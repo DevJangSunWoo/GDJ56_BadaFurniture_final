@@ -95,7 +95,7 @@
 				<div class="sellColRight" style="border-radius:0px 20px 0px 0px;">
 					<select id="item">
 						<option>세부 항목을 선택해주세요.</option>
-						<option>책상</option>
+						<option>책장</option>
 						<option>의자</option>
 						<option>화장대</option>
 						<option>침대</option>
@@ -167,9 +167,7 @@
 					참고사항 작성
 				</div>
 				<div class="sellColRight" style="height:110px !important;">
-					<textarea cols="60" rows="6" style="resize:none">
-					
-					</textarea>
+					<textarea cols="60" rows="6" style="resize:none"></textarea>
 				</div>		
 			</div>
 			<div class="sellRow">

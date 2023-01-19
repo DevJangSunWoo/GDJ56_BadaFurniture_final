@@ -144,7 +144,7 @@
 						Order
 					</div>
 					<div class="innerTitle2">
-						주문내역조회
+						주문내역 조회
 					</div>
 					<div class="innerImg">
 						<img src="${path}/resources/images/mypage/box.png">

@@ -7,8 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MypageController {
 	
 	@RequestMapping("/mypage/order.do")
-	public String readOrderList() {
-		return "mypage/readOrderList";
+	public String orderList() {
+		return "mypage/orderList";
 	}
 	
+	@RequestMapping("/mypage/refund.do")
+	public String refundList() {
+		return "mypage/refundList";
+	}
+	
+	@RequestMapping("mypage/cart.do")
+	public String cartList() {
+		return "mypage/cartList";
+	}
+
 }
