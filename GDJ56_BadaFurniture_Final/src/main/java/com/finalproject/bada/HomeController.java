@@ -16,12 +16,6 @@ public class HomeController {
 		return "mypage/mypageMain";
 	}
 	
-
-	@RequestMapping("resell.do")
-	public String writeResell() {
-		return "resell/writeResell";
-	}
-	
 //	관리자 페이지 시작
 	//대시보드
 	@RequestMapping("/admin/dash.do")
