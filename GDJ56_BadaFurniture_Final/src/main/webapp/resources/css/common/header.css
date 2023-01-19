@@ -1,0 +1,275 @@
+@charset "UTF-8";
+
+div{
+    /* border: 1px solid black; */
+}
+
+body{
+    /* font-family: 'Poppins', sans-serif; */
+    /* font-family: 'Ubuntu', sans-serif; */
+    /* font-family: 'Rowdies', cursive; */
+    font-family: 'Cabin', sans-serif;
+}
+
+#headerDiv {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+}
+
+#logo{
+    width: 550px;
+    height: 80px;
+}
+
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 버튼 */
+/* @import url('https://fonts.googleapis.com/css?family=Montserrat:600&display=swap'); */
+#headbtn{
+    width: 180px;
+    height: 55px;
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.button{
+  position: relative;
+  display: inline-flex;
+  width: 180px;
+  height: 55px;
+  margin: 0 15px;
+  perspective: 1000px;
+}
+.button a{
+  font-size: 19px;
+  letter-spacing: 1px;
+  transform-style: preserve-3d;
+  transform: translateZ(-25px);
+  transition: transform .25s;
+  font-family: 'Montserrat', sans-serif;
+  
+}
+.button a:before,
+.button a:after{
+  position: absolute;
+  content: "LOGIN";
+  height: 55px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #348492;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.button a:before{
+  color: #fff;
+  background: #348492;
+  transform: rotateY(0deg) translateZ(25px);
+}
+.button a:after{
+  color:#348492;
+  transform: rotateX(90deg) translateZ(25px);
+}
+.button a:hover{
+  transform: translateZ(-25px) rotateX(-90deg);
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 상단 메뉴바 */
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");*/
+#navDiv {
+    background-color: #393434;
+    display: flex;
+    justify-content: center;
+    height: 80px;
+    width: 100%;
+    align-items: center;
+}
+
+.navMenu a {
+    /* color: #f6f4e6; */
+    /* font-family: 'Noto Serif Display', serif; */
+    color: white;
+    text-decoration: none;
+    font-size: 2.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: inline-block;
+    width: 400px;
+    text-align: center;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:hover {
+  color: #348492;
+}
+
+.navMenu .dot {
+  width: 10px;
+  height: 10px;
+  background: #fddb3a;
+  border-radius: 50%;
+  opacity: 0;
+  -webkit-transform: translateX(30px);
+  transform: translateX(30px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:nth-child(1):hover ~ .dot {
+  -webkit-transform: translateX(195px);
+  transform: translateX(195px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(2):hover ~ .dot {
+  -webkit-transform: translateX(600px);
+  transform: translateX(600px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(3):hover ~ .dot {
+  -webkit-transform: translateX(1005px);
+  transform: translateX(1005px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+/* .navMenu a:nth-child(4):hover ~ .dot {
+  -webkit-transform: translateX(450px);
+  transform: translateX(450px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+} */
+
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 로그인화면 */
+#particles-js{
+  height: 100%
+}
+.loginBox{
+  font-family: 'Cabin', sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  /* width: 350px; */
+  width: 400px;
+  height: 580px;
+  min-height: 200px;
+  background: #393434 ;
+  /* background: white; */
+  border-radius: 10px;
+  padding: 40px;
+  box-sizing: border-box
+}
+.user{
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 20px
+}
+.loginBox h3{
+  margin: 0;
+  padding: 0 0 20px;
+  /* color: #59238F; */
+  color: #348492;
+  text-align: center
+}
+.loginBox input{
+  width: 100%;
+  margin-bottom: 20px
+}
+.loginBox input[type="text"], .loginBox input[type="password"]{
+  border: none;
+  border-bottom: 2px solid #262626;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  background: transparent;
+  font-size: 16px;
+  padding-left: 20px;
+  box-sizing: border-box
+}
+.loginBox input[type="text"]:hover, .loginBox input[type="password"]:hover{
+  color: #42F3FA;
+  border: 1px solid #42F3FA;
+  box-shadow: 0 0 5px rgba(0,255,0,.3), 0 0 10px rgba(0,255,0,.2), 0 0 15px rgba(0,255,0,.1), 0 2px 0 black
+}
+.loginBox input[type="text"]:focus, .loginBox input[type="password"]:focus{
+  border-bottom: 2px solid #42F3FA
+}
+.inputBox{
+  position: relative
+}
+.inputBox span{
+  position: absolute;
+  top: 10px;
+  color: #262626
+}
+.loginBox input[type="submit"]{
+  border: none;
+  outline: none;
+  height: 40px;
+  font-size: 16px;
+  /* background: #59238F; */
+  background: #348492;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer
+}
+.loginBox a{
+  /* color: #262626; */
+  color: grey;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  display: block
+}
+a:hover{
+  color: #00ffff
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 모달창 */
+.modal {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: rgba(77, 77, 77, .7); */
+  background: rgba(224, 221, 221, 0.7);
+  transition: all .4s;
+}
+
+.modal:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+#modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  /* color: white !important;  */
+  text-decoration: none;
+  font-size: 20px;
+}
+
+/* -------------------------------------------------------------------------------------------------- */
