@@ -16,6 +16,7 @@ public class HomeController {
 		return "mypage/mypageMain";
 	}
 	
+
 	@RequestMapping("resell.do")
 	public String writeResell() {
 		return "resell/writeResell";
@@ -54,4 +55,5 @@ public class HomeController {
 	}	
 // 관리자페이지 끝 
 	
+
 }

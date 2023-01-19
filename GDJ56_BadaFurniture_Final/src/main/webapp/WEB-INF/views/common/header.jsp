@@ -63,7 +63,7 @@
     <!-- 메뉴바 -->
     <div id="navDiv">
         <nav class="navMenu">
-            <a href="#">Home</a>
+            <a href="${path}/">Home</a>
             <a href="${path}/mypage.do">myPage</a>
             <a href="${path}/resell.do">Resell</a>
             <!-- <a href="#">Admin</a> -->
