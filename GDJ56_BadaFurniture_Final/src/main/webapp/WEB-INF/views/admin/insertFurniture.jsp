@@ -14,9 +14,6 @@
         border: 1px solid black;
 
     }
-    body {
-    
-    }
 
     #divTop{
         display: flex;

@@ -82,7 +82,6 @@
 	}
 
 	a{
-
 		text-decoration: none;
 	}
 
@@ -97,12 +96,42 @@
         box-shadow: 200px 0 0 0 rgba(0,0,0,0.25) inset, 
                    -200px 0 0 0 rgba(0,0,0,0.25) inset;
     }
-
+	div#summaryContainer{
+		display: flex;
+		justify-content: center;
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+	div#summaryContainer th,td{
+		width: 100px;
+		height: 30px;
+		text-align: center;
+		border: none;
+	}
+	.searchInput{
+		width:160px
+	}
 </style>
 
 <section>
 	<div id="listContainer">
 		<h2>가구관리</h2>
+		<div id="summaryContainer">
+			<table id="summaryTable">
+				<tr>
+					<th class="tableTh">전체</th>
+					<td class="tableTd">10</td>
+				</tr>
+				<tr>
+					<th class="tableTh">판매중</th>
+					<td class="tableTd">5</td>
+				</tr>
+				<tr>
+					<th class="tableTh">거래중</th>
+					<td class="tableTd">3</td>
+				</tr>
+			</table>
+		</div>
 		
 		<div id="search-container">
 			<span style="font-size: 17px;">검색타입 : </span> 
@@ -130,7 +159,7 @@
         	</div>
 
         	<div id="search-item">
-                <select name="searchKeyword">
+                <select name="searchKeyword" class="searchInput">
                     <option value="책상">책상</option>
                     <option value="의자">의자</option>
                     <option value="화장대">화장대</option>
@@ -147,14 +176,14 @@
         	
         	<div id="search-productNo">
        			<input type="text" name="searchKeyword" size="30" 
-       			placeholder="검색할 가구번호를 입력하세요">
+       			placeholder="검색할 가구번호 입력" class="searchInput">
        			<input type="hidden" name="searchType" value="BROKER_NO">
        			<button class="searchBtn">검색</button>
         	</div>
         	
         	<div id="search-price">
        			<input type="number" name="searchKeyword" size="30" 
-       			placeholder="가격 입력"> 이하
+       			placeholder="가격 입력" class="searchInput"> 이하
        			<input type="hidden" name="searchType" value="BROKER_NO">
 	      		<button class="searchBtn">검색</button>
         	</div>    	

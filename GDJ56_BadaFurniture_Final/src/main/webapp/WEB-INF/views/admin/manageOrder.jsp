@@ -127,11 +127,13 @@
 		width: 170px;
 	}
 
+	.searchInput{
+		width:170px;
+	}
+
 </style>
 
 <section>
-	
-
 
 	<div id="listContainer">
 		<h2>주문관리</h2>
@@ -160,22 +162,21 @@
 				<tr>
 					<th class="tableTh">주문취소</th>
 					<td class="tableTd">2</td>
-				</tr>
-	
+				</tr>	
 			</table>
 		</div>
 		<div id="search-container">
 			<span style="font-size: 17px;">검색타입 : </span> 
-        	<select id="searchType">
+        	<select id="searchType" class="searchInput">
 				<option value="orderState">주문상태</option>
         		<option value="deliveryState">배송상태</option>
         		<option value="orderSheetNo">주문번호</option>
-        		<option value="orderSheetEnrollDate">주문일자</option>
         		<option value="memberName">주문자</option>
+        		<option value="orderSheetEnrollDate">주문일자</option>
         	</select>
 			        	
 			<div id="search-orderState">
-				<select name="searchKeyword">
+				<select name="searchKeyword" class="searchInput">
                     <option value="입금대기">입금대기</option>
                     <option value="입금완료">입금완료</option>
                     <option value="결제완료">결제완료</option>
@@ -192,7 +193,7 @@
 			</div>
 
 			<div id="search-deliveryState">
-				<select name="searchKeyword">
+				<select name="searchKeyword" class="searchInput">
                     <option value="배송준비">배송준비</option>
                     <option value="배송중">배송중</option>
                     <option value="배송완료">배송완료</option>
@@ -204,24 +205,25 @@
         	
         	<div id="search-orderSheetNo">
        			<input type="text" name="searchKeyword" size="30" 
-       			placeholder="검색할 주문번호를 입력하세요">
+       			placeholder="검색할 주문번호 입력" class="searchInput">
        			<input type="hidden" name="searchType" value="BROKER_NO">
        			<button class="searchBtn">검색</button>
         	</div>
+			<div id="search-memberName">
+				<input type="text" name="searchKeyword" size="30" 
+				placeholder="검색할 주문자 이름 입력" class="searchInput">
+				<input type="hidden" name="searchType" value="BROKER_NO">
+				<button class="searchBtn">검색</button>
+		 	</div>
 
 			<!-- 주문일자 기간선택 -->
         	<div id="search-orderSheetEnrollDate">
-				<input type="text" id="orderDateRange" name="orderDateRange" value="">
+				<input type="text" id="orderDateRange" name="orderDateRange" value=""  class="searchInput">
        			<input type="hidden" name="searchType" value="BROKER_NO">
        			<button class="searchBtn">검색</button>
         	</div>
 
-        	<div id="search-memberName">
-       			<input type="text" name="searchKeyword" size="30" 
-       			placeholder="검색할 주문자 이름을 입력하세요">
-       			<input type="hidden" name="searchType" value="BROKER_NO">
-       			<button class="searchBtn">검색</button>
-        	</div>
+
         	
         </div>
 		<div id="propertyContainer" class = "tableContainer">

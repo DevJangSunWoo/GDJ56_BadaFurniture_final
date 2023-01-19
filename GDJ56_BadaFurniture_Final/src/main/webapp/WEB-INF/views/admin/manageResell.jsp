@@ -102,6 +102,10 @@
 		border: none;
 	}
 
+	.searchInput{
+		width: 200px;
+	}
+
 
 </style>
 
@@ -139,7 +143,7 @@
         	</select>
 
         	<div id="search-soldOutState">
-                <select name="searchKeyword">
+                <select name="searchKeyword" class="searchInput">
                     <option value="승인대기">승인대기</option>
                     <option value="승인완료">승인완료</option>
                     <option value="승인거부">승인거부</option>
@@ -154,14 +158,14 @@
         	
         	<div id="search-memberName">
        			<input type="text" name="searchKeyword" size="30" 
-       			placeholder="검색할 신청자 이름을 입력하세요">
+       			placeholder="검색할 신청자 이름을 입력하세요" class="searchInput">
        			<input type="hidden" name="searchType" value="BROKER_NO">
        			<button class="searchBtn">검색</button>
         	</div>
         	
         	<div id="search-resellNo">
        			<input type="text" name="searchKeyword" size="30" 
-       			placeholder="검색할 신청번호를 입력하세요">
+       			placeholder="검색할 신청번호를 입력하세요" class="searchInput">
        			<input type="hidden" name="searchType" value="BROKER_NO">
        			<button class="searchBtn">검색</button>
         	</div>
