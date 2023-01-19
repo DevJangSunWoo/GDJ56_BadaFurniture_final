@@ -13,7 +13,6 @@
     } */
 
 
-
     div#listContainer>h2{
         text-align:center;
         font-size:25px;
@@ -77,16 +76,36 @@
 	td{
 		background-color: #dcd5c32b;
 	}
+	
+	select{
+		font-size: 16px;
+	}
 
+	a{
 
+		text-decoration: none;
+	}
+
+	a:visited{
+		color: black;
+	}
+	button{
+		cursor: pointer;
+	}
+
+	button:hover{
+        box-shadow: 200px 0 0 0 rgba(0,0,0,0.25) inset, 
+                   -200px 0 0 0 rgba(0,0,0,0.25) inset;
+    }
 
 </style>
 
 <section>
 	<div id="listContainer">
 		<h2>가구관리</h2>
+		
 		<div id="search-container">
-			검색타입 : 
+			<span style="font-size: 17px;">검색타입 : </span> 
         	<select id="searchType">
 				<option value="soldOutState">판매상태</option>
         		<option value="showState">공개상태</option>
@@ -117,7 +136,9 @@
                     <option value="화장대">화장대</option>
                     <option value="침대">침대</option>
                     <option value="서랍장">서랍장</option>
+					<option value="책장">책장</option>
                     <option value="소파">소파</option>
+                    <option value="옷장">옷장</option>
                 </select>
 
        			<input type="hidden" name="searchType" value="BROKER_NO">
@@ -137,9 +158,6 @@
        			<input type="hidden" name="searchType" value="BROKER_NO">
 	      		<button class="searchBtn">검색</button>
         	</div>    	
-
-        	<input type="hidden" name="searchType" value="clear">
-        	<button  class="searchBtn">초기화</button>
         	
         </div>
 		<div id="propertyContainer" class = "tableContainer">
@@ -162,7 +180,7 @@
 					<tbody>
 						<tr>
 							<td style="width: 10px;"><input type="checkbox" name="chk"></td>
-							<td>가구번호</td>
+							<td><a href="">가구번호</a></td>
 							<td>분류</td>
 							<td>사진</td>
 							<td>사이즈</td>
@@ -170,8 +188,21 @@
 							<td>가격</td>
 							<td>업로드일</td>
 							<td>판매일자</td>
-							<td>판매상태</td>
-							<td>공개상태</td>
+							<td>
+								<select name="">
+									<option value="판매중">판매중</option>
+									<option value="거래중">거래중</option>
+									<option value="판매완료">판매완료</option>
+								</select>
+
+							</td>
+							<td>
+								<select name="">
+									<option value="Y">공개</option>
+									<option value="N">숨김</option>
+								</select>
+
+							</td>
 							<td style="width: 80px;"><button class="updateBtn">수정</button></td>
 						</tr>
 					</tbody>

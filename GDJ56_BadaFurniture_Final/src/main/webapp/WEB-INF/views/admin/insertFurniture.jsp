@@ -58,7 +58,7 @@
 
     }
     #divMid select{
-        width:400px;
+        width:425px;
 
     }
     #insertBtn{
@@ -71,7 +71,20 @@
         font-weight: bold;
     }
 	
+	select{
+		font-size: 16px;
+	}
+    button{
+		cursor: pointer;
+	}
+    button:hover{
+        box-shadow: 200px 0 0 0 rgba(0,0,0,0.25) inset, 
+                   -200px 0 0 0 rgba(0,0,0,0.25) inset;
+    }
 
+    .fileImg:hover{
+        cursor: pointer;
+    } 
 
 
 </style>
@@ -97,7 +110,9 @@
                     <option value="화장대">화장대</option>
                     <option value="침대">침대</option>
                     <option value="서랍장">서랍장</option>
+                    <option value="책장">책장</option>
                     <option value="소파">소파</option>
+                    <option value="옷장">옷장</option>
                 </select>
                 <br>
 
@@ -143,20 +158,20 @@
 
                 <br>
                 <img src="${path }/resources/images/admin/addThumbnail.png" 
-                    name="photo1" onclick="" width="180px" height="180px">
+                    name="photo1" onclick="" width="180px" height="180px" class="fileImg">
                 <input type="file" name="upFile1" style="display: none;">
                 <br>
                 <img src="${path }/resources/images/admin/addImage.png" 
-                    name="photo2" onclick="" width="110px" height="110px">
+                    name="photo2" onclick="" width="110px" height="110px" class="fileImg">
                 <input type="file" name="upFile2" style="display: none;">
                 <img src="${path }/resources/images/admin/addImage.png" 
-                    name="photo3" onclick="" width="110px" height="110px">
+                    name="photo3" onclick="" width="110px" height="110px" class="fileImg">
                 <input type="file" name="upFile3" style="display: none;">
                 <img src="${path }/resources/images/admin/addImage.png" 
-                    name="photo4" onclick="" width="110px" height="110px">
+                    name="photo4" onclick="" width="110px" height="110px" class="fileImg">
                 <input type="file" name="upFile4" style="display: none;">
                 <img src="${path }/resources/images/admin/addImage.png" 
-                    name="photo5" onclick="" width="110px" height="110px">
+                    name="photo5" onclick="" width="110px" height="110px" class="fileImg">
                 <input type="file" name="upFile5" style="display: none;">           
 
                 <br>
