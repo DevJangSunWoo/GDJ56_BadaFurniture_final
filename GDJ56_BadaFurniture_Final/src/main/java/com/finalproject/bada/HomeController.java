@@ -16,8 +16,4 @@ public class HomeController {
 		return "mypage/mypageMain";
 	}
 	
-	@RequestMapping("resell.do")
-	public String writeResell() {
-		return "resell/writeResell";
-	}
 }
