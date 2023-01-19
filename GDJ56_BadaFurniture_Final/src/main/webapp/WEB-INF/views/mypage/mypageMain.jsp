@@ -8,17 +8,17 @@
 <style>
 	section.mypage>div#title{
 		width:100%;
-		height:150px;
+		height:200px;
 	}
 	section.mypage>div#title>div#innerTitle{
 		display:flex;
 		align-items:center;
 		justify-content:center;
 		width:100%;
-		height:140px;
+		height:200px;
 		font-family:"Courier New";
 		font-weight:bolder;
-		font-size:34px;
+		font-size:50px;
 	}
 	div#mypageMenu{
 		width:100%;

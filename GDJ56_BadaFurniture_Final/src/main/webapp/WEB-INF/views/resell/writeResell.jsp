@@ -35,8 +35,8 @@
 		height:50px;
 		display:flex;
 		align-items:center;
-		justify-content:right;
-		padding-right:15px;
+		justify-content:left;
+		padding-left:15px;
 		background-color:rgb(52, 132, 146);
 		color:white;
 		font-weight:bolder;
@@ -111,9 +111,9 @@
 					크기 입력
 				</div>
 				<div class="sellColRight">
-					<span style="margin-right:30px;">가로 <input type="number" name="widthes" style="width:50px"> cm</span>
-					<span style="margin-right:30px;">세로 <input type="number" name="depthes" style="width:50px"> cm</span>
-					<span>높이 <input type="number" name="heightes" style="width:50px"> cm</span>
+					<span style="margin-right:30px;">가로 <input type="number" name="widthes" style="width:50px" min="1"> cm</span>
+					<span style="margin-right:30px;">세로 <input type="number" name="depthes" style="width:50px" min="1"> cm</span>
+					<span>높이 <input type="number" name="heightes" style="width:50px" min="1"> cm</span>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -145,7 +145,7 @@
 						<option>세부 항목을 선택해주세요.</option>
 						<option>최상</option>
 						<option>상</option>
-						<option>최상</option>
+						<option>중</option>
 					</select>
 				</div>		
 			</div>
@@ -201,7 +201,7 @@
 					판매희망금액
 				</div>
 				<div class="sellColRight">
-					<input type="number"> &nbsp;원
+					<input type="number" min="1"> &nbsp;원
 				</div>		
 			</div>
 			<div class="sellRow">
