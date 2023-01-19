@@ -26,7 +26,7 @@
 <body>
 <!-- 상단 -->
     <div id="headerDiv">
-        <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo">
+        <img src="${path }/resources/images/BADAlogo.png" id="logo">
         <span class="button" id="headbtn"><a href="#demo-modal"></a></span>
     </div>
 

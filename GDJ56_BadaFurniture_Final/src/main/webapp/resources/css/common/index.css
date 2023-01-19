@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+div{
+    /* border: 1px solid black; */
+}
+
+#mainDiv,#iconDiv{
+    display: flex;
+    justify-content: center;
+}
+
+#mainPicture {
+    width: 65%;
+    height: 35%;
+    /* margin-top: 15px; */
+}
+
+#iconCotainer {
+    display: flex;
+    justify-content: center;
+}
+
+#iconCotainer img {
+    width: 10%;
+}
