@@ -36,9 +36,9 @@
         <div class="loginBox"> 
             <a href="#" id="modal__close">
                 <!-- <img src="./아이콘/external-close-web-flaticons-flat-flat-icons.png" alt="" width="50px" height="50px"> -->
-                <img src="${path }/resources/images/closebutton.png" alt="" width="50px" height="50px">
+                <img src="${path }/resources/images/mainpage/closebutton.png" alt="" width="50px" height="50px">
             </a>
-            <img class="user" src="${path }/resources/images/loginIcon.png" height="100px" width="100px">
+            <img class="user" src="${path }/resources/images/mainpage/loginIcon.png" height="100px" width="100px">
             <h3>Sign in here</h3>
             <form action="login.php" method="post">
                 <div class="inputBox"> 
