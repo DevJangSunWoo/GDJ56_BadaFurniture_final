@@ -8,7 +8,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/> 
 
 <!-- css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/common/index.css"/>
+<link rel="stylesheet" href="${path }/resources/css/common/index.css"/>
 
 <section>
 	<div id="mainDiv">
@@ -17,6 +17,5 @@
 
 </section>
 
-</body>
-</html>
-<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -14,7 +14,7 @@
 <script src="${path}/resources/js/jquery-3.6.1.min.js"></script>
 
 <!-- css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/common/header.css"/>
+<link rel="stylesheet" href="${path }/resources/css/common/header.css"/>
 
 <!-- 상단바 폰트 -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
