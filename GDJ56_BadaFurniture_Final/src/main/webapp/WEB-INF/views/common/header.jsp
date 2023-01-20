@@ -65,7 +65,7 @@
         <nav class="navMenu">
             <a href="${path}/">Home</a>
             <a href="${path}/mypage.do">myPage</a>
-            <a href="${path}/resell.do">Resell</a>
+            <a href="${path}/resell/write.do">Resell</a>
             <!-- <a href="#">Admin</a> -->
             <div class="dot"></div>
         </nav>

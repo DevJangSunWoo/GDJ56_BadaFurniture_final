@@ -20,5 +20,10 @@ public class MypageController {
 	public String cartList() {
 		return "mypage/cartList";
 	}
-
+	
+	@RequestMapping("mypage/resell.do")
+	public String resellList() {
+		return "mypage/resellList";
+	}
+	
 }

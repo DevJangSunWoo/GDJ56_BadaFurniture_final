@@ -25,6 +25,9 @@
 		height:660px;
 		/* border:1px solid red; */
 	}
+	div#mypageMenu *{
+		font-family: 'Nanum Gothic' !important;
+	}
 	div#mypageMenu>div.mypageRow{
 		width:100%;
 		height:212px;

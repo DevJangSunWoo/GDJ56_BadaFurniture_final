@@ -8,16 +8,14 @@ public class ResellController {
 	
 	
 	
-	@RequestMapping("/resell.do")
+	@RequestMapping("/resell/write.do")
 	public String writeResell() {
 		return "resell/writeResell";
 	}
 	
 	@RequestMapping("/resell/read.do")
-	public String readResell(int resellNo) {
-		
-		
-		return "";
+	public String readResell() {
+		return "resell/readResell";
 	}
 	
 }
