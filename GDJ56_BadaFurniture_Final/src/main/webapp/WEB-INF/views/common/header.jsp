@@ -27,7 +27,27 @@
 <!-- 상단 -->
     <div id="headerDiv">
         <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo">
-        <span class="button" id="headbtn"><a href="#demo-modal"></a></span>
+        <c:if test="${not empty loginMember }">
+        	<span class="button" id="headbtn"><a href="#demo-modal"></a></span>
+        </c:if>
+        <c:if test="${empty loginMember }">
+        	<div style="display: flex; margin-top:10px">
+	        	<span><img src="${path }/resources/images/mainpage/종.png" width="60px" height="60px"></span>
+	        	<div style="display: flex; margin-right: 5px;">
+	        	  <details>
+			        <summary id="memberName"><u>유저공일님</u></summary>
+			        <nav class="memberMenu">
+			          <a href="#link">알림</a>
+			          <a href="#link">장바구니</a>
+			          <a href="#link">주문목록</a>
+			          <a href="#link">내 정보수정</a>
+			          <a href="#link">로그아웃</a>
+			          
+			        </nav>
+			      </details>
+		        </div>
+        	</div>
+        </c:if>
     </div>
 
 <!------------------------------------------------------------------------------------------------------------------>
