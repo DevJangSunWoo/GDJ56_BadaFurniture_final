@@ -53,8 +53,8 @@
                 <a href="#" class="find">비밀번호 찾기<br> </a>
             </div>
             <br><br>
-            <div class="text-center">
-                <p style="color: #348492; font-weight: bolder;">회원가입</p>
+            <div class="text-center" style="float:left">
+                <a href="${path}/member/enrollMember.do" class="find">회원가입</a>
             </div>
         </div>   
     </div>
