@@ -115,17 +115,33 @@
   opacity: 1;
 } */
 
+/* 로고 */
+#headerDiv {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+}
+
+#logo{
+    width: 550px;
+    height: 80px;
+}
+
 </style>
 
 
 <body>
-	<div id="navDiv">
-	    <nav class="navMenu">
-	        <a href="${path }/admin/dash.do" style="margin-right: 100px;font-weight: bold;">관리자 페이지</a>
-	        <a href="${path }/admin/insert.do">가구 올리기</a>
-	        <a href="${path }/admin/furniture.do">가구 관리</a>
-	        <a href="${path }/admin/order.do">주문 관리</a>
-	        <a href="${path }/admin/resell.do">'내 가구 팔기' 관리</a>
-	        <div class="dot"></div>
-	    </nav>
-	</div>
+  <div id="headerDiv">
+      <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo">
+      <span class="button" id="headbtn"><a href="#demo-modal"></a></span>
+  </div> 
+  <div id="navDiv">
+        <nav class="navMenu">
+            <a href="${path }/admin/dash.do" style="margin-right: 100px;font-weight: bold;">관리자 페이지</a>
+            <a href="${path }/admin/insert.do">가구 올리기</a>
+            <a href="${path }/admin/furniture.do">가구 관리</a>
+            <a href="${path }/admin/order.do">주문 관리</a>
+            <a href="${path }/admin/resell.do">'내 가구 팔기' 관리</a>
+            <div class="dot"></div>
+        </nav>
+  </div>
