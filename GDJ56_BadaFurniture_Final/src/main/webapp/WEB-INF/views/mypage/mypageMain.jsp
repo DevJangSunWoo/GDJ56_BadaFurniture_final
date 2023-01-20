@@ -40,6 +40,7 @@
 		height:200px;
 		border:2px solid black;
 		margin: 5px 3px 3px 5px;
+		cursor:pointer;
 	}
 	div#mypageMenu>div.mypageRow>div.mypageCol>div.innerTitle1{
 		text-align: center;
