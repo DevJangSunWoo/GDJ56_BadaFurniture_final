@@ -1,29 +1,51 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
- <!--폰트  -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+	
+	<!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/productView.css"/>
-	 <!-- 가운데 섹션 부분!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-    <section>
-        </style>
-        <div style="border:0px solid rgb(219, 29, 29);height:1700px">
-            <div style="display:flex">
-                <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바-->
-                <div  class="profileImg1" style="border:0px solid rgb(156, 30, 230);width:200px;height:700px"></div>
-                <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바여기까지-->
-                <!--메인콘텐츠 div  -->
-                <div  style="border:0px solid rgb(236, 10, 10);width:1000px;height:700px;display:flex; ">
-                    <div class="box-shadow"   style="border:1px solid black;" style="display:flex">
-                        <div style="border:0px solid green;width:1000px;height:700px;display:flex; ">   
-                             <div style="border:1px solid #348492;width:455px;border-width: medium thin 5px thick;">
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/bootstrap.min.css" type="text/css">
+    <%-- <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/font-awesome.min.css" type="text/css"> --%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product//style.css" type="text/css">
+	
+	<!-- Js Plugins -->
+     <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.1.min.js"></script> 
+  <%--   <script src="${pageContext.request.contextPath }/resources/js/jsProduct/jquery-3.3.1.min.js"></script> --%>
+    <script src="${pageContext.request.contextPath }/resources/js/jsProduct/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/js/jsProduct/jquery.nice-select.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/js/jsProduct/jquery-ui.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/js/jsProduct/jquery.slicknav.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/js/jsProduct/mixitup.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/js/jsProduct/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/js/jsProduct/main.js"></script>
+		
+	<!--기존 CSS  -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/productView.css"/>
+    
+
+   
+
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+           <!--헤더 예비 위치  -->
+            <div class="checkout__form">
+                <h4>PRODUCT Details</h4>
+                <form action="#">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                           	<div class="box-shadowTest123" style="border:1px solid lightgray;width:700px;margin-leff:600px!important;height:709px;">
                                 <div style="border:0px solid blue;height:539px;">
                                     <div class="slider">
                                         <input type="radio" name="slide" id="slide1">
@@ -31,10 +53,10 @@
                                         <input type="radio" name="slide" id="slide3">
                                         <input type="radio" name="slide" id="slide4">
                                         <ul id="imgholder" class="imgs">
-                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa1.jpg"  onerror="this.src='';"></li>
-                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa2.jpg"></li>
-                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa3.jpg"></li>
+                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa2.jpg"  onerror="this.src='';"></li>
+                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa1.jpg"></li>
                                             <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa4.jpg"></li>
+                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa3.jpg".jpg"></li>
                                         </ul>
                                         <div class="bullets">
                                             <label for="slide1">&nbsp;</label>
@@ -47,73 +69,42 @@
                                 <div style="border:0px solid red;height:154px;">
                                 </div>
                             </div>
-                             <div class="detailFont"   style="border:1px solid #348492;width:545px;border-width: medium thin 5px thick;">
-                                <div style="border:0px solid blue;height:77px;">
-                                    <div style="text-align:left;margin-left:10px;padding-top:20px;">
-                                        
-                                    </div>
+                           	
+                            
+                            
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                                <h4>응접실 소파</h4>
+                                <div class="checkout__order__products">가격 <span>250,000원</span></div>
+                                <ul>
+                                    <li>분류 <span>소파</span></li>
+                                    <li>크기(가로/세로/높이) <span>1cm 1cm 1cm</span></li>
+                                    <li>색상 <span>베이지</span></li>
+                                </ul>
+                                <div class="checkout__order__subtotal">등급 <span>상</span></div>
+                                <div class="checkout__order__total">총가격 <span>260,000원</span></div>
+                                <div class="checkout__input__checkbox">
+                                    <label for="acc-or">
+                                        배송비는 어떻게 되나요?
+                                        <input type="checkbox" id="acc-or">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </div>
-                                <div style="border-bottom:1px solid #393433;height:77px;border-width: medium thin 5px thick;">
-                                    <div style="text-align:left;margin-left:10px;padding-top:20px;">
-                                      
-                                        <span style="font-size: 30px;">응접실 소파</span>                                      
-                                    </div>
-                                </div>
-                                <div style="border:0px solid blue;height:77px;">
-                                    <div style="text-align:left;margin-left:10px;padding-top:20px;">
-                                        <span>가격</span>
-                                        <span>250,000원</span> 
-                                    </div>
-                                </div>
-                                <div style="border:0px solid red;height:77px;">
-                                    <div style="text-align:left;margin-left:10px;padding-top:20px;">
-                                        <span>분류</span>
-                                        <span>소파</span>
-                                    </div>
-                                </div>
-                                <div style="border:0px solid blue;height:77px;">
-                                    <div style="text-align:left;margin-left:10px;padding-top:20px;">
-                                        <span>크기</span>
-                                        <span>1cm</span>
-                                        <span>1cm</span>
-                                        <span>1cm</span>
-                                        <span>(가로/세로/높이)</span>
-                                    </div>
-                                </div>
-                                <div style="border:0px solid red;height:77px;">
-                                    <div style="text-align:left;margin-left:10px;padding-top:20px;">
-                                        <span>색상</span>
-                                        <span>파란색</span>
-                                    </div>
-                                </div>
-                                <div style="border-bottom:1px solid #393433;height:77px;border-width: medium thin 5px thick;">
-                                    <div style="text-align:left;margin-left:10px;padding-top:20px;">
-                                        <span>등급</span>
-                                        <span>상</span>
-                                    </div>
-                                </div>
-                                <div style="border:0px solid red;height:77px;">
-                                    <div style="text-align:left;margin-left:10px;padding-top:20px;">
-                                       <div id="delFont" >상품가격에 배송비가 포함되어 있습니다.!!!</div>
-                                       <div>
-                                            <span>Total</span>
-                                            <span>250,000원</span>
-                                       </div>
-                                    </div>
-                                </div>
-                                <div style="border:0px solid blue;height:77px;">
-                                    <div style="text-align:center;margin-left:10px;">
-                                        <span><button class="button">구매하기</button></span>
-                                        <span style="margin-left:50px;"><button class="button">장바구니</button></span>
-                                    </div>    
-                                </div>
-                            </div>              
+                                <p>배송비는 총가격에 포함되고 있습니다.
+                                	지역에 따라 배송비 추가금액이 붙을수 있습니다.
+                                </p>
+                                
+                                <button type="submit" class="site-btn" style="background-color: #348492;">구매하기</button>
+                                <button type="submit" class="site-btn" style="background-color: #348492;" >장바구니</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--메인콘텐츠 div여기까지  -->
+                </form>
             </div>
-            <!--상품 상세사항  -->
+        </div>
+    	 
+    	 <!--상품 상세사항  -->
             <div style="display:flex">
                 <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바-->
                 <div style="border:0px solid green;width:200px;height:1000px"></div>
@@ -121,7 +112,7 @@
                 <!--상세사항 div  -->
                 <div style="border:0px solid red;width:1000px;height:1000px;margin-top:50px;">
                     <div class="card-content">
-                        <img  style="max-width: 100%; height: auto;" src="${path}/resources/images/product/furnitureInfo.png"  class="furnitureInfo"/>
+                        <img src="${path}/resources/images/product/furnitureInfo.png"  class="furnitureInfo"/>
                         <div class="detailFont" style="border:0px solid red;height:60px;text-align: center;">
                             <span>소재:</span>
                             <span>불곰가죽</span>
@@ -130,7 +121,7 @@
                             <span>조립식 유/무:</span>
                             <span>무</span>
                         </div>
-                        <img src="${path}/resources/images/product/sofa1.jpg" class="card-content-img"/>
+                        <img src="${path}/resources/images/product/sofa2.jpg" class="card-content-img"/>
                     </div>
                     <span class="more">
                         <span class="blind">상품 더보기</span>
@@ -173,9 +164,6 @@
                       </div>
                 </div>
                 <!-- 상품 상세사항 div여기까지  -->
-            </div>        
-        </div>
-       
     </section>
     <!--상품 더보기 접기 js  -->
     <script>
@@ -193,35 +181,79 @@
       </script>
     
     
+    <!-- Checkout Section End -->
+    <!-- Footer Section Begin -->
+    <!-- <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="./index.html"><img src="" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Address: 60-49 Road 11378 New York</li>
+                            <li>Phone: +65 11.188.888</li>
+                            <li>Email: hello@colorlib.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                    <div class="footer__widget">
+                        <h6>Useful Links</h6>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">About Our Shop</a></li>
+                            <li><a href="#">Secure Shopping</a></li>
+                            <li><a href="#">Delivery infomation</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Our Sitemap</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Who We Are</a></li>
+                            <li><a href="#">Our Services</a></li>
+                            <li><a href="#">Projects</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Innovation</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer__widget">
+                        <h6>Join Our Newsletter Now</h6>
+                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <form action="#">
+                            <input type="text" placeholder="Enter your mail">
+                            <button type="submit" class="site-btn">Subscribe</button>
+                        </form>
+                        <div class="footer__widget__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p>Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p></div>
+                        <div class="footer__copyright__payment"><img src="" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+    <!-- Footer Section End -->
+
     
-    <style>
-        section{
-            border: 0px solid tomato;
-            font-family: 'Nanum Gothic', sans-serif;
-            margin-left: 50px;
-            margin-right: 50px;
-            /* padding-left: 100px; */
-            /* padding-right: 100px; */
-            /* 
-                만약 섹션 안에 div를 만든다면 여기 padding-left,padding-right에서
-                좌우 간격을 조정하세요
-                왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
-             */
-            margin-top: 100px;
-            height: 2500px; 
-            /*
-                ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
-                높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
-            */
-            
-        }
-        section>div{
-            border: 0px solid blue;
-            /* 섹션 안의 div테두리 */
-            
-        }
-    </style>
-    <!-- 여기까지!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-		
+
+ 
+
 </body>
+
 </html>
