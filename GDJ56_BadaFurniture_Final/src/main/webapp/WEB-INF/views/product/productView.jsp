@@ -5,6 +5,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+ <!--폰트  -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/productView.css"/>
 	 <!-- 가운데 섹션 부분!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <section>
@@ -91,7 +96,7 @@
                                     <div style="text-align:left;margin-left:10px;padding-top:20px;">
                                        <div id="delFont" >상품가격에 배송비가 포함되어 있습니다.!!!</div>
                                        <div>
-                                            <span>total</span>
+                                            <span>Total</span>
                                             <span>250,000원</span>
                                        </div>
                                     </div>
@@ -116,7 +121,7 @@
                 <!--상세사항 div  -->
                 <div style="border:0px solid red;width:1000px;height:1000px;margin-top:50px;">
                     <div class="card-content">
-                        <img src="${path}/resources/images/product/furnitureInfo.png"  class="furnitureInfo"/>
+                        <img  style="max-width: 100%; height: auto;" src="${path}/resources/images/product/furnitureInfo.png"  class="furnitureInfo"/>
                         <div class="detailFont" style="border:0px solid red;height:60px;text-align: center;">
                             <span>소재:</span>
                             <span>불곰가죽</span>
