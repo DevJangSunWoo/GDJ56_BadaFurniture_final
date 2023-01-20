@@ -18,4 +18,9 @@ public class ResellController {
 		return "resell/readResell";
 	}
 	
+	@RequestMapping("resell/update.do")
+	public String updateResell() {
+		return "resell/updateResell";
+	}
+	
 }

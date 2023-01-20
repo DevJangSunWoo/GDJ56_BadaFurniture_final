@@ -5,8 +5,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> 
 <style>
-	section#sellPage * {
+	section#sellpage * {
 		font-family: 'Nanum Gothic' !important;
 	}
 	section#sellpage>div#title{
@@ -249,7 +250,7 @@
 				</div>
 				<table id="tbl-comment">
 					<tr class="level1">
-		   				<td style="width:200px">
+		   				<td style="width:200px;font-size:15px;">
 						    <sub class="comment-writer">운영자</sub>
 						    <sub class="comment-date">2023-01-10</sub>
 						    <button style="width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;">new</button>
