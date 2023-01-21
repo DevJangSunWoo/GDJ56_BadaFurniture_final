@@ -23,13 +23,13 @@
 	}
 	div#sellWrap{
 		width:100%;
-		height:1000px; /* 수정요망 */
+		/* height:1000px; */ /* 수정요망 */
 		display:flex;
 		justify-content: center;
 	}
 	div#sellWrap>div#sellContent{
 		width:618px; 
-		height:1000px; /* 수정요망 */
+		/* height:1000px; */ /* 수정요망 */
 		/* border: 2px solid red; */
 	}
 	div#sellWrap>div#sellContent>div.sellRow{
@@ -305,5 +305,4 @@
 	    }).open();
 	}
 </script>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

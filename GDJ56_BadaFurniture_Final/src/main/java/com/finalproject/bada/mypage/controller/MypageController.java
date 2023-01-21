@@ -31,4 +31,9 @@ public class MypageController {
 		return "mypage/alertList";
 	}
 	
+	@RequestMapping("mypage/quit.do")
+	public String quitPage() {
+		return "mypage/quitPage";
+	}
+	
 }

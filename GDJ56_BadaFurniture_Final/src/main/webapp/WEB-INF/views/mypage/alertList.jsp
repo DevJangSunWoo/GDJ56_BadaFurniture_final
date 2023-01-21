@@ -26,7 +26,7 @@
 	
 	div#alertWrap{
 		width:100%; 
-		height:1000px; /* 수정요망 */
+		/* height:1000px; */ /* 수정요망 */
 		display:flex;
 		justify-content: center;
 	}
@@ -35,7 +35,7 @@
 	}
 	div#alertWrap>div#alertContent{
 		width:900px; /* px로 수정 */ 
-		height:1000px; /* 수정요망 */
+		/* height:1000px; */ /* 수정요망 */
 		/* border: 2px solid red; */
 	}
 	
@@ -169,5 +169,4 @@
 			</div>
 		</div>
 	</section>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
