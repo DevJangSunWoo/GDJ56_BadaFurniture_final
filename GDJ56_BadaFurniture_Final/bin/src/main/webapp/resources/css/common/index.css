@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+div{
+    /* border: 1px solid black; */
+}
+
+#iconDiv, .flexDiv{
+    display: flex;
+    justify-content: center;
+}
+
+.mainSize{
+    width: 70%;
+    height: 35%;
+    margin-top: 15px;
+}
+
+#iconDiv{
+	margin-top: 15px;
+}
+
+#iconDiv img{
+    height: 90px;
+}
+
+#iconContainer{
+	display: flex;
+	justify-content: space-between;
+}
+
+.icon{
+	text-align:center;
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+/* select박스 */

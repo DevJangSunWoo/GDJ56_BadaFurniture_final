@@ -3,7 +3,7 @@
 
  <!--박스그림자-->
      
-        .box-shadow{
+        .box-shadowTest123{
 
             box-shadow: 5px 5px 5px 5px gray;
         }
@@ -162,7 +162,8 @@
                 height: 60%;
                 position: relative;
                 margin: 0 auto;
-                margin-top:35%;    /* 이미지 위치설정 */
+                margin-left: 25%;
+                margin-top:25%;    /* 이미지 위치설정 */
                 overflow: hidden; /* 현재 슬라이드 오른쪽에 위치한 나머지 슬라이드 들이 보이지 않도록 가림 */
             }
             .slider input[type=radio]{
@@ -183,7 +184,7 @@
             }
             .bullets{
                 position: absolute;
-                left: 50%;
+                left: 40%;   /*이미지 변경 태그  위치 이동 */
                 transform: translateX(-50%);
                 bottom: 20px;
                 z-index: 2;
@@ -191,23 +192,23 @@
             .bullets label{
                 display: inline-block;
                 border-radius: 50%;
-                background-color: rgba(0,0,0,0.55);
+                background-color: rgba(0,0,0,0.82);
                 width: 20px;
                 height: 20px;
                 cursor: pointer;
             }
             /* 현재 선택된 불릿 배경 흰색으로 구분 표시 */
             .slider input[type=radio]:nth-child(1):checked~.bullets>label:nth-child(1){
-                background-color: #fff;
+                background-color: #c0c0c0;
             }
             .slider input[type=radio]:nth-child(2):checked~.bullets>label:nth-child(2){
-                background-color: #fff;
+                background-color: #c0c0c0;
             }
             .slider input[type=radio]:nth-child(3):checked~.bullets>label:nth-child(3){
-                background-color: #fff;
+                background-color: #c0c0c0;
             }
             .slider input[type=radio]:nth-child(4):checked~.bullets>label:nth-child(4){
-                background-color: #fff;
+                background-color: #c0c0c0;
             }
                      
             slider input[type=radio]:nth-child(1):checked~ul.imgs>li:nth-child(1){

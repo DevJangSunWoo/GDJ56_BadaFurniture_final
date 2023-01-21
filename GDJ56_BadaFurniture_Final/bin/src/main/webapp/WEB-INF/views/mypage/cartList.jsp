@@ -36,7 +36,7 @@
 	div#cartWrap>div#cartContent{
 		width:1150px; /* px로 수정 */ 
 		height:1000px; /* 수정요망 */
-		border: 2px solid red;
+		/* border: 2px solid red; */
 	}
 	
 	

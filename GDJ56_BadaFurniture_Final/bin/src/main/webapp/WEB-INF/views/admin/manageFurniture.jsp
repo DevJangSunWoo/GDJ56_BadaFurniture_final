@@ -85,9 +85,10 @@
 		text-decoration: none;
 	}
 
-	a:visited{
+	/* a:visited{
 		color: black;
-	}
+	} */
+
 	button{
 		cursor: pointer;
 	}
@@ -128,6 +129,10 @@
 				</tr>
 				<tr>
 					<th class="tableTh">거래중</th>
+					<td class="tableTd">3</td>
+				</tr>
+				<tr>
+					<th class="tableTh">숨긴 가구</th>
 					<td class="tableTd">3</td>
 				</tr>
 			</table>
