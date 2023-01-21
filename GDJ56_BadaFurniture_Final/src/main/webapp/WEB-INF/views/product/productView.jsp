@@ -53,10 +53,10 @@
                                         <input type="radio" name="slide" id="slide3">
                                         <input type="radio" name="slide" id="slide4">
                                         <ul id="imgholder" class="imgs">
-                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa2.jpg"  onerror="this.src='';"></li>
+                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa2.jpg"  ></li>
                                             <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa1.jpg"></li>
                                             <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa4.jpg"></li>
-                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa3.jpg".jpg"></li>
+                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa3.jpg"></li>
                                         </ul>
                                         <div class="bullets">
                                             <label for="slide1">&nbsp;</label>
@@ -105,9 +105,9 @@
         </div>
     	 
     	 <!--상품 상세사항  -->
-            <div style="display:flex">
+            <div style="display:flex;justify-content: center;">
                 <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바-->
-                <div style="border:0px solid green;width:200px;height:1000px"></div>
+              
                 <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바여기까지-->
                 <!--상세사항 div  -->
                 <div style="border:0px solid red;width:1000px;height:1000px;margin-top:50px;">
