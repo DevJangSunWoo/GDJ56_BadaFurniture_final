@@ -26,7 +26,7 @@
 	
 	div#cartWrap{
 		width:100%; 
-		height:1000px; /* 수정요망 */
+		/* height:1000px; */ /* 수정요망 */
 		display:flex;
 		justify-content: center;
 	}
@@ -35,8 +35,8 @@
 	}
 	div#cartWrap>div#cartContent{
 		width:1150px; /* px로 수정 */ 
-		height:1000px; /* 수정요망 */
-		border: 2px solid red;
+		/* height:1000px; */ /* 수정요망 */
+		/* border: 2px solid red; */
 	}
 	
 	
@@ -216,5 +216,4 @@
 		</div>
 
 	</section>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

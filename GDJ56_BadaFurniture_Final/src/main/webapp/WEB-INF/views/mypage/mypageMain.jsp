@@ -25,6 +25,9 @@
 		height:660px;
 		/* border:1px solid red; */
 	}
+	div#mypageMenu *{
+		font-family: 'Nanum Gothic' !important;
+	}
 	div#mypageMenu>div.mypageRow{
 		width:100%;
 		height:212px;
@@ -37,6 +40,7 @@
 		height:200px;
 		border:2px solid black;
 		margin: 5px 3px 3px 5px;
+		cursor:pointer;
 	}
 	div#mypageMenu>div.mypageRow>div.mypageCol>div.innerTitle1{
 		text-align: center;
@@ -229,5 +233,4 @@
 			location.assign(url);
 		});
 	</script>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

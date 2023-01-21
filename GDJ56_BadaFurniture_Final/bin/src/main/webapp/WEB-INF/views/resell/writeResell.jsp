@@ -5,7 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> 
 <style>
+	section#sellpage * {
+		font-family: 'Nanum Gothic' !important;
+	}
+
 	section#sellpage>div#title{
 		display:flex;
 		justify-content:center;
@@ -31,7 +36,7 @@
 		display:flex;
 	}
 	div.sellRow>div.sellColLeft{
-		width:150px;
+		width:170px;
 		height:50px;
 		display:flex;
 		align-items:center;
@@ -77,13 +82,14 @@
 		color:white;
 		background-color:rgb(52, 132, 146);
 		border:none;
-		font-size:20px;
+		font-size:25px;
 		border-radius:20px;
+		font-weight:bolder;
 	}
 </style>
 <section id="sellpage">
 	<div id="title">
-		중고 가구 판매 신청하기
+		내 가구 판매 신청하기
 	</div>
 	<form action="${path}/" method="post">
 	<div id="sellWrap">

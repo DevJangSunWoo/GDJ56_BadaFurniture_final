@@ -16,12 +16,13 @@
 
 
 
+
+
 <style>
+
 /*     div#search-container>div {        
         border: 1px solid blue;
     } */
-
-
 
     div#listContainer>h2{
         text-align:center;
@@ -96,9 +97,9 @@
 		text-decoration: none;
 	}
 
-	a:visited{
+	/* a:visited{
 		color: black;
-	}
+	} */
 
 	button{
 		cursor: pointer;
@@ -131,6 +132,68 @@
 		width:170px;
 	}
 
+
+
+	/* 모달 */
+	.modalTitle{
+		display: flex;
+		justify-content: center;
+	}
+
+	.closeBtn {
+          background-color: #348492;
+          padding: 5px 10px;
+          border-radius: 4px;
+          cursor: pointer;
+		  border:none;
+		  color: white;
+        }
+
+        .modals {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .modals .bg {
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .modalBox {
+          position: absolute;
+          background-color: #fff;
+          width: 400px;
+          height: 200px;
+          padding: 15px;
+        }
+
+        .modalBox button {
+          display: block;
+          width: 80px;
+          margin: 0 auto;
+        }
+
+        .hiddens {
+          display: none;
+        }
+
+		.modalContentInnerDiv{
+			margin:8px;
+		}
+
+		#modalBtnArea{
+			display: flex;
+			justify-content: center;
+			padding: 15px;
+		}
+
 </style>
 
 <section>
@@ -144,11 +207,15 @@
 					<td class="tableTd">10</td>
 				</tr>
 				<tr>
-					<th class="tableTh">배송중</th>
-					<td class="tableTd">5</td>
-				</tr>
+					<th class="tableTh">입금대기</th>
+					<td class="tableTd">2</td>
+				</tr>	
 				<tr>
-					<th class="tableTh">배송완료</th>
+					<th class="tableTh">입금완료</th>
+					<td class="tableTd">2</td>
+				</tr>	
+				<tr>
+					<th class="tableTh">반품요청</th>
 					<td class="tableTd">3</td>
 				</tr>
 				<tr>
@@ -156,13 +223,10 @@
 					<td class="tableTd">2</td>
 				</tr>
 				<tr>
-					<th class="tableTh">반품완료</th>
+					<th class="tableTh">취소요청</th>
 					<td class="tableTd">2</td>
 				</tr>
-				<tr>
-					<th class="tableTh">주문취소</th>
-					<td class="tableTd">2</td>
-				</tr>	
+
 			</table>
 		</div>
 		<div id="search-container">
@@ -277,11 +341,57 @@
 							</select>	
 
 						</td>
-						<td  class="tableTd" style="width: 80px;"><button class="updateBtn" onclick="">상세확인</button></td>
+						<td class="tableTd" style="width: 80px;"><button id="detailModalBtn" class="updateBtn" onclick="">상세확인</button></td>
 					</tr>
 				</tbody>
-
 			</table>
+			
+			<!-- 취소상세확인 모달 -->
+			<!-- <div id="refundModal" class="refundModal-overlay">
+				<div class="refundModal-window">
+					<div class="modalTitle">
+						<h1>반품/취소 상세내역</h1>
+					</div>
+					<div class="modalContent">
+						<span>주문 상세번호</span><span>1111</span>
+						<span>반품/취소 신청일</span><span>23-01-20</span>
+						<span>반품/취소 사유</span><span>단순변심</span>
+					</div>
+					<div class="close-area">
+						<button id="closebutton">닫기</button>
+					</div>
+				</div>
+			</div> -->
+			<!-- 모달 끝 -->
+
+
+			<div class="modals hiddens">
+			<div class="bg"></div>
+			<div class="modalBox">
+				<div class="modalTitle">
+					<h1>반품/취소 상세내역</h1>
+				</div>
+				<div class="modalContent">
+					<div class="modalContentInnerDiv">
+						<span>✔️ 주문 상세번호 : </span><span>1111</span>
+					</div>
+					<div class="modalContentInnerDiv">
+						<span>✔️ 반품/취소 신청일 : </span><span>23-01-20</span>
+					</div>
+					<div class="modalContentInnerDiv">
+						<span>✔️ 반품/취소 사유 : </span><span>단순변심</span>
+					</div>
+				</div>
+				<div id="modalBtnArea">
+					<button class="closeBtn">닫기</button>
+				</div>
+			</div>
+			</div>
+
+
+
+
+
 		</div>
 		<div id="pageBarContainer">
 			<div id=pageBar></div>
@@ -299,7 +409,7 @@
 
 
 
-	// datepicker test
+	// datepicker
 	$('#orderDateRange').daterangepicker({
     "locale": {
         "format": "YYYY-MM-DD",
@@ -316,11 +426,28 @@
     "startDate": new Date(),
     "endDate": new Date(),
     "drops": "auto"
-}, 
-// function (start, end, label) {
-//     console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-// }
-);
+	}, 
+	function (start, end, label) {
+	    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+	}
+	);
+
+
+	//취소/반품 확인 모달
+	const open = () => {
+		document.querySelector(".modals").classList.remove("hiddens");
+	}
+
+	const close = () => {
+		document.querySelector(".modals").classList.add("hiddens");
+	}
+
+	document.querySelector("#detailModalBtn").addEventListener("click", open);
+	document.querySelector(".closeBtn").addEventListener("click", close);
+	document.querySelector(".bg").addEventListener("click", close);
+
+
+
 
 </script>
 

@@ -86,9 +86,14 @@
 		text-decoration: none;
 	}
 
-	a:visited{
+	/* a:visited{
 		color: black;
+	} */
+
+	select{
+		font-size: 16px;
 	}
+
 	div#summaryContainer{
 		display: flex;
 		justify-content: center;
@@ -120,7 +125,11 @@
 					<td>10</td>
 				</tr>
 				<tr>
-					<th>미승인</th>
+					<th>승인검토</th>
+					<td>5</td>
+				</tr>
+				<tr>
+					<th>수정요청</th>
 					<td>5</td>
 				</tr>
 				<tr>
@@ -144,8 +153,8 @@
 
         	<div id="search-soldOutState">
                 <select name="searchKeyword" class="searchInput">
-                    <option value="승인대기">승인대기</option>
-                    <option value="승인완료">승인완료</option>
+					<option value="승인검토">승인검토</option>
+					<option value="수정요청">수정요청</option>
                     <option value="승인거부">승인거부</option>
                     <option value="수거대기">수거대기</option>
                     <option value="수거완료">수거완료</option>
@@ -200,7 +209,8 @@
 						<td>수거희망일</td>
 						<td>
 							<select>
-								<option value="승인대기">승인대기</option>
+								<option value="승인검토">승인검토</option>
+								<option value="수정요청">수정요청</option>
 								<option value="승인완료">승인완료</option>
 								<option value="승인거부">승인거부</option>
 								<option value="수거대기">수거대기</option>

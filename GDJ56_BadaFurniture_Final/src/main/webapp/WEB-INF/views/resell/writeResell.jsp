@@ -5,7 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> 
 <style>
+	section#sellpage * {
+		font-family: 'Nanum Gothic' !important;
+	}
+
 	section#sellpage>div#title{
 		display:flex;
 		justify-content:center;
@@ -18,20 +23,20 @@
 	}
 	div#sellWrap{
 		width:100%;
-		height:1000px; /* 수정요망 */
+		/* height:1000px; */ /* 수정요망 */
 		display:flex;
 		justify-content: center;
 	}
 	div#sellWrap>div#sellContent{
 		width:618px; 
-		height:1000px; /* 수정요망 */
+		/* height:1000px; */ /* 수정요망 */
 		/* border: 2px solid red; */
 	}
 	div#sellWrap>div#sellContent>div.sellRow{
 		display:flex;
 	}
 	div.sellRow>div.sellColLeft{
-		width:150px;
+		width:170px;
 		height:50px;
 		display:flex;
 		align-items:center;
@@ -59,10 +64,10 @@
 
 	}
 	div.sellColRight>div.sellImageUpload{
-		width:200px;
-		height:200px;
+		width:220px;
+		height:220px;
 		border: 2px solid rgb(52, 132, 146);
-		margin-right:20px;
+		margin-right:0px;
 	}
 	div#addressContainer>*{
 		margin:3px;
@@ -77,13 +82,14 @@
 		color:white;
 		background-color:rgb(52, 132, 146);
 		border:none;
-		font-size:20px;
+		font-size:25px;
 		border-radius:20px;
+		font-weight:bolder;
 	}
 </style>
 <section id="sellpage">
 	<div id="title">
-		중고 가구 판매 신청하기
+		내 가구 판매 신청하기
 	</div>
 	<form action="${path}/" method="post">
 	<div id="sellWrap">
@@ -111,9 +117,9 @@
 					크기 입력
 				</div>
 				<div class="sellColRight">
-					<span style="margin-right:30px;">가로 <input type="number" name="widthes" style="width:50px" min="1"> cm</span>
-					<span style="margin-right:30px;">세로 <input type="number" name="depthes" style="width:50px" min="1"> cm</span>
-					<span>높이 <input type="number" name="heightes" style="width:50px" min="1"> cm</span>
+					<span style="margin-right:30px;">가로 <input type="number" name="widthes" style="width:50px" min="1"> mm</span>
+					<span style="margin-right:30px;">세로 <input type="number" name="depthes" style="width:50px" min="1"> mm</span>
+					<span>높이 <input type="number" name="heightes" style="width:50px" min="1"> mm</span>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -157,7 +163,7 @@
 					<div class="sellImageUpload">
 						
 					</div>
-					<div class="sellImageUpload">
+					<div class="sellImageUpload" style="border-left:0px;">
 						
 					</div>
 				</div>		
@@ -299,5 +305,4 @@
 	    }).open();
 	}
 </script>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
