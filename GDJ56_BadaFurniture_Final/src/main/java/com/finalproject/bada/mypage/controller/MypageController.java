@@ -26,4 +26,9 @@ public class MypageController {
 		return "mypage/resellList";
 	}
 	
+	@RequestMapping("mypage/alert.do")
+	public String alertList() {
+		return "mypage/alertList";
+	}
+	
 }

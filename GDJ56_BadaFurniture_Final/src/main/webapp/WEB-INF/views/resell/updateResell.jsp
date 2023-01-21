@@ -42,11 +42,11 @@
 				판매 희망 금액 : <input type="number" style="width:100px;"> 원 
 			</div>
 			<div class="updateRow">
-				희망 수거일 : <input type="date" style="width:100px";>
+				희망 수거일 : <input type="date" style="width:100px">
 			</div>
 			<div class="updateRow">
 				<input type="submit" value="수정하기" 
-				style="background-color:rgb(52, 132, 146);color:white;border:none;width:250px;height:30px;"/>
+				style="background-color:rgb(52, 132, 146);color:white;border:none;width:250px;height:40px;border-radius:10px;font-size:18px;cursor:pointer;"/>
 			</div>
 		</form>
 	</div>

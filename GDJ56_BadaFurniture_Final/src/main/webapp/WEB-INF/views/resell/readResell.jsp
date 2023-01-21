@@ -63,10 +63,10 @@
 
 	}
 	div.sellColRight>div.sellImageUpload{
-		width:200px;
-		height:200px;
+		width:220px;
+		height:220px;
 		border: 2px solid rgb(52, 132, 146);
-		margin-right:20px;
+		margin-right:0px;
 	}
 	div#addressContainer>*{
 		margin:3px;
@@ -146,19 +146,7 @@
 					색상
 				</div>
 				<div class="sellColRight">
-					<select id="color">
-						<option>세부 항목을 선택해주세요.</option>
-						<option>블랙</option>
-						<option>화이트</option>
-						<option>브라운</option>
-						<option>그레이</option>
-						<option>네이비</option>
-						<option>레드</option>
-						<option>옐로우</option>
-						<option>그린</option>
-						<option>블루</option>
-						<option>퍼플</option>
-					</select>
+					블랙
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -177,7 +165,7 @@
 					<div class="sellImageUpload">
 						<img src="${path}/resources/upload/resell/deskTestImg01.png" width="100%" height="100%"/>
 					</div>
-					<div class="sellImageUpload">
+					<div class="sellImageUpload" style="border-left:0px;">
 						<img src="${path}/resources/upload/resell/deskTestImg02.png" width="100%" height="100%"/>
 					</div>
 				</div>		
@@ -196,13 +184,13 @@
 				</div>
 				<div class="sellColRight" style="height:110px !important;">
 					<div id="addressContainer">
-						<input type="text" id="sample4_postcode" placeholder="우편번호" style="width:100px;" value="08500">
+						<input type="text" id="sample4_postcode" placeholder="우편번호" style="width:100px;" value="08500" disabled>
 						<br>
-						<input type="text" id="sample4_roadAddress" placeholder="도로명주소" style="width:210px;" value="서울 금천구 가마산로 76">
-						<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width:210px;" value="서울 금천구 가산동 535-132">
+						<input type="text" id="sample4_roadAddress" placeholder="도로명주소" style="width:210px;" value="서울 금천구 가마산로 76" disabled>
+						<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width:210px;" value="서울 금천구 가산동 535-132" disabled>
 						<span id="guide" style="color:#999;display:none"></span><br>
-						<input type="text" id="sample4_detailAddress" placeholder="상세주소" style="width:210px;" value="구디빌라 811호">
-						<input type="text" id="sample4_extraAddress" placeholder="참고항목" style="width:210px;" value="(가산동)"> 
+						<input type="text" id="sample4_detailAddress" placeholder="상세주소" style="width:210px;" value="구디빌라 811호" disabled>
+						<input type="text" id="sample4_extraAddress" placeholder="참고항목" style="width:210px;" value="(가산동)" disabled> 
 					</div>
 				</div>		
 			</div>

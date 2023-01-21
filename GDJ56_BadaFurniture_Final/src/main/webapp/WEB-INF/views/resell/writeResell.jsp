@@ -64,10 +64,10 @@
 
 	}
 	div.sellColRight>div.sellImageUpload{
-		width:200px;
-		height:200px;
+		width:220px;
+		height:220px;
 		border: 2px solid rgb(52, 132, 146);
-		margin-right:20px;
+		margin-right:0px;
 	}
 	div#addressContainer>*{
 		margin:3px;
@@ -117,9 +117,9 @@
 					크기 입력
 				</div>
 				<div class="sellColRight">
-					<span style="margin-right:30px;">가로 <input type="number" name="widthes" style="width:50px" min="1"> cm</span>
-					<span style="margin-right:30px;">세로 <input type="number" name="depthes" style="width:50px" min="1"> cm</span>
-					<span>높이 <input type="number" name="heightes" style="width:50px" min="1"> cm</span>
+					<span style="margin-right:30px;">가로 <input type="number" name="widthes" style="width:50px" min="1"> mm</span>
+					<span style="margin-right:30px;">세로 <input type="number" name="depthes" style="width:50px" min="1"> mm</span>
+					<span>높이 <input type="number" name="heightes" style="width:50px" min="1"> mm</span>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -163,7 +163,7 @@
 					<div class="sellImageUpload">
 						
 					</div>
-					<div class="sellImageUpload">
+					<div class="sellImageUpload" style="border-left:0px;">
 						
 					</div>
 				</div>		
