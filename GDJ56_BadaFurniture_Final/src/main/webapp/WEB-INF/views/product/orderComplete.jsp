@@ -95,7 +95,7 @@
 
 
 
-<style>
+<!-- <style>
 	.important-style{font-weight:bold !important; font-size:14px !important;}
 
 	/* 결제 프로모션 */
@@ -105,7 +105,7 @@
 	.n-order-promotion > strong:first-child{margin-top:0}
 	.n-order-promotion > div{margin:5px 0}
 	.n-order-promotion > a{display:inline-block;font-weight:bold;color:#000;margin-top:5px}
-</style>
+</style> -->
 
 
 
@@ -122,346 +122,152 @@
 	<div class="right_area page_order_form" style="margin-right:300px;margin-top:150px; ">
 		<!-- 컨텐츠 영역 -->
 		<!--page nation -->
-		<div class="pagenation">
-			<!-- <div class="nav_sub"><a href="/">무신사 스토어</a><span class="icon_entity">&gt;</span><span>주문서</span></div> -->		
-		</div>
+		<div class="pagenation"></div>
 		<!--//page nation -->
 		<form name="f1" id="f1" method="post"  onSubmit="return jsf__pay(this);">
-            <input type="hidden" name="pay_kind" value="" />
-			<input type="hidden" name="order_prd_amt" value="42800"/>
-			<input type="hidden" name="kval" value="a7aef852029ddd8bba20bf60b536415b"/>
-			<input type="hidden" name="order_dlv_fee" value=""/>
-			<input type="hidden" name="order_coupon_amt" value=""/>
-			<input type="hidden" name="order_prepoint_amt" value=""/>
-			<input type="hidden" name="order_point_amt" value=""/>
-			<input type="hidden" name="order_cart_dc_amt" value="" />
-			<input type="hidden" name="order_group_dc_amt" value="" />
-			<input type="hidden" name="order_dc_amt" value="" />
-			<input type="hidden" name="order_pay_fee" value=""/>
-			<input type="hidden" name="order_pay_amt" value=""/>
-			<input type="hidden" name="guest" value="" />
-			<input type="hidden" name="dlv_cnt" value="1"/>
-			
-			<!-- 총 상품 금액 -->
-			<input type="hidden" name="total_prd_amt" id="total_prd_amt" value="42,800" />
-			<!-- 총 상품 정상금액 -->
-			<input type="hidden" name="total_normal_amt" value="69,000" />
-			<input type="hidden" name="total_normal_add_opt_amt" value="69,000" />
-			
-
-			<input type="hidden" name="unpay_order_cnt" value="0"/>
-			<input type="hidden" name="unpay_goods_cnt" value="0"/>
-			<input type="hidden" name="cancel_order_cnt" value="0"/>
-			<input type="hidden" name="cancel_order_dday" value=""/>
-			<input type="hidden" name="cancel_goods_cnt" value="0"/>
-			<input type="hidden" name="refund_goods_cnt" value="0"/>
-			<input type="hidden" name="unpay_limited_goods_cnt" value="0"/>
-			<input type="hidden" name="limited_goods_order_yn" value="Y"/>
-
-			<input type="hidden" name="comm_tax_mny" value="" />
-			<!-- 부가세 -->
-			<input type="hidden" name="comm_vat_mny" value="" />
-			<!-- 비과세 금액 -->
-			<input type="hidden" name="comm_free_mny" value="" />
-
-			<!-- BIZEST 결제수단 PAYMETHOD -->
-			<input type="hidden" name="pg_pay_method" value=""/>
-
-			<!-- 결제 서버 설정 값 -->
-			<input type="hidden" name="pay_server" value="https://www.musinsa.com" />
-
-			<input type="hidden" name="virtual_block_yn" value="N" />
-			<input type="hidden" name="user_mail_authed_yn" value="N" />
-
-			
-
-			<!-- 환불 정보 -->
-			<input type="hidden" name="refund_bank" value="국민은행"/>
-			<input type="hidden" name="refund_account" value="93350200466085"/>
-			<input type="hidden" name="refund_depositor" value="장선우"/>
-			<input type="hidden" name="cert_state" value="Y"/>
-
-			
-
-            <input type="hidden" name="pay_type" value=""/>
+           
 
 
 			<!--article-title-->
 			<div class="right_contents">
-				<h2 class="title-page">Order / Payment</h2>
+				<h2 class="title-page">Order / Complete</h2>
 				<div class="page-sorting order font-mss">
 					<a href="/app/cart"><span>장바구니</span></a>
 					<span><i class="ic-14-line-arrow-right">></i></span>
-					<span class="current-page">주문서</span>
+					<span>주문서</span>
 					<span><i class="ic-14-line-arrow-right">></i></span>
-					<span>주문 완료</span>
+					<span class="current-page">주문완료</span>
 				</div>
 			</div>
 			<!--//article-title-->
 
 
-			<!-- 회원 -->
-			<div class="section order__delivery">
-			    <!-- 주문자 정보 -->
-			    <input type="hidden" name="ordr_nm" value="장선우"/>
-			    <input type="hidden" name="email1" value="sunwoo8949"/>
-			    <input type="hidden" name="email_etc" value="naver.com"/>
-			    <input type="hidden" name="email2" value="naver.com"/>
-			    <input type="hidden" name="omobile1" value="010"/>
-			    <input type="hidden" name="omobile2" value="5640"/>
-			    <input type="hidden" name="omobile3" value="5610"/>
-			    <!-- // 주문자 정보 -->
+				<!-- 회원 -->
+			<div class="section order__delivery">  
+			<div class="order__delivery__inner">
+				        <h3 class="order__title">결제 정보</h3>
+				        
+				        <ul class="order__list">
+				            <li class="order__item delivery__item__info"  id="del_ori">
+				                <span class="order__item__label">입금정보</span>
+				                <div class="order__item__area" id="delivery-addr"> 카드</div>
+				            </li>
+				           <li class="order__item delivery__item__info"  id="del_ori">
+				                <span class="order__item__label">승인번호</span>
+				                <div class="order__item__area" id="delivery-addr"> 30121345</div>
+				            </li>
+				            <li class="order__item delivery__item__info"  id="del_ori">
+				                <span class="order__item__label">결제금액</span>
+				                <div class="order__item__area" id="delivery-addr"> 79,800원</div>
+				            </li>
+				         
+				         <!--배송지 변경 누를시 나타나는 변경  영역-->
+				         	<div  style="display: none;"  id='dis'>
+					         	<div class="order__item__area">
+						         	<span class="order__item__label">변경주소</span>    			
+					                <div class="order_option_box"> 
+					                <!-- 	<input type="text"  placeholder="공간차지" style="visibility: hidden;width:5px; "> -->
+					                	<input type="text" id="sample4_postcode" placeholder="우편번호" style="width:100px;border:1px solid lightgray; ">	<br>					
+										<input type="text" id="sample4_roadAddress" placeholder="도로명주소" style="width:210px;border:1px solid lightgray;">						
+										<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width:210px;border:1px solid lightgray;">
+										<span id="guide" style="color:#999;display:none"></span><br>
+										<input type="text" id="sample4_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;">
+									 </div>	
+					              
+				                </div>
+				         	</div>
+				         </ul>
+				  </div>
+			</div>
 		
-		    <!-- 배송지 정보 -->
-		    <div class="order__delivery__inner">
-		        <h3 class="order__title">배송 정보</h3>
-		        <input type="hidden" name="rcvr_nm" value="장선우" />
-		        <input type="hidden" name="rtitle" value="장선우님 배송지" />
-		        <input type="hidden" name="rzip_cd1" value="14215" />
-		        <input type="hidden" name="rzip_addr1" value="경기 광명시 연서일로17번길 17" />
-		        <input type="hidden" name="rzip_addr2" value="서동 에이스빌  101동 401호" />
-		        <input type="hidden" name="rmobile1" value="010" />
-		        <input type="hidden" name="rmobile2" value="5640" />
-		        <input type="hidden" name="rmobile3" value="5610" />
-		        <input type="hidden" name="rphone1" value="010" />
-		        <input type="hidden" name="rphone2" value="5640" />
-		        <input type="hidden" name="rphone3" value="5610" />
-		        <input type="hidden" name="dlv_msg" value="" />
-		        <input type="hidden" name="rselectedNo" value="8995361" />
-		        <ul class="order__list">
-		                        <li class="order__item delivery__item__info" >
-		                <span class="order__item__label">
-		                    배송지
-		                    <!-- 새벽배송 -->
-		                                    </span>
-		                <div class="order__item__area">
-		                    <ul class="order__delivery__radio-wrap" id="quickDeliveryList">
-		                                                <li>
-		                            <input type="radio" onclick="dis2()" class="n-radio" id="delivery_choice_0" name="delivery_choice" value="장선우님 배송지" checked >
-		                            <label for="delivery_choice_0">로그인멤버님 배송지</label>
-		                        </li>
-		                                            </ul>
-		                    <button type="button" class="order__button" onclick="dis()">배송지 변경</button> 
-		                </div>
-		            </li>
-		            <li class="order__item delivery__item__info" >
-		                <span class="order__item__label">이름 / 연락처</span>
-		                <div class="order__item__area">
-		                    <ul class="order__delivery__user">
-		                        <li id="delivery-name">로그인 멤버 이름</li>
-		                        <li id="delivery-phone">로그인 멤버 연락처</li>
-		                    </ul>
-		                </div>
-		            </li>
-		            <li class="order__item delivery__item__info"  id="del_ori">
-		                <span class="order__item__label">기본주소</span>
-		                <div class="order__item__area" id="delivery-addr"> 로그인 멤버 연락처</div>
-		            </li>
-		         
-		         <!--배송지 변경 누를시 나타나는 변경  영역-->
-		         	<div  style="display: none;"  id='dis'>
-			         	<div class="order__item__area">
-				         	<span class="order__item__label">변경주소</span>    			
-			                <div class="order_option_box"> 
-			                <!-- 	<input type="text"  placeholder="공간차지" style="visibility: hidden;width:5px; "> -->
-			                	<input type="text" id="sample4_postcode" placeholder="우편번호" style="width:100px;border:1px solid lightgray; ">	<br>					
-								<input type="text" id="sample4_roadAddress" placeholder="도로명주소" style="width:210px;border:1px solid lightgray;">						
-								<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width:210px;border:1px solid lightgray;">
-								<span id="guide" style="color:#999;display:none"></span><br>
-								<input type="text" id="sample4_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;">
-							 </div>	
-			              
-		                </div>
-		         	</div>
-		         </ul>
-		    </div>
-		</div>
+			
 	
-		<!--주소api  -->
-		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-		<script>
-			function sample4_execDaumPostcode() {
-			    new daum.Postcode({
-			        oncomplete: function(data) {
-			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-			
-			            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-			            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-			            var roadAddr = data.roadAddress; // 도로명 주소 변수
-			            var extraRoadAddr = ''; // 참고 항목 변수
-			
-			            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-			            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-			            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-			                extraRoadAddr += data.bname;
-			            }
-			            // 건물명이 있고, 공동주택일 경우 추가한다.
-			            if(data.buildingName !== '' && data.apartment === 'Y'){
-			               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-			            }
-			            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-			            if(extraRoadAddr !== ''){
-			                extraRoadAddr = ' (' + extraRoadAddr + ')';
-			            }
-			
-			            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-			            document.getElementById('sample4_postcode').value = data.zonecode;
-			            document.getElementById("sample4_roadAddress").value = roadAddr;
-			            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-			            
-			            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-			            /* if(roadAddr !== ''){
-			                document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-			            } else {
-			                document.getElementById("sample4_extraAddress").value = '';
-			            } */
-			
-			            var guideTextBox = document.getElementById("guide");
-			            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-			            if(data.autoRoadAddress) {
-			                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-			                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-			                guideTextBox.style.display = 'block';
-			
-			            } else if(data.autoJibunAddress) {
-			                var expJibunAddr = data.autoJibunAddress;
-			                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-			                guideTextBox.style.display = 'block';
-			            } else {
-			                guideTextBox.innerHTML = '';
-			                guideTextBox.style.display = 'none';
-			            }
-			           
-			        }
-			    }).open();
-			}
-		</script>
-	
-		<!--배송지 변경 출현 스크립트  -->
-		<script>
-		function dis(){
-		      if($('#dis').css('display') == 'none'){
-		      $('#dis').show();
-		      $('#del_ori').hide();
-		      $('#delivery_choice_0').prop('checked', false);
-		      sample4_execDaumPostcode();
-		    }else{
-		      $('#dis').hide();
-		      $('#del_ori').show();
-		      $('#delivery_choice_0').prop('checked', true);
-		    }
-		    }
-		
-		function dis2(){
-				
-				if($('#dis').css('display') == 'none'){
-			      /* $('#dis').show(); */
-			      $('#del_ori').hide();
-			      $('#delivery_choice_0').prop('checked', false);
-			    /*   sample4_execDaumPostcode(); */
-			    }
-			      else{
-				     
-			    	  $('#dis').hide();
-				      $('#del_ori').show();
-				      $('#delivery_choice_0').prop('checked', true);
-			    	}
-				
-		    }
-		</script>
-
-		<div class="section order_product_info">
-			<h3 class="order__title">상품 정보</h3>
-			<input type="hidden" id="discount_applied_yn" value="" />
-			<input type="hidden" id="event_min_pay_amt" value="10000" />
-			<!--cart products-->
-			<table class="table_basic order_cart_table">
-				<colgroup>
-					<col>
-					<col width="50px">
-<!--						<col width="100px">-->
-					<col width="80px">
-					<col width="80px">
-					<col width="70px" class="charge ">
-					<col width="69px" class="charge ">
-					<col width="100px" class="charge ">
-				</colgroup>
-				<thead>
-					<tr>
-						<th scope="col">상품 정보</th>					
-						<th scope="col"  colspan="3">배송비</th>
-						<th scope="col"  colspan="3">주문금액</th>
-					</tr>
-				</thead>
-				<!--리스트 데이터 표출 -->
-				<tbody>
-					<tr>
-						<td class="td_product">
-							<input type="hidden" class="input_hidden" name="no" value="780450657" />
-							<input type="hidden" class="input_hidden" name="coupon_amt_780450657" value="0" />
-							<input type="hidden" class="input_hidden" name="cart_info" value="2702396|0|스위트 메론 / L|42800|0|0|0|N|Y|780450657|Y" />
-							<input tyep="hidden" class="input_hidden" id="goods_2702396_0_스위트 메론 / L" />
-							<input type="hidden" class="input_hidden" name="goods_coupon_info" value="" />
-							<input type="hidden" class="input_hidden" name="used_yn" value="N" />
-							<input type="hidden" class="input_hidden" name="cart_goods_cnt[]" value="1" />
-							<input type="hidden" class="input_hidden" name="normal_price" value="69000" />
-							<input type="hidden" class="input_hidden" name="price" value="42800" />
-							<input type="hidden" name="use_point_yn_780450657" value="Y">
-							<input type="hidden" name="prepoint_yn_780450657" value="N">
-							<input type="hidden" name="prepoint_780450657" value="0">
-							<input type="hidden" class="input_hidden" name="exclusive_msspay" value="N" />
-							<input type="hidden" class="input_hidden" name="exclusive_msspay_hyundaicard" value="N" />
-                               <input type="hidden" class="input_hidden" id="group_dc_limit_yn_780450657" value="Y" />
-							<input type="hidden" name="plcc_dc_yn_780450657" value="Y" />
-							<input type="hidden" name="limit_coupon_amt_yn_780450657" value="N" />
-							<input type="hidden" name="goods_form_type" value="DELIVERY_PRODUCT" />
-							<div class="connect_img">
-								<a href="/app/goods/2702396/0" target="_blank">
-									<!--가구 이미지 삽입  -->
-									<img  src="${path}/resources/images/product/sofa1.jpg"  >
-								</a>
-							</div>
-							<div class="article_info connect_info">
-								<div class="box_product">
-									<strong>제품 명</strong>
-									<span class="list_info">
-										<!--상세화면 링크 걸기  -->
-										<a href="/app/goods/2702396/0" target="_blank">
-											화이트 캐비닛
-										</a>
-									</span>
+			<div class="section order_product_info">
+				<h3 class="order__title">상품 정보</h3>
+				<input type="hidden" id="discount_applied_yn" value="" />
+				<input type="hidden" id="event_min_pay_amt" value="10000" />
+				<!--cart products-->
+				<table class="table_basic order_cart_table">
+					<colgroup>
+						<col>
+						<col width="50px">
+	<!--						<col width="100px">-->
+						<col width="80px">
+						<col width="80px">
+						<col width="70px" class="charge ">
+						<col width="69px" class="charge ">
+						<col width="100px" class="charge ">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">상품 정보</th>					
+							<th scope="col"  colspan="3">배송비</th>
+							<th scope="col"  colspan="3">주문금액</th>
+						</tr>
+					</thead>
+					<!--리스트 데이터 표출 -->
+					<tbody>
+						<tr>
+							<td class="td_product">
+								<input type="hidden" class="input_hidden" name="no" value="780450657" />
+								<input type="hidden" class="input_hidden" name="coupon_amt_780450657" value="0" />
+								<input type="hidden" class="input_hidden" name="cart_info" value="2702396|0|스위트 메론 / L|42800|0|0|0|N|Y|780450657|Y" />
+								<input tyep="hidden" class="input_hidden" id="goods_2702396_0_스위트 메론 / L" />
+								<input type="hidden" class="input_hidden" name="goods_coupon_info" value="" />
+								<input type="hidden" class="input_hidden" name="used_yn" value="N" />
+								<input type="hidden" class="input_hidden" name="cart_goods_cnt[]" value="1" />
+								<input type="hidden" class="input_hidden" name="normal_price" value="69000" />
+								<input type="hidden" class="input_hidden" name="price" value="42800" />
+								<input type="hidden" name="use_point_yn_780450657" value="Y">
+								<input type="hidden" name="prepoint_yn_780450657" value="N">
+								<input type="hidden" name="prepoint_780450657" value="0">
+								<input type="hidden" class="input_hidden" name="exclusive_msspay" value="N" />
+								<input type="hidden" class="input_hidden" name="exclusive_msspay_hyundaicard" value="N" />
+	                               <input type="hidden" class="input_hidden" id="group_dc_limit_yn_780450657" value="Y" />
+								<input type="hidden" name="plcc_dc_yn_780450657" value="Y" />
+								<input type="hidden" name="limit_coupon_amt_yn_780450657" value="N" />
+								<input type="hidden" name="goods_form_type" value="DELIVERY_PRODUCT" />
+								<div class="connect_img">
+									<a href="/app/goods/2702396/0" target="_blank">
+										<!--가구 이미지 삽입  -->
+										<img  src="${path}/resources/images/product/sofa1.jpg"  >
+									</a>
 								</div>
-								<div class="order_option_box">
-									<p> 분류:소파/색깔:블루 /상태:최상 </p>
-								</div>										
-							</div>
-						</td>
-						<td rowspan="1" colspan="3">
-						배송비는 주문 금액에 포함되있습니다.
-						</td>
-					    <td class="price"   colspan="3">
-                               <strong>42,800 원</strong>
-                           </td>                                
-					</tr>
-				</tbody>																	
-			</table>
-		</div>
+								<div class="article_info connect_info">
+									<div class="box_product">
+										<strong>제품 명</strong>
+										<span class="list_info">
+											<!--상세화면 링크 걸기  -->
+											<a href="/app/goods/2702396/0" target="_blank">
+												화이트 캐비닛
+											</a>
+										</span>
+									</div>
+									<div class="order_option_box">
+										<p> 분류:소파/색깔:블루 /상태:최상 </p>
+									</div>										
+								</div>
+							</td>
+							<td rowspan="1" colspan="3">
+							배송비는 주문 금액에 포함되있습니다.
+							</td>
+						    <td class="price"   colspan="3">
+	                               <strong>42,800 원</strong>
+	                           </td>                                
+						</tr>
+					</tbody>																	
+				</table>
+			</div>
 		
-		<div class="section right_contents section_gift">
-			<!--빈영역  -->
-		</div>
+			<div class="section right_contents section_gift"></div>
 		
-		<div class="section order_hyundaicard" style="display:none;">			            				
-		    <!--빈영역  -->
-		</div>            			
 		
-		<div class="section order_coupon_discount" style="display:none;">
-			<!--빈영역  -->
-		</div>
 
-			<div class="right_contents section_payment">
+
+		<!--영역 잡기용  -->
+		<div class="right_contents section_payment" style="display:none;" >
 				<h3 class="order__title">결제 정보</h3>
-				<div  >
+				<div>
 					<!--신용카드 -->
 					<div class="cell_order_form" style="border-right: lightgray 1px !important;">
 						<div class="clear cell_order_form1 border_add_order" id="payment_info_area">
@@ -508,39 +314,11 @@
 		
 		
 <!-- 주문자 동의 -->
-<ul class="list_payment_order">
+
 	<li class="cell_discount_tit last">주문자 동의</li>
 	<li class="cell_discount_detail last">
     <div class="order-agree">
-        <div class="order-agree__title">
-            회원 본인은 구매 조건, 주문 내용 확인 및 결제에 동의합니다
-        </div>
-                <div class="order-agree__text">
-            <span class="font_basic">개인정보 수집 및 이용 동의</span>
-            <a href="javascript:void(0)" class="order-agree__more" onclick="showAgreeDetail(this); return false;" id="secondAgree">자세히</a>
-            <div id="secondAgreeDetail" class="order-agree__section" style="display:none;">
-                <strong>개인정보 수집 및 이용 동의</strong>
-                <ol>
-                    <li>
-                        1. 수집목적
-                        <br>판매자와 구매자의 거래의 원활한 진행, 본인의사의 확인, 고객 상담 및 불만처리, 상품과 경품 배송을 위한 배송지 확인 등
-                    </li>
-                    <li>
-                        2. 수집 항목
-                        <br>구매자 정보: 성명, 전화번호, ID, 휴대전화 번호, 메일주소, 상품 구매정보
-                        <br>수령자 정보: 성명, 전화번호, 휴대전화 번호, 배송지 주소
-                    </li>
-                    <li>
-                        3. 보유기간
-                        <br><span style="font-weight: bold; font-size: 14px;">개인정보 수집 및 이용목적 달성 시 및 관련 법령에 따른 기간까지 보관</span>
-                    </li>
-                    <li>
-                        4. 동의 거부시 불이익
-                        <br>본 개인정보 수집 및 이용 등에 동의하지 않을 권리가 있습니다. 다만, 필수항목에 동의를 하지 않을경우 거래가 제한될 수 있습니다.
-                    </li>
-                </ol>
-            </div>
-        </div>
+        
         <div class="order-agree__text">
             <span class="font_basic">개인정보 제 3자 제공 동의</span>
             <a href="javascript:void(0)" class="order-agree__more" onclick="showAgreeDetail(this); return false;" id="thirdAgree">자세히</a>
@@ -1102,25 +880,7 @@
 </li>
 
 
-<script type="text/javascript">
-    function showAgreeDetail(obj) {
-        if (!obj || typeof obj.id === 'undefined') {
-            return ;
-        }
 
-        var id = obj.id;
-        var agreeBtnId = $("#"+id);
-        var agreeDetailId = $("#"+id+"Detail");
-
-        if (agreeDetailId.css('display') === 'none') {
-            agreeDetailId.show();
-            agreeBtnId.text("닫기");
-        } else {
-            agreeDetailId.hide();
-            agreeBtnId.text("자세히");
-        }
-    }
-</script>
 
 </ul>
 <!-- // 주문자 동의 -->
@@ -1148,237 +908,61 @@
 					
 				<!--//cart button-->
 			</div>
-			<!--// 컨텐츠 영역 -->
+	
+		
 		</form>
+		<div class="section order__delivery">  
+			<div class="order__delivery__inner">
+				        <h3 class="order__title">배송지 정보</h3>
+				        
+				        <ul class="order__list">
+				            <li class="order__item delivery__item__info"  id="del_ori">
+				                <span class="order__item__label">수령인</span>
+				                <div class="order__item__area" id="delivery-addr"> 선우</div>
+				            </li>
+				           <li class="order__item delivery__item__info"  id="del_ori">
+				                <span class="order__item__label">배송지</span>
+				                <div class="order__item__area" id="delivery-addr"> 철산</div>
+				            </li>
+				            <li class="order__item delivery__item__info"  id="del_ori">
+				                <span class="order__item__label">휴대전화</span>
+				                <div class="order__item__area" id="delivery-addr"> 010-564012345</div>
+				            </li>
+				         	 <li class="order__item delivery__item__info"  id="del_ori">
+				                <span class="order__item__label">전화번호</span>
+				                <div class="order__item__area" id="delivery-addr"> 02-2687-3456</div>
+				            </li>
+				         
+				         
+				         
+				         
+				         	
+				         </ul>
+				  </div>
+			</div>
+			<!--cart button-->
+				<div style="display:inline-flex;">
+					<div  id="card_btn"  class="btn_wrap order_form__payment-button-wrap" style="margin-left:450px;">
+						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button" ">
+							<span id="btn-pay_amt" style="font-size:20px;"></span>주문목록으로 이동&nbsp;
+							<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
+						</a>
+					</div>
+					<div  id="account_btn"  class="btn_wrap order_form__payment-button-wrap"  style= >
+						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button" ">
+							<span id="btn-pay_amt" style="font-size:20px;"></span>홈으로 이동&nbsp;
+							<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
+						</a>
+					</div>
+				</div>	
+				<!--//cart button-->
+
+
 		
-
-<!--결제수단 여는 스크립트  -->
-		<script type="text/javascript">
-		function pay_info2_account(){
-		      if($('#pay_info2_account').css('display') == 'none'){
-		      $('#pay_info2_account').show();
-		      $('#card_btn').hide();
-		      $('#account_btn').show();
-		
-		    }
-		  
-		    }
-		
-		
-		function pay_info2_card(){
-		      if($('#pay_info2_account').css('display') != 'none'){
-		      $('#pay_info2_account').hide();
-		      $('#card_btn').show();
-		      $('#account_btn').hide();
-		   
-		    }
-		  
-		    }
-			
-		
-		</script>
-
-
-
-	<form method="post" name="msspay_method_add_form" action="https://pay.musinsa.com/paymethod/add">
-		<input type="hidden" name="returnUrl" value="https://www.musinsa.com/app/order/msspay_method_add_result" />
-	</form>
-
-	<form method="post" name="msspay_pay_form"></form>
-	
-		<!-- <script type="text/javascript">
-			if (!console.debug) {
-				console.debug = console.log;
-			}
-			
-			Msspay.install({
-				getOrderNo: function() {
-					Order.initOrderNo();
-					return document.order_info.ord_no.value;
-				},
-				getAmount: function() {
-					return Order.getPayAmt();
-				},
-				getTaxFreeAmount: function() {
-					return document.order_info.comm_free_mny.value;
-				},
-				getOrderTitle: function() {
-					return document.order_info.good_name.value;
-				},
-				isCardPointUse: function() {
-				 	return $('#__msspay-use-card-point input[type=checkbox]').is(':checked');
-				},
-				getFirstDiscountYN: function() {
-					return $(".hyundaicard-firstpayment").hasClass('is-active')? 'Y' : 'N';
-				},
-				getCashReceiptRegistrationType: function() {
-					return getCashReceiptType();
-				},
-				getCashReceiptNumberType: function() {
-					return getCashReceiptNumberType();
-				},
-				getCashReceiptRegistrationNumber: function() {
-					return getCashReceiptNumber();
-				},
-				isSaveCashReceipt: function() {
-					return $('#checkCashReceipt').prop('checked');
-				},
-				onMethodListUpdated: function() {
-					Order.CalculateAmt();
-				},
-                showImmediateDiscountCardName: function (immediateDiscountCardInfo) {
-					$('.msspay-discount-card').hide();
-                    $('#msspay_tooltip').hide();
-				    if (immediateDiscountCardInfo['cardNameList'].length > 0 && immediateDiscountCardInfo['maxDiscountAmt'] > 0) {
-						$('[name=discountCard]').text(immediateDiscountCardInfo['cardNameList'].join(', '));
-						$('.msspay-discount-card').show();
-                        setCookie("msspay-tooltip-close-button", 1, 1);
-                    } else {
-						var tootipCookie = getCookie("msspay-tooltip-close-button");
-						if (tootipCookie != "1") {
-							$('#msspay_tooltip').show();
-						}
-                    }
-                },
-				onAfterInstalled: function(msspay) {
-					$('.__payment-pg-view').show();
-					$('div.payment-area-wrap label.box_choice:visible').each(function(index, item){
-						if (index % 4 > 0) {
-							return true; // continue
-						}
-
-						$(item).addClass('row-first');
-					});
-					$('.__payment-pg-view').hide();
-
-					// 주문서 결제수단 선택 : 무신사페이(msspay) / 일반결제(pg)
-					$('ul.payment-choice input[name=payment_choice]').each(function() {
-						$(this).on('click', function(event, param) {
-							const paymentChoice = $(this).val();
-							msspay.updatePaymentView(paymentChoice);
-							showClaim();
-							if (Order.isMsspaySupported()) {
-								Msspay.showCashReceiptByPaymentType();
-								Msspay.setImmediateDiscount();
-							}
-
-							if (paymentChoice === 'msspay') {
-								$('.box_payment_event').hide();
-								$("#right_pay_info_msspay").show();
-                                setPayKind('MPAY');
-								CalculateAmt();
-							} else {
-								$('input[type=radio][name=kyejae]:checked').click();
-							}
-
-							if (plcc_open_yn == 'Y' && param != 'noCheckUsePLCC') {
-								PLCC.checkUsePLCCFirstPayDiscountByPaymentChoice(paymentChoice);
-								PLCC.checkPLCCDiscount(paymentChoice);
-								PLCC.checkExcludeInterestFreeText();
-							}
-						});
-					});
-
-					// 현금영수증 선택
-					$('input[name=cash_btn]').each(function() {
-						$(this).on('click', function() {
-							const receiptChoice = $(this).val();
-							showCashReceiptByType(receiptChoice);
-						});
-					});
-
-					$(window).on('pageshow', function (event) {
-						if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
-							$('ul.payment-choice input[name=payment_choice]:checked').click();
-						}
-					});
-
-					// 무신사페이 선택버튼 우측 툴팁 닫기
-					$('#__msspay-tooltip-close-button').on('click', function() {
-						$(this).parent().css('visibility', 'hidden');
-						setCookie("msspay-tooltip-close-button", 1, 7);
-					});
-
-					// 무신사페이 가입/결제수단 추가 버튼
-					$('.list_payment_order').on('click', '.__msspay-add-method-button',  msspay.openMsspayMethodAddWindow);
-					$('.__msspay-reload-button').on('click', msspay.loadMsspayMethodList);
-				},
-				onAfterLoadList: function() {
-					// 무신사페이 할부 영역 change 이벤트
-					$('select[id^=__msspay-plcc-interest-]').selectmenu({
-						change: function (event, ui) {
-							PLCC.checkExcludeInterestFreeText()
-						}
-					});
-				}
-			});
-		</script> -->
 	
 
-	<form method="post" name="mpay_auth_form"></form>
 	
-		<!-- <script type="text/javascript">
-			Mpay.install({
-				auth : {
-					form: document.mpay_auth_form,
-					getOrderNo: function() {
-						Order.initOrderNo();
-						return document.order_info.ord_no.value;
-					},
-					getOrderKey: function() {
-						Order.initOrderNo();
-						return document.order_info.ord_key.value;
-					},
-					getItemList: function() {
-						return getProductInfo();
-					},
-					getCashReceiptRegistrationType: function() {
-						return getCashReceiptType();
-					},
-					getCashReceiptNumberType: function() {
-						return getCashReceiptNumberType();
-					},
-					getCashReceiptRegistrationNumber: function() {
-						return getCashReceiptNumber();
-					},
-					isSaveCashReceipt: function() {
-						return ( $('#checkCashReceipt').prop('checked') && this.getCashReceiptRegistrationType() !== 'NONE' ) ? 'Y' : 'N';
-					},
-					onPrepared: function(form) {
-						window.name = 'order_form_' + form.oid.value;
-						var originalHandler = Order.payment;
-						var payKind = form.payKind.value;
-						const popupWindow = new PopupWindow('mpayAuthWindow', {
-							onAfterClosed: function() {
-								Order.payment = originalHandler;
-							}
-						});
-						if(payKind == 'VTRANSFER') {
-							form.target = "_self";
-							form.submit();
-						} else {
-							if(payKind == 'CARD' || payKind == 'PHONE' || payKind == 'TRANSFER' || payKind == 'OVERSEA_CARD') {
-								popupWindow.setFeature("width", 760);
-								popupWindow.setFeature("height", 570);
-							}
-							popupWindow.openWithForm(form, function() {
-								Order.payment = function() {
-									alert('결제 요청중입니다.');
-								}
-								return true;
-							});
-						}
-					}
-				}
-			});
-
-            const cashReceiptInfo = [];
-            Order.setCashReceipt(cashReceiptInfo);
-		</script> -->
 	
 	
 
-
-
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
