@@ -214,7 +214,7 @@
 			<table id="propertyTable">
 				<thead>
 					<tr>
-						<th><input type="checkbox" name="chk"></th>
+						<th><input type="checkbox" name="chk" onclick="selectAll(this)"></th>
 						<th>가구번호</th>
 						<th>분류</th>
 						<th>사진</th>
@@ -253,8 +253,37 @@
 								</select>
 
 							</td>
-							<td style="width: 80px;"><button class="updateBtn">수정</button></td>
+							<td style="width: 80px;"><button class="updateBtn" onclick="location.assign('${path}/admin/update.do')">수정</button></td>
 						</tr>
+						<!-- 지워 나중에  -->
+						<tr>
+							<td style="width: 10px;"><input type="checkbox" name="chk"></td>
+							<td><a href="">가구번호</a></td>
+							<td>분류</td>
+							<td>사진</td>
+							<td>사이즈</td>
+							<td>색상</td>
+							<td>가격</td>
+							<td>업로드일</td>
+							<td>판매일자</td>
+							<td>
+								<select name="">
+									<option value="판매중">판매중</option>
+									<option value="거래중">거래중</option>
+									<option value="판매완료">판매완료</option>
+								</select>
+
+							</td>
+							<td>
+								<select name="">
+									<option value="Y">공개</option>
+									<option value="N">숨김</option>
+								</select>
+
+							</td>
+							<td style="width: 80px;"><button class="updateBtn" onclick="location.assign('${path}/admin/update.do')">수정</button></td>
+						</tr>
+						<!-- 요기까지 지워 -->
 					</tbody>
 				</thead>
 
@@ -266,6 +295,8 @@
 	</div>
 </section>
 <script>
+
+	//검색타입 변경
 	$("select#searchType").change(e=>{
 		const type = $(e.target).val();
 		$("div#search-container>div").hide();
@@ -273,6 +304,15 @@
 		$("input[name=searchKeyword][type=text]").val("");
 		$("div#search-hiding>label>input[name=searchKeyword]").first().prop("checked",true);
 	});
+
+	//체크박스 전체선택
+	function selectAll(selectAll){
+		const allCheckbox=document.querySelectorAll('input[type="checkbox"]');
+		allCheckbox.forEach((checkbox)=>{
+			checkbox.checked = selectAll.checked
+		})
+
+	}
 
 </script>
 
