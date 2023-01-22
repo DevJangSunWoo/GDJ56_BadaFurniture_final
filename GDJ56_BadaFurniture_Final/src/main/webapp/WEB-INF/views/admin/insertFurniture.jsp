@@ -116,10 +116,10 @@
                 <form action="" method="">
                     <div id="divContent">            
                         <span>상품명</span>
-                        <input type="text" placeholder="상품명"><br>
+                        <input type="text" name="productNo" placeholder="상품명"><br>
 
                         <span>가격</span>
-                        <input type="text" placeholder="상품명"><br>
+                        <input type="text" name="title" placeholder="상품명"><br>
 
                         <span>분류</span>
                         <select name="item">
@@ -135,7 +135,7 @@
                         <br>
 
                         <span>상태</span>
-                        <select>
+                        <select name="grade">
                             <option value="최상">최상</option>
                             <option value="상">상</option>
                             <option value="중">중</option>
@@ -143,23 +143,31 @@
                         <br>
                         
                         <span>소재</span>
-                        <input type="text" placeholder="상품명"><br>
+                        <select name="material">
+                            <option value="철제">철제</option>
+                            <option value="원목">원목</option>
+                            <option value="가죽">가죽</option>
+                            <option value="패브릭">패브릭</option>
+                            <option value="메쉬">메쉬</option>
+                            <option value="유리">유리</option>
+                        </select>
+                        <br>
 
                         <span>크기</span>
                         <span style="width:50px">가로</span>
-                        <input type="number" placeholder="가로" style="width:325px">&nbsp;&nbsp;cm<br>
+                        <input type="number" name="widthes" placeholder="가로" style="width:325px">&nbsp;&nbsp;mm<br>
                         
                         <span>&nbsp;&nbsp;</span>
                         <span style="width:50px">세로</span>
-                        <input type="number" placeholder="세로" style="width:325px">&nbsp;&nbsp;cm<br>
+                        <input type="number" name="depthes" placeholder="세로" style="width:325px">&nbsp;&nbsp;mm<br>
                         
                         <span>&nbsp;&nbsp;</span>
                         <span style="width:50px">높이</span>
-                        <input type="number" placeholder="높이" style="width:325px">&nbsp;&nbsp;cm
+                        <input type="number" name="heightes" placeholder="높이" style="width:325px">&nbsp;&nbsp;mm
                         <br>
 
                         <span>색상</span>
-                        <select>
+                        <select name="color">
                             <option value="블랙">블랙</option>
                             <option value="화이트">화이트</option>
                             <option value="브라운">브라운</option>
@@ -194,7 +202,7 @@
 
                         <br>
                         <span>상세 내용</span><br>
-                        <textarea cols="73" rows="10" style="resize:none;margin-left: 15px;"></textarea>
+                        <textarea name="detail" cols="73" rows="10" style="resize:none;margin-left: 15px;"></textarea>
                         <br>
                     </div>
                     <div id="divBtn">

@@ -151,15 +151,15 @@
                         <br>
                         <span>크기</span>
                         <span style="width:50px">가로</span>
-                        <input type="number" placeholder="가로" style="width:325px">&nbsp;&nbsp;cm<br>
+                        <input type="number" name="widthes" placeholder="가로" style="width:325px">&nbsp;&nbsp;mm<br>
                         
                         <span>&nbsp;&nbsp;</span>
                         <span style="width:50px">세로</span>
-                        <input type="number" placeholder="세로" style="width:325px">&nbsp;&nbsp;cm<br>
+                        <input type="number" name="depthes" placeholder="세로" style="width:325px">&nbsp;&nbsp;mm<br>
                         
                         <span>&nbsp;&nbsp;</span>
                         <span style="width:50px">높이</span>
-                        <input type="number" placeholder="높이" style="width:325px">&nbsp;&nbsp;cm
+                        <input type="number" name="heightes" placeholder="높이" style="width:325px">&nbsp;&nbsp;mm
                         <br>
 
                         <span>색상</span>
@@ -198,7 +198,7 @@
 
                         <br>
                         <span>상세 내용</span><br>
-                        <textarea cols="73" rows="10" style="resize:none;margin-left: 15px;"></textarea>
+                        <textarea name="detail" cols="73" rows="10" style="resize:none;margin-left: 15px;" ></textarea>
                         <br>
                     </div>
                     <div id="divBtn">

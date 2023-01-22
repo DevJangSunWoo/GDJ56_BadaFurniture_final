@@ -141,7 +141,7 @@
 
 #adminIdDiv{
   display: block;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 #logOutBtn{
