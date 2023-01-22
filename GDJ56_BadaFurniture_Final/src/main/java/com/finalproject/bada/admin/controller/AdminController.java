@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AdminController {
-
+		
+	
 	//대시보드
-	@RequestMapping("/admin/dash.do")
+	@RequestMapping("/admin")
 	public String adminDashBoard() {
 		return "admin/adminDashBoard";
 	}

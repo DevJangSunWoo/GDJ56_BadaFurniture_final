@@ -137,7 +137,7 @@
   </div> 
   <div id="navDiv">
         <nav class="navMenu">
-            <a href="${path }/admin/dash.do" style="margin-right: 100px;font-weight: bold;">관리자 페이지</a>
+            <a href="${path }/admin" style="margin-right: 100px;font-weight: bold;">관리자 페이지</a>
             <a href="${path }/admin/insert.do">가구 올리기</a>
             <a href="${path }/admin/furniture.do">가구 관리</a>
             <a href="${path }/admin/order.do">주문 관리</a>

@@ -7,13 +7,13 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
 <style>
-    /* div{        
+/*     div{        
         border: 1px solid blue;
-    }
-    */
+    } */
+   
     canvas{
         border: 1px solid #3934348a;
-        border-radius: 1%;
+        
     } 
 
     #divTop{
@@ -99,6 +99,7 @@
     #divBot>#mixedGraph_container{
         display: block;
         width:65%;
+
     }
     #divBot>#mixedGraph_container>canvas{
         height: 100%;
@@ -110,8 +111,8 @@
     #divBot>#basicGraph_container>div{
         width:100%;
     }
-    #divBot #basicGraph_container canvas{
-        height: 80%;
+    #divBot>#basicGraph_container canvas{
+        height: 100%;
     }
     canvas{
         width: 100%;
@@ -202,9 +203,11 @@
     <br>
     <hr>
     <div id="divBot">
-        <div id="mixedGraph_container">
-            <h3 class="title">주문수/매출액</h3>
-            <canvas id="orderNprofit"></canvas>            
+        <div id="mixedGraph_Outercontainer">
+            <div id="mixedGraph_container">
+                <h3 class="title">주문수/매출액</h3>
+                <canvas id="orderNprofit"></canvas>        
+             </div>
         </div>
         <div id="basicGraph_container">
             <div id="graph2_container">
@@ -223,3 +226,5 @@
 </section>
 </body>
 </html>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
