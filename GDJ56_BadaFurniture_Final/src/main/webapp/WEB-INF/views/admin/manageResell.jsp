@@ -38,7 +38,8 @@
 
     div#search-container{text-align:center;}
 
-    div#search-soldOutState{display:inline-block;}
+    div#search-searchAll{display:inline-block;}
+    div#search-soldOutState{display:none;}
     div#search-memberName{display:none;}
     div#search-resellNo{display:none;}
 
@@ -146,11 +147,17 @@
 		<div id="search-container">
 			검색타입 : 
         	<select id="searchType">
+				<option value="searchAll">전체조회</option>
 				<option value="soldOutState">판매상태</option>
         		<option value="memberName">신청자</option>
         		<option value="resellNo">신청번호</option>
         	</select>
 
+			<div id="search-searchAll">
+				<label><input type="radio" name="searchKeyword" value="" checked>전체조회</label>
+				<input type="hidden" name="searchType" value="HIDING">
+				<button class="searchBtn">검색</button>
+			</div>
         	<div id="search-soldOutState">
                 <select name="searchKeyword" class="searchInput">
 					<option value="승인검토">승인검토</option>

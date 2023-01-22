@@ -44,7 +44,8 @@
 
     div#search-container{text-align:center;}
 
-    div#search-orderState{display:inline-block;}
+    div#search-searchAll{display:inline-block;}
+    div#search-orderState{display:none;}
     div#search-deliveryState{display:none;}
     div#search-orderSheetNo{display:none;}
     div#search-orderSheetEnrollDate{display:none;}
@@ -227,6 +228,7 @@
 		<div id="search-container">
 			<span style="font-size: 17px;">검색타입 : </span> 
         	<select id="searchType" class="searchInput">
+				<option value="searchAll">전체조회</option>
 				<option value="orderState">주문상태</option>
         		<option value="deliveryState">배송상태</option>
         		<option value="orderSheetNo">주문번호</option>
@@ -234,6 +236,11 @@
         		<option value="orderSheetEnrollDate">주문일자</option>
         	</select>
 			        	
+			<div id="search-searchAll">
+				<label><input type="radio" name="searchKeyword" value="" checked>전체조회</label>
+				<input type="hidden" name="searchType" value="HIDING">
+				<button class="searchBtn">검색</button>
+			</div>
 			<div id="search-orderState">
 				<select name="searchKeyword" class="searchInput">
                     <option value="입금대기">입금대기</option>
