@@ -137,7 +137,7 @@
     <div id="divMidOuter">    
         <div id="divMid">
             <div id="order_container">
-                <h3 class="title">💰 주문현황</h3>
+                <h3 class="title">💰 주문 현황</h3>
                 <div class="spandiv">                
                     <div class="stateOuterDiv">
                         <span id="totalOrder" style="margin-right: 60px;">전체</span><span class="orderCount">111111</span><span class="countUnit">건</span>
@@ -146,21 +146,29 @@
                         <span class="state" style="margin-right: 30px;">입금대기</span><span class="orderCount">111111</span><span class="countUnit">건</span>
                     </div>           
                     <div class="stateOuterDiv">
+                        <span class="state" style="margin-right: 30px;">입금완료</span><span class="orderCount">111</span><span class="countUnit">건</span>
+                    </div>
+                    <div class="stateOuterDiv">
+                        <span class="state" style="margin-right: 30px;">결제완료</span><span class="orderCount">111</span><span class="countUnit">건</span>
+                    </div>    
+                </div>            
+            </div>
+            <div id="orderDetail_container">
+                <h3 class="title">🛒 주문 취소 현황</h3>
+                <div class="spandiv">                                    
+                    <div class="stateOuterDiv">
+                        <span class="state" style="margin-right: 30px;">취소요청</span><span class="orderCount">111</span><span class="countUnit">건</span>
+                    </div>
+                    <div class="stateOuterDiv">
                         <span class="state" style="margin-right: 30px;">반품요청</span><span class="orderCount">111</span><span class="countUnit">건</span>
                     </div>
                     <div class="stateOuterDiv">
                         <span class="state" style="margin-right: 30px;">반품대기</span><span class="orderCount">111</span><span class="countUnit">건</span>
                     </div>
-                    <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">취소요청</span><span class="orderCount">111</span><span class="countUnit">건</span>
-                    </div>
-                    <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">취소완료</span><span class="orderCount">111</span><span class="countUnit">건</span>
-                    </div>
                 </div>            
             </div>
             <div id="delivery_container">
-                <h3 class="title">🚚 배송현황</h3>
+                <h3 class="title">🚚 배송 현황</h3>
                 <div class="spandiv">
                     <div class="stateOuterDiv">
                         <span class="state" style="margin-right: 30px;">배송준비</span><span class="orderCount">111111</span><span class="countUnit">건</span>
@@ -171,7 +179,7 @@
                 </div>            
             </div>
             <div id="product_container">
-                <h3 class="title">🎁 상품현황</h3>
+                <h3 class="title">🎁 상품 현황</h3>
                 <div class="spandiv">
                     <div class="stateOuterDiv">
                         <span class="state" style="margin-right: 30px;">판매중</span><span class="orderCount">111111</span><span class="countUnit">건</span>

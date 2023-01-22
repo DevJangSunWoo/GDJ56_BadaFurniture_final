@@ -11,6 +11,9 @@
 /*     div#search-container>div {        
         border: 1px solid blue;
     } */
+	/* body *{
+		border: 1px solid blue;
+	} */
 
 
     div#listContainer>h2{
@@ -24,10 +27,10 @@
         width:100%;
         text-align: center;
         border-collapse : collapse;
-		margin-top: 40px;
+		margin-top: 0px;
     }
     div.tableContainer>table th,td{
-        border : 1px solid black;
+        border : 1px solid white;
         padding:5px 10px 5px 10px;
     }
     div#pageBarContainer{
@@ -56,7 +59,7 @@
         border:none;
     }
 
-	button.updateBtn,.searchBtn{
+	button.updateBtn,.searchBtn,.deleteBtn{
 		background-color:#348492;
 		border: none;
 		color: white;
@@ -65,6 +68,16 @@
 		padding: 5px;
 
 	}
+	.deleteBtn{
+		width: 42px;
+	}
+
+	#deleteBtnDiv{
+		display: flex;
+		justify-content: left;
+		margin-bottom: 5px;
+	}
+
 	.searchBtn{
 		margin-left: 5px;
 	}
@@ -194,6 +207,9 @@
         	</div>    	
         	
         </div>
+		<div id="deleteBtnDiv">
+			<button id="delete" class="deleteBtn">삭제</button>
+		</div>
 		<div id="propertyContainer" class = "tableContainer">
 			<table id="propertyTable">
 				<thead>

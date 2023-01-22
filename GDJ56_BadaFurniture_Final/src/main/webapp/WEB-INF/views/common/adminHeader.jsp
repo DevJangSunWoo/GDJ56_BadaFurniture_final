@@ -120,21 +120,60 @@
     display: flex;
     justify-content: space-between;
     margin: 15px;
+    
 }
 
 #logo{
     width: 550px;
     height: 80px;
+    margin-top: 15px;
 }
+
+#adminId{
+	font-size: 40px;
+}
+
+
+
+/* body *{
+	border:1px solid red;
+} */
+
+#adminIdDiv{
+  display: block;
+  margin-top: 15px;
+}
+
+#logOutBtn{
+  background-color:#348492;
+		border: none;
+		color: white;
+		width: 80px;
+		border-radius: 5px;
+		padding: 5px;
+    height: 30px;
+    width: 200px;
+    margin-top: 10px;
+}
+
 
 </style>
 
 
 <body>
+<!-- 로고 -->
   <div id="headerDiv">
+  	<div>
       <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo">
       <span class="button" id="headbtn"><a href="#demo-modal"></a></span>
-  </div> 
+  	</div>
+  	<div id="adminIdDiv">
+  		<span id="adminId">관리자 계정</span><br>
+      <button id="logOutBtn">로그아웃</button>
+  	</div>
+  </div>  
+  
+  
   <div id="navDiv">
         <nav class="navMenu">
             <a href="${path }/admin" style="margin-right: 100px;font-weight: bold;">관리자 페이지</a>

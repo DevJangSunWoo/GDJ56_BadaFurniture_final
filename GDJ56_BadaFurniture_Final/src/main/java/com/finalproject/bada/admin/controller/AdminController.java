@@ -1,13 +1,27 @@
 package com.finalproject.bada.admin.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.finalproject.bada.admin.service.AdminService;
+
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class AdminController {
 		
+	private AdminService service;
 	
-	//대시보드
+	@Autowired
+	public AdminController(AdminService service) {
+		super();
+		this.service = service;
+	}
+	
+	
+	//관리자 페이지 메인 - 대시보드
 	@RequestMapping("/admin")
 	public String adminDashBoard() {
 		return "admin/adminDashBoard";

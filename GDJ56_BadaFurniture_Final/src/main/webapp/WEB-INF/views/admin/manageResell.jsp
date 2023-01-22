@@ -28,7 +28,7 @@
 		margin-top: 40px;
     }
     div.tableContainer>table th,td{
-        border : 1px solid black;
+        border : 1px solid white;
         padding:5px 10px 5px 10px;
     }
     div#pageBarContainer{
