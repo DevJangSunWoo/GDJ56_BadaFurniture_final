@@ -168,7 +168,7 @@
       <span class="button" id="headbtn"><a href="#demo-modal"></a></span>
   	</div>
   	<div id="adminIdDiv">
-  		<span id="adminId">관리자 계정</span><br>
+  		<span id="adminId"> 🛠️ 관리자</span><br>
       <button id="logOutBtn">로그아웃</button>
   	</div>
   </div>  
