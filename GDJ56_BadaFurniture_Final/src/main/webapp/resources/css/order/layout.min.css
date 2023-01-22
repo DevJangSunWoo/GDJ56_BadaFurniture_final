@@ -1933,7 +1933,7 @@ rPtks .login_open dt {
   background-color: #ff3333;
 }
 
-#brand_list_print {
+/* #brand_list_print {
   padding-top: 11px;
   margin-left: 15px;
   height: expression(this.scrollHeight > 1499 ? "1500px": "auto");
@@ -1949,7 +1949,7 @@ rPtks .login_open dt {
   scrollbar-highlight-color: #f3f3f3;
   scrollbar-shadow-color: #f3f3f3;
   scrollbar-darkshadow-color: #f3f3f3;
-}
+} */
 
 #brand_list_print::-webkit-scrollbar {
   width: 7px;
@@ -2808,7 +2808,7 @@ footer .row.row3 .title span {
   top: 0;
   right: 0;
   min-width: 1229px;
-  border-left: 1px solid #ddd;
+  /* border-left: 1px solid #ddd; */
 }
 
 .right_area.lnb-close {
