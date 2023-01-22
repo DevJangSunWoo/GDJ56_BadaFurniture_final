@@ -1,11 +1,11 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!-- 상단 콘텐츠 영역 -->
-
-
-
 
 
 
@@ -20,7 +20,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/order/guide.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/order/icon.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/order/image_search.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/order/jqModal.css" />
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/order/jqModal.css" /> --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/order/layout.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/order/magazine_common.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/order/media_query.css" />
@@ -43,19 +43,23 @@
 
 
 <!-- SW js커스텀마이징 -->
-<script src="${pageContext.request.contextPath }/resources/js/jsOrder/ai.2.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.1.min.js"></script> 
+
+<%-- <script src="${pageContext.request.contextPath }/resources/js/hotjar-1491926.js"></script>  --%>
+
+<%-- <script src="${pageContext.request.contextPath }/resources/js/jsOrder/ai.2.min.js"></script> --%>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/base.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/chunk-vendors.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/clipboard.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/common.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jsOrder/events.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jsOrder/get_botton_brand_ranking"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jsOrder/get_category_list_jsonp"></script>
+<%-- <script src="${pageContext.request.contextPath }/resources/js/jsOrder/events.js"></script> --%>
+<%-- <script src="${pageContext.request.contextPath }/resources/js/jsOrder/get_botton_brand_ranking"></script> --%>
+<%-- <script src="${pageContext.request.contextPath }/resources/js/jsOrder/get_category_list_jsonp"></script> --%>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/gtm.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jsOrder/hotjar-1491926.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jsOrder/image_search.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jsOrder/jqModal.min.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jsOrder/jquery-1.11.1.min.js"></script>
+<%-- <script src="${pageContext.request.contextPath }/resources/js/jsOrder/hotjar-1491926.js"></script> --%>
+<%-- <script src="${pageContext.request.contextPath }/resources/js/jsOrder/image_search.js"></script> --%>
+<%-- <script src="${pageContext.request.contextPath }/resources/js/jsOrder/jqModal.min.js"></script> --%>
+<%-- <script src="${pageContext.request.contextPath }/resources/js/jsOrder/jquery-1.11.1.min.js"></script> --%>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/jquery-ui.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/jquery.bxslider.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/jquery.cycle.all.js"></script>
@@ -69,8 +73,8 @@
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/mini_cart.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/miya_validator.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/mpay.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jsOrder/msspay.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jsOrder/order.js"></script>
+<%-- <script src="${pageContext.request.contextPath }/resources/js/jsOrder/msspay.js"></script> --%>
+<%-- <script src="${pageContext.request.contextPath }/resources/js/jsOrder/order.js"></script> --%>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/order_plcc.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/pc.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/plcc_data.js"></script>
@@ -113,21 +117,15 @@
 
 <!-- wrap -->
 <div class="wrap">
-	
-
-
-	
 
 	<!-- 오른쪽 콘텐츠 영역 -->
-	<div class="right_area page_order_form" style="margin-right:300px; ">
+	<div class="right_area page_order_form" style="margin-right:300px;margin-top:150px; ">
 		<!-- 컨텐츠 영역 -->
 		<!--page nation -->
 		<div class="pagenation">
-			<!-- <div class="nav_sub"><a href="/">무신사 스토어</a><span class="icon_entity">&gt;</span><span>주문서</span></div> -->
-			order/payment 이미지 삽입
+			<!-- <div class="nav_sub"><a href="/">무신사 스토어</a><span class="icon_entity">&gt;</span><span>주문서</span></div> -->		
 		</div>
 		<!--//page nation -->
-
 		<form name="f1" id="f1" method="post"  onSubmit="return jsf__pay(this);">
             <input type="hidden" name="pay_kind" value="" />
 			<input type="hidden" name="order_prd_amt" value="42800"/>
@@ -202,435 +200,270 @@
 			<!--//article-title-->
 
 
-<!-- 회원 -->
-<div class="section order__delivery">
-    <!-- 주문자 정보 -->
-    <input type="hidden" name="ordr_nm" value="장선우"/>
-    <input type="hidden" name="email1" value="sunwoo8949"/>
-    <input type="hidden" name="email_etc" value="naver.com"/>
-    <input type="hidden" name="email2" value="naver.com"/>
-    <input type="hidden" name="omobile1" value="010"/>
-    <input type="hidden" name="omobile2" value="5640"/>
-    <input type="hidden" name="omobile3" value="5610"/>
-    <!-- // 주문자 정보 -->
-
-    <!-- 배송지 정보 -->
-    <div class="order__delivery__inner">
-        <h3 class="order__title">배송 정보</h3>
-        <input type="hidden" name="rcvr_nm" value="장선우" />
-        <input type="hidden" name="rtitle" value="장선우님 배송지" />
-        <input type="hidden" name="rzip_cd1" value="14215" />
-        <input type="hidden" name="rzip_addr1" value="경기 광명시 연서일로17번길 17" />
-        <input type="hidden" name="rzip_addr2" value="서동 에이스빌  101동 401호" />
-        <input type="hidden" name="rmobile1" value="010" />
-        <input type="hidden" name="rmobile2" value="5640" />
-        <input type="hidden" name="rmobile3" value="5610" />
-        <input type="hidden" name="rphone1" value="010" />
-        <input type="hidden" name="rphone2" value="5640" />
-        <input type="hidden" name="rphone3" value="5610" />
-        <input type="hidden" name="dlv_msg" value="" />
-        <input type="hidden" name="rselectedNo" value="8995361" />
-        <ul class="order__list">
-                        <li class="order__item delivery__item__info" >
-                <span class="order__item__label">
-                    배송지
-                    <!-- 새벽배송 -->
-                                    </span>
-                <div class="order__item__area">
-                    <ul class="order__delivery__radio-wrap" id="quickDeliveryList">
-                                                <li>
-                            <input type="radio" onclick="ChoiceQuickDeliveryAddress(8995361)" class="n-radio" id="delivery_choice_0" name="delivery_choice" value="장선우님 배송지" checked >
-                            <label for="delivery_choice_0">장선우님 배송지</label>
-                        </li>
-                                            </ul>
-                    <button type="button" class="order__button" onclick="">배송지 변경</button> 
-                </div>
-            </li>
-            <li class="order__item delivery__item__info" >
-                <span class="order__item__label">이름 / 연락처</span>
-                <div class="order__item__area">
-                    <ul class="order__delivery__user">
-                        <li id="delivery-name">장선우</li>
-                        <li id="delivery-mobile">010-5640-5610</li>
-                        <li id="delivery-phone">010-5640-5610</li>
-                    </ul>
-                </div>
-            </li>
-            <li class="order__item delivery__item__info" >
-                <span class="order__item__label">주소</span>
-                <div class="order__item__area" id="delivery-addr">(14215) 경기 광명시 연서일로17번길 17 서동 에이스빌  101동 401호</div>
-            </li>
-         
-         <!--배송지 변경 누를시 나타나는 변경  영역-->
-         	<div  style="display: none;">
-	         	<li class="order__item delivery__item__info" >
-	                <span class="order__item__label">주소</span>
-	                <div class="order__item__area" id="delivery-addr">(14215) 경기 광명시 연서일로17번길 17 서동 에이스빌  101동 401호</div>
-	          	</li>   
-         	</div>
-         </ul>
-    </div>
-</div>
+			<!-- 회원 -->
+			<div class="section order__delivery">
+			    <!-- 주문자 정보 -->
+			    <input type="hidden" name="ordr_nm" value="장선우"/>
+			    <input type="hidden" name="email1" value="sunwoo8949"/>
+			    <input type="hidden" name="email_etc" value="naver.com"/>
+			    <input type="hidden" name="email2" value="naver.com"/>
+			    <input type="hidden" name="omobile1" value="010"/>
+			    <input type="hidden" name="omobile2" value="5640"/>
+			    <input type="hidden" name="omobile3" value="5610"/>
+			    <!-- // 주문자 정보 -->
+		
+		    <!-- 배송지 정보 -->
+		    <div class="order__delivery__inner">
+		        <h3 class="order__title">배송 정보</h3>
+		        <input type="hidden" name="rcvr_nm" value="장선우" />
+		        <input type="hidden" name="rtitle" value="장선우님 배송지" />
+		        <input type="hidden" name="rzip_cd1" value="14215" />
+		        <input type="hidden" name="rzip_addr1" value="경기 광명시 연서일로17번길 17" />
+		        <input type="hidden" name="rzip_addr2" value="서동 에이스빌  101동 401호" />
+		        <input type="hidden" name="rmobile1" value="010" />
+		        <input type="hidden" name="rmobile2" value="5640" />
+		        <input type="hidden" name="rmobile3" value="5610" />
+		        <input type="hidden" name="rphone1" value="010" />
+		        <input type="hidden" name="rphone2" value="5640" />
+		        <input type="hidden" name="rphone3" value="5610" />
+		        <input type="hidden" name="dlv_msg" value="" />
+		        <input type="hidden" name="rselectedNo" value="8995361" />
+		        <ul class="order__list">
+		                        <li class="order__item delivery__item__info" >
+		                <span class="order__item__label">
+		                    배송지
+		                    <!-- 새벽배송 -->
+		                                    </span>
+		                <div class="order__item__area">
+		                    <ul class="order__delivery__radio-wrap" id="quickDeliveryList">
+		                                                <li>
+		                            <input type="radio" onclick="dis2()" class="n-radio" id="delivery_choice_0" name="delivery_choice" value="장선우님 배송지" checked >
+		                            <label for="delivery_choice_0">로그인멤버님 배송지</label>
+		                        </li>
+		                                            </ul>
+		                    <button type="button" class="order__button" onclick="dis()">배송지 변경</button> 
+		                </div>
+		            </li>
+		            <li class="order__item delivery__item__info" >
+		                <span class="order__item__label">이름 / 연락처</span>
+		                <div class="order__item__area">
+		                    <ul class="order__delivery__user">
+		                        <li id="delivery-name">로그인 멤버 이름</li>
+		                        <li id="delivery-phone">로그인 멤버 연락처</li>
+		                    </ul>
+		                </div>
+		            </li>
+		            <li class="order__item delivery__item__info"  id="del_ori">
+		                <span class="order__item__label">기본주소</span>
+		                <div class="order__item__area" id="delivery-addr"> 로그인 멤버 연락처</div>
+		            </li>
+		         
+		         <!--배송지 변경 누를시 나타나는 변경  영역-->
+		         	<div  style="display: none;"  id='dis'>
+			         	<div class="order__item__area">
+				         	<span class="order__item__label">변경주소</span>    			
+			                <div class="order_option_box"> 
+			                <!-- 	<input type="text"  placeholder="공간차지" style="visibility: hidden;width:5px; "> -->
+			                	<input type="text" id="sample4_postcode" placeholder="우편번호" style="width:100px;border:1px solid lightgray; ">	<br>					
+								<input type="text" id="sample4_roadAddress" placeholder="도로명주소" style="width:210px;border:1px solid lightgray;">						
+								<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width:210px;border:1px solid lightgray;">
+								<span id="guide" style="color:#999;display:none"></span><br>
+								<input type="text" id="sample4_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;">
+							 </div>	
+			              
+		                </div>
+		         	</div>
+		         </ul>
+		    </div>
+		</div>
+	
+		<!--주소api  -->
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script>
+			function sample4_execDaumPostcode() {
+			    new daum.Postcode({
+			        oncomplete: function(data) {
+			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 			
-
-			<div class="section order_product_info">
-				<h3 class="order__title">상품 정보</h3>
-				<input type="hidden" id="discount_applied_yn" value="" />
-				<input type="hidden" id="event_min_pay_amt" value="10000" />
-				<!--cart products-->
-				<table class="table_basic order_cart_table">
-					<colgroup>
-						<col>
-						<col width="50px">
-<!--						<col width="100px">-->
-						<col width="80px">
-																		<col width="80px">
-						
-												<col width="70px" class="charge ">
-						<col width="69px" class="charge ">
-												<col width="100px" class="charge ">
-					</colgroup>
-					<thead>
-						<tr>
-							<th scope="col">상품 정보</th>					
-							<th scope="col">배송비</th>
-							<th scope="col">주문금액</th>
-						</tr>
-					</thead>
-					<!--리스트 데이터 표출 -->
-					<tbody>
-						<tr>
-							<td class="td_product">
-								<input type="hidden" class="input_hidden" name="no" value="780450657" />
-								<input type="hidden" class="input_hidden" name="coupon_amt_780450657" value="0" />
-								<input type="hidden" class="input_hidden" name="cart_info" value="2702396|0|스위트 메론 / L|42800|0|0|0|N|Y|780450657|Y" />
-								<input tyep="hidden" class="input_hidden" id="goods_2702396_0_스위트 메론 / L" />
-								<input type="hidden" class="input_hidden" name="goods_coupon_info" value="" />
-								<input type="hidden" class="input_hidden" name="used_yn" value="N" />
-								<input type="hidden" class="input_hidden" name="cart_goods_cnt[]" value="1" />
-								<input type="hidden" class="input_hidden" name="normal_price" value="69000" />
-								<input type="hidden" class="input_hidden" name="price" value="42800" />
-								<input type="hidden" name="use_point_yn_780450657" value="Y">
-								<input type="hidden" name="prepoint_yn_780450657" value="N">
-								<input type="hidden" name="prepoint_780450657" value="0">
-								<input type="hidden" class="input_hidden" name="exclusive_msspay" value="N" />
-								<input type="hidden" class="input_hidden" name="exclusive_msspay_hyundaicard" value="N" />
-                                <input type="hidden" class="input_hidden" id="group_dc_limit_yn_780450657" value="Y" />
-								<input type="hidden" name="plcc_dc_yn_780450657" value="Y" />
-								<input type="hidden" name="limit_coupon_amt_yn_780450657" value="N" />
-								<input type="hidden" name="goods_form_type" value="DELIVERY_PRODUCT" />
-								<div class="connect_img">
-									<a href="/app/goods/2702396/0" target="_blank">
-										<!--제품 이미지 삽입  -->
-										<img src="//image.msscdn.net/images/goods_img/20220807/2702396/2702396_16734042163511_62.jpg" alt="키뮤어(KIIMUIR) 코튼 워셔블 하찌 하프집업 니트_5 COLOR" />
-									</a>
-								</div>
-								<div class="article_info connect_info">
-																																				<div class="box_product">
-										<strong>
-											<span style="color:#09f;">
-																																																											</span>
-											<span style="color:#f00;">
-																																				※적립금 사용제한											</span>
-																																												[키뮤어]
-										</strong>
-										<span class="list_info">
-											<a href="/app/goods/2702396/0" target="_blank">
-																								코튼 워셔블 하찌 하프집업 니트_5 COLOR
-											</a>
-										</span>
-									</div>
-																		<div class="order_option_box">
-										<p>
-											<!-- 20160127 --옵션 없음<!-- //20160127 -->
-																								옵션 : 스위트 메론 / L																																</p>
-
-																				<p class="font_basic">
-											*
-											적립금선할인 미적용											 / 쿠폰 사용 불가											 / 회원 할인 제외										</p>
-																			</div>
-								</div>
-							</td>
-							<td><strong>1 개</strong></td>
-														<td>
-								642 원
-							</td>
-							<td>
-																- 26,200 원
-															</td>
-
-																				<td rowspan="1">
-								<!--7722
-								<br>-->
-								그룹1
-								<!--
-																-->
-							</td>
-							
-														<td rowspan="1">
-																	무료
-																<!--
-								무료
-																								<br>
-								반송비<br>2,500 원
-								-->
-								<br>
-								<a href="javascript:void(0)" onclick="layerView(this, 'order_delivery_pop_1'); return false;"><span class="txt_return">반송비<br />확인</span></a>
-								<!--반송비 정보-->
-								<div id="order_delivery_pop_1" class="popup_info order_delivery_pop">
-									<span class="txt_title">반송비 정보</span><a href="javascript:void(0)" onclick="layerHidden('order_delivery_pop_1'); return false;"><span class="btn_close_pop">닫기</span></a>
-									<ul class="box_return_chage">
-										<li class="popup_info_title">반송비용</li>
-										<li class="popup_info_detail">5,000 원 (지정 택배 이용 시)</li>
-									</ul>
-									<p class="popup_txt font_basic">- 위 반송비용은 판매사 지정택배 착불 반송 기준이며 선불로 반송하실 경우 50% 금액만 동봉하시면 됩니다.</p>
-									<p class="popup_txt font_basic">- 해외배송상품 및 도서 산간 지역의 경우 추가 반송 비용이 발생할 수 있습니다.</p>
-								</div>
-								<!--//반송비 정보-->
-							</td>
-							
-						                            <td class="price">
-								
-                                                                <del class="box_origin_price">69,000 원</del>
-                                                                <strong>42,800 원</strong>
-                            </td>
-<!--							<td>-->
-<!--								<strong>42,800 원</strong>-->
-<!--							</td>-->
-						</tr>
-																							</tbody>
-				</table>
-
+			            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+			            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+			            var roadAddr = data.roadAddress; // 도로명 주소 변수
+			            var extraRoadAddr = ''; // 참고 항목 변수
+			
+			            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+			            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+			            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+			                extraRoadAddr += data.bname;
+			            }
+			            // 건물명이 있고, 공동주택일 경우 추가한다.
+			            if(data.buildingName !== '' && data.apartment === 'Y'){
+			               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+			            }
+			            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+			            if(extraRoadAddr !== ''){
+			                extraRoadAddr = ' (' + extraRoadAddr + ')';
+			            }
+			
+			            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+			            document.getElementById('sample4_postcode').value = data.zonecode;
+			            document.getElementById("sample4_roadAddress").value = roadAddr;
+			            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+			            
+			            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+			            /* if(roadAddr !== ''){
+			                document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+			            } else {
+			                document.getElementById("sample4_extraAddress").value = '';
+			            } */
+			
+			            var guideTextBox = document.getElementById("guide");
+			            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+			            if(data.autoRoadAddress) {
+			                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+			                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+			                guideTextBox.style.display = 'block';
+			
+			            } else if(data.autoJibunAddress) {
+			                var expJibunAddr = data.autoJibunAddress;
+			                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+			                guideTextBox.style.display = 'block';
+			            } else {
+			                guideTextBox.innerHTML = '';
+			                guideTextBox.style.display = 'none';
+			            }
+			           
+			        }
+			    }).open();
+			}
+		</script>
+	
+		<!--배송지 변경 출현 스크립트  -->
+		<script>
+		function dis(){
+		      if($('#dis').css('display') == 'none'){
+		      $('#dis').show();
+		      $('#del_ori').hide();
+		      $('#delivery_choice_0').prop('checked', false);
+		      sample4_execDaumPostcode();
+		    }else{
+		      $('#dis').hide();
+		      $('#del_ori').show();
+		      $('#delivery_choice_0').prop('checked', true);
+		    }
+		    }
+		
+		function dis2(){
 				
-			</div>
+				if($('#dis').css('display') == 'none'){
+			      /* $('#dis').show(); */
+			      $('#del_ori').hide();
+			      $('#delivery_choice_0').prop('checked', false);
+			    /*   sample4_execDaumPostcode(); */
+			    }
+			      else{
+				     
+			    	  $('#dis').hide();
+				      $('#del_ori').show();
+				      $('#delivery_choice_0').prop('checked', true);
+			    	}
+				
+		    }
+		</script>
 
-			<div class="section right_contents section_gift">
-				<!--빈영역  -->
-			</div>
-												
-			            				<div class="section order_hyundaicard">
-    <div class="order_coupon_discount-box order_hyundaicard-box">
-        <h3 class="order__title">무신사 현대카드 혜택</h3>
-        <div class="cell_order_form">
-            <ul class="cart_discount_method search_plcc_info_area" style="display:none;">
-                <li class="cart_method">일시적으로 정보조회에 실패했습니다.</li>
-                <li class="cart_discount">
-                    <button type="button" id="searchPLCCInfo">다시 조회</button>
-                </li>
-            </ul>
-            <ul class="cart_discount_method first_card_discount_area" style="display:none;">
-                <li class="cart_method" name="first_cart_discount_name">무신사 현대카드 즉시할인</li>
-                <input type="hidden" id="clicked_yn_first_dc_amt_btn" value="N"/>
-                <li class="cart_discount">
-                    <span class="hyundaicard-firstpayment" id="span_plccDiscountAmount">0원</span>
-                    <span class="plcc-discount-limited txt-info" style="display:none; font-weight: normal; color: red;">제한(한도초과)</span>
-                    <button type="button" id="hyundaicardFirstPayment"></button>
-                </li>
-            </ul>
-            <ul class="cart_discount_method card_discount_area" style="display:none;">
-                <li class="cart_method card_percent_discount_type">5% 청구할인</li>
-                <li class="cart_discount card_underperform">
-                    <span class="hyundaicard-under">전월 실적 미달</span>
-                </li>
-                <li class="cart_discount card_perform">
-                    <span name="card_dc_amt">0</span>원&nbsp;<span class="txt_level">(잔여한도 <span id="possible_card_dc_amt">0</span>원)</span>
-                </li>
-                <input type="hidden" name="card_underperform_yn" readonly value=""/>
-                <input type="hidden" name="card_type" readonly value=""/>
-            </ul>
-            <ul class="cart_discount_method hyundaicard-not" style="display:none;">
-                <li class="cart_method card_percent_discount_type">5% 청구할인</li>
-                <li class="cart_discount">
-                    <em class="txt-info">카드 발급 후 적용</em>
-                </li>
-            </ul>
-                    </div>
-    </div>
-    <div class="cell_order_form">
-        <ul class="list_section_type">
-            <li class="first_card_discount_txt" style="display:none;">&middot; 무신사 현대카드로 결제 시 제공되는 혜택입니다.</li>
-            <li class="first_card_discount_txt" style="display:none;">&middot; 현대카드 즉시 할인은 무신사페이 결제 시 즉시 적용되며, 본인회원에 한해 1회 제공됩니다.(동일 이벤트 기 적용 회원은 제외)</li>
-            <li class="first_card_discount_txt" style="display:none;">&middot; 현대카드 즉시 할인은 즉시할인 적용된 상품 전체 취소 시 다시 사용할 수 있습니다. 단, 부분 취소시 사용된 것으로 간주됩니다.</li>
-            <li>&middot; 청구할인/캐시백은 전월 실적 30만원 이상 시, 월 최대 3만원 한도로 할인 가능합니다. (단, 신규 발급월 기준 다음 달 이용 건까지는 전월 실적 30만원 미만도 혜택 적용)</li>
-            <li>&middot; 매출전표 접수 기준으로 반영되어 실제 할인금액과 상이할 수 있습니다.</li>
-        </ul>
-    </div>
-</div>            			
-			<div class="section order_coupon_discount">
-				<h3 class="order__title">쿠폰/할인/적립금</h3>
-				<div class="cell_order_form">
-					<!--회원할인-->
-					<!--할인상세-->
-					<div class="discount_contents">
-						<ul>
-							<li class="cell_discount_tit">상품 금액</li>
-							<li class="cell_discount_detail">
-								<strong class="">69,000 원</strong>
-							</li>
-						</ul>
-																		<ul>
-							<li class="cell_discount_tit">상품 할인</li>
-							<li class="cell_discount_detail txt_point">
-								<em class="txt_point">- 26,200 원</em>
-							</li>
-						</ul>
-												<ul>
-							<li class="cell_discount_tit">등급 할인</li>
-							<li class="cell_discount_detail">
-								<strong>- 0 원</strong>
-																<span>(LV.3 멤버등급)</span>
-															</li>
-						</ul>
-												<ul>
-							<li class="cell_discount_tit">쿠폰 할인</li>
-							<li class="cell_discount_detail2">
-																										<a class="plain-btn btn" onClick="Order.viewCouponPop(); return false;">쿠폰 조회/적용</a>
-									<span class="coupon-limited txt-info" style="margin-top:7px;display:none;">제한(한도제한)</span>
-									<span class="font_basic txt_desc_btn">(쿠폰 허용 상품 / 일부 쿠폰 제외)</span>
-																								</li>
-						</ul>
-						<ul>
-							<li class="cell_discount_tit">적립금 선할인</li>
-														<li class="cell_discount_detail">
-								<label for="prepointUse" style="font-size:0">적립금 선할인 받기 선택</label>
-								<input type="checkbox" id="prepointUse" onclick="Order.CheckPayPrepoint('0'); Order.CalculateAmt(); CheckPrepoint('0','642');Order.isDiscountAmtExceedsPriceByProduct();" disabled/>
-																<strong class="prepoint-not-limited" id="prepoint_chk">0 원 할인 / 642 원 적립</strong>
-								<span class="prepoint-not-limited">(적립금 선할인 가능 금액은 0원입니다.)</span>
-<!--								<span class="prepoint-limited txt-info" style="color: #14aaff;display:none;">제한(한도초과)</span>-->
-															</li>
-							<li class="cell_discount_detail prepoint-limited" style="display:none;">
-								<span style="color: red; ">제한(한도초과)</span>
-							</li>
-													</ul>
-						<ul>
-							<li class="cell_discount_tit">적립금 사용</li>
-							<li class="cell_discount_detail2">
-																																																		<span class="txt-black">사용제한</span>
-												<input type="hidden" name="point" readonly value="0" />
-																																													</li>
-							<li class="cell_discount_detail2 use-point-limited" style="display:none;">
-								<span style="color: red;">제한(한도초과)</span>
-							</li>
-						</ul>
-                        						<ul class="first_card_discount_area" style="display:none;">
-							<li class="cell_discount_tit">무신사 현대카드 즉시할인</li>
-							<li class="cell_discount_detail">
-								<strong class="cart_dc_amt">0</strong>
-								<strong>원</strong>
-							</li>
-						</ul>
-                        					</div>
-					<!--//할인상세-->
-					<!--할인금액-->
-					<div class="cell_order_form2 cell_order_price">
-						<ul class="list_discount_order">
-							<!-- 배송비 -->
-							<li class="right_cell_order">상품 금액</li>
-							<li class="right_cell_price"><strong>69,000</strong> 원</li>
-						</ul>
-						<ul class="list_discount_order alliancediscount_order hidden">
-						<li class="right_cell_order hidden">제휴 할인</li>
-						<li class="right_cell_price hidden">
-						- <span id="ptn_dc_amt">0</span> 원
-						</li>
-						</ul>
-												<ul class="list_discount_order">
-							<!-- 상품 세일 -->
-							<li class="right_cell_order">상품 할인</li>
-							<li class="right_cell_price">
-								<em class="txt_point">- 26,200 원</em>
-							</li>
-						</ul>
-												<ul class="list_discount_order">
-							<!-- 배송비 -->
-							<strong id="dlv_amt" class="f18b hidden" >0</strong>
-							<li class="right_cell_order">등급 할인</li>
-							<li class="right_cell_price">
-								- <strong id="dc_price">0</strong> 원</li>
-						</ul>
-												<input type="hidden" name="group_dc_amt" readonly value="0" />
-						<ul class="list_discount_order">
-							<li class="right_cell_order">쿠폰 할인</li>
-							<li class="right_cell_price">
-								<input type="hidden" name="kcoupon" readonly value="0"/>
-								- <strong id="coupon_price">0</strong> 원
-							</li>
-						</ul>
-						<ul class="list_discount_order">
-							<li class="right_cell_order">적립금 선할인</li>
-							<li class="right_cell_price">
-								<input type="hidden" name="prepoint" readonly value="0"/>
-								- <strong id="prepoint_price">0</strong> 원
-							</li>
-						</ul>
-						<ul class="list_discount_order">
-							<li class="right_cell_order" id="have_point_li1">적립금 사용</li>
-							<li class="right_cell_price" id="have_point_li2">
-								- <strong id="point_price">0</strong> 원
-							</li>
-						</ul>
-						<ul class="list_discount_order first_card_discount_area" style="display:none;">
-							<li class="right_cell_order">현대카드 즉시할인</li>
-							<li class="right_cell_price">
-								- <strong class="cart_dc_amt">0</strong> 원
-								<input type="hidden" name="cart_dc_amt" readonly value="0" />
-							</li>
-						</ul>
-						<ul class="list_discount_order">
-							<li class="right_cell_sum">할인 합계</li>
-							<li class="right_cell_result">
-								- <strong id="total_pay_dc_amt">0</strong> 원
-								<span class="payment_off_grey" id="total_dc_rate">0</span>
-								<span class="txt_unit_discount">%</span>
-							</li>
-						</ul>
-					</div>
-					<!--//할인금액-->
-					<!--//회원할인-->
-				</div>
-				<div class="cell_order_form">
-					<div>
-						<ul class="list_section_type" style="margin-top:-50px">
-							<li>&middot; 현재 무신사 바로접속 <div class="icon_on">ON</div> 상태입니다. </li>
-							<li>&middot; 적립금 사용 시 총 상품 금액의 7% 이내로 제한됩니다. 일부 상품은 적립금 사용이 불가합니다. <a href="/app/cs/faq/005/005000" target="_blank">[적립금 관련 FAQ↗]</a></li>
-						</ul>
-					</div>
-
-					<div class="cell_order_price total_price_wrap">
-						<ul class="list_discount_order">
-							<li class="right_cell_order">결제 수수료</li>
-							<li class="right_cell_price">
-								<strong id="pay_fee">0</strong> 원</p>
-							</li>
-						</ul>
-						<ul class="box_total_price">
-							<li class="total_title">최종 결제 금액</li>
-							<li class="total_price">
-								<strong id="pay_amt">42,800</strong> 원
-							</li>
-							<li class="total_title total_msspay_area" style="display:none">무신사페이 결제금액</li>
-							<li class="total_price total_price--billing total_msspay_area" style="display:none">
-								<strong name="total_msspay_amt">0</strong> 원
-							</li>
-							<li class="total_title total_card_discount_area" style="display:none"><span class="card_discount_type">청구</span> 예상 금액</li>
-							<li class="total_price total_price--billing total_card_discount_area" style="display:none">
-								<strong name="total_expected_billing_dc_amt">0</strong> 원
-							</li>
-							<li class="total_title">총 적립금</li>
-							<li class="total_price">
-								<span id="total_point_amt">642</span> 원
-							</li>
-						</ul>
-					</div>
-				</div>
-				<!--//할인-->
-			</div>
+		<div class="section order_product_info">
+			<h3 class="order__title">상품 정보</h3>
+			<input type="hidden" id="discount_applied_yn" value="" />
+			<input type="hidden" id="event_min_pay_amt" value="10000" />
+			<!--cart products-->
+			<table class="table_basic order_cart_table">
+				<colgroup>
+					<col>
+					<col width="50px">
+<!--						<col width="100px">-->
+					<col width="80px">
+					<col width="80px">
+					<col width="70px" class="charge ">
+					<col width="69px" class="charge ">
+					<col width="100px" class="charge ">
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col">상품 정보</th>					
+						<th scope="col"  colspan="3">배송비</th>
+						<th scope="col"  colspan="3">주문금액</th>
+					</tr>
+				</thead>
+				<!--리스트 데이터 표출 -->
+				<tbody>
+					<tr>
+						<td class="td_product">
+							<input type="hidden" class="input_hidden" name="no" value="780450657" />
+							<input type="hidden" class="input_hidden" name="coupon_amt_780450657" value="0" />
+							<input type="hidden" class="input_hidden" name="cart_info" value="2702396|0|스위트 메론 / L|42800|0|0|0|N|Y|780450657|Y" />
+							<input tyep="hidden" class="input_hidden" id="goods_2702396_0_스위트 메론 / L" />
+							<input type="hidden" class="input_hidden" name="goods_coupon_info" value="" />
+							<input type="hidden" class="input_hidden" name="used_yn" value="N" />
+							<input type="hidden" class="input_hidden" name="cart_goods_cnt[]" value="1" />
+							<input type="hidden" class="input_hidden" name="normal_price" value="69000" />
+							<input type="hidden" class="input_hidden" name="price" value="42800" />
+							<input type="hidden" name="use_point_yn_780450657" value="Y">
+							<input type="hidden" name="prepoint_yn_780450657" value="N">
+							<input type="hidden" name="prepoint_780450657" value="0">
+							<input type="hidden" class="input_hidden" name="exclusive_msspay" value="N" />
+							<input type="hidden" class="input_hidden" name="exclusive_msspay_hyundaicard" value="N" />
+                               <input type="hidden" class="input_hidden" id="group_dc_limit_yn_780450657" value="Y" />
+							<input type="hidden" name="plcc_dc_yn_780450657" value="Y" />
+							<input type="hidden" name="limit_coupon_amt_yn_780450657" value="N" />
+							<input type="hidden" name="goods_form_type" value="DELIVERY_PRODUCT" />
+							<div class="connect_img">
+								<a href="/app/goods/2702396/0" target="_blank">
+									<!--가구 이미지 삽입  -->
+									<img  src="${path}/resources/images/product/sofa1.jpg"  >
+								</a>
+							</div>
+							<div class="article_info connect_info">
+								<div class="box_product">
+									<strong>제품 명</strong>
+									<span class="list_info">
+										<!--상세화면 링크 걸기  -->
+										<a href="/app/goods/2702396/0" target="_blank">
+											화이트 캐비닛
+										</a>
+									</span>
+								</div>
+								<div class="order_option_box">
+									<p> 분류:소파/색깔:블루 /상태:최상 </p>
+								</div>										
+							</div>
+						</td>
+						<td rowspan="1" colspan="3">
+						배송비는 주문 금액에 포함되있습니다.
+						</td>
+					    <td class="price"   colspan="3">
+                               <strong>42,800 원</strong>
+                           </td>                                
+					</tr>
+				</tbody>																	
+			</table>
+		</div>
+		
+		<div class="section right_contents section_gift">
+			<!--빈영역  -->
+		</div>
+		
+		<div class="section order_hyundaicard" style="display:none;">			            				
+		    <!--빈영역  -->
+		</div>            			
+		
+		<div class="section order_coupon_discount" style="display:none;">
+			<!--빈영역  -->
+		</div>
 
 			<div class="right_contents section_payment">
 				<h3 class="order__title">결제 정보</h3>
-				<div>
+				<div  >
 					<!--신용카드 -->
-					<div class="cell_order_form">
+					<div class="cell_order_form" style="border-right: lightgray 1px !important;">
 						<div class="clear cell_order_form1 border_add_order" id="payment_info_area">
 
                         							<!--결제 정보-->
@@ -638,716 +471,46 @@
 								<li class="cell_discount_tit new-payment-area">결제 수단</li>
 								<li class="cell_discount_detail new-payment-area">
 									<ul class="payment-choice">
-										<li>
-											<input type="radio" class="n-radio" id="payment_btn0" name="payment_choice" value="msspay" >
-											
-																						<p id="msspay_tooltip" class="n-tooltip tooltip-musinsa tooltip-close tool-right __msspay-user-view __msspay-ok-user-view" style="display:none">무신사페이로 빠르게 결제하세요!
-												<button id="__msspay-tooltip-close-button" type="button" class="btn-tooltip-close"><i class="ic-14-line-close">툴팁 닫기</i></button>
-											</p>
-										</li>
-										                                            										<li>
+										<li>                                           										
 											<input type="radio" class="n-radio" id="payment_btn1" name="payment_choice" value="pg" checked>
 											<label for="payment_btn1">일반결제</label>
-											<strong class="payment-tit-comment" style="display:none;">무신사 현대카드 즉시 할인 사용이 불가능한 결제수단입니다.</strong>
 										</li>
-                                            																			</ul>
+                                     </ul>      																			
 								</li>
 							</ul>
 
-														<div class="__payment-view __msspay-user-view __msspay-failed-user-view" style="display:none">
-								<ul class="list_payment_order">
-									<li class="cell_discount_tit new-payment-area">결제 안내</li>
-									<li class="cell_discount_detail new-payment-area">
-										<div class="add-easypayment add-easypayment--button __msspay-reload-button">
-											<svg width="123" height="35" viewBox="0 0 123 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M109 9.16699V27.8337M118.334 18.5003H99.667" stroke="#333333" stroke-width="2" class="svg-stroke"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M17.4663 0C19.8415 0 22.0713 0.125474 24.1301 0.327949C24.7122 0.385174 25.4782 0.523772 26.1244 0.697372C27.5575 1.0822 28.8414 1.71675 29.9795 2.5704C30.4325 2.905 30.8601 3.27145 31.2585 3.6666V3.67482C31.6527 4.07417 32.0182 4.50257 32.352 4.9567C33.2036 6.09735 33.8367 7.38447 34.2206 8.82122C34.3938 9.4689 34.532 10.2368 34.5889 10.8202C34.7909 12.8838 34.9163 15.1191 34.9163 17.5C34.9163 19.8807 34.7909 22.116 34.5889 24.1796C34.532 24.7632 34.3938 25.5307 34.2206 26.1786C33.8367 27.6152 33.2036 28.9023 32.352 30.0431C32.0182 30.4971 31.6527 30.9255 31.2585 31.325V31.3332C30.8601 31.7282 30.4325 32.0947 29.9795 32.4292C28.8414 33.2829 27.5575 33.9174 26.1244 34.3024C25.4782 34.476 24.7122 34.6147 24.1301 34.6719C22.0713 34.8742 19.8415 35 17.4663 35H17.4499C15.0749 35 12.845 34.8742 10.7863 34.6719C10.2043 34.6147 9.43822 34.476 8.79227 34.3024C7.35896 33.9174 6.07491 33.2829 4.93699 32.4292C4.48395 32.0947 4.0564 31.7282 3.65801 31.3332V31.325C3.26398 30.9255 2.8984 30.4971 2.5646 30.0431C1.71299 28.9023 1.07979 27.6152 0.695886 26.1786C0.522701 25.5307 0.384428 24.7632 0.32734 24.1796C0.125524 22.116 0 19.8807 0 17.5C0 15.1191 0.125524 12.8838 0.32734 10.8202C0.384428 10.2368 0.522701 9.4689 0.695886 8.82122C1.07979 7.38447 1.71299 6.09735 2.5646 4.9567C2.8984 4.50257 3.26398 4.07417 3.65801 3.67482V3.6666C4.0564 3.27145 4.48395 2.905 4.93699 2.5704C6.07491 1.71675 7.35896 1.0822 8.79227 0.697372C9.43822 0.523772 10.2043 0.385174 10.7863 0.327949C12.845 0.125474 15.0749 0 17.4499 0H17.4663ZM78.3525 11.7067L82.8846 21.423L87.4773 11.7067H91L81.9109 30.9612H78.3882L81.166 25.0768L74.751 11.7067H78.3525ZM64.9078 11.4419C66.7171 11.4419 68.3846 12.1823 69.7206 13.3049V11.7066H72.8568V27.1133H69.7206V25.5908C68.3846 26.6807 66.7171 27.3782 64.9078 27.3782C60.5174 27.3782 56.9584 23.8107 56.9584 19.41C56.9584 15.0092 60.5174 11.4419 64.9078 11.4419ZM48.6715 7.85872C50.9105 7.85872 52.6059 8.56397 53.7893 9.7825C55.0048 10.9688 55.7085 12.6362 55.7085 14.56C55.7085 16.516 55.0048 18.1832 53.7893 19.4017C52.5737 20.6201 50.9105 21.3255 48.6715 21.3255H45.3139V27.1133H42.1778V7.85872H48.6715ZM11.9524 8.80583H8.30501V26.2041H11.7652V14.8367L16.062 21.8164H18.8305L23.1512 14.829V26.2041H26.6114V8.80583H22.9644L17.4479 17.7375L11.9524 8.80583ZM64.9561 14.4974C62.2248 14.4974 60.1062 16.6969 60.1062 19.41C60.1062 22.1232 62.2248 24.3226 64.9561 24.3226C67.6873 24.3226 69.8631 22.1232 69.8631 19.41C69.8631 16.6969 67.6873 14.4974 64.9561 14.4974ZM48.3834 10.937H45.3139V18.2474H48.3834C49.7909 18.2474 50.7949 17.8304 51.4346 17.2214C52.0744 16.58 52.4264 15.6501 52.4264 14.5922C52.4264 13.5019 52.0423 12.5722 51.4346 11.9308C50.7949 11.2896 49.759 10.937 48.3834 10.937Z" fill="#333333" class="svg-fill"/>
-</svg>											<p class="text font-mss">
-												일시적으로 정보조회를 실패했습니다.<br>
-												새로고침 버튼을 눌러주세요.
-											</p>
-											<button type="button" class="button-refresh">새로고침</button>
-										</div>
-									</li>
-								</ul>
-							</div>
 							
-														<div class="__payment-view __msspay-user-view __msspay-unavailable-user-view" style="display:none">
-								<ul class="list_payment_order">
-									<li class="cell_discount_tit new-payment-area">결제 안내</li>
-									<li class="cell_discount_detail new-payment-area">
-										<div class="add-easypayment __msspay-reload-button">
-											<svg width="123" height="35" viewBox="0 0 123 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M109 9.16699V27.8337M118.334 18.5003H99.667" stroke="#333333" stroke-width="2" class="svg-stroke"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M17.4663 0C19.8415 0 22.0713 0.125474 24.1301 0.327949C24.7122 0.385174 25.4782 0.523772 26.1244 0.697372C27.5575 1.0822 28.8414 1.71675 29.9795 2.5704C30.4325 2.905 30.8601 3.27145 31.2585 3.6666V3.67482C31.6527 4.07417 32.0182 4.50257 32.352 4.9567C33.2036 6.09735 33.8367 7.38447 34.2206 8.82122C34.3938 9.4689 34.532 10.2368 34.5889 10.8202C34.7909 12.8838 34.9163 15.1191 34.9163 17.5C34.9163 19.8807 34.7909 22.116 34.5889 24.1796C34.532 24.7632 34.3938 25.5307 34.2206 26.1786C33.8367 27.6152 33.2036 28.9023 32.352 30.0431C32.0182 30.4971 31.6527 30.9255 31.2585 31.325V31.3332C30.8601 31.7282 30.4325 32.0947 29.9795 32.4292C28.8414 33.2829 27.5575 33.9174 26.1244 34.3024C25.4782 34.476 24.7122 34.6147 24.1301 34.6719C22.0713 34.8742 19.8415 35 17.4663 35H17.4499C15.0749 35 12.845 34.8742 10.7863 34.6719C10.2043 34.6147 9.43822 34.476 8.79227 34.3024C7.35896 33.9174 6.07491 33.2829 4.93699 32.4292C4.48395 32.0947 4.0564 31.7282 3.65801 31.3332V31.325C3.26398 30.9255 2.8984 30.4971 2.5646 30.0431C1.71299 28.9023 1.07979 27.6152 0.695886 26.1786C0.522701 25.5307 0.384428 24.7632 0.32734 24.1796C0.125524 22.116 0 19.8807 0 17.5C0 15.1191 0.125524 12.8838 0.32734 10.8202C0.384428 10.2368 0.522701 9.4689 0.695886 8.82122C1.07979 7.38447 1.71299 6.09735 2.5646 4.9567C2.8984 4.50257 3.26398 4.07417 3.65801 3.67482V3.6666C4.0564 3.27145 4.48395 2.905 4.93699 2.5704C6.07491 1.71675 7.35896 1.0822 8.79227 0.697372C9.43822 0.523772 10.2043 0.385174 10.7863 0.327949C12.845 0.125474 15.0749 0 17.4499 0H17.4663ZM78.3525 11.7067L82.8846 21.423L87.4773 11.7067H91L81.9109 30.9612H78.3882L81.166 25.0768L74.751 11.7067H78.3525ZM64.9078 11.4419C66.7171 11.4419 68.3846 12.1823 69.7206 13.3049V11.7066H72.8568V27.1133H69.7206V25.5908C68.3846 26.6807 66.7171 27.3782 64.9078 27.3782C60.5174 27.3782 56.9584 23.8107 56.9584 19.41C56.9584 15.0092 60.5174 11.4419 64.9078 11.4419ZM48.6715 7.85872C50.9105 7.85872 52.6059 8.56397 53.7893 9.7825C55.0048 10.9688 55.7085 12.6362 55.7085 14.56C55.7085 16.516 55.0048 18.1832 53.7893 19.4017C52.5737 20.6201 50.9105 21.3255 48.6715 21.3255H45.3139V27.1133H42.1778V7.85872H48.6715ZM11.9524 8.80583H8.30501V26.2041H11.7652V14.8367L16.062 21.8164H18.8305L23.1512 14.829V26.2041H26.6114V8.80583H22.9644L17.4479 17.7375L11.9524 8.80583ZM64.9561 14.4974C62.2248 14.4974 60.1062 16.6969 60.1062 19.41C60.1062 22.1232 62.2248 24.3226 64.9561 24.3226C67.6873 24.3226 69.8631 22.1232 69.8631 19.41C69.8631 16.6969 67.6873 14.4974 64.9561 14.4974ZM48.3834 10.937H45.3139V18.2474H48.3834C49.7909 18.2474 50.7949 17.8304 51.4346 17.2214C52.0744 16.58 52.4264 15.6501 52.4264 14.5922C52.4264 13.5019 52.0423 12.5722 51.4346 11.9308C50.7949 11.2896 49.759 10.937 48.3834 10.937Z" fill="#333333" class="svg-fill"/>
-</svg>											<p class="text font-mss">
-												안정적인 서비스를 위해 점검 중입니다.<br>
-												이용에 불편을 드려 죄송합니다.
-											</p>
-										</div>
-									</li>
-								</ul>
-							</div>
-							
-														<div class="__payment-view __msspay-user-view __msspay-ok-user-view __msspay-unregistered-user-view" style="display:none">
-								<ul class="list_payment_order">
-									<li class="cell_discount_tit new-payment-area">결제 안내</li>
-									<li class="cell_discount_detail new-payment-area">
-										<div class="no-card-swiper-area">
-											<div class="swiper-slide card-list card15">
-												<a href="javascript:void(0)" class="add-easypayment __msspay-add-method-button">
-													<svg width="123" height="35" viewBox="0 0 123 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M109 9.16699V27.8337M118.334 18.5003H99.667" stroke="#333333" stroke-width="2" class="svg-stroke"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M17.4663 0C19.8415 0 22.0713 0.125474 24.1301 0.327949C24.7122 0.385174 25.4782 0.523772 26.1244 0.697372C27.5575 1.0822 28.8414 1.71675 29.9795 2.5704C30.4325 2.905 30.8601 3.27145 31.2585 3.6666V3.67482C31.6527 4.07417 32.0182 4.50257 32.352 4.9567C33.2036 6.09735 33.8367 7.38447 34.2206 8.82122C34.3938 9.4689 34.532 10.2368 34.5889 10.8202C34.7909 12.8838 34.9163 15.1191 34.9163 17.5C34.9163 19.8807 34.7909 22.116 34.5889 24.1796C34.532 24.7632 34.3938 25.5307 34.2206 26.1786C33.8367 27.6152 33.2036 28.9023 32.352 30.0431C32.0182 30.4971 31.6527 30.9255 31.2585 31.325V31.3332C30.8601 31.7282 30.4325 32.0947 29.9795 32.4292C28.8414 33.2829 27.5575 33.9174 26.1244 34.3024C25.4782 34.476 24.7122 34.6147 24.1301 34.6719C22.0713 34.8742 19.8415 35 17.4663 35H17.4499C15.0749 35 12.845 34.8742 10.7863 34.6719C10.2043 34.6147 9.43822 34.476 8.79227 34.3024C7.35896 33.9174 6.07491 33.2829 4.93699 32.4292C4.48395 32.0947 4.0564 31.7282 3.65801 31.3332V31.325C3.26398 30.9255 2.8984 30.4971 2.5646 30.0431C1.71299 28.9023 1.07979 27.6152 0.695886 26.1786C0.522701 25.5307 0.384428 24.7632 0.32734 24.1796C0.125524 22.116 0 19.8807 0 17.5C0 15.1191 0.125524 12.8838 0.32734 10.8202C0.384428 10.2368 0.522701 9.4689 0.695886 8.82122C1.07979 7.38447 1.71299 6.09735 2.5646 4.9567C2.8984 4.50257 3.26398 4.07417 3.65801 3.67482V3.6666C4.0564 3.27145 4.48395 2.905 4.93699 2.5704C6.07491 1.71675 7.35896 1.0822 8.79227 0.697372C9.43822 0.523772 10.2043 0.385174 10.7863 0.327949C12.845 0.125474 15.0749 0 17.4499 0H17.4663ZM78.3525 11.7067L82.8846 21.423L87.4773 11.7067H91L81.9109 30.9612H78.3882L81.166 25.0768L74.751 11.7067H78.3525ZM64.9078 11.4419C66.7171 11.4419 68.3846 12.1823 69.7206 13.3049V11.7066H72.8568V27.1133H69.7206V25.5908C68.3846 26.6807 66.7171 27.3782 64.9078 27.3782C60.5174 27.3782 56.9584 23.8107 56.9584 19.41C56.9584 15.0092 60.5174 11.4419 64.9078 11.4419ZM48.6715 7.85872C50.9105 7.85872 52.6059 8.56397 53.7893 9.7825C55.0048 10.9688 55.7085 12.6362 55.7085 14.56C55.7085 16.516 55.0048 18.1832 53.7893 19.4017C52.5737 20.6201 50.9105 21.3255 48.6715 21.3255H45.3139V27.1133H42.1778V7.85872H48.6715ZM11.9524 8.80583H8.30501V26.2041H11.7652V14.8367L16.062 21.8164H18.8305L23.1512 14.829V26.2041H26.6114V8.80583H22.9644L17.4479 17.7375L11.9524 8.80583ZM64.9561 14.4974C62.2248 14.4974 60.1062 16.6969 60.1062 19.41C60.1062 22.1232 62.2248 24.3226 64.9561 24.3226C67.6873 24.3226 69.8631 22.1232 69.8631 19.41C69.8631 16.6969 67.6873 14.4974 64.9561 14.4974ZM48.3834 10.937H45.3139V18.2474H48.3834C49.7909 18.2474 50.7949 17.8304 51.4346 17.2214C52.0744 16.58 52.4264 15.6501 52.4264 14.5922C52.4264 13.5019 52.0423 12.5722 51.4346 11.9308C50.7949 11.2896 49.759 10.937 48.3834 10.937Z" fill="#333333" class="svg-fill"/>
-</svg>													<p class="text font-mss">무신사페이를 추가하고 빠르게 결제하세요!</p>
-												</a>
-											</div>
-										</div>
-																				<div class="no-plcc-card-swiper-area">
-											<div id="__msspay-issue-area" class="swiper-slide card-list card16 card16--nocard">
-												<p class="logo"></p>
-												<div class="text-wrap">
-													<p class="text">
-														<span class="issued_msspay_txt" style="display:none">무신사 현대카드를</br> 무신사페이에 등록하고 사용하세요!</span>
-														<span class="first_card_discount_txt not_issued_msspay_txt"><span name="first_cart_discount_name">무신사 현대카드 즉시 할인</span> 이벤트 혜택과</span>
-													</p>
-													<p class="text not_issued_msspay_txt">5% 청구 할인 혜택을 받아보세요.</p>
-												</div>
-												<a class="get-card-button" href="/app/campaign/event/musinsa_hyundaicard/129?eventCode=MSS03">무신사 현대카드 혜택받기</a>
-											</div>
-										</div>
-																				<div class="swiper-area" style="display:none">
-											<div class="swiper-container" id="cardSwiper">
-												<div class="swiper-wrapper" id="__msspay-available-methods">
-												</div>
-												<div class="swiper-button-next"><i class="ic-30-line-arrow-right"></i></div>
-												<div class="swiper-button-prev"><i class="ic-30-line-arrow-left"></i></div>
-											</div>
-																																											</div>
 
-										
-									</li>
-								</ul>
-							</div>
+							
+														
 							                        
-														<div class="__payment-view __payment-pg-view" >
+								<div class="__payment-view __payment-pg-view" >
 								<ul class="list_payment_order">
 									<li class="cell_discount_tit new-payment-area">결제 안내</li>
 									<li class="cell_discount_detail payment-area">
 										<div class="payment-area-wrap">
-																																	<input type="radio" id="btn-paykind-CARD" type="radio" name="kyejae" value="card" onclick="selectPayKind('CARD');">
+												<input type="radio" id="btn-paykind-CARD" type="radio" name="kyejae" value="card" onclick="pay_info2_card();">
 												<label for="btn-paykind-CARD" class="box_choice">카드</label>
-                                            
-											
-											
-											
-											
-											<!--toss-->
-											
-											
-											
-											
-																																
-											                                                <input type="radio" id="btn-paykind-VTRANSFER" type="radio" name="kyejae" value="virtual" onclick="selectPayKind('VTRANSFER');">
-                                                <label for="btn-paykind-VTRANSFER" class="box_choice">가상계좌</label>
-                                            
-											
-											
-											
-											<!--toss-->
-											
-											
-											
-											
-																																
-											
-																							<input type="radio" id="btn-paykind-TRANSFER" type="radio" name="kyejae" value="transfer" onclick="selectPayKind('TRANSFER');">
+												<input type="radio" id="btn-paykind-TRANSFER" type="radio" name="kyejae" value="transfer" onclick="pay_info2_account();">
 												<label for="btn-paykind-TRANSFER" class="box_choice">계좌이체</label>
-                                            
-											
-											
-											<!--toss-->
-											
-											
-											
-											
-																																
-											
-											
-											                                                <input type="radio" id="btn-paykind-PHONE" type="radio"  name="kyejae" value="mobile" onclick="selectPayKind('PHONE');">
-                                                <label for="btn-paykind-PHONE" class="box_choice">휴대폰</label>
-                                            
-											
-											<!--toss-->
-											
-											
-											
-											
-																																
-											
-											
-											
-											
-											<!--toss-->
-																							<input type="radio" id="btn-paykind-TOSSPAY" type="radio" name="kyejae" value="toss" onclick="selectPayKind('TOSSPAY');">
-												<label for="btn-paykind-TOSSPAY" class="box_choice">토스페이</label>
-											
-											
-											
-											
-																																
-											
-											
-											
-											
-											<!--toss-->
-											
-																							<input type="radio" id="btn-paykind-KAKAOPAY" type="radio" name="kyejae" value="kkopay" onclick="selectPayKind('KAKAOPAY');">
-												<label for="btn-paykind-KAKAOPAY" class="box_choice">카카오페이</label>
-											
-											
-											
-																																
-											
-											
-											
-											
-											<!--toss-->
-											
-											
-																							<input type="radio" id="btn-paykind-NAVERPAY" type="radio" name="kyejae" value="naverpay" onclick="selectPayKind('NAVERPAY');">
-												<label for="btn-paykind-NAVERPAY" class="box_choice">네이버페이</label>
-											
-											
-																																
-											
-											
-											
-											
-											<!--toss-->
-											
-											
-											
-											
-																							<input type="radio" id="btn-paykind-PAYCO" type="radio" name="kyejae" value="payco" onclick="selectPayKind('PAYCO');">
-												<label for="btn-paykind-PAYCO" class="box_choice">페이코</label>
-																					
-											<!-- 결제수수료율 설정값 출력 부분 //-->
-                                                                                        <input type="hidden" id="pay-fee-rate-PHONE" value="5" />
-                                            										</div>
-
-										<div id="pay_info2" style="display:none">
-
-										
-											<!-- 카드 결제 안내 -->
-																						<div id="box-payKind-info-CARD" class="box-payment-method box-payKind-info" style="display:none">
-												<div class="box-select">
-                                                    <select name="card_code" id="card_code">
-                                                        <option value="">카드 선택</option>
-                                                                                                                                                                                <option value="CCHN">하나카드</option>
-                                                                                                                                                                                                                                            <option value="CCBC">BC카드</option>
-                                                                                                                                                                                                                                            <option value="CCCJ">제주은행</option>
-                                                                                                                                                                                                                                            <option value="CCCT">씨티카드</option>
-                                                                                                                                                                                                                                            <option value="CC48">신협은행</option>
-                                                                                                                                                                                                                                            <option value="CCDI">현대카드</option>
-                                                                                                                                                                                                                                            <option value="CC401">KB증권</option>
-                                                                                                                                                                                                                                            <option value="CCJB">전북은행</option>
-                                                                                                                                                                                                                                            <option value="CC92">카카오뱅크</option>
-                                                                                                                                                                                                                                            <option value="CC215">산업은행</option>
-                                                                                                                                                                                                                                            <option value="CCKJ">광주은행</option>
-                                                                                                                                                                                                                                            <option value="CC302">케이뱅크</option>
-                                                                                                                                                                                                                                            <option value="CCKM">국민카드</option>
-                                                                                                                                                                                                                                            <option value="CCLG">신한카드</option>
-                                                                                                                                                                                                                                            <option value="CCLO">롯데카드</option>
-                                                                                                                                                                                                                                            <option value="CC403">NH투자증권</option>
-                                                                                                                                                                                                                                            <option value="CC207">우체국</option>
-                                                                                                                                                                                                                                            <option value="CC33">우리카드</option>
-                                                                                                                                                                                                                                            <option value="CC216">저축은행</option>
-                                                                                                                                                                                                                                            <option value="CC204">새마을금고</option>
-                                                                                                                                                                                                                                            <option value="CCSS">삼성카드</option>
-                                                                                                                                                                                                                                            <option value="CCSU">수협은행</option>
-                                                                                                                                                                                                                                            <option value="CCNH">농협카드</option>
-                                                                                                                                                                        </select>
-													<select id="card_quota" name="card_quota">
-														<option value="1">일시불</option>
-																												<option value="2">2개월</option>
-																												<option value="3">3개월</option>
-																												<option value="4">4개월</option>
-																												<option value="5">5개월</option>
-																												<option value="6">6개월</option>
-																												<option value="7">7개월</option>
-																												<option value="8">8개월</option>
-																												<option value="9">9개월</option>
-																												<option value="10">10개월</option>
-																												<option value="11">11개월</option>
-																												<option value="12">12개월</option>
-																											</select>
-													<button type="button" class="order-benefit-button" onclick="Order.showInterestBenefitInfo(); return false;">
-														무이자/부분무이자 할부 혜택 안내<i class="ic-14-line-arrow-right"></i>
-													</button>
-												</div>
-												<div class="order-notice">
-													<p class="order-notice__title">
-														안전결제(ISP)? (국민카드/BC카드/우리카드)
-													</p>
-													<p class="order-notice__contents">
-														온라인 쇼핑 시 주민등록번호, 비밀번호 등의 주요 개인정보를 입력하지 않고 고객님이 사전에 미리 설정한 한전결제(ISP) 비밀번호만 입력, 결제하도록 하여 개인정보 유출 및 카드 도용을 방지하는 서비스입니다.
-													</p>
-													<p class="order-notice__title">
-														안심 클릭 결제? (삼성/외환/롯데/현대/신한/시티/하나/NH/수협/전북/광주/산업은행/제주은행)
-													</p>
-													<p class="order-notice__contents">
-														온라인 쇼핑시 주민등록번호, 비밀번호 등의 주요 개인 정보를 입력하지 않고 고객님이 사전에 미리 설정한 전자 상거래용 안심 클릭 비밀번호를 입력하여 카드 사용자 본인 여부를 확인함으로써 온라인상에서의 카드 도용을 방지하는 서비스입니다.
-													</p>
-												</div>
-											</div>
-                                            											<!-- //카드 결제 안내 -->
-
-											<!-- 가상 계좌 안내-->
-																						<!-- //가상 계좌 안내-->
-
-
-											<!-- 계좌이체 결제 안내-->
-																						<!-- //계좌이체 결제 안내-->
-
-											<!-- 핸드폰 결제 안내-->
-																						<!-- //핸드폰 결제 안내 -->
-
-											<!-- 해외카드 안내 -->
-																						<!-- //해외카드 안내 -->
-
-											<!-- PAYCO 안내 -->
-																						<!-- //PAYCO 안내 -->
-
-											<!-- 카카오페이 안내 -->
-																						<!-- //카카오페이 안내 -->
-
-											<!-- TOSS 안내 -->
-																						<!-- //TOSSO 안내 -->
-
-											<!-- NAVERPAY 안내 -->
-																						<!-- // NAVERPAY 안내 -->
-
-											<!-- 차이페이 안내 -->
-																						<!-- // 차이페이 안내 -->
-										
-											<!-- 카드 결제 안내 -->
-																						<!-- //카드 결제 안내 -->
-
-											<!-- 가상 계좌 안내-->
-																						<div id="box-payKind-info-VTRANSFER" class="box-payment-method box-payKind-info" style="display:none">
-												<div class="box-select" >
-                                                    <select name="virtual_bank_code">
-                                                        <option value="">입금은행 선택 </option>
-                                                                                                                                                                                <option value="BK03">기업은행</option>
-                                                                                                                                                                                                                                            <option value="BK04">국민은행</option>
-                                                                                                                                                                                                                                            <option value="BK20">우리은행</option>
-                                                                                                                                                                                                                                            <option value="BK07">수협은행</option>
-                                                                                                                                                                                                                                            <option value="BK11">농협은행</option>
-                                                                                                                                                                                                                                            <option value="BK32">부산은행</option>
-                                                                                                                                                                                                                                            <option value="BK88">신한은행</option>
-                                                                                                                                                                                                                                            <option value="BK81">하나은행</option>
-                                                                                                                                                                                                                                            <option value="BK34">광주은행</option>
-                                                                                                                                                                                                                                            <option value="BK71">우체국</option>
-                                                                                                                                                                                                                                            <option value="BK31">대구은행</option>
-                                                                                                                                                                                                                                            <option value="BK39">경남은행</option>
-                                                                                                                                                                        </select>
-													<input type="text" name="virtual_bank_inpnm" id="virtual_bank_inpnm" value="장선우" readonly="readonly" disabled="disabled" />
-												</div>
-												<div class="order-notice">
-													<p class="order-notice__comment">
-														가상 계좌 <span>유효 기간</span>
-														<strong class="danger">2023년 01월 23일
-															<span id="virtual_bank_deadline">23시 29분</span> 59초
-														</strong>
-													</p>
-
-													<ul class="order-notice__bullet">
-														<li class="order-notice__bullet-item">가상계좌는 주문 시 고객님께 발급되는 일회성 계좌번호 이므로 입금자명이 다르더라도 입금 확인이 가능합니다.</li>
-														<li class="order-notice__bullet-item">단, 선택하신 은행을 통해 결제 금액을 1원 단위까지 정확히 맞추셔야 합니다.</li>
-														<li class="order-notice__bullet-item">가상 계좌의 입금 유효 기간은 주문 후 2일 이내이며, 기간 초과 시 계좌번호는 소멸되어 입금되지 않습니다.</li>
-														<li class="order-notice__bullet-item">구매 가능 수량이 1개로 제한된 상품은 주문 취소 시, 24시간 내 가상 계좌를 통한 재주문이 불가 합니다.</li>
-														<li class="order-notice__bullet-item">인터넷뱅킹, 텔레뱅킹, ATM/CD기계, 은행 창구 등에서 입금할 수 있습니다.</li>
-														<li class="order-notice__bullet-item">ATM 기기는 100원 단위 입금이 되지 않으므로 통장 및 카드로 계좌이체 해주셔야 합니다. 은행 창구에서도 1원 단위 입금이 가능합니다.</li>
-                                                        <li class="order-notice__bullet-item danger">가상 계좌 주문 방식은 입금이 최종 완료된 후 주문 확인 및 출고가 진행됩니다.</li>
-                                                        <li class="order-notice__bullet-item danger">가상 계좌 입금 전 재고 소진, 상품 품절, 판매 종료 등의 사유가 발생할 경우 주문이 취소됩니다.</li>
-														<li class="order-notice__bullet-item danger">반복적인 주문취소는 주문제한 사유가 될 수 있습니다.</li>
-													</ul>
-												</div>
-
-											</div>
-                                            											<!-- //가상 계좌 안내-->
-
-
-											<!-- 계좌이체 결제 안내-->
-																						<!-- //계좌이체 결제 안내-->
-
-											<!-- 핸드폰 결제 안내-->
-																						<!-- //핸드폰 결제 안내 -->
-
-											<!-- 해외카드 안내 -->
-																						<!-- //해외카드 안내 -->
-
-											<!-- PAYCO 안내 -->
-																						<!-- //PAYCO 안내 -->
-
-											<!-- 카카오페이 안내 -->
-																						<!-- //카카오페이 안내 -->
-
-											<!-- TOSS 안내 -->
-																						<!-- //TOSSO 안내 -->
-
-											<!-- NAVERPAY 안내 -->
-																						<!-- // NAVERPAY 안내 -->
-
-											<!-- 차이페이 안내 -->
-																						<!-- // 차이페이 안내 -->
-										
-											<!-- 카드 결제 안내 -->
-																						<!-- //카드 결제 안내 -->
-
-											<!-- 가상 계좌 안내-->
-																						<!-- //가상 계좌 안내-->
-
-
-											<!-- 계좌이체 결제 안내-->
-																						<div id="box-payKind-info-TRANSFER" class="box-payKind-info" style="display:none;">
-												<ul class="order-notice__bullet">
-													<li class="order-notice__bullet-item">
-														실시간 계좌이체를 이용하기 위해서는 계좌결제 앱이 설치되어 있어야 합니다.
-													</li>
-													<li class="order-notice__bullet-item">
-														계좌이체는  ATM이나 은행 홈페이지에 접속하지 않고 무신사 홈페이지 내에서 즉시 결제, 출금되는 결제 방식 입니다.
-													</li>
-													<li class="order-notice__bullet-item">
-														현재 약 20여개의 은행이 가능하며 현금영수증 발행은 결제 시 즉시 발급받으실 수 있습니다.
-													</li>
-												</ul>
-											</div>
-                                            											<!-- //계좌이체 결제 안내-->
-
-											<!-- 핸드폰 결제 안내-->
-																						<!-- //핸드폰 결제 안내 -->
-
-											<!-- 해외카드 안내 -->
-																						<!-- //해외카드 안내 -->
-
-											<!-- PAYCO 안내 -->
-																						<!-- //PAYCO 안내 -->
-
-											<!-- 카카오페이 안내 -->
-																						<!-- //카카오페이 안내 -->
-
-											<!-- TOSS 안내 -->
-																						<!-- //TOSSO 안내 -->
-
-											<!-- NAVERPAY 안내 -->
-																						<!-- // NAVERPAY 안내 -->
-
-											<!-- 차이페이 안내 -->
-																						<!-- // 차이페이 안내 -->
-										
-											<!-- 카드 결제 안내 -->
-																						<!-- //카드 결제 안내 -->
-
-											<!-- 가상 계좌 안내-->
-																						<!-- //가상 계좌 안내-->
-
-
-											<!-- 계좌이체 결제 안내-->
-																						<!-- //계좌이체 결제 안내-->
-
-											<!-- 핸드폰 결제 안내-->
-																						<div id="box-payKind-info-PHONE" class="box-payKind-info" style="display:none;">
-												<ul class="order-notice__bullet">
-													<li class="order-notice__bullet-item">
-														휴대폰 결제는 통신사와 결제 대행사 정책 / 높은 수수료 / 늦은 정산 주기로 인해 50만원이하 상품만 가능하며 <b>결제하실 금액의 5%가 결제 수수료로 추가</b>됩니다.<br>
-														예시) 판매금액 50,000원 상품을 휴대폰으로 결제 할 경우 52,500원이 결제됩니다. 환불 시에는 수수료를 포함한 결제금액이 환불됩니다.
-													</li>
-													<li class="order-notice__bullet-item">
-														<b>저렴한 구매를 원하실 경우 타 결제수단 (신용카드, 가상계좌, 계좌이체)를 이용</b>하시기바랍니다.
-													</li>
-													<li class="order-notice__bullet-item">
-														부분환불/결제 월이 지난 경우, 계좌로 환불 됩니다.
-													</li>
-												</ul>
-											</div>
-                                            											<!-- //핸드폰 결제 안내 -->
-
-											<!-- 해외카드 안내 -->
-																						<!-- //해외카드 안내 -->
-
-											<!-- PAYCO 안내 -->
-																						<!-- //PAYCO 안내 -->
-
-											<!-- 카카오페이 안내 -->
-																						<!-- //카카오페이 안내 -->
-
-											<!-- TOSS 안내 -->
-																						<!-- //TOSSO 안내 -->
-
-											<!-- NAVERPAY 안내 -->
-																						<!-- // NAVERPAY 안내 -->
-
-											<!-- 차이페이 안내 -->
-																						<!-- // 차이페이 안내 -->
-										
-											<!-- 카드 결제 안내 -->
-																						<!-- //카드 결제 안내 -->
-
-											<!-- 가상 계좌 안내-->
-																						<!-- //가상 계좌 안내-->
-
-
-											<!-- 계좌이체 결제 안내-->
-																						<!-- //계좌이체 결제 안내-->
-
-											<!-- 핸드폰 결제 안내-->
-																						<!-- //핸드폰 결제 안내 -->
-
-											<!-- 해외카드 안내 -->
-																						<!-- //해외카드 안내 -->
-
-											<!-- PAYCO 안내 -->
-																						<!-- //PAYCO 안내 -->
-
-											<!-- 카카오페이 안내 -->
-																						<!-- //카카오페이 안내 -->
-
-											<!-- TOSS 안내 -->
-																						<div id="box-payKind-info-TOSSPAY" class="box-payKind-info" style="display:none;">
-												<ul class="order-notice__bullet">
-													<li class="order-notice__bullet-item">
-														토스는 간편하게 비밀번호만으로 결제 할 수 있는 빠르고 편리한 계좌 간편 결제 서비스 입니다.
-													</li>
-													<li class="order-notice__bullet-item">
-														지원 은행: 모든 은행 계좌 등록/결제 가능
-													</li>
-													<li class="order-notice__bullet-item">
-														결제 비밀번호 분실 시 재설정 후 이용 가능합니다.
-													</li>
-												</ul>
-											</div>
-                                            											<!-- //TOSSO 안내 -->
-
-											<!-- NAVERPAY 안내 -->
-																						<!-- // NAVERPAY 안내 -->
-
-											<!-- 차이페이 안내 -->
-																						<!-- // 차이페이 안내 -->
-										
-											<!-- 카드 결제 안내 -->
-																						<!-- //카드 결제 안내 -->
-
-											<!-- 가상 계좌 안내-->
-																						<!-- //가상 계좌 안내-->
-
-
-											<!-- 계좌이체 결제 안내-->
-																						<!-- //계좌이체 결제 안내-->
-
-											<!-- 핸드폰 결제 안내-->
-																						<!-- //핸드폰 결제 안내 -->
-
-											<!-- 해외카드 안내 -->
-																						<!-- //해외카드 안내 -->
-
-											<!-- PAYCO 안내 -->
-																						<!-- //PAYCO 안내 -->
-
-											<!-- 카카오페이 안내 -->
-																						<div id="box-payKind-info-KAKAOPAY" class="box-payKind-info" style="display:none;">
-												<ul class="order-notice__bullet">
-													<li class="order-notice__bullet-item">
-														카카오페이는 카카오톡에서 카드를 등록, 간단하게 비밀번호만으로 결제할 수 있는 빠르고 편리한 모바일 결제 서비스입니다.
-													</li>
-													<li class="order-notice__bullet-item">
-														지원 카드 : 모든 카드 등록/결제 가능
-													</li>
-												</ul>
-											</div>
-                                            											<!-- //카카오페이 안내 -->
-
-											<!-- TOSS 안내 -->
-																						<!-- //TOSSO 안내 -->
-
-											<!-- NAVERPAY 안내 -->
-																						<!-- // NAVERPAY 안내 -->
-
-											<!-- 차이페이 안내 -->
-																						<!-- // 차이페이 안내 -->
-										
-											<!-- 카드 결제 안내 -->
-																						<!-- //카드 결제 안내 -->
-
-											<!-- 가상 계좌 안내-->
-																						<!-- //가상 계좌 안내-->
-
-
-											<!-- 계좌이체 결제 안내-->
-																						<!-- //계좌이체 결제 안내-->
-
-											<!-- 핸드폰 결제 안내-->
-																						<!-- //핸드폰 결제 안내 -->
-
-											<!-- 해외카드 안내 -->
-																						<!-- //해외카드 안내 -->
-
-											<!-- PAYCO 안내 -->
-																						<!-- //PAYCO 안내 -->
-
-											<!-- 카카오페이 안내 -->
-																						<!-- //카카오페이 안내 -->
-
-											<!-- TOSS 안내 -->
-																						<!-- //TOSSO 안내 -->
-
-											<!-- NAVERPAY 안내 -->
-																						<div id="box-payKind-info-NAVERPAY" class="box-payKind-info" style="display:none;">
-												<ul class="order-notice__bullet">
-													<li class="order-notice__bullet-item">
-														주문 변경 시 카드사 혜택 및 할부 적용 여부는 해당 카드사 정책에 따라 변경될 수 있습니다.
-													</li>
-													<li class="order-notice__bullet-item">
-														네이버페이는 네이버ID로 별도 앱 설치 없이 신용카드 또는 은행계좌 정보를 등록하여 네이버페이 비밀번호로 결제할 수 있는 간편결제 서비스입니다.
-													</li>
-													<li class="order-notice__bullet-item">
-														결제 가능한 신용카드: 신한, 삼성, 현대, BC, 국민, 하나, 롯데, NH농협, 씨티, 카카오뱅크
-													</li>
-													<li class="order-notice__bullet-item">
-														결제 가능한 은행: NH농협, 국민, 신한, 우리, 기업, SC제일, 부산, 경남, 수협, 우체국, 미래에셋대우, 광주, 대구, 전북, 새마을금고, 제주은행, 신협, 하나은행, 케이뱅크, 카카오뱅크, 삼성증권
-													</li>
-													<li class="order-notice__bullet-item">
-														네이버페이 카드 간편결제 시 카드사별 무이자, 청구할인은 네이버페이에서 제공하는 혜택만 적용됩니다.(무신사에서 제공하는 혜택은 적용 제외)
-													</li>
-												</ul>
-											</div>
-                                            											<!-- // NAVERPAY 안내 -->
-
-											<!-- 차이페이 안내 -->
-																						<!-- // 차이페이 안내 -->
-										
-											<!-- 카드 결제 안내 -->
-																						<!-- //카드 결제 안내 -->
-
-											<!-- 가상 계좌 안내-->
-																						<!-- //가상 계좌 안내-->
-
-
-											<!-- 계좌이체 결제 안내-->
-																						<!-- //계좌이체 결제 안내-->
-
-											<!-- 핸드폰 결제 안내-->
-																						<!-- //핸드폰 결제 안내 -->
-
-											<!-- 해외카드 안내 -->
-																						<!-- //해외카드 안내 -->
-
-											<!-- PAYCO 안내 -->
-																						<div id="box-payKind-info-PAYCO" class="box-payKind-info" style="display:none;">
-												<p class="txt_tit_payment">PAYCO 간편결제 안내</p>
-												<p class="txt_desc_payment">PAYCO는 온/오프라인 쇼핑은 물론 송금, 멤버십 적립까지 가능한 통합 서비스입니다.<br />휴대폰과 카드 명의자가 동일해야 결제 가능하며, 결제금액 제한은 없습니다.</p>
-												<ul class="list_wrap">
-													<li><span>-</span><span>지원카드 : 모든 국내 신용/체크카드</span></li>
-													<li><span>-</span><span>첫 구매 시(1만원 이상) 2,000원 즉시 할인 쿠폰 지급</span></li>
-												</ul>
-											</div>
-                                            											<!-- //PAYCO 안내 -->
-
-											<!-- 카카오페이 안내 -->
-																						<!-- //카카오페이 안내 -->
-
-											<!-- TOSS 안내 -->
-																						<!-- //TOSSO 안내 -->
-
-											<!-- NAVERPAY 안내 -->
-																						<!-- // NAVERPAY 안내 -->
-
-											<!-- 차이페이 안내 -->
-																						<!-- // 차이페이 안내 -->
-										
+								<!-- 결제수수료율 설정값 출력 부분 //-->
+                                                 <input type="hidden" id="pay-fee-rate-PHONE" value="5" />                                       
+                                        </div>
+										<div id="pay_info2_account"  style="display:none;" >
+											<input type="text"  placeholder="예금주명을 입력해주세요" style="width:200px;border:1px solid lightgray;display:inline !important;"/>	
 										</div>
-
+										
 									</li>
 								</ul>
 							</div>
-														<!-- 무신사페이 현금영수증 -->
-							<ul id="box-pay-cash-receipt" class="list_payment_order article_cash_receipt" style="display:none">
-								<li class="cell_discount_tit">현금영수증</li>
-								<li class="cell_discount_detail">
-									<div class="cell_discount_detail__receipt-choice">
-										<input type="radio" class="n-radio" id="cash_btn0" name="cash_btn" value="INCOME" checked>
-										<label for="cash_btn0">소득공제</label>
-										<input type="radio" class="n-radio" id="cash_btn1" name="cash_btn" value="SPENDING">
-										<label for="cash_btn1">지출증빙</label>
-										<input type="radio" class="n-radio" id="cash_btn2" name="cash_btn" value="NONE">
-										<label for="cash_btn2">미발행</label>
-									</div>
-
-									<!-- 소득공제 -->
-									<div class="cell_discount_detail__receipt-result div_income" style="display:none">
-										<div class="n-select n-select--style">
-											<select name="select-income">
-												<option value="PHONE">휴대폰 번호</option>
-												<option value="CARDNUM">현금영수증카드</option>
-											</select>
-										</div>
-										<input type="text" name="income_type_number" value="" class="n-input--style" placeholder="숫자만 입력해 주세요." />
-									</div>
-									<!-- //소득공제 -->
-									<div class="cell_discount_detail__receipt-result div_spending" style="display:none">
-										<div class="n-select n-select--style">
-											<select name="select-spending">
-												<option value="CORPNUM">사업자 번호</option>
-<!--												<option value="CARDNUM">현금영수증카드</option>-->
-											</select>
-										</div>
-										<input type="text" name="spending_type_number" value="" class="n-input--style" placeholder="숫자만 입력해 주세요." />
-									</div>
-									<div class="cell_discount_detail__receipt-result__reuse" style="display:none">
-										<input type="checkbox" class="n-check" id="checkCashReceipt" checked>
-										<label for="checkCashReceipt">현금영수증 정보를 다음에도 사용</label>
-									</div>
-								</li>
-							</ul>
-							<!-- //무신사페이 현금영수증 -->
-							<input type="hidden" name="ord_used_yn" value="N">
-							<input type="hidden" name="implode_refundable_bank_names" value="농협중앙회|우리은행|신한은행|기업은행|대구은행|부산은행|광주은행|경남은행|국민은행|수협|우체국|하나은행|토스뱅크|케이뱅크|산업은행|SC|시티은행|제주은행|전북은행|새마을금고|신협|카카오뱅크">
-														<ul class="list_payment_order account-refund">
-								<li class="cell_discount_tit" id="SoldoutContTitle" style="display:none">품절 시 환불 계좌</li>
-								<li class="cell_discount_detail" id="SoldoutCont" style="display:none">
-									<span id="refund_info"  >
-																					장*우 | 국민은행 933502004*****
-																			</span>
-									<a href="javascript:void(0);" id="refund_info_button" class="n-btn btn-sm btn-default" onclick="RefundAccount.showRefundAccount();">
-										변경하기
-									</a>
-																		<div>
-										<ul class="cell_discount_detail-list">
-											<li>&middot; 입점업체 배송은 낮은 확률로 상품이 품절일 가능성이 있습니다. 이에 품절 시 빠르게 환불 처리해드립니다.</li>
-											<li>&middot; 현금 환불의 경우, 예금정보가 일치해야 환불 처리가 가능합니다. 은행명, 계좌번호, 예금주명을 정확히 기재 부탁드립니다.</li>
-											<li>&middot; 환불 받으신 날짜 기준으로 3~5일(주말 제외) 후 결제대행사에서 직접 고객님의 계좌로 환불 처리됩니다.</li>
-										</ul>
-									</div>
-																	</li>
-							</ul>
-														<ul id="soldOutNonRefundablePayment" class="list_payment_order account-refund">
-								<li class="cell_discount_tit">품절 시 환불 안내</li>
-								<li class="cell_discount_detail">
-									<span>결제하신 수단으로 취소됩니다.</span>
-																		<div>
-										<ul class="cell_discount_detail-list">
-											<li>&middot; 입점업체 배송은 낮은 확률로 상품이 품절일 가능성이 있습니다. 이에 품절 시 빠르게 환불 처리해드립니다.</li>
-											<li>&middot; 현금 환불의 경우, 예금정보가 일치해야 환불 처리가 가능합니다. 은행명, 계좌번호, 예금주명을 정확히 기재 부탁드립니다.</li>
-											<li>&middot; 환불 받으신 날짜 기준으로 3~5일(주말 제외) 후 결제대행사에서 직접 고객님의 계좌로 환불 처리됩니다.</li>
-										</ul>
-									</div>
-																	</li>
-							</ul>
-							<!-- 주문자 동의 -->
-							<ul class="list_payment_order">
-								<li class="cell_discount_tit last">주문자 동의</li>
-								<li class="cell_discount_detail last">
+		
+		
+		
+		
+<!-- 주문자 동의 -->
+<ul class="list_payment_order">
+	<li class="cell_discount_tit last">주문자 동의</li>
+	<li class="cell_discount_detail last">
     <div class="order-agree">
         <div class="order-agree__title">
             회원 본인은 구매 조건, 주문 내용 확인 및 결제에 동의합니다
@@ -1958,145 +1121,11 @@
         }
     }
 </script>
-							</ul>
-							<!-- // 주문자 동의 -->
+
+</ul>
+<!-- // 주문자 동의 -->
 						</div>
-						<div class="cell_order_form2" id="right_pay_info_area">
-							<div class="payment_promotion" style="padding-bottom:0">
-								<p class="title_area" style="padding:0 10px">결제 프로모션</p>
-                                							</div>
-							<!-- //결제 수단 선택 -->
-
-                            <!-- 무신사페이 정보 -->
-                                                        <ul class="box_payment_event" id="right_pay_info_msspay" style="display:none;">
-                                <li class="box_method_order">무신사페이 안내사항</li>
-                                <li class="n-order-promotion">
-                                                                        <strong>무신사페이  할인 이벤트</strong>
-<div>
-<br>
-[하나카드 즉시할인]
-<br>
-        - 하나카드로 10만원 이상 결제시, 6천원 즉시 할인
-</div>
-<a href="/app/plan/views/29620">혜택 상세 내용 확인 ↗</a>
-<div>
-<br>
-[롯데카드 즉시할인]
-<br>
-        - 롯데카드로 10만원 이상 결제시, 6천원 즉시 할인
-</div>
-<a href="/app/plan/views/29619">혜택 상세 내용 확인 ↗</a>
-<div>
-<br>
-[NH농협카드 즉시할인]
-<br>
-        - 농협카드로 10만원 이상 결제시, 6천원 즉시 할인
-</div>
-<a href="/app/plan/views/29656">혜택 상세 내용 확인 ↗</a>
-<div>
-<br>
-[삼성카드 즉시할인]
-<br>
-        - 삼성카드로 8만원 이상 결제시, 4천원 즉시 할인
-</div>
-<a href="/app/plan/views/29618">혜택 상세 내용 확인 ↗</a>
-<div>
-<br>
-※ 본 프로모션은 카드사 예산 소진 시 조기 종료될 수 있습니다.
-</div>
-                                                                    </li>
-                            </ul>
-                                                        <!-- // 무신사페이 정보 -->
-
-						                            <ul class="box_payment_event" id="right_pay_info_CARD" style="display:none">
-							                                <!-- 신용카드 정보 -->
-																<li class="box_method_order" style="border-top: none">카드사 할인 이벤트</li>
-                                <!-- // 신용카드 정보 -->
-                                                            <li class="n-order-promotion">
-                                                                            <strong>삼성카드 14만원 캐시백 프로모션</strong>
-<div>
-	- 삼성카드 14만 원 이용 시, 14만원 캐시백
-</div>
-<a href="/app/plan/views/29463">프로모션 자세히 보기 ↗</a>
-                                                                    </li>
-                            </ul>
-						                            <ul class="box_payment_event" id="right_pay_info_VTRANSFER" style="display:none">
-							                                <!-- 가상계좌 정보 -->
-								<li class="box_method_order">가상 계좌 안내</li>
-								<li class="box_contents" style="padding-bottom:0">
-																		<!--회원 핸드폰 인증-->
-									<p class="font_basic">수량 제한 상품의 경우, 가상 계좌를 통한 주문은 최대 2건까지만 가능합니다.</p>
-									<p class="font_basic">(미입금 주문 기준, 기존 주문 합산)이전 주문을 완료 혹은 수량 제한 상품의 주문을 조절하세요.</p>
-									<p class="font_basic">구매 가능 수량이 1개로 제한된 상품은 주문 취소 시, 24시간 내 가상계좌 재주문이 불가합니다.</p>
-									<p class="font_basic txt-danger">반복적인 주문취소는 주문제한 사유가 될 수 있습니다.</p>
-																	</li>
-                                <!-- //가상계좌 정보 -->
-                                                            <li class="n-order-promotion">
-                                                                            현재 진행중인 이벤트가 없습니다.
-                                                                    </li>
-                            </ul>
-						                            <ul class="box_payment_event" id="right_pay_info_TRANSFER" style="display:none">
-															<li class="box_method_order">계좌이체 이벤트</li>
-                                                            <li class="n-order-promotion">
-                                                                            현재 진행중인 이벤트가 없습니다.
-                                                                    </li>
-                            </ul>
-						                            <ul class="box_payment_event" id="right_pay_info_PHONE" style="display:none">
-															<li class="box_method_order">휴대폰 이벤트</li>
-                                                            <li class="n-order-promotion">
-                                                                            현재 진행중인 이벤트가 없습니다.
-                                                                    </li>
-                            </ul>
-						                            <ul class="box_payment_event" id="right_pay_info_TOSSPAY" style="display:none">
-															<li class="box_method_order">토스페이 이벤트</li>
-                                                            <li class="n-order-promotion">
-                                                                            <strong>토스페이 최대 6천원 혜택 </strong>
-<div>
-        - 토스페이 7만원 이상 결제 시, 3천원 즉시 할인(1인 1회)
-<br>
-        - 토스페이 생애 첫 1만원 이상 결제 시, 3천원 캐시백(1인 1회)
-</div>
-<div>
-※ 본 프로모션은 결제사 예산 소진 시 조기 종료될 수 있습니다.<br>
-</div>
-<div>
-<strong>토스페이 후불결제 오픈</strong>
-<br>
-- 쇼핑은 오늘, 결제는 다음 달에!
-<br>
-- 월 최대 30만 원 까지 후불결제 가능
-<br>
-<br>
-<strong><a href="/app/plan/views/30171">혜택 상세 내용 확인 ↗</a></strong>
-</div>
-                                                                    </li>
-                            </ul>
-						                            <ul class="box_payment_event" id="right_pay_info_KAKAOPAY" style="display:none">
-															<li class="box_method_order">카카오페이 이벤트</li>
-                                                            <li class="n-order-promotion">
-                                                                            현재 진행중인 이벤트가 없습니다.
-                                                                    </li>
-                            </ul>
-						                            <ul class="box_payment_event" id="right_pay_info_NAVERPAY" style="display:none">
-															<li class="box_method_order">네이버페이 이벤트</li>
-                                                            <li class="n-order-promotion">
-                                                                            현재 진행중인 이벤트가 없습니다.
-                                                                    </li>
-                            </ul>
-						                            <ul class="box_payment_event" id="right_pay_info_PAYCO" style="display:none">
-															<li class="box_method_order">페이코 이벤트</li>
-                                                            <li class="n-order-promotion">
-                                                                            <strong>페이코 3천원 할인</strong>
-<div>
-	- 페이코 4만원 이상 결제 시 3천원 할인 
-</div>
-<a href="/app/plan/views/29426">프로모션 자세히 보기 ↗</a>
-<div>
-※ 본 프로모션은 결제사 예산 소진 시 조기 종료될 수 있습니다.
-</div>
-                                                                    </li>
-                            </ul>
-												</div>
+					
 					</div>
 					<!--//결제 정보-->
 					<!--//신용카드 -->
@@ -2104,154 +1133,51 @@
 				</div>
 
 				<!--cart button-->
-									<div class="btn_wrap order_form__payment-button-wrap">
-						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button">
-							<span id="btn-pay_amt" style="font-size:20px;">0</span>원 결제하기&nbsp;
+					<div  id="card_btn"  class="btn_wrap order_form__payment-button-wrap" >
+						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button" ">
+							<span id="btn-pay_amt" style="font-size:20px;">0</span>카드 결제하기&nbsp;
 							<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
 						</a>
-						<span id="txt_exclude_interest_free" class="btn-text" style="display:none">
-							무이자 할부 시 청구할인 대상 제외
-						</span>
 					</div>
-								<!--//cart button-->
+					<div  id="account_btn"  class="btn_wrap order_form__payment-button-wrap" style="display:none;" >
+						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button" ">
+							<span id="btn-pay_amt" style="font-size:20px;">0</span>계좌이체로 결제하기&nbsp;
+							<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
+						</a>
+					</div>
+					
+				<!--//cart button-->
 			</div>
 			<!--// 컨텐츠 영역 -->
 		</form>
-		<iframe name="payment_result" src="about:blank" target=_blank border="0" style="display: none; width: 100%; height: 0px; text-align: center;"></iframe>
-		<!-- 하단 콘텐츠 영역 -->
-				<div id="footerCommonPc"></div>
-<meta name="google-site-verification" content="NqB0BDAEWJTvAPCCxzrckJYnS7-xJILFU40FvSmh5S8" />
-<script type="text/javascript" src="//static.msscdn.net/skin/musinsa/js/jquery.url.packed.js" async="true"></script>				<!--// 하단 콘텐츠 영역 -->
-	</div>
-	<!--// 오른쪽 콘텐츠 영역 -->
-</div>
-<!--// wrap -->
-<div id="order_delivery_pop" class="popup_info order_delivery_pop" style="display:none;"></div>
+		
 
-<!--매장 픽업 가이드-->
-<div id="layer-pickup-guide" class="ui-layer layer-basic layer-change-info layer-pickup-guide"></div>
+<!--결제수단 여는 스크립트  -->
+		<script type="text/javascript">
+		function pay_info2_account(){
+		      if($('#pay_info2_account').css('display') == 'none'){
+		      $('#pay_info2_account').show();
+		      $('#card_btn').hide();
+		      $('#account_btn').show();
+		
+		    }
+		  
+		    }
+		
+		
+		function pay_info2_card(){
+		      if($('#pay_info2_account').css('display') != 'none'){
+		      $('#pay_info2_account').hide();
+		      $('#card_btn').show();
+		      $('#account_btn').hide();
+		   
+		    }
+		  
+		    }
+			
+		
+		</script>
 
-
-<script type="text/javascript">
-	function showEtc(val){
-		if(val == 'etc'){
-			$("#dlv_selectbox").val("etc");
-			$("#etc_textarea").show();
-			$("#etc_textarea").val(document.f1.dlv_msg.value);
-		}else{
-			$("#dlv_selectbox").val(val);
-			$("#etc_textarea").hide();
-			// $("#etc_textarea").val("");
-		}
-	}
-
-	function recipientInfoAutoInput(isChecked) {
-		if (isChecked) {
-			// 구매자 정보 자동 입력
-			$('[name="rcvr_nm"]').val('장선우');
-			$('[name="rmobile1"]').val('010');
-			$('[name="rmobile2"]').val('5640');
-			$('[name="rmobile3"]').val('5610');
-		} else {
-			// 받는 분 정보 초기화
-			$('[name="rcvr_nm"]').val('');
-			$('[name="rmobile1"]').val('');
-			$('[name="rmobile2"]').val('');
-			$('[name="rmobile3"]').val('');
-		}
-	}
-
-	function setDigitalGoodsRecipientInfoAutoInput() {
-		var f1 = document.f1;
-		var ordr_nm = f1.ordr_nm.value;
-		var rcvr_nm = f1.rcvr_nm.value.trim();
-		var omobile = f1.omobile1.value + f1.omobile2.value + f1.omobile3.value;
-		var rmobile = f1.rmobile1.value + f1.rmobile2.value + f1.rmobile3.value;
-		if (omobile == rmobile && ordr_nm == rcvr_nm) {
-			$('[name="ticket-tel"]').prop('checked', true);
-		} else {
-			$('[name="ticket-tel"]').prop('checked', false);
-		}
-	}
-
-	function showCashReceiptByType(type) {
-		if (type === 'INCOME') {
-			$('.div_spending').hide();
-			$('.div_income').show();
-			$('.cell_discount_detail__receipt-result__reuse').show();
-		} else if (type === 'SPENDING') {
-			$('.div_income').hide();
-			$('.div_spending').show();
-			$('.cell_discount_detail__receipt-result__reuse').show();
-		} else if (type === 'NONE') {
-			$('.cell_discount_detail__receipt-result').hide();
-			$('.cell_discount_detail__receipt-result__reuse').hide();
-		}
-	}
-
-	function showDlvEntranceType(obj) {
-	    if ($(obj).val() === 'password') {
-			$('#dlv_entrance_memo').show();
-		} else {
-			$('#dlv_entrance_memo').hide();
-		}
-	}
-
-	$('.input-num-size').keyup (function () {
-
-		var charLimit = $(this).attr("maxlength");
-
-		if (this.value.length >= charLimit) {
-			$(this).next('.input-num-size').focus();
-			return false;
-		}
-	});
-
-	$("#hyundaicardFirstPayment").click(function() {
-		var clicked_yn = 'N';
-		if (!PLCC.isActivePLCCFirstPayDiscountBtn()) {
-			if (!PLCC.validatePLCCFirstPayDiscount()) {
-				return false;
-			}
-			clicked_yn = 'Y';
-		}
-
-		PLCC.changePLCCFirstPayDiscountYn(clicked_yn);
-		PLCC.setClickedYnFirstPayDiscount();
-	});
-
-	$("#btnCardIssue").click(function() {
-		document.location.href = '/app/campaign/event/musinsa_hyundaicard/129';
-	});
-
-	$("#searchPLCCInfo").click(function() {
-		PLCC.setPLCCData();
-	});
-
-	// 새벽 배송 출입 방법 툴팁
-	$('#__delivery-entrance-tooltip-close-button').on('click', function () {
-		if ($('#delivery-entrance-toggle-btn').hasClass('is-active')) {
-			$('#delivery-entrance-toggle-btn').removeClass('is-active');
-		} else {
-			$('#delivery-entrance-toggle-btn').addClass('is-active');
-		}
-	});
-
-	// 배송지 툴팁
-	$('#__delivery-boutique-tooltip-close-button').on('click', function () {
-		if ($('#delivery-boutique-toggle-btn').hasClass('is-active')) {
-			$('#delivery-boutique-toggle-btn').removeClass('is-active');
-		} else {
-			$('#delivery-boutique-toggle-btn').addClass('is-active');
-		}
-	});
-
-	$('select[name=virtual_bank_code]').on('change', function () {
-		var virtual_bank_code = $('select[name=virtual_bank_code]').val();
-		var deadline_time = (virtual_bank_code == 'BK07' || virtual_bank_code == 'BK31')? '22시 59분' : '23시 29분';
-		$('#virtual_bank_deadline').text(deadline_time);
-	});
-</script>
 
 
 	<form method="post" name="msspay_method_add_form" action="https://pay.musinsa.com/paymethod/add">
@@ -2260,7 +1186,7 @@
 
 	<form method="post" name="msspay_pay_form"></form>
 	
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 			if (!console.debug) {
 				console.debug = console.log;
 			}
@@ -2386,12 +1312,12 @@
 					});
 				}
 			});
-		</script>
+		</script> -->
 	
 
 	<form method="post" name="mpay_auth_form"></form>
 	
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 			Mpay.install({
 				auth : {
 					form: document.mpay_auth_form,
@@ -2448,7 +1374,7 @@
 
             const cashReceiptInfo = [];
             Order.setCashReceipt(cashReceiptInfo);
-		</script>
+		</script> -->
 	
 	
 

@@ -28429,7 +28429,8 @@ body .btn-sns-share:focus {
     1px 0 0 0 #ddd inset, 0 1px 0 0 #ddd inset;
   box-sizing: border-box;
 }
-.new-special-section .swiper-slide:before {
+/* 고친 부분 */
+/* .new-special-section .swiper-slide:before {
   /content: "";
   position: absolute;
   right: 0;
@@ -28439,7 +28440,7 @@ body .btn-sns-share:focus {
   height: 100%;
   background-color: #ddd;
   z-index: 100;
-}
+} */
 .new-special-section .swiper-slide[data-swiper-row="1"] {
   border-top: 0;
 }
@@ -30629,7 +30630,7 @@ body .btn-sns-share:focus {
   height: 60px;
   padding: 0 40px;
   border: none;
-  background-color: #0078ff;
+  background-color: #393434;
   font-size: 20px;
   line-height: 60px;
   color: #fff;
