@@ -115,13 +115,13 @@
                         <input type="text" name="productNo" style="border-style: none;" readonly><br>
 
                         <span>상품명</span>
-                        <input type="text" name="title" placeholder="상품명"><br>
+                        <input type="text" name="title" placeholder="상품명" required><br>
 
                         <span>가격</span>
-                        <input type="number" name="price" placeholder="상품명"><br>
+                        <input type="number" name="price" placeholder="상품명" required><br>
 
                         <span>분류</span>
-                        <select name="item">
+                        <select name="item" required>
                             <option value="책상">책상</option>
                             <option value="의자">의자</option>
                             <option value="화장대">화장대</option>
@@ -132,7 +132,7 @@
                         <br>
 
                         <span>상태</span>
-                        <select name="grade">
+                        <select name="grade" required>
                             <option value="최상">최상</option>
                             <option value="상">상</option>
                             <option value="중">중</option>
@@ -140,7 +140,7 @@
                         <br>
                         
                         <span>소재</span>
-                        <select name="material">
+                        <select name="material" required>
                             <option value="철제">철제</option>
                             <option value="원목">원목</option>
                             <option value="가죽">가죽</option>
@@ -151,19 +151,19 @@
                         <br>
                         <span>크기</span>
                         <span style="width:50px">가로</span>
-                        <input type="number" name="widthes" placeholder="가로" style="width:325px">&nbsp;&nbsp;mm<br>
+                        <input type="number" name="widthes" placeholder="가로" style="width:325px" required>&nbsp;&nbsp;mm<br>
                         
                         <span>&nbsp;&nbsp;</span>
                         <span style="width:50px">세로</span>
-                        <input type="number" name="depthes" placeholder="세로" style="width:325px">&nbsp;&nbsp;mm<br>
+                        <input type="number" name="depthes" placeholder="세로" style="width:325px" required>&nbsp;&nbsp;mm<br>
                         
                         <span>&nbsp;&nbsp;</span>
                         <span style="width:50px">높이</span>
-                        <input type="number" name="heightes" placeholder="높이" style="width:325px">&nbsp;&nbsp;mm
+                        <input type="number" name="heightes" placeholder="높이" style="width:325px" required>&nbsp;&nbsp;mm
                         <br>
 
                         <span>색상</span>
-                        <select name="color">
+                        <select name="color" required>
                             <option value="블랙">블랙</option>
                             <option value="화이트">화이트</option>
                             <option value="브라운">브라운</option>
@@ -181,7 +181,7 @@
                         <br>
                         <img src="${path }/resources/images/admin/addThumbnail.png" 
                             name="photo1" onclick="" width="180px" height="180px" class="fileImg">
-                        <input type="file" name="upFile1" style="display: none;">
+                        <input type="file" name="upFile1" style="display: none;" required>
                         <br>
                         <img src="${path }/resources/images/admin/addImage.png" 
                             name="photo2" onclick="" width="110px" height="110px" class="fileImg">
@@ -198,7 +198,7 @@
 
                         <br>
                         <span>상세 내용</span><br>
-                        <textarea name="detail" cols="73" rows="10" style="resize:none;margin-left: 15px;" ></textarea>
+                        <textarea name="detail" cols="73" rows="10" style="resize:none;margin-left: 15px;" required></textarea>
                         <br>
                     </div>
                     <div id="divBtn">
