@@ -28,7 +28,7 @@
     <div id="headerDiv">
         <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo">
         <c:if test="${empty loginMember }">
-        	<span class="button" id="headbtn"><a href="#demo-modal"></a></span>
+        	<span class="headbtn" id="headbtn"><a href="#demo-modal"></a></span>
         </c:if>
         <c:if test="${not empty loginMember }">
         	<div style="display: flex; margin-top:10px">
@@ -53,7 +53,7 @@
 
 <!------------------------------------------------------------------------------------------------------------------>
     <!-- 로그인 모달창 -->
-    <div id="demo-modal" class="loginModal">
+    <div id="demo-modal" class="loginModal" style="z-index:3">
         <div class="loginBox"> 
             <a href="#" id="loginModal__close">
                 <!-- <img src="./아이콘/external-close-web-flaticons-flat-flat-icons.png" alt="" width="50px" height="50px"> -->
