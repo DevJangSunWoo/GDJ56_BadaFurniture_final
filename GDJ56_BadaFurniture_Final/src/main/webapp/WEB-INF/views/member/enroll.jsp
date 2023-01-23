@@ -30,14 +30,23 @@
                 
                 <div class="flexDiv" style="justify-content: center;">
                     <div id="inputDiv">
+		            	<div class="flexDiv">
+		                    <img src="${path }/resources/images/member/아이디.png">
+		                    <div class="input-container">		
+		                        <input type="password" name="id" class="form__input" placeholder="아이디"/>
+		                        <label class="form__label">아이디</label>
+		                    </div>
+		                    <input type="button" class="oribtn" id="idcheck" value="중복확인">
+		                </div>
+		                <br>
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/메일.png">
                             <div class="input-container" >
                                 <input type="email" name="email" id="email" class="form__input" placeholder="이메일"/>
                                 <label class="form__label" id="mailTxt">이메일</label>
                             </div>
-                            <input type="button" class="oribtn" value="중복확인">
-                            <input type="button" class="oribtn" id="checkEmail" value="이메일인증">
+                            <input type="button" class="oribtn" id="emailcheck" value="중복확인">
+                            <input type="button" class="oribtn" id="emailAuthentication" value="이메일인증">
                         </div>
                         <br>
                         <div class="flexDiv">
@@ -52,7 +61,7 @@
                         
                         <script>
 	                     	// 이메일 인증번호
-	                        $("#checkEmail").click(function() {
+	                        $("#emailAuthentication").click(function() {
 	                           $.ajax({
 	                              type : "POST",
 	                              url : "login/mailConfirm",
@@ -176,7 +185,7 @@
 
 				<script>
 					// 이메일 중복확인
-					$("#duplicateEmail").click(e=>{
+					/* $("#duplicateEmail").click(e=>{
 						const email=$("#email").val();
 						$.ajax({
 							url:"${path}/member/duplicateEmail.do",
@@ -198,7 +207,7 @@
 								}
 							}
 						});
-					});				
+					});	 */			
 
 
 
