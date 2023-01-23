@@ -22,7 +22,8 @@
                 <br>
                 <div class="flexDiv" style="justify-content: center;">
                     <div style="border: 1px solid grey; width: 80%;">
-                        <h5>  ❗ 계좌번호 제외 모두 필수 입력항목입니다.</h5>
+                        <h5> ❗ 계좌번호 제외 모두 필수 입력항목입니다.</h5>
+                        <h5> ❗ 비밀번호는 8자 이상, 영문자/숫자로만 구성할 수 있습니다.</h5>
                     </div>
                 </div>
                 <br>
@@ -32,22 +33,68 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/메일.png">
                             <div class="input-container" >
-                                <input type="email"  name="email" class="form__input" placeholder="이메일"/>
-                                <label class="form__label">이메일</label>
+                                <input type="email" name="email" id="email" class="form__input" placeholder="이메일"/>
+                                <label class="form__label" id="mailTxt">이메일</label>
                             </div>
                             <input type="button" class="oribtn" value="중복확인">
-                            <input type="button" class="oribtn" value="이메일인증">
+                            <input type="button" class="oribtn" id="checkEmail" value="이메일인증">
                         </div>
                         <br>
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/이메일체크.png" width="">
                             <div class="input-container">
-                                <input type="number" name="emailck" class="form__input" placeholder="인증번호"/>
-                                <label class="form__label">인증번호</label>
+                                <input type="text" name="emailck" class="form__input" id="memailconfirm" placeholder="인증번호"/>
+                                <label class="form__label" id="memailconfirmTxt">인증번호</label>
                             </div>
-                            <input type="button" class="oribtn" value="인증확인">		
+                            <!-- <input type="button" class="oribtn" value="인증확인"> -->		
                         </div>
                         <br>
+                        
+                        <script>
+	                     	// 이메일 인증번호
+	                        $("#checkEmail").click(function() {
+	                           $.ajax({
+	                              type : "POST",
+	                              url : "login/mailConfirm",
+	                              data : {
+	                                 "email" : $("#email").val()
+	                              },
+	                              success : function(data){
+	                                 alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
+	                                 console.log("data : "+data);
+	                                 chkEmailConfirm(data, $("#memailconfirm"), $("#memailconfirmTxt"));
+	                              }
+	                           })
+	                        })
+
+                        	// 이메일 인증번호 체크 함수
+                        	function chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt){
+                        		$("#memailconfirm").on("keyup", function(){
+                        			if (data != $("#memailconfirm").val()) { 
+                        				emconfirmchk = false;
+                        				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+                        				$("#emconfirmchk").css({
+                        					"color" : "#FA3E3E",
+                        					"font-weight" : "bold",
+                        					"font-size" : "14px"
+                        				})
+                        				
+                        				console.log("중복아이디");
+                        				
+                        			} else { // 아니면 중복아님
+                        				emconfirmchk = true;
+                        				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
+
+                        				$("#emconfirmchk").css({
+                        					"color" : "#0D6EFD",
+                        					"font-weight" : "bold",
+                        					"font-size" : "14px"
+                        				})
+                        			}
+                        		})
+                        	}
+                        </script>
+                        
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/비밀번호.png">
                             <div class="input-container">		
