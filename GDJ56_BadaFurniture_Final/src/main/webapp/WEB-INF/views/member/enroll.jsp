@@ -174,6 +174,38 @@
                     </div>
                 </div>
 
+				<script>
+					// 이메일 중복확인
+					$("#duplicateEmail").click(e=>{
+						const email=$("#email").val();
+						$.ajax({
+							url:"${path}/member/duplicateEmail.do",
+							data:{email:email},
+							success:function(result){
+								if(result==0){
+									alert("🔴 이미 존재하는 이메일입니다.");
+									$("#email").val("");
+									// setTimeout(function(){ //alert 무한루프 문제 해결								
+									// }, 10)
+								}else{
+									alert("🟢 사용할 수 있는 이메일입니다.");
+									
+									const email=$("#userEmail").val();
+									$("#userEmailUnique_chk").val(email);							
+									const emailchkk=$("#userEmailUnique_chk").val();
+									$("#certifyEmail").attr("disabled",false);
+									$("#certifyEmail").css("background-color","rgb(7, 90, 42)");
+								}
+							}
+						});
+					});				
+
+
+
+
+
+				</script>
+
                 <div class="flexDiv" style="justify-content: center;">
                     <div id="inputDiv">
                         <h3 style="color: #348492;"><b style="background-color: lightgray;">🔊 바다 이용약관</b></h3>

@@ -53,9 +53,9 @@
 
 <!------------------------------------------------------------------------------------------------------------------>
     <!-- 로그인 모달창 -->
-    <div id="demo-modal" class="modal">
+    <div id="demo-modal" class="loginModal">
         <div class="loginBox"> 
-            <a href="#" id="modal__close">
+            <a href="#" id="loginModal__close">
                 <!-- <img src="./아이콘/external-close-web-flaticons-flat-flat-icons.png" alt="" width="50px" height="50px"> -->
                 <img src="${path }/resources/images/mainpage/closebutton.png" alt="" width="50px" height="50px">
             </a>

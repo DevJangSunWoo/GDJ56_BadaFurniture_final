@@ -27,4 +27,8 @@ public class MemberController {
 	public String enrollMember() {
 		return "/member/enroll";
 	}
+	
+	//이메일 중복확인
+//	@RequestMapping("/duplicateEmail.do")
+ 
 }
