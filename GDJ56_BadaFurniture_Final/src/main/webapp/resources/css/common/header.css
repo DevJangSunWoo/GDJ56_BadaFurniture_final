@@ -52,7 +52,7 @@ summary {
   outline: none;
   transition: transform 200ms ease-in-out 0s;
 }
-
+ㄴ
 summary::before,
 summary::after {
   position: static;
@@ -96,7 +96,7 @@ details[open] summary::after {
 }
 
 .memberMenu a {
-  padding: 12px 24px;
+  padding: 12px 22px;
   margin: 0 16px;
  /*  color: var(--secoColor); */
   color: white;

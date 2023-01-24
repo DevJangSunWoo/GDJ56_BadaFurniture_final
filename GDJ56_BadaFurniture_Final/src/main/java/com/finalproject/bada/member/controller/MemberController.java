@@ -1,11 +1,14 @@
 package com.finalproject.bada.member.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.finalproject.bada.member.model.service.MemberService;
+import com.finalproject.bada.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/member")
@@ -19,6 +22,23 @@ public class MemberController {
 	public MemberController(MemberService service) {
 		this.service = service;
 //		this.passwordEncoder = passwordEncoder;
+	}
+	
+	//로그인
+	@RequestMapping("/login.do")
+	public String loginMember(Member m, HttpSession session) {
+//		System.out.println(m);
+		Member loginMember = service.selectMemberById(m);
+//		System.out.println(loginMember);
+		
+		if(loginMember!=null) {
+			session.setAttribute("loginMember", loginMember);
+		}
+		
+//		if(loginMember!=null && passwordEncoder.matches(m.getPassword(), loginMember.getPassword())) {
+//			session.setAttribute("loginMember", loginMember);
+//		}
+		return "redirect:/";
 	}
 	
 	

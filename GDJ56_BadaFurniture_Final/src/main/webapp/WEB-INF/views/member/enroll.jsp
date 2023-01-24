@@ -33,7 +33,7 @@
 		            	<div class="flexDiv">
 		                    <img src="${path }/resources/images/member/아이디.png">
 		                    <div class="input-container">		
-		                        <input type="password" name="id" class="form__input" placeholder="아이디"/>
+		                        <input type="password" name="id" class="form__input" placeholder="아이디" required/>
 		                        <label class="form__label">아이디</label>
 		                    </div>
 		                    <input type="button" class="oribtn" id="idcheck" value="중복확인">
@@ -42,7 +42,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/메일.png">
                             <div class="input-container" >
-                                <input type="email" name="email" id="email" class="form__input" placeholder="이메일"/>
+                                <input type="email" name="email" id="email" class="form__input" placeholder="이메일" required/>
                                 <label class="form__label" id="mailTxt">이메일</label>
                             </div>
                             <input type="button" class="oribtn" id="emailcheck" value="중복확인">
@@ -52,7 +52,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/이메일체크.png" width="">
                             <div class="input-container">
-                                <input type="text" name="emailck" class="form__input" id="memailconfirm" placeholder="인증번호"/>
+                                <input type="text" name="emailck" class="form__input" id="memailconfirm" placeholder="인증번호" required/>
                                 <label class="form__label" id="memailconfirmTxt">인증번호</label>
                             </div>
                             <!-- <input type="button" class="oribtn" value="인증확인"> -->		
@@ -107,7 +107,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/비밀번호.png">
                             <div class="input-container">		
-                                <input type="password" name="password" class="form__input" placeholder="비밀번호"/>
+                                <input type="password" name="password" class="form__input" placeholder="비밀번호" required/>
                                 <label class="form__label">비밀번호</label>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/비밀번호체크.png">
                             <div class="input-container">		
-                                <input type="password" name="passwordck" class="form__input" placeholder="비밀번호 확인"/>
+                                <input type="password" name="passwordck" class="form__input" placeholder="비밀번호 확인" required/>
                                 <label class="form__label">비밀번호 확인</label>
                             </div>
                         </div>
