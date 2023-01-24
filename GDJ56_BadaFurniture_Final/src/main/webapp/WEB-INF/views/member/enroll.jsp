@@ -7,6 +7,11 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/> 
 
+<!-- 주소검색 api -->
+<!-- <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
+<!-- <script src="https://ssl.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js?autoload=false"></script> -->
+<script src = "https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+
 <!-- css -->
 <link rel="stylesheet" href="${path }/resources/css/member/enroll.css"/>
 
@@ -36,14 +41,14 @@
 		                        <input type="text" name="id" class="form__input" placeholder="아이디" required/>
 		                        <label class="form__label" id="idTxt">아이디</label>
 		                    </div>
-		                    <!-- <input type="button" class="oribtn" id="idcheck" value="중복확인"> -->
+		                    <input type="button" class="oribtn" id="idcheck" value="중복확인">
 		                </div>
 		                <br>
 		                
 		                <script>
 		                	//아이디 중복확인
-		                	/* $("#idcheck").click(function(){ */
-		                	$("input[name=id]").keyup(function(){
+		                	$("#idcheck").click(function(){
+		                	/* $("input[name=id]").keyup(function(){ */
 		                		const id = $("input[name=id]").val();
 		                		$.ajax({
 		                			url: "${path}/member/idDuplicate.do",
@@ -56,6 +61,7 @@
 	                        					"font-weight" : "bold",
 	                        					"font-size" : "14px"
 	                        				});
+		                					/* $("input[name=id]").val(""); */
 		                			
 		                				}else{ //중복된 아이디 없음
 		                					$("#idTxt").html("<span id='idTxtcheck'>사용가능한 아이디입니다</span>")
@@ -181,7 +187,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/이름.png">
                             <div class="input-container">		
-                                <input type="text" name="name" class="form__input" placeholder="이름"/>
+                                <input type="text" name="name" class="form__input" placeholder="이름" required/>
                                 <label class="form__label">이름</label>
                             </div>
                         </div>
@@ -189,7 +195,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/전화.png">
                             <div class="input-container">
-                                <input type="text" name="phone" class="form__input" placeholder="전화번호(-포함)"/>
+                                <input type="text" name="phone" class="form__input" placeholder="전화번호(-포함)" />
                                 <label class="form__label">전화번호</label>		
                             </div>
                         </div>
@@ -210,15 +216,16 @@
                             </div>
                         </div>
                         <br>
+                        
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/주소.png">
-                            <input type="button" value="주소찾기" class="oribtn">
+                            <input type="button" value="주소찾기" class="oribtn" onclick="sample5_execDaumPostcode()">
                         </div>
                         <br>
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" name="postCode" class="form__input" placeholder="우편번호"/>
+                                <input type="text" id="postCode" name="postCode" class="form__input" placeholder="우편번호"/>
                                 <label class="form__label">우편번호</label>		
                             </div>
                         </div>
@@ -226,7 +233,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" name="address" class="form__input" placeholder="주소"/>
+                                <input type="text" id="address" name="address" class="form__input" placeholder="주소"/>
                                 <label class="form__label">주소</label>		
                             </div>
                         </div>
@@ -240,39 +247,31 @@
                         </div>
                     </div>
                 </div>
-
+					
 				<script>
-					// 이메일 중복확인
-					/* $("#duplicateEmail").click(e=>{
-						const email=$("#email").val();
-						$.ajax({
-							url:"${path}/member/duplicateEmail.do",
-							data:{email:email},
-							success:function(result){
-								if(result==0){
-									alert("🔴 이미 존재하는 이메일입니다.");
-									$("#email").val("");
-									// setTimeout(function(){ //alert 무한루프 문제 해결								
-									// }, 10)
-								}else{
-									alert("🟢 사용할 수 있는 이메일입니다.");
-									
-									const email=$("#userEmail").val();
-									$("#userEmailUnique_chk").val(email);							
-									const emailchkk=$("#userEmailUnique_chk").val();
-									$("#certifyEmail").attr("disabled",false);
-									$("#certifyEmail").css("background-color","rgb(7, 90, 42)");
-								}
-							}
-						});
-					});	 */			
-
-
-
-
-
-				</script>
-
+	                function sample5_execDaumPostcode() {
+	                    new daum.Postcode({
+	                        oncomplete: function(data) {
+	                            addr = data.address; // 최종 주소 변수
+	
+	                            // 주소 정보를 해당 필드에 넣는다.
+	                            document.getElementById("address").value = addr;
+	                            document.getElementById("postCode").value = data.zonecode;
+	                            
+	                			console.log(data);
+	                			console.log(addr);
+	                          	console.log(data.zonecode);
+	                			//console.log(data.jibunAddress);
+	                			//console.log(document.getElementById("sample5_address").value);
+	                			
+				                //geocoder.addressSearch(addr, callback); 
+	                        }
+	                    }).open();
+	                }
+	            </script>
+				
+				</script>	
+				
                 <div class="flexDiv" style="justify-content: center;">
                     <div id="inputDiv">
                         <h3 style="color: #348492;"><b style="background-color: lightgray;">🔊 바다 이용약관</b></h3>
