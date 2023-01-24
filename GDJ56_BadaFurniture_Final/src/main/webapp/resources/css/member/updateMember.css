@@ -128,6 +128,21 @@ div{
 
 .btn:focus { outline:0; }
 
+#passwordbtn{
+	justify-content: center;
+}
+
+#passwordbtn>input{
+	background-color: #348492;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 95%;
+    height: 40px;
+    font-size: 16px;
+}
+
 /* -------------------------------------------------------------------------------------------------- */
 /* 아이콘 */
 
@@ -142,22 +157,3 @@ div{
 }
 
 /* -------------------------------------------------------------------------------------------------- */
-/* 이용약관 */
-#signupRule1{
-    width:100%;
-    height:100px;
-    margin-top: 10px;
-    background-color: white;
-    overflow: auto;
-    border: 1px solid black;
-    
-}
-#signupRule2{
-    width:100%;
-    height:100px;
-    margin-top: 5px;
-    background-color: white;
-    overflow: auto;
-    border: 1px solid black;
-    
-}
