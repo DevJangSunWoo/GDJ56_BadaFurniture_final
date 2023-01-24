@@ -27,27 +27,28 @@
 <!-- 상단 -->
     <div id="headerDiv">
         <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo">
+        
         <c:if test="${empty loginMember }">
         	<span class="headbtn" id="headbtn"><a href="#demo-modal"></a></span>
         </c:if>
+        
         <c:if test="${not empty loginMember }">
         	<div style="display: flex; margin-top:10px">
 	        	<span><img src="${path }/resources/images/mainpage/종.png" width="60px" height="60px"></span>
 	        	<div style="display: flex; margin-right: 5px;">
 	        	  <details>
-			        <summary id="memberName"><u>유저공일님</u></summary>
+			        <summary id="memberName"><u>${loginMember.memberName}님</u></summary>
 			        <nav class="memberMenu">
-			          <a href="#link">알림</a>
-			          <a href="#link">장바구니</a>
-			          <a href="#link">주문목록</a>
+			          <a href="${path}/mypage/alert.do">알림</a>
+			          <a href="${path}/mypage/cart.do">장바구니</a>
+			          <a href="${path}/mypage/order.do">주문목록</a>
 			          <a href="#link">내 정보수정</a>
-			          <a href="#link">로그아웃</a>
-			          
+			          <a href="${path}/member/logout.do ">로그아웃</a>
 			        </nav>
 			      </details>
 		        </div>
         	</div>
-        </c:if>
+        </c:if> 
     </div>
     
 
@@ -61,12 +62,13 @@
             </a>
             <img class="user" src="${path }/resources/images/mainpage/loginIcon.png" height="100px" width="100px">
             <h3>Sign in here</h3>
-            <form action="login.php" method="post">
+            <form action="${path}/member/login.do" method="post">
                 <div class="inputBox"> 
-                    <input id="uname" type="text" name="Username" placeholder="아이디"> 
-                    <input id="pass" type="password" name="Password" placeholder="비밀번호"> 
-                </div> 
-                <input type="submit" name="" value="Login">
+                    <input id="uname" type="text" name="memberId" placeholder="아이디"> 
+                    <input id="pass" type="password" name="password" placeholder="비밀번호"> 
+                </div>
+                <br>
+                <input type="submit" value="Login">
             </form>
             <div style="display: flex; justify-content: center;">
                 <a href="#" class="find">아이디 찾기<br> </a> 
