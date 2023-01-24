@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="${path }/resources/css/admin/manageOrder.css"/>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
 
 <!-- datepicker -->
@@ -13,7 +14,6 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-<link rel="stylesheet" href="${path }/resources/css/admin/manageOrder.css"/>
 
 
 <section>

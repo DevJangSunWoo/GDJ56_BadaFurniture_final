@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BADA 관리자 페이지</title>
 
 <!-- JQuery -->
 <script src="${path}/resources/js/jquery-3.6.1.min.js"></script>
@@ -33,7 +33,7 @@
   	</div>
   	<div id="adminIdDiv">
   		<span id="adminId"> 🛠️ 관리자</span><br>
-      <button id="logOutBtn">로그아웃</button>
+      <button id="logOutBtn" onclick="location.assign(${path}/logout.do)">로그아웃</button>
   	</div>
   </div>  
   
@@ -45,6 +45,5 @@
             <a href="${path }/admin/furniture.do">가구 관리</a>
             <a href="${path }/admin/order.do">주문 관리</a>
             <a href="${path }/admin/resell.do">'내 가구 팔기' 관리</a>
-            <div class="dot"></div>
         </nav>
   </div>

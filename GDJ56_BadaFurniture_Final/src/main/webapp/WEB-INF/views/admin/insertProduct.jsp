@@ -5,8 +5,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
 <link rel="stylesheet" href="${path }/resources/css/admin/insertProduct.css"/>
+
+<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
 
 <section>
     <div id="divTop">
@@ -17,7 +18,7 @@
     <div id="divOuter1">
         <div id="divOuter2">    
             <div id="divMid">
-                <form action="" method="post">
+                <form name="productFrm" action="${path }/admin/insertEnd.do" method="post" enctype="multipart/form-data">
                     <div id="divContent">            
                         <span>상품명</span>
                         <input type="text" name="productNo" placeholder="상품명" required><br>
@@ -88,21 +89,25 @@
 
                         <br>
                         <img src="${path }/resources/images/admin/addThumbnail.png" 
-                            name="photo1" onclick="" width="180px" height="180px" class="fileImg">
-                        <input type="file" name="upFile1" style="display: none;" required>
-                        <br>
+                            name="photo1" onclick="fn_upFile1();" width="180px" height="180px" class="fileImg">
+                        <input type="file" id="photoFile1" name="upFile" style="display: none;" required>
+                        <br>                
+                        
                         <img src="${path }/resources/images/admin/addImage.png" 
-                            name="photo2" onclick="" width="110px" height="110px" class="fileImg">
-                        <input type="file" name="upFile2" style="display: none;">
+                            name="photo2" onclick="fn_upFile2();" width="110px" height="110px" class="fileImg">
+                        <input type="file" id="photoFile2" name="upFile" style="display: none;">
+
                         <img src="${path }/resources/images/admin/addImage.png" 
-                            name="photo3" onclick="" width="110px" height="110px" class="fileImg">
-                        <input type="file" name="upFile3" style="display: none;">
+                            name="photo3" onclick="fn_upFile3();" width="110px" height="110px" class="fileImg">
+                        <input type="file" id="photoFile3" name="upFile" style="display: none;">
+
                         <img src="${path }/resources/images/admin/addImage.png" 
-                            name="photo4" onclick="" width="110px" height="110px" class="fileImg">
-                        <input type="file" name="upFile4" style="display: none;">
+                            name="photo4" onclick="fn_upFile4();" width="110px" height="110px" class="fileImg">
+                        <input type="file" id="photoFile4" name="upFile" style="display: none;">
+
                         <img src="${path }/resources/images/admin/addImage.png" 
-                            name="photo5" onclick="" width="110px" height="110px" class="fileImg">
-                        <input type="file" name="upFile5" style="display: none;">           
+                            name="photo5" onclick="fn_upFile5();" width="110px" height="110px" class="fileImg">
+                        <input type="file" id="photoFile5" name="upFile" style="display: none;">           
 
                         <br>
                         <span>상세 내용</span><br>
@@ -121,5 +126,73 @@
 </section>
 </body>
 </html>
+<script>
+    //메인 사진 업로드 (1)
+    const fn_upFile1=()=>{
+        $("#photoFile1").click();
+    }
 
+    $("#photoFile1").change(e=>{
+        const reader = new FileReader();
+        reader.onload = e =>{
+            $("img[name=photo1]").attr("src",e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);  
+    });
+    
+    //추가 사진 업로드 (2)
+    const fn_upFile2=()=>{
+        $("#photoFile2").click();
+    }
+
+    $("#photoFile2").change(e=>{
+        const reader = new FileReader();
+        reader.onload = e =>{
+            $("img[name=photo2]").attr("src",e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);    
+    });   
+
+    //추가 사진 업로드 (3)
+    const fn_upFile3=()=>{
+        $("#photoFile3").click();
+    }
+
+    $("#photoFile3").change(e=>{
+        const reader = new FileReader();
+        reader.onload = e =>{
+            $("img[name=photo3]").attr("src",e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);    
+    });   
+
+    //추가 사진 업로드 (4)
+    const fn_upFile4=()=>{
+        $("#photoFile4").click();
+    }
+
+    $("#photoFile4").change(e=>{
+        const reader = new FileReader();
+        reader.onload = e =>{
+            $("img[name=photo4]").attr("src",e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);    
+    });   
+
+    //추가 물품사진 업로드 (5)
+    const fn_upFile5=()=>{
+        $("#photoFile5").click();
+    }
+
+    $("#photoFile5").change(e=>{
+        const reader = new FileReader();
+        reader.onload = e =>{
+            $("img[name=photo5]").attr("src",e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);    
+    });   
+
+    //
+
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
