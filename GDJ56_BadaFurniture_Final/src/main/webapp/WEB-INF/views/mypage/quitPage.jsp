@@ -73,7 +73,7 @@
 				Quit
 			</div>
 		</div>
-		<div id="mypageMenu" style="margin-top:80px;">
+		<div id="mypageMenu">
 			<div class="mypageRow">
 				<div class="mypageCol">
 					<input type="hidden" value="/mypage.do"/>
