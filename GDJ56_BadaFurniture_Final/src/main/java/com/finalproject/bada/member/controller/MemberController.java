@@ -81,5 +81,13 @@ public class MemberController {
 		response.getWriter().print(m!=null ? true : false);
 	}
 	
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+	//정보수정페이지 이동
+	@RequestMapping("/updateMember.do")
+	public String updateMember() {
+		return "/member/updateMember";
+	}
 	
 }
