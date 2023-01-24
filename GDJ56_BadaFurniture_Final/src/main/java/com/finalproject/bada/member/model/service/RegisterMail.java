@@ -23,8 +23,8 @@ public class RegisterMail {
 
 	// 메일 내용 작성
 	public MimeMessage createMessage(String to) throws MessagingException, UnsupportedEncodingException {
-		System.out.println("보내는 대상 : " + to);
-		System.out.println("인증 번호 : " + ePw);
+//		System.out.println("보내는 대상 : " + to);
+//		System.out.println("인증 번호 : " + ePw);
 		
 		MimeMessage message = emailsender.createMimeMessage();
 
@@ -50,7 +50,6 @@ public class RegisterMail {
 		// 보내는 사람의 이메일 주소, 보내는 사람 이름
 		message.setFrom(new InternetAddress("yeonjilim20@naver.com", "BADA_Admin"));// 보내는 사람
 
-		System.out.println(message);
 		return message;
 	}
 

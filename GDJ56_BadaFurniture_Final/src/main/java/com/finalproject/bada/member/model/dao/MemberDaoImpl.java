@@ -13,4 +13,9 @@ public class MemberDaoImpl implements MemberDao {
 		return session.selectOne("member.selectMemberById", m);
 	}
 
+	@Override
+	public Member selectMemberByEmail(SqlSessionTemplate session, Member m) {
+		return session.selectOne("member.selectMemberByEmail", m);
+	}
+
 }

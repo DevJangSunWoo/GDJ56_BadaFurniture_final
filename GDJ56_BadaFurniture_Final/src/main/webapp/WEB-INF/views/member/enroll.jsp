@@ -33,12 +33,43 @@
 		            	<div class="flexDiv">
 		                    <img src="${path }/resources/images/member/아이디.png">
 		                    <div class="input-container">		
-		                        <input type="password" name="id" class="form__input" placeholder="아이디" required/>
-		                        <label class="form__label">아이디</label>
+		                        <input type="text" name="id" class="form__input" placeholder="아이디" required/>
+		                        <label class="form__label" id="idTxt">아이디</label>
 		                    </div>
-		                    <input type="button" class="oribtn" id="idcheck" value="중복확인">
+		                    <!-- <input type="button" class="oribtn" id="idcheck" value="중복확인"> -->
 		                </div>
 		                <br>
+		                
+		                <script>
+		                	//아이디 중복확인
+		                	/* $("#idcheck").click(function(){ */
+		                	$("input[name=id]").keyup(function(){
+		                		const id = $("input[name=id]").val();
+		                		$.ajax({
+		                			url: "${path}/member/idDuplicate.do",
+		                			data: {memberId: id},
+		                	         success:data=>{
+		                				if(data=='true'){  //중복된 아이디가 있음
+		                					$("#idTxt").html("<span id='idTxtcheck'>중복된 아이디입니다</span>")
+	                        				$("#idTxtcheck").css({
+	                        					"color" : "#FA3E3E",
+	                        					"font-weight" : "bold",
+	                        					"font-size" : "14px"
+	                        				});
+		                			
+		                				}else{ //중복된 아이디 없음
+		                					$("#idTxt").html("<span id='idTxtcheck'>사용가능한 아이디입니다</span>")
+	                        				$("#idTxtcheck").css({
+	                        					"color" : "#0D6EFD",
+	                        					"font-weight" : "bold",
+	                        					"font-size" : "14px"
+	                        				});
+		                				}
+		                			}
+		                		});
+		                	});
+		                </script>
+		                
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/메일.png">
                             <div class="input-container" >
@@ -46,7 +77,7 @@
                                 <label class="form__label" id="mailTxt">이메일</label>
                             </div>
                             <input type="button" class="oribtn" id="emailcheck" value="중복확인">
-                            <input type="button" class="oribtn" id="emailAuthentication" value="이메일인증">
+                            <input type="button" class="oribtn" id="emailAuthentication" value="이메일인증" hidden>
                         </div>
                         <br>
                         <div class="flexDiv">
@@ -60,6 +91,35 @@
                         <br>
                         
                         <script>
+                        	//이메일 중복확인
+		                	$("#emailcheck").click(function(){
+		                		const email = $("input[name=email]").val();
+		                		$.ajax({
+		                			url: "${path}/member/emailDuplicate.do",
+		                			data: {email: email},
+		                	         success:data=>{
+		                				if(data=='true'){  //중복된 이메일 있음
+		                					$("#mailTxt").html("<span id='mailTxtcheck'>중복된 이메일입니다</span>")
+	                        				$("#mailTxtcheck").css({
+	                        					"color" : "#FA3E3E",
+	                        					"font-weight" : "bold",
+	                        					"font-size" : "14px"
+	                        				});
+		                			
+		                				}else{ //중복된 이메일 없음
+		                					$("#mailTxt").html("<span id='mailTxtcheck'>사용가능한 이메일입니다</span>")
+	                        				$("#mailTxtcheck").css({
+	                        					"color" : "#0D6EFD",
+	                        					"font-weight" : "bold",
+	                        					"font-size" : "14px"
+	                        				});
+		                					$("#emailAuthentication").attr("hidden",false);
+		                				}
+		                			}
+		                		});
+		                	});
+                        
+                        	
 	                     	// 이메일 인증번호
 	                        $("#emailAuthentication").click(function() {
 	                           $.ajax({
@@ -77,7 +137,7 @@
 	                        })
 
                         	// 이메일 인증번호 체크 함수
-                        	function chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt){
+                        	function chkEmailConfirm(data){
                         		$("#memailconfirm").on("keyup", function(){
                         			if (data != $("#memailconfirm").val()) { 
                         				emconfirmchk = false;
@@ -87,8 +147,6 @@
                         					"font-weight" : "bold",
                         					"font-size" : "14px"
                         				})
-                        				
-                        				console.log("중복아이디");
                         				
                         			} else { // 아니면 중복아님
                         				emconfirmchk = true;
@@ -442,9 +500,9 @@
                         </div>
                         <br>
                         <div id="ruleContainer">
-                            <input type="checkbox" name="agree1" value="Y" required> 이용약관에 동의합니다. 
+                            <label><input type="checkbox" name="agree1" value="Y" required> 이용약관에 동의합니다.</label> 
                             <br>
-                            <input type="checkbox" name="agree2" value="Y" required> 개인정보 수집 및 이용에 동의합니다.
+                            <label><input type="checkbox" name="agree2" value="Y" required> 개인정보 수집 및 이용에 동의합니다.</label>
                         </div>
                     </div>
                 </div>

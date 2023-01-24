@@ -1,5 +1,8 @@
 package com.finalproject.bada.member.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,7 @@ public class MemberController {
 //		this.passwordEncoder = passwordEncoder;
 	}
 	
+//--------------------------------------------------------------------------------------------------------------------------------------------------	
 	//로그인
 	@RequestMapping("/login.do")
 	public String loginMember(Member m, HttpSession session) {
@@ -50,14 +54,32 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
-	
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------
+	 
 	//회원가입페이지이동
 	@RequestMapping("/enrollMember.do")
 	public String enrollMember() {
 		return "/member/enroll";
 	}
 	
+	//아이디 중복확인
+	@RequestMapping("/idDuplicate.do")
+	public void duplicateId(String memberId, HttpServletResponse response) throws IOException{
+		
+		Member m = service.selectMemberById(Member.builder().memberId(memberId).build());
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().print(m!=null ? true : false);
+	}
+	
 	//이메일 중복확인
-//	@RequestMapping("/duplicateEmail.do")
- 
+	@RequestMapping("/emailDuplicate.do")
+	public void emailDuplicate(String email, HttpServletResponse response) throws IOException{
+		
+		Member m = service.selectMemberByEmail(Member.builder().email(email).build());
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().print(m!=null ? true : false);
+	}
+	
+	
 }

@@ -39,9 +39,9 @@
 	        	  <details>
 			        <summary id="memberName"><u>${loginMember.memberName}님</u></summary>
 			        <nav class="memberMenu">
-			          <a href="#link">알림</a>
-			          <a href="#link">장바구니</a>
-			          <a href="#link">주문목록</a>
+			          <a href="${path}/mypage/alert.do">알림</a>
+			          <a href="${path}/mypage/cart.do">장바구니</a>
+			          <a href="${path}/mypage/order.do">주문목록</a>
 			          <a href="#link">내 정보수정</a>
 			          <a href="${path}/member/logout.do ">로그아웃</a>
 			        </nav>
@@ -66,7 +66,8 @@
                 <div class="inputBox"> 
                     <input id="uname" type="text" name="memberId" placeholder="아이디"> 
                     <input id="pass" type="password" name="password" placeholder="비밀번호"> 
-                </div> 
+                </div>
+                <br>
                 <input type="submit" value="Login">
             </form>
             <div style="display: flex; justify-content: center;">

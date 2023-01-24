@@ -52,7 +52,6 @@ summary {
   outline: none;
   transition: transform 200ms ease-in-out 0s;
 }
-ㄴ
 summary::before,
 summary::after {
   position: static;
@@ -269,7 +268,7 @@ details[open] summary::after {
   transform: translate(-50%,-50%);
   /* width: 350px; */
   width: 400px;
-  height: 580px;
+  height: 530px;
   min-height: 200px;
   background: #393434 ;
   /* background: white; */

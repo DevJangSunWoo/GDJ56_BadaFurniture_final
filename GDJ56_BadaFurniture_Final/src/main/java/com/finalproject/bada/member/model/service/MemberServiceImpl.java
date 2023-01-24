@@ -25,4 +25,9 @@ public class MemberServiceImpl implements MemberService {
 		return dao.selectMemberById(session,m);
 	}
 
+	@Override
+	public Member selectMemberByEmail(Member m) {
+		return dao.selectMemberByEmail(session,m);
+	}
+
 }
