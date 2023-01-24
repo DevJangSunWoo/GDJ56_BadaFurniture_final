@@ -6,126 +6,7 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
-
-<style>
-/*     div#search-container>div {        
-        border: 1px solid blue;
-    } */
-	/* body *{
-		border: 1px solid blue;
-	} */
-
-
-    div#listContainer>h2{
-        text-align:center;
-        font-size:25px;
-        font-weight:bolder;
-        padding:15px;
-		margin-top: 35px;
-    }
-    div.tableContainer>table{
-        width:100%;
-        text-align: center;
-        border-collapse : collapse;
-		margin-top: 0px;
-    }
-    div.tableContainer>table th,td{
-        border : 1px solid white;
-        padding:5px 10px 5px 10px;
-    }
-    div#pageBarContainer{
-        display:flex;
-        justify-content: center;
-    }
-
-    div#search-container{text-align:center;}
-
-    div#search-soldOutState{display:inline-block;}
-    div#search-showState{display:none;}
-    div#search-item{display:none;}
-    div#search-productNo{display:none;}
-    div#search-price{display:none;}
-
-    div#search-container {margin:0 0 10px 0; padding:3px; }
-    div#numPerpage-container{text-align:right; padding:0px 40px 20px 0px;}
-    button#hidingBtnToY{
-        background-color: white;
-        color:black;
-        border:none;
-    }
-    button#hidingBtnToN{
-        background-color: rgb(7, 90, 42);
-        color:white;
-        border:none;
-    }
-
-	button.updateBtn,.searchBtn,.deleteBtn{
-		background-color:#348492;
-		border: none;
-		color: white;
-		width: 80px;
-		border-radius: 5px;
-		padding: 5px;
-
-	}
-	.deleteBtn{
-		width: 42px;
-	}
-
-	#deleteBtnDiv{
-		display: flex;
-		justify-content: left;
-		margin-bottom: 5px;
-	}
-
-	.searchBtn{
-		margin-left: 5px;
-	}
-
-	th{
-		background-color: #393434;
-		color: white;
-	}
-	td{
-		background-color: #dcd5c32b;
-	}
-	
-	select{
-		font-size: 16px;
-	}
-
-	a{
-		text-decoration: none;
-	}
-
-	/* a:visited{
-		color: black;
-	} */
-
-	button{
-		cursor: pointer;
-	}
-
-	button:hover{
-        box-shadow: 200px 0 0 0 rgba(0,0,0,0.25) inset, 
-                   -200px 0 0 0 rgba(0,0,0,0.25) inset;
-    }
-	div#summaryContainer{
-		display: flex;
-		justify-content: center;
-		margin-top: 30px;
-		margin-bottom: 30px;
-	}
-	div#summaryContainer th,td{
-		width: 100px;
-		height: 30px;
-		text-align: center;
-		border: none;
-	}
-	.searchInput{
-		width:160px
-	}
-</style>
+<link rel="stylesheet" href="${path }/resources/css/admin/manageProduct.css"/>
 
 <section>
 	<div id="listContainer">
@@ -154,6 +35,7 @@
 		<div id="search-container">
 			<span style="font-size: 17px;">검색타입 : </span> 
         	<select id="searchType">
+        		<option value="searchAll">전체조회</option>
 				<option value="soldOutState">판매상태</option>
         		<option value="showState">공개상태</option>
         		<option value="item">가구분류</option>
@@ -161,6 +43,11 @@
         		<option value="price">가격</option>
         	</select>
 			        	
+			<div id="search-searchAll">
+				   <label><input type="radio" name="searchKeyword" value="" checked>전체조회</label>
+				   <input type="hidden" name="searchType" value="HIDING">
+				   <button class="searchBtn">검색</button>
+			</div>
 			<div id="search-soldOutState">
 				   <label><input type="radio" name="searchKeyword" value="판매중">판매중</label> 
 				   <label><input type="radio" name="searchKeyword" value="거래중">거래중</label>
@@ -214,7 +101,7 @@
 			<table id="propertyTable">
 				<thead>
 					<tr>
-						<th><input type="checkbox" name="chk"></th>
+						<th><input type="checkbox" name="chk" onclick="selectAll(this)"></th>
 						<th>가구번호</th>
 						<th>분류</th>
 						<th>사진</th>
@@ -253,8 +140,37 @@
 								</select>
 
 							</td>
-							<td style="width: 80px;"><button class="updateBtn">수정</button></td>
+							<td style="width: 80px;"><button class="updateBtn" onclick="location.assign('${path}/admin/update.do')">수정</button></td>
 						</tr>
+						<!-- 지워 나중에  -->
+						<tr>
+							<td style="width: 10px;"><input type="checkbox" name="chk"></td>
+							<td><a href="">가구번호</a></td>
+							<td>분류</td>
+							<td>사진</td>
+							<td>사이즈</td>
+							<td>색상</td>
+							<td>가격</td>
+							<td>업로드일</td>
+							<td>판매일자</td>
+							<td>
+								<select name="">
+									<option value="판매중">판매중</option>
+									<option value="거래중">거래중</option>
+									<option value="판매완료">판매완료</option>
+								</select>
+
+							</td>
+							<td>
+								<select name="">
+									<option value="Y">공개</option>
+									<option value="N">숨김</option>
+								</select>
+
+							</td>
+							<td style="width: 80px;"><button class="updateBtn" onclick="location.assign('${path}/admin/update.do')">수정</button></td>
+						</tr>
+						<!-- 요기까지 지워 -->
 					</tbody>
 				</thead>
 
@@ -266,6 +182,8 @@
 	</div>
 </section>
 <script>
+
+	//검색타입 변경
 	$("select#searchType").change(e=>{
 		const type = $(e.target).val();
 		$("div#search-container>div").hide();
@@ -273,6 +191,15 @@
 		$("input[name=searchKeyword][type=text]").val("");
 		$("div#search-hiding>label>input[name=searchKeyword]").first().prop("checked",true);
 	});
+
+	//체크박스 전체선택
+	function selectAll(selectAll){
+		const allCheckbox=document.querySelectorAll('input[type="checkbox"]');
+		allCheckbox.forEach((checkbox)=>{
+			checkbox.checked = selectAll.checked
+		})
+
+	}
 
 </script>
 

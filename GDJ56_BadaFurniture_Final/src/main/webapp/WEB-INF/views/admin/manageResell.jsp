@@ -6,113 +6,7 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
-
-<style>
-/*     div#search-container>div {        
-        border: 1px solid blue;
-    } */
-
-
-
-    div#listContainer>h2{
-        text-align:center;
-        font-size:25px;
-        font-weight:bolder;
-        padding:15px;
-		margin-top: 35px;
-    }
-    div.tableContainer>table{
-        width:100%;
-        text-align: center;
-        border-collapse : collapse;
-		margin-top: 40px;
-    }
-    div.tableContainer>table th,td{
-        border : 1px solid white;
-        padding:5px 10px 5px 10px;
-    }
-    div#pageBarContainer{
-        display:flex;
-        justify-content: center;
-    }
-
-    div#search-container{text-align:center;}
-
-    div#search-soldOutState{display:inline-block;}
-    div#search-memberName{display:none;}
-    div#search-resellNo{display:none;}
-
-    div#search-container {margin:0 0 10px 0; padding:3px; }
-    div#numPerpage-container{text-align:right; padding:0px 40px 20px 0px;}
-    button#hidingBtnToY{
-        background-color: white;
-        color:black;
-        border:none;
-    }
-    button#hidingBtnToN{
-        background-color: rgb(7, 90, 42);
-        color:white;
-        border:none;
-    }
-
-	button.updateBtn,.searchBtn{
-		background-color:#348492;
-		border: none;
-		color: white;
-		width: 80px;
-		border-radius: 5px;
-		padding: 5px;
-
-	}
-	.searchBtn{
-		margin-left: 5px;
-	}
-
-	th{
-		background-color: #393434;
-		color: white;
-	}
-	td{
-		background-color: #dcd5c32b;
-	}
-	button{
-		cursor: pointer;
-	}
-	button:hover{
-        box-shadow: 200px 0 0 0 rgba(0,0,0,0.25) inset, 
-                   -200px 0 0 0 rgba(0,0,0,0.25) inset;
-    }
-	a{
-		text-decoration: none;
-	}
-
-	/* a:visited{
-		color: black;
-	} */
-
-	select{
-		font-size: 16px;
-	}
-
-	div#summaryContainer{
-		display: flex;
-		justify-content: center;
-		margin-top: 30px;
-		margin-bottom: 30px;
-	}
-	div#summaryContainer th,td{
-		width: 100px;
-		height: 30px;
-		text-align: center;
-		border: none;
-	}
-
-	.searchInput{
-		width: 200px;
-	}
-
-
-</style>
+<link rel="stylesheet" href="${path }/resources/css/admin/manageResell.css"/>
 
 <section>
 
@@ -146,11 +40,17 @@
 		<div id="search-container">
 			검색타입 : 
         	<select id="searchType">
+				<option value="searchAll">전체조회</option>
 				<option value="soldOutState">판매상태</option>
         		<option value="memberName">신청자</option>
         		<option value="resellNo">신청번호</option>
         	</select>
 
+			<div id="search-searchAll">
+				<label><input type="radio" name="searchKeyword" value="" checked>전체조회</label>
+				<input type="hidden" name="searchType" value="HIDING">
+				<button class="searchBtn">검색</button>
+			</div>
         	<div id="search-soldOutState">
                 <select name="searchKeyword" class="searchInput">
 					<option value="승인검토">승인검토</option>
