@@ -29,17 +29,17 @@ public class AdminController {
 	//가구 올리기
 	@RequestMapping("/admin/insert.do")
 	public String insertFurniture() {
-		return "admin/insertFurniture";
+		return "admin/insertProduct";
 	}
 	//가구 수정하기
 	@RequestMapping("/admin/update.do")
 	public String updateFurniture() {
-		return "admin/updateFurniture";
+		return "admin/updateProduct";
 	}
 	//가구 관리
 	@RequestMapping("/admin/furniture.do")
 	public String manageFurniture() {
-		return "admin/manageFurniture";
+		return "admin/manageProduct";
 	}
 	//주문 관리
 	@RequestMapping("/admin/order.do")

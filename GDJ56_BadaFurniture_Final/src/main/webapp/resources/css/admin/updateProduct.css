@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+    /* div{        
+        border: 1px solid blue;
+    }
+    canvas{
+        border: 1px solid black;
+
+    } */
+
+    #divOuter1{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #divOuter2{
+        width: fit-content;
+        height: fit-content;   
+        background-color: #a3a3a329;   
+        border-radius: 1%;
+    }
+
+    #divTop{
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+        padding: 30px;
+    }
+    #divMid{
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+        width: auto;
+        padding: 10px;
+
+    }
+    #divMid *{
+        display: inline-block;
+        width: auto;
+        padding: 10px;        
+        margin-bottom: 15px;
+
+    }
+    #divBtn{
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+        width: auto;
+        padding: 10px;  
+        margin-top: 20px;
+        margin-bottom: 0px;
+    }
+
+    #divMid span{
+        width:100px;
+        font-size: 20px;
+        font-weight: bold;
+
+    }
+    #divMid input{
+        width:400px;
+
+    }
+    #divMid select{
+        width:425px;
+
+    }
+    #updateBtn{
+        height: 50px;
+        width:400px;
+        border-radius: 3px;
+        background-color: #348492 ;
+        border-style: none;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+    }
+	
+	select{
+		font-size: 16px;
+	}
+    button{
+		cursor: pointer;
+	}
+    button:hover{
+        box-shadow: 200px 0 0 0 rgba(0,0,0,0.25) inset, 
+                   -200px 0 0 0 rgba(0,0,0,0.25) inset;
+    }
+    .fileImg:hover{
+        cursor: pointer;
+    } 
+
