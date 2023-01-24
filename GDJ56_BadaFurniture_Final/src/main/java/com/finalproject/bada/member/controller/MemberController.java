@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.finalproject.bada.member.model.service.MemberService;
 import com.finalproject.bada.member.model.vo.Member;
@@ -41,6 +42,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	//로그아웃
+	@RequestMapping("/logout.do")
+	public String logoutMember(SessionStatus session) {
+		if(!session.isComplete()) {
+			session.setComplete();
+		}
+		return "redirect:/";
+	}
 	
 	//회원가입페이지이동
 	@RequestMapping("/enrollMember.do")

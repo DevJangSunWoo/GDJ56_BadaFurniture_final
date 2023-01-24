@@ -43,7 +43,7 @@
 			          <a href="#link">장바구니</a>
 			          <a href="#link">주문목록</a>
 			          <a href="#link">내 정보수정</a>
-			          <a href="#link">로그아웃</a>
+			          <a href="${path}/member/logout.do ">로그아웃</a>
 			        </nav>
 			      </details>
 		        </div>
