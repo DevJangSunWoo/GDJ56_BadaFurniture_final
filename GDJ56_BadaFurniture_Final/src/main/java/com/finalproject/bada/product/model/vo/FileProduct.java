@@ -1,4 +1,4 @@
-package com.finalproject.bada.admin.vo;
+package com.finalproject.bada.product.model.vo;
 
 import java.sql.Date;
 
