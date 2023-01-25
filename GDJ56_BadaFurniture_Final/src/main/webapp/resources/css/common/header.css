@@ -95,7 +95,7 @@ details[open] summary::after {
 }
 
 .memberMenu a {
-  padding: 12px 22px;
+  padding: 12px 15px;
   margin: 0 16px;
  /*  color: var(--secoColor); */
   color: white;

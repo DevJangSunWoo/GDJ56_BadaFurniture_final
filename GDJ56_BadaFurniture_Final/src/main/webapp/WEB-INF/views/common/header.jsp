@@ -39,11 +39,16 @@
 	        	  <details>
 			        <summary id="memberName"><u>${loginMember.memberName}님</u></summary>
 			        <nav class="memberMenu">
-			          <a href="${path}/mypage/alert.do">알림</a>
-			          <a href="${path}/mypage/cart.do">장바구니</a>
-			          <a href="${path}/mypage/order.do">주문목록</a>
-			          <a href="${path}/member/updateMember.do">내 정보수정</a>
-			          <a href="${path}/member/logout.do ">로그아웃</a>
+		        		<c:if test="${loginMember.memberId.equals('admin')}">
+							<a href="${path}/admin">관리자페이지</a>
+						</c:if>
+						<c:if test="${!loginMember.memberId.equals('admin')}">
+							<a href="${path}/mypage/alert.do">알림</a>
+							<a href="${path}/mypage/cart.do">장바구니</a>
+							<a href="${path}/mypage/order.do">주문목록</a>
+						</c:if>
+						<a href="${path}/member/updateMember.do">정보수정</a>
+						<a href="${path}/member/logout.do ">로그아웃</a>
 			        </nav>
 			      </details>
 		        </div>
