@@ -23,7 +23,7 @@
 
     <div class="flexDiv" style="justify-content: center;">
         <div id="enrollDiv">
-            <form action="">
+            <form action="${path}/member/enrollMemberEnd.do">
                 <br>
                 <div class="flexDiv" style="justify-content: center;">
                     <div style="border: 1px solid grey; width: 80%;">
@@ -49,7 +49,7 @@
 		                <script>
 			              	//아이디 정규표현식
 			    			$("input[name=id]").blur(e=>{
-		    					const id=$("input[name=id]").val();
+		    					const id=$("input[name=id]").val().trim();
 		    					const idChk=/^[A-Za-z0-9]+$/
 		    					
 		    					if(!idChk.test(id) || id.length<4){
@@ -113,7 +113,7 @@
                         <script>
 	                      	//이메일 정규표현식
 	            			$("input[name=email]").blur(e=>{
-            					const userEmail=$("input[name=email]").val();
+            					const userEmail=$("input[name=email]").val().trim();
             					const emailChk=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])+@[a-z]+\.[a-z]{2,3}/
             					
             					if(!emailChk.test(userEmail)){
@@ -231,7 +231,7 @@
                         <script>
 	                        //전화번호 정규표현식
 	            			$("input[name=phone]").blur(e=>{
-		                        const userPhone=$("input[name=phone]").val();
+		                        const userPhone=$("input[name=phone]").val().trim();
 		                        const phoneChk=/^\d{3}-\d{3,4}-\d{4}$/
 		                        
 		                        if(!phoneChk.test(userPhone)){

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.member.model.service.MemberService;
 import com.finalproject.bada.member.model.vo.Member;
@@ -79,6 +80,14 @@ public class MemberController {
 		Member m = service.selectMemberByEmail(Member.builder().email(email).build());
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().print(m!=null ? true : false);
+	}
+	
+	//회원가입완료
+	@RequestMapping("/enrollMemberEnd.do")
+	public ModelAndView enrollMemberEne(Member m, ModelAndView mv) {
+//		String encodePassword = passwordEncoder.encode(m.getPassword());
+		
+		return mv;
 	}
 	
 	
