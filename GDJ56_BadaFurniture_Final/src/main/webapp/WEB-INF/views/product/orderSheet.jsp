@@ -114,7 +114,6 @@
 <!--  결제 관련  종료 -->
 
 
-
 <!-- wrap -->
 <div class="wrap">
 
@@ -1377,7 +1376,6 @@
 		</script> -->
 	
 	
-
-
+		
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
