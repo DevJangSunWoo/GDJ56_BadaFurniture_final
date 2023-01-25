@@ -23,12 +23,13 @@
 
     <div class="flexDiv" style="justify-content: center;">
         <div id="enrollDiv">
-            <form action="">
+            <form action="${path}/member/enrollMemberEnd.do">
                 <br>
                 <div class="flexDiv" style="justify-content: center;">
                     <div style="border: 1px solid grey; width: 80%;">
                         <h5> ❗ 계좌번호 제외 모두 필수 입력항목입니다.</h5>
-                        <h5> ❗ 비밀번호는 8자 이상, 영문자/숫자로만 구성할 수 있습니다.</h5>
+                        <h5> ❗ 아이디는 4글자 이상 영문자/숫자로만 구성할 수 있습니다.</h5>
+                        <h5> ❗ 비밀번호는 8글자 이상, 영문자/숫자로만 구성할 수 있습니다.</h5>
                     </div>
                 </div>
                 <br>
@@ -46,6 +47,19 @@
 		                <br>
 		                
 		                <script>
+			              	//아이디 정규표현식
+			    			$("input[name=id]").blur(e=>{
+		    					const id=$("input[name=id]").val().trim();
+		    					const idChk=/^[A-Za-z0-9]+$/
+		    					
+		    					if(!idChk.test(id) || id.length<4){
+		    						setTimeout(function(){ //alert 무한루프 문제 해결
+			    						alert("⛔ 아이디는 4자 이상, 영문자/숫자로만 구성할 수 있습니다. ⛔");
+			    						$("input[name=id]").val("");
+		    						}, 10)
+		    					}					
+			    			});
+		                
 		                	//아이디 중복확인
 		                	$("#idcheck").click(function(){
 		                	/* $("input[name=id]").keyup(function(){ */
@@ -97,6 +111,19 @@
                         <br>
                         
                         <script>
+	                      	//이메일 정규표현식
+	            			$("input[name=email]").blur(e=>{
+            					const userEmail=$("input[name=email]").val().trim();
+            					const emailChk=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])+@[a-z]+\.[a-z]{2,3}/
+            					
+            					if(!emailChk.test(userEmail)){
+            						setTimeout(function(){ 
+            							alert("⛔ 이메일을 정확히 입력해주세요 ⛔");
+            							$("input[name=email]").val("");
+            						}, 10);
+            					}					
+	            			});
+                        	
                         	//이메일 중복확인
 		                	$("#emailcheck").click(function(){
 		                		const email = $("input[name=email]").val();
@@ -200,6 +227,22 @@
                             </div>
                         </div>
                         <br>
+                        
+                        <script>
+	                        //전화번호 정규표현식
+	            			$("input[name=phone]").blur(e=>{
+		                        const userPhone=$("input[name=phone]").val().trim();
+		                        const phoneChk=/^\d{3}-\d{3,4}-\d{4}$/
+		                        
+		                        if(!phoneChk.test(userPhone)){
+		                            setTimeout(function(){ 
+			                            alert("⛔ '-' 포함 전화번호를 정확히 입력해주세요 ⛔");
+			                            $("input[name=phone]").val("");
+		                            }, 10);
+		                        }					
+	                		});  	
+                        </script>
+                        
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/은행.png">
                             <div class="input-container">

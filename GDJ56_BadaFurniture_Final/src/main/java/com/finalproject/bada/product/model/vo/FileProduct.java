@@ -19,4 +19,12 @@ public class FileProduct {
 	private String thumbnail;
 	private Date fileProductEnrollDate;
 
+	
+	public String toString() {
+		 String temp="";
+	return fileProductNo+" "+productNo.getProductNo()+" "
+				 +originalFileName+" "
+				 +renamedFileName+" "+thumbnail+" "
+				 +fileProductEnrollDate+temp;
+	}
 }

@@ -1,6 +1,7 @@
 package com.finalproject.bada.product.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,8 +19,9 @@ public class Product {
 	private int price;
 	private String item;
 	private String grade;
-	private String Material;
+	private String material;
 	private int widthes;
+	private int depthes;
 	private int heights;
 	private String color;
 	private String detail;
@@ -28,4 +30,13 @@ public class Product {
 	private Date productSoldOutDate;
 	private Date productEnrollDate;
 	private Date productEditDate;
+	private List<FileProduct> files;
+	
+	public String toString() {
+	 String temp="";
+	 return productNo+" "+title+" "+price+" "+item+" "
+			 +grade+" "+material+" "+widthes+" "+depthes+" "+heights+" "+color+" "+detail+" "+showState+" "
+	 +soldOutState+" "+productSoldOutDate+" "
+			 +productEnrollDate+" "+productEditDate+" "+files;
+	}
 }

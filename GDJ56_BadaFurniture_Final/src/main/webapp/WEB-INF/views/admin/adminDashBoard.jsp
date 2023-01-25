@@ -5,8 +5,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
 <link rel="stylesheet" href="${path }/resources/css/admin/adminDashBoard.css"/>
+
+<jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
 
 <section>
     <div id="divTop">
