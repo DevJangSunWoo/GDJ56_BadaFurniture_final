@@ -1,6 +1,7 @@
 package com.finalproject.bada.product.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class Product {
 	private String grade;
 	private String Material;
 	private int widthes;
+	private int depths;
 	private int heights;
 	private String color;
 	private String detail;
@@ -28,4 +30,6 @@ public class Product {
 	private Date productSoldOutDate;
 	private Date productEnrollDate;
 	private Date productEditDate;
+	private List<FileProduct> fileProducts;
+	
 }

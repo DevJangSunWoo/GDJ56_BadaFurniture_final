@@ -42,6 +42,7 @@
            <!--헤더 예비 위치  -->
             <div class="checkout__form">
                 <h4>PRODUCT Details</h4>
+             <c:if test="${productData != null}">
                 <form action="#">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
@@ -53,10 +54,17 @@
                                         <input type="radio" name="slide" id="slide3">
                                         <input type="radio" name="slide" id="slide4">
                                         <ul id="imgholder" class="imgs">
-                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa2.jpg"  ></li>
-                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa1.jpg"></li>
-                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa4.jpg"></li>
-                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/sofa3.jpg"></li>
+                                        	<c:if test="${not empty productData.fileProducts.originalFileName}">  
+	                                        	<c:forEach var="notice" items="${notices}" varStatus="vs">	  
+		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"  ></li>
+		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
+		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
+		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
+                                        		</c:forEach>
+                                        	</c:if>  
+                                        	<c:if test="${empty productData.fileProducts.originalFileName}">  
+                                        		제품사진 미등록
+                                        	</c:if>
                                         </ul>
                                         <div class="bullets">
                                             <label for="slide1">&nbsp;</label>
@@ -76,14 +84,14 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4>응접실 소파</h4>
-                                <div class="checkout__order__products">가격 <span>250,000원</span></div>
+                                <div class="checkout__order__products">가격 <span>${productData.price}원</span></div>
                                 <ul>
-                                    <li>분류 <span>소파</span></li>
-                                    <li>크기(가로/세로/높이) <span>1cm 1cm 1cm</span></li>
-                                    <li>색상 <span>베이지</span></li>
+                                    <li>분류 <span>${productData.item}</span></li>
+                            <%--         <li>크기(가로/세로/높이) <span>${productData.widthes}cm ${productData.depths}cm ${productData.heights}cm</span></li> --%>
+                                    <li>색상 <span>${productData.color}</span></li>
                                 </ul>
-                                <div class="checkout__order__subtotal">등급 <span>상</span></div>
-                                <div class="checkout__order__total">총가격 <span>260,000원</span></div>
+                                <div class="checkout__order__subtotal">등급 <span>${productData.grade}</span></div>
+                                <div class="checkout__order__total">총가격 <span>${productData.price+5000}원</span></div>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         배송비는 어떻게 되나요?
@@ -115,13 +123,19 @@
                         <img src="${path}/resources/images/product/furnitureInfo.png"  class="furnitureInfo"/>
                         <div class="detailFont" style="border:0px solid red;height:60px;text-align: center;">
                             <span>소재:</span>
-                            <span>불곰가죽</span>
+                            <span>${productData.Material}</span>
                         </div>
                         <div class="detailFont" style="border:0px solid red;height:60px;text-align: center;">
-                            <span>조립식 유/무:</span>
-                            <span>무</span>
+                          <!--   <span>조립식 유/무:</span>
+                            <span>무</span> -->
                         </div>
-                        <img src="${path}/resources/images/product/sofa2.jpg" class="card-content-img"/>
+                    	<c:if test="${productData.fileProducts.originalFileName != null}">      
+                        	<img src="${path}/resources/images/product/${productData.fileProducts.originalFileName}" class="card-content-img"/>
+                    	</c:if>
+                    	<c:if test="${productData.fileProducts.originalFileName != null}"> 
+                    		제품사진 미등록됨
+                    	</c:if>
+                    	
                     </div>
                     <span class="more">
                         <span class="blind">상품 더보기</span>
@@ -165,6 +179,13 @@
 	                      
 	                    </div>    
                 </div>
+              </c:if>
+              <c:if test="${productData == null}">
+              	해당 제품이 조회되지 않습니다.	
+              
+              </c:if>
+              
+           
                 <!-- 상품 상세사항 div여기까지  -->
     </section>
     <!--상품 더보기 접기 js  -->
@@ -195,7 +216,7 @@
 		}
 	  
 	   	footer {
-	    position:fixed; 
+	 /*    position:fixed;  */
 	   left:0px;
 	   bottom:0px;
 	  
@@ -206,7 +227,7 @@
 	
 		section {
 		  margin-top:60px;
-		  margin-bottom:120px !important;
+		  margin-bottom:800px !important;
 		}	
 	 
 	 

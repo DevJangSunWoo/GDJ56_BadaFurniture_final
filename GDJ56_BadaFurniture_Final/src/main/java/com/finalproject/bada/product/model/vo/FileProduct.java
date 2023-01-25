@@ -18,5 +18,6 @@ public class FileProduct {
 	private String renamedFileName;
 	private String thumbnail;
 	private Date fileProductEnrollDate;
-
+	
+	
 }
