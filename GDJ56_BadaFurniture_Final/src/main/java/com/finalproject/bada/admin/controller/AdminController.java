@@ -73,9 +73,8 @@ public class AdminController {
 //		log.debug("이름 :"+upFile[0].getName());
 //		log.debug("이름 :"+upFile[0].getOriginalFilename());
 //		log.debug("이름 :"+upFile[1].getName());
-//		log.debug("이름 :"+upFile[1].getOriginalFilename());
-		
-		//int result=service.insertProduct(p);			
+//		log.debug("이름 :"+upFile[1].getOriginalFilename());		
+			
 		
 		//파일 저장할 위치
 		String path=session.getServletContext().getRealPath("/resources/upload/product/");
@@ -84,8 +83,7 @@ public class AdminController {
 		if(!dir.exists()) dir.mkdirs();
 		
 		//renamed 된 파일명 저장할 곳
-		List<FileProduct> files=new ArrayList();		
-		
+		List<FileProduct> files=new ArrayList();				
 		
 		//파일저장
 		//썸네일			
@@ -100,7 +98,6 @@ public class AdminController {
 			try {
 				upFile[0].transferTo(new File(path+renameFile));
 				files.add(new FileProduct().builder()
-						.productNo(new Product().builder().productNo(p.getProductNo()).build())
 						.originalFileName(originalFileName)
 						.renamedFileName(renameFile)
 						.thumbnail("Y")
@@ -112,20 +109,19 @@ public class AdminController {
 			//추가 사진
 			for(int i=1;i<upFile.length;i++) {
 				if(!upFile[i].isEmpty()) {
-					originalFileName=upFile[i].getOriginalFilename(); //원래이름
-					ext=originalFileName.substring(originalFileName.lastIndexOf(".")); //확장자
+					originalFileName=upFile[i].getOriginalFilename(); 
+					ext=originalFileName.substring(originalFileName.lastIndexOf(".")); 
 					
 					sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
 					rnd=(int)(Math.random()*100000+1);
-					renameFile=sdf.format(System.currentTimeMillis())+"_"+rnd+ext; //절대 겹칠 수 없는 임의의 이름 만들어주기 
+					renameFile=sdf.format(System.currentTimeMillis())+"_"+rnd+ext;
 					
 					try {
 						upFile[i].transferTo(new File(path+renameFile));
 						files.add(new FileProduct().builder()
-								.productNo(new Product().builder().productNo(p.getProductNo()).build())
 								.originalFileName(originalFileName)
 								.renamedFileName(renameFile)
-								.thumbnail("Y")
+								.thumbnail("N")
 								.build());
 					}catch(IOException e) {
 						e.printStackTrace();
@@ -135,9 +131,31 @@ public class AdminController {
 			
 		}
 
+		Product product=Product.builder().title(p.getTitle())
+				.price(p.getPrice())
+				.item(p.getItem())
+				.grade(p.getGrade())
+				.material(p.getMaterial())
+				.widthes(p.getWidthes())
+				.depthes(p.getDepthes())
+				.heights(p.getHeights())
+				.color(p.getColor())
+				.detail(p.getDetail())
+				.files(files)
+				.build();
 		
+		int result=service.insertProduct(product);
 		
-		return null;
+		//log.debug("result : {}",result);
+		//log.debug("product : {}",product);
+		//log.debug("files : {}",files);
+		
+		mv.addObject("msg",result>0?"가구올리기 성공":"가구올리기 실패");
+		mv.addObject("loc",result>0?"/admin/furniture.do":"/admin/insert.do");
+		mv.setViewName("common/msg");
+		
+		return mv;
+		
 	}
 }
 

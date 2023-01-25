@@ -67,7 +67,7 @@
                         
                         <span>&nbsp;&nbsp;</span>
                         <span style="width:50px">높이</span>
-                        <input type="number" name="heightes" placeholder="높이" style="width:325px" required>&nbsp;&nbsp;mm
+                        <input type="number" name="heights" placeholder="높이" style="width:325px" required>&nbsp;&nbsp;mm
                         <br>
 
                         <span>색상</span>

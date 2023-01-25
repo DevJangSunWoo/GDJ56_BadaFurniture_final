@@ -23,12 +23,13 @@
 
     <div class="flexDiv" style="justify-content: center;">
         <div id="enrollDiv">
-            <form action="">
+            <form action="${path}/member/enrollMemberEnd.do">
                 <br>
                 <div class="flexDiv" style="justify-content: center;">
                     <div style="border: 1px solid grey; width: 80%;">
                         <h5> ❗ 계좌번호 제외 모두 필수 입력항목입니다.</h5>
-                        <h5> ❗ 비밀번호는 8자 이상, 영문자/숫자로만 구성할 수 있습니다.</h5>
+                        <h5> ❗ 아이디는 4글자 이상 영문자/숫자로만 구성할 수 있습니다.</h5>
+                        <h5> ❗ 비밀번호는 8글자 이상, 영문자/숫자로만 구성할 수 있습니다.</h5>
                     </div>
                 </div>
                 <br>
@@ -38,7 +39,8 @@
 		            	<div class="flexDiv">
 		                    <img src="${path }/resources/images/member/아이디.png">
 		                    <div class="input-container">		
-		                        <input type="text" name="id" class="form__input" placeholder="아이디" required/>
+		                        <input type="text" name="memberId" id="id" class="form__input" placeholder="아이디" required/>
+		                        
 		                        <label class="form__label" id="idTxt">아이디</label>
 		                    </div>
 		                    <input type="button" class="oribtn" id="idcheck" value="중복확인">
@@ -46,13 +48,25 @@
 		                <br>
 		                
 		                <script>
+			              	//아이디 정규표현식
+			    			$("input[name=memberId]").blur(e=>{
+		    					const id=$("input[name=memberId]").val().trim();
+		    					const idChk=/^[A-Za-z0-9]+$/
+		    					
+		    					if(!idChk.test(id) || id.length<4){
+		    						setTimeout(function(){ //alert 무한루프 문제 해결
+			    						alert("⛔ 아이디는 4자 이상, 영문자/숫자로만 구성할 수 있습니다. ⛔");
+			    						$("input[name=memberId]").val("");
+		    						}, 10)
+		    					}					
+			    			});
+		                
 		                	//아이디 중복확인
 		                	$("#idcheck").click(function(){
-		                	/* $("input[name=id]").keyup(function(){ */
-		                		const id = $("input[name=id]").val();
+		                	/* $("input[name=memberId]").keyup(function(){ */
 		                		$.ajax({
 		                			url: "${path}/member/idDuplicate.do",
-		                			data: {memberId: id},
+		                			data: {memberId: $("#id").val()},
 		                	         success:data=>{
 		                				if(data=='true'){  //중복된 아이디가 있음
 		                					$("#idTxt").html("<span id='idTxtcheck'>중복된 아이디입니다</span>")
@@ -97,6 +111,19 @@
                         <br>
                         
                         <script>
+	                      	//이메일 정규표현식
+	            			$("input[name=email]").blur(e=>{
+            					const userEmail=$("input[name=email]").val().trim();
+            					const emailChk=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])+@[a-z]+\.[a-z]{2,3}/
+            					
+            					if(!emailChk.test(userEmail)){
+            						setTimeout(function(){ 
+            							alert("⛔ 이메일을 정확히 입력해주세요 ⛔");
+            							$("input[name=email]").val("");
+            						}, 10);
+            					}					
+	            			});
+                        	
                         	//이메일 중복확인
 		                	$("#emailcheck").click(function(){
 		                		const email = $("input[name=email]").val();
@@ -180,14 +207,44 @@
                             <img src="${path }/resources/images/member/비밀번호체크.png">
                             <div class="input-container">		
                                 <input type="password" name="passwordck" class="form__input" placeholder="비밀번호 확인" required/>
-                                <label class="form__label">비밀번호 확인</label>
+                                <label class="form__label" id="passwordckTxt">비밀번호 확인</label>
                             </div>
                         </div>
                         <br>
+                        
+                        <script>
+                        	//비밀번호 확인
+							$("input[name=passwordck]").blur(e=>{
+								const pw = $("input[name=password]").val();
+								const pwck = $("input[name=passwordck]").val();
+								
+								if(pw!=pwck){
+									$("#passwordckTxt").html("<span id='passwordck'>비밀번호 불일치</span>")
+                    				$("#passwordck").css({
+                    					"color" : "#FA3E3E",
+                    					"font-weight" : "bold",
+                    					"font-size" : "14px"
+                    				});
+									
+									$("input[name=passwordck]").val('');
+									$("input[name=passwordck]").focus();
+									
+								}else{
+									$("#passwordckTxt").html("<span id='passwordck'>비밀번호 일치</span>")
+                    				$("#passwordck").css({
+                    					"color" : "#0D6EFD",
+                    					"font-weight" : "bold",
+                    					"font-size" : "14px"
+                    				});
+								}
+							});
+                        	
+                        </script>
+                        
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/이름.png">
                             <div class="input-container">		
-                                <input type="text" name="name" class="form__input" placeholder="이름" required/>
+                                <input type="text" name="memberName" class="form__input" placeholder="이름" required/>
                                 <label class="form__label">이름</label>
                             </div>
                         </div>
@@ -195,11 +252,27 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/전화.png">
                             <div class="input-container">
-                                <input type="text" name="phone" class="form__input" placeholder="전화번호(-포함)" />
+                                <input type="text" name="phone" class="form__input" placeholder="전화번호(-포함)" required/>
                                 <label class="form__label">전화번호</label>		
                             </div>
                         </div>
                         <br>
+                        
+                        <script>
+	                        //전화번호 정규표현식
+	            			$("input[name=phone]").blur(e=>{
+		                        const userPhone=$("input[name=phone]").val().trim();
+		                        const phoneChk=/^\d{3}-\d{3,4}-\d{4}$/
+		                        
+		                        if(!phoneChk.test(userPhone)){
+		                            setTimeout(function(){ 
+			                            alert("⛔ '-' 포함 전화번호를 정확히 입력해주세요 ⛔");
+			                            $("input[name=phone]").val("");
+		                            }, 10);
+		                        }					
+	                		});  	
+                        </script>
+                        
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/은행.png">
                             <div class="input-container">
@@ -225,7 +298,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" id="postCode" name="postCode" class="form__input" placeholder="우편번호"/>
+                                <input type="text" id="postCode" name="postCode" class="form__input" placeholder="우편번호" required/>
                                 <label class="form__label">우편번호</label>		
                             </div>
                         </div>
@@ -233,7 +306,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" id="address" name="address" class="form__input" placeholder="주소"/>
+                                <input type="text" id="address" name="address" class="form__input" placeholder="주소" required/>
                                 <label class="form__label">주소</label>		
                             </div>
                         </div>

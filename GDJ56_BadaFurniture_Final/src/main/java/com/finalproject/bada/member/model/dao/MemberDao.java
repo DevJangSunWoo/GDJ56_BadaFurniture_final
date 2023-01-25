@@ -9,4 +9,6 @@ public interface MemberDao {
 	Member selectMemberById(SqlSessionTemplate session ,Member m);
 
 	Member selectMemberByEmail(SqlSessionTemplate session ,Member m);
+	
+	int insertMember(SqlSessionTemplate session,Member m);
 }
