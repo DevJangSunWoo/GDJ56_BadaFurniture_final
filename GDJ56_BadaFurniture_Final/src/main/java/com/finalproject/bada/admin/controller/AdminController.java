@@ -162,10 +162,12 @@ public class AdminController {
 	@RequestMapping("/admin/furniture.do")
 	public ModelAndView productList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
-			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage) {
+			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage) {
 		
-		List<Product> list=service.productList();
-
+		//List<Product> list=service.productList();
+		//log.debug("c {}", cPage);
+		//log.debug("numPerpage {}", numPerpage);
+		
 		mv.addObject("product",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage)));
 		
 		int totalData=service.productListCount();

@@ -60,15 +60,15 @@
 
                         <span>크기</span>
                         <span style="width:50px">가로</span>
-                        <input type="number" name="widthes" placeholder="가로" style="width:325px" required>&nbsp;&nbsp;mm<br>
+                        <input type="number" name="widthes" placeholder="가로" style="width:350px" required>&nbsp;&nbsp;mm<br>
                         
                         <span>&nbsp;&nbsp;</span>
                         <span style="width:50px">세로</span>
-                        <input type="number" name="depthes" placeholder="세로" style="width:325px" required>&nbsp;&nbsp;mm<br>
+                        <input type="number" name="depthes" placeholder="세로" style="width:350px" required>&nbsp;&nbsp;mm<br>
                         
                         <span>&nbsp;&nbsp;</span>
                         <span style="width:50px">높이</span>
-                        <input type="number" name="heights" placeholder="높이" style="width:325px" required>&nbsp;&nbsp;mm
+                        <input type="number" name="heights" placeholder="높이" style="width:350px" required>&nbsp;&nbsp;mm
                         <br>
 
                         <span>색상</span>
@@ -137,7 +137,12 @@
         reader.onload = e =>{
             $("img[name=photo1]").attr("src",e.target.result);
         }
-        reader.readAsDataURL(e.target.files[0]);  
+        
+		if(e.target.value.length == 0){
+			$("img[name=photo1]").attr("src","${path}/resources/images/admin/addImage.png");
+		} else {
+			reader.readAsDataURL(e.target.files[0]);  
+		}
     });
     
     //추가 사진 업로드 (2)
@@ -150,7 +155,11 @@
         reader.onload = e =>{
             $("img[name=photo2]").attr("src",e.target.result);
         }
-        reader.readAsDataURL(e.target.files[0]);    
+		if(e.target.value.length == 0){
+			$("img[name=photo2]").attr("src","${path}/resources/images/admin/addImage.png");
+		} else {
+			reader.readAsDataURL(e.target.files[0]);  
+		}
     });   
 
     //추가 사진 업로드 (3)
@@ -163,7 +172,11 @@
         reader.onload = e =>{
             $("img[name=photo3]").attr("src",e.target.result);
         }
-        reader.readAsDataURL(e.target.files[0]);    
+		if(e.target.value.length == 0){
+			$("img[name=photo3]").attr("src","${path}/resources/images/admin/addImage.png");
+		} else {
+			reader.readAsDataURL(e.target.files[0]);  
+		} 
     });   
 
     //추가 사진 업로드 (4)
@@ -176,7 +189,11 @@
         reader.onload = e =>{
             $("img[name=photo4]").attr("src",e.target.result);
         }
-        reader.readAsDataURL(e.target.files[0]);    
+		if(e.target.value.length == 0){
+			$("img[name=photo4").attr("src","${path}/resources/images/admin/addImage.png");
+		} else {
+			reader.readAsDataURL(e.target.files[0]);  
+		}   
     });   
 
     //추가 물품사진 업로드 (5)
@@ -189,7 +206,11 @@
         reader.onload = e =>{
             $("img[name=photo5]").attr("src",e.target.result);
         }
-        reader.readAsDataURL(e.target.files[0]);    
+		if(e.target.value.length == 0){
+			$("img[name=photo5]").attr("src","${path}/resources/images/admin/addImage.png");
+		} else {
+			reader.readAsDataURL(e.target.files[0]);  
+		}
     });   
 
     //
