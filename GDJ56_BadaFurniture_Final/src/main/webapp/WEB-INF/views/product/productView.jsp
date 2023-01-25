@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product//style.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/style.css" type="text/css">
 	
 	<!-- Js Plugins -->
      <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.1.min.js"></script> 
@@ -56,7 +56,7 @@
                                         <ul id="imgholder" class="imgs">
                                         	<c:if test="${not empty productData.files}">  
 	                                        	<c:forEach var="files" items="${productData.files}" varStatus="vs">	  
-		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${files.renamedFileName}"  ></li>
+		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/upload/product/${files.renamedFileName}"  ></li>
 		                                           <%--  <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
 		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
 		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li> --%>
@@ -113,13 +113,13 @@
         </div>
     	 
     	 <!--상품 상세사항  -->
-            <div style="display:flex;justify-content: center;">
+            <div style="display:flex;justify-content:center;">
                 <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바-->
               
                 <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바여기까지-->
                 <!--상세사항 div  -->
                 <div style="border:0px solid red;width:1000px;height:1000px;margin-top:50px;">
-                    <div class="card-content">
+                    <div class="card-content" style="height:100%;">
                         <img src="${path}/resources/images/product/furnitureInfo.png"  class="furnitureInfo"/>
                         <div class="detailFont" style="border:0px solid red;height:60px;text-align: center;">
                             <span>소재:</span>
@@ -132,13 +132,12 @@
                     	
                     	<c:if test="${not empty productData.files}">      
                         	<c:forEach var="files" items="${productData.files}" varStatus="vs"> 	
-                        		<img src="${path}/resources/images/product/${files.renamedFileName}" class="card-content-img"/>
+                        		<img src="${path}/resources/upload/product/${files.renamedFileName}" class="card-content-img"/>
                     		</c:forEach>	 
                     	</c:if>
                     	<c:if test="${empty productData.files}"> 
                     		제품사진 미등록됨
-                    	</c:if>
-                    	
+                    	</c:if>	
                     </div>
                     <span class="more">
                         <span class="blind">상품 더보기</span>

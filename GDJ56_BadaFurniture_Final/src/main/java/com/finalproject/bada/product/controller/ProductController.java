@@ -19,18 +19,18 @@ public class ProductController {
 //		return "product/productView";
 //		
 //	}
-//	
-//	@RequestMapping("/order/orderSheet.do")
-//	public String orderSheet() {
-//		return "product/orderSheet";
-//		
-//	}
-//	
-//	@RequestMapping("/order/orderComplete.do")
-//	public String orderComplete() {
-//		return "product/orderComplete";
-//		
-//	}
+	
+	@RequestMapping("/order/orderSheet.do")
+	public String orderSheet() {
+		return "product/orderSheet";
+		
+	}
+	
+	@RequestMapping("/order/orderComplete.do")
+	public String orderComplete() {
+		return "product/orderComplete";
+		
+	}
 	
 	private ProductService service;
 	
