@@ -103,5 +103,22 @@
 	.searchInput{
 		width: 200px;
 	}
+	#pageBarContainer *{
 
+		padding: 5px;
+		margin-top: 10px;
+	}
+
+	#pageBarContainer a{
+
+		text-decoration: none;
+		color: black;
+
+	}
+	#pageBarContainer a:visited{
+
+		text-decoration: none;
+		color: black;
+
+	}
 
