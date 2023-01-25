@@ -42,7 +42,7 @@
            <!--헤더 예비 위치  -->
             <div class="checkout__form">
                 <h4>PRODUCT Details</h4>
-             <c:if test="${productData != null}">
+             <c:if test="${not empty productData}">
                 <form action="#">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
@@ -54,15 +54,15 @@
                                         <input type="radio" name="slide" id="slide3">
                                         <input type="radio" name="slide" id="slide4">
                                         <ul id="imgholder" class="imgs">
-                                        	<c:if test="${not empty productData.fileProducts.originalFileName}">  
-	                                        	<c:forEach var="notice" items="${notices}" varStatus="vs">	  
-		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"  ></li>
+                                        	<c:if test="${not empty productData.files}">  
+	                                        	<c:forEach var="files" items="${productData.files}" varStatus="vs">	  
+		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${files.renamedFileName}"  ></li>
+		                                           <%--  <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
 		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
-		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
-		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
+		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li> --%>
                                         		</c:forEach>
                                         	</c:if>  
-                                        	<c:if test="${empty productData.fileProducts.originalFileName}">  
+                                        	<c:if test="${empty  productData.files}">  
                                         		제품사진 미등록
                                         	</c:if>
                                         </ul>
@@ -87,7 +87,7 @@
                                 <div class="checkout__order__products">가격 <span>${productData.price}원</span></div>
                                 <ul>
                                     <li>분류 <span>${productData.item}</span></li>
-                            <%--         <li>크기(가로/세로/높이) <span>${productData.widthes}cm ${productData.depths}cm ${productData.heights}cm</span></li> --%>
+                                    <li>크기(가로/세로/높이) <span>${productData.widths}cm ${productData.depths}cm ${productData.heights}cm</span></li> 
                                     <li>색상 <span>${productData.color}</span></li>
                                 </ul>
                                 <div class="checkout__order__subtotal">등급 <span>${productData.grade}</span></div>
@@ -123,16 +123,19 @@
                         <img src="${path}/resources/images/product/furnitureInfo.png"  class="furnitureInfo"/>
                         <div class="detailFont" style="border:0px solid red;height:60px;text-align: center;">
                             <span>소재:</span>
-                            <span>${productData.Material}</span>
+                            <span>${productData.material}</span>
                         </div>
                         <div class="detailFont" style="border:0px solid red;height:60px;text-align: center;">
                           <!--   <span>조립식 유/무:</span>
                             <span>무</span> -->
                         </div>
-                    	<c:if test="${productData.fileProducts.originalFileName != null}">      
-                        	<img src="${path}/resources/images/product/${productData.fileProducts.originalFileName}" class="card-content-img"/>
+                    	
+                    	<c:if test="${not empty productData.files}">      
+                        	<c:forEach var="files" items="${productData.files}" varStatus="vs"> 	
+                        		<img src="${path}/resources/images/product/${files.renamedFileName}" class="card-content-img"/>
+                    		</c:forEach>	 
                     	</c:if>
-                    	<c:if test="${productData.fileProducts.originalFileName != null}"> 
+                    	<c:if test="${empty productData.files}"> 
                     		제품사진 미등록됨
                     	</c:if>
                     	
@@ -180,7 +183,7 @@
 	                    </div>    
                 </div>
               </c:if>
-              <c:if test="${productData == null}">
+              <c:if test="${empty productData}">
               	해당 제품이 조회되지 않습니다.	
               
               </c:if>

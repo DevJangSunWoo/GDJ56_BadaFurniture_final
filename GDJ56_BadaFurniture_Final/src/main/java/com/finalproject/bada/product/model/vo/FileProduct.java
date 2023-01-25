@@ -20,7 +20,7 @@ public class FileProduct {
 	private Date fileProductEnrollDate;
 
 
-	
+	//productNo.getProductNo()에서
 	public String toString() {
 		 String temp="";
 	return fileProductNo+" "+productNo+" "
