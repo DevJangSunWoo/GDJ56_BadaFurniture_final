@@ -21,11 +21,7 @@ public class Product {
 	private String grade;
 	private String material;
 	private int widthes;
-<<<<<<< HEAD
-	private int depths;
-=======
 	private int depthes;
->>>>>>> branch 'master' of https://github.com/bxxxdx/GDJ56_BadaFurniture_final.git
 	private int heights;
 	private String color;
 	private String detail;
@@ -34,10 +30,6 @@ public class Product {
 	private Date productSoldOutDate;
 	private Date productEnrollDate;
 	private Date productEditDate;
-<<<<<<< HEAD
-	private List<FileProduct> fileProducts;
-	
-=======
 	private List<FileProduct> files;
 	
 	public String toString() {
@@ -47,5 +39,5 @@ public class Product {
 	 +soldOutState+" "+productSoldOutDate+" "
 			 +productEnrollDate+" "+productEditDate+" "+files;
 	}
->>>>>>> branch 'master' of https://github.com/bxxxdx/GDJ56_BadaFurniture_final.git
+
 }

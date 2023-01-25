@@ -18,10 +18,7 @@ public class FileProduct {
 	private String renamedFileName;
 	private String thumbnail;
 	private Date fileProductEnrollDate;
-<<<<<<< HEAD
-	
-	
-=======
+
 
 	
 	public String toString() {
@@ -31,5 +28,4 @@ public class FileProduct {
 				 +renamedFileName+" "+thumbnail+" "
 				 +fileProductEnrollDate+temp;
 	}
->>>>>>> branch 'master' of https://github.com/bxxxdx/GDJ56_BadaFurniture_final.git
 }
