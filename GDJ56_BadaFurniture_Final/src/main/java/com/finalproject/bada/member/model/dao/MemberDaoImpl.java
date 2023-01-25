@@ -18,4 +18,9 @@ public class MemberDaoImpl implements MemberDao {
 		return session.selectOne("member.selectMemberByEmail", m);
 	}
 
+	@Override
+	public int insertMember(SqlSessionTemplate session, Member m) {
+		return session.insert("member.insertMember",m);
+	}
+
 }

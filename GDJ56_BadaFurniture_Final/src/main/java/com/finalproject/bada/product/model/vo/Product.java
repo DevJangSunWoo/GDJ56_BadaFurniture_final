@@ -39,4 +39,5 @@ public class Product {
 	 +soldOutState+" "+productSoldOutDate+" "
 			 +productEnrollDate+" "+productEditDate+" "+files;
 	}
+
 }

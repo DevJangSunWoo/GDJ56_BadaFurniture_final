@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -21,12 +22,12 @@ import com.finalproject.bada.member.model.vo.Member;
 public class MemberController {
 
 	private MemberService service;
-//	private BCryptPasswordEncoder passwordEncoder;
+	private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
-	public MemberController(MemberService service) {
+	public MemberController(MemberService service, BCryptPasswordEncoder passwordEncoder) {
 		this.service = service;
-//		this.passwordEncoder = passwordEncoder;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 //--------------------------------------------------------------------------------------------------------------------------------------------------	
@@ -37,13 +38,12 @@ public class MemberController {
 		Member loginMember = service.selectMemberById(m);
 //		System.out.println(loginMember);
 		
-		if(loginMember!=null) {
-			session.setAttribute("loginMember", loginMember);
-		}
-		
-//		if(loginMember!=null && passwordEncoder.matches(m.getPassword(), loginMember.getPassword())) {
+//		if(loginMember!=null) {
 //			session.setAttribute("loginMember", loginMember);
 //		}
+		if(loginMember!=null && passwordEncoder.matches(m.getPassword(), loginMember.getPassword())) {
+			session.setAttribute("loginMember", loginMember);
+		}
 		return "redirect:/";
 	}
 	
@@ -67,7 +67,7 @@ public class MemberController {
 	//아이디 중복확인
 	@RequestMapping("/idDuplicate.do")
 	public void duplicateId(String memberId, HttpServletResponse response) throws IOException{
-		
+
 		Member m = service.selectMemberById(Member.builder().memberId(memberId).build());
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().print(m!=null ? true : false);
@@ -85,7 +85,18 @@ public class MemberController {
 	//회원가입완료
 	@RequestMapping("/enrollMemberEnd.do")
 	public ModelAndView enrollMemberEne(Member m, ModelAndView mv) {
-//		String encodePassword = passwordEncoder.encode(m.getPassword());
+		String encodePassword = passwordEncoder.encode(m.getPassword());
+		m.setPassword(encodePassword);
+		
+		int result = service.insertMember(m);
+		if(result>0) {
+			mv.addObject("msg","회원가입 완료");
+			mv.addObject("loc","/");
+		}else {
+			mv.addObject("msg","회원가입 실패");
+			mv.addObject("loc","/member/enrollMember.do");
+		}
+		mv.setViewName("common/msg");
 		
 		return mv;
 	}

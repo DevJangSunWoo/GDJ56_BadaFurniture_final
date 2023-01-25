@@ -19,6 +19,7 @@ public class FileProduct {
 	private String thumbnail;
 	private Date fileProductEnrollDate;
 
+
 	
 	public String toString() {
 		 String temp="";
