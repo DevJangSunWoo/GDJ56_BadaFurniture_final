@@ -91,7 +91,7 @@
 	<div id="title">
 		내 가구 판매 신청하기
 	</div>
-	<form action="${path}/resell/insertEnd.do" method="post">
+	<form action="${path}/resell/writeEnd.do" method="post" onsubmit="return checkSubmit();"  enctype="multipart/form-data">
 	<div id="sellWrap">
 		<div id="sellContent">
 			<div class="sellRow">
@@ -118,8 +118,8 @@
 				</div>
 				<div class="sellColRight">
 					<span style="margin-right:30px;">가로 <input type="number" name="widths" style="width:50px" min="1"> mm</span>
-					<span style="margin-right:30px;">세로 <input type="number" name="depths" style="width:50px" min="1"> mm</span>
-					<span>높이 <input type="number" name="heights" style="width:50px" min="1"> mm</span>
+					<span style="margin-right:30px;">세로 <input type="number" name="heights" style="width:50px" min="1"> mm</span>
+					<span>높이 <input type="number" name="depths" style="width:50px" min="1"> mm</span>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -148,7 +148,7 @@
 				</div>
 				<div class="sellColRight">
 					<select name="grade">
-						<option>세부 항목을 선택해주세요.</option>
+						<option value="none">세부 항목을 선택해주세요.</option>
 						<option value="최상">최상</option>
                         <option value="상">상</option>
                         <option value="중">중</option>
@@ -162,11 +162,13 @@
 				<div class="sellColRight" style="height:250px !important;display:flex;">
 					<div class="sellImageUpload">
 						<img src="${path }/resources/images/admin/addImage.png" 
-                            name="photo2" onclick="" width="100%" height="100%" class="fileImg">
+                            name="photo1" onclick="fn_upFile1();" width="100%" height="100%">
+                        <input type="file" id="photoFile1" name="upFile" accept="image/jpeg, image/png" style="display: none;">
 					</div>
 					<div class="sellImageUpload" style="border-left:0px;">
 						<img src="${path }/resources/images/admin/addImage.png" 
-                            name="photo2" onclick="" width="100%" height="100%" class="fileImg">
+                            name="photo2" onclick="fn_upFile2();" width="100%" height="100%">
+                        <input type="file" id="photoFile2" name="upFile" accept="image/jpeg, image/png" style="display: none;">
 					</div>
 				</div>		
 			</div>
@@ -175,7 +177,7 @@
 					참고사항 작성
 				</div>
 				<div class="sellColRight" style="height:110px !important;">
-					<textarea cols="60" rows="6" style="resize:none"></textarea>
+					<textarea cols="58" rows="6" style="resize:none" name="detail"></textarea>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -184,11 +186,11 @@
 				</div>
 				<div class="sellColRight" style="height:110px !important;">
 					<div id="addressContainer">
-						<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:100px;">
+						<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:100px;"name="postCode" disabled>
 						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" id="sample6_address" placeholder="주소" style="width:435px;"><br>
-						<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:210px;">
-						<input type="text" id="sample6_extraAddress" placeholder="참고항목" style="width:210px;">
+						<input type="text" id="sample6_address" placeholder="주소" style="width:435px;"name="address" disabled><br>
+						<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:210px;"name="addressDetail">
+						<input type="text" id="sample6_extraAddress" placeholder="참고항목" style="width:210px;"name="addressExtra" disabled>
 					</div>
 				</div>		
 			</div>
@@ -197,7 +199,10 @@
 					희망수거일 입력
 				</div>
 				<div class="sellColRight">
-					<input type="date">
+					<input type="date" name="pickUpDate"> 
+					<span style="margin-left:10px;color:grey;font-size:13px;">
+						* 희망수거일은 7일 후부터 선택할 수 있습니다.
+					</span>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -205,7 +210,7 @@
 					판매희망금액
 				</div>
 				<div class="sellColRight">
-					<input type="number" min="1"> &nbsp;원
+					<input type="number" min="1" name="hopePrice"> &nbsp;원
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -215,8 +220,8 @@
 				<div class="sellColRight" style="height:80px !important;border-bottom: 1px solid black;border-radius:0px 0px 20px 0px;">
 					<div id="accountContainer">
 						은행명 : 
-						<select id="bankName">
-							<option>은행명 선택</option>
+						<select name="bankName">
+							<option value="none">은행명 선택</option>
 	                        <option value="국민은행">국민은행</option>
 	                        <option value="기업은행">기업은행</option>
 	                        <option value="농협중앙회">농협중앙회</option>
@@ -230,18 +235,18 @@
 	                        <option value="케이뱅크">케이뱅크</option>
 	                        <option value="하나은행">하나은행</option>
 	                        <option value="한국씨티은행">한국씨티은행</option>
-	                        <option value="HSBC">HSBC은행</option>
-	                        <option value="제일은행">SC제일은행</option>
+	                        <option value="HSBC은행">HSBC은행</option>
+	                        <option value="SC제일은행">SC제일은행</option>
 						</select>
-						예금주 : <input type="text" placeholder="예금주명 입력" style="width:100px">
+						예금주 : <input type="text" placeholder="예금주명 입력" style="width:100px"name="depositorName">
 						<br>
-						계좌번호 : <input type="text" placeholder="계좌번호 입력" style="width:257px">
+						계좌번호 : <input type="text" placeholder="계좌번호 입력" style="width:257px"name="accountCode">
 					</div>
 				</div>		
 			</div>
 			<div class="sellRow" id="buttonContainer" style="dislpay:flex;justify-content:center;">
 				<div>
-					<input id="resellBtn" type="submit" value="제출하기">
+					<input id="resellBtn" type="submit" value="신청하기">
 				</div>
 			</div>
 		</div>
@@ -250,6 +255,64 @@
 </section>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+	$(()=>{
+		// 지금 날짜 + 7일*24시간*60분*60초*1000ms로 세팅
+		var now_utc = Date.now() + 7*24*60*60*1000;
+		// getTimezoneOffset()은 위 시간과의 차이를 분 단위로 반환
+		var timeOff = new Date().getTimezoneOffset()*60000; 
+		var sevenAfterDay = new Date(now_utc-timeOff).toISOString().split("T")[0];
+		$("input[name=pickUpDate]").attr("min",sevenAfterDay);
+	});
+
+	// onsubmit 함수
+	const checkSubmit = () => {
+		console.log($("input[name=upFile]").length);
+		if($("select[name=item]").val()=='none'){
+			alert("카테고리를 선택해주세요.");
+			return false;
+		} else if($("input[name=widths]").val()==''){
+			alert("가로 길이를 입력해주세요.");
+			return false;
+		} else if($("input[name=heights]").val()==''){
+			alert("세로 길이를 입력해주세요.");
+			return false;
+		} else if($("input[name=depths]").val()==''){
+			alert("높이를 입력해주세요.");
+			return false;
+		} else if($("select[name=color]").val()=='none'){
+			alert("색상을 선택해주세요.");
+			return false;
+		} else if($("select[name=grade]").val()=='none'){
+			alert("상태를 선택해주세요.");
+			return false;
+		} else if($("input[name=upFile]").first().val()=='' ||$("input[name=upFile]").last().val()==''){
+			alert("사진을 2장 업로드 해주세요.");
+			return false;
+		} else if($("textarea[name=detail]").val()=='') {
+			alert("참고사항을 작성해주세요.");	
+			return false;
+		} else if($("input[name=postCode]").val()=='') {
+			alert("주소를 입력해주세요.");
+			return false;
+		} else if($("input[name=pickUpDate]").val()==''){
+			alert("희망수거일을 입력해주세요.");
+			return false;
+		} else if($("input[name=hopePrice]").val()==''){
+			alert("판매희망금액을 입력해주세요.");
+			return false;
+		} else if($("select[name=bankName]").val()=='none') {
+			alert("은행명을 선택해주세요.");
+			return false;
+		} else if($("select[name=depositorName]").val()==''){
+			alert("예금주를 입력해주세요.");
+			return false;
+		} else if($("input[name=accountCode]").val()==''){
+			alert("계좌번호를 입력해주세요.");
+			return false;
+		}
+		return true;
+	}
+	
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -297,5 +360,39 @@
             }
         }).open();
     }
+    
+    //사진 추가 이미지를 클릭했을 때
+    const fn_upFile1=()=>{
+        $("#photoFile1").click();
+    }
+
+    $("#photoFile1").change(e=>{
+        const reader = new FileReader();
+        reader.onload = e =>{
+            $("img[name=photo1]").attr("src",e.target.result);
+        } 
+		if(e.target.value.length == 0){
+			$("img[name=photo1]").attr("src","${path}/resources/images/admin/addImage.png");
+		} else {
+			reader.readAsDataURL(e.target.files[0]);  
+		}
+    });
+    
+  //사진 추가 이미지를 클릭했을 때
+    const fn_upFile2=()=>{
+        $("#photoFile2").click();
+    }
+
+    $("#photoFile2").change(e=>{
+    	const reader = new FileReader();
+        reader.onload = e =>{
+            $("img[name=photo2]").attr("src",e.target.result);
+        } 
+		if(e.target.value.length == 0){
+			$("img[name=photo2]").attr("src","${path}/resources/images/admin/addImage.png");
+		} else {
+			reader.readAsDataURL(e.target.files[0]);  
+		}  
+    });
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
