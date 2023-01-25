@@ -1,18 +1,22 @@
 @charset "UTF-8";
 
 /* 무신사 폰트 적용 */
-.nav_category strong.title {
+/* .nav_category strong.title {
   font-family: "Musinsa", sans-serif;
   margin-top: 1px;
 }
 .title-page,
 .txt_selected_division,
 .font-mss {
-  font-family: "Musinsa", sans-serif !important;
+  font-family: "Musinsa", sans-serif ;
 }
 .title-box.font-mss,
 .section .section_title.font-mss {
   font-size: 18px;
+} */
+
+   body *{
+	font-family: 'Nanum Gothic', sans-serif;;
 }
 
 /* 최소 넓이 추가 */
