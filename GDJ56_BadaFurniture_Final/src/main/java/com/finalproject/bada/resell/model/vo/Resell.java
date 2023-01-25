@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.util.List;
 
 import com.finalproject.bada.member.model.vo.Member;
-import com.finalproject.bada.product.model.vo.FileProduct;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

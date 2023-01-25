@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FileResell {
 	private int fileResellNo;
+	private int resellNo;
 	private String originalFileName;
 	private String renamedFileName;
 	private String thumbnail;

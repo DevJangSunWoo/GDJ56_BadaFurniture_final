@@ -1,13 +1,13 @@
 package com.finalproject.bada.resell.controller;
 
-import javax.mail.Multipart;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.resell.model.vo.Resell;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,10 +33,10 @@ public class ResellController {
 	}
 	
 	@RequestMapping("/resell/writeEnd.do")
-	public ModelAndView writeEndResell(ModelAndView mv, Product p, 
-			HttpSession session, Multipart[] upFile) {
+	public ModelAndView writeEndResell(ModelAndView mv, Resell resell, 
+			HttpSession session, MultipartFile[] upFile) {
 		
-		log.debug("{}",p);
+		log.debug("{}",resell);
 		log.debug("{}",upFile[0]);
 		log.debug("{}",upFile[1]);
 		

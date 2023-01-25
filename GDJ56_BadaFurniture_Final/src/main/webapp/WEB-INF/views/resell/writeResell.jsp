@@ -117,9 +117,9 @@
 					크기 입력
 				</div>
 				<div class="sellColRight">
-					<span style="margin-right:30px;">가로 <input type="number" name="widths" style="width:50px" min="1"> mm</span>
+					<span style="margin-right:30px;">가로 <input type="number" name="widthes" style="width:50px" min="1"> mm</span>
 					<span style="margin-right:30px;">세로 <input type="number" name="heights" style="width:50px" min="1"> mm</span>
-					<span>높이 <input type="number" name="depths" style="width:50px" min="1"> mm</span>
+					<span>높이 <input type="number" name="depthes" style="width:50px" min="1"> mm</span>
 				</div>		
 			</div>
 			<div class="sellRow">
