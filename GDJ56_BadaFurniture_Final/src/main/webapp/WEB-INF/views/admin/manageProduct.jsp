@@ -103,6 +103,7 @@
 					<tr>
 						<th><input type="checkbox" name="chk" onclick="selectAll(this)"></th>
 						<th>가구번호</th>
+						<th>제품명</th>
 						<th>분류</th>
 						<th>사진</th>
 						<th>색상</th>
@@ -119,12 +120,13 @@
 								<tr>
 									<td style="width: 10px;"><input type="checkbox" name="chk"></td>
 									<td><a href="">${p.productNo }</a></td>
+									<td>${p.title }</td>
 									<td>${p.item }</td>
-									<td><img src=""></td>
+									<td><img id="productImg" src="${path}/resources/upload/product/${p.getFiles().get(0).renamedFileName}"></td>
 									<td>${p.color }</td>
 									<td>${p.price }</td>
+									<td>${p.productEnrollDate }</td>
 									<td>${p.productSoldOutDate }</td>
-									<td>${p.soldOutState }</td>
 									<td>
 										<select name="soldOutState">
 											<option value="N" >판매중</option>
