@@ -13,17 +13,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FileProduct {
 	private int fileProductNo;
-	private Product productNo;
+	private int productNo;   /// Product에서   int형으로 변경
 	private String originalFileName;
 	private String renamedFileName;
 	private String thumbnail;
 	private Date fileProductEnrollDate;
 
 
-	
+	//productNo.getProductNo()에서
 	public String toString() {
 		 String temp="";
-	return fileProductNo+" "+productNo.getProductNo()+" "
+	return fileProductNo+" "+productNo+" "
 				 +originalFileName+" "
 				 +renamedFileName+" "+thumbnail+" "
 				 +fileProductEnrollDate+temp;
