@@ -39,7 +39,8 @@
 		            	<div class="flexDiv">
 		                    <img src="${path }/resources/images/member/아이디.png">
 		                    <div class="input-container">		
-		                        <input type="text" name="memberId" class="form__input" placeholder="아이디" required/>
+		                        <input type="text" name="memberId" id="id" class="form__input" placeholder="아이디" required/>
+		                        
 		                        <label class="form__label" id="idTxt">아이디</label>
 		                    </div>
 		                    <input type="button" class="oribtn" id="idcheck" value="중복확인">
@@ -62,11 +63,10 @@
 		                
 		                	//아이디 중복확인
 		                	$("#idcheck").click(function(){
-		                	/* $("input[name=id]").keyup(function(){ */
-		                		const id = $("input[name=memberId]").val();
+		                	/* $("input[name=memberId]").keyup(function(){ */
 		                		$.ajax({
 		                			url: "${path}/member/idDuplicate.do",
-		                			data: {memberId: id},
+		                			data: {memberId: $("#id").val()},
 		                	         success:data=>{
 		                				if(data=='true'){  //중복된 아이디가 있음
 		                					$("#idTxt").html("<span id='idTxtcheck'>중복된 아이디입니다</span>")
@@ -252,7 +252,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/전화.png">
                             <div class="input-container">
-                                <input type="text" name="phone" class="form__input" placeholder="전화번호(-포함)" />
+                                <input type="text" name="phone" class="form__input" placeholder="전화번호(-포함)" required/>
                                 <label class="form__label">전화번호</label>		
                             </div>
                         </div>
@@ -298,7 +298,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" id="postCode" name="postCode" class="form__input" placeholder="우편번호"/>
+                                <input type="text" id="postCode" name="postCode" class="form__input" placeholder="우편번호" required/>
                                 <label class="form__label">우편번호</label>		
                             </div>
                         </div>
@@ -306,7 +306,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" id="address" name="address" class="form__input" placeholder="주소"/>
+                                <input type="text" id="address" name="address" class="form__input" placeholder="주소" required/>
                                 <label class="form__label">주소</label>		
                             </div>
                         </div>

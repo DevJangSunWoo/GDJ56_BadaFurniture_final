@@ -30,4 +30,9 @@ public class MemberServiceImpl implements MemberService {
 		return dao.selectMemberByEmail(session,m);
 	}
 
+	@Override
+	public int insertMember(Member m) {
+		return dao.insertMember(session,m);
+	}
+
 }

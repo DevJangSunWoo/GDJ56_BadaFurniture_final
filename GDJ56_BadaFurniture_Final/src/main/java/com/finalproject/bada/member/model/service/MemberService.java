@@ -7,4 +7,6 @@ public interface MemberService {
 	Member selectMemberById(Member m);
 
 	Member selectMemberByEmail(Member m);
+	
+	int insertMember(Member m);
 }
