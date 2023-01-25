@@ -47,8 +47,8 @@ public class ProductController {
 		
 		Product  productData=service.selectProduct(productNo);
 		
-		for(int i=0;i<productData.getFileProducts().size();i++) {
-		log.debug("{}",productData.getFileProducts().get(i));
+		for(int i=0;i<productData.getFiles().size();i++) {
+		log.debug("{}",productData.getFiles().get(i));
 		}
 		mv.addObject("productData",productData);
 		mv.setViewName("product/productView");
