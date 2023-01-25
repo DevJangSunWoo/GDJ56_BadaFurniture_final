@@ -34,7 +34,7 @@ public class AdminServiceImpl implements AdminService {
 		if(result>0) {
 			for(FileProduct f : product.getFiles()) {
 				//f.setProductNo(product.getProductNo());
-				f.setProductNo(product);
+				f.setProductNo(product.getProductNo());
 				result=dao.insertFileProduct(session,f);
 			}
 		}

@@ -123,8 +123,8 @@
 									<td><img src=""></td>
 									<td>${p.color }</td>
 									<td>${p.price }</td>
-									<td>${p.soldOutState }</td>
 									<td>${p.productSoldOutDate }</td>
+									<td>${p.soldOutState }</td>
 									<td>
 										<select name="soldOutState">
 											<option value="N" >판매중</option>

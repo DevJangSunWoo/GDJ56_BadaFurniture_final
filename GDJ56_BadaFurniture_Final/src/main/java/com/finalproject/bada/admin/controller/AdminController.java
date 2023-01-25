@@ -56,10 +56,10 @@ public class AdminController {
 		return "admin/updateProduct";
 	}
 	//가구 관리 연결
-	@RequestMapping("/admin/furniture.do")
-	public String manageFurniture() {
-		return "admin/manageProduct";
-	}
+//	@RequestMapping("/admin/furniture.do")
+//	public String manageFurniture() {
+//		return "admin/manageProduct";
+//	}
 	//주문 관리 연결
 	@RequestMapping("/admin/order.do")
 	public String manageOrder() {
@@ -76,7 +76,6 @@ public class AdminController {
 	@RequestMapping("/admin/insertEnd.do")
 	public ModelAndView insertProduct(ModelAndView mv,Product p, HttpSession session,
 			MultipartFile[] upFile) {		
-		
 		//파일 저장할 위치
 		String path=session.getServletContext().getRealPath("/resources/upload/product/");
 		
@@ -160,18 +159,17 @@ public class AdminController {
 	}
 	
 	//가구 조회
-	@RequestMapping("/admin/productList.do")
+	@RequestMapping("/admin/furniture.do")
 	public ModelAndView productList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
 			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage) {
 		
 		List<Product> list=service.productList();
-		log.debug("되니 ? {}",list);
-		
+
 		mv.addObject("product",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage)));
 		
 		int totalData=service.productListCount();
-		mv.addObject("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "admin/productList.do"));
+		mv.addObject("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "furniture.do"));
 		
 		mv.setViewName("admin/manageProduct");
 		

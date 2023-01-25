@@ -11,44 +11,44 @@ public class PageFactory {
       int pageEnd=pageNo+pageBarSize-1;
       
       
-      pageBar="<ul class='pagination justify-content-center pagination-sm'>";
+      pageBar="<span class='pagination justify-content-center pagination-sm'>";
       
       if(pageNo==1) {
-         pageBar+="<li class='page-item disabled'>";
+         pageBar+="<span class='page-item disabled'>";
          pageBar+="<a class='page-link' href='#'>이전</a>";
-         pageBar+="</li>";
+         pageBar+="</span>";
       }else {
-         pageBar+="<li class='page-item'>";
+         pageBar+="<span class='page-item'>";
          pageBar+="<a class='page-link' href='javascript:fn_paging("+(pageNo-1)+")'>이전</a>";
-         pageBar+="</li>";
+         pageBar+="</span>";
       }
       
       while(!(pageNo>pageEnd||pageNo>totalPage)) {
          if(cPage==pageNo) {
-            pageBar+="<li class='page-item disabled'>";
+            pageBar+="<span class='page-item disabled'>";
             pageBar+="<a class='page-link' href='#'>"+pageNo+"</a>";
-            pageBar+="</li>";
+            pageBar+="</span>";
          }else {
-            pageBar+="<li class='page-item'>";
+            pageBar+="<span class='page-item'>";
             pageBar+="<a class='page-link' href='javascript:fn_paging("+(pageNo)+")'>"
             +pageNo+"</a>";
-            pageBar+="</li>";
+            pageBar+="</span>";
          }
          
          pageNo++;
       }
       
       if(pageNo>totalPage) {
-         pageBar+="<li class='page-item disabled'>";
+         pageBar+="<span class='page-item disabled'>";
          pageBar+="<a class='page-link' href='#'>다음</a>";
-         pageBar+="</li>";
+         pageBar+="</span>";
       }else {
-         pageBar+="<li class='page-item'>";
+         pageBar+="<span class='page-item'>";
          pageBar+="<a class='page-link' href='javascript:fn_paging("+(pageNo)+")'>다음</a>";
-         pageBar+="</li>";
+         pageBar+="</span>";
       }
       
-      pageBar+="</ul>";
+      pageBar+="</span>";
       
       pageBar+="<script>";
       pageBar+="function fn_paging(pageNo){";

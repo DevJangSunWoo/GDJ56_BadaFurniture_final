@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FileProduct {
 	private int fileProductNo;
-	private Product productNo;
+	private int productNo;
 	private String originalFileName;
 	private String renamedFileName;
 	private String thumbnail;
@@ -23,7 +23,7 @@ public class FileProduct {
 	
 	public String toString() {
 		 String temp="";
-	return fileProductNo+" "+productNo.getProductNo()+" "
+	return fileProductNo+" "+productNo+" "
 				 +originalFileName+" "
 				 +renamedFileName+" "+thumbnail+" "
 				 +fileProductEnrollDate+temp;
