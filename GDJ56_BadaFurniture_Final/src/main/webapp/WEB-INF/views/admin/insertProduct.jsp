@@ -21,10 +21,10 @@
                 <form name="productFrm" action="${path }/admin/insertEnd.do" method="post" enctype="multipart/form-data">
                     <div id="divContent">            
                         <span>상품명</span>
-                        <input type="text" name="productNo" placeholder="상품명" required><br>
+                        <input type="text" name="title" placeholder="상품명" required><br>
 
                         <span>가격</span>
-                        <input type="text" name="title" placeholder="상품명" required><br>
+                        <input type="text" name="price" placeholder="가격" required><br>
 
                         <span>분류</span>
                         <select name="item" required>
@@ -68,7 +68,7 @@
                         
                         <span>&nbsp;&nbsp;</span>
                         <span style="width:50px">높이</span>
-                        <input type="number" name="heightes" placeholder="높이" style="width:325px" required>&nbsp;&nbsp;mm
+                        <input type="number" name="heights" placeholder="높이" style="width:325px" required>&nbsp;&nbsp;mm
                         <br>
 
                         <span>색상</span>

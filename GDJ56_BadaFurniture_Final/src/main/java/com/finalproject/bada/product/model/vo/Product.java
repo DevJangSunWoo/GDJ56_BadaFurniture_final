@@ -19,7 +19,7 @@ public class Product {
 	private int price;
 	private String item;
 	private String grade;
-	private String Material;
+	private String material;
 	private int widthes;
 	private int depthes;
 	private int heights;
@@ -31,4 +31,12 @@ public class Product {
 	private Date productEnrollDate;
 	private Date productEditDate;
 	private List<FileProduct> files;
+	
+	public String toString() {
+	 String temp="";
+	 return productNo+" "+title+" "+price+" "+item+" "
+			 +grade+" "+material+" "+widthes+" "+depthes+" "+heights+" "+color+" "+detail+" "+showState+" "
+	 +soldOutState+" "+productSoldOutDate+" "
+			 +productEnrollDate+" "+productEditDate+" "+files;
+	}
 }

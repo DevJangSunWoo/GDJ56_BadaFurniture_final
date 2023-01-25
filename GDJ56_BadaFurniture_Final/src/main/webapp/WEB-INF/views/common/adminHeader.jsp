@@ -33,7 +33,7 @@
   	</div>
   	<div id="adminIdDiv">
   		<span id="adminId"> 🛠️ 관리자</span><br>
-      <button id="logOutBtn" onclick="location.assign(${path}/logout.do)">로그아웃</button>
+      <button id="logOutBtn" onclick="location.assign('${path}/member/logout.do')">로그아웃</button>
   	</div>
   </div>  
   

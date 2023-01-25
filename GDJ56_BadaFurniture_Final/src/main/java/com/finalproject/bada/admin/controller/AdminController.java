@@ -135,7 +135,7 @@ public class AdminController {
 				.price(p.getPrice())
 				.item(p.getItem())
 				.grade(p.getGrade())
-				.Material(p.getMaterial())
+				.material(p.getMaterial())
 				.widthes(p.getWidthes())
 				.depthes(p.getDepthes())
 				.heights(p.getHeights())
@@ -146,11 +146,16 @@ public class AdminController {
 		
 		int result=service.insertProduct(product);
 		
+		//log.debug("result : {}",result);
+		//log.debug("product : {}",product);
+		//log.debug("files : {}",files);
+		
 		mv.addObject("msg",result>0?"가구올리기 성공":"가구올리기 실패");
 		mv.addObject("loc",result>0?"/admin/furniture.do":"/admin/insert.do");
 		mv.setViewName("common/msg");
 		
 		return mv;
+		
 	}
 }
 
