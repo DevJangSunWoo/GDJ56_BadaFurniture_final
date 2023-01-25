@@ -20,8 +20,8 @@ public class Product {
 	private String item;
 	private String grade;
 	private String material;
-	private int widthes;
-	private int depthes;
+	private int widths;
+	private int depths;
 	private int heights;
 	private String color;
 	private String detail;
@@ -35,7 +35,7 @@ public class Product {
 	public String toString() {
 	 String temp="";
 	 return productNo+" "+title+" "+price+" "+item+" "
-			 +grade+" "+material+" "+widthes+" "+depthes+" "+heights+" "+color+" "+detail+" "+showState+" "
+			 +grade+" "+material+" "+widths+" "+depths+" "+heights+" "+color+" "+detail+" "+showState+" "
 	 +soldOutState+" "+productSoldOutDate+" "
 			 +productEnrollDate+" "+productEditDate+" "+files;
 	}
