@@ -1,5 +1,9 @@
 package com.finalproject.bada.admin.model.dao;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +27,26 @@ public class AdminDaoImpl implements AdminDao {
 	public int insertFileProduct(SqlSessionTemplate session, FileProduct f) {
 		// TODO Auto-generated method stub
 		return session.insert("admin.insertFileProduct",f);
+	}
+	
+	//가구 관리
+	@Override
+	public List<Product> productList(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectList("admin.productList");
+	}
+
+	@Override
+	public List<Product> productListPage(SqlSessionTemplate session, Map<String, Integer> param) {
+		// TODO Auto-generated method stub
+		return session.selectList("admin.productList",null,
+				new RowBounds((param.get("cPage")-1)*param.get("numPerpage"),param.get("numPerpage")));
+	}
+
+	@Override
+	public int productListCount(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.productListCount");
 	}
 	
 

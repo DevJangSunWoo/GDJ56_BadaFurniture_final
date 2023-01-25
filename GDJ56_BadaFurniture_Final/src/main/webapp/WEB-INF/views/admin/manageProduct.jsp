@@ -105,7 +105,6 @@
 						<th>가구번호</th>
 						<th>분류</th>
 						<th>사진</th>
-						<th>사이즈</th>
 						<th>색상</th>
 						<th>가격</th>
 						<th>업로드일</th>
@@ -115,69 +114,47 @@
 						<th></th>					
 					</tr>
 					<tbody>
-						<tr>
-							<td style="width: 10px;"><input type="checkbox" name="chk"></td>
-							<td><a href="">가구번호</a></td>
-							<td>분류</td>
-							<td>사진</td>
-							<td>사이즈</td>
-							<td>색상</td>
-							<td>가격</td>
-							<td>업로드일</td>
-							<td>판매일자</td>
-							<td>
-								<select name="">
-									<option value="판매중">판매중</option>
-									<option value="거래중">거래중</option>
-									<option value="판매완료">판매완료</option>
-								</select>
+						<c:if test="${not empty product}">
+							<c:forEach var="p" items="${product }">
+								<tr>
+									<td style="width: 10px;"><input type="checkbox" name="chk"></td>
+									<td><a href="">${p.productNo }</a></td>
+									<td>${p.item }</td>
+									<td><img src=""></td>
+									<td>${p.color }</td>
+									<td>${p.price }</td>
+									<td>${p.soldOutState }</td>
+									<td>${p.productSoldOutDate }</td>
+									<td>
+										<select name="soldOutState">
+											<option value="N" >판매중</option>
+											<option value="I">거래중</option>
+											<option value="Y">판매완료</option>
+										</select>
+										
+									</td>
+									<td>
+										<select name="showState">
+											<option value="Y">공개</option>
+											<option value="N">숨김</option>
+										</select>
+										
+									</td>
+									<td style="width: 80px;"><button class="updateBtn" onclick="location.assign('${path}/admin/update.do')">수정</button></td>
+								</tr>
+							</c:forEach>
+						</c:if>
 
-							</td>
-							<td>
-								<select name="">
-									<option value="Y">공개</option>
-									<option value="N">숨김</option>
-								</select>
 
-							</td>
-							<td style="width: 80px;"><button class="updateBtn" onclick="location.assign('${path}/admin/update.do')">수정</button></td>
-						</tr>
-						<!-- 지워 나중에  -->
-						<tr>
-							<td style="width: 10px;"><input type="checkbox" name="chk"></td>
-							<td><a href="">가구번호</a></td>
-							<td>분류</td>
-							<td>사진</td>
-							<td>사이즈</td>
-							<td>색상</td>
-							<td>가격</td>
-							<td>업로드일</td>
-							<td>판매일자</td>
-							<td>
-								<select name="">
-									<option value="판매중">판매중</option>
-									<option value="거래중">거래중</option>
-									<option value="판매완료">판매완료</option>
-								</select>
-
-							</td>
-							<td>
-								<select name="">
-									<option value="Y">공개</option>
-									<option value="N">숨김</option>
-								</select>
-
-							</td>
-							<td style="width: 80px;"><button class="updateBtn" onclick="location.assign('${path}/admin/update.do')">수정</button></td>
-						</tr>
-						<!-- 요기까지 지워 -->
 					</tbody>
 				</thead>
 
 			</table>
 		</div>
 		<div id="pageBarContainer">
-			<div id=pageBar></div>
+			<div id=pageBar>
+				${pageBar}
+			</div>
 		</div>
 	</div>
 </section>
@@ -200,6 +177,8 @@
 		})
 
 	}
+
+	
 
 </script>
 
