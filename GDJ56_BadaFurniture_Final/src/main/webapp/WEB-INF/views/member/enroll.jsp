@@ -39,7 +39,7 @@
 		            	<div class="flexDiv">
 		                    <img src="${path }/resources/images/member/아이디.png">
 		                    <div class="input-container">		
-		                        <input type="text" name="id" class="form__input" placeholder="아이디" required/>
+		                        <input type="text" name="memberId" class="form__input" placeholder="아이디" required/>
 		                        <label class="form__label" id="idTxt">아이디</label>
 		                    </div>
 		                    <input type="button" class="oribtn" id="idcheck" value="중복확인">
@@ -48,14 +48,14 @@
 		                
 		                <script>
 			              	//아이디 정규표현식
-			    			$("input[name=id]").blur(e=>{
-		    					const id=$("input[name=id]").val().trim();
+			    			$("input[name=memberId]").blur(e=>{
+		    					const id=$("input[name=memberId]").val().trim();
 		    					const idChk=/^[A-Za-z0-9]+$/
 		    					
 		    					if(!idChk.test(id) || id.length<4){
 		    						setTimeout(function(){ //alert 무한루프 문제 해결
 			    						alert("⛔ 아이디는 4자 이상, 영문자/숫자로만 구성할 수 있습니다. ⛔");
-			    						$("input[name=id]").val("");
+			    						$("input[name=memberId]").val("");
 		    						}, 10)
 		    					}					
 			    			});
@@ -63,7 +63,7 @@
 		                	//아이디 중복확인
 		                	$("#idcheck").click(function(){
 		                	/* $("input[name=id]").keyup(function(){ */
-		                		const id = $("input[name=id]").val();
+		                		const id = $("input[name=memberId]").val();
 		                		$.ajax({
 		                			url: "${path}/member/idDuplicate.do",
 		                			data: {memberId: id},
@@ -207,14 +207,44 @@
                             <img src="${path }/resources/images/member/비밀번호체크.png">
                             <div class="input-container">		
                                 <input type="password" name="passwordck" class="form__input" placeholder="비밀번호 확인" required/>
-                                <label class="form__label">비밀번호 확인</label>
+                                <label class="form__label" id="passwordckTxt">비밀번호 확인</label>
                             </div>
                         </div>
                         <br>
+                        
+                        <script>
+                        	//비밀번호 확인
+							$("input[name=passwordck]").blur(e=>{
+								const pw = $("input[name=password]").val();
+								const pwck = $("input[name=passwordck]").val();
+								
+								if(pw!=pwck){
+									$("#passwordckTxt").html("<span id='passwordck'>비밀번호 불일치</span>")
+                    				$("#passwordck").css({
+                    					"color" : "#FA3E3E",
+                    					"font-weight" : "bold",
+                    					"font-size" : "14px"
+                    				});
+									
+									$("input[name=passwordck]").val('');
+									$("input[name=passwordck]").focus();
+									
+								}else{
+									$("#passwordckTxt").html("<span id='passwordck'>비밀번호 일치</span>")
+                    				$("#passwordck").css({
+                    					"color" : "#0D6EFD",
+                    					"font-weight" : "bold",
+                    					"font-size" : "14px"
+                    				});
+								}
+							});
+                        	
+                        </script>
+                        
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/이름.png">
                             <div class="input-container">		
-                                <input type="text" name="name" class="form__input" placeholder="이름" required/>
+                                <input type="text" name="memberName" class="form__input" placeholder="이름" required/>
                                 <label class="form__label">이름</label>
                             </div>
                         </div>

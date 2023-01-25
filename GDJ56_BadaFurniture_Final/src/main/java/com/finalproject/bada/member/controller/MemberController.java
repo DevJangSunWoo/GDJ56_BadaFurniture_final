@@ -86,6 +86,7 @@ public class MemberController {
 	@RequestMapping("/enrollMemberEnd.do")
 	public ModelAndView enrollMemberEne(Member m, ModelAndView mv) {
 //		String encodePassword = passwordEncoder.encode(m.getPassword());
+		System.out.println(m);
 		
 		return mv;
 	}
