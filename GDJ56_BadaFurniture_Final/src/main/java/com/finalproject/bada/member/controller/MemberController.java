@@ -1,8 +1,10 @@
 package com.finalproject.bada.member.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -33,8 +35,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/test.do")
-	public void test(@RequestParam Map m) {
-		System.out.println(m);
+	public void test(HttpServletRequest req, @RequestParam Map map) {
+		String[] color = req.getParameterValues("color");
+		String[] material = req.getParameterValues("material");
+		String[] grade = req.getParameterValues("level");
+		
+		System.out.println(Arrays.toString(color));
+		System.out.println(Arrays.toString(material));
+		System.out.println(Arrays.toString(grade));
+		System.out.println(map);
 	}
 	
 	

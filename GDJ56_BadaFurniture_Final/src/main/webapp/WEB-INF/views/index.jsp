@@ -14,77 +14,92 @@
 	<div class="flexDiv">
 	    <img src="${path }/resources/images/mainpage/mainPicture.jpg" class="mainSize">
 	</div>
-
-	<div id="iconDiv" class="flexDiv">
-		<div class="mainSize" id="iconContainer">
-			<div class="icon">
-				<img src="${path }/resources/images/mainpage/전체.png">
-				<h3>전체</h3>
-			</div>
-			<div class="icon">
-				<img src="${path }/resources/images/mainpage/책장.png">
-				<h3>책장</h3>
-			</div>
-			<div class="icon">
-				<img src="${path }/resources/images/mainpage/의자.png">
-				<h3>의자</h3>
-			</div>
-			<div class="icon">
-				<img src="${path }/resources/images/mainpage/화장대.png">
-				<h3>화장대</h3>
-			</div>
-			<div class="icon">
-				<img src="${path }/resources/images/mainpage/침대.png">
-				<h3>침대</h3>
-			</div>
-			<div class="icon">
-				<img src="${path }/resources/images/mainpage/서랍장.png">
-				<h3>서랍장</h3>
-			</div>
-			<div class="icon">
-				<img src="${path }/resources/images/mainpage/책상.png">
-				<h3>책상</h3>
-			</div>
-			<div class="icon">
-				<img src="${path }/resources/images/mainpage/쇼파.png">
-				<h3>쇼파</h3>
-			</div>
-			<div class="icon">
-				<img src="${path }/resources/images/mainpage/옷장.png">
-				<h3>옷장</h3>
+	
+	<form action="${path}/member/test.do" id="form">
+		<div id="iconDiv" class="flexDiv">
+			<div class="mainSize" id="iconContainer">
+				<div class="icon" onclick="fn_selectItem(event);">
+					<img src="${path }/resources/images/mainpage/전체.png">
+					<h3>전체</h3>
+				</div>
+				<div class="icon" onclick="fn_selectItem(event);">
+					<img src="${path }/resources/images/mainpage/책장.png">
+					<h3>책장</h3>
+				</div>
+				<div class="icon" onclick="fn_selectItem(event);">
+					<img src="${path }/resources/images/mainpage/의자.png">
+					<h3>의자</h3>
+				</div>
+				<div class="icon" onclick="fn_selectItem(event);">
+					<img src="${path }/resources/images/mainpage/화장대.png">
+					<h3>화장대</h3>
+				</div>
+				<div class="icon" onclick="fn_selectItem(event);">
+					<img src="${path }/resources/images/mainpage/침대.png">
+					<h3>침대</h3>
+				</div>
+				<div class="icon" onclick="fn_selectItem(event);">
+					<img src="${path }/resources/images/mainpage/서랍장.png">
+					<h3>서랍장</h3>
+				</div>
+				<div class="icon" onclick="fn_selectItem(event);">
+					<img src="${path }/resources/images/mainpage/책상.png">
+					<h3>책상</h3>
+				</div>
+				<div class="icon" onclick="fn_selectItem(event);">
+					<img src="${path }/resources/images/mainpage/쇼파.png">
+					<h3>소파</h3>
+				</div>
+				<div class="icon" onclick="fn_selectItem(event);">
+					<img src="${path }/resources/images/mainpage/옷장.png">
+					<h3>옷장</h3>
+				</div>
 			</div>
 		</div>
-	</div>
-	
-	<br><br>
-	<div class="flexDiv">
-		<p id="listTitle"> / Furniture List / </p>
-	</div>
+		<br><br>
+		
+		<input type="text" name="item" value="전체" hidden>
+		<script>
+			// 이미지 클릭시 클릭한 item 값 넘겨주면서 form태그 submit
+			const fn_selectItem=(e)=>{
+				let item = $(e.target).parents(".icon").children("h3").text();
+				console.log(item);
+				
+				$("input[name=item]").val(item);
+				$("#form").submit();
+			}
+		</script>
+		
+		<div class="flexDiv">
+			<p id="listTitle"> / Furniture List / </p>
+		</div>
 	
 	
 <!------------------------------------------------------------------------------------------------------------------>	
-	<div style="display:flex; justify-content: space-between;">
-		<!-- 조건검색 -->
-		<div>
-			<button id="slidebtn">🤍조건검색</button>
-		</div>
-		
-		<!-- select Box -->		
-		<div>
-			<div class="select" tabindex="1">
-		        <input class="selectopt" name="test" type="radio" id="opt0" checked>
-		        <label for="opt0" class="option">🏳‍🌈 최근등록일순</label>
-		        <input class="selectopt" name="test" type="radio" id="opt1">
-		        <label for="opt1" class="option">🏁 금액 낮은순</label>
-		        <input class="selectopt" name="test" type="radio" id="opt2">
-		        <label for="opt2" class="option">🏴 금액 높은순</label>
-		    </div>
-		</div>
-		
-	</div>
-	<div id="checkDiv">
-		<form action="${path}/member/test.do">
+		<div style="display:flex; justify-content: space-between;">
+			<!-- 조건검색 -->
+			<div>
+				<input type="button" id="slidebtn" value="🤍조건검색">
+			</div>
 			
+			<!-- select Box -->		
+			<div>
+				<div class="select" tabindex="1">
+			        <input class="selectopt" name="sort" value="최근등록일순" type="radio" id="opt0" checked>
+			        <label for="opt0" class="option">🏳‍🌈 최근등록일순</label>
+			        <input class="selectopt" name="sort" value="금액낮은순" type="radio" id="opt1">
+			        <label for="opt1" class="option">🏁 금액 낮은순</label>
+			        <input class="selectopt" name="sort" value="금액높은순" type="radio" id="opt2">
+			        <label for="opt2" class="option">🏴 금액 높은순</label>
+			    </div>
+			</div>
+			<script>
+				
+			</script>
+			
+			
+		</div>
+		<div id="checkDiv">
 			<div class="container">
 					<h5>[색상]</h5>
 				<ul class="ks-cboxtags">
@@ -105,7 +120,7 @@
 			<div class="container">
 				<h5>[소재]</h5>
 				<ul class="list">	
-					<li><label><input type="checkbox" name="material" value="철제	" checked> 철제</label></li>
+					<li><label><input type="checkbox" name="material" value="철제" checked> 철제</label></li>
 					<li><label><input type="checkbox" name="material" value="플라스틱" checked> 플라스틱</label></li>
 					<li><label><input type="checkbox" name="material" value="합판" checked> 합판</label></li>
 					<li><label><input type="checkbox" name="material" value="원목" checked> 원목</label></li>
@@ -130,13 +145,14 @@
 			<div class="container">
 				<h5>[가로사이즈]</h5>
 				<ul class="list">	
-					<li><label><input type="checkbox" name="size" value="1000" checked> ~100cm</label></li>
-					<li><label><input type="checkbox" name="size" value="1200" checked> ~120cm</label></li>
-					<li><label><input type="checkbox" name="size" value="1400" checked> ~140cm</label></li>
-					<li><label><input type="checkbox" name="size" value="1600" checked> ~160cm</label></li>
-					<li><label><input type="checkbox" name="size" value="1800" checked> ~180cm</label></li>
-					<li><label><input type="checkbox" name="size" value="2000" checked> ~200cm</label></li>
-					<li><label><input type="checkbox" name="size" value="2010" checked> 201cm~</label></li>
+					<li><label><input type="radio" name="size" value="1000" > ~100cm</label></li>
+					<li><label><input type="radio" name="size" value="1200" > ~120cm</label></li>
+					<li><label><input type="radio" name="size" value="1400" > ~140cm</label></li>
+					<li><label><input type="radio" name="size" value="1600" > ~160cm</label></li>
+					<li><label><input type="radio" name="size" value="1800" > ~180cm</label></li>
+					<li><label><input type="radio" name="size" value="2000" > ~200cm</label></li>
+					<li><label><input type="radio" name="size" value="2010" > 201cm~</label></li>
+					<li><label><input type="radio" name="size" value="전체" checked> 전체</label></li>
 				</ul>
 			</div>
 			
@@ -144,23 +160,20 @@
 				<input type="button" value="초기화">
 				<input type="submit" value="적용">
 			</div>
-		</form>
-	</div>	
-	
+		</div>	
+	</form>
 	<script>
 		//조건검색 슬라이드
 		 $("#slidebtn").click(e=>{
-	         $("#checkDiv").slideToggle(1000);
+	         $("#checkDiv").slideToggle(600);
 	     });
 	</script>
-	
-	
-	
 	
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br>
 </section>
+	
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
