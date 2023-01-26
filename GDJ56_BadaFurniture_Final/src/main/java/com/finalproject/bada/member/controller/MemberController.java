@@ -1,6 +1,7 @@
 package com.finalproject.bada.member.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,17 +32,19 @@ public class MemberController {
 		this.passwordEncoder = passwordEncoder;
 	}
 	
+	@RequestMapping("/test.do")
+	public void test(@RequestParam Map m) {
+		System.out.println(m);
+	}
+	
+	
 //--------------------------------------------------------------------------------------------------------------------------------------------------	
 	//로그인
 	@RequestMapping("/login.do")
 	public String loginMember(Member m, HttpSession session) {
-//		System.out.println(m);
+
 		Member loginMember = service.selectMemberById(m);
-//		System.out.println(loginMember);
 		
-//		if(loginMember!=null) {
-//			session.setAttribute("loginMember", loginMember);
-//		}
 		if(loginMember!=null && passwordEncoder.matches(m.getPassword(), loginMember.getPassword())) {
 			session.setAttribute("loginMember", loginMember);
 		}
@@ -90,17 +94,16 @@ public class MemberController {
 		
 		int result = service.insertMember(m);
 		if(result>0) {
-			mv.addObject("msg","회원가입 완료");
+			mv.addObject("msg","회원가입 완료 o(*￣▽￣*)ブ");
 			mv.addObject("loc","/");
 		}else {
-			mv.addObject("msg","회원가입 실패");
+			mv.addObject("msg","회원가입 실패 /(ㄒoㄒ)/");
 			mv.addObject("loc","/member/enrollMember.do");
 		}
 		mv.setViewName("common/msg");
 		
 		return mv;
 	}
-	
 	
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------

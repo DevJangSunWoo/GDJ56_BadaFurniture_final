@@ -15,12 +15,24 @@ div{
     margin-top: 15px;
 }
 
+#listTitle{
+    font-family: 'Ubuntu', sans-serif;
+    /* font-family: 'Rowdies', cursive; */
+    /* font-family: 'Cabin', sans-serif; */
+	font-size: 40px;
+	font-weight: bolder;
+}
+
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 아이콘 */
+
 #iconDiv{
 	margin-top: 15px;
 }
 
 #iconDiv img{
-    height: 90px;
+    height: 80px;
 }
 
 #iconContainer{
@@ -32,5 +44,300 @@ div{
 	text-align:center;
 }
 
+.icon>h3{
+	font-family: 'Ubuntu', sans-serif;
+}
+
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 조건검색 */
+
+#slidebtn{
+	cursor: pointer;
+	background-color: #efefef;
+	border-radius: 3px;
+ 	width: 120px;
+ 	height: 100%;
+ 	font-size: 18px;
+}
+
+#checkDiv{
+	position: absolute;
+	width: 65%;
+    height: 590px;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+#checkDiv h5{
+	font-size: 24px;
+}
+
+#checkDiv span{
+	font-size: 20px;
+}
+
+#checkDiv lable {
+	font-size : 16px;
+}
+
+.list input[type="checkbox"]{
+	width: 20px; 
+	height: 20px; 
+	cursor: pointer;
+	accent-color: black;
+}
+
+.list li{
+	display: inline;
+	margin-right: 15px;
+	list-style-type : none;
+	font-size: 23px;
+}
+
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 조건검색 - 색상 */
+
+.container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    margin-left: 20px;
+}
+
+.container>ul{
+	margin-top: 40px;
+}
+
+ul.ks-cboxtags {
+    list-style: none;
+}
+
+ul.ks-cboxtags li{
+	display: inline;
+	margin-right: 15px;
+}
+ul.ks-cboxtags li label{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(139, 139, 139, .3);
+    color: #adadad;
+    border-radius: 25px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all .2s;
+    font-size: 17px;
+}
+
+ul.ks-cboxtags li label {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+ul.ks-cboxtags li input[type="checkbox"] {
+	display: absolute;
+}
+ul.ks-cboxtags li input[type="checkbox"] {
+	position: absolute;
+	opacity: 0;
+}
+
+#checkboxOne:checked + label {
+    border: 2px solid black; 
+    background-color: black;
+    color: white;
+    transition: all .2s;
+    font-size: 17px;
+}
+#checkboxTwo:checked + label {
+    border: 2px solid black; 
+    background-color: #ebebeb;
+    color: black;
+    transition: all .2s;
+    font-size: 17px;
+}
+#checkboxThree:checked + label {
+    border: 2px solid black; 
+    background-color: brown;
+    color: white;
+    transition: all .2s;
+    font-size: 17px;
+}
+#checkboxFour:checked + label {
+    border: 2px solid black; 
+    background-color: grey;
+    color: white;
+    transition: all .2s;
+    font-size: 17px;
+}
+#checkboxFive:checked + label {
+    border: 2px solid black; 
+    background-color: red;
+    color: white;
+    transition: all .2s;
+    font-size: 17px;
+}
+#checkboxSix:checked + label {
+    border: 2px solid black; 
+    background-color: yellow;
+    color: black;
+    transition: all .2s;
+    font-size: 17px;
+}
+#checkboxSeven:checked + label {
+    border: 2px solid black; 
+    background-color: green;
+    color: white;
+    transition: all .2s;
+    font-size: 17px;
+}
+#checkboxEight:checked + label {
+    border: 2px solid black; 
+    background-color: blue;
+    color: white;
+    transition: all .2s;
+    font-size: 17px;
+}
+#checkboxNine:checked + label {
+    border: 2px solid black; 
+    background-color: navy;
+    color: white;
+    transition: all .2s;
+    font-size: 17px;
+}
+#checkboxTen:checked + label {
+    border: 2px solid black; 
+    background-color: purple;
+    color: white;
+    transition: all .2s;
+    font-size: 17px;
+}
+
+
+/* ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+    border: 2px solid #1bdbf8;
+    background-color: #12bbd4;
+    color: #fff;
+    transition: all .2s;
+} */
+/* ul.ks-cboxtags li input[type="checkbox"]:focus + label {
+  border: 2px solid black;
+} */
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 조건검색 - 버튼 */
+#checkBtn{
+	width: 90%;
+	display: flex;
+	justify-content: space-around;
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+
+#checkBtn>input{
+	width: 300px;
+	height: 45px;
+	font-size: 20px;
+	background-color: white;
+	box-shadow: 1px 1px 1px grey;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+#checkBtn>input:hover {
+    background: lightgrey;
+    color: wihte;
+}
+
 /* -------------------------------------------------------------------------------------------------- */
 /* select박스 */
+.select {
+  display:flex;
+  flex-direction: column;
+  position:relative;
+  width:230px;
+  height:40px;
+  font-size: 18px; 
+}
+
+.option {
+  padding:0 30px 0 10px;
+  min-height:40px;
+  display:flex;
+  align-items:center;
+  /* background:#333; */
+  /* color: white; */
+  background: lightgrey;
+  border-top:grey solid 1px;
+  border-bottom :black solid 1px;
+  border-left :black solid 1px;
+  border-right :black solid 1px;
+  position:absolute;
+  top:0;
+  width: 100%;
+  pointer-events:none;
+  order:2;
+  z-index:1;
+  transition:background .4s ease-in-out;
+  box-sizing:border-box;
+  overflow:hidden;
+  white-space:nowrap;
+  
+}
+
+.option:hover {
+  /* background:#666; */
+  background: #56b1c5;
+}
+
+.select:focus .option {
+  position:relative;
+  pointer-events:all;
+}
+
+.select input {
+  opacity:0;
+  position:absolute;
+  left:-99999px;
+}
+
+.select input:checked + label {
+  order: 1;
+  z-index:2;
+  /* background:#666; */
+  background:white;
+  color: black;
+  /* border-top:none; */
+  border : 1px solid black;
+  position:relative;
+}
+
+.select input:checked + label:after {
+  content:'';
+  width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid white;
+  position:absolute;
+  right:10px;
+  top:calc(50% - 2.5px);
+  pointer-events:none;
+  z-index:3;
+}
+
+.select input:checked + label:before {
+  position:absolute;
+  right:0;
+  height: 40px;
+  width: 40px;
+  content: '';
+  background:#666;
+}
