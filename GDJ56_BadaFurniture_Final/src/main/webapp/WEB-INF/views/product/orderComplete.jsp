@@ -123,9 +123,11 @@
 
 <!-- wrap -->
 <div class="wrap">
-
+	<div style="display: flex !important;justify-content: center !important;height:1200px !important;">
 	<!-- 오른쪽 콘텐츠 영역 -->
-	<div class="right_area page_order_form" style="margin-right:300px;margin-top:150px; ">
+	<!-- class="right_area page_order_form" -->
+	<div style="margin-top:150px; ">
+	
 		<!-- 컨텐츠 영역 -->
 		<!--page nation -->
 		<div class="pagenation"></div>
@@ -947,14 +949,18 @@
 				  </div>
 			</div>
 			<!--cart button-->
-				<div style="display:inline-flex;">
-					<div  id="card_btn"  class="btn_wrap order_form__payment-button-wrap" style="margin-left:450px;">
+				<div style="display:flex;justify-content:center;width:1229px;">
+					<!-- <div  id="card_btn"  class="btn_wrap order_form__payment-button-wrap" style="margin-left:450px;">
 						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button" ">
 							<span id="btn-pay_amt" style="font-size:20px;"></span>주문목록으로 이동&nbsp;
 							<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
 						</a>
-					</div>
+					</div> -->
 					<div  id="account_btn"  class="btn_wrap order_form__payment-button-wrap"  style= >
+						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button" ">
+							<span id="btn-pay_amt" style="font-size:20px;"></span>주문목록으로 이동&nbsp;
+							<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
+						</a>
 						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button" ">
 							<span id="btn-pay_amt" style="font-size:20px;"></span>홈으로 이동&nbsp;
 							<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
@@ -964,9 +970,13 @@
 				<!--//cart button-->
 
 
-		
+			<!--right area  -->
+		</div>
 	
-
+		</div>	
+	
+		<!--wrap  -->
+	</div> 
 	
 	
 	
