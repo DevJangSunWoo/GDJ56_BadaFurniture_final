@@ -16,4 +16,6 @@ public interface ResellDao {
 	int insertFileResell(SqlSessionTemplate session, FileResell fr);
 	
 	Resell selectResell(SqlSessionTemplate session, int resellNo);
+	
+	int updateResell(SqlSessionTemplate session, Resell resell);
 }

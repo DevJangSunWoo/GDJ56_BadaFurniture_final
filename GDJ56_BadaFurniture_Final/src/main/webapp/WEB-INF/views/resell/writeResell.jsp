@@ -202,7 +202,7 @@
 				<div class="sellColRight">
 					<input type="date" name="pickUpDate"> 
 					<span style="margin-left:10px;color:grey;font-size:13px;">
-						* 희망수거일은 7일 후부터 선택할 수 있습니다.
+						* 희망수거일은 7일 이후부터 선택할 수 있습니다.
 					</span>
 				</div>		
 			</div>

@@ -85,6 +85,19 @@
 		border-radius:20px;
 	}
 	
+	button.updateBtn{
+		padding:0px;
+		border:2px solid rgb(52, 132, 146);
+		width:70px;
+		height:25px;
+		background-color:white;
+		color:rgb(52, 132, 146);
+		border-radius:5px;
+		padding-bottom:2px;
+		margin:1px;
+		cursor: pointer;
+	}
+	
 	/*댓글테이블*/
 	div#comment-container>div.comment-editor{
 		display:flex;
@@ -205,7 +218,7 @@
 					판매희망금액
 				</div>
 				<div class="sellColRight">
-					<fmt:formatNumber value="${resell.hopePrice}" type="currency" />
+					<fmt:formatNumber value="${resell.hopePrice}" type="currency"/> &nbsp;<button class="updateBtn" value="${resell.resellNo}">수정하기</button>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -227,10 +240,8 @@
 				<div class="comment-editor">
 					<form action="${path}/board/writeBoardComment.do" method="post">
 						<textarea name="content" cols="55" rows="3"></textarea>
-						<input type="hidden" name="boardref" value="${board.boardNo}">
-						<input type="hidden" name="level" value="1">
-						<input type="hidden" name="commentref" value="0">
-						<input type="hidden" name="commentWriter" value="${loginMember!=null?loginMember.memberId:''}">
+						<input type="hidden" name="resellNo" value="${resell.resellNo}">
+						<input type="hidden" name="memberNo" value="${loginMember.memberNo}">
 						<button type="submit" id="btn-insert">등록</button>
 					</form>
 				</div>
@@ -257,5 +268,11 @@
 		</div>
 	</div>
 </section>
+<script>
+	$("button.updateBtn").click(e=>{
+		let path = '${path}/resell/update.do?resellNo=' + $(e.target).val();
+		open(path,'_blank','width=420px height=300px top=280px left=750px');
+	});
+</script>
 <br><br><br><br>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

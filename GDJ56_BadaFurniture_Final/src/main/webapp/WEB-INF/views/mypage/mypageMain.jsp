@@ -177,7 +177,7 @@
 					</div>
 				</div>
 				<div class="mypageCol">
-					<input type="hidden" value="/mypage/resell.do?memberNo=${loginMember.memberNo}"/>
+					<input type="hidden" value="/mypage/resell.do"/>
 					<div class="innerTitle1">
 						Resell
 					</div>

@@ -31,6 +31,11 @@ public class ResellDaoImpl implements ResellDao {
 		return session.selectOne("resell.selectResell",resellNo);
 	}
 
+	@Override
+	public int updateResell(SqlSessionTemplate session, Resell resell) {
+		return session.update("resell.updateResell",resell);
+	}
+
 	
 
 }
