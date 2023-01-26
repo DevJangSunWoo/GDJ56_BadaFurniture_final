@@ -24,4 +24,7 @@ public interface AdminDao {
 	
 	//가구관리 - 삭제
 	int deleteProduct(SqlSessionTemplate session,int id);
+	
+	//가구 관리 - 판매상태 변경
+	int updateSoldOutState(SqlSessionTemplate session,Map param);
 }

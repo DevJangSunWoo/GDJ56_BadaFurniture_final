@@ -20,4 +20,7 @@ public interface AdminService {
 	
 	//가구관리 - 삭제
 	int deleteProduct(int id);
+	
+	//가구 관리 - 판매상태 변경
+	int updateSoldOutState(Map param);
 }

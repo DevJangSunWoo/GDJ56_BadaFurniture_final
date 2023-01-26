@@ -15,19 +15,19 @@
 			<table id="summaryTable">
 				<tr>
 					<th class="tableTh">전체</th>
-					<td class="tableTd">${summary[0].ALLP}</td>
+					<td class="tableTd"><c:out value="${summary[0].ALLP}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">판매중</th>
-					<td class="tableTd">${summary[0].SOSNP}</td>
+					<td class="tableTd"><c:out value="${summary[0].SOSNP}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">거래중</th>
-					<td class="tableTd">${summary[0].SOSIP}</td>
+					<td class="tableTd"><c:out value="${summary[0].SOSIP}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">숨긴 가구</th>
-					<td class="tableTd">${summary[0].SSNP}</td>
+					<td class="tableTd"><c:out value="${summary[0].SSNP}"/></td>
 				</tr>
 			</table>
 		</div>
@@ -114,21 +114,22 @@
 			<div id="propertyContainer" class = "tableContainer">
 				<table id="propertyTable">
 					<thead>
-					<tr>
-						<th><input type="checkbox" name="chk" onclick="selectAll(this)"></th>
-						<th>가구번호</th>
-						<th>사진</th>
-						<th>제품명</th>
-						<th>분류</th>
-						<th>상태</th>
-						<th>색상</th>
-						<th>가격&nbsp;(원)</th>
-						<th>업로드일</th>
-						<th>판매일자</th>
-						<th>판매상태</th>
-						<th>공개상태</th>
-						<th></th>					
-					</tr>
+						<tr>
+							<th><input type="checkbox" name="chk" onclick="selectAll(this)"></th>
+							<th>가구번호</th>
+							<th>사진</th>
+							<th>제품명</th>
+							<th>분류</th>
+							<th>상태</th>
+							<th>색상</th>
+							<th>가격&nbsp;(원)</th>
+							<th>업로드일</th>
+							<th>판매일자</th>
+							<th>판매상태</th>
+							<th>공개상태</th>
+							<th></th>					
+						</tr>
+					</thead>
 					<tbody>
 						<c:if test="${not empty product}">
 							<c:forEach var="p" items="${product }">
@@ -137,45 +138,40 @@
 										<input type="checkbox" name="deleteList" value="${p.productNo}">
 									</td>
 									<td style="width: 20px;">
-										<a href="">${p.productNo }</a>
+										<a href=""><c:out value="${p.productNo }"/></a>
 									</td>
 									<td style="width: 70px;">
 										<img id="productImg" src="${path}/resources/upload/product/${p.getFiles().get(0).renamedFileName}">
 									</td>
 									<td>${p.title }</td>
-									<td style="width: 40px;">${p.item }</td>
-									<td style="width: 20px;">${p.grade }</td>
-									<td style="width: 30px;">${p.color }</td>
-									<td class="price" style="width: 70px;">${p.price }</td>
-									<td style="width: 50px;">${p.productEnrollDate }</td>
-									<td style="width: 50px;">${p.productSoldOutDate }</td>
+									<td style="width: 40px;"><c:out value="${p.item }"/></td>
+									<td style="width: 20px;"><c:out value="${p.grade }"/></td>
+									<td style="width: 30px;"><c:out value="${p.color }"/></td>
+									<td class="price" style="width: 70px;"><c:out value="${p.price }"/></td>
+									<td style="width: 60px;"><c:out value="${p.productEnrollDate }"/></td>
+									<td style="width: 60px;"><c:out value="${p.productSoldOutDate }"/></td>
 									<td>
 										<select name="soldOutState">
-											<option value="N" >판매중</option>
-											<option value="I">거래중</option>
-											<option value="Y">판매완료</option>
+											<option value="N" ${p.soldOutState=='N'?"selected":"" }>판매중</option>
+											<option value="I" ${p.soldOutState=='I'?"selected":"" }>거래중</option>
+											<option value="Y" ${p.soldOutState=='Y'?"selected":"" }>판매완료</option>
 										</select>
 										
 									</td>
 									<td>
 										<select name="showState">
-											<option value="Y">공개</option>
-											<option value="N">숨김</option>
-										</select>
-										
+											<option value="Y" ${p.showState=='Y'?"selected":"" }>공개</option>
+											<option value="N" ${p.showState=='N'?"selected":"" }>숨김</option>
+										</select>										
 									</td>
-									<td style="width: 80px;"><button type="button" class="updateBtn" onclick="location.assign('${path}/admin/update.do')">수정</button></td>
+									<td style="width: 80px;"><button type="button" class="updateBtn" onclick="location.assign('${path}/admin/update.do?productNo=${p.productNo }')">수정</button></td>
 								</tr>
 							</c:forEach>
-						</c:if>
-					</form>
-						
-						
-					</tbody>
-				</thead>
-
-			</table>
-		</div>
+						</c:if>							
+					</tbody>								
+				</table>
+			</div>
+		</form>
 		<div id="pageBarContainer">
 			<div id=pageBar>
 				${pageBar}
@@ -237,7 +233,38 @@
 			}
 		}
 	}
-	
+
+	//판매상태 변경하기
+	$("select[name=soldOutState]").change(e=>{
+			const productNo=$(e.target).parent().parent().children().children().val();
+			const soldOutState=$(e.target).val();
+			// console.log(productNo);
+			// console.log(soldOutState);
+
+			$.ajax({
+				url:"${path}/admin/updateSoldOutState.do",
+				data:{productNo:productNo,soldOutState:soldOutState},
+				success:function(result){		
+					if(result.result>0){
+						alert("변경 완료 (●'◡'●)");
+					}else{
+						alert("변경 실패 ψ(｀∇´)ψ");
+						
+					}
+				},
+				error:function(result){
+					alert("error! result 값 : "+result.result );	
+				}
+			})
+
+
+	});
+
+
+	//공개상태 변경하기
+	function changeShowState(){
+
+	}
 
 </script>
 

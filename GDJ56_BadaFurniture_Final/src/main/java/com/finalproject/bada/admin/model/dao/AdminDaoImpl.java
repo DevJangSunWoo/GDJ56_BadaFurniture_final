@@ -64,6 +64,14 @@ public class AdminDaoImpl implements AdminDao {
 		return session.delete("admin.deleteProduct",id);
 	}
 	
+	//가구 관리 - 판매상태 변경
+	@Override
+	public int updateSoldOutState(SqlSessionTemplate session, Map param) {
+		// TODO Auto-generated method stub
+		return session.update("admin.updateSoldOutState",param);
+	}
+	
+	
 	
 	
 
