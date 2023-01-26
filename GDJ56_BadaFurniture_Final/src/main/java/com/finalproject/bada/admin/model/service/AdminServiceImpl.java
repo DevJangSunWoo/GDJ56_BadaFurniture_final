@@ -60,6 +60,12 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.productListCount(session);
 	}
+
+	@Override
+	public List<Map<String,Integer>> productSummary() {
+		// TODO Auto-generated method stub
+		return dao.productSummary(session);
+	}
 	
 	
 	

@@ -15,19 +15,19 @@
 			<table id="summaryTable">
 				<tr>
 					<th class="tableTh">전체</th>
-					<td class="tableTd">10</td>
+					<td class="tableTd">${summary[0].ALLP}</td>
 				</tr>
 				<tr>
 					<th class="tableTh">판매중</th>
-					<td class="tableTd">5</td>
+					<td class="tableTd">${summary[0].SOSNP}</td>
 				</tr>
 				<tr>
 					<th class="tableTh">거래중</th>
-					<td class="tableTd">3</td>
+					<td class="tableTd">${summary[0].SOSIP}</td>
 				</tr>
 				<tr>
 					<th class="tableTh">숨긴 가구</th>
-					<td class="tableTd">3</td>
+					<td class="tableTd">${summary[0].SSNP}</td>
 				</tr>
 			</table>
 		</div>

@@ -13,15 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.admin.model.service.AdminService;
-
 import com.finalproject.bada.common.PageFactory;
-
-
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
 
@@ -132,11 +128,11 @@ public class AdminController {
 		
 	}
 	
-	//가구 조회
+	//가구관리 - 가구조회
 	@RequestMapping("/admin/product.do")
 	public ModelAndView productList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
-			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage) {
+			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage) {
 		
 		//List<Product> list=service.productList();
 		//log.debug("c {}", cPage);
@@ -147,10 +143,19 @@ public class AdminController {
 		int totalData=service.productListCount();
 		mv.addObject("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "product.do"));
 		
-		mv.setViewName("admin/manageProduct");
+		
+		//가구조회 요약
+		List<Map<String,Integer>> sum=service.productSummary();
+		log.debug("{}",sum);
+		
+		mv.addObject("summary",sum);	
+		
+		
+		mv.setViewName("admin/manageProduct");	
 		
 		return mv;
 	}
+	
 	
 	
 	
