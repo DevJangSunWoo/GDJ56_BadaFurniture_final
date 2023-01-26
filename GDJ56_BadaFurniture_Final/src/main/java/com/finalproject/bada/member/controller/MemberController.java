@@ -38,7 +38,7 @@ public class MemberController {
 	public void test(HttpServletRequest req, @RequestParam Map map) {
 		String[] color = req.getParameterValues("color");
 		String[] material = req.getParameterValues("material");
-		String[] grade = req.getParameterValues("level");
+		String[] grade = req.getParameterValues("grade");
 		
 		System.out.println(Arrays.toString(color));
 		System.out.println(Arrays.toString(material));

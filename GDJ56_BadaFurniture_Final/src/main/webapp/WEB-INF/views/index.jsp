@@ -84,7 +84,7 @@
 			
 			<!-- select Box -->		
 			<div>
-				<div class="select" tabindex="1">
+				<div class="select" tabindex="1" onchange="fn_changeSort();">
 			        <input class="selectopt" name="sort" value="최근등록일순" type="radio" id="opt0" checked>
 			        <label for="opt0" class="option">🏳‍🌈 최근등록일순</label>
 			        <input class="selectopt" name="sort" value="금액낮은순" type="radio" id="opt1">
@@ -94,7 +94,9 @@
 			    </div>
 			</div>
 			<script>
-				
+				const fn_changeSort=()=>{
+					$("#form").submit();
+				}
 			</script>
 			
 			
@@ -135,9 +137,9 @@
 			<div class="container">
 				<h5>[등급]</h5>
 				<ul class="list">	
-					<li><label><input type="checkbox" name="level" value="최상" checked> 최상</label></li>
-					<li><label><input type="checkbox" name="level" value="상" checked> 상</label></li>
-					<li><label><input type="checkbox" name="level" value="중" checked> 중</label></li>
+					<li><label><input type="checkbox" name="grade" value="최상" checked> 최상</label></li>
+					<li><label><input type="checkbox" name="grade" value="상" checked> 상</label></li>
+					<li><label><input type="checkbox" name="grade" value="중" checked> 중</label></li>
 				</ul>
 			</div>
 			<hr>
@@ -145,19 +147,19 @@
 			<div class="container">
 				<h5>[가로사이즈]</h5>
 				<ul class="list">	
-					<li><label><input type="radio" name="size" value="1000" > ~100cm</label></li>
-					<li><label><input type="radio" name="size" value="1200" > ~120cm</label></li>
-					<li><label><input type="radio" name="size" value="1400" > ~140cm</label></li>
-					<li><label><input type="radio" name="size" value="1600" > ~160cm</label></li>
-					<li><label><input type="radio" name="size" value="1800" > ~180cm</label></li>
-					<li><label><input type="radio" name="size" value="2000" > ~200cm</label></li>
-					<li><label><input type="radio" name="size" value="2010" > 201cm~</label></li>
-					<li><label><input type="radio" name="size" value="전체" checked> 전체</label></li>
+					<li><label><input type="radio" name="width" value="1000" > ~100cm</label></li>
+					<li><label><input type="radio" name="width" value="1200" > ~120cm</label></li>
+					<li><label><input type="radio" name="width" value="1400" > ~140cm</label></li>
+					<li><label><input type="radio" name="width" value="1600" > ~160cm</label></li>
+					<li><label><input type="radio" name="width" value="1800" > ~180cm</label></li>
+					<li><label><input type="radio" name="width" value="2000" > ~200cm</label></li>
+					<li><label><input type="radio" name="width" value="2010" > 201cm~</label></li>
+					<li><label><input type="radio" name="width" value="전체" checked> 전체</label></li>
 				</ul>
 			</div>
 			
 			<div id="checkBtn"> 
-				<input type="button" value="초기화">
+				<input type="button" onclick="fn_reset();" value="초기화">
 				<input type="submit" value="적용">
 			</div>
 		</div>	
@@ -165,8 +167,62 @@
 	<script>
 		//조건검색 슬라이드
 		 $("#slidebtn").click(e=>{
-	         $("#checkDiv").slideToggle(600);
-	     });
+	        $("#checkDiv").slideToggle(600);
+	    });
+		
+		//색깔 최소 한개 선택 (0개선택 X)
+		const color = $("input[name=color]");
+		color.change(e=>{
+			if(color.eq(0).prop("checked")==false 
+				&& color.eq(1).prop("checked")==false 
+				&& color.eq(2).prop("checked")==false 
+				&& color.eq(3).prop("checked")==false 
+				&& color.eq(4).prop("checked")==false 
+				&& color.eq(5).prop("checked")==false 
+				&& color.eq(6).prop("checked")==false 
+				&& color.eq(7).prop("checked")==false 
+				&& color.eq(8).prop("checked")==false 
+				&& color.eq(9).prop("checked")==false){
+					
+				$(e.target).prop("checked",true);
+			}
+		});
+		
+		//소재 최소 한개 선택(0개 선택 X)
+		const material = $("input[name=material]");
+		material.change(e=>{
+			if(material.eq(0).prop("checked")==false
+				&& material.eq(1).prop("checked")==false
+				&& material.eq(2).prop("checked")==false
+				&& material.eq(3).prop("checked")==false
+				&& material.eq(4).prop("checked")==false
+				&& material.eq(5).prop("checked")==false
+				&& material.eq(6).prop("checked")==false
+				&& material.eq(7).prop("checked")==false){
+					
+				$(e.target).prop("checked",true);
+			}
+				
+		});
+	
+		//등급 최소 한개 선택 (0개선택 X)
+		const grade = $("input[name=grade]");
+		grade.change(e=>{
+			if(grade.eq(0).prop("checked")==false 
+				&& grade.eq(1).prop("checked")==false 
+				&& grade.eq(2).prop("checked")==false){
+				
+				$(e.target).prop("checked",true);
+			}
+		});
+		
+		//초기화 버튼
+		const fn_reset=()=>{
+			color.prop("checked",true);
+			material.prop("checked",true);
+			grade.prop("checked",true);
+			$("input[name=width]").eq(7).prop("checked",true);
+		}
 	</script>
 	
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
