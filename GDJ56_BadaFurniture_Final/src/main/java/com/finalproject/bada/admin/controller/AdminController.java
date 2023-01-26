@@ -123,12 +123,8 @@ public class AdminController {
 		
 		int result=service.insertProduct(product);
 		
-		//log.debug("result : {}",result);
-		//log.debug("product : {}",product);
-		//log.debug("files : {}",files);
-		
 		mv.addObject("msg",result>0?"가구올리기 성공":"가구올리기 실패");
-		mv.addObject("loc",result>0?"/admin/furniture.do":"/admin/insert.do");
+		mv.addObject("loc",result>0?"/admin/product.do":"/admin/insert.do");
 		mv.setViewName("common/msg");
 		
 		return mv;
@@ -137,7 +133,7 @@ public class AdminController {
 	}
 	
 	//가구 조회
-	@RequestMapping("/admin/furniture.do")
+	@RequestMapping("/admin/product.do")
 	public ModelAndView productList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
 			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage) {
@@ -149,7 +145,7 @@ public class AdminController {
 		mv.addObject("product",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage)));
 		
 		int totalData=service.productListCount();
-		mv.addObject("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "furniture.do"));
+		mv.addObject("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "product.do"));
 		
 		mv.setViewName("admin/manageProduct");
 		

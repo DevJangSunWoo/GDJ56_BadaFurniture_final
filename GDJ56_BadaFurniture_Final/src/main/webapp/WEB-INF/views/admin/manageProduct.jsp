@@ -103,11 +103,12 @@
 					<tr>
 						<th><input type="checkbox" name="chk" onclick="selectAll(this)"></th>
 						<th>가구번호</th>
+						<th>사진</th>
 						<th>제품명</th>
 						<th>분류</th>
-						<th>사진</th>
+						<th>상태</th>
 						<th>색상</th>
-						<th>가격</th>
+						<th>가격&nbsp;(원)</th>
 						<th>업로드일</th>
 						<th>판매일자</th>
 						<th>판매상태</th>
@@ -118,15 +119,22 @@
 						<c:if test="${not empty product}">
 							<c:forEach var="p" items="${product }">
 								<tr>
-									<td style="width: 10px;"><input type="checkbox" name="chk"></td>
-									<td><a href="">${p.productNo }</a></td>
+									<td style="width: 10px;">
+										<input type="checkbox" name="chk">
+									</td>
+									<td style="width: 20px;">
+										<a href="">${p.productNo }</a>
+									</td>
+									<td style="width: 70px;">
+										<img id="productImg" src="${path}/resources/upload/product/${p.getFiles().get(0).renamedFileName}">
+									</td>
 									<td>${p.title }</td>
-									<td>${p.item }</td>
-									<td><img id="productImg" src="${path}/resources/upload/product/${p.getFiles().get(0).renamedFileName}"></td>
-									<td>${p.color }</td>
-									<td>${p.price }</td>
-									<td>${p.productEnrollDate }</td>
-									<td>${p.productSoldOutDate }</td>
+									<td style="width: 40px;">${p.item }</td>
+									<td style="width: 20px;">${p.grade }</td>
+									<td style="width: 30px;">${p.color }</td>
+									<td class="price" style="width: 70px;">${p.price }</td>
+									<td style="width: 50px;">${p.productEnrollDate }</td>
+									<td style="width: 50px;">${p.productSoldOutDate }</td>
 									<td>
 										<select name="soldOutState">
 											<option value="N" >판매중</option>
@@ -179,6 +187,21 @@
 		})
 
 	}
+
+	//천단위 콤마
+	$(()=>{
+		$(".price").each((i,v)=>{
+			let oriPrice=$(v).text();
+			let numberPrice=Number(oriPrice);
+			let parsedPrice=numberPrice.toLocaleString();
+			
+			// console.log("이전: "+oriPrice);
+			// console.log("이후: "+parsedPrice);
+			// console.log("=============")
+
+			$(v).text(parsedPrice);
+		})
+	})
 
 	
 
