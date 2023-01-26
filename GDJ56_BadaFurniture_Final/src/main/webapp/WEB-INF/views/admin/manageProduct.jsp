@@ -40,6 +40,7 @@
         		<option value="showState">공개상태</option>
         		<option value="item">가구분류</option>
         		<option value="productNo">가구번호</option>
+        		<option value="grade">상태</option>
         		<option value="price">가격</option>
         	</select>
 			        	
@@ -80,11 +81,22 @@
         	</div>
         	
         	<div id="search-productNo">
-       			<input type="text" name="searchKeyword" size="30" 
-       			placeholder="검색할 가구번호 입력" class="searchInput">
-       			<input type="hidden" name="searchType" value="BROKER_NO">
-       			<button class="searchBtn">검색</button>
+				<input type="text" name="searchKeyword" size="30" 
+				placeholder="검색할 가구번호 입력" class="searchInput">
+				<input type="hidden" name="searchType" value="BROKER_NO">
+				<button class="searchBtn">검색</button>
         	</div>
+
+			<div id="search-grade">
+				<select name="searchKeyword" class="searchInput">
+					<option value="최상">최상</option>
+					<option value="상">상</option>
+					<option value="중">중</option>
+				</select>
+
+				<input type="hidden" name="searchType" value="BROKER_NO">
+				<button class="searchBtn">검색</button>
+			</div>
         	
         	<div id="search-price">
        			<input type="number" name="searchKeyword" size="30" 
