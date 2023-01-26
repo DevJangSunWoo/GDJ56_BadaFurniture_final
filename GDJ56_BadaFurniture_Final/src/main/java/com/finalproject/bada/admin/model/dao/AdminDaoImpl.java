@@ -70,6 +70,15 @@ public class AdminDaoImpl implements AdminDao {
 		// TODO Auto-generated method stub
 		return session.update("admin.updateSoldOutState",param);
 	}
+
+	//가구 관리 - 공개상태 변경
+	@Override
+	public int updateShowState(SqlSessionTemplate session, Map param) {
+		// TODO Auto-generated method stub
+		return session.update("admin.updateShowState",param);
+	}
+	
+	
 	
 	
 	

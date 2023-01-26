@@ -199,7 +199,7 @@
 
 	}
 
-	//천단위 콤마
+	//천원 단위 콤마
 	$(()=>{
 		$(".price").each((i,v)=>{
 			let oriPrice=$(v).text();
@@ -246,9 +246,21 @@
 				data:{productNo:productNo,soldOutState:soldOutState},
 				success:function(result){		
 					if(result.result>0){
-						alert("변경 완료 (●'◡'●)");
+
+						const nowState="";
+						if(soldOutState=='N'){
+							msg="판매중";
+						}else if(soldOutState=='I'){
+							msg="거래중";
+						}else{
+							msg="판매완료";
+						}
+
+						alert(msg+"으로 변경 완료");
+
+						
 					}else{
-						alert("변경 실패 ψ(｀∇´)ψ");
+						alert("판매상태 변경 실패");
 						
 					}
 				},
@@ -262,9 +274,31 @@
 
 
 	//공개상태 변경하기
-	function changeShowState(){
+		$("select[name=showState]").change(e=>{
+			const productNo=$(e.target).parent().parent().children().children().val();
+			const showState=$(e.target).val();
+			console.log(productNo);
+			console.log(showState);
 
-	}
+			$.ajax({
+				url:"${path}/admin/updateShowState.do",
+				data:{productNo:productNo,showState:showState},
+				success:function(result){		
+					if(result.result>0){
+						alert("공개상태 변경 완료");
+					}else{
+						alert("공개상태 변경 실패");
+						
+					}
+				},
+				error:function(result){
+					alert("error! result 값 : "+result.result );	
+				}
+			})
+
+
+	});
+
 
 </script>
 

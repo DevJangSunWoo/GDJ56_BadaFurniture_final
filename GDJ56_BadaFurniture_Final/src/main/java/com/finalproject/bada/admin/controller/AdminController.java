@@ -22,6 +22,7 @@ import com.finalproject.bada.admin.model.service.AdminService;
 import com.finalproject.bada.common.PageFactory;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.google.gson.Gson;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -203,8 +204,20 @@ public class AdminController {
 	
 	//가구관리 - 공개상태 변경
 	@RequestMapping("/admin/updateShowState.do")
-	public String updateShowState() {
-		return null;
+	@ResponseBody
+	public Map<String,Integer> updateShowState(
+			@RequestParam("productNo") int productNo,
+			@RequestParam("showState") String showState) {
+		Map param=new HashMap();
+		param.put("productNo", productNo);
+		param.put("showState", showState);						
+				
+		int result=service.updateShowState(param);
+		Map<String,Integer> result2=new HashMap<String,Integer>();
+		result2.put("result", result);
+		
+		return result2;
+		
 	}	
 	
 	
