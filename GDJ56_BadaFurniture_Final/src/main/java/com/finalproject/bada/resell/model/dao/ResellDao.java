@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.finalproject.bada.resell.model.vo.FileResell;
 import com.finalproject.bada.resell.model.vo.Resell;
+import com.finalproject.bada.resell.model.vo.ResellComment;
 
 public interface ResellDao {
 	
@@ -18,4 +19,8 @@ public interface ResellDao {
 	Resell selectResell(SqlSessionTemplate session, int resellNo);
 	
 	int updateResell(SqlSessionTemplate session, Resell resell);
+	
+	int deleteResell(SqlSessionTemplate session, int resellNo);
+	
+	int insertResellComment(SqlSessionTemplate session, ResellComment resellComment);
 }

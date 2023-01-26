@@ -19,6 +19,7 @@ import com.finalproject.bada.member.model.vo.Member;
 import com.finalproject.bada.resell.model.service.ResellService;
 import com.finalproject.bada.resell.model.vo.FileResell;
 import com.finalproject.bada.resell.model.vo.Resell;
+import com.finalproject.bada.resell.model.vo.ResellComment;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -169,10 +170,47 @@ public class ResellController {
 		return mv;
 	}
 	
+	@RequestMapping("/resell/delete.do")
+	public ModelAndView deleteResell(ModelAndView mv, 
+			@RequestParam(value="resellNo") int resellNo) {
+		
+		int result = service.deleteResell(resellNo);
+		
+		String msg = "";
+		if(result>0) {
+			msg = "삭제 성공";
+		} else {
+			msg = "삭제 실패";
+		}
+		
+		mv.addObject("msg", msg);
+		mv.addObject("loc", "/mypage/resell.do");
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
 	
-	
-	
-	
+	@RequestMapping("/resell/writeComment.do")
+	public ModelAndView writeResellComment(ModelAndView mv, ResellComment resellComment) {
+		
+		log.debug("resellComment : {}",resellComment);
+		
+		int result = service.insertResellComment(resellComment);
+		
+		String msg = "";
+		String loc = "/resell/read.do?resellNo="+resellComment.getResellNo();
+		if(result > 0) {
+			msg = "댓글 입력 성공";
+		} else {
+			msg = "댓글 입력 실패";
+		}
+		
+		mv.addObject("msg", msg);
+		mv.addObject("loc",loc);
+		mv.setViewName("common/msg");
+			
+		return mv;
+	}
 	
 	
 }
