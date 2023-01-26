@@ -21,11 +21,6 @@ public class MypageController {
 		return "mypage/cartList";
 	}
 	
-	@RequestMapping("mypage/resell.do")
-	public String resellList() {
-		return "mypage/resellList";
-	}
-	
 	@RequestMapping("mypage/alert.do")
 	public String alertList() {
 		return "mypage/alertList";

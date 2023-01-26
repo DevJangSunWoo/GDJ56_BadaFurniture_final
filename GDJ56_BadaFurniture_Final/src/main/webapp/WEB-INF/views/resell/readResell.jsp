@@ -232,7 +232,7 @@
 						<input type="hidden" name="boardref" value="${board.boardNo}">
 						<input type="hidden" name="level" value="1">
 						<input type="hidden" name="commentref" value="0">
-						<input type="hidden" name="commentWriter" value="${loginMember!=null?loginMember.userId:''}">
+						<input type="hidden" name="commentWriter" value="${loginMember!=null?loginMember.memberId:''}">
 						<button type="submit" id="btn-insert">등록</button>
 					</form>
 				</div>

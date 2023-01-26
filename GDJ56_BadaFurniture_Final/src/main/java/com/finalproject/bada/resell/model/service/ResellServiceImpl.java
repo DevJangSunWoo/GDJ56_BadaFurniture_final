@@ -1,5 +1,7 @@
 package com.finalproject.bada.resell.model.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,11 @@ public class ResellServiceImpl implements ResellService {
 	public ResellServiceImpl(ResellDao dao, SqlSessionTemplate session) {
 		this.dao = dao;
 		this.session = session;
+	}
+	
+	@Override
+	public List<Resell> selectResellList(int memberNo) {
+		return dao.selectResellList(session, memberNo);
 	}
 	
 	@Override
