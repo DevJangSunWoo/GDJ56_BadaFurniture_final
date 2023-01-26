@@ -43,7 +43,7 @@
             <div class="checkout__form">
                 <h4>PRODUCT Details</h4>
              <c:if test="${not empty productData}">
-                <form action="#">
+              <!--   <form action="#"> -->
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                            	<div class="box-shadowTest123" style="border:1px solid lightgray;width:700px;margin-leff:600px!important;height:709px;">
@@ -91,7 +91,7 @@
                                     <li>색상 <span>${productData.color}</span></li>
                                 </ul>
                                 <div class="checkout__order__subtotal">등급 <span>${productData.grade}</span></div>
-                                <div class="checkout__order__total">총가격 <span>${productData.price+5000}원</span></div>
+                                <div class="checkout__order__total">총가격 <span>${productData.price+3000}원</span></div>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         배송비는 어떻게 되나요?
@@ -103,12 +103,13 @@
                                 	지역에 따라 배송비 추가금액이 붙을수 있습니다.
                                 </p>
                                 
-                                <button type="submit" class="site-btn" style="background-color: #348492;">구매하기</button>
-                                <button type="submit" class="site-btn" style="background-color: #348492;" >장바구니</button>
+                               
+                                <button  class="site-btn" style="background-color: #348492;"  onclick="location.assign('${path}/order/orderSheet.do?productNo=${productData.productNo}');">바로 구매하기</button>
+                                <button  class="site-btn" style="background-color: #348492;" >장바구니</button>
                             </div>
                         </div>
                     </div>
-                </form>
+             <!--    </form> -->
             </div>
         </div>
     	 

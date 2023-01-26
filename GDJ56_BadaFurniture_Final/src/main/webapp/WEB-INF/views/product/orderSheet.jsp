@@ -476,7 +476,7 @@
 	                                                 <input type="hidden" id="pay-fee-rate-PHONE" value="5" />                                       
 	                                        </div>
 											<div id="pay_info2_account"  style="display:none;" >
-												<input type="text"  placeholder="예금주명을 입력해주세요" style="width:200px;border:1px solid lightgray;display:inline !important;"/>	
+												<input id="depositName" type="text"  placeholder="예금주명을 입력해주세요" style="width:200px;border:1px solid lightgray;display:inline !important;"/>	
 											</div>
 											
 										</li>
@@ -1158,7 +1158,7 @@
 		      $('#pay_info2_account').hide();
 		      $('#card_btn').show();
 		      $('#account_btn').hide();
-		   
+		   		$("#depositName").val("");
 		    }
 		  
 		    }
