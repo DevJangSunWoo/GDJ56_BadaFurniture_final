@@ -66,7 +66,7 @@
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/jquery.easing.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/jquery.lazyload.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/jquery.url.packed.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jsOrder/js"></script>
+<%-- <script src="${pageContext.request.contextPath }/resources/js/jsOrder/js"></script> --%>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/jslib.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/lnb.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/md5.js"></script>
@@ -229,147 +229,125 @@
 			        <input type="hidden" name="rphone3" value="5610" />
 			        <input type="hidden" name="dlv_msg" value="" />
 			        <input type="hidden" name="rselectedNo" value="8995361" />
-			        <ul class="order__list">
-			                        <li class="order__item delivery__item__info" >
-			                <span class="order__item__label">
-			                    배송지
-			                    <!-- 새벽배송 -->
-			                                    </span>
-			                <div class="order__item__area">
-			                    <ul class="order__delivery__radio-wrap" id="quickDeliveryList">
-			                                                <li>
-			                            <input type="radio" onclick="dis2()" class="n-radio" id="delivery_choice_0" name="delivery_choice" value="장선우님 배송지" checked >
-			                            <label for="delivery_choice_0">로그인멤버님 배송지</label>
-			                        </li>
-			                                            </ul>
-			                    <button type="button" class="order__button" onclick="dis()">배송지 변경</button> 
-			                </div>
-			            </li>
-			            <li class="order__item delivery__item__info" >
-			                <span class="order__item__label">이름 / 연락처</span>
-			                <div class="order__item__area">
-			                    <ul class="order__delivery__user">
-			                        <li id="delivery-name">로그인 멤버 이름</li>
-			                        <li id="delivery-phone">로그인 멤버 연락처</li>
-			                    </ul>
-			                </div>
-			            </li>
-			            <li class="order__item delivery__item__info"  id="del_ori">
-			                <span class="order__item__label">기본주소</span>
-			                <div class="order__item__area" id="delivery-addr"> 로그인 멤버 연락처</div>
-			            </li>
-			         
-			         <!--배송지 변경 누를시 나타나는 변경  영역-->
-			         	<div  style="display: none;"  id='dis'>
-				         	<div class="order__item__area">
-					         	<span class="order__item__label">변경주소</span>    			
-				                <div class="order_option_box"> 
-				                <!-- 	<input type="text"  placeholder="공간차지" style="visibility: hidden;width:5px; "> -->
-				                	<input type="text" id="sample4_postcode" placeholder="우편번호" style="width:100px;border:1px solid lightgray; ">	<br>					
-									<input type="text" id="sample4_roadAddress" placeholder="도로명주소" style="width:210px;border:1px solid lightgray;">						
-									<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width:210px;border:1px solid lightgray;">
-									<span id="guide" style="color:#999;display:none"></span><br>
-									<input type="text" id="sample4_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;">
-								 </div>	
-				              
-			                </div>
-			         	</div>
-			         </ul>
+			     <%--    <c:if test="${not empty loginMember }"> --%>
+				        <ul class="order__list">
+				            <li class="order__item delivery__item__info" >
+				                <span class="order__item__label">
+				                    배송지
+				                    <!-- 새벽배송 -->
+				                                    </span>
+				                <div class="order__item__area">
+				                    <ul class="order__delivery__radio-wrap" id="quickDeliveryList">
+				                        <li>
+				                            <input type="radio" onclick="test123789();" class="n-radio" id="delivery_choice_0" name="delivery_choice" value="장선우님 배송지" checked >
+				                            <label for="delivery_choice_0">${loginMember.memberId}님 배송지</label>
+				                        </li>
+				                    </ul>
+				                    <button type="button" class="order__button" onclick="sample6_execDaumPostcode();">배송지 변경</button> 
+				                </div>
+				            </li>
+				            <li class="order__item delivery__item__info" >
+				                <span class="order__item__label">이름 / 연락처</span>
+				                <div class="order__item__area">
+				                    <ul class="order__delivery__user">
+				                        <li id="delivery-name">로그인 멤버 이름</li>
+				                        <li id="delivery-phone">로그인 멤버 연락처</li>
+				                    </ul>
+				                </div>
+				            </li>	
+				         <!--배송지 변경 누를시 나타나는 변경  영역-->
+				         	<div id='dis'>
+					         	<div class="order__item__area">
+						         	<span class="order__item__label">배송주소</span>    			
+					                <div class="order_option_box"> 
+									 	<!-- <div id="addressContainer">
+										 	<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:100px;border:1px solid lightgray;"name="postCode" readonly required>
+											<input type="text" id="sample6_address" placeholder="주소" style="width:210px;border:1px solid lightgray;"name="address" readonly required><br>
+											<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;"name="addressDetail">
+									 	</div> -->
+										<div id="addressContainer">
+											<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:210px;border:1px solid lightgray;"name="postCode" readonly required  value="${loginMember.postCode}"   >
+											<input type="text" id="sample6_address" placeholder="주소" style="width:210px;border:1px solid lightgray;"name="address" readonly required value="${loginMember.address}"><br>
+											<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;"name="addressDetail" value="${loginMember.detailAddress}">
+											<input type="hidden" id="sample6_extraAddress" placeholder="참고항목" style="width:210px;"name="addressExtra" disabled>
+										</div>
+									 </div>	
+				                </div>
+				         	</div>
+				         </ul>
+			     <%--     </c:if> --%>
 			    </div>
 			</div>
 		
 			<!--주소api  -->
+			
 			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 			<script>
-				function sample4_execDaumPostcode() {
-				    new daum.Postcode({
-				        oncomplete: function(data) {
-				            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-				
-				            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-				            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-				            var roadAddr = data.roadAddress; // 도로명 주소 변수
-				            var extraRoadAddr = ''; // 참고 항목 변수
-				
-				            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-				            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-				            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-				                extraRoadAddr += data.bname;
-				            }
-				            // 건물명이 있고, 공동주택일 경우 추가한다.
-				            if(data.buildingName !== '' && data.apartment === 'Y'){
-				               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-				            }
-				            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-				            if(extraRoadAddr !== ''){
-				                extraRoadAddr = ' (' + extraRoadAddr + ')';
-				            }
-				
-				            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-				            document.getElementById('sample4_postcode').value = data.zonecode;
-				            document.getElementById("sample4_roadAddress").value = roadAddr;
-				            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-				            
-				            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-				            /* if(roadAddr !== ''){
-				                document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-				            } else {
-				                document.getElementById("sample4_extraAddress").value = '';
-				            } */
-				
-				            var guideTextBox = document.getElementById("guide");
-				            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-				            if(data.autoRoadAddress) {
-				                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-				                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-				                guideTextBox.style.display = 'block';
-				
-				            } else if(data.autoJibunAddress) {
-				                var expJibunAddr = data.autoJibunAddress;
-				                guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-				                guideTextBox.style.display = 'block';
-				            } else {
-				                guideTextBox.innerHTML = '';
-				                guideTextBox.style.display = 'none';
-				            }
-				           
-				        }
-				    }).open();
-				}
+			function sample6_execDaumPostcode() {
+		        new daum.Postcode({
+		            oncomplete: function(data) {
+		                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+		                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		                var addr = ''; // 주소 변수
+		                var extraAddr = ''; // 참고항목 변수
+
+		                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+		                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+		                    addr = data.roadAddress;
+		                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+		                    addr = data.jibunAddress;
+		                }
+
+		                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+		                if(data.userSelectedType === 'R'){
+		                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+		                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+		                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+		                        extraAddr += data.bname;
+		                    }
+		                    // 건물명이 있고, 공동주택일 경우 추가한다.
+		                    if(data.buildingName !== '' && data.apartment === 'Y'){
+		                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		                    }
+		                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+		                    if(extraAddr !== ''){
+		                        extraAddr = ' (' + extraAddr + ')';
+		                    }
+		                    // 조합된 참고항목을 해당 필드에 넣는다.
+		                    document.getElementById("sample6_extraAddress").value = extraAddr;
+		                
+		                } else {
+		                    document.getElementById("sample6_extraAddress").value = '';
+		                }
+
+		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		                document.getElementById('sample6_postcode').value = data.zonecode;
+		                document.getElementById("sample6_address").value = addr;
+		                // 커서를 상세주소 필드로 이동한다.
+		                document.getElementById("sample6_detailAddress").focus();
+		            }
+		        }).open();
+		    	$("#delivery_choice_0").prop("checked",false);
+			}	
 			</script>
-		
-			<!--배송지 변경 출현 스크립트  -->
 			<script>
-			function dis(){
-			      if($('#dis').css('display') == 'none'){
-			      $('#dis').show();
-			      $('#del_ori').hide();
-			      $('#delivery_choice_0').prop('checked', false);
-			      sample4_execDaumPostcode();
-			    }else{
-			      $('#dis').hide();
-			      $('#del_ori').show();
-			      $('#delivery_choice_0').prop('checked', true);
-			    }
-			    }
+				/*기본 배송지로 변경하는 스크립트   */
+				function test123789(){
+					$("#sample6_postcode").val('${loginMember.postCode}');
+					$("#sample6_address").val('${loginMember.address}');
+					$("#sample6_detailAddress").val('${loginMember.detailAddress}');
 			
-			function dis2(){
+				
 					
-					if($('#dis').css('display') == 'none'){
-				      /* $('#dis').show(); */
-				      $('#del_ori').hide();
-				      $('#delivery_choice_0').prop('checked', false);
-				    /*   sample4_execDaumPostcode(); */
-				    }
-				      else{
-					     
-				    	  $('#dis').hide();
-					      $('#del_ori').show();
-					      $('#delivery_choice_0').prop('checked', true);
-				    	}
 					
-			    }
+					
+				}
+				
+			
 			</script>
+			
 	
 			<div class="section order_product_info">
 				<h3 class="order__title">상품 정보</h3>
