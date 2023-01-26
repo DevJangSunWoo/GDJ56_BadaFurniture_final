@@ -56,4 +56,9 @@ public class ResellServiceImpl implements ResellService {
 		}	
 	}
 
+	@Override
+	public Resell selectResell(int resellNo) {
+		return dao.selectResell(session, resellNo);
+	}
+
 }

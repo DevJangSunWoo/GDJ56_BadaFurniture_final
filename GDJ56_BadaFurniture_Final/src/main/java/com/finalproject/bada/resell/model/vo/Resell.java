@@ -36,4 +36,5 @@ public class Resell {
 	private Date resellEnrollDate;
 	private Date resellEditDate;
 	private List<FileResell> files;
+	private List<ResellComment> comments;
 }

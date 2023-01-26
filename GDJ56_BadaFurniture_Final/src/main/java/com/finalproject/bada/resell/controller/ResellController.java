@@ -49,19 +49,29 @@ public class ResellController {
 		return mv;
 	}
 	
-	@RequestMapping("/resell/write.do")
-	public String writeResell() {
-		return "resell/writeResell";
-	}
-	
 	@RequestMapping("/resell/read.do")
-	public String readResell() {
-		return "resell/readResell";
+	public ModelAndView readResell(ModelAndView mv,
+			@RequestParam(value="resellNo") int resellNo) {
+		
+		Resell resell = service.selectResell(resellNo);
+		
+		log.debug("readResell : {}",resell);
+		log.debug("resellFiles : {}",resell.getFiles());
+		log.debug("resellComments : {}",resell.getComments());
+		mv.addObject("resell", resell);
+		mv.setViewName("resell/readResell");
+		
+		return mv;
 	}
 	
 	@RequestMapping("/resell/update.do")
 	public String updateResell() {
 		return "resell/updateResell";
+	}
+	
+	@RequestMapping("/resell/write.do")
+	public String writeResell() {
+		return "resell/writeResell";
 	}
 	
 	@RequestMapping("/resell/writeEnd.do")

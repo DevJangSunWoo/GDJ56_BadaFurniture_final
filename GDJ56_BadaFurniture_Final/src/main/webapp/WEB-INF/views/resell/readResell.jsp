@@ -119,7 +119,7 @@
 		내 가구 판매 신청서 조회
 	</div>
 	<div id="title" style="font-size:20px !important;height:50px !important;">
-		신청번호 : 100001
+		신청번호 : <c:out value="${resell.resellNo}"/>
 	</div>
 	<div id="sellWrap">
 		<div id="sellContent">
@@ -128,7 +128,7 @@
 					카테고리
 				</div>
 				<div class="sellColRight" style="border-radius:0px 20px 0px 0px;">
-					책상
+					<c:out value="${resell.item}"/>
 				</div>	
 			</div>
 			<div class="sellRow">
@@ -136,9 +136,9 @@
 					크기
 				</div>
 				<div class="sellColRight">
-					<span style="margin-right:30px;">가로 800cm</span>
-					<span style="margin-right:30px;">세로 600cm</span>
-					<span>높이 150cm</span>
+					<span style="margin-right:30px;">가로 <c:out value="${resell.widths}"/>mm</span>
+					<span style="margin-right:30px;">세로 <c:out value="${resell.depths}"/>mm</span>
+					<span>높이 <c:out value="${resell.heights}"/>mm</span>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -146,7 +146,7 @@
 					색상
 				</div>
 				<div class="sellColRight">
-					블랙
+					<c:out value="${resell.color}"/>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -154,7 +154,7 @@
 					상태
 				</div>
 				<div class="sellColRight">
-					최상
+					<c:out value="${resell.grade}"/>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -163,10 +163,10 @@
 				</div>
 				<div class="sellColRight" style="height:250px !important;display:flex;">
 					<div class="sellImageUpload">
-						<img src="${path}/resources/upload/resell/deskTestImg01.png" width="100%" height="100%"/>
+						<img src="${path}/resources/upload/resell/${resell.files[0].renamedFileName}" width="100%" height="100%"/>
 					</div>
 					<div class="sellImageUpload" style="border-left:0px;">
-						<img src="${path}/resources/upload/resell/deskTestImg02.png" width="100%" height="100%"/>
+						<img src="${path}/resources/upload/resell/${resell.files[1].renamedFileName}" width="100%" height="100%"/>
 					</div>
 				</div>		
 			</div>
@@ -175,7 +175,9 @@
 					참고사항
 				</div>
 				<div class="sellColRight" style="height:110px !important;">
-					1년전에 구매한 이케아 책상입니다. 상태 좋아용 ㅎ
+					<div>
+						<c:out value="${resell.detail}"/>
+					</div>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -184,13 +186,9 @@
 				</div>
 				<div class="sellColRight" style="height:110px !important;">
 					<div id="addressContainer">
-						<input type="text" id="sample4_postcode" placeholder="우편번호" style="width:100px;" value="08500" disabled>
-						<br>
-						<input type="text" id="sample4_roadAddress" placeholder="도로명주소" style="width:210px;" value="서울 금천구 가마산로 76" disabled>
-						<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width:210px;" value="서울 금천구 가산동 535-132" disabled>
-						<span id="guide" style="color:#999;display:none"></span><br>
-						<input type="text" id="sample4_detailAddress" placeholder="상세주소" style="width:210px;" value="구디빌라 811호" disabled>
-						<input type="text" id="sample4_extraAddress" placeholder="참고항목" style="width:210px;" value="(가산동)" disabled> 
+						<input type="text" style="width:100px;"name="postCode" value="${resell.postCode}" disabled><br>
+						<input type="text" style="width:435px;"name="address" value="${resell.address}" disabled><br>
+						<input type="text" style="width:435px;"name="addressDetail" value="${resell.addressDetail}" disabled>
 					</div>
 				</div>		
 			</div>
@@ -199,7 +197,7 @@
 					희망수거일
 				</div>
 				<div class="sellColRight">
-					2023-01-24(화)
+					<fmt:formatDate value="${resell.pickUpDate}" type="date" pattern="yyyy-MM-dd(E)"/>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -207,7 +205,7 @@
 					판매희망금액
 				</div>
 				<div class="sellColRight">
-					100,000원
+					<fmt:formatNumber value="${resell.hopePrice}" type="currency" />
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -218,10 +216,10 @@
 				</div>
 				<div class="sellColRight" style="height:80px !important;border-bottom: 1px solid black;border-radius:0px 0px 20px 0px;">
 					<div id="accountContainer">
-						은행명 : 국민은행
-						예금주 : 박선우
+						은행명 : <c:out value="${resell.bankName}"/> / 
+						예금주 : <c:out value="${resell.depositorName}"/>
 						<br>
-						계좌번호 : 1234-1234-1234
+						계좌번호 : <c:out value="${resell.accountCode}"/>
 					</div>
 				</div>		
 			</div>
@@ -237,29 +235,23 @@
 					</form>
 				</div>
 				<table id="tbl-comment">
-					<tr class="level1">
-		   				<td style="width:200px;font-size:15px;">
-						    <sub class="comment-writer">운영자</sub>
-						    <sub class="comment-date">2023-01-10</sub>
-						    <button style="width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;">new</button>
-						    <br> 
-						    고객님이 신청하신 이케아 책상의 가격대는 80,000으로 책정되어 있습니다. 판매를 희망하신다면 가격을 조정해주시면 감사하겠습니다.             
-		   				</td>
-						<td>
-							<button>가격수정</button>
-						</td>	
-					</tr>
-					<tr class="level1">
-		   				<td style="width:200px">
-						    <sub class="comment-writer">DevSunwoo</sub>
-						    <sub class="comment-date">2023-01-11</sub>
-						    <br> 
-						    넹   
-		   				</td>
-						<td>
-
-						</td>	
-					</tr>		
+					<c:if test="${not empty resell.comments}">
+						<c:forEach var="comment" items="${resell.comments}">
+							<tr class="level1">
+								<td>
+									<sub class="comment-writer">
+										<c:out value="${comment.memberNo==100000?'운영자':loginMember.memberId}"/>
+									</sub>
+								    <sub class="comment-date"><c:out value="${comment.resellCommentEnrollDate}"/></sub>
+								    <br> 
+								    <c:out value="${comment.content}"/>
+								</td>
+								<td>
+								
+								</td>
+							</tr>
+						</c:forEach>
+					</c:if>	
 				</table>
 			</div>
 		</div>

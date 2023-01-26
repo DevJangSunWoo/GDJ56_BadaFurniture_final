@@ -152,7 +152,6 @@
 										<div>
 											<div class="infoDetail">
 												<a href="${path}/resell/read.do?resellNo=${r.resellNo}"><c:out value="${r.item}"/> 판매신청</a>
-												<button class="newButton">new</button>
 											</div>
 										</div>
 									</div>
