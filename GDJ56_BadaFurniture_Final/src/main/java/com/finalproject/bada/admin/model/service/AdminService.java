@@ -15,6 +15,9 @@ public interface AdminService {
 	List<Product> productListPage(Map<String,Integer> param);
 	int productListCount();
 	
-	//가구관리 - 요약
+	//가구관리 - 요약테이블
 	List<Map<String,Integer>> productSummary();
+	
+	//가구관리 - 삭제
+	int deleteProduct(int id);
 }

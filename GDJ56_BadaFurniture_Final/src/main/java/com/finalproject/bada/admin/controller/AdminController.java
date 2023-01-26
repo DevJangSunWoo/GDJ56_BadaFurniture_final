@@ -146,12 +146,35 @@ public class AdminController {
 		
 		//가구조회 요약
 		List<Map<String,Integer>> sum=service.productSummary();
-		log.debug("{}",sum);
-		
-		mv.addObject("summary",sum);	
-		
+		//log.debug("{}",sum);		
+		mv.addObject("summary",sum);		
 		
 		mv.setViewName("admin/manageProduct");	
+		
+		return mv;
+	}
+	
+	//가구관리 - 가구삭제
+	@RequestMapping("/admin/deleteProduct.do")
+	public ModelAndView deleteProduct(
+			@RequestParam("deleteList") List<Integer> productNoList,ModelAndView mv) {
+		
+		String msg="삭제에 성공했습니다.";
+		String loc="/admin/product.do";
+		
+		for(Integer id : productNoList) {
+			int result=service.deleteProduct(id);
+			if(result<0) {
+				msg="삭제에 실패했습니다.";
+				loc="/admin/product.do";
+				break;
+			}
+		}		
+
+		mv.addObject("msg",msg);
+		mv.addObject("loc",loc);
+		
+		mv.setViewName("common/msg");
 		
 		return mv;
 	}

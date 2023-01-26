@@ -27,6 +27,7 @@ public class AdminServiceImpl implements AdminService {
 		this.session = session;
 	}
 	
+	//가구 올리기
 	@Override
 	public int insertProduct(Product product) {
 		int result=dao.insertProduct(session,product);			
@@ -42,6 +43,7 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 
+	//가구관리 - 조회
 	@Override
 	public List<Product> productList() {
 		
@@ -61,10 +63,18 @@ public class AdminServiceImpl implements AdminService {
 		return dao.productListCount(session);
 	}
 
+	//요약테이블
 	@Override
 	public List<Map<String,Integer>> productSummary() {
 		// TODO Auto-generated method stub
 		return dao.productSummary(session);
+	}
+
+	//가구관리 - 삭제
+	@Override
+	public int deleteProduct(int id) {
+		// TODO Auto-generated method stub
+		return dao.deleteProduct(session,id);
 	}
 	
 	
