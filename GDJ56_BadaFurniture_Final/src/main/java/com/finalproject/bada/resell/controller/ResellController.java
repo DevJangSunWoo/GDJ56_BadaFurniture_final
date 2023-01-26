@@ -34,6 +34,21 @@ public class ResellController {
 		this.service = service;
 	}
 	
+	@RequestMapping("mypage/resell.do")
+	public ModelAndView resellList(ModelAndView mv, @RequestParam(value="memberNo") int memberNo) {
+		
+		List<Resell> resells = service.selectResellList(memberNo);
+		
+//		if(resells != null) {
+//			resells.stream().forEach(v->log.debug("resell:{}",v));
+//		}
+		
+		mv.addObject("resells",resells);
+		mv.setViewName("mypage/resellList");
+		
+		return mv;
+	}
+	
 	@RequestMapping("/resell/write.do")
 	public String writeResell() {
 		return "resell/writeResell";
@@ -58,7 +73,7 @@ public class ResellController {
 //		log.debug("{}",upFile[0]);
 //		log.debug("{}",upFile[1]);
 		
-		String path = session.getServletContext().getRealPath("/resources/upload/resell");
+		String path = session.getServletContext().getRealPath("/resources/upload/resell/");
 		
 		File dir = new File(path);
 		if(!dir.exists()) dir.mkdirs();

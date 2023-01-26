@@ -339,7 +339,7 @@ details[open] summary::after {
   text-align: center;
   display: block
 }
-a:hover{
+.loginBox a:hover{
   color: #00ffff
 }
 
