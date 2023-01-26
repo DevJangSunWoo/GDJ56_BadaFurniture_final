@@ -50,6 +50,8 @@
                         <span>소재</span>
                         <select name="material" required>
                             <option value="철제">철제</option>
+                            <option value="플라스틱">플라스틱</option>
+                            <option value="합판">합판</option>
                             <option value="원목">원목</option>
                             <option value="가죽">가죽</option>
                             <option value="패브릭">패브릭</option>
@@ -60,11 +62,11 @@
 
                         <span>크기</span>
                         <span style="width:50px">가로</span>
-                        <input type="number" name="widthes" placeholder="가로" style="width:350px" required>&nbsp;&nbsp;mm<br>
+                        <input type="number" name="widths" placeholder="가로" style="width:350px" required>&nbsp;&nbsp;mm<br>
                         
                         <span>&nbsp;&nbsp;</span>
                         <span style="width:50px">세로</span>
-                        <input type="number" name="depthes" placeholder="세로" style="width:350px" required>&nbsp;&nbsp;mm<br>
+                        <input type="number" name="depths" placeholder="세로" style="width:350px" required>&nbsp;&nbsp;mm<br>
                         
                         <span>&nbsp;&nbsp;</span>
                         <span style="width:50px">높이</span>

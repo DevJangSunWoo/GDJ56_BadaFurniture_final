@@ -85,50 +85,27 @@ public class AdminController {
 		//renamed 된 파일명 저장할 곳
 		List<FileProduct> files=new ArrayList();				
 		
-		//파일저장
-		//썸네일			
-		if(!upFile[0].isEmpty()) {
-			String originalFileName=upFile[0].getOriginalFilename(); //원래이름
-			String ext=originalFileName.substring(originalFileName.lastIndexOf(".")); //확장자
-			
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-			int rnd=(int)(Math.random()*100000+1);
-			String renameFile=sdf.format(System.currentTimeMillis())+"_"+rnd+ext; //절대 겹칠 수 없는 임의의 이름 만들어주기 
-			
-			try {
-				upFile[0].transferTo(new File(path+renameFile));
-				files.add(new FileProduct().builder()
-						.originalFileName(originalFileName)
-						.renamedFileName(renameFile)
-						.thumbnail("Y")
-						.build());
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
-			
-			//추가 사진
-			for(int i=1;i<upFile.length;i++) {
-				if(!upFile[i].isEmpty()) {
-					originalFileName=upFile[i].getOriginalFilename(); 
-					ext=originalFileName.substring(originalFileName.lastIndexOf(".")); 
-					
-					sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-					rnd=(int)(Math.random()*100000+1);
-					renameFile=sdf.format(System.currentTimeMillis())+"_"+rnd+ext;
-					
-					try {
-						upFile[i].transferTo(new File(path+renameFile));
-						files.add(new FileProduct().builder()
-								.originalFileName(originalFileName)
-								.renamedFileName(renameFile)
-								.thumbnail("N")
-								.build());
-					}catch(IOException e) {
-						e.printStackTrace();
-					}
-				}		
-			}				
-			
+		//파일저장		
+		for(int i=0;i<upFile.length;i++) {
+			if(!upFile[i].isEmpty()) {
+				String originalFileName=upFile[i].getOriginalFilename(); //원래이름
+				String ext=originalFileName.substring(originalFileName.lastIndexOf(".")); //확장자
+				
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+				int rnd=(int)(Math.random()*100000+1);
+				String renameFile=sdf.format(System.currentTimeMillis())+"_"+rnd+ext; //절대 겹칠 수 없는 임의의 이름 만들어주기 
+				
+				try {
+					upFile[i].transferTo(new File(path+renameFile));
+					files.add(new FileProduct().builder()
+							.originalFileName(originalFileName)
+							.renamedFileName(renameFile)
+							.thumbnail(i==0?"Y":"N")
+							.build());
+				}catch(IOException e) {
+					e.printStackTrace();
+				}
+			}	
 		}
 
 		Product product=Product.builder().title(p.getTitle())
@@ -155,6 +132,7 @@ public class AdminController {
 		mv.setViewName("common/msg");
 		
 		return mv;
+		
 		
 	}
 	
