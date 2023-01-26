@@ -93,6 +93,7 @@
 	</div>
 	<form action="${path}/resell/writeEnd.do" method="post" onsubmit="return checkSubmit();"  enctype="multipart/form-data">
 	<div id="sellWrap">
+		<input type="hidden" name="memberNo" value="${loginMember.memberNo}">
 		<div id="sellContent">
 			<div class="sellRow">
 				<div class="sellColLeft" style="border-radius:20px 0px 0px 0px;">
@@ -117,9 +118,9 @@
 					크기 입력
 				</div>
 				<div class="sellColRight">
-					<span style="margin-right:30px;">가로 <input type="number" name="widthes" style="width:50px" min="1"> mm</span>
+					<span style="margin-right:30px;">가로 <input type="number" name="widths" style="width:50px" min="1"> mm</span>
 					<span style="margin-right:30px;">세로 <input type="number" name="heights" style="width:50px" min="1"> mm</span>
-					<span>높이 <input type="number" name="depthes" style="width:50px" min="1"> mm</span>
+					<span>높이 <input type="number" name="depths" style="width:50px" min="1"> mm</span>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -310,6 +311,12 @@
 			alert("계좌번호를 입력해주세요.");
 			return false;
 		}
+		$("input[name=postCode]").attr("disabled", false);
+		$("input[name=address]").attr("disabled", false);
+		$("input[name=addressExtra]").attr("disabled", false);
+		const addressDetail = $("input[name=addressDetail]").val();
+		const addressExtra = $("input[name=addressExtra]").val();
+		$("input[name=addressDetail]").val(addressDetail + addressExtra);
 		return true;
 	}
 	

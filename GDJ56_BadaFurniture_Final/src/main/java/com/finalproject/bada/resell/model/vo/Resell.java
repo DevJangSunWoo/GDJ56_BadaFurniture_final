@@ -19,8 +19,8 @@ public class Resell {
 	private Member member;
 	private String item;
 	private String grade;
-	private int widthes;
-	private int depthes;
+	private int widths;
+	private int depths;
 	private int heights;
 	private String color;
 	private String detail;
