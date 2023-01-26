@@ -4,7 +4,7 @@ import com.finalproject.bada.resell.model.vo.Resell;
 
 public interface ResellService {
 
-	int insertResell(Resell resell);
+	void insertResell(Resell resell);
 	
 	
 }

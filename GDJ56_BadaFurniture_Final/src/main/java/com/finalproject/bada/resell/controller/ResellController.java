@@ -58,12 +58,6 @@ public class ResellController {
 //		log.debug("{}",upFile[0]);
 //		log.debug("{}",upFile[1]);
 		
-		String msg = "gg";
-		String loc = "zz";
-		
-		mv.addObject("msg",msg);
-		mv.addObject("loc",loc);
-		
 		String path = session.getServletContext().getRealPath("/resources/upload/resell");
 		
 		File dir = new File(path);
@@ -98,9 +92,21 @@ public class ResellController {
 							.addressDetail(r.getAddressDetail()).pickUpDate(r.getPickUpDate())
 							.hopePrice(r.getHopePrice()).bankName(r.getBankName()).depositorName(r.getDepositorName())
 							.accountCode(r.getAccountCode()).files(files).build();
-		Member m = Member.builder().memberNo(memberNo).build();
-		
-		System.out.println(resell);
+		log.debug("resell : {}",resell);
+		String msg = "";
+		String loc = "";
+		try {
+			service.insertResell(resell);
+			msg = "내가구팔기 신청이 완료되었습니다.";
+			loc = "/mypage/resell.do";
+		} catch(RuntimeException e) {
+			e.printStackTrace();
+			msg = "내가구팔기 신청 실패.";
+			loc = "/resell/write.do";
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("loc",loc);
+		mv.setViewName("common/msg");
 		
 		return mv;
 	}
