@@ -26,6 +26,11 @@ public class ResellDaoImpl implements ResellDao {
 		return session.insert("resell.insertFileResell", fr);
 	}
 
+	@Override
+	public Resell selectResell(SqlSessionTemplate session, int resellNo) {
+		return session.selectOne("resell.selectResell",resellNo);
+	}
+
 	
 
 }

@@ -9,4 +9,6 @@ public interface ResellService {
 	void insertResell(Resell resell);
 	
 	List<Resell> selectResellList(int memberNo);
+	
+	Resell selectResell(int resellNo);
 }
