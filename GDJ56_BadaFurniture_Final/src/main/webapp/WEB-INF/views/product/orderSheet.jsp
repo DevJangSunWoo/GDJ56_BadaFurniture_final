@@ -119,75 +119,12 @@
 	<div style="display: flex !important;justify-content: center !important;height:1200px !important;">
 	
 	<!-- 오른쪽 콘텐츠 영역 -->
-	<!--class="right_area page_order_form" -->
 		<div  style="margin-top:150px; ">
-			<!-- 컨텐츠 영역 -->
-			<!--page nation -->
-			<div class="pagenation">
-				<!-- <div class="nav_sub"><a href="/">무신사 스토어</a><span class="icon_entity">&gt;</span><span>주문서</span></div> -->		
-			</div>
-			<!--//page nation -->
+			
 			<form name="f1" id="f1" method="post"  onSubmit="return jsf__pay(this);">
-	            <input type="hidden" name="pay_kind" value="" />
-				<input type="hidden" name="order_prd_amt" value="42800"/>
-				<input type="hidden" name="kval" value="a7aef852029ddd8bba20bf60b536415b"/>
-				<input type="hidden" name="order_dlv_fee" value=""/>
-				<input type="hidden" name="order_coupon_amt" value=""/>
-				<input type="hidden" name="order_prepoint_amt" value=""/>
-				<input type="hidden" name="order_point_amt" value=""/>
-				<input type="hidden" name="order_cart_dc_amt" value="" />
-				<input type="hidden" name="order_group_dc_amt" value="" />
-				<input type="hidden" name="order_dc_amt" value="" />
-				<input type="hidden" name="order_pay_fee" value=""/>
-				<input type="hidden" name="order_pay_amt" value=""/>
-				<input type="hidden" name="guest" value="" />
-				<input type="hidden" name="dlv_cnt" value="1"/>
-				
-				<!-- 총 상품 금액 -->
-				<input type="hidden" name="total_prd_amt" id="total_prd_amt" value="42,800" />
-				<!-- 총 상품 정상금액 -->
-				<input type="hidden" name="total_normal_amt" value="69,000" />
-				<input type="hidden" name="total_normal_add_opt_amt" value="69,000" />
-				
-	
-				<input type="hidden" name="unpay_order_cnt" value="0"/>
-				<input type="hidden" name="unpay_goods_cnt" value="0"/>
-				<input type="hidden" name="cancel_order_cnt" value="0"/>
-				<input type="hidden" name="cancel_order_dday" value=""/>
-				<input type="hidden" name="cancel_goods_cnt" value="0"/>
-				<input type="hidden" name="refund_goods_cnt" value="0"/>
-				<input type="hidden" name="unpay_limited_goods_cnt" value="0"/>
-				<input type="hidden" name="limited_goods_order_yn" value="Y"/>
-	
-				<input type="hidden" name="comm_tax_mny" value="" />
-				<!-- 부가세 -->
-				<input type="hidden" name="comm_vat_mny" value="" />
-				<!-- 비과세 금액 -->
-				<input type="hidden" name="comm_free_mny" value="" />
-	
-				<!-- BIZEST 결제수단 PAYMETHOD -->
-				<input type="hidden" name="pg_pay_method" value=""/>
-	
-				<!-- 결제 서버 설정 값 -->
-				<input type="hidden" name="pay_server" value="https://www.musinsa.com" />
-	
-				<input type="hidden" name="virtual_block_yn" value="N" />
-				<input type="hidden" name="user_mail_authed_yn" value="N" />
-	
-				
-	
-				<!-- 환불 정보 -->
-				<input type="hidden" name="refund_bank" value="국민은행"/>
-				<input type="hidden" name="refund_account" value="93350200466085"/>
-				<input type="hidden" name="refund_depositor" value="장선우"/>
-				<input type="hidden" name="cert_state" value="Y"/>
-	
-				
-	
-	            <input type="hidden" name="pay_type" value=""/>
-	
-	
-				<!--article-title-->
+	           <!--input hidden 위치 결제수단,상품금액 -->
+	           
+	           
 				<div class="right_contents">
 					<h2 class="title-page">Order / Payment</h2>
 					<div class="page-sorting order font-mss">
@@ -198,48 +135,27 @@
 						<span>주문 완료</span>
 					</div>
 				</div>
-				<!--//article-title-->
 	
 	
 				<!-- 회원 -->
 				<div class="section order__delivery">
-				    <!-- 주문자 정보 -->
-				    <input type="hidden" name="ordr_nm" value="장선우"/>
-				    <input type="hidden" name="email1" value="sunwoo8949"/>
-				    <input type="hidden" name="email_etc" value="naver.com"/>
-				    <input type="hidden" name="email2" value="naver.com"/>
-				    <input type="hidden" name="omobile1" value="010"/>
-				    <input type="hidden" name="omobile2" value="5640"/>
-				    <input type="hidden" name="omobile3" value="5610"/>
-				    <!-- // 주문자 정보 -->
+				<!-- 주문자 정보   히튼 태그 위치 -->
+		
 			
 			    <!-- 배송지 정보 -->
 			    <div class="order__delivery__inner">
 			        <h3 class="order__title">배송 정보</h3>
-			        <input type="hidden" name="rcvr_nm" value="장선우" />
-			        <input type="hidden" name="rtitle" value="장선우님 배송지" />
-			        <input type="hidden" name="rzip_cd1" value="14215" />
-			        <input type="hidden" name="rzip_addr1" value="경기 광명시 연서일로17번길 17" />
-			        <input type="hidden" name="rzip_addr2" value="서동 에이스빌  101동 401호" />
-			        <input type="hidden" name="rmobile1" value="010" />
-			        <input type="hidden" name="rmobile2" value="5640" />
-			        <input type="hidden" name="rmobile3" value="5610" />
-			        <input type="hidden" name="rphone1" value="010" />
-			        <input type="hidden" name="rphone2" value="5640" />
-			        <input type="hidden" name="rphone3" value="5610" />
-			        <input type="hidden" name="dlv_msg" value="" />
-			        <input type="hidden" name="rselectedNo" value="8995361" />
-			     <%--    <c:if test="${not empty loginMember }"> --%>
+			       <!--배송정보 히든 태그  -->
+			     <c:if test="${not empty loginMember }"> 
 				        <ul class="order__list">
 				            <li class="order__item delivery__item__info" >
 				                <span class="order__item__label">
 				                    배송지
-				                    <!-- 새벽배송 -->
-				                                    </span>
+				                </span>
 				                <div class="order__item__area">
 				                    <ul class="order__delivery__radio-wrap" id="quickDeliveryList">
 				                        <li>
-				                            <input type="radio" onclick="test123789();" class="n-radio" id="delivery_choice_0" name="delivery_choice" value="장선우님 배송지" checked >
+				                            <input type="radio" onclick="test123789();" class="n-radio" id="delivery_choice_0" name=""    checked >
 				                            <label for="delivery_choice_0">${loginMember.memberId}님 배송지</label>
 				                        </li>
 				                    </ul>
@@ -250,13 +166,13 @@
 				                <span class="order__item__label">이름 / 연락처</span>
 				                <div class="order__item__area">
 				                    <ul class="order__delivery__user">
-				                        <li id="delivery-name">로그인 멤버 이름</li>
-				                        <li id="delivery-phone">로그인 멤버 연락처</li>
+				                        <li id="delivery-name">${loginMember.memberName}</li>
+				                        <li id="delivery-phone">${loginMember.phone}</li>
 				                    </ul>
 				                </div>
 				            </li>	
-				         <!--배송지 변경 누를시 나타나는 변경  영역-->
-				         	<div id='dis'>
+				        
+				         	<div>
 					         	<div class="order__item__area">
 						         	<span class="order__item__label">배송주소</span>    			
 					                <div class="order_option_box"> 
@@ -266,8 +182,8 @@
 											<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;"name="addressDetail">
 									 	</div> -->
 										<div id="addressContainer">
-											<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:210px;border:1px solid lightgray;"name="postCode" readonly required  value="${loginMember.postCode}"   >
-											<input type="text" id="sample6_address" placeholder="주소" style="width:210px;border:1px solid lightgray;"name="address" readonly required value="${loginMember.address}"><br>
+											<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:100px;border:1px solid lightgray;"name="postCode" readonly required  value="${loginMember.postCode}"   >
+											<input type="text" id="sample6_address" placeholder="주소" style="width:280px;border:1px solid lightgray;"name="address" readonly required value="${loginMember.address}"><br>
 											<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;"name="addressDetail" value="${loginMember.detailAddress}">
 											<input type="hidden" id="sample6_extraAddress" placeholder="참고항목" style="width:210px;"name="addressExtra" disabled>
 										</div>
@@ -275,7 +191,7 @@
 				                </div>
 				         	</div>
 				         </ul>
-			     <%--     </c:if> --%>
+			          </c:if> 
 			    </div>
 			</div>
 		
@@ -338,21 +254,11 @@
 					$("#sample6_postcode").val('${loginMember.postCode}');
 					$("#sample6_address").val('${loginMember.address}');
 					$("#sample6_detailAddress").val('${loginMember.detailAddress}');
-			
-				
-					
-					
-					
-				}
-				
-			
+			}
 			</script>
 			
-	
 			<div class="section order_product_info">
-				<h3 class="order__title">상품 정보</h3>
-				<input type="hidden" id="discount_applied_yn" value="" />
-				<input type="hidden" id="event_min_pay_amt" value="10000" />
+				<h3 class="order__title">상품 정보</h3>	
 				<!--cart products-->
 				<table class="table_basic order_cart_table">
 					<colgroup>
@@ -376,24 +282,7 @@
 					<tbody>
 						<tr>
 							<td class="td_product">
-								<input type="hidden" class="input_hidden" name="no" value="780450657" />
-								<input type="hidden" class="input_hidden" name="coupon_amt_780450657" value="0" />
-								<input type="hidden" class="input_hidden" name="cart_info" value="2702396|0|스위트 메론 / L|42800|0|0|0|N|Y|780450657|Y" />
-								<input tyep="hidden" class="input_hidden" id="goods_2702396_0_스위트 메론 / L" />
-								<input type="hidden" class="input_hidden" name="goods_coupon_info" value="" />
-								<input type="hidden" class="input_hidden" name="used_yn" value="N" />
-								<input type="hidden" class="input_hidden" name="cart_goods_cnt[]" value="1" />
-								<input type="hidden" class="input_hidden" name="normal_price" value="69000" />
-								<input type="hidden" class="input_hidden" name="price" value="42800" />
-								<input type="hidden" name="use_point_yn_780450657" value="Y">
-								<input type="hidden" name="prepoint_yn_780450657" value="N">
-								<input type="hidden" name="prepoint_780450657" value="0">
-								<input type="hidden" class="input_hidden" name="exclusive_msspay" value="N" />
-								<input type="hidden" class="input_hidden" name="exclusive_msspay_hyundaicard" value="N" />
-	                               <input type="hidden" class="input_hidden" id="group_dc_limit_yn_780450657" value="Y" />
-								<input type="hidden" name="plcc_dc_yn_780450657" value="Y" />
-								<input type="hidden" name="limit_coupon_amt_yn_780450657" value="N" />
-								<input type="hidden" name="goods_form_type" value="DELIVERY_PRODUCT" />
+								<!--제품에 대한 정보 히든 태그 hidden 태그  -->
 								<div class="connect_img">
 									<a href="/app/goods/2702396/0" target="_blank">
 										<!--가구 이미지 삽입  -->
