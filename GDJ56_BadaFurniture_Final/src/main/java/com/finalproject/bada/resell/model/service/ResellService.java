@@ -11,4 +11,6 @@ public interface ResellService {
 	List<Resell> selectResellList(int memberNo);
 	
 	Resell selectResell(int resellNo);
+	
+	int updateResell(Resell resell);
 }

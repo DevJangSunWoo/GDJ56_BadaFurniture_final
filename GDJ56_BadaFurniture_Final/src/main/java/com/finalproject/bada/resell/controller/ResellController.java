@@ -35,9 +35,11 @@ public class ResellController {
 	}
 	
 	@RequestMapping("mypage/resell.do")
-	public ModelAndView resellList(ModelAndView mv, @RequestParam(value="memberNo") int memberNo) {
+	public ModelAndView resellList(ModelAndView mv, HttpSession session) {
 		
-		List<Resell> resells = service.selectResellList(memberNo);
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		
+		List<Resell> resells = service.selectResellList(loginMember.getMemberNo());
 		
 //		if(resells != null) {
 //			resells.stream().forEach(v->log.debug("resell:{}",v));
@@ -55,9 +57,9 @@ public class ResellController {
 		
 		Resell resell = service.selectResell(resellNo);
 		
-		log.debug("readResell : {}",resell);
-		log.debug("resellFiles : {}",resell.getFiles());
-		log.debug("resellComments : {}",resell.getComments());
+		//log.debug("readResell : {}",resell);
+		//log.debug("resellFiles : {}",resell.getFiles());
+		//log.debug("resellComments : {}",resell.getComments());
 		mv.addObject("resell", resell);
 		mv.setViewName("resell/readResell");
 		
@@ -65,8 +67,39 @@ public class ResellController {
 	}
 	
 	@RequestMapping("/resell/update.do")
-	public String updateResell() {
-		return "resell/updateResell";
+	public ModelAndView updateResell(ModelAndView mv, 
+			@RequestParam(value="resellNo") int resellNo) {
+		
+		Resell resell = service.selectResell(resellNo);
+		
+		mv.addObject(resell);
+		mv.setViewName("resell/updateResell");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/resell/updateEnd.do")
+	public ModelAndView updateEndResell(ModelAndView mv, Resell r) {
+		
+		log.debug("{}",r);
+		
+		int result = service.updateResell(r);
+		
+		String msg="";
+		String script="";
+		if(result > 0) {
+			msg = "수정 완료";
+			script = "opener.document.location.reload();self.close();";
+		}
+		else {
+			msg = "수정 실패.";
+			script = "self.close();";
+		}
+		mv.addObject("msg", msg);
+		mv.addObject("script",script);
+		mv.setViewName("common/msg");
+		
+		return mv;
 	}
 	
 	@RequestMapping("/resell/write.do")
@@ -117,7 +150,7 @@ public class ResellController {
 							.addressDetail(r.getAddressDetail()).pickUpDate(r.getPickUpDate())
 							.hopePrice(r.getHopePrice()).bankName(r.getBankName()).depositorName(r.getDepositorName())
 							.accountCode(r.getAccountCode()).files(files).build();
-		log.debug("resell : {}",resell);
+		//log.debug("resell : {}",resell);
 		String msg = "";
 		String loc = "";
 		try {
