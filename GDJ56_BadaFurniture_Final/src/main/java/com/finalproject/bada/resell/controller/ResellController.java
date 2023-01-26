@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.member.model.vo.Member;
+import com.finalproject.bada.resell.model.service.ResellService;
 import com.finalproject.bada.resell.model.vo.FileResell;
 import com.finalproject.bada.resell.model.vo.Resell;
 
@@ -24,7 +26,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ResellController {
 	
+	private ResellService service;
 	
+	@Autowired
+	public ResellController(ResellService service) {
+		super();
+		this.service = service;
+	}
 	
 	@RequestMapping("/resell/write.do")
 	public String writeResell() {

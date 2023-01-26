@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.finalproject.bada.resell.model.dao.ResellDao;
+import com.finalproject.bada.resell.model.vo.FileResell;
 import com.finalproject.bada.resell.model.vo.Resell;
 
 public class ResellServiceImpl implements ResellService {
@@ -20,8 +21,17 @@ public class ResellServiceImpl implements ResellService {
 	
 	@Override
 	public int insertResell(Resell resell) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int result = dao.insertResell(session, resell);
+		
+		if(result>0) {
+			for(FileResell fr : resell.getFiles()) {
+				fr.setResellNo(resell.getResellNo());
+
+			}
+		}
+		
+		return result;
 	}
 
 }
