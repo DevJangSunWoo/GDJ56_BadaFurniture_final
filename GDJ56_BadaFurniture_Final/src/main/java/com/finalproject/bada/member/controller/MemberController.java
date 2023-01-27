@@ -34,18 +34,6 @@ public class MemberController {
 		this.passwordEncoder = passwordEncoder;
 	}
 	
-	@RequestMapping("/test.do")
-	public void test(HttpServletRequest req, @RequestParam Map map) {
-		String[] color = req.getParameterValues("color");
-		String[] material = req.getParameterValues("material");
-		String[] grade = req.getParameterValues("grade");
-		
-		System.out.println(Arrays.toString(color));
-		System.out.println(Arrays.toString(material));
-		System.out.println(Arrays.toString(grade));
-		System.out.println(map);
-	}
-	
 	
 //--------------------------------------------------------------------------------------------------------------------------------------------------	
 	//로그인

@@ -239,13 +239,18 @@
 			$.each($("input[name=grade]:checked"), function(i,v){
 				gradeArr[i] = $(v).val(); 	
 			});
-			/* console.log(item);
-			console.log(colorArr);
-			console.log(materialArr);
-			console.log(gradeArr);
-			console.log(width);
-			console.log(sort); */
 			
+			$.ajax({
+				url : "${path}/product/productList.do",
+				type : "post",
+				contentType:"application/json",
+// 				traditional:true,
+				data :	JSON.stringify({color:colorArr, material:materialArr, grade:gradeArr, item:item, width:width, sort:sort}),
+				success : plist =>{
+					console.log(plist);
+				}
+				
+			});
 			
 		}
 	</script>
