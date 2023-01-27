@@ -282,48 +282,20 @@
 					</thead>
 					<!--리스트 데이터 표출 -->
 					<tbody>
-						<%-- <c:if test="${not empty productData.files}"  리스트 데이터가 있다면 리스트로 출력하기>    	
-							<tr>
-								<td class="td_product">
-									<div class="connect_img">
-										<img src="${path}/resources/images/product/변수"  >
-									</div>
-									<div class="article_info connect_info">
-										<div class="box_product">
-											<strong>제품 명</strong>
-											<span class="list_info">변수</span>
-										</div>
-										<div class="order_option_box">
-											<p> 분류:변수/색깔:변수 /상태:변수 </p>
-										</div>										
-									</div>
-								</td>
-								<td rowspan="1" colspan="3">
-								배송비는 주문 금액에 포함되있습니다.
-								</td>
-							    <td class="price"   colspan="3">
-		                               <strong>변수명원</strong>
-		                           </td>                                
-							</tr>
-						</c:if> --%>
-						
-						<!--리스트 데이터가 없다면 단품 바로구매하기  -->
-						<%-- <c:if test="${not empty productData.files}">   --%> 	
-							<c:if test="${not empty ospi}">	
+						 <c:if test="${not empty products}">    	
+							<c:forEach var="products" items="${products}" varStatus="vs">
 								<tr>
 									<td class="td_product">
 										<div class="connect_img">
-											<c:if test="${not empty ospi.files}">
-													<img src="${path}/resources/upload/product/${ospi.files.get(0).renamedFileName}"  >
-											</c:if> 
+											<img src="${path}/resources/upload/product/${products.files.get(0).renamedFileName}">
 										</div>
 										<div class="article_info connect_info">
 											<div class="box_product">
 												<strong>제품 명</strong>
-												<span class="list_info">${ospi.title}</span>
+												<span class="list_info">${products.title}</span>
 											</div>
 											<div class="order_option_box">
-												<p> 분류:${ospi.item}/색깔:${ospi.color} /상태:${ospi.grade} </p>
+												<p> 분류:${products.item}/색깔:${products.color} /상태:${products.grade}</p>
 											</div>										
 										</div>
 									</td>
@@ -331,17 +303,14 @@
 									배송비는 주문 금액에 포함되있습니다.
 									</td>
 								    <td class="price"   colspan="3">
-			                               <strong>${ospi.price}원</strong>
-			                        </td>                                
+			                               <strong>${products.price}원</strong>
+			                           </td>                                
 								</tr>
-							</c:if>
-							<c:if test="${empty ospi}">	
-								해당 제품은 판매되었습니다.
-							</c:if>
-						<%-- </c:if>  --%>
-						
-						
-						
+							</c:forEach>
+						</c:if> 
+						<c:if test="${empty products}">	
+							해당 제품은 판매되었습니다.
+						</c:if>
 					</tbody>																	
 				</table>
 			</div>

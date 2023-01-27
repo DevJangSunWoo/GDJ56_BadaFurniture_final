@@ -1,5 +1,8 @@
 package com.finalproject.bada.order.model.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,11 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		
 		return dao.selectOrderSheet(session,productNo);
+	}
+	@Override
+	public List<Product> selectOrderSheetProductList(HashMap map) {
+		// TODO Auto-generated method stub
+		return dao.selectOrderSheetProductList(session,map);
 	}
 	
 	
