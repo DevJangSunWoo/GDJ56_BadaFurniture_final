@@ -20,8 +20,8 @@ public interface AdminService {
 	List<Map<String,Integer>> productSummary();
 	
 	//가구관리 - 삭제
-	int deleteProduct(int id);
-	List<FileProduct> selectFileList(int id);
+	int deleteProduct(Map param);
+	List<FileProduct> selectFileList(Map param);
 	
 	//가구 관리 - 판매상태 변경
 	int updateSoldOutState(Map param);

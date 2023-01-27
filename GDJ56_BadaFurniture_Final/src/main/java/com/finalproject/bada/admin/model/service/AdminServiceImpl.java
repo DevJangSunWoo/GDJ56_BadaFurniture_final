@@ -72,15 +72,15 @@ public class AdminServiceImpl implements AdminService {
 
 	//가구관리 - 삭제
 	@Override
-	public int deleteProduct(int id) {
+	public int deleteProduct(Map param) {
 		// TODO Auto-generated method stub
-		return dao.deleteProduct(session,id);
+		return dao.deleteProduct(session,param);
 	}
 	
 	@Override
-	public List<FileProduct> selectFileList(int id) {
+	public List<FileProduct> selectFileList(Map param) {
 		// TODO Auto-generated method stub
-		return dao.selectFileList(session,id);
+		return dao.selectFileList(session,param);
 	}	
 	
 	

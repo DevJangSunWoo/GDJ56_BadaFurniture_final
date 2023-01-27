@@ -11,6 +11,7 @@
 <section>
 	<div id="listContainer">
 		<h2>가구관리</h2>
+		<!-- 요약테이블 -->
 		<div id="summaryContainer">
 			<table id="summaryTable">
 				<tr>
@@ -32,6 +33,9 @@
 			</table>
 		</div>
 		
+
+		<!-- 조건 검색하기 -->
+
 		<div id="search-container">
 			<span style="font-size: 17px;">검색타입 : </span> 
         	<select id="searchType">
@@ -107,6 +111,8 @@
         	
         </div>
 
+		<!-- 가구 목록 -->
+
 		<form action="${path}/admin/deleteProduct.do" method="post" onsubmit="return deleteConfirm();">
 			<div id="deleteBtnDiv">
 				<button type="submit" id="delete" class="deleteBtn">삭제</button>
@@ -177,6 +183,8 @@
 		</div>
 	</div>
 </section>
+
+
 <script>
 
 	//검색타입 변경
