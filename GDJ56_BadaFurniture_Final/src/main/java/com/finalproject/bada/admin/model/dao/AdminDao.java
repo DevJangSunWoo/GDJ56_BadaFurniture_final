@@ -24,11 +24,18 @@ public interface AdminDao {
 	
 	//가구관리 - 삭제
 	int deleteProduct(SqlSessionTemplate session,int id);
+	List<FileProduct> selectFileList(SqlSessionTemplate session,int id);
 	
 	//가구 관리 - 판매상태 변경
 	int updateSoldOutState(SqlSessionTemplate session,Map param);
 	
 	//가구 관리 - 공개상태 변경
 	int updateShowState(SqlSessionTemplate session,Map param);
+	
+	//가구 관리 - 수정하기 연결 - productNo로 정보 가져오기
+	Product selectProductByProductNo(SqlSessionTemplate session,int productNo);
+
+	
+	
 	
 }
