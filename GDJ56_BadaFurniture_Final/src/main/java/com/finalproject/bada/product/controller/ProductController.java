@@ -1,5 +1,7 @@
 package com.finalproject.bada.product.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,7 +60,12 @@ public class ProductController {
 	}
 	
 	
+	@RequestMapping("/product/cartBtn.do")
+	public void  cartBtn (int cartProductNo,int cartMemberNo,HttpServletResponse response )  {
 	
+			
+		
+	}
 	
 	
 	

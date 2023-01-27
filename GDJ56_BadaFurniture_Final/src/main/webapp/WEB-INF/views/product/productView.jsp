@@ -32,9 +32,7 @@
 		
 	<!--기존 CSS  -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/productView.css"/>
-    
-
-   
+      
 
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
@@ -43,7 +41,7 @@
             <div class="checkout__form">
                 <h4>PRODUCT Details</h4>
              <c:if test="${not empty productData}">
-              <!--   <form action="#"> -->
+              <!--<form action="#"> -->
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                            	<div class="box-shadowTest123" style="border:1px solid lightgray;width:700px;margin-leff:600px!important;height:709px;">
@@ -97,7 +95,7 @@
                                     <li>색상 <span>${productData.color}</span></li>
                                 </ul>
                                 <div class="checkout__order__subtotal">등급 <span>${productData.grade}</span></div>
-                                <div class="checkout__order__total">총가격 <span>${productData.price+3000}원</span></div>
+                                <div class="checkout__order__total">총가격 <span>${productData.price}원</span></div>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         배송비는 어떻게 되나요?
@@ -111,14 +109,42 @@
                                 
                                
                                 <button  class="site-btn" style="background-color: #348492;"  onclick="location.assign('${path}/order/orderSheet.do?productNo=${productData.productNo}');">바로 구매하기</button>
-                                <button  class="site-btn" style="background-color: #348492;" >장바구니</button>
+                                <button  class="site-btn" style="background-color: #348492;" onclick="fn_cartBtn();">장바구니</button>
+                            	
+                            	<!--장바구니에 보낼데이터   type="hidden -->
+                            	<input id="cart_productNo" type="hidden" value="${productData.productNo}">
+                            	<input id="cart_memberNo" type="hidden" value="${loginMember.memberNo}" >
                             </div>
                         </div>
                     </div>
-             <!--    </form> -->
+             <!--</form> -->
             </div>
-        </div>
+        </div>   	 
+    	 <script>
+    	 const fn_cartBtn=()=>{
+				$.ajax({
+					url:"${path}/product/cartBtn.do",
+					data:{cartProductNo:$("#cart_productNo").val()
+						,cartMemberNo:$("#cart_memberNo").val()
+					},
+					success:data=>{
+						console.log(data);
+						if(data){
+							$("#enroll-container span.ok").hide();
+							$("#enroll-container span.error").show();
+						}else{
+							$("#enroll-container span.ok").show();
+							$("#enroll-container span.error").hide();	
+						}
+					}
+				});
+			}	
     	 
+    	 
+    	 
+    	 
+    	 
+    	 </script>
     	 <!--상품 상세사항  -->
             <div style="display:flex;justify-content:center;">
                 <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바-->
