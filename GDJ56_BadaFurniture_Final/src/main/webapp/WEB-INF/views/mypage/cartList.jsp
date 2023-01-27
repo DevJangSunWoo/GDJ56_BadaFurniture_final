@@ -112,7 +112,7 @@
 		</div>
 		<div id="cartWrap">
 			<div id="cartContent">
-				<form action="${path}/order/orderSheet.do" method="get">
+				<form action="${path}/order/orderSheet.do" method="get" onsubmit="return submitCheck();">
 				<table id="cartTable"> 
 					<tr style="border-bottom:1px solid black;"> 
 						<th style="font-size:13px;">
@@ -121,7 +121,7 @@
 							<c:out value="${products.size()}"/>개
 						</th>
 						<th>
-							<input type="checkbox">
+							<input type="checkbox" class="checkAll" checked>
 						</th>
 						<th>상품정보</th>
 						<th>판매가</th>
@@ -133,7 +133,7 @@
 							<tr>
 								<td>${vs.index+1}</td>
 								<td>
-									<input type="checkbox" name="productNo" value="${product.productNo}">
+									<input type="checkbox" class="check" name="productNo" value="${product.productNo}" checked>
 								</td>
 								<td>
 									<div style="height:85px;width:380px;margin:10px;display:flex;">
@@ -148,14 +148,15 @@
 										</div>
 									</div>
 								</td>
-								<td>
-									<fmt:formatNumber value="${product.price}" type="currency" /> 
+								<td class="price">
+									<input type="hidden" value="${product.price}"/>
+									<fmt:formatNumber value="${product.price}" type="currency"/> 
 								</td>
 								<td>
 									무료
 								</td>
 								<td>
-									<button id="deleteBtn">삭제</button>
+									<button type="button" id="deleteBtn" class="deleteOne" value="${product.productNo}">삭제</button>
 								</td>
 							</tr>	
 						</c:forEach>
@@ -168,11 +169,13 @@
 				</table>
 				<div style="display:flex;justify-content: space-between;">
 					<div>
-						<button  id="deleteBtn" style="margin:15px 0px 10px 15px;">선택삭제</button>
+						<button type="button" id="deleteBtn" class="deleteSelect" style="margin:15px 0px 10px 15px;">선택삭제</button>
 					</div>
 					<div id="priceContainer" style="width:100%;height:80px;display:flex;justify-content:right;align-items:center;margin-right:30px;">
-						<div style="color:grey;font-size:20px;font-weight:bolder;">상품합계 : </div>
-						<div style="color:black;font-size:25px;font-weight:bolder">130,000원</div>
+						<div style="color:grey;font-size:20px;font-weight:bolder;margin-right:5px;">상품합계 : </div>
+						<div style="color:black;font-size:25px;font-weight:bolder">
+							<span id="totalPrice"></span>원
+						</div>
 					</div>
 				</div>
 				<div id="ulContainer">
@@ -197,6 +200,79 @@
 				</form>
 			</div>
 		</div>
-		
 	</section>
+<script>
+	$(()=>{
+		sumPrice();
+	});
+	
+	//전체선택 체크박스를 클릭했을 때
+	$("input.checkAll").change(e=>{
+		if($(e.target).prop("checked")==true){
+			$("input.check").prop("checked",true);	
+			sumPrice();
+		} else {
+			$("input.check").prop("checked",false);	
+			sumPrice();
+		}
+	});
+	
+	//가구 체크박스를 클릭했을 때
+	$("input.check").change(e=>{
+		if($("input.check").length == $("input.check:checked").length){
+			$("input.checkAll").prop("checked",true);
+		} else {
+			$("input.checkAll").prop("checked",false);
+		}
+		sumPrice();
+	});
+	
+	//가격 구하기 함수
+	const sumPrice = () => {
+		let totalPrice = 0;
+		if($("input.check:checked").length > 0){
+			$("input.check:checked").each((i,v)=>{
+				totalPrice += Number($(v).parent().next().next().children().first().val());
+			});
+		} 
+		$("span#totalPrice").html(fnSetComma(totalPrice));
+	};
+	
+	//onsubmit 함수
+	const submitCheck = () => {
+		if($("input.check:checked").length == 0){
+			alert("한개 이상의 가구를 선택해 주세요.");
+			return false;
+		}
+		return true;
+	}
+	
+	//숫자 콤마 찍어주는 함수
+	function fnSetComma(n) {
+	    var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
+	    n += '';                          // 숫자를 문자열로 변환         
+	    while (reg.test(n)) {
+	        n = n.replace(reg, '$1' + ',' + '$2');
+	    }
+	    return n;
+	}
+	
+	//삭제 버튼 클릭했을 때
+	$("button.deleteOne").click(e=>{
+		if(confirm("삭제 하시겠습니까?")){
+			location.replace("${path}/cart/delete.do?productNo="+$(e.target).val());
+		} else {
+			
+		}
+	});
+	
+	$("button.deleteSelect").click(e=>{
+		if(confirm("선택하신 가구들을 삭제하시겠습니까?")){
+			
+		} else {
+			
+		}
+	});
+	
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
