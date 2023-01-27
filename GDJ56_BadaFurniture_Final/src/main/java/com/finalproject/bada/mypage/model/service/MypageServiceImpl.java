@@ -1,6 +1,7 @@
 package com.finalproject.bada.mypage.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public List<Product> selectCartProduct(int memberNo) {
 		return dao.selectCartProduct(session, memberNo);
+	}
+
+	@Override
+	public int deleteCart(Map param) {
+		return dao.deleteCart(session, param);
 	}
 
 	
