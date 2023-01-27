@@ -9,7 +9,7 @@ public interface ResellService {
 
 	void insertResell(Resell resell);
 	
-	List<Resell> selectResellList(int memberNo);
+	List<Resell> selectResellList(int memberNo, int cPage, int numPerpage);
 	
 	Resell selectResell(int resellNo);
 	
@@ -18,4 +18,6 @@ public interface ResellService {
 	int deleteResell(int resellNo);
 	
 	int insertResellComment(ResellComment resellComment);
+	
+	int selectResellCount(int memberNo);
 }

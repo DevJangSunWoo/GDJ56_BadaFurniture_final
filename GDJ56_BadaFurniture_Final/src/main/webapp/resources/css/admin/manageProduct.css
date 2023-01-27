@@ -100,10 +100,15 @@
 	a{
 		text-decoration: none;
 	}
-
-	/* a:visited{
+	
+	.viewProduct{
+		text-decoration: none;
 		color: black;
-	} */
+	}
+
+	.viewProduct a:visited{
+		color: black;
+	}
 
 	button{
 		cursor: pointer;

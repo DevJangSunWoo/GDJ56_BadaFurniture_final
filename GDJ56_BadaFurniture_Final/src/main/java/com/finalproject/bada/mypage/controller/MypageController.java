@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finalproject.bada.common.PageFactory;
 import com.finalproject.bada.member.model.vo.Member;
 import com.finalproject.bada.mypage.model.service.MypageService;
+import com.finalproject.bada.mypage.model.vo.Alert;
 import com.finalproject.bada.product.model.vo.Product;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +33,7 @@ public class MypageController {
 		this.service = service;
 	}
 	
-	// Cart
+	// 장바구니 기능 
 	@RequestMapping("/mypage/cart.do")
 	public ModelAndView cartList(ModelAndView mv, HttpSession session) {	
 		Member loginMember = (Member)session.getAttribute("loginMember");	
@@ -70,6 +72,28 @@ public class MypageController {
 		return mv;
 	}
 	
+	//알림기능
+	@RequestMapping("/mypage/alert.do")
+	public ModelAndView alertList(ModelAndView mv, HttpSession session,
+			@RequestParam(value="cPage", defaultValue="1") int cPage) {
+		
+		int numPerpage = 7;
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		
+		List<Alert> alerts = service.selectAlertList(loginMember.getMemberNo(), cPage, numPerpage);
+		int totalData = service.selectAlertCount(loginMember.getMemberNo());
+		String pageBar = PageFactory.getPage(cPage, numPerpage, totalData, "alert.do");
+		
+		mv.addObject("pageBar",pageBar);
+		mv.addObject("alerts",alerts);
+		mv.setViewName("mypage/alertList");
+		
+		return mv;
+	}
+	
+	
+	
+	
 	@RequestMapping("/mypage/order.do")
 	public String orderList() {
 		return "mypage/orderList";
@@ -78,11 +102,6 @@ public class MypageController {
 	@RequestMapping("/mypage/refund.do")
 	public String refundList() {
 		return "mypage/refundList";
-	}
-	
-	@RequestMapping("/mypage/alert.do")
-	public String alertList() {
-		return "mypage/alertList";
 	}
 	
 	@RequestMapping("/mypage/quit.do")

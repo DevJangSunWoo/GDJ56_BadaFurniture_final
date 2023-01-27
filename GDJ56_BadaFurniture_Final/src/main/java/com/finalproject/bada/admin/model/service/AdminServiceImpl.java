@@ -72,10 +72,17 @@ public class AdminServiceImpl implements AdminService {
 
 	//가구관리 - 삭제
 	@Override
-	public int deleteProduct(int id) {
+	public int deleteProduct(Map param) {
 		// TODO Auto-generated method stub
-		return dao.deleteProduct(session,id);
+		return dao.deleteProduct(session,param);
 	}
+	
+	@Override
+	public List<FileProduct> selectFileList(Map param) {
+		// TODO Auto-generated method stub
+		return dao.selectFileList(session,param);
+	}	
+	
 	
 	//가구 관리 - 판매상태 변경
 	@Override
@@ -90,6 +97,16 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.updateShowState(session,param);
 	}
+
+	//가구 관리 - 수정하기 연결 - productNo로 정보 가져오기
+	@Override
+	public Product selectProductByProductNo(int productNo) {
+		// TODO Auto-generated method stub
+		return dao.selectProductByProductNo(session,productNo);
+	}
+
+
+	
 	
 	
 	

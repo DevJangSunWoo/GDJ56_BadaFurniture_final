@@ -140,7 +140,7 @@
 										<img class="infoImg" alt="${product.productNo}" src="${path}/resources/upload/product/${product.files[0].renamedFileName}" width="85px" height="85px" style="cursor:pointer;"/>
 										<div>
 											<div style="padding:20px 0px 8px 10px;">
-												<a href="${path}/product/view.do?productNo=${productNo}"><c:out value="${product.title}"/></a>
+												<a href="${path}/product/view.do?productNo=${product.productNo}"><c:out value="${product.title}"/></a>
 											</div>
 											<div style="padding:0px 0px 5px 10px;font-size:13px;color:grey;">
 												상태 : <c:out value="${product.grade}"/>

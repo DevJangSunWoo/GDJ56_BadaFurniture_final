@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.finalproject.bada.mypage.model.dao.MypageDao;
+import com.finalproject.bada.mypage.model.vo.Alert;
 import com.finalproject.bada.product.model.vo.Product;
 
 @Service
@@ -32,6 +33,18 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public int deleteCart(Map param) {
 		return dao.deleteCart(session, param);
+	}
+
+
+	@Override
+	public List<Alert> selectAlertList(int memberNo, int cPage, int numPerpage) {
+		return dao.selectAlertList(session, memberNo, cPage, numPerpage);
+	}
+
+
+	@Override
+	public int selectAlertCount(int memberNo) {
+		return dao.selectAlertCount(session, memberNo);
 	}
 
 	

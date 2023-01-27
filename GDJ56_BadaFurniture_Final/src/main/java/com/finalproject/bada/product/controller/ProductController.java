@@ -1,8 +1,12 @@
 package com.finalproject.bada.product.controller;
 
+
+import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,6 +67,7 @@ public class ProductController {
 		
 	}
 	
+
 	//메인페이지 제품리스트 출력(아이템, 조건, 정렬 적용)
 	@RequestMapping("product/productList.do")
 	@ResponseBody
@@ -74,8 +79,12 @@ public class ProductController {
 		return list;
 	}
 	
+			
 	
-	
+	@RequestMapping("/product/cartBtn.do")
+	public void  cartBtn (int cartProductNo,int cartMemberNo,HttpServletResponse response )  {
+
+	}
 	
 	
 }
