@@ -52,7 +52,7 @@
 			<div id="search-soldOutState">
 				   <label><input type="radio" name="searchKeyword" value="판매중">판매중</label> 
 				   <label><input type="radio" name="searchKeyword" value="거래중">거래중</label>
-				   <label><input type="radio" name="searchKeyword" value="거래완료">거래완료</label>
+				   <label><input type="radio" name="searchKeyword" value="판매완료">판매완료</label>
 				   <input type="hidden" name="searchType" value="HIDING">
 				   <button class="searchBtn">검색</button>
 			</div>
@@ -124,7 +124,6 @@
 							<th>색상</th>
 							<th>가격&nbsp;(원)</th>
 							<th>업로드일</th>
-							<th>판매일자</th>
 							<th>판매상태</th>
 							<th>공개상태</th>
 							<th></th>					
@@ -138,7 +137,7 @@
 										<input type="checkbox" name="deleteList" value="${p.productNo}">
 									</td>
 									<td style="width: 20px;">
-										<a href=""><c:out value="${p.productNo }"/></a>
+										<a class="viewProduct" href="${path}/product/view.do?productNo=${p.productNo}"><c:out value="${p.productNo }"/></a>
 									</td>
 									<td style="width: 70px;">
 										<img id="productImg" src="${path}/resources/upload/product/${p.getFiles().get(0).renamedFileName}">
@@ -149,7 +148,6 @@
 									<td style="width: 30px;"><c:out value="${p.color }"/></td>
 									<td class="price" style="width: 70px;"><c:out value="${p.price }"/></td>
 									<td style="width: 60px;"><c:out value="${p.productEnrollDate }"/></td>
-									<td style="width: 60px;"><c:out value="${p.productSoldOutDate }"/></td>
 									<td>
 										<select name="soldOutState">
 											<option value="N" ${p.soldOutState=='N'?"selected":"" }>판매중</option>
@@ -164,7 +162,7 @@
 											<option value="N" ${p.showState=='N'?"selected":"" }>숨김</option>
 										</select>										
 									</td>
-									<td style="width: 80px;"><button type="button" class="updateBtn" onclick="location.assign('${path}/admin/update.do?productNo=${p.productNo }')">수정</button></td>
+									<td style="width: 80px;"><button type="button" class="updateBtn" onclick="window.open('${path}/admin/update.do?productNo=${p.productNo }')">수정</button></td>
 								</tr>
 							</c:forEach>
 						</c:if>							

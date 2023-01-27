@@ -63,6 +63,12 @@ public class AdminDaoImpl implements AdminDao {
 		// TODO Auto-generated method stub
 		return session.delete("admin.deleteProduct",id);
 	}
+
+	@Override
+	public List<FileProduct> selectFileList(SqlSessionTemplate session, int id) {
+		// TODO Auto-generated method stub
+		return session.selectList("admin.selectFileList",id);
+	}
 	
 	//가구 관리 - 판매상태 변경
 	@Override
@@ -77,6 +83,15 @@ public class AdminDaoImpl implements AdminDao {
 		// TODO Auto-generated method stub
 		return session.update("admin.updateShowState",param);
 	}
+
+	//가구 관리 - 수정하기 연결 - productNo로 정보 가져오기
+	@Override
+	public Product selectProductByProductNo(SqlSessionTemplate session, int productNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.selectProductByProductNo",productNo);
+	}
+
+	
 	
 	
 	

@@ -76,7 +76,7 @@
 		text-align:center;
 		border-bottom:1px solid grey;
 	}
-	button#deleteBtn{
+	button.deleteBtn{
 		padding:0px;
 		border:2px solid red;
 		width:70px;
@@ -121,7 +121,7 @@
 							<c:out value="${products.size()}"/>개
 						</th>
 						<th>
-							<input type="checkbox" class="checkAll" checked>
+							<input type="checkbox" class="checkAll" style="cursor:pointer;" checked>
 						</th>
 						<th>상품정보</th>
 						<th>판매가</th>
@@ -133,14 +133,14 @@
 							<tr>
 								<td>${vs.index+1}</td>
 								<td>
-									<input type="checkbox" class="check" name="productNo" value="${product.productNo}" checked>
+									<input type="checkbox" class="check" name="productNo" value="${product.productNo}" style="cursor:pointer;" checked>
 								</td>
 								<td>
 									<div style="height:85px;width:380px;margin:10px;display:flex;">
-										<img src="${path}/resources/upload/product/${product.files[0].renamedFileName}" width="85px" height="85px"/>
+										<img class="infoImg" alt="${product.productNo}" src="${path}/resources/upload/product/${product.files[0].renamedFileName}" width="85px" height="85px" style="cursor:pointer;"/>
 										<div>
 											<div style="padding:20px 0px 8px 10px;">
-												<a href="${path}"><c:out value="${product.title}"/></a>
+												<a href="${path}/product/view.do?productNo=${product.productNo}"><c:out value="${product.title}"/></a>
 											</div>
 											<div style="padding:0px 0px 5px 10px;font-size:13px;color:grey;">
 												상태 : <c:out value="${product.grade}"/>
@@ -156,7 +156,7 @@
 									무료
 								</td>
 								<td>
-									<button type="button" id="deleteBtn" class="deleteOne" value="${product.productNo}">삭제</button>
+									<button type="button" class="deleteBtn deleteOne" value="${product.productNo}" style="cursor:pointer;">삭제</button>
 								</td>
 							</tr>	
 						</c:forEach>
@@ -169,7 +169,7 @@
 				</table>
 				<div style="display:flex;justify-content: space-between;">
 					<div>
-						<button type="button" id="deleteBtn" class="deleteSelect" style="margin:15px 0px 10px 15px;">선택삭제</button>
+						<button type="button" class="deleteBtn deleteSelect" style="margin:15px 0px 10px 15px;cursor:pointer;">선택삭제</button>
 					</div>
 					<div id="priceContainer" style="width:100%;height:80px;display:flex;justify-content:right;align-items:center;margin-right:30px;">
 						<div style="color:grey;font-size:20px;font-weight:bolder;margin-right:5px;">상품합계 : </div>
@@ -261,17 +261,27 @@
 	$("button.deleteOne").click(e=>{
 		if(confirm("삭제 하시겠습니까?")){
 			location.replace("${path}/cart/delete.do?productNo="+$(e.target).val());
-		} else {
-			
+		} 
+	});
+	
+	//선택삭제 버튼 클릭했을 때
+	$("button.deleteSelect").click(e=>{
+		let queryString = "";
+		if($("input.check:checked").length > 0){
+			if(confirm("선택하신 가구들을 삭제하시겠습니까?")){
+				$("input.check:checked").each((i,v)=>{
+					queryString += "productNo=" + $(v).val() + "&";
+				});
+				queryString = queryString.substring(0,queryString.length-1);
+				location.replace("${path}/cart/delete.do?" + queryString);
+			} 
 		}
 	});
 	
-	$("button.deleteSelect").click(e=>{
-		if(confirm("선택하신 가구들을 삭제하시겠습니까?")){
-			
-		} else {
-			
-		}
+	//이미지 클릭했을 때
+	$("img.infoImg").click(e=>{
+		let path = '${path}/product/view.do?productNo=' + $(e.target).attr("alt");
+		location.assign(path);
 	});
 	
 </script>
