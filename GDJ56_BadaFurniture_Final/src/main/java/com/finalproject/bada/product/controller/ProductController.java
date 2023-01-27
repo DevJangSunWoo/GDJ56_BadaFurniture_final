@@ -1,8 +1,14 @@
 package com.finalproject.bada.product.controller;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.product.model.service.ProductService;
@@ -13,6 +19,14 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class ProductController {
+	
+	private ProductService service;
+	
+	@Autowired
+	public ProductController(ProductService service) {
+		super();
+		this.service = service;
+	}
 	
 //	@RequestMapping("/product/view.do")
 //	public String productView() {
@@ -32,18 +46,10 @@ public class ProductController {
 		
 	}
 	
-	private ProductService service;
-	
-	@Autowired
-	public ProductController(ProductService service) {
-		super();
-		this.service = service;
-	}
-	
 	
 	//상세화면 표출하기
 	@RequestMapping("/product/view.do")
-	public ModelAndView  productView(ModelAndView mv, int productNo) {
+	public ModelAndView productView(ModelAndView mv, int productNo) {
 		
 		Product  productData=service.selectProduct(productNo);
 		
@@ -57,7 +63,15 @@ public class ProductController {
 		
 	}
 	
-	
+	@RequestMapping("product/productList.do")
+	@ResponseBody
+	public List<Product> productList(@RequestBody Map map) throws IOException{
+		log.debug("{}",map);
+		
+		List<Product> list = service.selectProductList(map);
+		
+		return list;
+	}
 	
 	
 	
