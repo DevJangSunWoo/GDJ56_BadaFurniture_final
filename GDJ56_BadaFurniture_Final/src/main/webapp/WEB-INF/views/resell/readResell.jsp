@@ -238,7 +238,7 @@
 			</div>
 			<div id="comment-container">
 				<div class="comment-editor">
-					<form action="${path}/board/writeBoardComment.do" method="post">
+					<form action="${path}/resell/writeComment.do" method="post">
 						<textarea name="content" cols="55" rows="3"></textarea>
 						<input type="hidden" name="resellNo" value="${resell.resellNo}">
 						<input type="hidden" name="memberNo" value="${loginMember.memberNo}">

@@ -54,14 +54,20 @@
                                         <input type="radio" name="slide" id="slide3">
                                         <input type="radio" name="slide" id="slide4">
                                         <ul id="imgholder" class="imgs">
+                                        	
                                         	<c:if test="${not empty productData.files}">  
 	                                        	<c:forEach var="files" items="${productData.files}" varStatus="vs">	  
-		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/upload/product/${files.renamedFileName}"  ></li>
+		                                            <li  class="image-box" style="width:400px !important ;height:400px !important; ">
+		                                            	
+		                                            		<img style="width:100%;height:100%;"   class="image-thumbnail" src="${path}/resources/upload/product/${files.renamedFileName}">
+		                                            	
+		                                            </li>
 		                                           <%--  <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
 		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
 		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li> --%>
                                         		</c:forEach>
                                         	</c:if>  
+                                        	
                                         	<c:if test="${empty  productData.files}">  
                                         		제품사진 미등록
                                         	</c:if>

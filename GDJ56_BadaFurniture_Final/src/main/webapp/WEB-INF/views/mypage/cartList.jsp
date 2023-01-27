@@ -112,12 +112,13 @@
 		</div>
 		<div id="cartWrap">
 			<div id="cartContent">
+				<form action="${path}/order/orderSheet.do" method="get">
 				<table id="cartTable"> 
 					<tr style="border-bottom:1px solid black;"> 
 						<th style="font-size:13px;">
 							전체
 							<br>
-							n개
+							<c:out value="${products.size()}"/>개
 						</th>
 						<th>
 							<input type="checkbox">
@@ -127,62 +128,43 @@
 						<th>배송비</th>
 						<th>비고</th>
 					</tr>
-					<tr>
-						<td>1</td>
-						<td>
-							<input type="checkbox">
-						</td>
-						<td>
-							<div style="height:85px;width:380px;margin:10px;display:flex;">
-								<img src="${path}/resources/images/admin/addImage.png" width="85px" height="85px"/>
-								<div>
-									<div style="padding:20px 0px 8px 10px;">
-										<a href="#">유병승 선생님의 책상</a>
+					<c:if test="${not empty products}">
+						<c:forEach var="product" items="${products}" varStatus="vs">
+							<tr>
+								<td>${vs.index+1}</td>
+								<td>
+									<input type="checkbox" name="productNo" value="${product.productNo}">
+								</td>
+								<td>
+									<div style="height:85px;width:380px;margin:10px;display:flex;">
+										<img src="${path}/resources/upload/product/${product.files[0].renamedFileName}" width="85px" height="85px"/>
+										<div>
+											<div style="padding:20px 0px 8px 10px;">
+												<a href="${path}"><c:out value="${product.title}"/></a>
+											</div>
+											<div style="padding:0px 0px 5px 10px;font-size:13px;color:grey;">
+												상태 : <c:out value="${product.grade}"/>
+											</div>
+										</div>
 									</div>
-									<div style="padding:0px 0px 5px 10px;font-size:13px;color:grey;">
-										상태 : 상
-									</div>
-								</div>
-							</div>
-						</td>
-						<td>
-							30,000원
-						</td>
-						<td>
-							무료
-						</td>
-						<td>
-							<button id="deleteBtn">삭제</button>
-						</td>
-					</tr>	
-					<tr>
-						<td>2</td>
-						<td>
-							<input type="checkbox">
-						</td>
-						<td>
-							<div style="height:85px;width:380px;margin:10px;display:flex;">
-								<img src="${path}/resources/images/admin/addImage.png" width="85px" height="85px"/>
-								<div>
-									<div style="padding:20px 0px 8px 10px;">
-										<a href="#">유병승 선생님의 책상</a>
-									</div>
-									<div style="padding:0px 0px 5px 10px;font-size:13px;color:grey;">
-										상태 : 상
-									</div>
-								</div>
-							</div>
-						</td>
-						<td>
-							100,000원
-						</td>
-						<td>
-							무료
-						</td>
-						<td>
-							<button id="deleteBtn">삭제</button>
-						</td>
-					</tr>	
+								</td>
+								<td>
+									<fmt:formatNumber value="${product.price}" type="currency" /> 
+								</td>
+								<td>
+									무료
+								</td>
+								<td>
+									<button id="deleteBtn">삭제</button>
+								</td>
+							</tr>	
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty products}">
+						<tr>
+							<td colspan="6">장바구니에 상품이 없습니다.</td>
+						</tr>
+					</c:if>
 				</table>
 				<div style="display:flex;justify-content: space-between;">
 					<div>
@@ -210,10 +192,11 @@
 					</ul>
 				</div>
 				<div style="display:flex;justify-content:center">
-					<button id="orderBtn">결제하기</button>
+					<button id="orderBtn">구매하기</button>
 				</div>
+				</form>
 			</div>
 		</div>
-
+		
 	</section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -20,11 +20,11 @@ public class ProductController {
 //		
 //	}
 	
-	@RequestMapping("/order/orderSheet.do")
-	public String orderSheet() {
-		return "product/orderSheet";
-		
-	}
+//	@RequestMapping("/order/orderSheet.do")
+//	public String orderSheet() {
+//		return "product/orderSheet";
+//		
+//	}
 	
 	@RequestMapping("/order/orderComplete.do")
 	public String orderComplete() {
