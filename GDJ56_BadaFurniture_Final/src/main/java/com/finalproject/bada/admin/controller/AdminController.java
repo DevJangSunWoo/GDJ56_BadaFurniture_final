@@ -164,15 +164,15 @@ public class AdminController {
 		
 		String msg="삭제에 성공했습니다.";
 		String loc="/admin/product.do";
-		log.debug("productNoList : "+productNoList);
+		//log.debug("productNoList : "+productNoList);
 				
 		String path=session.getServletContext().getRealPath("/resources/upload/product/");
 		List<FileProduct> fileList=service.selectFileList(param);
-		log.debug("FILELIST : "+fileList);
+		//log.debug("FILELIST : "+fileList);
 		
 		for(int i=0;i<fileList.size();i++) {
 			String renamedFileName=fileList.get(i).getRenamedFileName();
-			log.debug("파일명 : "+renamedFileName);
+			//log.debug("파일명 : "+renamedFileName);
 			File file=new File(path+renamedFileName);				
 			if(file.exists()){
 				file.delete();
