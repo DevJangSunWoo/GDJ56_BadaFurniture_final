@@ -46,7 +46,7 @@ summary {
   text-align: center;
   padding: 12px 10px;
   height: 17px;
-  color: var(--secoColor); 
+  color: #348492; 
   cursor: pointer;
   user-select: none;
   outline: none;
@@ -97,8 +97,8 @@ details[open] summary::after {
 .memberMenu a {
   padding: 12px 15px;
   margin: 0 16px;
- /*  color: var(--secoColor); */
-  color: white;
+  color: var(--secoColor);
+  /* color: white; */
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   text-decoration: none;
   text-align: center;

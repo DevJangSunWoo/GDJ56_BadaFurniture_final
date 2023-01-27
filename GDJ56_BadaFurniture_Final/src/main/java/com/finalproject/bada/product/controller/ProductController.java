@@ -63,6 +63,7 @@ public class ProductController {
 		
 	}
 	
+	//메인페이지 제품리스트 출력(아이템, 조건, 정렬 적용)
 	@RequestMapping("product/productList.do")
 	@ResponseBody
 	public List<Product> productList(@RequestBody Map map) throws IOException{

@@ -246,10 +246,50 @@
 				contentType:"application/json",
 // 				traditional:true,
 				data :	JSON.stringify({color:colorArr, material:materialArr, grade:gradeArr, item:item, width:width, sort:sort}),
-				success : plist =>{
-					console.log(plist);
+				success : list =>{
+					console.log(list);
+					$("#productContainer").html("");
+					/* list.forEach(e=>{
+						
+					}) */
+					for(let i=0; i<list.length; i++){
+						let productWrap = $("<div>").addClass("productWrap");
+						let productNo = $("<input>").attr("type","number").attr("name","productNo").prop("hidden");
+						let showProduct = $("<div>").addClass("showProduct");
+						
+						let imgDiv = $("<div>").addClass("imgDiv")
+									.append($("<img>").attr("src","${path }/resources/upload/product/"+list[i].files[0].renamedFileName));
+						
+						let infoDiv = $("<div>").addClass("infoDiv");
+						let productTitle = $("<div>").addClass("productTitle")
+										.append($("<span>")).text(list[i].title);
+						let grade = $("<div>").addClass("grade")
+									.append($("<span>")).text("등급 : ");
+									.after($("<span>")).text(list[i].grade);
+						let size = $("<div>").addClass("size")
+									.append($("<span>")).text(list[i].widths)
+									.append($("<span>")).text("mm")
+									.append($("<span>")).text("*")
+									.append($("<span>")).text(list[i].depths)
+									.append($("<span>")).text("mm")
+									.append($("<span>")).text("*")
+									.append($("<span>")).text(list[i].heights)
+									.append($("<span>")).text("mm");
+						let price = $("<div>").addClass("price")
+									.append($("<span>")).text(list[i].price)
+									.append($("<span>")).text("원");
+						let date = $("<div>").addClass("date")
+									.append($("<span>")).text(list[i].productEnrollDate);
+						
+						
+						productWrap.append(productNo).append(showProduct);
+						showProduct.append(imgDiv).append(infoDiv);
+						infoDiv.append(productTitle).append(grade).append(size).append(price).append(date);
+						
+						
+						$("#productContainer").append(productWrap);
+					}
 				}
-				
 			});
 			
 		}
@@ -259,6 +299,8 @@
 	
 	<div style="display:flex; justify-content:center;">
 		<div id="productContainer">
+		
+			<%-- <c:forEach begin="0" end="7" step="1" var="i">
 			<div class="productWrap" >
                 <input type="number" name="productNo" id="productNo" value="" hidden>
                 
@@ -268,17 +310,14 @@
 	                </div>
 	                
 	                <div class="infoDiv">
-	                    <!-- <div class="productItem">
-	                        <span>책상</span>
-	                    </div> -->
 	                    <div class="productTitle">
 	                    	<span>책상이에요요요용</span>
 	                    </div>
-	                    <div class="infotext">
+	                    <div class="grade">
 	                    	<span>등급 : </span>
 	                    	<span>최상</span>
 	                    </div>
-	                    <div class="infotext">
+	                    <div class="size">
 	                    	<span>1500</span>
 	                    	<span>mm</span>
 	                    	<span>*</span>
@@ -298,6 +337,8 @@
 	                </div>
                 </div> 
             </div>
+            </c:forEach> --%>
+            
 		</div>
 	</div>
 	
