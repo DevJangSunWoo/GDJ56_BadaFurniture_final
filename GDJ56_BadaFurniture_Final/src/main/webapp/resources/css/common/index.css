@@ -33,6 +33,11 @@ div{
 
 #iconDiv img{
     height: 80px;
+    cursor : pointer;
+}
+
+#iconDiv h3{
+	cursor : pointer;
 }
 
 #iconContainer{
@@ -63,8 +68,7 @@ div{
 
 #checkDiv{
 	position: absolute;
-	width: 65%;
-    height: 590px;
+	width: 70%;
     border-radius: 5px;
     border: 2px solid black;
 }
@@ -81,7 +85,7 @@ div{
 	font-size : 16px;
 }
 
-.list input[type="checkbox"]{
+.list input[type="checkbox"], input[type="radio"]{
 	width: 20px; 
 	height: 20px; 
 	cursor: pointer;
@@ -233,11 +237,12 @@ ul.ks-cboxtags li input[type="checkbox"] {
 /* -------------------------------------------------------------------------------------------------- */
 /* 조건검색 - 버튼 */
 #checkBtn{
-	width: 90%;
+	width: 95%;
 	display: flex;
 	justify-content: space-around;
 	margin-top: 20px;
 	margin-right: 20px;
+	margin-bottom: 30px;
 }
 
 

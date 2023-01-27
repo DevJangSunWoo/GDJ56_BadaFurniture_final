@@ -77,6 +77,21 @@ public class AdminServiceImpl implements AdminService {
 		return dao.deleteProduct(session,id);
 	}
 	
+	//가구 관리 - 판매상태 변경
+	@Override
+	public int updateSoldOutState(Map param) {
+		// TODO Auto-generated method stub
+		return dao.updateSoldOutState(session,param);
+	}
+	
+	//가구 관리 - 공개상태 변경
+	@Override
+	public int updateShowState(Map param) {
+		// TODO Auto-generated method stub
+		return dao.updateShowState(session,param);
+	}
+	
+	
 	
 	
 }

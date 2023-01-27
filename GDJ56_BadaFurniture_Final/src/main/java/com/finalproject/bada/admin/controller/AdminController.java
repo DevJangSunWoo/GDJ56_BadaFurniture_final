@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,6 +22,7 @@ import com.finalproject.bada.admin.model.service.AdminService;
 import com.finalproject.bada.common.PageFactory;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.google.gson.Gson;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -89,7 +92,7 @@ public class AdminController {
 				
 				SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
 				int rnd=(int)(Math.random()*100000+1);
-				String renameFile=sdf.format(System.currentTimeMillis())+"_"+rnd+ext; //절대 겹칠 수 없는 임의의 이름 만들어주기 
+				String renameFile=sdf.format(System.currentTimeMillis())+"_"+rnd+ext;
 				
 				try {
 					upFile[i].transferTo(new File(path+renameFile));
@@ -179,8 +182,43 @@ public class AdminController {
 		return mv;
 	}
 	
+	//가구관리 - 판매상태 변경
+	@RequestMapping(value="/admin/updateSoldOutState.do")
+	@ResponseBody
+	public Map<String,Integer> updateSoldOutState(
+			@RequestParam("productNo") int productNo,
+			@RequestParam("soldOutState") String soldOutState) {
+		Map param=new HashMap();
+		param.put("productNo", productNo);
+		param.put("soldOutState", soldOutState);		
+				
+		
+		int result=service.updateSoldOutState(param);
+		Map<String,Integer> result2=new HashMap<String,Integer>();
+		result2.put("result", result);
+		
+		return result2;
+		
+	}
 	
 	
+	//가구관리 - 공개상태 변경
+	@RequestMapping("/admin/updateShowState.do")
+	@ResponseBody
+	public Map<String,Integer> updateShowState(
+			@RequestParam("productNo") int productNo,
+			@RequestParam("showState") String showState) {
+		Map param=new HashMap();
+		param.put("productNo", productNo);
+		param.put("showState", showState);						
+				
+		int result=service.updateShowState(param);
+		Map<String,Integer> result2=new HashMap<String,Integer>();
+		result2.put("result", result);
+		
+		return result2;
+		
+	}	
 	
 	
 }

@@ -20,7 +20,7 @@
                 <form action="" method="">
                     <div id="divContent">            
                         <span>가구번호</span>
-                        <input type="text" name="productNo" style="border-style: none;" readonly><br>
+                        <input type="text" name="productNo" style="border-style: none;" value="" readonly><br>
 
                         <span>상품명</span>
                         <input type="text" name="title" placeholder="상품명" required><br>
