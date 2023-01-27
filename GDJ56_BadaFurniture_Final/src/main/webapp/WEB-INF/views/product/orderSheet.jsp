@@ -283,46 +283,43 @@
 					<!--리스트 데이터 표출 -->
 					<tbody>
 						 <c:if test="${not empty products}">    	
-							<c:forEach var="products" items="${products}" varStatus="vs">
-								<tr>
-									<td class="td_product">
-										<div class="connect_img">
-											<img src="${path}/resources/upload/product/${products.files.get(0).renamedFileName}">
-										</div>
-										<div class="article_info connect_info">
-											<div class="box_product">
-												<strong>제품 명</strong>
-												<span class="list_info">${products.title}</span>
-											</div>
-											<div class="order_option_box">
-												<p> 분류:${products.item}/색깔:${products.color} /상태:${products.grade}</p>
-											</div>										
-										</div>
-									</td>
-									<td rowspan="1" colspan="3">
-									배송비는 주문 금액에 포함되있습니다.
-									</td>
-								    <td class="price"   colspan="3">
-			                               <strong>${products.price}원</strong>
-			                           </td>                                
-								</tr>
-							</c:forEach>
+							<!--총가격을 구하기 위한 이엘태그  -->
+							<c:set var = "total" value = "0" />
+								<c:forEach var="products" items="${products}" varStatus="vs">
+										
+										<tr>
+											<td class="td_product">
+												<div class="connect_img">
+													<img src="${path}/resources/upload/product/${products.files.get(0).renamedFileName}">
+												</div>
+												<div class="article_info connect_info">
+													<div class="box_product">
+														<strong>제품 명</strong>
+														<span class="list_info">${products.title}</span>
+													</div>
+													<div class="order_option_box">
+														<p> 분류:${products.item}/색깔:${products.color} /상태:${products.grade}</p>
+													</div>										
+												</div>
+											</td>
+											<td rowspan="1" colspan="3">
+											배송비는 주문 금액에 포함되있습니다.
+											</td>
+										    <td class="price" colspan="3">
+					                        	<strong>${products.price}원</strong>
+					                        </td>                                
+										</tr>
+									<c:set var= "total" value="${total + products.price}"/>
+								</c:forEach>
+							
 						</c:if> 
 						<c:if test="${empty products}">	
 							해당 제품은 판매되었습니다.
 						</c:if>
+						
 					</tbody>																	
 				</table>
 			</div>
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			<div class="right_contents section_payment">
 				<h3 class="order__title">결제 정보</h3>
@@ -993,7 +990,7 @@
 				<div  id="account_btn"  class="btn_wrap order_form__payment-button-wrap" style="display:none;" >
 						
 						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.accountPayment();" class="order_form__payment-button" ">
-							<span id="btn-pay_amt" style="font-size:20px;">${ospi.price}원</span>&nbsp계좌이체로 결제하기&nbsp;
+							<span id="btn-pay_amt" style="font-size:20px;"><c:out value="${total}"/>원</span>&nbsp계좌이체로 결제하기&nbsp;
 						</a>
 				</div>
 				<!--//cart button-->

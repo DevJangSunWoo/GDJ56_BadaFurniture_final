@@ -91,17 +91,17 @@
 				<table id="alertTable"> 
 					<tr> 
 						<th>
-							<input type="checkbox">
+							<input type="checkbox" class="checkAll" style="cursor:pointer;">
 						</th>
 						<th>알림내용</th>
 						<th>알림일자</th>
 					</tr>
 					<tr>
 						<td>
-							<input type="checkbox">
+							<input type="checkbox" class="check" name="productNo" value="" style="cursor:pointer;">
 						</td>
 						<td>
-							<a href="" style="color:rgb(52, 132, 146);">책상 판매신청(100,000)</a>에 운영자가 댓글을 달았습니다.
+							<a href="">책상 판매신청(100,000)</a>에 운영자가 댓글을 달았습니다.
 							<button style="width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;">new</button>
 						</td>
 						<td>
@@ -111,10 +111,10 @@
 					
 					<tr>
 						<td>
-							<input type="checkbox">
+							<input type="checkbox" class="check" name="productNo" value="" style="cursor:pointer;">
 						</td>
 						<td>
-							<a href="" style="color:rgb(52, 132, 146);">책상 판매신청(100,000)</a>에 운영자가 댓글을 달았습니다.
+							<a href="">책상 판매신청(100,000)</a>에 운영자가 댓글을 달았습니다.
 							<button style="width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;">new</button>
 						</td>
 						<td>
@@ -124,37 +124,14 @@
 					
 					<tr>
 						<td>
-							<input type="checkbox">
+							<input type="checkbox" class="check" name="productNo" value="" style="cursor:pointer;">
 						</td>
 						<td>
-							<a href="" style="color:rgb(52, 132, 146);">책상 판매신청(100,000)</a>에 운영자가 댓글을 달았습니다.
+							<a href="">책상 판매신청(100,000)</a>에 운영자가 댓글을 달았습니다.
+							<button style="width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;">new</button>
 						</td>
 						<td>
-							2023-01-18
-						</td>
-					</tr>
-					
-					<tr>
-						<td>
-							<input type="checkbox">
-						</td>
-						<td>
-							<a href="" style="color:rgb(52, 132, 146);">책상 판매신청(100,000)</a>에 운영자가 댓글을 달았습니다.
-						</td>
-						<td>
-							2023-01-17
-						</td>
-					</tr>
-					
-					<tr>
-						<td>
-							<input type="checkbox">
-						</td>
-						<td>
-							<a href="" style="color:rgb(52, 132, 146);">책상 판매신청(100,000)</a>에 운영자가 댓글을 달았습니다.
-						</td>
-						<td>
-							2023-01-17
+							2023-01-21
 						</td>
 					</tr>
 				</table>
@@ -169,4 +146,26 @@
 			</div>
 		</div>
 	</section>
+
+<script>
+	//전체선택 체크박스를 클릭했을 때
+	$("input.checkAll").change(e=>{
+		if($(e.target).prop("checked")==true){
+			$("input.check").prop("checked",true);	
+		} else {
+			$("input.check").prop("checked",false);	
+		}
+	});
+	
+	//알림 체크박스를 클릭했을 때
+	$("input.check").change(e=>{
+		if($("input.check").length == $("input.check:checked").length){
+			$("input.checkAll").prop("checked",true);
+		} else {
+			$("input.checkAll").prop("checked",false);
+		}
+		sumPrice();
+	});
+
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

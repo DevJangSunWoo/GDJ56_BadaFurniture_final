@@ -1,8 +1,12 @@
 package com.finalproject.bada.product.controller;
 
+
+import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,6 +67,9 @@ public class ProductController {
 		
 	}
 	
+
+	
+	
 	@RequestMapping("product/productList.do")
 	@ResponseBody
 	public List<Product> productList(@RequestBody Map map) throws IOException{
@@ -72,9 +79,15 @@ public class ProductController {
 		
 		return list;
 	}
+
 	
+			
+		
 	
-	
+	@RequestMapping("/product/cartBtn.do")
+	public void  cartBtn (int cartProductNo,int cartMemberNo,HttpServletResponse response )  {
+
+	}
 	
 	
 }

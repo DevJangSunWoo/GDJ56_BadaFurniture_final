@@ -2,6 +2,7 @@ package com.finalproject.bada.resell.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +14,8 @@ import com.finalproject.bada.resell.model.vo.ResellComment;
 public class ResellDaoImpl implements ResellDao {
 	
 	@Override
-	public List<Resell> selectResellList(SqlSessionTemplate session, int memberNo) {
-		return session.selectList("resell.selectResellList",memberNo);
+	public List<Resell> selectResellList(SqlSessionTemplate session, int memberNo, int cPage, int numPerpage) {
+		return session.selectList("resell.selectResellList",memberNo,new RowBounds((cPage-1)*numPerpage,numPerpage));
 	}
 	
 	@Override
@@ -45,6 +46,11 @@ public class ResellDaoImpl implements ResellDao {
 	@Override
 	public int insertResellComment(SqlSessionTemplate session, ResellComment resellComment) {
 		return session.insert("resell.insertResellComment", resellComment);
+	}
+
+	@Override
+	public int selectResellCount(SqlSessionTemplate session, int memberNo) {
+		return session.selectOne("resell.selectResellCount", memberNo);
 	}
 
 	
