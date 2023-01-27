@@ -112,7 +112,7 @@
 		</div>
 		<div id="cartWrap">
 			<div id="cartContent">
-				<form action="${path}/product/productView.do" method="get">
+				<form action="${path}/order/orderSheet.do" method="get">
 				<table id="cartTable"> 
 					<tr style="border-bottom:1px solid black;"> 
 						<th style="font-size:13px;">
