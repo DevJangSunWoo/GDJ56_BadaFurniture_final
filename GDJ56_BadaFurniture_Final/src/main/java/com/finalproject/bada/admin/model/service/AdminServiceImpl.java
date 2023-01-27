@@ -77,6 +77,13 @@ public class AdminServiceImpl implements AdminService {
 		return dao.deleteProduct(session,id);
 	}
 	
+	@Override
+	public List<FileProduct> selectFileList(int id) {
+		// TODO Auto-generated method stub
+		return dao.selectFileList(session,id);
+	}	
+	
+	
 	//가구 관리 - 판매상태 변경
 	@Override
 	public int updateSoldOutState(Map param) {
@@ -90,6 +97,16 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.updateShowState(session,param);
 	}
+
+	//가구 관리 - 수정하기 연결 - productNo로 정보 가져오기
+	@Override
+	public Product selectProductByProductNo(int productNo) {
+		// TODO Auto-generated method stub
+		return dao.selectProductByProductNo(session,productNo);
+	}
+
+
+	
 	
 	
 	
