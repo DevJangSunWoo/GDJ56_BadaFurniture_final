@@ -28,8 +28,8 @@ public class ResellServiceImpl implements ResellService {
 	}
 	
 	@Override
-	public List<Resell> selectResellList(int memberNo) {
-		return dao.selectResellList(session, memberNo);
+	public List<Resell> selectResellList(int memberNo, int cPage, int numPerpage) {
+		return dao.selectResellList(session, memberNo, cPage, numPerpage);
 	}
 	
 	@Override
@@ -75,6 +75,11 @@ public class ResellServiceImpl implements ResellService {
 	@Override
 	public int insertResellComment(ResellComment resellComment) {
 		return dao.insertResellComment(session, resellComment);
+	}
+
+	@Override
+	public int selectResellCount(int memberNo) {
+		return dao.selectResellCount(session, memberNo);
 	}
 
 }

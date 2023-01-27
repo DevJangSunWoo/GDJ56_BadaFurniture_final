@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finalproject.bada.common.PageFactory;
 import com.finalproject.bada.member.model.vo.Member;
 import com.finalproject.bada.resell.model.service.ResellService;
 import com.finalproject.bada.resell.model.vo.FileResell;
@@ -35,17 +36,19 @@ public class ResellController {
 		this.service = service;
 	}
 	
-	@RequestMapping("mypage/resell.do")
-	public ModelAndView resellList(ModelAndView mv, HttpSession session) {
+	@RequestMapping("/mypage/resell.do")
+	public ModelAndView resellList(ModelAndView mv, HttpSession session,
+			@RequestParam(value="cPage", defaultValue="1") int cPage) {
 		
+		int numPerpage = 5;
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
-		List<Resell> resells = service.selectResellList(loginMember.getMemberNo());
+		List<Resell> resells = service.selectResellList(loginMember.getMemberNo(), cPage, numPerpage);
+		int totalData = service.selectResellCount(loginMember.getMemberNo());
+		String pageBar = PageFactory.getPage(cPage, numPerpage, totalData, "resell.do");
 		
-//		if(resells != null) {
-//			resells.stream().forEach(v->log.debug("resell:{}",v));
-//		}
 		
+		mv.addObject("pageBar",pageBar);
 		mv.addObject("resells",resells);
 		mv.setViewName("mypage/resellList");
 		
@@ -172,13 +175,22 @@ public class ResellController {
 	
 	@RequestMapping("/resell/delete.do")
 	public ModelAndView deleteResell(ModelAndView mv, 
-			@RequestParam(value="resellNo") int resellNo) {
+			@RequestParam(value="resellNo") int resellNo, HttpSession session) {
+		
+		Resell resell = service.selectResell(resellNo);
 		
 		int result = service.deleteResell(resellNo);
 		
 		String msg = "";
 		if(result>0) {
 			msg = "삭제 성공";
+			String path = session.getServletContext().getRealPath("/resources/upload/resell/");
+			if(resell.getFiles()!=null) {
+				for(FileResell fr : resell.getFiles()){
+					File delFile = new File(path+fr.getRenamedFileName());
+					if(delFile.exists()) delFile.delete(); 
+				}
+			}
 		} else {
 			msg = "삭제 실패";
 		}
