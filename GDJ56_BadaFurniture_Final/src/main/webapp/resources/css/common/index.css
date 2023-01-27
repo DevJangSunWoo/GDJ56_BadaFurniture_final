@@ -67,6 +67,7 @@ div{
 }
 
 #checkDiv{
+	background-color: white;
 	position: absolute;
 	width: 70%;
     border-radius: 5px;
@@ -346,3 +347,102 @@ ul.ks-cboxtags li input[type="checkbox"] {
   content: '';
   background:#666;
 }
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 매물리스트 */
+
+#container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 70%;
+}
+
+#productContainer{
+	width: 95%;
+}
+.productWrap{
+	font-family: 'Ubuntu', sans-serif;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    width: 330px;
+    height: 425px;
+   /*  margin-top: 20px;
+    margin-right: 13px; */
+}
+.imgDiv{
+    display: flex;
+    justify-content: center;
+}
+.imgDiv>img{
+	margin-top: 5px;
+    width: 95%;
+    border: 1px solid gray;
+    border-radius: 3px;
+}
+
+.infoDiv{
+    margin-top: 5px;
+}
+
+.infoDiv div{
+	margin-top: 8px;
+}
+
+.productTitle, .infotext, .price{
+	text-align: center;
+}
+
+.productTitle span{
+	font-size: 21px;
+	font-weight: bolder; 
+}
+
+.infotext span{
+	font-size: 16px;
+}
+
+.price span{
+	color: red;
+	font-size: 20px;
+	font-weight: bolder;
+	
+}
+.price{
+	margin-bottom: 15px;
+}
+
+.date {
+	float: right;
+	margin-right: 7px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -101,7 +101,7 @@
 			
 			
 		</div>
-		<div id="checkDiv">
+		<div id="checkDiv" hidden>
 			<div class="container">
 					<h5>[색상]</h5>
 				<ul class="ks-cboxtags">
@@ -164,6 +164,7 @@
 			</div>
 		</div>	
 	</form>
+	<br><br><br>
 	<script>
 		//조건검색 슬라이드
 		 $("#slidebtn").click(e=>{
@@ -225,9 +226,51 @@
 		}
 	</script>
 	
+	<div style="display:flex; justify-content:center;">
+		<div id="productContainer">
+			<div class="productWrap" >
+                <input type="number" name="productNo" id="productNo" value="" hidden>
+                
+                <div class="showProduct" onclick="fn_showPropertyInfo(event)">
+	                <div class="imgDiv">
+	                    <img src="${path }/resources/upload/product/product01_01_01.jpg" alt="">
+	                </div>
+	                
+	                <div class="infoDiv">
+	                    <!-- <div class="productItem">
+	                        <span>책상</span>
+	                    </div> -->
+	                    <div class="productTitle">
+	                    	<span>책상이에요요요용</span>
+	                    </div>
+	                    <div class="infotext">
+	                    	<span>등급 : </span>
+	                    	<span>최상</span>
+	                    </div>
+	                    <div class="infotext">
+	                    	<span>1500</span>
+	                    	<span>mm</span>
+	                    	<span>*</span>
+	                    	<span>2000</span>
+	                    	<span>mm</span>
+	                    	<span>*</span>
+	                    	<span>800</span>
+	                    	<span>mm</span>
+	                    </div>
+	                    <div class="price">
+	                    	<span>249,900</span>
+	                    	<span>원</span>
+	                    </div>
+	                    <div class="date">
+	                    	<span>2023-01-27</span>
+	                    </div>
+	                </div>
+                </div> 
+            </div>
+		</div>
+	</div>
+	
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br>
 </section>
 	
 
