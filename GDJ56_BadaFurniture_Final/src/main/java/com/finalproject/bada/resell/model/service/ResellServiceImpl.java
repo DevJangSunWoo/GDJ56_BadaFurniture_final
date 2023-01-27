@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.finalproject.bada.resell.model.dao.ResellDao;
 import com.finalproject.bada.resell.model.vo.FileResell;
 import com.finalproject.bada.resell.model.vo.Resell;
+import com.finalproject.bada.resell.model.vo.ResellComment;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,6 +55,26 @@ public class ResellServiceImpl implements ResellService {
 		} else {
 			throw new RuntimeException("Resell 입력 실패");
 		}	
+	}
+
+	@Override
+	public Resell selectResell(int resellNo) {
+		return dao.selectResell(session, resellNo);
+	}
+
+	@Override
+	public int updateResell(Resell resell) {
+		return dao.updateResell(session, resell);
+	}
+
+	@Override
+	public int deleteResell(int resellNo) {
+		return dao.deleteResell(session, resellNo);
+	}
+
+	@Override
+	public int insertResellComment(ResellComment resellComment) {
+		return dao.insertResellComment(session, resellComment);
 	}
 
 }

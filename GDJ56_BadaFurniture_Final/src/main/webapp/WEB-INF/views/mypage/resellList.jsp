@@ -152,7 +152,6 @@
 										<div>
 											<div class="infoDetail">
 												<a href="${path}/resell/read.do?resellNo=${r.resellNo}"><c:out value="${r.item}"/> 판매신청</a>
-												<button class="newButton">new</button>
 											</div>
 										</div>
 									</div>
@@ -203,10 +202,9 @@
 		});
 		$("button.deleteBtn").click(e=>{
 			if(confirm("삭제 하시겠습니까?")){
-				alert($(e.target).val()+"번 삭제로직 적기");
-			} else{
-				alert("취소");
-			}
+				let path = '${path}/resell/delete.do?resellNo=' + $(e.target).val();
+				location.assign(path);
+			} 
 		});
 		$("img.infoImg").click(e=>{
 			let path = '${path}/resell/read.do?resellNo=' + $(e.target).prev().val();

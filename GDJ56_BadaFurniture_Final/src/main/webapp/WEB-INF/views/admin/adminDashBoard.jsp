@@ -67,6 +67,9 @@
                         <span class="state" style="margin-right: 30px;">판매중</span><span class="orderCount">111111</span><span class="countUnit">건</span>
                     </div>
                     <div class="stateOuterDiv">
+                        <span class="state" style="margin-right: 30px;">거래중</span><span class="orderCount">111111</span><span class="countUnit">건</span>
+                    </div>
+                    <div class="stateOuterDiv">
                         <span class="state" style="margin-right: 30px;">비공개</span><span class="orderCount">111111</span><span class="countUnit">건</span>
                     </div>
                 </div>

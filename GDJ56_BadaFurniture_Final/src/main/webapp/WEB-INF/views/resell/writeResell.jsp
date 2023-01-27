@@ -191,7 +191,7 @@
 						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 						<input type="text" id="sample6_address" placeholder="주소" style="width:435px;"name="address" disabled><br>
 						<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:210px;"name="addressDetail">
-						<input type="text" id="sample6_extraAddress" placeholder="참고항목" style="width:210px;"name="addressExtra" disabled>
+						<input type="hidden" id="sample6_extraAddress" placeholder="참고항목" style="width:210px;"name="addressExtra" disabled>
 					</div>
 				</div>		
 			</div>
@@ -202,7 +202,7 @@
 				<div class="sellColRight">
 					<input type="date" name="pickUpDate"> 
 					<span style="margin-left:10px;color:grey;font-size:13px;">
-						* 희망수거일은 7일 후부터 선택할 수 있습니다.
+						* 희망수거일은 7일 이후부터 선택할 수 있습니다.
 					</span>
 				</div>		
 			</div>
@@ -313,10 +313,6 @@
 		}
 		$("input[name=postCode]").attr("disabled", false);
 		$("input[name=address]").attr("disabled", false);
-		$("input[name=addressExtra]").attr("disabled", false);
-		const addressDetail = $("input[name=addressDetail]").val();
-		const addressExtra = $("input[name=addressExtra]").val();
-		$("input[name=addressDetail]").val(addressDetail + addressExtra);
 		return true;
 	}
 	

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.admin.model.service.AdminService;
-
 import com.finalproject.bada.common.PageFactory;
-
-
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.google.gson.Gson;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -93,7 +92,7 @@ public class AdminController {
 				
 				SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
 				int rnd=(int)(Math.random()*100000+1);
-				String renameFile=sdf.format(System.currentTimeMillis())+"_"+rnd+ext; //절대 겹칠 수 없는 임의의 이름 만들어주기 
+				String renameFile=sdf.format(System.currentTimeMillis())+"_"+rnd+ext;
 				
 				try {
 					upFile[i].transferTo(new File(path+renameFile));
@@ -132,11 +131,11 @@ public class AdminController {
 		
 	}
 	
-	//가구 조회
+	//가구관리 - 가구조회
 	@RequestMapping("/admin/product.do")
 	public ModelAndView productList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
-			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage) {
+			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage) {
 		
 		//List<Product> list=service.productList();
 		//log.debug("c {}", cPage);
@@ -147,12 +146,79 @@ public class AdminController {
 		int totalData=service.productListCount();
 		mv.addObject("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "product.do"));
 		
-		mv.setViewName("admin/manageProduct");
+		
+		//가구조회 요약
+		List<Map<String,Integer>> sum=service.productSummary();
+		//log.debug("{}",sum);		
+		mv.addObject("summary",sum);		
+		
+		mv.setViewName("admin/manageProduct");	
 		
 		return mv;
 	}
 	
+	//가구관리 - 가구삭제
+	@RequestMapping("/admin/deleteProduct.do")
+	public ModelAndView deleteProduct(
+			@RequestParam("deleteList") List<Integer> productNoList,ModelAndView mv) {
+		
+		String msg="삭제에 성공했습니다.";
+		String loc="/admin/product.do";
+		
+		for(Integer id : productNoList) {
+			int result=service.deleteProduct(id);
+			if(result<0) {
+				msg="삭제에 실패했습니다.";
+				loc="/admin/product.do";
+				break;
+			}
+		}		
+
+		mv.addObject("msg",msg);
+		mv.addObject("loc",loc);
+		
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
 	
+	//가구관리 - 판매상태 변경
+	@RequestMapping(value="/admin/updateSoldOutState.do")
+	@ResponseBody
+	public Map<String,Integer> updateSoldOutState(
+			@RequestParam("productNo") int productNo,
+			@RequestParam("soldOutState") String soldOutState) {
+		Map param=new HashMap();
+		param.put("productNo", productNo);
+		param.put("soldOutState", soldOutState);		
+				
+		
+		int result=service.updateSoldOutState(param);
+		Map<String,Integer> result2=new HashMap<String,Integer>();
+		result2.put("result", result);
+		
+		return result2;
+		
+	}
+	
+	
+	//가구관리 - 공개상태 변경
+	@RequestMapping("/admin/updateShowState.do")
+	@ResponseBody
+	public Map<String,Integer> updateShowState(
+			@RequestParam("productNo") int productNo,
+			@RequestParam("showState") String showState) {
+		Map param=new HashMap();
+		param.put("productNo", productNo);
+		param.put("showState", showState);						
+				
+		int result=service.updateShowState(param);
+		Map<String,Integer> result2=new HashMap<String,Integer>();
+		result2.put("result", result);
+		
+		return result2;
+		
+	}	
 	
 	
 }

@@ -15,19 +15,19 @@
 			<table id="summaryTable">
 				<tr>
 					<th class="tableTh">전체</th>
-					<td class="tableTd">10</td>
+					<td class="tableTd"><c:out value="${summary[0].ALLP}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">판매중</th>
-					<td class="tableTd">5</td>
+					<td class="tableTd"><c:out value="${summary[0].SOSNP}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">거래중</th>
-					<td class="tableTd">3</td>
+					<td class="tableTd"><c:out value="${summary[0].SOSIP}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">숨긴 가구</th>
-					<td class="tableTd">3</td>
+					<td class="tableTd"><c:out value="${summary[0].SSNP}"/></td>
 				</tr>
 			</table>
 		</div>
@@ -40,6 +40,7 @@
         		<option value="showState">공개상태</option>
         		<option value="item">가구분류</option>
         		<option value="productNo">가구번호</option>
+        		<option value="grade">상태</option>
         		<option value="price">가격</option>
         	</select>
 			        	
@@ -80,11 +81,22 @@
         	</div>
         	
         	<div id="search-productNo">
-       			<input type="text" name="searchKeyword" size="30" 
-       			placeholder="검색할 가구번호 입력" class="searchInput">
-       			<input type="hidden" name="searchType" value="BROKER_NO">
-       			<button class="searchBtn">검색</button>
+				<input type="text" name="searchKeyword" size="30" 
+				placeholder="검색할 가구번호 입력" class="searchInput">
+				<input type="hidden" name="searchType" value="BROKER_NO">
+				<button class="searchBtn">검색</button>
         	</div>
+
+			<div id="search-grade">
+				<select name="searchKeyword" class="searchInput">
+					<option value="최상">최상</option>
+					<option value="상">상</option>
+					<option value="중">중</option>
+				</select>
+
+				<input type="hidden" name="searchType" value="BROKER_NO">
+				<button class="searchBtn">검색</button>
+			</div>
         	
         	<div id="search-price">
        			<input type="number" name="searchKeyword" size="30" 
@@ -94,73 +106,72 @@
         	</div>    	
         	
         </div>
-		<div id="deleteBtnDiv">
-			<button id="delete" class="deleteBtn">삭제</button>
-		</div>
-		<div id="propertyContainer" class = "tableContainer">
-			<table id="propertyTable">
-				<thead>
-					<tr>
-						<th><input type="checkbox" name="chk" onclick="selectAll(this)"></th>
-						<th>가구번호</th>
-						<th>사진</th>
-						<th>제품명</th>
-						<th>분류</th>
-						<th>상태</th>
-						<th>색상</th>
-						<th>가격&nbsp;(원)</th>
-						<th>업로드일</th>
-						<th>판매일자</th>
-						<th>판매상태</th>
-						<th>공개상태</th>
-						<th></th>					
-					</tr>
+
+		<form action="${path}/admin/deleteProduct.do" method="post" onsubmit="return deleteConfirm();">
+			<div id="deleteBtnDiv">
+				<button type="submit" id="delete" class="deleteBtn">삭제</button>
+			</div>
+			<div id="propertyContainer" class = "tableContainer">
+				<table id="propertyTable">
+					<thead>
+						<tr>
+							<th><input type="checkbox" name="chk" onclick="selectAll(this)"></th>
+							<th>가구번호</th>
+							<th>사진</th>
+							<th>제품명</th>
+							<th>분류</th>
+							<th>상태</th>
+							<th>색상</th>
+							<th>가격&nbsp;(원)</th>
+							<th>업로드일</th>
+							<th>판매일자</th>
+							<th>판매상태</th>
+							<th>공개상태</th>
+							<th></th>					
+						</tr>
+					</thead>
 					<tbody>
 						<c:if test="${not empty product}">
 							<c:forEach var="p" items="${product }">
 								<tr>
 									<td style="width: 10px;">
-										<input type="checkbox" name="chk">
+										<input type="checkbox" name="deleteList" value="${p.productNo}">
 									</td>
 									<td style="width: 20px;">
-										<a href="">${p.productNo }</a>
+										<a href=""><c:out value="${p.productNo }"/></a>
 									</td>
 									<td style="width: 70px;">
 										<img id="productImg" src="${path}/resources/upload/product/${p.getFiles().get(0).renamedFileName}">
 									</td>
 									<td>${p.title }</td>
-									<td style="width: 40px;">${p.item }</td>
-									<td style="width: 20px;">${p.grade }</td>
-									<td style="width: 30px;">${p.color }</td>
-									<td class="price" style="width: 70px;">${p.price }</td>
-									<td style="width: 50px;">${p.productEnrollDate }</td>
-									<td style="width: 50px;">${p.productSoldOutDate }</td>
+									<td style="width: 40px;"><c:out value="${p.item }"/></td>
+									<td style="width: 20px;"><c:out value="${p.grade }"/></td>
+									<td style="width: 30px;"><c:out value="${p.color }"/></td>
+									<td class="price" style="width: 70px;"><c:out value="${p.price }"/></td>
+									<td style="width: 60px;"><c:out value="${p.productEnrollDate }"/></td>
+									<td style="width: 60px;"><c:out value="${p.productSoldOutDate }"/></td>
 									<td>
 										<select name="soldOutState">
-											<option value="N" >판매중</option>
-											<option value="I">거래중</option>
-											<option value="Y">판매완료</option>
+											<option value="N" ${p.soldOutState=='N'?"selected":"" }>판매중</option>
+											<option value="I" ${p.soldOutState=='I'?"selected":"" }>거래중</option>
+											<option value="Y" ${p.soldOutState=='Y'?"selected":"" }>판매완료</option>
 										</select>
 										
 									</td>
 									<td>
 										<select name="showState">
-											<option value="Y">공개</option>
-											<option value="N">숨김</option>
-										</select>
-										
+											<option value="Y" ${p.showState=='Y'?"selected":"" }>공개</option>
+											<option value="N" ${p.showState=='N'?"selected":"" }>숨김</option>
+										</select>										
 									</td>
-									<td style="width: 80px;"><button class="updateBtn" onclick="location.assign('${path}/admin/update.do')">수정</button></td>
+									<td style="width: 80px;"><button type="button" class="updateBtn" onclick="location.assign('${path}/admin/update.do?productNo=${p.productNo }')">수정</button></td>
 								</tr>
 							</c:forEach>
-						</c:if>
-
-
-					</tbody>
-				</thead>
-
-			</table>
-		</div>
+						</c:if>							
+					</tbody>								
+				</table>
+			</div>
+		</form>
 		<div id="pageBarContainer">
 			<div id=pageBar>
 				${pageBar}
@@ -188,7 +199,7 @@
 
 	}
 
-	//천단위 콤마
+	//천원 단위 콤마
 	$(()=>{
 		$(".price").each((i,v)=>{
 			let oriPrice=$(v).text();
@@ -203,7 +214,91 @@
 		})
 	})
 
-	
+	//체크 안하고 삭제 버튼 눌렀을 때
+	function deleteConfirm(){				
+		let deleteList=$("[name=deleteList]");
+		var chkArray=[];
+		$('input:checkbox[name=deleteList]:checked').each(function(){
+			chkArray.push(this.value);		
+		});
+		
+		if(chkArray.length==0){
+			alert("삭제할 가구를 선택해주세요.")
+			return false;
+		}else{
+			if(confirm("총 "+chkArray.length+"개의 가구를 삭제하시겠습니까?")){
+				return true;	
+			}else{
+				return false;
+			}
+		}
+	}
+
+	//판매상태 변경하기
+	$("select[name=soldOutState]").change(e=>{
+			const productNo=$(e.target).parent().parent().children().children().val();
+			const soldOutState=$(e.target).val();
+			// console.log(productNo);
+			// console.log(soldOutState);
+
+			$.ajax({
+				url:"${path}/admin/updateSoldOutState.do",
+				data:{productNo:productNo,soldOutState:soldOutState},
+				success:function(result){		
+					if(result.result>0){
+
+						const nowState="";
+						if(soldOutState=='N'){
+							msg="판매중";
+						}else if(soldOutState=='I'){
+							msg="거래중";
+						}else{
+							msg="판매완료";
+						}
+
+						alert(msg+"으로 변경 완료");
+
+						
+					}else{
+						alert("판매상태 변경 실패");
+						
+					}
+				},
+				error:function(result){
+					alert("error! result 값 : "+result.result );	
+				}
+			})
+
+
+	});
+
+
+	//공개상태 변경하기
+		$("select[name=showState]").change(e=>{
+			const productNo=$(e.target).parent().parent().children().children().val();
+			const showState=$(e.target).val();
+			console.log(productNo);
+			console.log(showState);
+
+			$.ajax({
+				url:"${path}/admin/updateShowState.do",
+				data:{productNo:productNo,showState:showState},
+				success:function(result){		
+					if(result.result>0){
+						alert("공개상태 변경 완료");
+					}else{
+						alert("공개상태 변경 실패");
+						
+					}
+				},
+				error:function(result){
+					alert("error! result 값 : "+result.result );	
+				}
+			})
+
+
+	});
+
 
 </script>
 

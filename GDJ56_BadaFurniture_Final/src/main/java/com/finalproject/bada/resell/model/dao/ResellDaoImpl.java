@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.finalproject.bada.resell.model.vo.FileResell;
 import com.finalproject.bada.resell.model.vo.Resell;
+import com.finalproject.bada.resell.model.vo.ResellComment;
 
 @Repository
 public class ResellDaoImpl implements ResellDao {
@@ -24,6 +25,26 @@ public class ResellDaoImpl implements ResellDao {
 	@Override
 	public int insertFileResell(SqlSessionTemplate session, FileResell fr) {
 		return session.insert("resell.insertFileResell", fr);
+	}
+
+	@Override
+	public Resell selectResell(SqlSessionTemplate session, int resellNo) {
+		return session.selectOne("resell.selectResell",resellNo);
+	}
+
+	@Override
+	public int updateResell(SqlSessionTemplate session, Resell resell) {
+		return session.update("resell.updateResell",resell);
+	}
+
+	@Override
+	public int deleteResell(SqlSessionTemplate session, int resellNo) {
+		return session.delete("resell.deleteResell",resellNo);
+	}
+
+	@Override
+	public int insertResellComment(SqlSessionTemplate session, ResellComment resellComment) {
+		return session.insert("resell.insertResellComment", resellComment);
 	}
 
 	
