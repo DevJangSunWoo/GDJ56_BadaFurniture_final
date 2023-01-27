@@ -168,7 +168,7 @@ public class AdminController {
 
 			//productNo들고 가서 fileProduct List 가져오기	
 			List<FileProduct> fileList=service.selectFileList(id);
-			log.debug("파일리스트 : {}",fileList);
+			//log.debug("파일리스트 : {}",fileList);
 			
 			//renamedfilename 가져와서 
 			for(int i=0;i<fileList.size();i++) {
@@ -177,10 +177,7 @@ public class AdminController {
 				File file=new File(path+renamedFileName);				
 				if(file.exists()){
 					file.delete();
-					System.out.println(renamedFileName+" : 삭제 O");
-				}else {
-					System.out.println(renamedFileName+ " : 삭제 X");
-					
+				//	System.out.println(renamedFileName+" : 삭제 O");
 				}
 			}						
 			
