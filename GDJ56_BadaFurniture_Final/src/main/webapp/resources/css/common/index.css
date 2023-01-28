@@ -371,6 +371,11 @@ ul.ks-cboxtags li input[type="checkbox"] {
     height: 425px;
 	margin: 10px;
 }
+
+.productWrap>input[name="productNo"]{
+	border: none;
+}
+
 .imgDiv{
     display: flex;
     justify-content: center;

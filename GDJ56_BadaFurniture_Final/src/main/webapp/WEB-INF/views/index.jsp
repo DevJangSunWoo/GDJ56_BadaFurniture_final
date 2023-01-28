@@ -254,7 +254,8 @@
 					}) */
 					for(let i=0; i<list.length; i++){
 						let productWrap = $("<div>").addClass("productWrap");
-						let productNo = $("<input>").attr("type","number").attr("name","productNo").prop("hidden");
+						let productNo = $("<input>").attr("type","number").attr("name","productNo")
+										.attr("value",list[i].productNo)/* .prop("hidden") */;
 						let showProduct = $("<div>").addClass("showProduct");
 						
 						let imgDiv = $("<div>").addClass("imgDiv")
@@ -264,8 +265,7 @@
 						let productTitle = $("<div>").addClass("productTitle")
 										.append($("<span>")).text(list[i].title);
 						let grade = $("<div>").addClass("grade")
-									.append($("<span>")).text("등급 : ");
-									.after($("<span>")).text(list[i].grade);
+									.html("<span>등급 : </span><span>"+list[i].grade+"</span>");
 						let size = $("<div>").addClass("size")
 									.append($("<span>")).text(list[i].widths)
 									.append($("<span>")).text("mm")
@@ -276,8 +276,7 @@
 									.append($("<span>")).text(list[i].heights)
 									.append($("<span>")).text("mm");
 						let price = $("<div>").addClass("price")
-									.append($("<span>")).text(list[i].price)
-									.append($("<span>")).text("원");
+									.html("<span>"+list[i].price+"</span><span>원</span>");
 						let date = $("<div>").addClass("date")
 									.append($("<span>")).text(list[i].productEnrollDate);
 						
