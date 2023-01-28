@@ -116,12 +116,10 @@
 
 <!-- wrap -->
 <div class="wrap">
-	<div style="display: flex !important;justify-content: center !important;height:1200px !important;">
-	
+	<div style="display: flex !important;justify-content: center !important;height:1200px !important;">	
 	<!-- 오른쪽 콘텐츠 영역 -->
 		<div  style="margin-top:150px; ">
-			
-			<form  action="${path}/order/insertBoard.do"   method="post"    name="f1" id="orderForm"  >
+			<form  name="f1" id="orderForm"  >
 	           <!--input hidden 위치 결제수단,상품금액 -->
 	           
 	           
@@ -347,13 +345,11 @@
 												<label for="btn-paykind-CARD" class="box_choice">카드</label>
 												<input type="radio" id="btn-paykind-TRANSFER" type="radio" name="kyejae" value="transfer" onclick="pay_info2_account();">
 												<label for="btn-paykind-TRANSFER" class="box_choice">계좌이체</label>
-								<!-- 결제수수료율 설정값 출력 부분 //-->
-	                                                <input type="hidden" id="pay-fee-rate-PHONE" value="5" />                                       
-	                                       </div>
+	                                            <input type="hidden" id="pay-fee-rate-PHONE" value="5" />                                       
+	                                     </div>
 										<div id="pay_info2_account"  style="display:none;" >
-											<input id="depositName" type="text"  placeholder="예금주명을 입력해주세요" style="width:200px;border:1px solid lightgray;display:inline !important;"/>	
+											<input id="depositName" type="text"  placeholder="예금주명을 입력해주세요" style="width:200px;border:1px solid lightgray;display: block!important;"/>	
 										</div>
-										
 									</li>
 								</ul>
 							</div>
@@ -982,33 +978,44 @@
 
 				<!--cart button-->
 				<div  id="card_btn"  class="btn_wrap order_form__payment-button-wrap" >
-					<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button" ">
+					<a id="btn_pay" href="javascript:void(0)"   class="order_form__payment-button" ">
 						<span id="btn-pay_amt" style="font-size:20px;">0</span>카드 결제하기&nbsp;
 						<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
 					</a>
 				</div>
 				<div  id="account_btn"  class="btn_wrap order_form__payment-button-wrap" style="display:none;" >
 						
-						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.accountPayment();" class="order_form__payment-button" ">
+						<a id="btn_pay"  onclick="badaOrderPayment('account');" class="order_form__payment-button" ">
 							<span id="btn-pay_amt" style="font-size:20px;"><c:out value="${total}"/>원</span>&nbsp계좌이체로 결제하기&nbsp;
 						</a>
 				</div>
 				<!--//cart button-->
 			 </div>
 			<!--// 컨텐츠 영역 -->
-			</form>
+			<!--form으로 전송할 데이터  -->
+			<input  type="hidden"  name="" value="" >
+		
+		
+		
+		</form>
 			<!--right area  -->
-	</div>
-
-	</div>	
+	 </div>
+  </div>	
 		<!-- 중앙정렬용 /div  -->
 	<!--wrap  -->
 </div> 
+
 <!--결제 버튼 스크립트 -->
 	<script>
-		function Order.accountPayment(){
-			$("#orderForm").submit();
-			
+		function badaOrderPayment(method){
+			if(method=='account'){
+				/* console.log("계좌이체 결제 진행"); */
+				$("#orderForm").method = 'post';
+				$("#orderForm").action = "${path}/order/orderPayment.do";  
+				/* $("#orderForm").target = '_blank'; */
+				$("#orderForm").submit();
+				alert('7일이내로 금액을 입금하셔야 배송이 시작됩니다.');				
+			}
 		} 	
 	</script>
 <!--결제수단 여는 스크립트  -->
@@ -1038,7 +1045,13 @@
 	</script>
 
 
+<style>
+	footer{
+	
+		margin-top:230px! important;
+	}
 
+</style>
 
 
 	

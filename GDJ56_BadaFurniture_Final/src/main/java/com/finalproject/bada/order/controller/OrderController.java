@@ -61,7 +61,13 @@ public class OrderController {
 		
 	}
 	
-	
+//	@RequestMapping("/order/orderPayment.do")
+//	public ModelAndView orderPayment(ModelAndView mv,) {
+//		
+//		
+//		return mv
+//	}
+//	
 	
 	
 	

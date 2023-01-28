@@ -46,11 +46,11 @@ public class ProductController {
 //		
 //	}
 	
-	@RequestMapping("/order/orderComplete.do")
-	public String orderComplete() {
-		return "product/orderComplete";
-		
-	}
+//	@RequestMapping("/order/orderComplete.do")
+//	public String orderComplete() {
+//		return "product/orderComplete";
+//		
+//	}
 	
 	
 	//상세화면 표출하기
