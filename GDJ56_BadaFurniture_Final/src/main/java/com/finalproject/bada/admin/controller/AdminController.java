@@ -159,35 +159,33 @@ public class AdminController {
 	public ModelAndView deleteProduct(
 			@RequestParam("deleteList") List<Integer> productNoList,ModelAndView mv,HttpSession session) {
 		
+		Map param=new HashMap();
+		param.put("productNoList", productNoList);
+		
 		String msg="삭제에 성공했습니다.";
 		String loc="/admin/product.do";
-		
-		for(Integer id : productNoList) {
+		//log.debug("productNoList : "+productNoList);
 				
-			String path=session.getServletContext().getRealPath("/resources/upload/product/");
-
-			//productNo들고 가서 fileProduct List 가져오기	
-			List<FileProduct> fileList=service.selectFileList(id);
-			//log.debug("파일리스트 : {}",fileList);
-			
-			//renamedfilename 가져와서 
-			for(int i=0;i<fileList.size();i++) {
-				String renamedFileName=fileList.get(i).getRenamedFileName();
-				log.debug("파일명 : "+renamedFileName);
-				File file=new File(path+renamedFileName);				
-				if(file.exists()){
-					file.delete();
-				//	System.out.println(renamedFileName+" : 삭제 O");
-				}
-			}						
-			
-			int result=service.deleteProduct(id);
-			if(result<0) {
-				msg="삭제에 실패했습니다.";
-				loc="/admin/product.do";
-				break;
+		String path=session.getServletContext().getRealPath("/resources/upload/product/");
+		List<FileProduct> fileList=service.selectFileList(param);
+		//log.debug("FILELIST : "+fileList);
+		
+		for(int i=0;i<fileList.size();i++) {
+			String renamedFileName=fileList.get(i).getRenamedFileName();
+			//log.debug("파일명 : "+renamedFileName);
+			File file=new File(path+renamedFileName);				
+			if(file.exists()){
+				file.delete();
 			}
-		}		
+		}						
+		
+		int result=service.deleteProduct(param);
+		
+		if(result<1) {
+			msg="삭제에 실패했습니다.";
+			loc="/admin/product.do";
+		}
+	
 
 		mv.addObject("msg",msg);
 		mv.addObject("loc",loc);
@@ -195,6 +193,47 @@ public class AdminController {
 		mv.setViewName("common/msg");
 		
 		return mv;
+		
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//		
+//		String msg="삭제에 성공했습니다.";
+//		String loc="/admin/product.do";
+//		
+//		for(Integer id : productNoList) {
+//			
+//			String path=session.getServletContext().getRealPath("/resources/upload/product/");
+//			
+//			//productNo들고 가서 fileProduct List 가져오기	
+//			List<FileProduct> fileList=service.selectFileList(id);
+//			//log.debug("파일리스트 : {}",fileList);
+//			
+//			//renamedfilename 가져와서 
+//			for(int i=0;i<fileList.size();i++) {
+//				String renamedFileName=fileList.get(i).getRenamedFileName();
+//				log.debug("파일명 : "+renamedFileName);
+//				File file=new File(path+renamedFileName);				
+//				if(file.exists()){
+//					file.delete();
+//					//	System.out.println(renamedFileName+" : 삭제 O");
+//				}
+//			}						
+//			
+//			int result=service.deleteProduct(id);
+//			if(result<0) {
+//				msg="삭제에 실패했습니다.";
+//				loc="/admin/product.do";
+//				break;
+//			}
+//		}		
+//		
+//		mv.addObject("msg",msg);
+//		mv.addObject("loc",loc);
+//		
+//		mv.setViewName("common/msg");
+//		
+//		return mv;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 	}
 	
 	//가구관리 - 판매상태 변경

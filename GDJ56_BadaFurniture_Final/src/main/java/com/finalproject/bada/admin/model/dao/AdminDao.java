@@ -23,8 +23,8 @@ public interface AdminDao {
 	List<Map<String,Integer>> productSummary(SqlSessionTemplate session);
 	
 	//가구관리 - 삭제
-	int deleteProduct(SqlSessionTemplate session,int id);
-	List<FileProduct> selectFileList(SqlSessionTemplate session,int id);
+	int deleteProduct(SqlSessionTemplate session,Map param);
+	List<FileProduct> selectFileList(SqlSessionTemplate session,Map param);
 	
 	//가구 관리 - 판매상태 변경
 	int updateSoldOutState(SqlSessionTemplate session,Map param);

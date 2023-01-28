@@ -359,7 +359,9 @@ ul.ks-cboxtags li input[type="checkbox"] {
 }
 
 #productContainer{
-	width: 95%;
+	width: 94%;
+    display: flex;
+    flex-wrap: wrap;
 }
 .productWrap{
 	font-family: 'Ubuntu', sans-serif;
@@ -367,8 +369,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
     border-radius: 10px;
     width: 330px;
     height: 425px;
-   /*  margin-top: 20px;
-    margin-right: 13px; */
+	margin: 10px;
 }
 .imgDiv{
     display: flex;
@@ -377,6 +378,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
 .imgDiv>img{
 	margin-top: 5px;
     width: 95%;
+    height: 240px;
     border: 1px solid gray;
     border-radius: 3px;
 }
@@ -389,7 +391,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
 	margin-top: 8px;
 }
 
-.productTitle, .infotext, .price{
+.productTitle, .grade, .size, .price{
 	text-align: center;
 }
 
@@ -398,7 +400,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
 	font-weight: bolder; 
 }
 
-.infotext span{
+.grade span, .size span{
 	font-size: 16px;
 }
 
