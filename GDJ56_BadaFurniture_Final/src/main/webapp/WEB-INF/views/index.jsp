@@ -251,13 +251,15 @@
 				success : list =>{
 					console.log(list);
 					$("#productContainer").html("");
-					/* list.forEach(e=>{
-						
-					}) */
+					if(list==""){
+						$("#productContainer").html("<h1 style='color: grey; text-align: center;'>조건에 맞는 가구가 없습니다.</h1>");
+					}
+					
+					//list.forEach(e=>{})
 					for(let i=0; i<list.length; i++){
 						let productWrap = $("<div>").addClass("productWrap");
 						let productNo = $("<input>").attr("type","number").attr("name","productNo")
-										.attr("value",list[i].productNo)/* .prop("hidden") */;
+										.attr("value",list[i].productNo).attr("readonly",true);
 						let showProduct = $("<div>").addClass("showProduct");
 						
 						let imgDiv = $("<div>").addClass("imgDiv")
@@ -265,12 +267,12 @@
 						
 						let infoDiv = $("<div>").addClass("infoDiv");
 						let productTitle = $("<div>").addClass("productTitle")
-										.append($("<span>")).text(list[i].title);
+										.html("<span>"+list[i].title+"</span>");
 						let grade = $("<div>").addClass("grade")
 									.html("<span>등급 : </span><span>"+list[i].grade+"</span>");
 						let size = $("<div>").addClass("size")
-									.html("<span>"+list[i].widths+"</span><span>mm</span><span>*</span><span>"
-											+list[i].depths+"</span><span>mm</span><span>*</span><span>"+list[i].heights
+									.html("<span>"+list[i].widths+"</span><span>mm</span><span> * </span><span>"
+											+list[i].depths+"</span><span>mm</span><span> * </span><span>"+list[i].heights
 											+"</span><span>mm</span>");
 						let price = $("<div>").addClass("price")
 									.html("<span>"+list[i].price+"</span><span>원</span>");
@@ -288,57 +290,60 @@
 				}
 			});
 			
+			
+			$(".productWrap").on("click",function(){
+				console.log("dfd");
+			});
+			
+			
 		}
 	</script>
 	
-
-	
-	<div style="display:flex; justify-content:center;">
+	<div id="pro" style="display:flex; justify-content:center;">
 		<div id="productContainer">
 		
-			<%-- <c:forEach begin="0" end="7" step="1" var="i">
-			<div class="productWrap" >
-                <input type="number" name="productNo" id="productNo" value="" hidden>
-                
-                <div class="showProduct" onclick="fn_showPropertyInfo(event)">
-	                <div class="imgDiv">
-	                    <img src="${path }/resources/upload/product/product01_01_01.jpg" alt="">
-	                </div>
+			<c:forEach items="${productList}" var="product">
+				<div class="productWrap" >
+	                <input type="number" name="productNo" id="productNo" value="${product.productNo }">
 	                
-	                <div class="infoDiv">
-	                    <div class="productTitle">
-	                    	<span>책상이에요요요용</span>
-	                    </div>
-	                    <div class="grade">
-	                    	<span>등급 : </span>
-	                    	<span>최상</span>
-	                    </div>
-	                    <div class="size">
-	                    	<span>1500</span>
-	                    	<span>mm</span>
-	                    	<span>*</span>
-	                    	<span>2000</span>
-	                    	<span>mm</span>
-	                    	<span>*</span>
-	                    	<span>800</span>
-	                    	<span>mm</span>
-	                    </div>
-	                    <div class="price">
-	                    	<span>249,900</span>
-	                    	<span>원</span>
-	                    </div>
-	                    <div class="date">
-	                    	<span>2023-01-27</span>
-	                    </div>
-	                </div>
-                </div> 
-            </div>
-            </c:forEach> --%>
+	                <div class="showProduct" onclick="fn_showPropertyInfo(event)">
+		                <div class="imgDiv">
+		                    <img src="${path }/resources/upload/product/${product.files[0].renamedFileName}" alt="">
+		                </div>
+		                
+		                <div class="infoDiv">
+		                    <div class="productTitle">
+		                    	<span>${product.title}</span>
+		                    </div>
+		                    <div class="grade">
+		                    	<span>등급 : </span>
+		                    	<span>${product.grade}</span>
+		                    </div>
+		                    <div class="size">
+		                    	<span>${product.widths}</span>
+		                    	<span>mm</span>
+		                    	<span> * </span>
+		                    	<span>${product.depths}</span>
+		                    	<span>mm</span>
+		                    	<span> * </span>
+		                    	<span>${product.heights}</span>
+		                    	<span>mm</span>
+		                    </div>
+		                    <div class="price">
+		                    	<span><fmt:formatNumber value="${product.price}" type="currency"/></span>
+		                    	<span>원</span>
+		                    </div>
+		                    <div class="date">
+		                    	<span><fmt:formatDate value="${product.productEnrollDate}" type="date" pattern="yyyy-MM-dd(E)"/></span>
+		                    </div>
+		                </div>
+	                </div> 
+	            </div>
+            </c:forEach>
             
 		</div>
 	</div>
 	
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </section>
 	
 

@@ -12,6 +12,9 @@ public interface ProductService {
 	
 	List<Product> selectProductList(Map map);
 	
+	List<Product> productList();
+	
+	
 	
 	 Cart selectCartCheck(Map map);
 	 int selectCartCount(int cartMemberNo);	

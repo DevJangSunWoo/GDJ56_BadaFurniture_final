@@ -21,6 +21,11 @@ public class ProductDaoImpl implements ProductDao {
 	public List<Product> selectProductList(SqlSessionTemplate session, Map map) {
 		return session.selectList("product.selectProductList", map);
 	}
+	
+	@Override
+	public List<Product> productList(SqlSessionTemplate session) {
+		return session.selectList("product.productList");
+	}
 
 	@Override
 	public Cart selectCartCheck(SqlSessionTemplate session, Map map) {
@@ -39,6 +44,7 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return session.insert("product.insertCart", map);
 	}
+
 
 	
 	
