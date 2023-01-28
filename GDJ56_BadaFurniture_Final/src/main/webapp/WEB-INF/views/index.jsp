@@ -223,6 +223,8 @@
 		
 		//조건에 따라 제품출력하는 ajax
 		const fn_printProductList=()=>{
+			$("#checkDiv").slideUp(200);
+			
 			let colorArr = [];
 			let materialArr = [];
 			let gradeArr = [];
@@ -267,14 +269,9 @@
 						let grade = $("<div>").addClass("grade")
 									.html("<span>등급 : </span><span>"+list[i].grade+"</span>");
 						let size = $("<div>").addClass("size")
-									.append($("<span>")).text(list[i].widths)
-									.append($("<span>")).text("mm")
-									.append($("<span>")).text("*")
-									.append($("<span>")).text(list[i].depths)
-									.append($("<span>")).text("mm")
-									.append($("<span>")).text("*")
-									.append($("<span>")).text(list[i].heights)
-									.append($("<span>")).text("mm");
+									.html("<span>"+list[i].widths+"</span><span>mm</span><span>*</span><span>"
+											+list[i].depths+"</span><span>mm</span><span>*</span><span>"+list[i].heights
+											+"</span><span>mm</span>");
 						let price = $("<div>").addClass("price")
 									.html("<span>"+list[i].price+"</span><span>원</span>");
 						let date = $("<div>").addClass("date")
