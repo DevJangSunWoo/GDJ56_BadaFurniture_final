@@ -49,64 +49,86 @@
         	</select>
 			        	
 			<div id="search-searchAll">
-				   <label><input type="radio" name="searchKeyword" value="" checked>전체조회</label>
-				   <input type="hidden" name="searchType" value="HIDING">
-				   <button class="searchBtn">검색</button>
+				<form action="${path}/admin/product.do" method="post">
+
+					<label><input type="radio" name="searchKeyword" value="" checked>전체조회</label>
+					<input type="hidden" name="searchType" value="searchAll">
+					<button class="searchBtn">검색</button>
+				</form>
 			</div>
+
 			<div id="search-soldOutState">
-				   <label><input type="radio" name="searchKeyword" value="판매중">판매중</label> 
-				   <label><input type="radio" name="searchKeyword" value="거래중">거래중</label>
-				   <label><input type="radio" name="searchKeyword" value="판매완료">판매완료</label>
-				   <input type="hidden" name="searchType" value="HIDING">
-				   <button class="searchBtn">검색</button>
+				<form action="${path}/admin/product.do" method="post">
+
+					<label><input type="radio" name="searchKeyword" value="N">판매중</label> 
+					<label><input type="radio" name="searchKeyword" value="I">거래중</label>
+					<label><input type="radio" name="searchKeyword" value="Y">판매완료</label>
+					<input type="hidden" name="searchType" value="SOLD_OUT_STATE">
+					<button class="searchBtn">검색</button>
+				</form>
 			</div>
 			
         	<div id="search-showState">
-       			<label><input type="radio" name="searchKeyword" value="Y">공개</label> 
-       			<label><input type="radio" name="searchKeyword" value="N">숨김</label>
-       			<input type="hidden" name="searchType" value="HIDING">
-       			<button class="searchBtn">검색</button>
+				<form action="${path}/admin/product.do" method="post">
+					
+					<label><input type="radio" name="searchKeyword" value="Y">공개</label> 
+					<label><input type="radio" name="searchKeyword" value="N">숨김</label>
+					<input type="hidden" name="searchType" value="SHOW_STATE">
+					<button class="searchBtn">검색</button>
+				</form>
         	</div>
 
         	<div id="search-item">
-                <select name="searchKeyword" class="searchInput">
-                    <option value="책상">책상</option>
-                    <option value="의자">의자</option>
-                    <option value="화장대">화장대</option>
-                    <option value="침대">침대</option>
-                    <option value="서랍장">서랍장</option>
-					<option value="책장">책장</option>
-                    <option value="소파">소파</option>
-                    <option value="옷장">옷장</option>
-                </select>
+				<form action="${path}/admin/product.do" method="post">
 
-       			<input type="hidden" name="searchType" value="BROKER_NO">
-       			<button class="searchBtn">검색</button>
+					<select name="searchKeyword" class="searchInput">
+						<option value="책상">책상</option>
+						<option value="의자">의자</option>
+						<option value="화장대">화장대</option>
+						<option value="침대">침대</option>
+						<option value="서랍장">서랍장</option>
+						<option value="책장">책장</option>
+						<option value="소파">소파</option>
+						<option value="옷장">옷장</option>
+					</select>
+					
+					<input type="hidden" name="searchType" value="ITEM">
+					<button class="searchBtn">검색</button>
+				</form>
         	</div>
         	
         	<div id="search-productNo">
-				<input type="text" name="searchKeyword" size="30" 
-				placeholder="검색할 가구번호 입력" class="searchInput">
-				<input type="hidden" name="searchType" value="BROKER_NO">
-				<button class="searchBtn">검색</button>
+				<form action="${path}/admin/product.do" method="post">
+
+					<input type="text" name="searchKeyword" size="30" 
+					placeholder="검색할 가구번호 입력" class="searchInput">
+					<input type="hidden" name="searchType" value="PRODUCT_NO">
+					<button class="searchBtn">검색</button>
+				</form>
         	</div>
 
 			<div id="search-grade">
-				<select name="searchKeyword" class="searchInput">
-					<option value="최상">최상</option>
-					<option value="상">상</option>
-					<option value="중">중</option>
-				</select>
+				<form action="${path}/admin/product.do" method="post">
 
-				<input type="hidden" name="searchType" value="BROKER_NO">
-				<button class="searchBtn">검색</button>
+					<select name="searchKeyword" class="searchInput">
+						<option value="최상">최상</option>
+						<option value="상">상</option>
+						<option value="중">중</option>
+					</select>
+					
+					<input type="hidden" name="searchType" value="GRADE">
+					<button class="searchBtn">검색</button>
+				</form>
 			</div>
         	
         	<div id="search-price">
-       			<input type="number" name="searchKeyword" size="30" 
-       			placeholder="가격 입력" class="searchInput"> 이하
-       			<input type="hidden" name="searchType" value="BROKER_NO">
-	      		<button class="searchBtn">검색</button>
+				<form action="${path}/admin/product.do" method="post">
+
+					<input type="number" name="searchKeyword" size="30" 
+					placeholder="가격 입력" class="searchInput"> 이하
+					<input type="hidden" name="searchType" value="PRICE">
+					<button class="searchBtn">검색</button>
+				</form>
         	</div>    	
         	
         </div>
@@ -305,6 +327,9 @@
 
 	});
 
+	$(".searchBtn").click(e=>{
+		
+	})
 
 </script>
 

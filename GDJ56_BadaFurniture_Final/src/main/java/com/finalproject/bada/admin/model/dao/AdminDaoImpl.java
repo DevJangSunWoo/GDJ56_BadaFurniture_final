@@ -38,16 +38,17 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<Product> productListPage(SqlSessionTemplate session, Map<String, Integer> param) {
+	public List<Product> productListPage(SqlSessionTemplate session, Map<String,Integer> param,Map search) {
 		// TODO Auto-generated method stub
-		return session.selectList("admin.productList",null,
+		log.debug("넘오오니 ? {}",search);
+		return session.selectList("admin.productList",search,
 				new RowBounds((param.get("cPage")-1)*param.get("numPerpage"),param.get("numPerpage")));
 	}
 
 	@Override
-	public int productListCount(SqlSessionTemplate session) {
+	public int productListCount(SqlSessionTemplate session,Map search) {
 		// TODO Auto-generated method stub
-		return session.selectOne("admin.productListCount");
+		return session.selectOne("admin.productListCount",search);
 	}
 
 	//요약테이블

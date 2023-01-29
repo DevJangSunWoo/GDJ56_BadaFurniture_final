@@ -132,15 +132,28 @@ public class AdminController {
 	@RequestMapping("/admin/product.do")
 	public ModelAndView productList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
-			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage) {
+			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
+			,@RequestParam(value="searchType", defaultValue="전체조회") String searchType
+			,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
+			) {
 		
 		//List<Product> list=service.productList();
-		//log.debug("c {}", cPage);
-		//log.debug("numPerpage {}", numPerpage);
+		log.debug("cPage {}", cPage);
+		log.debug("numPerpage {}", numPerpage);
 		
-		mv.addObject("product",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage)));
+		log.debug("searchType {}", searchType);
+		log.debug("searchKeyword {}", searchKeyword);
 		
-		int totalData=service.productListCount();
+		Map search=new HashMap();
+		search.put("searchType", searchType);
+		search.put("searchKeyword", searchKeyword);
+		
+		mv.addObject("product",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		
+		int totalData=service.productListCount(search);
+		
+		log.debug("totalData {}", totalData);		
+		
 		mv.addObject("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "product.do"));
 		
 		

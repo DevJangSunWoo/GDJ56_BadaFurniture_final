@@ -13,8 +13,8 @@ public interface AdminService {
 	
 	//가구관리 - 조회
 	List<Product> productList();
-	List<Product> productListPage(Map<String,Integer> param);
-	int productListCount();
+	List<Product> productListPage(Map<String,Integer> param,Map search);
+	int productListCount(Map search);
 	
 	//가구관리 - 요약테이블
 	List<Map<String,Integer>> productSummary();

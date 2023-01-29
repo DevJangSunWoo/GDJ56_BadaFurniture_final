@@ -16,8 +16,8 @@ public interface AdminDao {
 	
 	//가구관리 - 조회
 	List<Product> productList(SqlSessionTemplate session);
-	List<Product> productListPage(SqlSessionTemplate session,Map<String,Integer> param);
-	int productListCount(SqlSessionTemplate session);
+	List<Product> productListPage(SqlSessionTemplate session,Map<String,Integer> param,Map search);
+	int productListCount(SqlSessionTemplate session,Map search);
 	
 	//가구관리 - 요약테이블
 	List<Map<String,Integer>> productSummary(SqlSessionTemplate session);
