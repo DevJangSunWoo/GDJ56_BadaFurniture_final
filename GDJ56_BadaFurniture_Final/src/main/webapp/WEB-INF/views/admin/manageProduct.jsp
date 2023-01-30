@@ -40,9 +40,9 @@
 			<span style="font-size: 17px;">검색타입 : </span> 
         	<select id="searchType">
         		<option value="searchAll">전체조회</option>
-				<option value="soldOutState">판매상태</option>
-        		<option value="showState">공개상태</option>
-        		<option value="item">가구분류</option>
+				<option value="soldOutState" ${searchType.equals('soldOutState')?"selected":""}>판매상태</option>
+        		<option value="showState" >공개상태</option>
+        		<option value="item" >가구분류</option>
         		<option value="productNo">가구번호</option>
         		<option value="grade">상태</option>
         		<option value="price">가격</option>
@@ -60,7 +60,7 @@
 			<div id="search-soldOutState">
 				<form action="${path}/admin/product.do" method="post">
 
-					<label><input type="radio" name="searchKeyword" value="N">판매중</label> 
+					<label><input type="radio" name="searchKeyword" value="N" >판매중</label> 
 					<label><input type="radio" name="searchKeyword" value="I">거래중</label>
 					<label><input type="radio" name="searchKeyword" value="Y">판매완료</label>
 					<input type="hidden" name="searchType" value="SOLD_OUT_STATE">
@@ -327,9 +327,13 @@
 
 	});
 
-	$(".searchBtn").click(e=>{
+	// $(".searchBtn").click(e=>{
 		
-	})
+	// })
+
+	// $("#searchType").change(e=>{
+	// 	$(e.target).attr
+	// })
 
 </script>
 

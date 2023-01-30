@@ -156,6 +156,10 @@ public class AdminController {
 		
 		mv.addObject("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "product.do"));
 		
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchKeyword", searchKeyword);
+		
+		
 		
 		//가구조회 요약
 		List<Map<String,Integer>> sum=service.productSummary();
@@ -184,7 +188,7 @@ public class AdminController {
 		//log.debug("FILELIST : "+fileList);
 		
 		for(int i=0;i<fileList.size();i++) {
-			String renamedFileName=fileList.get(i).getRenamedFileName();
+			String renamedFileName=fileList.get(i).getRenamedFileName();																													                     
 			//log.debug("파일명 : "+renamedFileName);
 			File file=new File(path+renamedFileName);				
 			if(file.exists()){
