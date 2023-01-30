@@ -1,5 +1,7 @@
 package com.finalproject.bada.member.model.service;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int insertMember(Member m) {
 		return dao.insertMember(session,m);
+	}
+
+	@Override
+	public int updatePassword(Map param) {
+		return dao.updatePassword(session, param);
+	}
+
+	@Override
+	public int updateMember(Member m) {
+		return dao.updateMember(session, m);
 	}
 
 }

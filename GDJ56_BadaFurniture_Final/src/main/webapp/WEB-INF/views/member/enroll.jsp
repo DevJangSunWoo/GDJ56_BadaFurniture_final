@@ -50,7 +50,7 @@
 		                <script>
 			              	//아이디 정규표현식
 			    			$("input[name=memberId]").blur(e=>{
-		    					const id=$("input[name=memberId]").val().trim();
+		    					const id=$("#id").val().trim();
 		    					const idChk=/^[A-Za-z0-9]+$/
 		    					
 		    					if(!idChk.test(id) || id.length<4){
@@ -198,7 +198,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/비밀번호.png">
                             <div class="input-container">		
-                                <input type="password" name="password" class="form__input" placeholder="비밀번호" required/>
+                                <input type="password" name="password" id="pw" class="form__input" placeholder="비밀번호" required/>
                                 <label class="form__label">비밀번호</label>
                             </div>
                         </div>
@@ -215,8 +215,11 @@
                         <script>
                         	//비밀번호 확인
 							$("input[name=passwordck]").blur(e=>{
-								const pw = $("input[name=password]").val();
+								const pw = $("#pw").val();
 								const pwck = $("input[name=passwordck]").val();
+								
+								console.log($("#pw").val());
+								console.log(pwck);
 								
 								if(pw!=pwck){
 									$("#passwordckTxt").html("<span id='passwordck'>비밀번호 불일치</span>")
@@ -227,7 +230,7 @@
                     				});
 									
 									$("input[name=passwordck]").val('');
-									$("input[name=passwordck]").focus();
+									//$("input[name=passwordck]").focus();
 									
 								}else{
 									$("#passwordckTxt").html("<span id='passwordck'>비밀번호 일치</span>")
@@ -276,8 +279,26 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/은행.png">
                             <div class="input-container">
-                                <input type="text" name="bankName" class="form__input" placeholder="거래은행"/>
-                                <label class="form__label">거래은행</label>		
+								<select name="bankName">
+									<option value="">은행명 선택</option>
+			                        <option value="국민은행">국민은행</option>
+			                        <option value="기업은행">기업은행</option>
+			                        <option value="농협중앙회">농협중앙회</option>
+			                        <option value="새마을금고">새마을금고</option>
+			                        <option value="수협중앙회">수협중앙회</option>
+			                        <option value="신한은행">신한은행</option>
+			                        <option value="외환은행">외환은행</option>
+			                        <option value="우리은행">우리은행</option>
+			                        <option value="우체국">우체국</option>
+			                        <option value="카카오뱅크">카카오뱅크</option>
+			                        <option value="케이뱅크">케이뱅크</option>
+			                        <option value="하나은행">하나은행</option>
+			                        <option value="한국씨티은행">한국씨티은행</option>
+			                        <option value="HSBC은행">HSBC은행</option>
+			                        <option value="SC제일은행">SC제일은행</option>
+								</select>
+                                <!-- <input type="text" name="bankName" class="form__input" placeholder="거래은행"/>
+                                <label class="form__label">거래은행</label> -->		
                             </div>
                         </div>
                         <br>

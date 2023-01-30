@@ -90,7 +90,7 @@
 		<div id="mypageMenu">
 			<div class="mypageRow">
 				<div class="mypageCol">
-					<input type="hidden" value="/mypage/edit.do"/>
+					<input type="hidden" value="/member/updateMember.do"/>
 					<div class="innerTitle1">
 						Edit
 					</div>

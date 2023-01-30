@@ -253,7 +253,7 @@
 									<sub class="comment-writer">
 										<c:out value="${comment.memberNo==100000?'운영자':loginMember.memberId}"/>
 									</sub>
-								    <sub class="comment-date"><c:out value="${comment.resellCommentEnrollDate}"/></sub>
+								    <sub class="comment-date"><fmt:formatDate value="${comment.resellCommentEnrollDate}" type="date" pattern="yyyy-MM-dd(E) a hh:mm"/></sub>
 								    <br> 
 								    <c:out value="${comment.content}"/>
 								</td>
