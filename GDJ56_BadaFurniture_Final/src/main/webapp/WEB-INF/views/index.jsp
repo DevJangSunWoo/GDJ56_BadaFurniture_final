@@ -85,7 +85,7 @@
 	</div>
 	
 	
-	<div id="checkDiv" hidden>
+	<div id="checkDiv" 	>
 		<div class="container">
 				<h5>[색상]</h5>
 			<ul class="ks-cboxtags">
@@ -295,7 +295,9 @@
 				console.log("dfd");
 			});
 			
-			
+			$(".imgDiv").on("click",function(){
+				console.log("dfd");
+			});
 		}
 	</script>
 	
