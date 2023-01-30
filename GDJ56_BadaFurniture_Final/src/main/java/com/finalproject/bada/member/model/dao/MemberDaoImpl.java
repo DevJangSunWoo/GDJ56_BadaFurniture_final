@@ -1,5 +1,7 @@
 package com.finalproject.bada.member.model.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +23,11 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int insertMember(SqlSessionTemplate session, Member m) {
 		return session.insert("member.insertMember",m);
+	}
+
+	@Override
+	public int updatePassword(SqlSessionTemplate session, Map param) {
+		return session.update("member.updatePassword", param);
 	}
 
 }

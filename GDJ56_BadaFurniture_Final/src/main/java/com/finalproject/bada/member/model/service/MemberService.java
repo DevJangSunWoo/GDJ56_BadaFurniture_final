@@ -1,5 +1,7 @@
 package com.finalproject.bada.member.model.service;
 
+import java.util.Map;
+
 import com.finalproject.bada.member.model.vo.Member;
 
 public interface MemberService {
@@ -9,4 +11,6 @@ public interface MemberService {
 	Member selectMemberByEmail(Member m);
 	
 	int insertMember(Member m);
+	
+	int updatePassword(Map param);
 }
