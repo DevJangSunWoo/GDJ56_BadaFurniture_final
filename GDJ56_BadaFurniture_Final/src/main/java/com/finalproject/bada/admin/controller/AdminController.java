@@ -140,23 +140,23 @@ public class AdminController {
 			) {
 		
 		//List<Product> list=service.productList();
-		log.debug("cPage {}", cPage);
-		log.debug("numPerpage {}", numPerpage);
+		//log.debug("cPage {}", cPage);
+		//log.debug("numPerpage {}", numPerpage);
 		
-		log.debug("searchType {}", searchType);
-		log.debug("searchKeyword {}", searchKeyword);
+		//log.debug("searchType {}", searchType);
+		//log.debug("searchKeyword {}", searchKeyword);
 		
 		Map search=new HashMap();
 		search.put("searchType", searchType);
 		search.put("searchKeyword", searchKeyword);
 		
 		mv.addObject("product",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
-		log.debug("product : {}",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		//log.debug("product : {}",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
 		
 		
 		int totalData=service.productListCount(search);
 		
-		log.debug("totalData {}", totalData);		
+		//log.debug("totalData {}", totalData);		
 		
 		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "product.do",searchType,searchKeyword));
 		
@@ -304,7 +304,7 @@ public class AdminController {
 		
 		Product p=service.selectProductByProductNo(productNo);
 		
-		log.debug("가구 정보 : {}",p);
+		//log.debug("가구 정보 : {}",p);
 		
 		mv.addObject("product",p);
 		
@@ -327,11 +327,11 @@ public class AdminController {
 			,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
 			) {		
 
-		log.debug("cPage {}", cPage);
-		log.debug("numPerpage {}", numPerpage);
+		//log.debug("cPage {}", cPage);
+		//log.debug("numPerpage {}", numPerpage);
 		
-		log.debug("searchType {}", searchType);
-		log.debug("searchKeyword {}", searchKeyword);
+		//log.debug("searchType {}", searchType);
+		//log.debug("searchKeyword {}", searchKeyword);
 		
 		Map search=new HashMap();
 		search.put("searchType", searchType);		
@@ -339,12 +339,12 @@ public class AdminController {
 
 		
 		mv.addObject("resell",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
-		log.debug("resell : {}",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		//log.debug("resell : {}",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
 		
 		
 		int totalData=service.resellListCount(search);
 		
-		log.debug("totalData {}", totalData);		
+		//log.debug("totalData {}", totalData);		
 		
 		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "resell.do",searchType,searchKeyword));
 		
@@ -373,7 +373,7 @@ public class AdminController {
 		param.put("resellNo", resellNo);
 		param.put("progressState", progressState);	
 		
-		log.debug("변경할 상태 : "+progressState);
+		//log.debug("변경할 상태 : "+progressState);
 	
 		
 		int result=service.updateProgressState(param);

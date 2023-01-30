@@ -9,7 +9,7 @@ public class AdminPageFactory {
    public static String getPage(int cPage, int numPerpage, int totalData, String url, String searchType, String searchKeyword) {
 	   
 	   
-	  log.debug("cPage : {}", cPage);
+	  //log.debug("cPage : {}", cPage);
       String pageBar="";
       int totalPage=(int)Math.ceil((double)totalData/numPerpage);
       int pageBarSize=5;
