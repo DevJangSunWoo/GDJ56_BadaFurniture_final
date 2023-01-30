@@ -203,24 +203,21 @@ public class ResellController {
 	}
 	
 	@RequestMapping("/resell/writeComment.do")
-	public ModelAndView writeResellComment(ModelAndView mv, ResellComment resellComment) {
-		
-		log.debug("resellComment : {}",resellComment);
-		
-		int result = service.insertResellComment(resellComment);
+	public ModelAndView writeResellComment(ModelAndView mv, ResellComment resellComment, HttpSession session) {
 		
 		String msg = "";
 		String loc = "/resell/read.do?resellNo="+resellComment.getResellNo();
-		if(result > 0) {
+		try {
+			service.insertResellComment(resellComment, session);
 			msg = "댓글 입력 성공";
-		} else {
+		} catch(RuntimeException e) {
+			e.printStackTrace();
 			msg = "댓글 입력 실패";
 		}
-		
 		mv.addObject("msg", msg);
 		mv.addObject("loc",loc);
 		mv.setViewName("common/msg");
-			
+		
 		return mv;
 	}
 	
