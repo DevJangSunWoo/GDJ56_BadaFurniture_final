@@ -50,20 +50,20 @@
 		<div id="search-container">
 			<span style="font-size: 17px;">검색타입 : </span> 
         	<select id="searchType">
-        		<option value="searchAll">전체조회</option>
-				<option value="soldOutState" ${searchType.equals('soldOutState')?"selected":""}>판매상태</option>
-        		<option value="showState" >공개상태</option>
-        		<option value="item" >가구분류</option>
-        		<option value="productNo">가구번호</option>
-        		<option value="grade">상태</option>
-        		<option value="price">가격</option>
+        		<option value="searchAll" ${searchType.equals("SEARCH_ALL")?"selected":""}>전체조회</option>
+				<option value="soldOutState" ${searchType.equals('SOLD_OUT_STATE')?"selected":""}>판매상태</option>
+        		<option value="showState" ${searchType.equals('SHOW_STATE')?"selected":""}>공개상태</option>
+        		<option value="item" ${searchType.equals('ITEM')?"selected":""}>가구분류</option>
+        		<option value="productNo" ${searchType.equals('PRODUCT_NO')?"selected":""}>가구번호</option>
+        		<option value="grade" ${searchType.equals('GRADE')?"selected":""}>상태</option>
+        		<option value="price" ${searchType.equals('PRICE')?"selected":""}>가격</option>
         	</select>
 			        	
 			<div id="search-searchAll">
 				<form action="${path}/admin/product.do" method="post">
 
-					<label><input type="radio" name="searchKeyword" value="" checked>전체조회</label>
-					<input type="hidden" name="searchType" value="searchAll">
+					<label><input type="radio" name="searchKeyword" value="searchAll" ${searchKeyword.equals("searchAll")?"checked":""}>전체조회</label>
+					<input type="hidden" name="searchType" value="SEARCH_ALL">
 					<button class="searchBtn">검색</button>
 				</form>
 			</div>
@@ -71,9 +71,9 @@
 			<div id="search-soldOutState">
 				<form action="${path}/admin/product.do" method="post">
 
-					<label><input type="radio" name="searchKeyword" value="N" >판매중</label> 
-					<label><input type="radio" name="searchKeyword" value="I">거래중</label>
-					<label><input type="radio" name="searchKeyword" value="Y">판매완료</label>
+					<label><input type="radio" name="searchKeyword" value="N" ${searchKeyword.equals('N')?"checked":""}>판매중</label> 
+					<label><input type="radio" name="searchKeyword" value="I" ${searchKeyword.equals('I')?"checked":""}>거래중</label>
+					<label><input type="radio" name="searchKeyword" value="Y" ${searchKeyword.equals('Y')?"checked":""}>판매완료</label>
 					<input type="hidden" name="searchType" value="SOLD_OUT_STATE">
 					<button class="searchBtn">검색</button>
 				</form>
@@ -82,8 +82,8 @@
         	<div id="search-showState">
 				<form action="${path}/admin/product.do" method="post">
 					
-					<label><input type="radio" name="searchKeyword" value="Y">공개</label> 
-					<label><input type="radio" name="searchKeyword" value="N">숨김</label>
+					<label><input type="radio" name="searchKeyword" value="Y" ${searchKeyword.equals('Y')?"checked":""}>공개</label> 
+					<label><input type="radio" name="searchKeyword" value="N" ${searchKeyword.equals('N')?"checked":""}>숨김</label>
 					<input type="hidden" name="searchType" value="SHOW_STATE">
 					<button class="searchBtn">검색</button>
 				</form>
@@ -93,14 +93,14 @@
 				<form action="${path}/admin/product.do" method="post">
 
 					<select name="searchKeyword" class="searchInput">
-						<option value="책상">책상</option>
-						<option value="의자">의자</option>
-						<option value="화장대">화장대</option>
-						<option value="침대">침대</option>
-						<option value="서랍장">서랍장</option>
-						<option value="책장">책장</option>
-						<option value="소파">소파</option>
-						<option value="옷장">옷장</option>
+						<option value="책상" ${searchKeyword.equals("책상")?"selected":""}>책상</option>
+						<option value="의자" ${searchKeyword.equals("의자")?"selected":""}>의자</option>
+						<option value="화장대" ${searchKeyword.equals("화장대")?"selected":""}>화장대</option>
+						<option value="침대" ${searchKeyword.equals("침대")?"selected":""}>침대</option>
+						<option value="서랍장" ${searchKeyword.equals("서랍장")?"selected":""}>서랍장</option>
+						<option value="책장" ${searchKeyword.equals("책장")?"selected":""}>책장</option>
+						<option value="소파" ${searchKeyword.equals("소파")?"selected":""}>소파</option>
+						<option value="옷장" ${searchKeyword.equals("옷장")?"selected":""}>옷장</option>
 					</select>
 					
 					<input type="hidden" name="searchType" value="ITEM">
@@ -112,7 +112,7 @@
 				<form action="${path}/admin/product.do" method="post">
 
 					<input type="text" name="searchKeyword" size="30" 
-					placeholder="검색할 가구번호 입력" class="searchInput">
+					placeholder="검색할 가구번호 입력" class="searchInput" value="${searchKeyword}">
 					<input type="hidden" name="searchType" value="PRODUCT_NO">
 					<button class="searchBtn">검색</button>
 				</form>
@@ -122,9 +122,9 @@
 				<form action="${path}/admin/product.do" method="post">
 
 					<select name="searchKeyword" class="searchInput">
-						<option value="최상">최상</option>
-						<option value="상">상</option>
-						<option value="중">중</option>
+						<option value="최상" ${searchKeyword.equals("최상")?"selected":""}>최상</option>
+						<option value="상" ${searchKeyword.equals("상")?"selected":""}>상</option>
+						<option value="중" ${searchKeyword.equals("중")?"selected":""}>중</option>
 					</select>
 					
 					<input type="hidden" name="searchType" value="GRADE">
@@ -136,7 +136,7 @@
 				<form action="${path}/admin/product.do" method="post">
 
 					<input type="number" name="searchKeyword" size="30" 
-					placeholder="가격 입력" class="searchInput"> 이하
+					placeholder="가격 입력" class="searchInput" value="${searchKeyword}"> 이하
 					<input type="hidden" name="searchType" value="PRICE">
 					<button class="searchBtn">검색</button>
 				</form>
@@ -169,6 +169,12 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:if test="${empty product}">
+							<tr>
+								<td colspan="12">조회된 결과가 없습니다.</td>
+							</tr>
+
+						</c:if>
 						<c:if test="${not empty product}">
 							<c:forEach var="p" items="${product }">
 								<tr>
@@ -219,7 +225,6 @@
 
 
 <script>
-
 	//검색타입 변경
 	$("select#searchType").change(e=>{
 		const type = $(e.target).val();
@@ -338,13 +343,14 @@
 
 	});
 
-	// $(".searchBtn").click(e=>{
-		
-	// })
+	//
+	$(()=>{
 
-	// $("#searchType").change(e=>{
-	// 	$(e.target).attr
-	// })
+		const type = $("#searchType").val();
+		$("div#search-container>div").hide();
+		$("div#search-"+type).css("display","inline-block");
+
+	})
 
 </script>
 

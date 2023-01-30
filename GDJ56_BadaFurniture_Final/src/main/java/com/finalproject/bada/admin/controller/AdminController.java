@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.admin.model.service.AdminService;
-import com.finalproject.bada.common.PageFactory;
+import com.finalproject.bada.common.AdminPageFactory;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
 
@@ -133,7 +133,7 @@ public class AdminController {
 	public ModelAndView productList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
 			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
-			,@RequestParam(value="searchType", defaultValue="전체조회") String searchType
+			,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
 			,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
 			) {
 		
@@ -156,7 +156,7 @@ public class AdminController {
 		
 		log.debug("totalData {}", totalData);		
 		
-		mv.addObject("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "product.do"));
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "product.do",searchType,searchKeyword));
 		
 		mv.addObject("searchType", searchType);
 		mv.addObject("searchKeyword", searchKeyword);
