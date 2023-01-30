@@ -96,8 +96,8 @@
                                 <input type="email" name="email" id="email" class="form__input" placeholder="이메일" required/>
                                 <label class="form__label" id="mailTxt">이메일</label>
                             </div>
-                            <input type="button" class="oribtn" id="emailcheck" value="중복확인">
-                            <input type="button" class="oribtn" id="emailAuthentication" value="이메일인증" hidden>
+                           <input type="button" class="oribtn" id="emailcheck" value="중복확인">
+                           <input type="button" class="oribtn" id="emailAuthentication" value="이메일인증" hidden>
                         </div>
                         <br>
                         <div class="flexDiv">
