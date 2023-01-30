@@ -42,4 +42,9 @@ public class MemberServiceImpl implements MemberService {
 		return dao.updatePassword(session, param);
 	}
 
+	@Override
+	public int updateMember(Member m) {
+		return dao.updateMember(session, m);
+	}
+
 }

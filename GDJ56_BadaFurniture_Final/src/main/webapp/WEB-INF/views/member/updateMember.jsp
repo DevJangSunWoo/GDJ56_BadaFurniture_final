@@ -16,13 +16,14 @@
 <link rel="stylesheet" href="${path }/resources/css/member/updateMember.css"/>
 
 <div class="flexDiv" style="justify-content: center;">
+	<%=session.getAttribute("loginMember") %>
     <h1 style="color: #348492; font-size: 40px;">정보수정</h1>
 </div>
 <br>
 
 <div class="flexDiv" style="justify-content: center;">
     <div id="enrollDiv">
-        <form action="/member/updateMember.do">
+        <form action="${path}/member/updateMemberEnd.do" method="post">
             <br>
             <div class="flexDiv" style="justify-content: center;">
                 <div style="border: 1px solid grey; width: 80%;">
@@ -36,7 +37,7 @@
           	<div class="flexDiv">
                   <img src="${path }/resources/images/member/아이디.png">
                   <div class="input-container">		
-                      <input type="text" name="id" class="form__input" value="${loginMember.memberId}" readonly/>
+                      <input type="text" name="id" class="form__input" value="${sessionScope.loginMember.memberId}" readonly/>
                       <label class="form__label" id="idTxt">아이디</label>
                   </div>
               </div>
@@ -45,7 +46,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/메일.png">
                         <div class="input-container" >
-                            <input type="email" name="email" id="email" class="form__input" value="${loginMember.email}" readonly/>
+                            <input type="email" name="email" id="email" class="form__input" value="${sessionScope.loginMember.email}" readonly/>
                             <label class="form__label" id="mailTxt">이메일</label>
                         </div>
                     </div>
@@ -67,7 +68,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/이름.png">
                         <div class="input-container">		
-                            <input type="text" name="name" class="form__input" value="${loginMember.memberName}" placeholder="이름" required/>
+                            <input type="text" name="memberName" class="form__input" value="${sessionScope.loginMember.memberName}" placeholder="이름" required/>
                             <label class="form__label">이름</label>
                         </div>
                     </div>
@@ -75,7 +76,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/전화.png">
                         <div class="input-container">
-                            <input type="text" name="phone" class="form__input" value="${loginMember.phone}" placeholder="전화번호(-포함)" required/>
+                            <input type="text" name="phone" class="form__input" value="${sessionScope.loginMember.phone}" placeholder="전화번호(-포함)" required/>
                             <label class="form__label">전화번호</label>		
                         </div>
                     </div>
@@ -83,25 +84,25 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/은행.png">
                         <div class="input-container" style="display: flex;">
-				<select name="bankName" id="bankName">
-					<option value="">은행명 선택</option>
-                       <option value="국민은행">국민은행</option>
-                       <option value="기업은행">기업은행</option>
-                       <option value="농협중앙회">농협중앙회</option>
-                       <option value="새마을금고">새마을금고</option>
-                       <option value="수협중앙회">수협중앙회</option>
-                       <option value="신한은행">신한은행</option>
-                       <option value="외환은행">외환은행</option>
-                       <option value="우리은행">우리은행</option>
-                       <option value="우체국">우체국</option>
-                       <option value="카카오뱅크">카카오뱅크</option>
-                       <option value="케이뱅크">케이뱅크</option>
-                       <option value="하나은행">하나은행</option>
-                       <option value="한국씨티은행">한국씨티은행</option>
-                       <option value="HSBC은행">HSBC은행</option>
-                       <option value="SC제일은행">SC제일은행</option>
-				</select>
-                            <input type="text" id="bank" name="bankName" class="form__input" value="${loginMember.bankName }" placeholder="거래은행" readonly/>
+							<select name="bank" id="bankName">
+								<option value="">은행명 선택</option>
+			                    <option value="국민은행">국민은행</option>
+			                    <option value="기업은행">기업은행</option>
+			                    <option value="농협중앙회">농협중앙회</option>
+			                    <option value="새마을금고">새마을금고</option>
+			                    <option value="수협중앙회">수협중앙회</option>
+			                    <option value="신한은행">신한은행</option>
+			                    <option value="외환은행">외환은행</option>
+			                    <option value="우리은행">우리은행</option>
+			                    <option value="우체국">우체국</option>
+			                    <option value="카카오뱅크">카카오뱅크</option>
+			                    <option value="케이뱅크">케이뱅크</option>
+			                    <option value="하나은행">하나은행</option>
+			                    <option value="한국씨티은행">한국씨티은행</option>
+			                    <option value="HSBC은행">HSBC은행</option>
+			                    <option value="SC제일은행">SC제일은행</option>
+							</select>
+                            <input type="text" id="bank" name="bankName" class="form__input" value="${sessionScope.loginMember.bankName }" placeholder="거래은행" readonly/>
                         </div>
                     </div>
                     <br>
@@ -115,7 +116,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/계좌번호.png">
                         <div class="input-container">
-                            <input type="text" name="accountCode" class="form__input" value="${loginMember.accountCode}" placeholder="계좌번호(-포함)"/>
+                            <input type="text" name="accountCode" class="form__input" value="${sessionScope.loginMember.accountCode}" placeholder="계좌번호(-포함)"/>
                             <label class="form__label">계좌번호</label>		
                         </div>
                     </div>
@@ -129,7 +130,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/그림.png">
                         <div class="input-container">
-                            <input type="text" id="postCode" name="postCode" class="form__input" value="${loginMember.postCode}" placeholder="우편번호" required/>
+                            <input type="text" id="postCode" name="postCode" class="form__input" value="${sessionScope.loginMember.postCode}" placeholder="우편번호" required/>
                             <label class="form__label">우편번호</label>		
                         </div>
                     </div>
@@ -137,7 +138,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/그림.png">
                         <div class="input-container">
-                            <input type="text" id="address" name="address" class="form__input" value="${loginMember.address}" placeholder="주소" required/>
+                            <input type="text" id="address" name="address" class="form__input" value="${sessionScope.loginMember.address}" placeholder="주소" required/>
                             <label class="form__label">주소</label>		
                         </div>
                     </div>
@@ -145,7 +146,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/그림.png">
                         <div class="input-container">
-                            <input type="text" name="addressDetail" class="form__input" value="${loginMember.detailAddress}" placeholder="상세주소"/>
+                            <input type="text" name="addressDetail" class="form__input" value="${sessionScope.loginMember.detailAddress}" placeholder="상세주소"/>
                             <label class="form__label">상세주소</label>		
                         </div>
                     </div>
@@ -173,12 +174,9 @@
                  }).open();
              }
          </script>
-
-            
-            <div class="flexDiv" style="justify-content: center;">
-
-            </div>
-
+			
+			<input type="hidden" name="memberId" value="${loginMember.memberId }">
+			
             <br><br><br>
             <div class="flexDiv" style="justify-content: center;">
                 <button type="submit" class="btn">정보수정</button>

@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/member")
-@SessionAttributes({"loginMember"})
+//@SessionAttributes({"loginMember"})
 @Slf4j
 public class MemberController {
 
@@ -42,9 +42,9 @@ public class MemberController {
 	//로그인
 	@RequestMapping("/login.do")
 	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
-		log.debug("{}",m);
+//		log.debug("{}",m);
 		Member loginMember = service.selectMemberById(m);
-		log.debug("{}",loginMember);
+		log.debug("loginMember: {}",loginMember);
 		
 		if(loginMember!=null && passwordEncoder.matches(m.getPassword(), loginMember.getPassword())) {
 			session.setAttribute("loginMember", loginMember);
@@ -67,7 +67,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	//아이디찾기
+	//아이디찾기 페이지연결
 	@RequestMapping("/searchId.do")
 	public String searchId() {
 		return "/member/searchId";
@@ -160,6 +160,30 @@ public class MemberController {
 		}else {
 			mv.addObject("msg","현재 비밀번호가 일치하지 않습니다! 다시 시도하세요!");
 			mv.addObject("loc","/member/updatePassword.do");
+		}
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	
+	//정보수정완료
+	@RequestMapping("/updateMemberEnd.do" )
+	public ModelAndView updateMember(Member m, ModelAndView mv, HttpSession session) {
+		
+		log.debug("updateMemberEnd: {}",m);
+		
+		int result = service.updateMember(m);
+		log.debug("updateMemberEnd(result): {}",result);
+		
+		if(result>0) {
+			Member loginMember = service.selectMemberById(m);
+			log.debug("loginMember: {}",loginMember);
+			session.setAttribute("loginMember", loginMember);
+			log.debug("loginMember: {}",session.getAttribute("loginMember"));
+			mv.addObject("msg","회원정보 수정완료");
+			mv.addObject("loc","/");
+		}else {
+			mv.addObject("msg","회원정보 수정실패");
+			mv.addObject("loc","/member/updateMember.do");
 		}
 		mv.setViewName("common/msg");
 		return mv;

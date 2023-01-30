@@ -13,4 +13,6 @@ public interface MemberService {
 	int insertMember(Member m);
 	
 	int updatePassword(Map param);
+	
+	int updateMember(Member m);
 }

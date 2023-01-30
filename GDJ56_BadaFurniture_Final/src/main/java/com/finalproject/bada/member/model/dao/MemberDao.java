@@ -15,4 +15,6 @@ public interface MemberDao {
 	int insertMember(SqlSessionTemplate session,Member m);
 	
 	int updatePassword(SqlSessionTemplate session, Map param);
+	
+	int updateMember(SqlSessionTemplate session,Member m);
 }
