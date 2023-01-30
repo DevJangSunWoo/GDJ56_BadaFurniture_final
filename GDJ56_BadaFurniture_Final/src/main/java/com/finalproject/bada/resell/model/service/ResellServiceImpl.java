@@ -83,7 +83,7 @@ public class ResellServiceImpl implements ResellService {
 			Resell resell = dao.selectResell(session, resellComment.getResellNo());
 			String alertMsg = mypageDao.getAlertMsg(httpSession.getServletContext().getContextPath(), "resellComment", resell);
 			result = 0;
-			result = mypageDao.insertAlert(session, Alert.builder().memberNo(loginMember.getMemberNo()).detail(alertMsg).build());
+			result = mypageDao.insertAlert(session, Alert.builder().memberNo(resell.getMember().getMemberNo()).detail(alertMsg).build());
 			if(result <= 0) {
 				throw new RuntimeException("알림 등록 실패");
 			}

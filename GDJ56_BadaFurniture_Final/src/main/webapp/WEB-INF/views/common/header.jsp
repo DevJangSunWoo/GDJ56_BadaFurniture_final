@@ -26,7 +26,7 @@
 <body>
 <!-- 상단 -->
     <div id="headerDiv">
-        <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo">
+        <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo" style="cursor:pointer;">
         
         <c:if test="${empty loginMember }">
         	<span class="headbtn" id="headbtn"><a href="#demo-modal"></a></span>
@@ -34,7 +34,7 @@
         
         <c:if test="${not empty loginMember }">
         	<div style="display: flex; margin-top:10px">
-	        	<span><img src="${path }/resources/images/mainpage/종.png" width="60px" height="60px"></span>
+	        	<span id="alertImgContainer"></span>
 	        	<div style="display: flex; margin-right: 5px;">
 	        	  <details>
 			        <summary id="memberName"><u>${loginMember.memberName}님</u></summary>
@@ -98,4 +98,34 @@
             <div class="dot"></div>
         </nav>
     </div>
+    
+    <script>
+    $(()=>{
+    	<c:if test="${loginMember != null}">
+    	$.ajax({
+   			url:"${path}/alert/countReadState.do",
+   			success:data=>{
+   				let alertImg = $("<img>").attr({
+   					width:"60px",
+   					height:"60px",
+   				}).css("cursor","pointer");
+   				if(data > 0){
+   					alertImg.attr("src","${path }/resources/images/mainpage/new종.png");
+   				} else{
+   					alertImg.attr("src","${path }/resources/images/mainpage/종.png");
+   				}
+   				$("span#alertImgContainer").append(alertImg);
+   			}
+    	});
+    	</c:if>
+    });
+    
+    $(document).on("click","span#alertImgContainer>img", e=>{
+    	location.assign("${path}/mypage/alert.do");
+    });
+    
+    $("#logo").click(e=>{
+    	location.assign("${path}")
+    });
+    </script>
 

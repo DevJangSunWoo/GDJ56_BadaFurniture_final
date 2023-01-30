@@ -62,4 +62,19 @@ public class MypageDaoImpl implements MypageDao {
 		return msg;
 	}
 
+	@Override
+	public int deleteAlert(SqlSessionTemplate session, List<Integer> alertNos) {
+		return session.delete("mypage.deleteAlert", alertNos);
+	}
+
+	@Override
+	public int updateAlertReadState(SqlSessionTemplate session, int memberNo) {
+		return session.update("mypage.updateAlertReadState",memberNo);
+	}
+
+	@Override
+	public int selectAlertCountReadStateN(SqlSessionTemplate session, int memberNo) {
+		return session.selectOne("mypage.selectAlertCountReadStateN", memberNo);
+	}
+
 }

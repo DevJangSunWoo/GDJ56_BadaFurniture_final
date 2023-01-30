@@ -17,4 +17,10 @@ public interface MypageService {
 	List<Alert> selectAlertList(int memberNo, int cPage, int numPerpage);
 	
 	int selectAlertCount(int memberNo);
+	
+	int deleteAlert(List<Integer> alertNos);
+	
+	int updateAlertReadState(int memberNo);
+	
+	int selectAlertCountReadStateN(int memberNo);
 }

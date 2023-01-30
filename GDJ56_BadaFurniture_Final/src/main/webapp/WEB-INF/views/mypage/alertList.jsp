@@ -73,7 +73,7 @@
 		text-align:center;
 		border-bottom:1px solid grey;
 	}
-	button#deleteBtn{
+	button#deleteSelect{
 		padding:0px;
 		border:2px solid red;
 		width:70px;
@@ -105,7 +105,7 @@
 						<c:forEach var="alert" items="${alerts}">
 							<tr>
 								<td>
-									<input type="checkbox" class="check" name="productNo" value="" style="cursor:pointer;">
+									<input type="checkbox" class="check" name="alertNo" value="${alert.alertNo}" style="cursor:pointer;">
 								</td>
 								<td>
 									${alert.detail}
@@ -122,7 +122,7 @@
 				</table>
 				<div style="display:flex;justify-content: left;">
 					<div>
-						<button  id="deleteBtn" style="margin:15px 0px 10px 15px;font-size:13px;">선택삭제</button>
+						<button  id="deleteSelect" style="margin:15px 0px 10px 15px;font-size:13px;">선택삭제</button>
 					</div>
 				</div>
 				<div id="pageBar" style="text-align:center">
@@ -133,6 +133,12 @@
 	</section>
 
 <script>
+	$(()=>{
+		//알림을 읽음 처리로 변경한다.
+		$.ajax({
+			url:"${path}/alert/updateReadState.do"
+		});
+	});
 	//전체선택 체크박스를 클릭했을 때
 	$("input.checkAll").change(e=>{
 		if($(e.target).prop("checked")==true){
@@ -150,6 +156,20 @@
 			$("input.checkAll").prop("checked",false);
 		}
 		sumPrice();
+	});
+	
+	//선택삭제 버튼 클릭했을 때
+	$("button#deleteSelect").click(e=>{
+		let queryString = "";
+		if($("input.check:checked").length > 0){
+			if(confirm("선택하신 알림을 삭제하시겠습니까?")){
+				$("input.check:checked").each((i,v)=>{
+					queryString += "alertNo=" + $(v).val() + "&";
+				});
+				queryString = queryString.substring(0,queryString.length-1);
+				location.replace("${path}/alert/delete.do?" + queryString);
+			} 
+		}
 	});
 
 </script>
