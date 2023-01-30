@@ -57,6 +57,12 @@ public class MemberController {
 		return "redirect:/";
 	}
 
+	//아이디찾기
+	@RequestMapping("/searchId.do")
+	public String searchId() {
+		return "/member/searchId";
+	}
+	
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 	 
 	//회원가입페이지이동
@@ -113,9 +119,9 @@ public class MemberController {
 	
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	//아이디찾기
-	@RequestMapping("/searchId.do")
-	public String searchId() {
-		return "/member/searchId";
+	//회원탈퇴페이지 이동
+	@RequestMapping("/deleteMember.do")
+	public String deleteMember() {
+		return "/mypage/deleteMember";
 	}
 }
