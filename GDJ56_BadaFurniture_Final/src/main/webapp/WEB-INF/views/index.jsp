@@ -85,7 +85,7 @@
 	</div>
 	
 	
-	<div id="checkDiv" 	>
+	<div id="checkDiv" hidden>
 		<div class="container">
 				<h5>[색상]</h5>
 			<ul class="ks-cboxtags">
@@ -284,19 +284,16 @@
 						showProduct.append(imgDiv).append(infoDiv);
 						infoDiv.append(productTitle).append(grade).append(size).append(price).append(date);
 						
+						//생성된 태그에 이벤트 걸어서 제품 div 클릭시 상세페이지로 연결
+						productWrap.on("click",function(e){
+							console.log($(e.target).parents(".productWrap").children(".showProduct").prev().val());
+							let productNo = $(e.target).parents(".productWrap").children(".showProduct").prev().val();
+							location.assign("${path}/product/view.do?productNo="+productNo);
+						});
 						
 						$("#productContainer").append(productWrap);
 					}
 				}
-			});
-			
-			
-			$(".productWrap").on("click",function(){
-				console.log("되닝");
-			});
-			
-			$(".imgDiv").on("click",function(){
-				console.log("확인");
 			});
 		}
 	</script>
@@ -308,7 +305,7 @@
 				<div class="productWrap" >
 	                <input type="number" name="productNo" id="productNo" value="${product.productNo }">
 	                
-	                <div class="showProduct" onclick="fn_showPropertyInfo(event)">
+	                <div class="showProduct">
 		                <div class="imgDiv">
 		                    <img src="${path }/resources/upload/product/${product.files[0].renamedFileName}" alt="">
 		                </div>
@@ -347,7 +344,13 @@
 	</div>
 	
 </section>
-	
+	<script>
+		$(".productWrap").on("click",function(e){
+			console.log($(e.target).parents(".productWrap").children(".showProduct").prev().val());
+			let productNo = $(e.target).parents(".productWrap").children(".showProduct").prev().val();
+			location.assign("${path}/product/view.do?productNo="+productNo);
+		});
+	</script>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
