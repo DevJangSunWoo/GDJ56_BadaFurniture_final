@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.resell.model.vo.Resell;
 
 public interface AdminDao {
 	
@@ -34,8 +35,13 @@ public interface AdminDao {
 	
 	//가구 관리 - 수정하기 연결 - productNo로 정보 가져오기
 	Product selectProductByProductNo(SqlSessionTemplate session,int productNo);
-
 	
 	
+	//내가구팔기 관리 - 조회
+	List<Resell> resellListPage(SqlSessionTemplate session,Map<String,Integer> param,Map search);
+	int resellListCount(SqlSessionTemplate session,Map search);
+	
+	//내가구팔기 관리 - 요약
+	List<Map<String,Integer>> resellSummary(SqlSessionTemplate session);
 	
 }

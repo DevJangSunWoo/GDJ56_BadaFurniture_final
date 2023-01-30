@@ -62,11 +62,11 @@ public class AdminController {
 		return "admin/manageOrder";
 	}
 	
-	//내가구팔기 관리 연결
-	@RequestMapping("/admin/resell.do")
-	public String manageResell() {
-		return "admin/manageResell";
-	}		
+//	//내가구팔기 관리 연결
+//	@RequestMapping("/admin/resell.do")
+//	public String manageResell() {
+//		return "admin/manageResell";
+//	}		
 	
 	//가구 올리기
 	@RequestMapping("/admin/insertEnd.do")
@@ -315,6 +315,51 @@ public class AdminController {
 //	public String update() {
 
 //	}
+	
+	//'내가구팔기' - 조회
+	@RequestMapping("/admin/resell.do")
+	public ModelAndView resellList(ModelAndView mv,
+			@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
+			,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
+			,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
+			) {		
+
+		log.debug("cPage {}", cPage);
+		log.debug("numPerpage {}", numPerpage);
+		
+		log.debug("searchType {}", searchType);
+		log.debug("searchKeyword {}", searchKeyword);
+		
+		Map search=new HashMap();
+		search.put("searchType", searchType);		
+		search.put("searchKeyword", searchKeyword);		
+
+		
+		mv.addObject("resell",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		log.debug("resell : {}",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		
+		
+		int totalData=service.resellListCount(search);
+		
+		log.debug("totalData {}", totalData);		
+		
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "resell.do",searchType,searchKeyword));
+		
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchKeyword", searchKeyword);
+		
+		
+		
+		//내가구팔기 요약
+		List<Map<String,Integer>> sum=service.resellSummary();
+		//log.debug("{}",sum);		
+		mv.addObject("summary",sum);		
+		
+		mv.setViewName("admin/manageResell");	
+		
+		return mv;
+	}
 	
 	
 	
