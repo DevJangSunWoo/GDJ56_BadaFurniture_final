@@ -2,6 +2,8 @@ package com.finalproject.bada.resell.model.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.finalproject.bada.resell.model.vo.Resell;
 import com.finalproject.bada.resell.model.vo.ResellComment;
 
@@ -17,7 +19,7 @@ public interface ResellService {
 	
 	int deleteResell(int resellNo);
 	
-	int insertResellComment(ResellComment resellComment);
+	void insertResellComment(ResellComment resellComment, HttpSession session);
 	
 	int selectResellCount(int memberNo);
 }

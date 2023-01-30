@@ -16,4 +16,8 @@ public interface MypageDao {
 	List<Alert> selectAlertList(SqlSessionTemplate session, int memberNo, int cPage, int numPerpage);
 	
 	int selectAlertCount(SqlSessionTemplate session, int memberNo);
+	
+	int insertAlert(SqlSessionTemplate session, Alert alert);
+	
+	String getAlertMsg(String path, String state, Object obj);
 }
