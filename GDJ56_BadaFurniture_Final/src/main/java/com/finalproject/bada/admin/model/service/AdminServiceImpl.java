@@ -52,15 +52,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Product> productListPage(Map<String, Integer> param) {
+	public List<Product> productListPage(Map<String, Integer> param,Map search) {
 		// TODO Auto-generated method stub
-		return dao.productListPage(session,param);
+		return dao.productListPage(session,param,search);
 	}
 
 	@Override
-	public int productListCount() {
+	public int productListCount(Map search) {
 		// TODO Auto-generated method stub
-		return dao.productListCount(session);
+		return dao.productListCount(session,search);
 	}
 
 	//요약테이블

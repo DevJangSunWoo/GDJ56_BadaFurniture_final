@@ -1,8 +1,8 @@
 package com.finalproject.bada.common;
 
-public class PageFactory {
+public class AdminPageFactory {
    
-   public static String getPage(int cPage, int numPerpage, int totalData, String url) {
+   public static String getPage(int cPage, int numPerpage, int totalData, String url, String searchType, String searchKeyword) {
 
       String pageBar="";
       int totalPage=(int)Math.ceil((double)totalData/numPerpage);
@@ -10,6 +10,7 @@ public class PageFactory {
       int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
       int pageEnd=pageNo+pageBarSize-1;
 
+      if(searchType.equals("searchAll")) searchKeyword="";
       
       
       pageBar="<span class='pagination justify-content-center pagination-sm'>";

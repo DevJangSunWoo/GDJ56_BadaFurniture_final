@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.admin.model.service.AdminService;
-import com.finalproject.bada.common.PageFactory;
+import com.finalproject.bada.common.AdminPageFactory;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
 
@@ -132,16 +132,35 @@ public class AdminController {
 	@RequestMapping("/admin/product.do")
 	public ModelAndView productList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
-			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage) {
+			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
+			,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
+			,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
+			) {
 		
 		//List<Product> list=service.productList();
-		//log.debug("c {}", cPage);
-		//log.debug("numPerpage {}", numPerpage);
+		log.debug("cPage {}", cPage);
+		log.debug("numPerpage {}", numPerpage);
 		
-		mv.addObject("product",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage)));
+		log.debug("searchType {}", searchType);
+		log.debug("searchKeyword {}", searchKeyword);
 		
-		int totalData=service.productListCount();
-		mv.addObject("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "product.do"));
+		Map search=new HashMap();
+		search.put("searchType", searchType);
+		search.put("searchKeyword", searchKeyword);
+		
+		mv.addObject("product",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		log.debug("product : {}",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		
+		
+		int totalData=service.productListCount(search);
+		
+		log.debug("totalData {}", totalData);		
+		
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "product.do",searchType,searchKeyword));
+		
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchKeyword", searchKeyword);
+		
 		
 		
 		//가구조회 요약
@@ -171,7 +190,7 @@ public class AdminController {
 		//log.debug("FILELIST : "+fileList);
 		
 		for(int i=0;i<fileList.size();i++) {
-			String renamedFileName=fileList.get(i).getRenamedFileName();
+			String renamedFileName=fileList.get(i).getRenamedFileName();																													                     
 			//log.debug("파일명 : "+renamedFileName);
 			File file=new File(path+renamedFileName);				
 			if(file.exists()){
