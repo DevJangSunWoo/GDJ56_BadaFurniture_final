@@ -35,4 +35,9 @@ public class MemberDaoImpl implements MemberDao {
 		return session.update("member.updateMember", m);
 	}
 
+	@Override
+	public String searchId(SqlSessionTemplate session, Map param) {
+		return session.selectOne("member.searchId", param);
+	}
+
 }

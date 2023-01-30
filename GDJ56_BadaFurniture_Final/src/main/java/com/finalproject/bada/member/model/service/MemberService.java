@@ -15,4 +15,6 @@ public interface MemberService {
 	int updatePassword(Map param);
 	
 	int updateMember(Member m);
+	
+	String searchId(Map param);
 }
