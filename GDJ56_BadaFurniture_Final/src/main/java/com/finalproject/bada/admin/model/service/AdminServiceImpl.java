@@ -127,6 +127,14 @@ public class AdminServiceImpl implements AdminService {
 		return dao.resellSummary(session);
 	}
 
+	@Override
+	public int updateProgressState(Map param) {
+		// TODO Auto-generated method stub
+		return dao.updateProgressState(session,param);
+	}
+	
+	//내가구팔기 관리 - 진행상태 변경
+
 
 	
 	

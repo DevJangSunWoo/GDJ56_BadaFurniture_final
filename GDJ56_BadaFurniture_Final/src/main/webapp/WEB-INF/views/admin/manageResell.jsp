@@ -106,6 +106,9 @@
 			<table id="propertyTable">
 				<thead>
 					<tr>
+						<!-- <th>
+							<input type="checkbox" name="chk" onclick="selectAll(this)">
+						</th> -->
 						<th>신청번호</th>
 						<th>신청일자</th>
 						<th>최종수정일</th>
@@ -128,7 +131,15 @@
 					<c:if test="${not empty resell}">
 						<c:forEach var="r" items="${resell }">
 							<tr>
-								<td><a href="${path}/resell/read.do?resellNo=${r.resellNo}"><c:out value="${r.resellNo}"/></a></td>
+								<!-- <td>
+									<input type="checkbox" name="deleteList" value="${r.resellNo}">
+								</td> -->
+								<td>
+									<input type="hidden" value="${r.resellNo}">
+									<a href="${path}/resell/read.do?resellNo=${r.resellNo}">
+										<c:out value="${r.resellNo}"/>
+									</a>
+								</td>
 								<td><c:out value="${r.resellEnrollDate}"/></td>
 								<td>${r.resellEditDate==null?"-":r.resellEditDate}</td>
 								<td>
@@ -150,7 +161,6 @@
 										<option value="입금완료" ${r.progressState.equals("입금완료")?"selected":""}>입금완료</option>
 
 									</select>
-
 								</td>
 							</tr>
 						</c:forEach>
@@ -161,7 +171,7 @@
 		</div>
 		<div id="pageBarContainer">
 			<div id=pageBar>
-
+				${pageBar}
 			</div>
 		</div>
 	</div>
@@ -198,41 +208,41 @@
 		})
 	})
 
+
+
+
 	//진행상태 변경하기
+	function changeProgressState(resellNo,progressState){
+		$.ajax({
+			url:"${path}/admin/updateProgressState.do",
+			data:{resellNo:resellNo,progressState:progressState},
+			success:function(result){	
+				alert(progressState+"상태로 변경했습니다.")
+			}
+		})
+	}
+
 	$("select[name=progressState]").change(e=>{
-			const productNo=$(e.target).parent().parent().children().children().val();
-			const soldOutState=$(e.target).val();
+			const resellNo=$(e.target).parent().parent().children().children().val();
+			const progressState=$(e.target).val();
 
-			console.log(productNo);
-			console.log(soldOutState);
+			//console.log("resellNo : "+resellNo);
+			//console.log("progressState : "+progressState);
+			
+			if(progressState=="수정요청"||progressState=="승인거부"||progressState=="승인완료"){
+				if(confirm("진행상태를 "+progressState+"으로 변경하시겠습니까?")){					
+					changeProgressState(resellNo,progressState);
 
-			// $.ajax({
-			// 	url:"${path}/admin/updateSoldOutState.do",
-			// 	data:{productNo:productNo,soldOutState:soldOutState},
-			// 	success:function(result){		
-			// 		if(result.result>0){
+				}else{
+					location.reload();
+				}		
 
-			// 			const nowState="";
-			// 			if(soldOutState=='N'){
-			// 				msg="판매중";
-			// 			}else if(soldOutState=='I'){
-			// 				msg="거래중";
-			// 			}else{
-			// 				msg="판매완료";
-			// 			}
+			}else{
+				changeProgressState(resellNo,progressState);
+			}
 
-			// 			alert(msg+"으로 변경 완료");
 
-						
-			// 		}else{
-			// 			alert("판매상태 변경 실패");
-						
-			// 		}
-			// 	},
-			// 	error:function(result){
-			// 		alert("error! result 값 : "+result.result );	
-			// 	}
-			// })
+
 
 
 	});

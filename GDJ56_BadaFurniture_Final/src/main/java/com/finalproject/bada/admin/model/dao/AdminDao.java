@@ -44,4 +44,7 @@ public interface AdminDao {
 	//내가구팔기 관리 - 요약
 	List<Map<String,Integer>> resellSummary(SqlSessionTemplate session);
 	
+	
+	//내가구팔기 관리 - 진행상태 변경
+	int updateProgressState(SqlSessionTemplate session,Map param);
 }

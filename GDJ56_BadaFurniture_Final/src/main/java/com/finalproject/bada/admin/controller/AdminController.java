@@ -22,6 +22,8 @@ import com.finalproject.bada.admin.model.service.AdminService;
 import com.finalproject.bada.common.AdminPageFactory;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -359,6 +361,31 @@ public class AdminController {
 		mv.setViewName("admin/manageResell");	
 		
 		return mv;
+	}
+	
+	//'내 가구 팔기 ' 관리 - 진행상태 변경
+	@RequestMapping(value="/admin/updateProgressState.do")
+	@ResponseBody
+	public String updateProgressState(
+			@RequestParam("resellNo") int resellNo,
+			@RequestParam("progressState") String progressState) {
+		Map param=new HashMap();
+		param.put("resellNo", resellNo);
+		param.put("progressState", progressState);	
+		
+		log.debug("변경할 상태 : "+progressState);
+	
+		
+		int result=service.updateProgressState(param);
+		
+		Gson gson=new Gson();
+		JsonObject jsonOb=new JsonObject();
+		jsonOb.addProperty("result", result);
+		
+		String JsonStr=gson.toJson(jsonOb);
+		
+		return JsonStr;
+		
 	}
 	
 	

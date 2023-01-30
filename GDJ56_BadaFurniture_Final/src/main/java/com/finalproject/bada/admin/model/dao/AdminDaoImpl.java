@@ -115,6 +115,13 @@ public class AdminDaoImpl implements AdminDao {
 		return session.selectList("admin.resellSummary");
 	}
 
+	//내가구팔기 관리 - 진행상태 변경
+	@Override
+	public int updateProgressState(SqlSessionTemplate session, Map param) {
+		// TODO Auto-generated method stub
+		return session.update("admin.updateProgressState",param);
+	}
+
 	
 	
 	
