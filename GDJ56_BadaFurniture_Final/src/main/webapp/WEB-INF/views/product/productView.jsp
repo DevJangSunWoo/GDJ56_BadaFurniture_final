@@ -129,12 +129,8 @@
 					},
 					success:data=>{
 						console.log(data);
-						if(data){
-							$("#enroll-container span.ok").hide();
-							$("#enroll-container span.error").show();
-						}else{
-							$("#enroll-container span.ok").show();
-							$("#enroll-container span.error").hide();	
+						if(confirm(data+"장바구니로 이동하시겠습니까?")) {
+						    window.location.href = "${path}/mypage/cart.do"
 						}
 					}
 				});

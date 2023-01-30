@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.finalproject.bada.mypage.model.vo.Cart;
 import com.finalproject.bada.product.model.vo.Product;
 
 @Repository
@@ -20,5 +21,32 @@ public class ProductDaoImpl implements ProductDao {
 	public List<Product> selectProductList(SqlSessionTemplate session, Map map) {
 		return session.selectList("product.selectProductList", map);
 	}
+	
+	@Override
+	public List<Product> productList(SqlSessionTemplate session) {
+		return session.selectList("product.productList");
+	}
 
+	@Override
+	public Cart selectCartCheck(SqlSessionTemplate session, Map map) {
+		// TODO Auto-generated method stub
+		return session.selectOne("product.selectCartCheck",map);
+	}
+
+	@Override
+	public int selectCartCount(SqlSessionTemplate session, int cartMemberNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("product.selectCartCount", cartMemberNo);
+	}
+
+	@Override
+	public int insertCart(SqlSessionTemplate session, Map map) {
+		// TODO Auto-generated method stub
+		return session.insert("product.insertCart", map);
+	}
+
+
+	
+	
+	
 }

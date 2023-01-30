@@ -111,4 +111,11 @@ public class MemberController {
 		return "/member/updateMember";
 	}
 	
+//--------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	//아이디찾기
+	@RequestMapping("/searchId.do")
+	public String searchId() {
+		return "/member/searchId";
+	}
 }

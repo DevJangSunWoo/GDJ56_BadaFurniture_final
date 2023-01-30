@@ -223,6 +223,8 @@
 		
 		//조건에 따라 제품출력하는 ajax
 		const fn_printProductList=()=>{
+			$("#checkDiv").slideUp(200);
+			
 			let colorArr = [];
 			let materialArr = [];
 			let gradeArr = [];
@@ -246,64 +248,109 @@
 				contentType:"application/json",
 // 				traditional:true,
 				data :	JSON.stringify({color:colorArr, material:materialArr, grade:gradeArr, item:item, width:width, sort:sort}),
-				success : plist =>{
-					console.log(plist);
+				success : list =>{
+					console.log(list);
+					$("#productContainer").html("");
+					if(list==""){
+						$("#productContainer").html("<h1 style='color: grey; text-align: center;'>조건에 맞는 가구가 없습니다.</h1>");
+					}
+					
+					//list.forEach(e=>{})
+					for(let i=0; i<list.length; i++){
+						let productWrap = $("<div>").addClass("productWrap");
+						let productNo = $("<input>").attr("type","number").attr("name","productNo")
+										.attr("value",list[i].productNo).attr("readonly",true);
+						let showProduct = $("<div>").addClass("showProduct");
+						
+						let imgDiv = $("<div>").addClass("imgDiv")
+									.append($("<img>").attr("src","${path }/resources/upload/product/"+list[i].files[0].renamedFileName));
+						
+						let infoDiv = $("<div>").addClass("infoDiv");
+						let productTitle = $("<div>").addClass("productTitle")
+										.html("<span>"+list[i].title+"</span>");
+						let grade = $("<div>").addClass("grade")
+									.html("<span>등급 : </span><span>"+list[i].grade+"</span>");
+						let size = $("<div>").addClass("size")
+									.html("<span>"+list[i].widths+"</span><span>mm</span><span> * </span><span>"
+											+list[i].depths+"</span><span>mm</span><span> * </span><span>"+list[i].heights
+											+"</span><span>mm</span>");
+						let price = $("<div>").addClass("price")
+									.html("<span>"+list[i].price+"</span><span>원</span>");
+						let date = $("<div>").addClass("date")
+									.append($("<span>")).text(list[i].productEnrollDate);
+						
+						
+						productWrap.append(productNo).append(showProduct);
+						showProduct.append(imgDiv).append(infoDiv);
+						infoDiv.append(productTitle).append(grade).append(size).append(price).append(date);
+						
+						//생성된 태그에 이벤트 걸어서 제품 div 클릭시 상세페이지로 연결
+						productWrap.on("click",function(e){
+							console.log($(e.target).parents(".productWrap").children(".showProduct").prev().val());
+							let productNo = $(e.target).parents(".productWrap").children(".showProduct").prev().val();
+							location.assign("${path}/product/view.do?productNo="+productNo);
+						});
+						
+						$("#productContainer").append(productWrap);
+					}
 				}
-				
 			});
-			
 		}
 	</script>
 	
-
-	
-	<div style="display:flex; justify-content:center;">
+	<div id="pro" style="display:flex; justify-content:center;">
 		<div id="productContainer">
-			<div class="productWrap" >
-                <input type="number" name="productNo" id="productNo" value="" hidden>
-                
-                <div class="showProduct" onclick="fn_showPropertyInfo(event)">
-	                <div class="imgDiv">
-	                    <img src="${path }/resources/upload/product/product01_01_01.jpg" alt="">
-	                </div>
+		
+			<c:forEach items="${productList}" var="product">
+				<div class="productWrap" >
+	                <input type="number" name="productNo" id="productNo" value="${product.productNo }">
 	                
-	                <div class="infoDiv">
-	                    <!-- <div class="productItem">
-	                        <span>책상</span>
-	                    </div> -->
-	                    <div class="productTitle">
-	                    	<span>책상이에요요요용</span>
-	                    </div>
-	                    <div class="infotext">
-	                    	<span>등급 : </span>
-	                    	<span>최상</span>
-	                    </div>
-	                    <div class="infotext">
-	                    	<span>1500</span>
-	                    	<span>mm</span>
-	                    	<span>*</span>
-	                    	<span>2000</span>
-	                    	<span>mm</span>
-	                    	<span>*</span>
-	                    	<span>800</span>
-	                    	<span>mm</span>
-	                    </div>
-	                    <div class="price">
-	                    	<span>249,900</span>
-	                    	<span>원</span>
-	                    </div>
-	                    <div class="date">
-	                    	<span>2023-01-27</span>
-	                    </div>
-	                </div>
-                </div> 
-            </div>
+	                <div class="showProduct">
+		                <div class="imgDiv">
+		                    <img src="${path }/resources/upload/product/${product.files[0].renamedFileName}" alt="">
+		                </div>
+		                
+		                <div class="infoDiv">
+		                    <div class="productTitle">
+		                    	<span>${product.title}</span>
+		                    </div>
+		                    <div class="grade">
+		                    	<span>등급 : </span>
+		                    	<span>${product.grade}</span>
+		                    </div>
+		                    <div class="size">
+		                    	<span>${product.widths}</span>
+		                    	<span>mm</span>
+		                    	<span> * </span>
+		                    	<span>${product.depths}</span>
+		                    	<span>mm</span>
+		                    	<span> * </span>
+		                    	<span>${product.heights}</span>
+		                    	<span>mm</span>
+		                    </div>
+		                    <div class="price">
+		                    	<span><fmt:formatNumber value="${product.price}" type="currency"/></span>
+		                    	<span>원</span>
+		                    </div>
+		                    <div class="date">
+		                    	<span><fmt:formatDate value="${product.productEnrollDate}" type="date" pattern="yyyy-MM-dd(E)"/></span>
+		                    </div>
+		                </div>
+	                </div> 
+	            </div>
+            </c:forEach>
+            
 		</div>
 	</div>
 	
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </section>
-	
+	<script>
+		$(".productWrap").on("click",function(e){
+			console.log($(e.target).parents(".productWrap").children(".showProduct").prev().val());
+			let productNo = $(e.target).parents(".productWrap").children(".showProduct").prev().val();
+			location.assign("${path}/product/view.do?productNo="+productNo);
+		});
+	</script>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
