@@ -77,7 +77,7 @@ public class MypageController {
 	public ModelAndView alertList(ModelAndView mv, HttpSession session,
 			@RequestParam(value="cPage", defaultValue="1") int cPage) {
 		
-		int numPerpage = 7;
+		int numPerpage = 5;
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		List<Alert> alerts = service.selectAlertList(loginMember.getMemberNo(), cPage, numPerpage);
