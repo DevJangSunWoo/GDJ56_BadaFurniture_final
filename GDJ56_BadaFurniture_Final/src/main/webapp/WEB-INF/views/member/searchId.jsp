@@ -17,10 +17,11 @@
 
 	<form class="flexDiv" action="" method="post">
 	    <div id="searchDiv">
-	    	<div style="width:90%; justify-content: center;">
+	    	<div style="width:100%; justify-content: center;">
 	    		<img id="img" src="${path}/resources/images/member/찾기.jpg">
 	    	</div>
 			<div id="inputDiv">
+	    		<br><br>
 				<div class="flexDiv">
                 	<img src="${path }/resources/images/member/이름.png">
                     <div class="input-container">		
@@ -28,7 +29,7 @@
                         <label class="form__label">이름</label>
                     </div>
                 </div>
-                <br>
+                <br><br>
 		        
 		        <div class="flexDiv">
                     <img src="${path }/resources/images/member/전화.png">
@@ -37,7 +38,7 @@
                         <label class="form__label">전화번호</label>		
                     </div>
                 </div>
-                <br>
+                <br><br>
                 
                 <div class="flexDiv">
                     <img src="${path }/resources/images/member/메일.png">

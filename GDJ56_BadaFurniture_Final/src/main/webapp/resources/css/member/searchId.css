@@ -11,8 +11,8 @@ div{
 
 #searchDiv{
 	border: 2px solid black;
-	width: 90%;
-	height: 900px;
+	width: 60%;
+	height: 700px;
 }
 
 #img{
@@ -25,7 +25,7 @@ div{
 	background-color: lightgrey;
 	width: 90%;
 	text-align: center;
-	font-size: 30px;
+	font-size: 28px;
 	
 }
 
@@ -95,14 +95,15 @@ div{
     text-align: center;
     text-transform: uppercase;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 19px;
     letter-spacing: 4px;
     position: relative;
     background-color: #348492;
     border: none;
     color: #fff;
     padding: 20px;
-    width: 60%;
+    width: 70%;
+    height: 61px;
     text-align: center;
     transition-duration: 0.4s;
     overflow: hidden;

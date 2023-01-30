@@ -292,11 +292,11 @@
 			
 			
 			$(".productWrap").on("click",function(){
-				console.log("dfd");
+				console.log("되닝");
 			});
 			
 			$(".imgDiv").on("click",function(){
-				console.log("dfd");
+				console.log("확인");
 			});
 		}
 	</script>
