@@ -8,6 +8,17 @@
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
 <link rel="stylesheet" href="${path }/resources/css/admin/manageProduct.css"/>
 
+
+<style>
+	#pageBar a.active {
+		background-color: #4CAF50;
+  		color: white;
+	}
+	#pageBar a:hover:not(.active) {
+		background-color: #ddd;
+	}
+</style>
+
 <section>
 	<div id="listContainer">
 		<h2>가구관리</h2>

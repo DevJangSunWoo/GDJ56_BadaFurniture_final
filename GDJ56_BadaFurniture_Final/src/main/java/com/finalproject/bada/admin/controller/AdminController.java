@@ -149,6 +149,8 @@ public class AdminController {
 		search.put("searchKeyword", searchKeyword);
 		
 		mv.addObject("product",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		log.debug("product : {}",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		
 		
 		int totalData=service.productListCount(search);
 		

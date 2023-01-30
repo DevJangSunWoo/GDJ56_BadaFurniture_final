@@ -40,7 +40,7 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<Product> productListPage(SqlSessionTemplate session, Map<String,Integer> param,Map search) {
 		// TODO Auto-generated method stub
-		log.debug("넘오오니 ? {}",(param.get("cPage")-1)*param.get("numPerpage"));
+		log.debug("paging ? {}",(param.get("cPage")-1)*param.get("numPerpage"));
 		return session.selectList("admin.productList",search,
 				new RowBounds((param.get("cPage")-1)*param.get("numPerpage"),param.get("numPerpage")));
 	}
