@@ -33,8 +33,8 @@ public class HomeController {
 		mv.addObject("productList",service.productList(Map.of("cPage",cPage, "numPerpage",numPerpage)));
 		
 		int totalData = service.selectProductCount();
-		log.debug("totalData: {}",totalData);
-		mv.addObject("pageBar", PageFactory2.getPage(cPage, numPerpage, totalData, "/"));
+//		log.debug("totalData: {}",totalData);
+		mv.addObject("pageBar", PageFactory2.getPage(cPage, numPerpage, totalData, "/bada/"));
 		
 		mv.setViewName("index");
 		return mv;
