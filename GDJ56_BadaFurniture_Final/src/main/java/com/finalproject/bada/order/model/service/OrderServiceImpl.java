@@ -47,7 +47,8 @@ public class OrderServiceImpl implements OrderService {
 		
 		log.debug("{}","인서트 전"+seqOrderSheet);
 		int result=dao.insertOrderSheet(session,map);
-		log.debug("{}","인서트 후"+seqOrderSheet); 
+		//map.get("seqOrderSheet")  으로 해야지  변화된 데이터가 나옴
+		log.debug("{}","인서트 후"+map.get("seqOrderSheet")); 
 		
 		
 		
@@ -56,7 +57,10 @@ public class OrderServiceImpl implements OrderService {
 			
 			int[] productNos = (int[])map.get("productNos");
 			
+			//for문을 도는 순간 여기서  배열을   일반 int형 데이터가 됨
 			for(int productNo : productNos) {
+				
+				map.put("proudctNo",productNo);
 				result += dao.insertOrderDetail(session, map);//
 			}
 			
