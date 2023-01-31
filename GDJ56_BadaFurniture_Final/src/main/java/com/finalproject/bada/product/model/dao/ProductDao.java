@@ -14,12 +14,14 @@ public interface ProductDao {
 	
 	List<Product> selectProductList(SqlSessionTemplate session, Map map);
 	
-	List<Product> productList(SqlSessionTemplate session);
+	List<Product> productList(SqlSessionTemplate session, Map<String, Integer> page);
+	
+	int selectProductCount(SqlSessionTemplate session);
 	
 	Cart selectCartCheck(SqlSessionTemplate session,Map map);
 	
-	 int selectCartCount(SqlSessionTemplate session,int cartMemberNo);
+	int selectCartCount(SqlSessionTemplate session,int cartMemberNo);
 	 
-	 int insertCart(SqlSessionTemplate session,Map map);
+	int insertCart(SqlSessionTemplate session,Map map);
 	 
 }

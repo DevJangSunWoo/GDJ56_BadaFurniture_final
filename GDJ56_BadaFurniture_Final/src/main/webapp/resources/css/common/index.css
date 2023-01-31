@@ -23,6 +23,16 @@ div{
 	font-weight: bolder;
 }
 
+#pagebarDiv{
+	display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+#pagebar{
+	font-size: 30px;
+}
 
 /* -------------------------------------------------------------------------------------------------- */
 /* 아이콘 */

@@ -245,9 +245,17 @@
 			$.ajax({
 				url : "${path}/product/productList.do",
 				type : "post",
+				//controller에서 map으로 데이터를 받을때 배열은 못 받기때문에 
+				//contentType:"application/json"와 data에 JSON.stringify 추가
 				contentType:"application/json",
-// 				traditional:true,
-				data :	JSON.stringify({color:colorArr, material:materialArr, grade:gradeArr, item:item, width:width, sort:sort}),
+				data :	JSON.stringify({
+					cPage:++cPage,
+					color:colorArr, 
+					material:materialArr, 
+					grade:gradeArr, 
+					item:item, 
+					width:width, 
+					sort:sort}),
 				success : list =>{
 					console.log(list);
 					$("#productContainer").html("");
@@ -340,6 +348,12 @@
 	            </div>
             </c:forEach>
             
+            <br><br>
+            <div id="pagebarDiv">
+	            <div id="pagebar" >
+					${pageBar}
+				</div>
+            </div>
 		</div>
 	</div>
 	

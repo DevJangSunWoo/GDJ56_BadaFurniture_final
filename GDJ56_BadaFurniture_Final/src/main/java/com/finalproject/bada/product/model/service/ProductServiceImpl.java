@@ -38,10 +38,15 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> selectProductList(Map map) {
 		return dao.selectProductList(session, map);
 	}
-
+	
 	@Override
-	public List<Product> productList() {
-		return dao.productList(session);
+	public List<Product> productList(Map<String, Integer> page) {
+		return dao.productList(session, page);
+	}
+	
+	@Override
+	public int selectProductCount() {
+		return dao.selectProductCount(session);
 	}
 	
 
@@ -65,6 +70,9 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return dao.insertCart(session,map);
 	}
+
+
+	
 
 
 	
