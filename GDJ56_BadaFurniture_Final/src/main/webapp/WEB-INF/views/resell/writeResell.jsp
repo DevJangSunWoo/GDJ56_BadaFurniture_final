@@ -163,12 +163,12 @@
 				<div class="sellColRight" style="height:250px !important;display:flex;">
 					<div class="sellImageUpload">
 						<img src="${path }/resources/images/admin/addImage.png" 
-                            name="photo1" onclick="fn_upFile1();" width="100%" height="100%">
+                            name="photo1" onclick="fn_upFile1();" width="100%" height="100%" style="cursor:pointer;">
                         <input type="file" id="photoFile1" name="upFile" accept="image/jpeg, image/png" style="display: none;">
 					</div>
 					<div class="sellImageUpload" style="border-left:0px;">
 						<img src="${path }/resources/images/admin/addImage.png" 
-                            name="photo2" onclick="fn_upFile2();" width="100%" height="100%">
+                            name="photo2" onclick="fn_upFile2();" width="100%" height="100%" style="cursor:pointer;">
                         <input type="file" id="photoFile2" name="upFile" accept="image/jpeg, image/png" style="display: none;">
 					</div>
 				</div>		
@@ -188,7 +188,7 @@
 				<div class="sellColRight" style="height:110px !important;">
 					<div id="addressContainer">
 						<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:100px;"name="postCode" disabled>
-						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="cursor:pointer;"><br>
 						<input type="text" id="sample6_address" placeholder="주소" style="width:435px;"name="address" disabled><br>
 						<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:210px;"name="addressDetail">
 						<input type="hidden" id="sample6_extraAddress" placeholder="참고항목" style="width:210px;"name="addressExtra" disabled>
@@ -247,7 +247,7 @@
 			</div>
 			<div class="sellRow" id="buttonContainer" style="dislpay:flex;justify-content:center;">
 				<div>
-					<input id="resellBtn" type="submit" value="신청하기">
+					<input id="resellBtn" type="submit" value="신청하기" style="cursor:pointer;">
 				</div>
 			</div>
 		</div>

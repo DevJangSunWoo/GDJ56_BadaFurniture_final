@@ -51,5 +51,6 @@ public class MemberServiceImpl implements MemberService {
 	public String searchId(Map param) {
 		return dao.searchId(session, param);
 	}
+	
 
 }

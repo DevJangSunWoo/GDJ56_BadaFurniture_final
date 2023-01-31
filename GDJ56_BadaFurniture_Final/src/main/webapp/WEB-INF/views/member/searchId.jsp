@@ -9,13 +9,6 @@
 <!-- css -->
 <link rel="stylesheet" href="${path }/resources/css/member/searchId.css"/>
 
-<!-- Remember to include jQuery :) 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-
-<!-- jQuery Modal -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
 <section>
 	<div class="flexDiv">
         <h1 style="color: #348492; font-size: 40px;">아이디 찾기</h1>

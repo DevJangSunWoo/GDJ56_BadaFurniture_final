@@ -129,7 +129,7 @@
 </section> 
 	<script>
 		const fn_searchPw=()=>{
-			location.assign("");
+			location.assign("${path}/member/searchPw.do");
 		}
 	</script>
 
