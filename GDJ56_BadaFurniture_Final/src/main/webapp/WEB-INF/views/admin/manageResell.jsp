@@ -16,6 +16,11 @@
 	#pageBar a:hover:not(.active) {
 		background-color: #ddd;
 	}
+
+	.resellImg{
+		width: 70px;
+		height: 70px;
+	}
 </style>
 
 <section>
@@ -143,7 +148,7 @@
 								<td><c:out value="${r.resellEnrollDate}"/></td>
 								<td>${r.resellEditDate==null?"-":r.resellEditDate}</td>
 								<td>
-									<img src="${path}/resources/upload/resell/${r.getFiles().get(0).renamedFileName}">									
+									<img class="resellImg" src="${path}/resources/upload/resell/${r.getFiles().get(0).renamedFileName}">									
 								</td>
 								<td><c:out value="${r.item}"/></td>
 								<td><c:out value="${r.grade}"/></td>

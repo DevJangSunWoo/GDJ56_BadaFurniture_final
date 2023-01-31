@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
 import com.finalproject.bada.resell.model.vo.Resell;
@@ -47,4 +48,14 @@ public interface AdminDao {
 	
 	//내가구팔기 관리 - 진행상태 변경
 	int updateProgressState(SqlSessionTemplate session,Map param);
+	
+	//주문관리 - 조회
+	List<OrderSheet> orderListPage(SqlSessionTemplate session,Map<String,Integer> param,Map search);
+	int orderListCount(SqlSessionTemplate session,Map search);
+	
+	//주문관리 - 요약
+	List<Map<String,Integer>> orderSummary(SqlSessionTemplate session);
+	
+	
+	
 }
