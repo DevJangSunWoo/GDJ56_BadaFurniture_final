@@ -38,51 +38,51 @@
 			<table class="summaryTable">
 				<tr>
 					<th class="tableTh">전체주문</th>
-					<td class="tableTd">10</td>
+					<td class="tableTd"><c:out value="${summary[0].ALL_O}"/></td>
 				</tr>
 			</table>
 			<table class="summaryTable">
 				<tr>
 					<th class="tableTh">입금대기</th>
-					<td class="tableTd">2</td>
+					<td class="tableTd"><c:out value="${summary[0].STATE_1}"/></td>
 				</tr>	
 				<tr>
 					<th class="tableTh">입금완료</th>
-					<td class="tableTd">2</td>
+					<td class="tableTd"><c:out value="${summary[0].STATE_2}"/></td>
 				</tr>	
 				<tr>
 					<th class="tableTh">결제완료</th>
-					<td class="tableTd">3</td>
+					<td class="tableTd"><c:out value="${summary[0].STATE_3}"/></td>
 				</tr>
 			</table>
 
 			<table class="summaryTable">
 				<tr>
 					<th class="tableTh">배송준비</th>
-					<td class="tableTd">10</td>
+					<td class="tableTd"><c:out value="${summary[0].STATE_4}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">배송중</th>
-					<td class="tableTd">2</td>
+					<td class="tableTd"><c:out value="${summary[0].STATE_5}"/></td>
 				</tr>	
 				<tr>
 					<th class="tableTh">배송완료</th>
-					<td class="tableTd">2</td>
+					<td class="tableTd"><c:out value="${summary[0].STATE_6}"/></td>
 				</tr>
 			</table>
 
 			<table class="summaryTable">
 				<tr>
 					<th class="tableTh">반품요청</th>
-					<td class="tableTd">10</td>
+					<td class="tableTd"><c:out value="${summary[0].STATE_7}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">반품대기</th>
-					<td class="tableTd">2</td>
+					<td class="tableTd"><c:out value="${summary[0].STATE_8}"/></td>
 				</tr>	
 				<tr>
 					<th class="tableTh">취소요청</th>
-					<td class="tableTd">2</td>
+					<td class="tableTd"><c:out value="${summary[0].STATE_9}"/></td>
 				</tr>
 			</table>
 
@@ -196,59 +196,84 @@
 						<th class="tableTh">분류</th>
 						<th class="tableTh">사진</th>
 						<th class="tableTh">가격</th>
+						<th class="tableTh">총금액</th>
 						<th class="tableTh">주문자</th>
 						<th class="tableTh">결제수단</th>
 						<th class="tableTh">결제상태</th>
 						<th class="tableTh">배송상태</th>
-						<th class="tableTh">주문상태</th>
-						<th class="tableTh">취소/반품</th>					
+						<th class="tableTh">취소/반품 상태</th>
+						<th class="tableTh">취소/반품 상세</th>					
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<!-- <td class="tableTd" style="width: 10px;background-color:#dcd5c32b;"><input type="checkbox" name="chk"></td> -->
-						<td class="tableTd">
-							<input type="hidden" value="">
-							<a href="${path}/order/orderPayment.do?orderSheetNo=">주문번호</a>
-						</td>
-						<td class="tableTd">주문일자</td>
-						<td class="tableTd">가구번호</td>
-						<td class="tableTd">분류</td>
-						<td class="tableTd">
-							<img class="orderImg" src="">
-						</td>
-						<td class="tableTd">가격</td>
-						<td class="tableTd">주문자</td>
-						<td class="tableTd">결제수단</td>
-						<td class="tableTd">
-							<select name="paymentState">
-								<option value="입금대기">입금대기</option>
-								<option value="입금완료">입금완료</option>
-								<option value="결제완료">결제완료</option>
-							</select>
+					<c:if test="${empty order}">
+						<tr>
+							<td colspan="12">조회된 결과가 없습니다.</td>
+						</tr>
 
-						</td>
-						<td class="tableTd">
-							<select name="deliverState">
-								<option value="배송준비">배송준비</option>
-								<option value="배송중">배송중</option>
-								<option value="배송완료">배송완료</option>
-							</select>
-							
-						</td>
-						<td class="tableTd">
-							<select name="refundState">
-								<option value="반품요청">반품요청</option>
-								<option value="반품대기">반품대기</option>
-								<option value="반품완료">반품완료</option>
-								<option value="취소요청">취소요청</option>
-								<option value="취소완료">취소완료</option>
-								<option value="주문확정">주문확정</option>
-							</select>	
+					</c:if>
+					<c:if test="${not empty order}">
+						<c:forEach var="o" items="${order}" varStatus="vs">						
+							<tr>
+								<!-- <td class="tableTd" style="width: 10px;background-color:#dcd5c32b;"><input type="checkbox" name="chk"></td> -->
+								<td class="tableTd">
+									<input type="hidden" value="${o.orderSheetNo}">
+									<a href="${path}/order/orderPayment.do?orderSheetNo="><c:out value="${o.orderSheetNo}"/></a>
+								</td>
+								<td class="tableTd"><c:out value="${o.orderSheetenrollDate}"/></td>
+								${o.details[vs.index].product.productNo}
+								<td class="tableTd"><c:out value="${o.details[vs.index].product.productNo}"/></td>
+								<td class="tableTd"><c:out value="${o.details[vs.index].product.item}"/></td>
+								<td class="tableTd">
+									<img class="orderImg" src="">
+								</td>
+								<td class="tableTd"><c:out value="${o.details[vs.index].product.price}"/></td>
+								<td class="tableTd"><c:out value="${o.totalPrice}"/></td>
+																
+								<td class="tableTd"><c:out value="${o.member.memberName}"/></td>
+								<td class="tableTd"><c:out value="${o.paymentMethod}"/></td>
+								<td class="tableTd">
+									<select name="paymentState">
+										<option value="입금대기" ${o.paymentState.equals("입금대기")?"selected":""}>입금대기</option>
+										<option value="입금완료"  ${o.paymentState.equals("입금완료")?"selected":""}>입금완료</option>
+										<option value="카드결제완료"  ${o.paymentState.equals("카드결제완료")?"selected":""}>카드결제완료</option>
+									</select>
 
-						</td>
-						<td class="tableTd" style="width: 80px;"><button id="detailModalBtn" class="updateBtn" onclick="">상세확인</button></td>
-					</tr>
+								</td>
+								<td class="tableTd">
+									<select name="deliverState">
+										<option value="배송준비" ${o.details[vs.index].deliveryState.equals("배송준비")?"selected":""}>배송준비</option>
+										<option value="배송중" ${o.details[vs.index].deliveryState.equals("배송중")?"selected":""}>배송중</option>
+										<option value="배송완료" ${o.details[vs.index].deliveryState.equals("배송완료")?"selected":""}>배송완료</option>
+									</select>
+									
+								</td>
+
+								<c:if test="${o.details[vs.index].refundState==null}">
+									<td class="tableTd">-</td>
+									<td class="tableTd">-</td>									
+								</c:if>
+								<c:if test="${o.details[vs.index].refundState!=null}">
+									<td class="tableTd">
+										<select name="refundState">
+											<option value="반품요청">반품요청</option>
+											<option value="반품대기">반품대기</option>
+											<option value="반품완료">반품완료</option>
+											<option value="취소요청">취소요청</option>
+											<option value="취소완료">취소완료</option>
+											<option value="주문확정">주문확정</option>
+										</select>										
+									</td>
+									<td class="tableTd" style="width: 80px;">
+										<button id="detailModalBtn" class="updateBtn" onclick="">상세확인</button>
+									</td>
+								</c:if>
+
+
+
+							</tr>
+						</c:forEach>
+					</c:if>
 				</tbody>
 			</table>
 			

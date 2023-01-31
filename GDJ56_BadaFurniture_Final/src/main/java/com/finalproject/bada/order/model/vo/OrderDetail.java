@@ -1,6 +1,6 @@
 package com.finalproject.bada.order.model.vo;
 
-import java.sql.Date;
+import com.finalproject.bada.product.model.vo.Product;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class OrderDetail {
 	private int orderDetailNo;
 	private int orderSheetNo;
-	private int productNo;
+	private Product product;
 	private String deliveryState;
 	private String confirmState;
 	private String refundState;
@@ -23,7 +23,7 @@ public class OrderDetail {
 	public String toString() {
 		 String temp="";
 	
-		 return orderDetailNo+" "+orderSheetNo+" "+productNo+" "+deliveryState
+		 return orderDetailNo+" "+orderSheetNo+" "+product+" "+deliveryState
 				 +" "+confirmState+" "+refundState+temp;
 		 
 	}

@@ -427,7 +427,7 @@ public class AdminController {
 
 		
 		mv.addObject("order",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
-		//log.debug("order : {}",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		//log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
 		
 		
 		int totalData=service.orderListCount(search);
@@ -445,7 +445,7 @@ public class AdminController {
 		List<Map<String,Integer>> sum=service.orderSummary();
 		//log.debug("{}",sum);		
 		mv.addObject("summary",sum);		
-		
+//		
 		mv.setViewName("admin/manageOrder");	
 		
 		return mv;
