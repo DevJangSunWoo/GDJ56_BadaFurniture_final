@@ -133,12 +133,7 @@
 	</section>
 
 <script>
-	$(()=>{
-		//알림을 읽음 처리로 변경한다.
-		$.ajax({
-			url:"${path}/alert/updateReadState.do"
-		});
-	});
+	
 	//전체선택 체크박스를 클릭했을 때
 	$("input.checkAll").change(e=>{
 		if($(e.target).prop("checked")==true){

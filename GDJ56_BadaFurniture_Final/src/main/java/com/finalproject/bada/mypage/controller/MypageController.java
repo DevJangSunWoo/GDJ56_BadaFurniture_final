@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -114,13 +115,17 @@ public class MypageController {
 		return mv;
 	}
 	
+	//N이었던 알림 READ_STATE Y로 변경
+	@ResponseBody
 	@RequestMapping("/alert/updateReadState.do")
-	public void updateAlertReadState(HttpSession session) {
+	public int updateAlertReadState(HttpSession session) {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		int result = service.updateAlertReadState(loginMember.getMemberNo());
-		log.debug("new 표시 업데이트 : ",result);
+		//log.debug("new 표시 업데이트 : ",result);
+		return result;
 	}
 	
+	//알림 READ_STATE가 N인 행의 갯수 반환
 	@ResponseBody
 	@RequestMapping("/alert/countReadState.do")
 	public int countReadState(HttpSession session) {
