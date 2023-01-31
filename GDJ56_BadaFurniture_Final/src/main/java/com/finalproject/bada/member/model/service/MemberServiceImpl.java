@@ -47,4 +47,9 @@ public class MemberServiceImpl implements MemberService {
 		return dao.updateMember(session, m);
 	}
 
+	@Override
+	public String searchId(Map param) {
+		return dao.searchId(session, param);
+	}
+
 }

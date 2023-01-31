@@ -89,6 +89,20 @@ div{
 }
 
 /* -------------------------------------------------------------------------------------------------- */
+/* 기본버튼 */
+.oribtn {
+    background-color: #348492;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 80px;
+    height: 35px;
+    margin-right: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* -------------------------------------------------------------------------------------------------- */
 /* 버튼 */
 .btn {
     /* font-family: 'Poppins', sans-serif; */

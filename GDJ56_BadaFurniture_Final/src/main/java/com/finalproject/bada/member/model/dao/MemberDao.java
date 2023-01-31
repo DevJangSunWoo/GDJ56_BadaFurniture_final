@@ -17,4 +17,6 @@ public interface MemberDao {
 	int updatePassword(SqlSessionTemplate session, Map param);
 	
 	int updateMember(SqlSessionTemplate session,Member m);
+	
+	String searchId(SqlSessionTemplate session, Map param);
 }

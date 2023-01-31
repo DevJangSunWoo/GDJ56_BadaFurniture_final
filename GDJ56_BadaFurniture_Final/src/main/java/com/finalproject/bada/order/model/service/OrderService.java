@@ -11,4 +11,8 @@ public interface OrderService {
 	
 	List<Product> selectOrderSheetProductList(HashMap map);
 	
+	void insertOrderSheet(HashMap map);
+	
+	
+	
 }

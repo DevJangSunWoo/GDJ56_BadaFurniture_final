@@ -60,10 +60,8 @@ public class MemberController {
 	
 	//로그아웃
 	@RequestMapping("/logout.do")
-	public String logoutMember(SessionStatus session) {
-		if(!session.isComplete()) {
-			session.setComplete();
-		}
+	public String logoutMember(HttpSession session) {
+		session.invalidate();
 		return "redirect:/";
 	}
 
@@ -71,6 +69,18 @@ public class MemberController {
 	@RequestMapping("/searchId.do")
 	public String searchId() {
 		return "/member/searchId";
+	}
+	
+	//아이디찾기 완료
+	@RequestMapping("/searchIdEnd.do")
+	public ModelAndView searchIdEnd(@RequestParam Map param, ModelAndView mv) {
+		log.debug("searchId: {}",param);
+		String memberId = service.searchId(param);
+		log.debug("searchId(result): {}",memberId);
+		
+		mv.addObject("memberId",memberId);
+		mv.setViewName("member/searchIdResult");
+		return mv;
 	}
 	
 //--------------------------------------------------------------------------------------------------------------------------------------------------
