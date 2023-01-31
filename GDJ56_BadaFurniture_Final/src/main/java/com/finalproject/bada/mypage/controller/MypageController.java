@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.common.PageFactory;
@@ -33,7 +34,7 @@ public class MypageController {
 		this.service = service;
 	}
 	
-	// 장바구니 기능 
+	// 장바구니 리스트 출력
 	@RequestMapping("/mypage/cart.do")
 	public ModelAndView cartList(ModelAndView mv, HttpSession session) {	
 		Member loginMember = (Member)session.getAttribute("loginMember");	
@@ -44,6 +45,7 @@ public class MypageController {
 		return mv;
 	}
 	
+	//장바구니 삭제 기능
 	@RequestMapping("/cart/delete.do")
 	public ModelAndView deleteCart(ModelAndView mv, HttpSession session, @RequestParam(value="productNo")List<Integer> productNos) {
 		
@@ -72,12 +74,12 @@ public class MypageController {
 		return mv;
 	}
 	
-	//알림기능
+	//알림리스트 출력
 	@RequestMapping("/mypage/alert.do")
 	public ModelAndView alertList(ModelAndView mv, HttpSession session,
 			@RequestParam(value="cPage", defaultValue="1") int cPage) {
 		
-		int numPerpage = 7;
+		int numPerpage = 5;
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		List<Alert> alerts = service.selectAlertList(loginMember.getMemberNo(), cPage, numPerpage);
@@ -91,8 +93,41 @@ public class MypageController {
 		return mv;
 	}
 	
+	//알림 선택삭제 기능
+	@RequestMapping("/alert/delete.do")
+	public ModelAndView deleteAlert(ModelAndView mv, @RequestParam(value="alertNo")List<Integer> alertNos) {
+		
+		int result = service.deleteAlert(alertNos);
+		
+		String loc = "/mypage/alert.do";
+		String msg = "";
+		if(result > 0) {
+			msg = "삭제 완료";
+		} else {
+			msg = "삭제 실패";
+		}
+		
+		mv.addObject("msg",msg);
+		mv.addObject("loc",loc);
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
 	
+	@RequestMapping("/alert/updateReadState.do")
+	public void updateAlertReadState(HttpSession session) {
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		int result = service.updateAlertReadState(loginMember.getMemberNo());
+		log.debug("new 표시 업데이트 : ",result);
+	}
 	
+	@ResponseBody
+	@RequestMapping("/alert/countReadState.do")
+	public int countReadState(HttpSession session) {
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		int count = service.selectAlertCountReadStateN(loginMember.getMemberNo());
+		return count;
+	}
 	
 	@RequestMapping("/mypage/order.do")
 	public String orderList() {

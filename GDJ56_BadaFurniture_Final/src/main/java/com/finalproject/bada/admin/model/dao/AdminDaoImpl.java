@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.finalproject.bada.admin.model.service.AdminServiceImpl;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.resell.model.vo.Resell;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,16 +39,17 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<Product> productListPage(SqlSessionTemplate session, Map<String, Integer> param) {
+	public List<Product> productListPage(SqlSessionTemplate session, Map<String,Integer> param,Map search) {
 		// TODO Auto-generated method stub
-		return session.selectList("admin.productList",null,
+		//log.debug("paging ? {}",(param.get("cPage")-1)*param.get("numPerpage"));
+		return session.selectList("admin.productList",search,
 				new RowBounds((param.get("cPage")-1)*param.get("numPerpage"),param.get("numPerpage")));
 	}
 
 	@Override
-	public int productListCount(SqlSessionTemplate session) {
+	public int productListCount(SqlSessionTemplate session,Map search) {
 		// TODO Auto-generated method stub
-		return session.selectOne("admin.productListCount");
+		return session.selectOne("admin.productListCount",search);
 	}
 
 	//요약테이블
@@ -89,6 +91,35 @@ public class AdminDaoImpl implements AdminDao {
 	public Product selectProductByProductNo(SqlSessionTemplate session, int productNo) {
 		// TODO Auto-generated method stub
 		return session.selectOne("admin.selectProductByProductNo",productNo);
+	}
+	
+	
+	//내가구팔기 관리 - 조회
+	@Override
+	public List<Resell> resellListPage(SqlSessionTemplate session, Map<String, Integer> param, Map search) {
+		// TODO Auto-generated method stub
+		return session.selectList("admin.resellList",search,
+				new RowBounds((param.get("cPage")-1)*param.get("numPerpage"),param.get("numPerpage")));
+	}
+
+	@Override
+	public int resellListCount(SqlSessionTemplate session, Map search) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.resellListCount",search);
+	}
+	
+	//내가구팔기 관리 - 요약
+	@Override
+	public List<Map<String, Integer>> resellSummary(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectList("admin.resellSummary");
+	}
+
+	//내가구팔기 관리 - 진행상태 변경
+	@Override
+	public int updateProgressState(SqlSessionTemplate session, Map param) {
+		// TODO Auto-generated method stub
+		return session.update("admin.updateProgressState",param);
 	}
 
 	

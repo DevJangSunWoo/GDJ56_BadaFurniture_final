@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <style>
 	section.mypage>div#title{
 		width:100%;
@@ -46,6 +48,9 @@
 		border-top:8px solid black;
 		border-collapse: collapse;
 	}
+	table#alertTable th{
+		text-align: center;
+	}
 	table#alertTable td{
 		height:60px;
 	}
@@ -68,7 +73,7 @@
 		text-align:center;
 		border-bottom:1px solid grey;
 	}
-	button#deleteBtn{
+	button#deleteSelect{
 		padding:0px;
 		border:2px solid red;
 		width:70px;
@@ -96,58 +101,44 @@
 						<th>알림내용</th>
 						<th>알림일자</th>
 					</tr>
-					<tr>
-						<td>
-							<input type="checkbox" class="check" name="productNo" value="" style="cursor:pointer;">
-						</td>
-						<td>
-							<a href="">책상 판매신청(100,000)</a>에 운영자가 댓글을 달았습니다.
-							<button style="width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;">new</button>
-						</td>
-						<td>
-							2023-01-21
-						</td>
-					</tr>
-					
-					<tr>
-						<td>
-							<input type="checkbox" class="check" name="productNo" value="" style="cursor:pointer;">
-						</td>
-						<td>
-							<a href="">책상 판매신청(100,000)</a>에 운영자가 댓글을 달았습니다.
-							<button style="width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;">new</button>
-						</td>
-						<td>
-							2023-01-21
-						</td>
-					</tr>
-					
-					<tr>
-						<td>
-							<input type="checkbox" class="check" name="productNo" value="" style="cursor:pointer;">
-						</td>
-						<td>
-							<a href="">책상 판매신청(100,000)</a>에 운영자가 댓글을 달았습니다.
-							<button style="width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;">new</button>
-						</td>
-						<td>
-							2023-01-21
-						</td>
-					</tr>
+					<c:if test="${not empty alerts}">
+						<c:forEach var="alert" items="${alerts}">
+							<tr>
+								<td>
+									<input type="checkbox" class="check" name="alertNo" value="${alert.alertNo}" style="cursor:pointer;">
+								</td>
+								<td>
+									${alert.detail}
+									<c:if test="${alert.readState == 'N'}">
+										<button style="width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;">new</button>
+									</c:if>
+								</td>
+								<td>
+									<fmt:formatDate value="${alert.alertEnrollDate}" type="date" pattern="yyyy-MM-dd(E)"/>
+								</td>
+							</tr>
+						</c:forEach>
+					</c:if>
 				</table>
 				<div style="display:flex;justify-content: left;">
 					<div>
-						<button  id="deleteBtn" style="margin:15px 0px 10px 15px;">선택삭제</button>
+						<button  id="deleteSelect" style="margin:15px 0px 10px 15px;font-size:13px;">선택삭제</button>
 					</div>
 				</div>
 				<div id="pageBar" style="text-align:center">
-					[이전] 1 2 3 4 5 [다음]
+					${pageBar }
 				</div>
 			</div>
 		</div>
 	</section>
 
 <script>
+	$(()=>{
+		//알림을 읽음 처리로 변경한다.
+		$.ajax({
+			url:"${path}/alert/updateReadState.do"
+		});
+	});
 	//전체선택 체크박스를 클릭했을 때
 	$("input.checkAll").change(e=>{
 		if($(e.target).prop("checked")==true){
@@ -165,6 +156,20 @@
 			$("input.checkAll").prop("checked",false);
 		}
 		sumPrice();
+	});
+	
+	//선택삭제 버튼 클릭했을 때
+	$("button#deleteSelect").click(e=>{
+		let queryString = "";
+		if($("input.check:checked").length > 0){
+			if(confirm("선택하신 알림을 삭제하시겠습니까?")){
+				$("input.check:checked").each((i,v)=>{
+					queryString += "alertNo=" + $(v).val() + "&";
+				});
+				queryString = queryString.substring(0,queryString.length-1);
+				location.replace("${path}/alert/delete.do?" + queryString);
+			} 
+		}
 	});
 
 </script>

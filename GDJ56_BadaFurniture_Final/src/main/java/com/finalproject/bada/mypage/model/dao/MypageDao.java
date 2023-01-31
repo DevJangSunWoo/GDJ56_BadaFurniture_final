@@ -9,11 +9,23 @@ import com.finalproject.bada.mypage.model.vo.Alert;
 import com.finalproject.bada.product.model.vo.Product;
 
 public interface MypageDao {
+	//Cart
 	List<Product> selectCartProduct(SqlSessionTemplate session, int memberNo);
 	
 	int deleteCart(SqlSessionTemplate session, Map param);
 	
+	//Alert
 	List<Alert> selectAlertList(SqlSessionTemplate session, int memberNo, int cPage, int numPerpage);
 	
 	int selectAlertCount(SqlSessionTemplate session, int memberNo);
+	
+	int insertAlert(SqlSessionTemplate session, Alert alert);
+	
+	String getAlertMsg(String path, String state, Object obj);
+	
+	int deleteAlert(SqlSessionTemplate session, List<Integer> alertNos);
+	
+	int updateAlertReadState(SqlSessionTemplate session, int memberNo);
+	
+	int selectAlertCountReadStateN(SqlSessionTemplate session, int memberNo);
 }

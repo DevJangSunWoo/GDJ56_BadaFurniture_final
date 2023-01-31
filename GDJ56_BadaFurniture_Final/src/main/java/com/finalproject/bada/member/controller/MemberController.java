@@ -20,9 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.finalproject.bada.member.model.service.MemberService;
 import com.finalproject.bada.member.model.vo.Member;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/member")
-@SessionAttributes({"loginMember"})
+//@SessionAttributes({"loginMember"})
+@Slf4j
 public class MemberController {
 
 	private MemberService service;
@@ -38,14 +41,21 @@ public class MemberController {
 //--------------------------------------------------------------------------------------------------------------------------------------------------	
 	//로그인
 	@RequestMapping("/login.do")
-	public String loginMember(Member m, HttpSession session) {
-
+	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
+//		log.debug("{}",m);
 		Member loginMember = service.selectMemberById(m);
+		log.debug("loginMember: {}",loginMember);
 		
 		if(loginMember!=null && passwordEncoder.matches(m.getPassword(), loginMember.getPassword())) {
 			session.setAttribute("loginMember", loginMember);
+			mv.addObject("msg","로그인 완료");
+			mv.addObject("loc","/");
+		}else {
+			mv.addObject("msg","아이디와 비밀번호를 다시 확인해주세요.");
+			mv.addObject("loc","/");
 		}
-		return "redirect:/";
+		mv.setViewName("common/msg");
+		return mv;
 	}
 	
 	//로그아웃
@@ -57,6 +67,12 @@ public class MemberController {
 		return "redirect:/";
 	}
 
+	//아이디찾기 페이지연결
+	@RequestMapping("/searchId.do")
+	public String searchId() {
+		return "/member/searchId";
+	}
+	
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 	 
 	//회원가입페이지이동
@@ -111,11 +127,73 @@ public class MemberController {
 		return "/member/updateMember";
 	}
 	
+	//비밀번호변경 페이지이동
+	@RequestMapping("/updatePassword.do")
+	public String updatePassword() {
+		return "member/updatePassword";
+	}
+	
+	//비밀번호 변경 :
+	@RequestMapping("/updatePasswordEnd.do")
+	public ModelAndView updatePasswordEnd(@RequestParam Map param, ModelAndView mv, HttpServletRequest request) {
+		log.debug("{}",param);
+		Member member = service.selectMemberById(Member.builder().memberId((String)param.get("memberId")).build());
+		
+		if(member!=null && passwordEncoder.matches((String)(param.get("password")), member.getPassword())) {
+			
+			String encodePassword = passwordEncoder.encode((String)(param.get("password_new")));
+			param.put("password_new",encodePassword);
+			
+			int result = service.updatePassword(param);
+			
+			if(result>0) {
+				String script = "opener.location.replace('"+request.getContextPath()+"/member/logout.do');close();";
+				mv.addObject("msg","비밀번호 변경완료!");
+				mv.addObject("loc","/member/updateMember.do");
+				mv.addObject("script", script);
+				
+			}else {
+				mv.addObject("msg","비밀번호 변경 실패!");
+				mv.addObject("loc","/member/updatePassword.do");
+			}
+			
+		}else {
+			mv.addObject("msg","현재 비밀번호가 일치하지 않습니다! 다시 시도하세요!");
+			mv.addObject("loc","/member/updatePassword.do");
+		}
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	
+	//정보수정완료
+	@RequestMapping("/updateMemberEnd.do" )
+	public ModelAndView updateMember(Member m, ModelAndView mv, HttpSession session) {
+		
+		log.debug("updateMemberEnd: {}",m);
+		
+		int result = service.updateMember(m);
+		log.debug("updateMemberEnd(result): {}",result);
+		
+		if(result>0) {
+			Member loginMember = service.selectMemberById(m);
+			log.debug("loginMember: {}",loginMember);
+			session.setAttribute("loginMember", loginMember);
+			log.debug("loginMember: {}",session.getAttribute("loginMember"));
+			mv.addObject("msg","회원정보 수정완료");
+			mv.addObject("loc","/");
+		}else {
+			mv.addObject("msg","회원정보 수정실패");
+			mv.addObject("loc","/member/updateMember.do");
+		}
+		mv.setViewName("common/msg");
+		return mv;
+	}
+	
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	//아이디찾기
-	@RequestMapping("/searchId.do")
-	public String searchId() {
-		return "/member/searchId";
+	//회원탈퇴페이지 이동
+	@RequestMapping("/deleteMember.do")
+	public String deleteMember() {
+		return "/mypage/deleteMember";
 	}
 }

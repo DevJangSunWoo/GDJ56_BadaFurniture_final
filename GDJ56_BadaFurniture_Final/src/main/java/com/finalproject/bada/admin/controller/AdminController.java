@@ -19,9 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.admin.model.service.AdminService;
-import com.finalproject.bada.common.PageFactory;
+import com.finalproject.bada.common.AdminPageFactory;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,11 +64,11 @@ public class AdminController {
 		return "admin/manageOrder";
 	}
 	
-	//내가구팔기 관리 연결
-	@RequestMapping("/admin/resell.do")
-	public String manageResell() {
-		return "admin/manageResell";
-	}		
+//	//내가구팔기 관리 연결
+//	@RequestMapping("/admin/resell.do")
+//	public String manageResell() {
+//		return "admin/manageResell";
+//	}		
 	
 	//가구 올리기
 	@RequestMapping("/admin/insertEnd.do")
@@ -132,16 +134,35 @@ public class AdminController {
 	@RequestMapping("/admin/product.do")
 	public ModelAndView productList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
-			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage) {
+			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
+			,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
+			,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
+			) {
 		
 		//List<Product> list=service.productList();
-		//log.debug("c {}", cPage);
+		//log.debug("cPage {}", cPage);
 		//log.debug("numPerpage {}", numPerpage);
 		
-		mv.addObject("product",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage)));
+		//log.debug("searchType {}", searchType);
+		//log.debug("searchKeyword {}", searchKeyword);
 		
-		int totalData=service.productListCount();
-		mv.addObject("pageBar",PageFactory.getPage(cPage, numPerpage, totalData, "product.do"));
+		Map search=new HashMap();
+		search.put("searchType", searchType);
+		search.put("searchKeyword", searchKeyword);
+		
+		mv.addObject("product",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		//log.debug("product : {}",service.productListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		
+		
+		int totalData=service.productListCount(search);
+		
+		//log.debug("totalData {}", totalData);		
+		
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "product.do",searchType,searchKeyword));
+		
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchKeyword", searchKeyword);
+		
 		
 		
 		//가구조회 요약
@@ -171,7 +192,7 @@ public class AdminController {
 		//log.debug("FILELIST : "+fileList);
 		
 		for(int i=0;i<fileList.size();i++) {
-			String renamedFileName=fileList.get(i).getRenamedFileName();
+			String renamedFileName=fileList.get(i).getRenamedFileName();																													                     
 			//log.debug("파일명 : "+renamedFileName);
 			File file=new File(path+renamedFileName);				
 			if(file.exists()){
@@ -283,7 +304,7 @@ public class AdminController {
 		
 		Product p=service.selectProductByProductNo(productNo);
 		
-		log.debug("가구 정보 : {}",p);
+		//log.debug("가구 정보 : {}",p);
 		
 		mv.addObject("product",p);
 		
@@ -296,6 +317,76 @@ public class AdminController {
 //	public String update() {
 
 //	}
+	
+	//'내가구팔기' - 조회
+	@RequestMapping("/admin/resell.do")
+	public ModelAndView resellList(ModelAndView mv,
+			@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
+			,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
+			,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
+			) {		
+
+		//log.debug("cPage {}", cPage);
+		//log.debug("numPerpage {}", numPerpage);
+		
+		//log.debug("searchType {}", searchType);
+		//log.debug("searchKeyword {}", searchKeyword);
+		
+		Map search=new HashMap();
+		search.put("searchType", searchType);		
+		search.put("searchKeyword", searchKeyword);		
+
+		
+		mv.addObject("resell",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		//log.debug("resell : {}",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		
+		
+		int totalData=service.resellListCount(search);
+		
+		//log.debug("totalData {}", totalData);		
+		
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "resell.do",searchType,searchKeyword));
+		
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchKeyword", searchKeyword);
+		
+		
+		
+		//내가구팔기 요약
+		List<Map<String,Integer>> sum=service.resellSummary();
+		//log.debug("{}",sum);		
+		mv.addObject("summary",sum);		
+		
+		mv.setViewName("admin/manageResell");	
+		
+		return mv;
+	}
+	
+	//'내 가구 팔기 ' 관리 - 진행상태 변경
+	@RequestMapping(value="/admin/updateProgressState.do")
+	@ResponseBody
+	public String updateProgressState(
+			@RequestParam("resellNo") int resellNo,
+			@RequestParam("progressState") String progressState) {
+		Map param=new HashMap();
+		param.put("resellNo", resellNo);
+		param.put("progressState", progressState);	
+		
+		//log.debug("변경할 상태 : "+progressState);
+	
+		
+		int result=service.updateProgressState(param);
+		
+		Gson gson=new Gson();
+		JsonObject jsonOb=new JsonObject();
+		jsonOb.addProperty("result", result);
+		
+		String JsonStr=gson.toJson(jsonOb);
+		
+		return JsonStr;
+		
+	}
 	
 	
 	

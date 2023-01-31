@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.finalproject.bada.admin.model.dao.AdminDao;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.resell.model.vo.Resell;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,15 +53,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Product> productListPage(Map<String, Integer> param) {
+	public List<Product> productListPage(Map<String, Integer> param,Map search) {
 		// TODO Auto-generated method stub
-		return dao.productListPage(session,param);
+		return dao.productListPage(session,param,search);
 	}
 
 	@Override
-	public int productListCount() {
+	public int productListCount(Map search) {
 		// TODO Auto-generated method stub
-		return dao.productListCount(session);
+		return dao.productListCount(session,search);
 	}
 
 	//요약테이블
@@ -104,6 +105,35 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.selectProductByProductNo(session,productNo);
 	}
+	
+	
+	//내가구팔기 관리 - 조회
+	@Override
+	public List<Resell> resellListPage(Map<String, Integer> param, Map search) {
+		// TODO Auto-generated method stub
+		return dao.resellListPage(session,param,search);
+	}
+
+	@Override
+	public int resellListCount(Map search) {
+		// TODO Auto-generated method stub
+		return dao.resellListCount(session,search);
+	}
+	
+	//내가구팔기 관리 - 요약
+	@Override
+	public List<Map<String, Integer>> resellSummary() {
+		// TODO Auto-generated method stub
+		return dao.resellSummary(session);
+	}
+
+	@Override
+	public int updateProgressState(Map param) {
+		// TODO Auto-generated method stub
+		return dao.updateProgressState(session,param);
+	}
+	
+	//내가구팔기 관리 - 진행상태 변경
 
 
 	

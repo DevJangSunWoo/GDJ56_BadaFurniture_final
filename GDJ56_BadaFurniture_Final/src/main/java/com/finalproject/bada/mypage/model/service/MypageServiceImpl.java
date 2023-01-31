@@ -47,6 +47,21 @@ public class MypageServiceImpl implements MypageService {
 		return dao.selectAlertCount(session, memberNo);
 	}
 
+
+	@Override
+	public int deleteAlert(List<Integer> alertNos) {
+		return dao.deleteAlert(session, alertNos);
+	}
+
+
+	@Override
+	public int updateAlertReadState(int memberNo) {
+		return dao.updateAlertReadState(session, memberNo);
+	}
 	
+	@Override
+	public int selectAlertCountReadStateN(int memberNo) {
+		return dao.selectAlertCountReadStateN(session, memberNo);
+	}
 	
 }
