@@ -23,6 +23,20 @@ public class OrderDaoImpl implements OrderDao {
 		return session.selectList("order.selectOrderSheetProductList",map);
 	}
 
+	@Override
+	public int insertOrderSheet(SqlSessionTemplate session, HashMap map) {
+		// TODO Auto-generated method stub
+		return session.insert("order.insertOrderSheet", map);
+	}
+
+	@Override
+	public int insertOrderDetail(SqlSessionTemplate session, HashMap map) {
+		// TODO Auto-generated method stub
+		return session.insert("order.insertOrderDetail",map);
+	}
+
+	
+	
 	
 	
 	
