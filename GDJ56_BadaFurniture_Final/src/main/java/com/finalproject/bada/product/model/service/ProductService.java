@@ -12,6 +12,8 @@ public interface ProductService {
 	
 	List<Product> selectProductList(Map map);
 	
+	int selectProductListCount(Map map);
+	
 	List<Product> productList(Map<String, Integer> page);
 	
 	int selectProductCount();

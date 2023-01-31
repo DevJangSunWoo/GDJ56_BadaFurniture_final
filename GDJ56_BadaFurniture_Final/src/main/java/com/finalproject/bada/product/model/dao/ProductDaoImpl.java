@@ -24,6 +24,11 @@ public class ProductDaoImpl implements ProductDao {
 	}
 	
 	@Override
+	public int selectProductListCount(SqlSessionTemplate session, Map map) {
+		return session.selectOne("product.selectProductListCount", map);
+	}
+	
+	@Override
 	public List<Product> productList(SqlSessionTemplate session, Map<String, Integer> page) {
 		return session.selectList("product.productList", null, new RowBounds((page.get("cPage")-1) * page.get("numPerpage"), page.get("numPerpage")));
 	}
@@ -50,6 +55,8 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return session.insert("product.insertCart", map);
 	}
+
+	
 
 	
 

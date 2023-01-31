@@ -249,7 +249,7 @@
 				//contentType:"application/json"와 data에 JSON.stringify 추가
 				contentType:"application/json",
 				data :	JSON.stringify({
-					cPage:++cPage,
+					//cPage:++cPage,
 					color:colorArr, 
 					material:materialArr, 
 					grade:gradeArr, 

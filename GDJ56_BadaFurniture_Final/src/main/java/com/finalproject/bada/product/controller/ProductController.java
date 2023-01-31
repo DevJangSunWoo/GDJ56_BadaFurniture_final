@@ -78,6 +78,9 @@ public class ProductController {
 		
 		List<Product> list = service.selectProductList(map);
 		
+		int totalData = service.selectProductListCount(map);
+		log.debug("{}",totalData);
+		
 		return list;
 	}
 	

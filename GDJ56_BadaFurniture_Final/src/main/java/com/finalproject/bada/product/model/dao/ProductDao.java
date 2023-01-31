@@ -14,6 +14,8 @@ public interface ProductDao {
 	
 	List<Product> selectProductList(SqlSessionTemplate session, Map map);
 	
+	int selectProductListCount(SqlSessionTemplate session, Map map);
+	
 	List<Product> productList(SqlSessionTemplate session, Map<String, Integer> page);
 	
 	int selectProductCount(SqlSessionTemplate session);
