@@ -9,6 +9,13 @@
 <!-- css -->
 <link rel="stylesheet" href="${path }/resources/css/member/searchId.css"/>
 
+<!-- Remember to include jQuery :) 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
 <section>
 	<div class="flexDiv">
         <h1 style="color: #348492; font-size: 40px;">아이디 찾기</h1>
@@ -34,7 +41,7 @@
                 <div class="flexDiv">
                     <img src="${path }/resources/images/member/이메일체크.png" width="">
                     <div class="input-container">
-                        <input type="text" name="emailck" class="form__input" id="memailconfirm" placeholder="인증번호" required/>
+                        <input type="text" name="emailck" class="form__input" id="memailconfirm" placeholder="이메일 인증번호" required/>
                         <label class="form__label" id="memailconfirmTxt">인증번호</label>
                     </div>
                     <!-- <input type="button" class="oribtn" value="인증확인"> -->		
@@ -134,9 +141,12 @@
                 </div>
 			</div>
 		</div>
-	</form>
+	</form>	
+	
 </section>
+
 	<script>
+		//onsubmit
 		const fn_invalidate=(result)=>{
 			if(result=='false'){
 				console.log(result);

@@ -76,9 +76,10 @@ public class MemberController {
 	public ModelAndView searchIdEnd(@RequestParam Map param, ModelAndView mv) {
 		log.debug("searchId: {}",param);
 		String memberId = service.searchId(param);
+		log.debug("searchId(result): {}",memberId);
 		
 		mv.addObject("memberId",memberId);
-		
+		mv.setViewName("member/searchIdResult");
 		return mv;
 	}
 	
