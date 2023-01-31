@@ -60,7 +60,7 @@
         	</select>
 			        	
 			<div id="search-searchAll">
-				<form action="${path}/admin/product.do" method="post">
+				<form action="${path}/admin/product.do" method="get">
 
 					<label><input type="radio" name="searchKeyword" value="searchAll" ${searchKeyword.equals("searchAll")?"checked":""}>전체조회</label>
 					<input type="hidden" name="searchType" value="SEARCH_ALL">
@@ -69,7 +69,7 @@
 			</div>
 
 			<div id="search-soldOutState">
-				<form action="${path}/admin/product.do" method="post">
+				<form action="${path}/admin/product.do" method="get">
 
 					<label><input type="radio" name="searchKeyword" value="N" ${searchKeyword.equals('N')?"checked":""}>판매중</label> 
 					<label><input type="radio" name="searchKeyword" value="I" ${searchKeyword.equals('I')?"checked":""}>거래중</label>
@@ -80,17 +80,18 @@
 			</div>
 			
         	<div id="search-showState">
-				<form action="${path}/admin/product.do" method="post">
+				<form action="${path}/admin/product.do" method="get">
 					
 					<label><input type="radio" name="searchKeyword" value="Y" ${searchKeyword.equals('Y')?"checked":""}>공개</label> 
 					<label><input type="radio" name="searchKeyword" value="N" ${searchKeyword.equals('N')?"checked":""}>숨김</label>
 					<input type="hidden" name="searchType" value="SHOW_STATE">
 					<button class="searchBtn">검색</button>
 				</form>
+
         	</div>
 
         	<div id="search-item">
-				<form action="${path}/admin/product.do" method="post">
+				<form action="${path}/admin/product.do" method="get">
 
 					<select name="searchKeyword" class="searchInput">
 						<option value="책상" ${searchKeyword.equals("책상")?"selected":""}>책상</option>
@@ -109,7 +110,7 @@
         	</div>
         	
         	<div id="search-productNo">
-				<form action="${path}/admin/product.do" method="post">
+				<form action="${path}/admin/product.do" method="get">
 
 					<input type="text" name="searchKeyword" size="30" 
 					placeholder="검색할 가구번호 입력" class="searchInput" value="${searchKeyword}">
@@ -119,7 +120,7 @@
         	</div>
 
 			<div id="search-grade">
-				<form action="${path}/admin/product.do" method="post">
+				<form action="${path}/admin/product.do" method="get">
 
 					<select name="searchKeyword" class="searchInput">
 						<option value="최상" ${searchKeyword.equals("최상")?"selected":""}>최상</option>
@@ -133,7 +134,7 @@
 			</div>
         	
         	<div id="search-price">
-				<form action="${path}/admin/product.do" method="post">
+				<form action="${path}/admin/product.do" method="get">
 
 					<input type="number" name="searchKeyword" size="30" 
 					placeholder="가격 입력" class="searchInput" value="${searchKeyword}"> 이하
@@ -343,7 +344,7 @@
 
 	});
 
-	//
+	//검색조건 고정시켜놓기
 	$(()=>{
 
 		const type = $("#searchType").val();
@@ -351,6 +352,8 @@
 		$("div#search-"+type).css("display","inline-block");
 
 	})
+
+
 
 </script>
 

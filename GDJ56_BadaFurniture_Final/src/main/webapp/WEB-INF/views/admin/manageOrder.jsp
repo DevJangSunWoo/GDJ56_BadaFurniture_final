@@ -136,7 +136,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td style="width: 10px;"><input type="checkbox" name="chk" class="tableTd"></td>
+						<td class="tableTd" style="width: 10px;background-color:#dcd5c32b;"><input type="checkbox" name="chk"></td>
 						<td class="tableTd"><a href="">주문번호</a></td>
 						<td class="tableTd">주문일자</td>
 						<td class="tableTd">가구번호</td>
