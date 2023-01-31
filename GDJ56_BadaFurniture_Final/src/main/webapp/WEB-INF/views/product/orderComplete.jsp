@@ -123,6 +123,8 @@
 
 <!-- wrap -->
 <div class="wrap">
+ 	<fmt:setLocale value="ko_kr"/>
+	
 	<div style="display: flex !important;justify-content: center !important;height:1200px !important;">
 	<!-- 오른쪽 콘텐츠 영역 -->
 	<!-- class="right_area page_order_form" -->
@@ -150,122 +152,107 @@
 			<!--//article-title-->
 
 
+
+
 				<!-- 회원 -->
-			<div class="section order__delivery">  
-			<div class="order__delivery__inner">
-				        <h3 class="order__title">결제 정보</h3>
-				        
-				        <ul class="order__list">
-				            <li class="order__item delivery__item__info"  id="del_ori">
-				                <span class="order__item__label">입금정보</span>
-				                <div class="order__item__area" id="delivery-addr"> 카드</div>
-				            </li>
-				           <li class="order__item delivery__item__info"  id="del_ori">
-				                <span class="order__item__label">승인번호</span>
-				                <div class="order__item__area" id="delivery-addr"> 30121345</div>
-				            </li>
-				            <li class="order__item delivery__item__info"  id="del_ori">
-				                <span class="order__item__label">결제금액</span>
-				                <div class="order__item__area" id="delivery-addr"> 79,800원</div>
-				            </li>
-				         
-				         <!--배송지 변경 누를시 나타나는 변경  영역-->
-				         	<div  style="display: none;"  id='dis'>
-					         	<div class="order__item__area">
-						         	<span class="order__item__label">변경주소</span>    			
-					                <div class="order_option_box"> 
-					                <!-- 	<input type="text"  placeholder="공간차지" style="visibility: hidden;width:5px; "> -->
-					                	<input type="text" id="sample4_postcode" placeholder="우편번호" style="width:100px;border:1px solid lightgray; ">	<br>					
-										<input type="text" id="sample4_roadAddress" placeholder="도로명주소" style="width:210px;border:1px solid lightgray;">						
-										<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width:210px;border:1px solid lightgray;">
-										<span id="guide" style="color:#999;display:none"></span><br>
-										<input type="text" id="sample4_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;">
-									 </div>	
-					              
-				                </div>
-				         	</div>
-				         </ul>
-				  </div>
-			</div>
-		
+			<c:if test="${not empty oss}">		 
+				<c:forEach var="os" items="${oss}" varStatus="vs"> 	
+					<div class="section order__delivery">  
+						<div class="order__delivery__inner">
+						        <h3 class="order__title">결제 정보</h3>						        
+						        <ul class="order__list">
+						            <li class="order__item delivery__item__info"  id="del_ori">
+						                <span class="order__item__label">입금정보</span>
+						                <div class="order__item__area" id="delivery-addr">${os.paymentMethod}</div>
+						            </li>
+						           <li class="order__item delivery__item__info"  id="del_ori">
+						                <span class="order__item__label">승인번호</span>
+						                <div class="order__item__area" id="delivery-addr">${os.merchantUid}</div>
+						            </li>
+						            <li class="order__item delivery__item__info"  id="del_ori">
+						                <span class="order__item__label">결제금액</span>
+						                
+						                <div class="order__item__area" id="delivery-addr">
+						                	<fmt:formatNumber value="${os.totalPrice}" type="currency" />원
+						                </div>
+						            </li>						         					
+						         </ul>
+						  </div>
+					</div>
+				</c:forEach>
+			</c:if>
 			
-	
-			<div class="section order_product_info">
-				<h3 class="order__title">상품 정보</h3>
-				<input type="hidden" id="discount_applied_yn" value="" />
-				<input type="hidden" id="event_min_pay_amt" value="10000" />
-				<!--cart products-->
-				<table class="table_basic order_cart_table">
-					<colgroup>
-						<col>
-						<col width="50px">
-	<!--						<col width="100px">-->
-						<col width="80px">
-						<col width="80px">
-						<col width="70px" class="charge ">
-						<col width="69px" class="charge ">
-						<col width="100px" class="charge ">
-					</colgroup>
-					<thead>
-						<tr>
-							<th scope="col">상품 정보</th>					
-							<th scope="col"  colspan="3">배송비</th>
-							<th scope="col"  colspan="3">주문금액</th>
-						</tr>
-					</thead>
-					<!--리스트 데이터 표출 -->
-					<tbody>
-						<tr>
-							<td class="td_product">
-								<input type="hidden" class="input_hidden" name="no" value="780450657" />
-								<input type="hidden" class="input_hidden" name="coupon_amt_780450657" value="0" />
-								<input type="hidden" class="input_hidden" name="cart_info" value="2702396|0|스위트 메론 / L|42800|0|0|0|N|Y|780450657|Y" />
-								<input tyep="hidden" class="input_hidden" id="goods_2702396_0_스위트 메론 / L" />
-								<input type="hidden" class="input_hidden" name="goods_coupon_info" value="" />
-								<input type="hidden" class="input_hidden" name="used_yn" value="N" />
-								<input type="hidden" class="input_hidden" name="cart_goods_cnt[]" value="1" />
-								<input type="hidden" class="input_hidden" name="normal_price" value="69000" />
-								<input type="hidden" class="input_hidden" name="price" value="42800" />
-								<input type="hidden" name="use_point_yn_780450657" value="Y">
-								<input type="hidden" name="prepoint_yn_780450657" value="N">
-								<input type="hidden" name="prepoint_780450657" value="0">
-								<input type="hidden" class="input_hidden" name="exclusive_msspay" value="N" />
-								<input type="hidden" class="input_hidden" name="exclusive_msspay_hyundaicard" value="N" />
-	                               <input type="hidden" class="input_hidden" id="group_dc_limit_yn_780450657" value="Y" />
-								<input type="hidden" name="plcc_dc_yn_780450657" value="Y" />
-								<input type="hidden" name="limit_coupon_amt_yn_780450657" value="N" />
-								<input type="hidden" name="goods_form_type" value="DELIVERY_PRODUCT" />
-								<div class="connect_img">
-									<a href="/app/goods/2702396/0" target="_blank">
-										<!--가구 이미지 삽입  -->
-										<img  src="${path}/resources/images/product/sofa1.jpg"  >
-									</a>
-								</div>
-								<div class="article_info connect_info">
-									<div class="box_product">
-										<strong>제품 명</strong>
-										<span class="list_info">
-											<!--상세화면 링크 걸기  -->
-											<a href="/app/goods/2702396/0" target="_blank">
-												화이트 캐비닛
-											</a>
-										</span>
-									</div>
-									<div class="order_option_box">
-										<p> 분류:소파/색깔:블루 /상태:최상 </p>
-									</div>										
-								</div>
-							</td>
-							<td rowspan="1" colspan="3">
-							배송비는 주문 금액에 포함되있습니다.
-							</td>
-						    <td class="price"   colspan="3">
-	                               <strong>42,800 원</strong>
-	                           </td>                                
-						</tr>
-					</tbody>																	
-				</table>
-			</div>
+			<c:if test="${not empty oss}">		 
+				 	
+				
+					<div class="section order_product_info">
+						<h3 class="order__title">상품 정보</h3>
+						<input type="hidden" id="discount_applied_yn" value="" />
+						<input type="hidden" id="event_min_pay_amt" value="10000" />
+						<!--cart products-->
+						<table class="table_basic order_cart_table">
+							<colgroup>
+								<col>
+								<col width="50px">
+			<!--						<col width="100px">-->
+								<col width="80px">
+								<col width="80px">
+								<col width="70px" class="charge ">
+								<col width="69px" class="charge ">
+								<col width="100px" class="charge ">
+							</colgroup>
+							<thead>
+								<tr>
+									<th scope="col">상품 정보</th>					
+									<th scope="col"  colspan="3">배송비</th>
+									<th scope="col"  colspan="3">주문금액</th>
+								</tr>
+							</thead>
+							<!--리스트 데이터 표출 -->
+							<tbody>
+								<c:forEach var="os" items="${oss}" varStatus="vs"> 
+									<c:forEach var="detail" items="${os.details}" varStatus="vs">
+									<%-- <p>${detail }</p>--%>	
+									
+											<tr>
+												<td class="td_product">
+													<div class="connect_img">
+															<!--가구 이미지 삽입  -->
+														 	
+														 	<img  src="${path}/resources/upload/product/${detail.product.files.get(0).renamedFileName}"  > 								
+													</div>
+													<div class="article_info connect_info">
+														<div class="box_product">
+															<strong>제품 명</strong>
+															<span class="list_info">
+																<!--상세화면 링크 걸기  -->
+															<!-- 	<a href="/app/goods/2702396/0" target="_blank"></a> -->
+																	${detail.product.title}
+																	
+															</span>
+														</div>
+														<div class="order_option_box">
+															<p> 분류:${detail.product.item}/색깔:${detail.product.color} /상태:${detail.product.grade}</p>
+														</div>										
+													</div>
+												</td>
+												<td rowspan="1" colspan="3">
+												배송비는 주문 금액에 포함되있습니다.
+												</td>
+											    <td class="price"   colspan="3">
+						                               <strong>
+						                               <fmt:formatNumber value="${detail.product.price}" type="currency" />원
+						                               </strong>
+						                         </td>                                
+											</tr>
+							
+									</c:forEach>
+									</c:forEach>
+							
+							</tbody>																	
+						</table>
+					</div>		
+			</c:if>
 		
 			<div class="section right_contents section_gift"></div>
 		
@@ -893,59 +880,50 @@
 </ul>
 <!-- // 주문자 동의 -->
 						</div>
-					
-					</div>
-					<!--//결제 정보-->
-					<!--//신용카드 -->
 
+					</div>
 				</div>
-
-				<!--cart button-->
-					<div  id="card_btn"  class="btn_wrap order_form__payment-button-wrap" >
-						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button" ">
-							<span id="btn-pay_amt" style="font-size:20px;">0</span>카드 결제하기&nbsp;
-							<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
-						</a>
-					</div>
-					<div  id="account_btn"  class="btn_wrap order_form__payment-button-wrap" style="display:none;" >
-						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button" ">
-							<span id="btn-pay_amt" style="font-size:20px;">0</span>계좌이체로 결제하기&nbsp;
-							<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
-						</a>
-					</div>
-					
-				<!--//cart button-->
 			</div>
-	
-		
 		</form>
 		<div class="section order__delivery">  
 			<div class="order__delivery__inner">
-				        <h3 class="order__title">배송지 정보</h3>
-				        
-				        <ul class="order__list">
-				            <li class="order__item delivery__item__info"  id="del_ori">
-				                <span class="order__item__label">수령인</span>
-				                <div class="order__item__area" id="delivery-addr"> 선우</div>
-				            </li>
-				           <li class="order__item delivery__item__info"  id="del_ori">
-				                <span class="order__item__label">배송지</span>
-				                <div class="order__item__area" id="delivery-addr"> 철산</div>
-				            </li>
-				            <li class="order__item delivery__item__info"  id="del_ori">
-				                <span class="order__item__label">휴대전화</span>
-				                <div class="order__item__area" id="delivery-addr"> 010-564012345</div>
-				            </li>
-				         	 <li class="order__item delivery__item__info"  id="del_ori">
-				                <span class="order__item__label">전화번호</span>
-				                <div class="order__item__area" id="delivery-addr"> 02-2687-3456</div>
-				            </li>
-				         
-				         
-				         
-				         
-				         	
-				         </ul>
+				        <h3 class="order__title">배송지 정보</h3>				        
+				         <c:if test="${not empty oss}">	 
+					        <ul class="order__list">
+					            <li class="order__item delivery__item__info"  id="del_ori">
+					                <span class="order__item__label">수령인</span>
+					                 <c:forEach var="os" items="${oss}" varStatus="vs">  					                	 					                	
+					                		<div class="order__item__area" id="delivery-addr">
+					                			 ${os.member.memberName} 
+					                		</div>					            							             		
+					             	</c:forEach> 
+					            </li>
+					           <li class="order__item delivery__item__info"  id="del_ori">
+					                <span class="order__item__label">배송지</span>
+					                
+					                <c:forEach var="os" items="${oss}" varStatus="vs">  	
+						                <div class="order__item__area" id="delivery-addr">
+						                 	${os.postCode}/${os.address}/${os.detailAddress}
+						                 </div>
+					                
+					                 </c:forEach>
+					           
+					            </li>
+					            <li class="order__item delivery__item__info"  id="del_ori">
+					                <span class="order__item__label">휴대전화</span>
+					                <c:forEach var="os" items="${oss}" varStatus="vs">  
+					                <div class="order__item__area" id="delivery-addr">
+					                ${os.member.phone} 					                
+					                </div>
+					            	</c:forEach>
+					            </li>
+					         	<!--  <li class="order__item delivery__item__info"  id="del_ori">
+					                <span class="order__item__label">전화번호</span>
+					                <div class="order__item__area" id="delivery-addr"> 02-2687-3456</div>
+					            </li>					 -->       					         		         	
+					         </ul>
+					     
+					      </c:if> 	
 				  </div>
 			</div>
 			<!--cart button-->
@@ -957,11 +935,11 @@
 						</a>
 					</div> -->
 					<div  id="account_btn"  class="btn_wrap order_form__payment-button-wrap"  style= >
-						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button" ">
+						<a id="btn_pay" href="${path}/mypage/order.do"   class="order_form__payment-button" ">
 							<span id="btn-pay_amt" style="font-size:20px;"></span>주문목록으로 이동&nbsp;
 							<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
 						</a>
-						<a id="btn_pay" href="javascript:void(0)"  onclick="Order.payment();" class="order_form__payment-button" ">
+						<a id="btn_pay" href="${path}/ "   class="order_form__payment-button" ">
 							<span id="btn-pay_amt" style="font-size:20px;"></span>홈으로 이동&nbsp;
 							<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
 						</a>
@@ -975,6 +953,8 @@
 	
 		</div>	
 			<!-- 중앙정렬용 /div  -->
+	
+
 		<!--wrap  -->
 	</div> 
 	

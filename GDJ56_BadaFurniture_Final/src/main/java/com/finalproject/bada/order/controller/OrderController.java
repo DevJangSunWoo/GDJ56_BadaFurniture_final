@@ -124,15 +124,26 @@ public class OrderController {
 		service.insertOrderSheet(map);		
 		
 		
+		//장바구니 담겨있는 데이터들  delete 
+		//가구의  판매상태변경  update
+		
 		
 		//주문완료서에 데이터 표출하기
 		int orderSheetNo=Integer.parseInt(map.get("seqOrderSheet").toString());
-		log.debug("주문서 번호+{}",orderSheetNo);		
+		//log.debug("주문서 번호+{}",orderSheetNo);		
 		
-	//	OrderSheet os=service.selectOrderSheet(orderSheetNo);		
+		List<OrderSheet> oss=service.selectOrderComplete(orderSheetNo);		
+		
+		if(oss==null) {
+			//log.debug("{}","데이터x");
+			
+		}else {
+			//log.debug("{}","데이터넘어옴");
+			
+		}
 		
 		
-		
+		mv.addObject("oss",oss);
 		mv.setViewName("product/orderComplete");
 		
 		return mv ;
