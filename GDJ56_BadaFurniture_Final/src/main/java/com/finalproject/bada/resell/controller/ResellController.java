@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.common.PageFactory;
+import com.finalproject.bada.config.AES256Config;
 import com.finalproject.bada.member.model.vo.Member;
 import com.finalproject.bada.resell.model.service.ResellService;
 import com.finalproject.bada.resell.model.vo.FileResell;
@@ -29,11 +30,13 @@ import lombok.extern.slf4j.Slf4j;
 public class ResellController {
 	
 	private ResellService service;
+	private AES256Config aes256;
 	
 	@Autowired
-	public ResellController(ResellService service) {
+	public ResellController(ResellService service, AES256Config aes256) {
 		super();
 		this.service = service;
+		this.aes256 = aes256;
 	}
 	
 	@RequestMapping("/mypage/resell.do")
@@ -64,6 +67,11 @@ public class ResellController {
 		//log.debug("readResell : {}",resell);
 		//log.debug("resellFiles : {}",resell.getFiles());
 		//log.debug("resellComments : {}",resell.getComments());
+		try {
+			resell.setAccountCode(aes256.decrypt(resell.getAccountCode()));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		mv.addObject("resell", resell);
 		mv.setViewName("resell/readResell");
 		
@@ -147,6 +155,13 @@ public class ResellController {
 				}
 			}
 		}
+
+		try {
+			r.setAccountCode(aes256.encrypt(r.getAccountCode()));
+			//log.debug("계좌번호 암호화 후  : {}", r.getAccountCode());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		Resell resell = Resell.builder().member(Member.builder().memberNo(memberNo).build())
 							.item(r.getItem()).grade(r.getGrade()).widths(r.getWidths())
 							.depths(r.getDepths()).heights(r.getHeights()).color(r.getColor())
@@ -154,7 +169,6 @@ public class ResellController {
 							.addressDetail(r.getAddressDetail()).pickUpDate(r.getPickUpDate())
 							.hopePrice(r.getHopePrice()).bankName(r.getBankName()).depositorName(r.getDepositorName())
 							.accountCode(r.getAccountCode()).files(files).build();
-		//log.debug("resell : {}",resell);
 		String msg = "";
 		String loc = "";
 		try {
