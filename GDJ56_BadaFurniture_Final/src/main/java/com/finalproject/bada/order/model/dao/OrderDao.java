@@ -11,6 +11,10 @@ public interface OrderDao {
 	
 	Product selectOrderSheet(SqlSessionTemplate session,int productNo);
 	List<Product> selectOrderSheetProductList(SqlSessionTemplate session,HashMap map); 
+	int insertOrderSheet(SqlSessionTemplate session,HashMap map);
+	int insertOrderDetail(SqlSessionTemplate session,HashMap map);
+	
+	
 	
 	
 }

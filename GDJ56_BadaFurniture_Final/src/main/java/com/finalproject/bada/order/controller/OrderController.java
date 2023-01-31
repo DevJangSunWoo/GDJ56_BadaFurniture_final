@@ -1,6 +1,9 @@
 package com.finalproject.bada.order.controller;
 
-import java.util.Arrays;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,10 +46,10 @@ public class OrderController {
 		List<Product> list=service.selectOrderSheetProductList(map);
 
 		if(list==null) {
-			log.debug("{}"," x 데이터 못 가져옴");
+//			log.debug("{}"," x 데이터 못 가져옴");
 			
 		}else {
-			log.debug("{}","  o 가져옴");
+		//	log.debug("{}","  o 가져옴");
 		}
 				
 	
@@ -61,13 +64,73 @@ public class OrderController {
 		
 	}
 	
-//	@RequestMapping("/order/orderPayment.do")
-//	public ModelAndView orderPayment(ModelAndView mv,) {
-//		
-//		
-//		return mv
-//	}
-//	
+	@RequestMapping("/order/orderPayment.do")
+	public ModelAndView orderPayment(ModelAndView mv
+			,@RequestParam(value="badaLoginMemberNo",required=false)int loginMemberNo 
+			,@RequestParam(value="badaDepositName",required=false)String depositName
+			,@RequestParam(value="badaTotalPrice",required=false)int totalPrice
+			,@RequestParam(value="badaReceiverName",required=false) String receiverName
+			,@RequestParam(value="badaPostCode",required=false)String  postCode 
+			,@RequestParam(value="badaAddress",required=false)String address
+			,@RequestParam(value="badaAddressDetail",required=false)String addressDetail
+//			,@RequestParam(value="badaProductList",required=false)List<Product> productList
+			,@RequestParam(value="badaProductNo",required=false) int[]productNos
+			)
+		throws IOException {
+//		log.debug("{}",loginMemberNo);  
+//		log.debug("{}",depositName);  
+//		log.debug("{}",totalPrice);	
+//		log.debug("{}",receiverName);
+//		log.debug("{}",postCode);
+//		log.debug("{}",address);
+//		log.debug("{}",addressDetail);
+//		log.debug("{}",productList);   //ng
+//		log.debug("{}",productNos);
+		
+		
+		//import java.util.Date 
+		Date date = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd_hh:mm:ss");
+		String dateToStr = dateFormat.format(date);
+		//log.debug("{}",dateToStr);
+		
+		//난수
+		//중복되지 않는 난수 생성?
+//		double min = 0;
+//		double max = 100000;
+//		double random = (int) ((Math.random() * (max - min)) + min);
+//		String val= Double.toString(random);
+		int rnd=(int)(Math.random()*100000+1);
+		
+		
+		//주문식별번호=날짜+난수
+		String merchantUid=dateToStr +rnd;
+		log.debug("{}",merchantUid);
+		
+		
+		HashMap map = new HashMap();
+		map.put("seqOrderSheet",0);  // 시퀀스에 대한 임의의 키값
+		map.put("loginMemberNo",loginMemberNo); 
+		map.put("merchantUid",merchantUid);
+		map.put("depositName",depositName); 
+		map.put("totalPrice",totalPrice); 
+		map.put("receiverName",receiverName); 
+		map.put("postCode",postCode); 
+		map.put("address",address);
+		map.put("addressDetail",addressDetail);
+		map.put("productNos",productNos);
+		
+		service.insertOrderSheet(map);
+		
+		
+		
+		
+
+		mv.setViewName("product/orderComplete");
+		
+		return mv ;
+	}
+	
 	
 	
 	
