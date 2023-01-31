@@ -3,6 +3,7 @@ package com.finalproject.bada.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
 import com.finalproject.bada.resell.model.vo.Resell;
@@ -42,5 +43,13 @@ public interface AdminService {
 	
 	//내가구팔기 관리 - 진행상태 변경
 	int updateProgressState(Map param);	
+	
+	//주문관리 - 조회
+	List<OrderSheet> orderListPage(Map<String,Integer> param,Map search);
+	int orderListCount(Map search);
+	
+	//주문관리 - 요약
+	List<Map<String,Integer>> orderSummary();
+	
 	
 }
