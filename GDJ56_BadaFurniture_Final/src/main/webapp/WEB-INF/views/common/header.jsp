@@ -78,7 +78,7 @@
             <div style="display: flex; justify-content: center;">
                 <a href="${path}/member/searchId.do" class="find">아이디 찾기<br> </a> 
                 &nbsp; &nbsp; <a> | </a> &nbsp; &nbsp;
-                <a href="#" class="find">비밀번호 찾기<br> </a>
+                <a href="${path}/member/searchPw.do" class="find">비밀번호 찾기<br> </a>
             </div>
             <br><br>
             <div class="text-center" style="float:left">

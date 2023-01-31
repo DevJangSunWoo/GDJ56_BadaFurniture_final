@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -81,6 +82,12 @@ public class MemberController {
 		mv.addObject("memberId",memberId);
 		mv.setViewName("member/searchIdResult");
 		return mv;
+	}
+	
+	//비밀번호찾기 페이지연결
+	@RequestMapping("/searchPw.do")
+	public String searchPw() {
+		return "member/searchPw";
 	}
 	
 //--------------------------------------------------------------------------------------------------------------------------------------------------
