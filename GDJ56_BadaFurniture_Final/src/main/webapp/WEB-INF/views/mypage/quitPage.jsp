@@ -91,6 +91,7 @@
 		//div 클릭시	
 		if(url=='${path}/member/deleteMember.do'){ //탈퇴하기 누를시
 			$("#openModal").get(0).click();
+			$("#passwordck").focus();
 		}else{ //마이페이지로 이동
 			location.assign(url);
 		}

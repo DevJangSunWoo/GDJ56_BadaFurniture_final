@@ -235,7 +235,7 @@ public class MemberController {
 		
 		if(result>0) {
 			session.invalidate();
-			mv.addObject("msg","탈퇴가 완료되었습니다. \n 지금까지 Bada Furniture를 이용해 주셔서 감사합니다 <(＿　＿)>");
+			mv.addObject("msg","탈퇴가 완료되었습니다. 그동안 이용해주셔셔 감사합니다.<(＿　＿)>");
 			mv.addObject("loc","/");
 		}else {
 			mv.addObject("msg","회원삭제 실패");

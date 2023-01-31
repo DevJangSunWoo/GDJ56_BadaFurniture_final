@@ -77,8 +77,8 @@
             <div id="withdrawalBtn-Container">
                 <hr>
                 <form id="withdrawal" action="${path}/member/deleteMemberResult.do" method="post">
-                	<input type="checkbox" id="agreeck" name="withdrawalAgree" value="Y" required> 
-                	<span>위 내용을 숙지하였으며, 동의합니다.</span>
+                	<label><input type="checkbox" id="agreeck" name="withdrawalAgree" value="Y" required> 
+                	<span>위 내용을 숙지하였으며, 동의합니다.</span></label>
                 	<input type="hidden" name="memberNo" value="${loginMember.memberNo}">
                 	<br><br>
                 	<div style="display: flex; justify-content: center;">
