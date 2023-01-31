@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.finalproject.bada.admin.model.dao.AdminDao;
+import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
 import com.finalproject.bada.resell.model.vo.Resell;
@@ -126,14 +127,36 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.resellSummary(session);
 	}
-
+	
+	
+	//내가구팔기 관리 - 진행상태 변경
 	@Override
 	public int updateProgressState(Map param) {
 		// TODO Auto-generated method stub
 		return dao.updateProgressState(session,param);
 	}
+
 	
-	//내가구팔기 관리 - 진행상태 변경
+	//주문관리 - 조회
+	@Override
+	public List<OrderSheet> orderListPage(Map<String, Integer> param, Map search) {
+		// TODO Auto-generated method stub
+		return dao.orderListPage(session, param, search);
+	}
+
+	@Override
+	public int orderListCount(Map search) {
+		// TODO Auto-generated method stub
+		return dao.orderListCount(session, search);
+	}
+	
+	//주문관리 - 요약
+	@Override
+	public List<Map<String, Integer>> orderSummary() {
+		// TODO Auto-generated method stub
+		return dao.orderSummary(session);
+	}
+
 
 
 	

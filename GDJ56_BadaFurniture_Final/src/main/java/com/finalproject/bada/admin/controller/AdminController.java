@@ -58,11 +58,11 @@ public class AdminController {
 //		return "admin/manageProduct";
 //	}
 	
-	//주문 관리 연결
-	@RequestMapping("/admin/order.do")
-	public String manageOrder() {
-		return "admin/manageOrder";
-	}
+//	//주문 관리 연결
+//	@RequestMapping("/admin/order.do")
+//	public String manageOrder() {
+//		return "admin/manageOrder";
+//	}
 	
 //	//내가구팔기 관리 연결
 //	@RequestMapping("/admin/resell.do")
@@ -341,7 +341,6 @@ public class AdminController {
 		mv.addObject("resell",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
 		//log.debug("resell : {}",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
 		
-		
 		int totalData=service.resellListCount(search);
 		
 		//log.debug("totalData {}", totalData);		
@@ -389,6 +388,69 @@ public class AdminController {
 	}
 	
 	
+	
+	//'주문관리' - 조회
+	@RequestMapping("/admin/order.do")
+	public ModelAndView orderList(ModelAndView mv,
+		@RequestParam(value="cPage", defaultValue="1") int cPage,
+		@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
+		,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
+		,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
+		) {		
+//		log.debug("cPage {}", cPage);
+//		log.debug("numPerpage {}", numPerpage);
+//		
+//		log.debug("searchType {}", searchType);
+//		log.debug("searchKeyword {}", searchKeyword);
+		
+
+		Map search=new HashMap();
+		search.put("searchType", searchType);		
+		
+		if(searchType.equals("ORDER_SHEET_ENROLL_DATE")) {	
+			//주문일자 들어오는 값 :2023-01-31 ~ 2023-01-31
+			
+			String[] keys=searchKeyword.split("~");
+			
+			String key1=keys[0].trim();
+			String key2=keys[1].trim();
+			
+			//log.debug("keys :{}",key1);
+			//log.debug("keys :{}",key2);				
+			
+			search.put("searchKeyword1", key1);			
+			search.put("searchKeyword2", key2);		
+			
+		}else {
+			search.put("searchKeyword", searchKeyword);			
+		}
+
+		
+		mv.addObject("order",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		//log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		
+		
+		int totalData=service.orderListCount(search);
+		
+		//log.debug("totalData {}", totalData);		
+		
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "order.do",searchType,searchKeyword));
+		
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchKeyword", searchKeyword);
+		
+		
+		
+		//내가구팔기 요약
+		List<Map<String,Integer>> sum=service.orderSummary();
+		//log.debug("{}",sum);		
+		mv.addObject("summary",sum);		
+//		
+		mv.setViewName("admin/manageOrder");	
+		
+		return mv;
+	}
+
 	
 }
 

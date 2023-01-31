@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderSheet {
 	private int orderSheetNo;
-	private Member memberNo;   //*
+	private Member member;   //*
 	private String paymentMethod;
 	private String paymentState;
 	private String merchantUid;
@@ -36,7 +36,7 @@ public class OrderSheet {
 	
 	public String toString() {
 		String temp="";
-		return  orderSheetNo+" "+memberNo.getMemberNo()+" "+paymentMethod+" "+paymentState+" "+merchantUid+" "+impUid+receiptUrl+
+		return  orderSheetNo+" "+member.getMemberNo()+" "+paymentMethod+" "+paymentState+" "+merchantUid+" "+impUid+receiptUrl+
 				" "+depositor+" "+totalPrice+receiverName+" "
 				+postCode+" "+address+" "+detailAddress+" "+orderSheetenrollDate+" "+details+temp;
 	}
