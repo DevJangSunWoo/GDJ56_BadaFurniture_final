@@ -62,13 +62,16 @@
 <!--------------------------------------------------------------------------------------------------->	
 	<!-- 패스워드 modal -->
 	<div id="ex1" class="modal">
-  		<p>비밀번호를 입력해 주세요.</p>
-  		<input type="password" name="password" id="passwordck">
-  		<input type="hidden" id="memberId" value="${loginMember.memberId}">
-  		<div>
-	  		<a href="#" rel="modal:close">취소</a>
-	  		<input type="button" value="확인" onclick="fn_passwordCheck();">
-	  	</div>
+		<p>📢 비밀번호를 입력해 주세요.</p>
+		<input type="hidden" id="memberId" value="${loginMember.memberId}">
+		<input type="password" name="password" id="passwordck" placeholder="비밀번호">
+  		<br><br><br>
+  		<div style="display: flex; justify-content: space-around;">
+	  		<input type="button" id="ok" value="확인" onclick="fn_passwordCheck();">
+	  		<div id="reset">
+	  			<a href="#" rel="modal:close" onclick="reset();">취소</a>
+	  		</div>
+  		</div>
 	</div>
 	
 	<!-- Link to open the modal -->
@@ -93,7 +96,7 @@
 		}
 	});
 	
-	//패스워드 입력시 맞을 경우 페이지이동
+	//패스워드 기본정보와 일치할 경우 페이지이동
 	const fn_passwordCheck=()=>{
 		$.ajax({
 			type : "POST",
@@ -112,6 +115,11 @@
 			}
 			
 		});
+	}
+	
+	//취소버튼 누르면 패스워드 value값 지우기
+	const reset=()=>{
+		$("#passwordck").val("");
 	}
 </script>
 

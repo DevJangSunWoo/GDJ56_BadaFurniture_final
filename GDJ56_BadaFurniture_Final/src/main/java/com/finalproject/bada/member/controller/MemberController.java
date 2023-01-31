@@ -206,8 +206,6 @@ public class MemberController {
 	
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	//회원탈퇴
-	
 	//패스워드 확인
 	@RequestMapping("/deleteMember.do")
 	@ResponseBody
@@ -227,7 +225,7 @@ public class MemberController {
 		return "mypage/member/deleteMemberEnd";
 	}
 	
-	//회워탈퇴
+	//회원탈퇴
 	@RequestMapping("/deleteMemberResult.do")
 	public ModelAndView deleteMemberResult(ModelAndView mv, @RequestParam String memberNo, HttpSession session) {
 		System.out.println(memberNo);
@@ -237,7 +235,7 @@ public class MemberController {
 		
 		if(result>0) {
 			session.invalidate();
-			mv.addObject("msg","탈퇴가 완료되었습니다.");
+			mv.addObject("msg","탈퇴가 완료되었습니다. \n 지금까지 Bada Furniture를 이용해 주셔서 감사합니다 <(＿　＿)>");
 			mv.addObject("loc","/");
 		}else {
 			mv.addObject("msg","회원삭제 실패");

@@ -70,3 +70,58 @@ div#mypageMenu>div.mypageRow>div.mypageCol>div.innerContent{
 	text-align:center;
 	font-size:13px;
 }
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 패스워드 modal */
+
+#ex1{
+	height: 300px;
+	width: 500px 
+	
+}
+
+#ex1 p{
+	font-size: 30px;
+	font-weight: bolder;
+}
+
+#passwordck{
+	width: 100%;
+	font-size: 30px;
+}
+
+#ok{
+	width: 110px;
+    height: 45px;
+	font-size: 30px;
+	background-color: #348492;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+}
+
+#reset{
+	text-align: center;
+	width: 110px;
+	font-size: 30px;
+	background-color: #ff4f4f;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+}
+
+a{
+	text-decoration: none;
+	color: white;
+}
+
+
+
+
+
+
+
+
+
