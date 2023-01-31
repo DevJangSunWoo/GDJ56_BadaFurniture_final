@@ -34,7 +34,7 @@
         
         <c:if test="${not empty loginMember }">
         	<div style="display: flex; margin-top:10px">
-	        	<span id="alertImgContainer"></span>
+	        	<span id="alertImgContainer"><img id="alertImg" width="60px" height="60px" style="cursor:pointer;"/></span>
 	        	<div style="display: flex; margin-right: 5px;">
 	        	  <details>
 			        <summary id="memberName"><u>${loginMember.memberName}님</u></summary>
@@ -105,10 +105,7 @@
     	$.ajax({
    			url:"${path}/alert/countReadState.do",
    			success:data=>{
-   				let alertImg = $("<img>").attr({
-   					width:"60px",
-   					height:"60px",
-   				}).css("cursor","pointer");
+   				let alertImg = $("img#alertImg");
    				if(data > 0){
    					alertImg.attr("src","${path }/resources/images/mainpage/new종.png");
    				} else{

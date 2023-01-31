@@ -229,12 +229,6 @@
 			} else {
 				mapping = $(e.target).children().first().val();
 			}
-			//알림 페이지를 클릭했을 때, 알림 읽음처리 
-			if(mapping == "/mypage/alert.do"){
-				$.ajax({
-					url:"${path}/alert/updateReadState.do"
-				});
-			}
 			let url = "${path}" + mapping;
 			location.assign(url);
 		});

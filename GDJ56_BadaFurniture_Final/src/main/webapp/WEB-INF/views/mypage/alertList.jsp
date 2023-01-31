@@ -132,7 +132,15 @@
 		</div>
 	</section>
 
-<script>
+<script>		
+	$(()=>{
+		$.ajax({
+			url:"${path}/alert/updateReadState.do",
+			success:data=>{
+				$("img#alertImg").attr("src","${path }/resources/images/mainpage/종.png");
+			}
+		});	
+	}); 
 	
 	//전체선택 체크박스를 클릭했을 때
 	$("input.checkAll").change(e=>{
