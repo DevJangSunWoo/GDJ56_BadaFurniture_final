@@ -46,11 +46,11 @@ public class ProductController {
 //		
 //	}
 	
-	@RequestMapping("/order/orderComplete.do")
-	public String orderComplete() {
-		return "product/orderComplete";
-		
-	}
+//	@RequestMapping("/order/orderComplete.do")
+//	public String orderComplete() {
+//		return "product/orderComplete";
+//		
+//	}
 	
 	
 	//상세화면 표출하기
@@ -60,7 +60,7 @@ public class ProductController {
 		Product  productData=service.selectProduct(productNo);
 		
 		for(int i=0;i<productData.getFiles().size();i++) {
-		log.debug("{}",productData.getFiles().get(i));
+//		log.debug("{}",productData.getFiles().get(i));
 		}
 		mv.addObject("productData",productData);
 		mv.setViewName("product/productView");

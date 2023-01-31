@@ -1,127 +1,70 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<style>
-	section.mypage>div#title{
-		width:100%;
-		height:200px;
-	}
-	section.mypage>div#title>div#innerTitle{
-		display:flex;
-		align-items:center;
-		justify-content:center;
-		width:100%;
-		height:200px;
-		font-family:"Courier New";
-		font-weight:bolder;
-		font-size:50px;
-	}
-	div#mypageMenu{
-		width:100%;
-		height:500px;
-		/* border:1px solid red; */
-	}
-	div#mypageMenu *{
-		font-family: 'Nanum Gothic' !important;
-	}
-	div#mypageMenu>div.mypageRow{
-		width:100%;
-		height:212px;
-		/* border:1px solid blue; */
-		display:flex;
-		justify-content:center;
-	}
-	div#mypageMenu>div.mypageRow>div.mypageCol{
-		width:200px;
-		height:200px;
-		border:2px solid black;
-		margin: 5px 3px 3px 5px;
-		cursor:pointer; 
-	}
-	div#mypageMenu>div.mypageRow>div.mypageCol>div.innerTitle1{
-		text-align: center;
-		font-family: "Verdana";
-		font-size:25px;
-		height:40px;
-		padding-top:15px;
-	}
-	div#mypageMenu>div.mypageRow>div.mypageCol>div.innerTitle2{
-		text-align:center;
-		font-size:13px;
-	}
-	div#mypageMenu>div.mypageRow>div.mypageCol>div.innerImg{
-		text-align:center;
-		margin-top:8px;
-		margin-bottom:8px;
-	}
-	div#mypageMenu>div.mypageRow>div.mypageCol>div.innerImg>img{
-		width:60px;
-		height:60px;
-	}
-	div#mypageMenu>div.mypageRow>div.mypageCol>div.innerContent{
-		text-align:center;
-		font-size:13px;
-	}
-</style>
-	<section class="mypage">
-		<div id="title">
-			<div id="innerTitle">
-				Quit
-			</div>
+
+<!-- css -->
+<link rel="stylesheet" href="${path }/resources/css/member/quitPage.css"/>
+
+<section class="mypage">
+	<div id="title">
+		<div id="innerTitle">
+			Quit
 		</div>
-		<div id="mypageMenu">
-			<div class="mypageRow">
-				<div class="mypageCol">
-					<input type="hidden" value="/mypage.do"/>
-					<div class="innerTitle1">
-						µÚ·Î°¡±â
-					</div>
-					<div class="innerTitle2">
-						Ãë¼Ò
-					</div>
-					<div class="innerImg">
-						<img src="${path}/resources/images/mypage/back.png">
-					</div>
-					<div class="innerContent">
-						¸¶ÀÌÆäÀÌÁö·Î
-						<br>
-						µ¹¾Æ°©´Ï´Ù.
-					</div>
+	</div>
+	<div id="mypageMenu">
+		<div class="mypageRow">
+			<div class="mypageCol">
+				<input type="hidden" value="/mypage.do"/>
+				<div class="innerTitle1">
+					ë’¤ë¡œê°€ê¸°
 				</div>
-				<div class="mypageCol">
-					<input type="hidden" value="/member/quit.do"/>
-					<div class="innerTitle1">
-						Å»ÅğÇÏ±â
-					</div>
-					<div class="innerTitle2">
-						Å»Åğ
-					</div>
-					<div class="innerImg">
-						<img src="${path}/resources/images/mypage/check.png">
-					</div>
-					<div class="innerContent">
-						Bada Furniture
-						<br>
-						°¡ÀÔ°èÁ¤À» Å»ÅğÇÕ´Ï´Ù.
-					</div>
+				<div class="innerTitle2">
+					ì·¨ì†Œ
+				</div>
+				<div class="innerImg">
+					<img src="${path}/resources/images/mypage/back.png">
+				</div>
+				<div class="innerContent">
+					ë§ˆì´í˜ì´ì§€ë¡œ
+					<br>
+					ëŒì•„ê°‘ë‹ˆë‹¤.
+				</div>
+			</div>
+			<div class="mypageCol">
+				<input type="hidden" value="/member/deleteMember.do"/>
+				<div class="innerTitle1">
+					íƒˆí‡´í•˜ê¸°
+				</div>
+				<div class="innerTitle2">
+					íƒˆí‡´
+				</div>
+				<div class="innerImg">
+					<img src="${path}/resources/images/mypage/check.png">
+				</div>
+				<div class="innerContent">
+					Bada Furniture
+					<br>
+					ê°€ì…ê³„ì •ì„ íƒˆí‡´í•©ë‹ˆë‹¤.
 				</div>
 			</div>
 		</div>
-	</section>
-	<script>
-		$("div.mypageCol").click(e=>{
-			let mapping;
-			if($(e.target).attr("class") != "mypageCol"){
-				mapping = $(e.target).parents("div.mypageCol").children().first().val();
-			} else {
-				mapping = $(e.target).children().first().val();
-			}
-			let url = "${path}" + mapping;
-			location.assign(url);
-		});
-	</script>
+	</div>
+</section>
+<script>
+	$("div.mypageCol").click(e=>{
+		let mapping;
+		if($(e.target).attr("class") != "mypageCol"){
+			mapping = $(e.target).parents("div.mypageCol").children().first().val();
+		} else {
+			mapping = $(e.target).children().first().val();
+		}
+		let url = "${path}" + mapping;
+		location.assign(url);
+	});
+</script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

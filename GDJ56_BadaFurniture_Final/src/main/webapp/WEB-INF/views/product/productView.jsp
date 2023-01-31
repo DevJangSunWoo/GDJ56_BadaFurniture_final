@@ -107,9 +107,10 @@
                                 	지역에 따라 배송비 추가금액이 붙을수 있습니다.
                                 </p>
                                 
-                               
+                             <%--    <c:if test="${not empty loginMember }">  --%>
                                 <button  class="site-btn" style="background-color: #348492;"  onclick="location.assign('${path}/order/orderSheet.do?productNo=${productData.productNo}');">바로 구매하기</button>
                                 <button  class="site-btn" style="background-color: #348492;" onclick="fn_cartBtn();">장바구니</button>
+                         <%--    	</c:if> --%>
                             	
                             	<!--장바구니에 보낼데이터   type="hidden -->
                             	<input id="cart_productNo" type="hidden" value="${productData.productNo}">
@@ -120,21 +121,29 @@
              <!--</form> -->
             </div>
         </div>   	 
+    	 <input type="hidden" id="badaLoginFilter"  value="${loginMember.memberId}">
     	 <script>
     	 const fn_cartBtn=()=>{
-				$.ajax({
-					url:"${path}/product/cartBtn.do",
-					data:{cartProductNo:$("#cart_productNo").val()
-						,cartMemberNo:$("#cart_memberNo").val()
-					},
-					success:data=>{
-						console.log(data);
-						if(confirm(data+"장바구니로 이동하시겠습니까?")) {
-						    window.location.href = "${path}/mypage/cart.do"
+    		/* if( $("#badaLoginFilter").val() == null){
+    		
+    			confirm("로그인 화면으로 이동하시겠습니니까?");
+   			 window.location.href="${path}/member/login.do"
+    			
+    		} */
+    		$.ajax({
+						url:"${path}/product/cartBtn.do",
+						data:{cartProductNo:$("#cart_productNo").val()
+							,cartMemberNo:$("#cart_memberNo").val()
+						},
+						success:data=>{
+							console.log(data);
+							if(confirm(data+"장바구니로 이동하시겠습니까?")) {
+							    window.location.href = "${path}/mypage/cart.do"
+							}
 						}
-					}
-				});
-			}	
+					});
+    			
+    	 }	
     	 
     	 
     	 

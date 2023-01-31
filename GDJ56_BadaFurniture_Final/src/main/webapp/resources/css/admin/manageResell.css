@@ -39,7 +39,7 @@
     div#search-container{text-align:center;}
 
     div#search-searchAll{display:inline-block;}
-    div#search-soldOutState{display:none;}
+    div#search-progressState{display:none;}
     div#search-memberName{display:none;}
     div#search-resellNo{display:none;}
 

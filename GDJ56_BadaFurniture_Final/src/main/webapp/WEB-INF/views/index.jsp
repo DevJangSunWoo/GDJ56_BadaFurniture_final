@@ -330,7 +330,7 @@
 		                    </div>
 		                    <div class="price">
 		                    	<span><fmt:formatNumber value="${product.price}" type="currency"/></span>
-		                    	<span>원</span>
+		                    	<!-- <span>원</span> -->
 		                    </div>
 		                    <div class="date">
 		                    	<span><fmt:formatDate value="${product.productEnrollDate}" type="date" pattern="yyyy-MM-dd(E)"/></span>
