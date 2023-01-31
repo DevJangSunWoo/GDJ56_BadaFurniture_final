@@ -16,7 +16,6 @@
 <link rel="stylesheet" href="${path }/resources/css/member/updateMember.css"/>
 
 <div class="flexDiv" style="justify-content: center;">
-	<%=session.getAttribute("loginMember") %>
     <h1 style="color: #348492; font-size: 40px;">정보수정</h1>
 </div>
 <br>
@@ -146,7 +145,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/그림.png">
                         <div class="input-container">
-                            <input type="text" name="addressDetail" class="form__input" value="${sessionScope.loginMember.detailAddress}" placeholder="상세주소"/>
+                            <input type="text" name="detailAddress" class="form__input" value="${sessionScope.loginMember.detailAddress}" placeholder="상세주소"/>
                             <label class="form__label">상세주소</label>		
                         </div>
                     </div>

@@ -75,7 +75,9 @@
 	                        					"font-weight" : "bold",
 	                        					"font-size" : "14px"
 	                        				});
-		                					/* $("input[name=id]").val(""); */
+		                					
+		                					alert("중복된 아이디입니다");
+		                					$("input[name=id]").val("");
 		                			
 		                				}else{ //중복된 아이디 없음
 		                					$("#idTxt").html("<span id='idTxtcheck'>사용가능한 아이디입니다</span>")
@@ -171,7 +173,7 @@
 
                         	// 이메일 인증번호 체크 함수
                         	function chkEmailConfirm(data){
-                        		$("#memailconfirm").on("keyup", function(){
+                        		$("#memailconfirm").on("blur", function(){
                         			if (data != $("#memailconfirm").val()) { 
                         				emconfirmchk = false;
                         				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
@@ -179,7 +181,10 @@
                         					"color" : "#FA3E3E",
                         					"font-weight" : "bold",
                         					"font-size" : "14px"
-                        				})
+                        				});
+                        				
+                        				alert("인증번호가 잘못되었습니다.");
+        	            				$("input[name=emailck]").val("");
                         				
                         			} else { // 아니면 중복아님
                         				emconfirmchk = true;
@@ -335,7 +340,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" name="addressDetail" class="form__input" placeholder="상세주소"/>
+                                <input type="text" name="detailAddress" class="form__input" placeholder="상세주소"/>
                                 <label class="form__label">상세주소</label>		
                             </div>
                         </div>

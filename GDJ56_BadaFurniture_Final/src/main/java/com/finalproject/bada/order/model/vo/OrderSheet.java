@@ -3,6 +3,7 @@ package com.finalproject.bada.order.model.vo;
 import java.sql.Date;
 import java.util.List;
 
+import com.finalproject.bada.member.model.vo.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderSheet {
 	private int orderSheetNo;
-	private int memberNo;   //*
+	private Member memberNo;   //*
 	private String paymentMethod;
 	private String paymentState;
 	private String merchantUid;
@@ -35,7 +36,7 @@ public class OrderSheet {
 	
 	public String toString() {
 		String temp="";
-		return  orderSheetNo+" "+memberNo+" "+paymentMethod+" "+paymentState+" "+merchantUid+" "+impUid+receiptUrl+
+		return  orderSheetNo+" "+memberNo.getMemberNo()+" "+paymentMethod+" "+paymentState+" "+merchantUid+" "+impUid+receiptUrl+
 				" "+depositor+" "+totalPrice+receiverName+" "
 				+postCode+" "+address+" "+detailAddress+" "+orderSheetenrollDate+" "+details+temp;
 	}
