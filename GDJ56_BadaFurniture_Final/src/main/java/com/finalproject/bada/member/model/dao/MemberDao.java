@@ -19,4 +19,6 @@ public interface MemberDao {
 	int updateMember(SqlSessionTemplate session,Member m);
 	
 	String searchId(SqlSessionTemplate session, Map param);
+	
+	int deleteMember(SqlSessionTemplate session, int memberNo);
 }

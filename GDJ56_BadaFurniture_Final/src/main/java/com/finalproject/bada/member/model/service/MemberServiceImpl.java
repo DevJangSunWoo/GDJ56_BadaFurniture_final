@@ -51,6 +51,11 @@ public class MemberServiceImpl implements MemberService {
 	public String searchId(Map param) {
 		return dao.searchId(session, param);
 	}
+
+	@Override
+	public int deleteMember(int memberNo) {
+		return dao.deleteMember(session, memberNo);
+	}
 	
 
 }

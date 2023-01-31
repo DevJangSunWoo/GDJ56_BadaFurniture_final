@@ -40,4 +40,9 @@ public class MemberDaoImpl implements MemberDao {
 		return session.selectOne("member.searchId", param);
 	}
 
+	@Override
+	public int deleteMember(SqlSessionTemplate session, int memberNo) {
+		return session.delete("member.deleteMember", memberNo);
+	}
+
 }

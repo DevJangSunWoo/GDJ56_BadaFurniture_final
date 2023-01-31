@@ -9,6 +9,10 @@
 <!-- css -->
 <link rel="stylesheet" href="${path }/resources/css/member/quitPage.css"/>
 
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
 <section class="mypage">
 	<div id="title">
 		<div id="innerTitle">
@@ -53,7 +57,24 @@
 			</div>
 		</div>
 	</div>
+	
+
+<!--------------------------------------------------------------------------------------------------->	
+	<!-- 패스워드 modal -->
+	<div id="ex1" class="modal">
+  		<p>비밀번호를 입력해 주세요.</p>
+  		<input type="password" name="password" id="passwordck">
+  		<input type="hidden" id="memberId" value="${loginMember.memberId}">
+  		<div>
+	  		<a href="#" rel="modal:close">취소</a>
+	  		<input type="button" value="확인" onclick="fn_passwordCheck();">
+	  	</div>
+	</div>
+	
+	<!-- Link to open the modal -->
+	<p><a href="#ex1" id="openModal" rel="modal:open" hidden>Open Modal</a></p>
 </section>
+
 <script>
 	$("div.mypageCol").click(e=>{
 		let mapping;
@@ -63,8 +84,35 @@
 			mapping = $(e.target).children().first().val();
 		}
 		let url = "${path}" + mapping;
-		location.assign(url);
+		
+		//div 클릭시	
+		if(url=='${path}/member/deleteMember.do'){ //탈퇴하기 누를시
+			$("#openModal").get(0).click();
+		}else{ //마이페이지로 이동
+			location.assign(url);
+		}
 	});
+	
+	//패스워드 입력시 맞을 경우 페이지이동
+	const fn_passwordCheck=()=>{
+		$.ajax({
+			type : "POST",
+			url : "${path}/member/deleteMember.do",
+			data : {
+				"password": $("#passwordck").val(),
+				"memberId": $("#memberId").val()	
+			},
+			success : data=>{
+				if(data=='true') {
+					alert("비밀번호 확인완료");
+					location.assign("${path}/member/deleteMemberEnd.do");
+				}else{
+					alert("비밀번호가 맞지 않습니다. 다시 입력해주세요.");
+				}
+			}
+			
+		});
+	}
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
