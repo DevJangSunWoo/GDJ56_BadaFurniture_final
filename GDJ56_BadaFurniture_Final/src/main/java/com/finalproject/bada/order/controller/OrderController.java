@@ -132,7 +132,7 @@ public class OrderController {
 		
 		
 		
-
+	//1형태
 		//가구의  판매상태변경  update
 		//map 객체에 제품번호 확인
 //		int[] productNosAfter = (int[])map.get("productNos");

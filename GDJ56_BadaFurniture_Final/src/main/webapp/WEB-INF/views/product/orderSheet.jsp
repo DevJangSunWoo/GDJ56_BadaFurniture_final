@@ -1055,7 +1055,7 @@
 <style>
 	footer{
 	
-		margin-top:230px! important;
+		margin-top:800px! important;
 	}
 
 </style>

@@ -89,7 +89,14 @@ public class OrderServiceImpl implements OrderService {
 					
 				}
 			
-				
+			//제품결제시  결제한 제품들 카트에서 삭제하기	
+			
+//			int resultCartDelete=dao.deleteMemberCart(session,map);	
+//				
+//			if(resultCartDelete<=0) {
+//				throw new RuntimeException(" 장바구니 제품 삭제 실패");
+//				
+//			}
 				
 							
 			
