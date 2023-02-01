@@ -480,7 +480,7 @@ public class AdminController {
 	//'주문관리' - 결제상태 변경하기
 	@RequestMapping(value="/admin/updatePaymentState.do")
 	@ResponseBody
-	public Map<String,Integer> updatePaymentState(
+	public Map<String,String> updatePaymentState(
 			@RequestParam("orderSheetNo") int orderSheetNo,
 			@RequestParam("paymentState") String paymentState,
 			@RequestParam("productNoArr") int[] productNoArr) {
@@ -491,24 +491,22 @@ public class AdminController {
 		//주문서 결제상태 변경
 		Map param=new HashMap();
 		param.put("orderSheetNo", orderSheetNo);
-		param.put("paymentState", paymentState);			
+		param.put("paymentState", paymentState);	
+		param.put("productNoArr", productNoArr);
 		//log.debug("변경할 상태 : "+paymentState);
 		
-		int result=service.updatePaymentState(param);
 		
-		//상품 판매상태 변경		
-		Map param2=new HashMap();
-		param2.put("paymentState", paymentState);
-		param2.put("productNoArr", productNoArr);
+		Map result=new HashMap();	
 		
-		int sosChangeResult=service.updateSoldOutStateAtOrder(param2);
+		try {
+			service.updatePaymentState(param);			
+			result.put("msg", ((String)param.get("paymentState"))+" 상태로 변경완료");
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			result.put("msg", "변경실패~");
+		}		
 		
-		Map<String,Integer> result2=new HashMap<String,Integer>();
-		result2.put("result", result);
-		result2.put("result2", sosChangeResult);
-		
-		
-		return result2;
+		return result;
 		
 	}	
 	

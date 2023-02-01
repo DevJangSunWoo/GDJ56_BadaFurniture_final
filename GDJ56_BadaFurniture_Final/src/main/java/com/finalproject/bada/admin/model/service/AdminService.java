@@ -52,8 +52,7 @@ public interface AdminService {
 	List<Map<String,Integer>> orderSummary();
 	
 	//주문관리- 결제상태 변경
-	int updatePaymentState(Map param);
-	int updateSoldOutStateAtOrder(Map param2);
+	void updatePaymentState(Map param);
 	
 	
 }

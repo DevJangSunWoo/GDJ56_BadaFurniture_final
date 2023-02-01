@@ -228,7 +228,7 @@
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.orderSheetenrollDate}"/></td>
 											</c:if>
 
-											<td class="${o.orderSheetNo}Td">
+											<td class="${o.orderSheetNo}Td" style="background-color: #dcd5c32b;">
 												<input type="hidden" value="${d.product.productNo}">
 												<c:out value="${d.product.productNo}"/>
 											</td>
@@ -378,13 +378,14 @@
 				},
 				success:function(result){		
 						
-					if(result.result>0){
-						alert(paymentState+" 상태로 변경 완료");
+					// if(result.result>0){
+					// 	alert(paymentState+" 상태로 변경 완료");
 						
-					}else{
-						alert(paymentStat+" 상태로 변경 실패");
+					// }else{
+					// 	alert(paymentState+" 상태로 변경 실패");
 						
-					}
+					// }
+					alert(result.msg);
 
 
 				},

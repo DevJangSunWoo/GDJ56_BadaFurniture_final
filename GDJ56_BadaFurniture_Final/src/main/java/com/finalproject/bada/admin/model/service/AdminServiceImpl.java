@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.finalproject.bada.admin.model.dao.AdminDao;
 import com.finalproject.bada.order.model.vo.OrderSheet;
@@ -175,16 +176,26 @@ public class AdminServiceImpl implements AdminService {
 
 	//주문관리- 결제상태 변경
 	@Override
-	public int updatePaymentState(Map param) {
+	@Transactional
+	public void updatePaymentState(Map param) {
 		// TODO Auto-generated method stub
-		return dao.updatePaymentState(session,param);
+		
+		int result=dao.updatePaymentState(session,param);
+		if(result>0) {
+			result=0;
+			result=dao.updateSoldOutStateAtOrder(session,param);
+			
+			if(result<((int[])param.get("productNoArr")).length) {
+				throw new RuntimeException("가구 판매상태 변경 실패");				
+			}
+			
+		}else {
+			throw new RuntimeException("결제상태 변경 실패");
+		}
+		
 	}
 
-	@Override
-	public int updateSoldOutStateAtOrder(Map param2) {
-		// TODO Auto-generated method stub
-		return dao.updateSoldOutStateAtOrder(session,param2);
-	}
+
 
 
 
