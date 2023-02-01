@@ -6,6 +6,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
 
 @Repository
@@ -35,6 +36,14 @@ public class OrderDaoImpl implements OrderDao {
 		return session.insert("order.insertOrderDetail",map);
 	}
 
+	@Override
+	public List<OrderSheet> selectOrderComplete(SqlSessionTemplate session, int orderSheetNo) {
+		// TODO Auto-generated method stub
+		return session.selectList("order.selectOrderComplete",orderSheetNo);
+	
+	}
+
+	
 	
 	
 	

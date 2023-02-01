@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.finalproject.bada.order.model.dao.OrderDao;
+import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
 
 import lombok.extern.slf4j.Slf4j;
@@ -86,6 +87,12 @@ public class OrderServiceImpl implements OrderService {
 		
 		
 	}
+	@Override
+	public List<OrderSheet> selectOrderComplete(int orderSheetNo) {
+		// TODO Auto-generated method stub
+		return dao.selectOrderComplete(session,orderSheetNo);
+	}
+	
 	
 	
 	
