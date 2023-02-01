@@ -170,6 +170,34 @@ public class AdminDaoImpl implements AdminDao {
 	public OrderSheet selectOrderSheet(SqlSessionTemplate session, int orderSheetNo) {
 		return session.selectOne("admin.selectOrderSheet", orderSheetNo);
 	}
+	
+	//취소/반품관리 - 조회
+	@Override
+	public List<OrderDetail> refundListPage(SqlSessionTemplate session, Map<String, Integer> param, Map search) {
+		// TODO Auto-generated method stub
+		return session.selectList("admin.refundList",search
+				,new RowBounds((param.get("cPage")-1)*param.get("numPerpage"),param.get("numPerpage")));		
+
+	}
+
+	@Override
+	public int refundListCount(SqlSessionTemplate session,Map search) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.refundListCount",search);
+	}
+	
+	//취소/반품관리 - 요약
+	@Override
+	public List<Map<String, Integer>> refundSummary(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectList("admin.refundSummary");
+	}
+
+	@Override
+	public int updateRefundState(SqlSessionTemplate session, Map param) {
+		// TODO Auto-generated method stub
+		return session.update("admin.updateRefundState",param);
+	}
 
 
 	

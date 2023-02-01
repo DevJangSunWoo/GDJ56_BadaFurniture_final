@@ -3,6 +3,7 @@ package com.finalproject.bada.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
@@ -51,11 +52,21 @@ public interface AdminService {
 	//주문관리 - 요약
 	List<Map<String,Integer>> orderSummary();
 	
-	//주문관리- 결제상태 변경
+	//주문관리 - 결제상태 변경
 	void updatePaymentState(Map param);
 	
 	//BD
 	//주문관리 - 주문서 번호로 주문서 1개 가져오기
 	OrderSheet selectOrderSheet(int orderSheetNo);
+	
+	//취소/반품관리 - 조회
+	List<OrderDetail> refundListPage(Map<String,Integer> param,Map search);
+	int refundListCount(Map search);
+	
+	//취소/반품관리 - 요약
+	List<Map<String,Integer>> refundSummary();
+	
+	//취소반품관리 - 취소반품상태 변경
+	void updateRefundState(Map param);
 	
 }

@@ -67,4 +67,16 @@ public interface AdminDao {
 	//주문관리 - 주문서 번호로 주문서 1개 가져오기
 	OrderSheet selectOrderSheet(SqlSessionTemplate session, int orderSheetNo);
 	
+	//취소/반품관리 - 조회
+	List<OrderDetail> refundListPage(SqlSessionTemplate session,Map<String,Integer> param,Map search);
+	int refundListCount(SqlSessionTemplate session,Map search);
+	
+	//취소/반품관리 - 요약
+	List<Map<String,Integer>> refundSummary(SqlSessionTemplate session);	
+	
+	//취소반품관리 - 취소반품상태 변경
+	int updateRefundState(SqlSessionTemplate session,Map param);
+	
+	
+	
 }

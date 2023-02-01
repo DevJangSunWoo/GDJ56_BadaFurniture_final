@@ -28,7 +28,7 @@
 <!-- 로고 -->
   <div id="headerDiv">
   	<div>
-      <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo">
+      <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo" onclick="location.assign('${path}')">
       <span class="button" id="headbtn"><a href="#demo-modal"></a></span>
   	</div>
   	<div id="adminIdDiv">

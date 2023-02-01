@@ -72,10 +72,10 @@ public class AdminController {
 	}
 	
 	//취소/반품 관리 연결
-	@RequestMapping("/admin/refund.do")
-	public String manageRefund() {
-		return "admin/manageRefund";
-	}
+//	@RequestMapping("/admin/refund.do")
+//	public String manageRefund() {
+//		return "admin/manageRefund";
+//	}
 	
 //	//내가구팔기 관리 연결
 //	@RequestMapping("/admin/resell.do")
@@ -500,15 +500,90 @@ public class AdminController {
 		
 		try {
 			service.updatePaymentState(param);			
-			result.put("msg", ((String)param.get("paymentState"))+" 상태로 변경완료");
+			result.put("msg", ("'"+(String)param.get("paymentState"))+"'"+" 상태로 변경했습니다.");
 		}catch(RuntimeException e) {
 			e.printStackTrace();
-			result.put("msg", "변경실패~");
+			result.put("msg", "결제상태 변경에 실패했습니다.");
 		}		
 		
 		return result;
 		
 	}	
+	
+	
+	//'취소/반품관리' - 조회
+	@RequestMapping("/admin/refund.do")
+	public ModelAndView refundList(ModelAndView mv,
+			@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
+			,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
+			,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
+			) {		
+
+		//log.debug("cPage {}", cPage);
+		//log.debug("numPerpage {}", numPerpage);
+		
+		//log.debug("searchType {}", searchType);
+		//log.debug("searchKeyword {}", searchKeyword);
+		
+		Map search=new HashMap();
+		search.put("searchType", searchType);		
+		search.put("searchKeyword", searchKeyword);		
+		
+		
+		mv.addObject("refund",service.refundListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		//log.debug("resell : {}",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		
+		int totalData=service.refundListCount(search);
+		
+		//log.debug("totalData {}", totalData);		
+		
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "refund.do",searchType,searchKeyword));
+		
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchKeyword", searchKeyword);
+		
+		
+		
+		//취소환불 요약
+		List<Map<String,Integer>> sum=service.refundSummary();
+		//log.debug("{}",sum);		
+		mv.addObject("summary",sum);		
+		
+		mv.setViewName("admin/manageRefund");	
+		
+		return mv;
+	}
+	
+	//'취소반품 관리' - 취소상태 변경하기
+	@RequestMapping(value="/admin/updateRefundState.do")
+	@ResponseBody
+	public Map updateRefundState(
+			@RequestParam("orderDetailNo") int orderDetailNo,
+			@RequestParam("refundState") String refundState) {		
+		
+		Map param=new HashMap();
+		param.put("orderDetailNo", orderDetailNo);
+		param.put("refundState", refundState);	
+		//log.debug("변경할 상태 : "+paymentState);
+		
+		Map result=new HashMap();	
+		
+		try {
+			service.updateRefundState(param);			
+			result.put("msg", ("'"+(String)param.get("refundState"))+"'"+" 상태로 변경했습니다.");
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			result.put("msg", "취소/반품상태 변경에 실패했습니다.");
+		}		
+		
+		return result;
+		
+	}	
+	
+//	@RequestMapping(value="/admin/viewRefundDetail.do")
+//	@ResponseBody
+//	public Refund
 	
 }
 
