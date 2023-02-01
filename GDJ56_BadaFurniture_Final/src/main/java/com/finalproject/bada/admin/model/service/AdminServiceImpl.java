@@ -153,8 +153,10 @@ public class AdminServiceImpl implements AdminService {
 		if(orderSheets!=null) {
 			for(OrderSheet os : orderSheets) {
 				os.setDetails(dao.orderDetailList(session, os.getOrderSheetNo()));
+				log.debug("ㅎㅇ : {}",dao.orderDetailList(session, os.getOrderSheetNo()));
 			}
 		}
+		
 		return orderSheets;
 	}
 
