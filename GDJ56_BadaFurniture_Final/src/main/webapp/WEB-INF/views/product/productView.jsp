@@ -43,47 +43,24 @@
              <c:if test="${not empty productData}">
               <!--<form action="#"> -->
                     <div class="row">
-                        <div class="col-lg-8 col-md-6">
-                           	<div class="box-shadowTest123" style="border:1px solid lightgray;width:700px;margin-leff:600px!important;height:709px;">
-                                <div style="border:0px solid blue;height:539px;">
-                                    <div class="slider">
-                                        <input type="radio" name="slide" id="slide1">
-                                        <input type="radio" name="slide" id="slide2" checked>
-                                        <input type="radio" name="slide" id="slide3">
-                                        <input type="radio" name="slide" id="slide4">
-                                        <ul id="imgholder" class="imgs">
-                                        	
-                                        	<c:if test="${not empty productData.files}">  
-	                                        	<c:forEach var="files" items="${productData.files}" varStatus="vs">	  
-		                                            <li  class="image-box" style="width:400px !important ;height:400px !important; ">
-		                                            	
-		                                            		<img style="width:100%;height:100%;"   class="image-thumbnail" src="${path}/resources/upload/product/${files.renamedFileName}">
-		                                            	
-		                                            </li>
-		                                           <%--  <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
-		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li>
-		                                            <li  class="image-box"><img class="image-thumbnail" src="${path}/resources/images/product/${productData.fileProducts.originalFileName}"></li> --%>
-                                        		</c:forEach>
-                                        	</c:if>  
-                                        	
-                                        	<c:if test="${empty  productData.files}">  
-                                        		제품사진 미등록
-                                        	</c:if>
-                                        </ul>
-                                        <div class="bullets">
-                                            <label for="slide1">&nbsp;</label>
-                                            <label for="slide2">&nbsp;</label>
-                                            <label for="slide3">&nbsp;</label>
-                                            <label for="slide4">&nbsp;</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="border:0px solid red;height:154px;">
-                                </div>
-                            </div>
-                           	
-                            
-                            
+                         <div class="col-lg-8 col-md-6">
+                         	<div class="product__details__pic">
+		                     	<c:if test="${not empty productData.files}">     
+			                        
+			                        <div class="product__details__pic__item">
+			                            <c:forEach var="files" items="${productData.files}" varStatus="vs" begin="0" end="0">	
+			                            <img class="product__details__pic__item--large"
+			                                src="${path}/resources/upload/product/${files.renamedFileName}" alt="">
+			                        	</c:forEach>
+			                        </div>
+			                        <div class="product__details__pic__slider owl-carousel">
+			                           <c:forEach var="files" items="${productData.files}" varStatus="vs">	  
+				                            <img class="imgUrl"  data-imgbigurl="${path}/resources/upload/product/${files.renamedFileName}"
+				                                src="${path}/resources/upload/product/${files.renamedFileName}" alt="">				                                               		
+			                        	</c:forEach>
+			                        </div>
+                    			</c:if>
+                    		</div>                                                      
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
@@ -91,16 +68,17 @@
                                 <div class="checkout__order__products">가격 <span>${productData.price}원</span></div>
                                 <ul>
                                     <li>분류 <span>${productData.item}</span></li>
-                                    <li>크기(가로/세로/높이) <span>${productData.widths}cm ${productData.depths}cm ${productData.heights}cm</span></li> 
+                                    <li>크기(가로/세로/높이) </li>
+                                    <li style="font-weight: 700;">${productData.widths}cm/${productData.depths}cm /${productData.heights}cm</li> 
                                     <li>색상 <span>${productData.color}</span></li>
                                 </ul>
+                                <div class="checkout__order__subtotal">색사 <span>${productData.grade}</span></div>
                                 <div class="checkout__order__subtotal">등급 <span>${productData.grade}</span></div>
                                 <div class="checkout__order__total">총가격 <span>${productData.price}원</span></div>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         배송비는 어떻게 되나요?
-                                        <input type="checkbox" id="acc-or">
-                                        <span class="checkmark"></span>
+                                      
                                     </label>
                                 </div>
                                 <p>배송비는 총가격에 포함되고 있습니다.
@@ -122,6 +100,138 @@
             </div>
         </div>   	 
     	 <input type="hidden" id="badaLoginFilter"  value="${loginMember.memberId}">
+    	 <!--슬라이드 이미지 크기 조절 스타일  -->
+    	 <style>
+    	 	.imgUrl{
+    	 	height:100% !important;
+    	 	width:100% !important;
+    	 	
+    	 	}
+    	 	.owl-item cloned{
+    	 	height: 122.9px !important;
+    	 	width: 112.5px !important;
+    	 	
+    	 	}
+    	 	.owl-item active{
+    	 	height: 122.9px !important;
+    	 	width: 112.5px !important;
+    	 	
+    	 	}
+    	 
+    	 	.owl-item {
+    	 	height: 122.9px !important;
+    	 	width: 112.5px !important;
+    	 	
+    	 	}
+    	 	
+    	 	.owl-item cloned active {
+    	 	height: 122.9px !important;
+    	 	width: 112.5px !important;
+    	 	
+    	 	}
+    	 
+    	 	.product__details__pic__item--large{
+    	 		height: 730.9px !important;
+    	 	width: 730.5px !important;
+    	 	}
+    	 
+    	 </style>
+    	 
+    	 
+    	 <!--슬라이드 스크립트  -->
+    	 <script type="text/javascript">
+    	 /*-----------------------------
+         Product Discount Slider
+     -------------------------------*/
+     $(".product__discount__slider").owlCarousel({
+         loop: true,
+         margin: 0,
+         items: 3,
+         dots: true,
+         smartSpeed: 1200,
+         autoHeight: false,
+         autoplay: true,
+         responsive: {
+
+             320: {
+                 items: 1,
+             },
+
+             480: {
+                 items: 2,
+             },
+
+             768: {
+                 items: 2,
+             },
+
+             992: {
+                 items: 3,
+             }
+         }
+     });
+
+     /*---------------------------------
+         Product Details Pic Slider
+     ----------------------------------*/
+     $(".product__details__pic__slider").owlCarousel({
+         loop: true,
+         margin: 20,
+         items: 4,
+         dots: true,
+         smartSpeed: 1200,
+         autoHeight: false,
+         autoplay: true
+     });
+
+     /*-----------------------
+ 		Price Range Slider
+ 	------------------------ */
+     var rangeSlider = $(".price-range"),
+         minamount = $("#minamount"),
+         maxamount = $("#maxamount"),
+         minPrice = rangeSlider.data('min'),
+         maxPrice = rangeSlider.data('max');
+     rangeSlider.slider({
+         range: true,
+         min: minPrice,
+         max: maxPrice,
+         values: [minPrice, maxPrice],
+         slide: function (event, ui) {
+             minamount.val('$' + ui.values[0]);
+             maxamount.val('$' + ui.values[1]);
+         }
+     });
+     minamount.val('$' + rangeSlider.slider("values", 0));
+     maxamount.val('$' + rangeSlider.slider("values", 1));
+
+     /*--------------------------
+         Select
+     ----------------------------*/
+     $("select").niceSelect();
+
+     /*------------------
+ 		Single Product
+ 	--------------------*/
+     $('.product__details__pic__slider img').on('click', function () {
+
+         var imgurl = $(this).data('imgbigurl');
+         var bigImg = $('.product__details__pic__item--large').attr('src');
+         if (imgurl != bigImg) {
+             $('.product__details__pic__item--large').attr({
+                 src: imgurl
+             });
+         }
+     });
+    	 
+    	 
+    	 
+    	 </script>
+    	 
+    	 
+    	 
+    	 
+    	 
     	 <script>
     	 const fn_cartBtn=()=>{
     		/* if( $("#badaLoginFilter").val() == null){
@@ -156,7 +266,7 @@
               
                 <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바여기까지-->
                 <!--상세사항 div  -->
-                <div style="border:0px solid red;width:1000px;height:1000px;margin-top:50px;">
+                <div style="border:0px solid red;width:1000px;height:100%;margin-top:50px;">
                     <div class="card-content" style="height:100%;">
                         <img src="${path}/resources/images/product/furnitureInfo.png"  class="furnitureInfo"/>
                         <div class="detailFont" style="border:0px solid red;height:60px;text-align: center;">
@@ -170,18 +280,22 @@
                     	
                     	<c:if test="${not empty productData.files}">      
                         	<c:forEach var="files" items="${productData.files}" varStatus="vs"> 	
-                        		<img src="${path}/resources/upload/product/${files.renamedFileName}" class="card-content-img"/>
+                        		<div style="display:flex;justify-content:center;">
+                        		<div style="width:500px;height:500px;display:flex;justify-content:center;">
+                        			<img src="${path}/resources/upload/product/${files.renamedFileName}" class="card-content-img"/>
+                    			</div>	
+                    			</div>
                     		</c:forEach>	 
                     	</c:if>
                     	<c:if test="${empty productData.files}"> 
                     		제품사진 미등록됨
                     	</c:if>	
-                    </div>
-                    <span class="more">
-                        <span class="blind">상품 더보기</span>
-                      </span>
-                      <div class="board" >
-	                 
+                    </div>  
+                	
+                	<span class="more">
+                        <span class="blind">배송및 교환환불사항 더보기</span>
+                     </span>
+                     <div class="board" >	                 
 	                        <div  style="border:0px solid black;height:780px;"> 
 	                            <div  style="border:0px solid rgb(17, 0, 255);height:260px;">
 	                                <div style="border:0px solid rgb(179, 255, 0);height:86px;">
@@ -215,17 +329,26 @@
 	                                    -고객님의 실수 또는 오작동으로 인하여 파손되거나 고장난 경우 <br>
 	                                </div>
 	                            </div>
-	                        </div>
-	                      
+	                        </div>	                      
 	                    </div>    
+                
                 </div>
+              	
+              	
+              	
+              	
+              	
+              
+              
               </c:if>
               <c:if test="${empty productData}">
-              	해당 제품이 조회되지 않습니다.	
-              
+              	해당 제품이 조회되지 않습니다.	              
               </c:if>
+  				
+  
+  
               
-           
+         
                 <!-- 상품 상세사항 div여기까지  -->
     </section>
     <!--상품 더보기 접기 js  -->
