@@ -14,7 +14,7 @@ public class PageFactoryAjax {
       pageBar="<span class='pagination justify-content-center pagination-sm'>";
       
       if(pageNo==1) {
-         pageBar+="<span class='page-item disabled'>";
+         pageBar+="<span class='page-item'>";
          pageBar+=" <a class='page-link' href='#'> 이전 </a>";
          pageBar+="</span>";
       }else {
@@ -25,7 +25,7 @@ public class PageFactoryAjax {
       
       while(!(pageNo>pageEnd||pageNo>totalPage)) {
          if(cPage==pageNo) {
-            pageBar+="<span class='page-item disabled'>";
+            pageBar+="<span class='page-item'>";
             pageBar+=" <a class='page-link' href='#'> "+pageNo+" </a>";
             pageBar+="</span>";
          }else {
@@ -38,7 +38,7 @@ public class PageFactoryAjax {
       }
       
       if(pageNo>totalPage) {
-         pageBar+="<span class='page-item disabled'>";
+         pageBar+="<span class='page-item'>";
          pageBar+=" <a class='page-link' href='#'> 다음 </a>";
          pageBar+="</span>";
       }else {
@@ -48,12 +48,6 @@ public class PageFactoryAjax {
       }
       
       pageBar+="</span>";
-      
-//      pageBar+="<script>";
-//      pageBar+="function fn_paging(pageNo){";
-//      pageBar+="location.assign('"+url+"?cPage='+pageNo);";
-//      pageBar+="}";
-//      pageBar+="</script>";
       
       return pageBar;
    }

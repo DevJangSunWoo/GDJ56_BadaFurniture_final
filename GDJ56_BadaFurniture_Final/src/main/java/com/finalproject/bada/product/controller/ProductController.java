@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,11 +86,9 @@ public class ProductController {
 		
 		cPage=(int)map.get("cPage");
 		page.put("cPage",cPage);
-		log.debug("{}",map.get("cPage"));
+		//log.debug("{}",map.get("cPage"));
 		
-		//numPerpage=(int)map.get("numPerpage");
 		page.put("numPerpage", numPerpage);
-		log.debug("{}",map.get("numPerpage"));
 		
 		List<Product> list = service.selectProductList(map, page);
 		
@@ -100,14 +99,13 @@ public class ProductController {
 	//메인페이지 페이징 Ajax
 	@RequestMapping("product/page.do")
 	@ResponseBody
-	public String page(ModelAndView mv, @RequestParam (value="cPage", defaultValue = "1") int cPage, 
-			@RequestParam (value = "numPerpage", defaultValue = "10") int numPerpage) throws IOException{
+	public String page(@RequestBody Map map) { 
+		log.debug("{}",map);
 		
-//		log.debug("{}",map);
-//		int totalData = service.selectProductListCount(map);
-		int totalData = service.selectProductCount();
+		int totalData = service.selectProductListCount(map);
+		log.debug("totalData: {}" ,totalData);
 		
-		return PageFactoryAjax.getPage(cPage, numPerpage, totalData, "/bada/");
+		return PageFactoryAjax.getPage((int)map.get("cPage"), (int)map.get("numPerpage"), totalData, "/bada/");
 	}
 	
 //--------------------------------------------------------------------------------------------------------------------------------------------------	

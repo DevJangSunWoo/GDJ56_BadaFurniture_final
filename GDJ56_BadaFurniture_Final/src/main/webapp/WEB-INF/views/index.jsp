@@ -224,26 +224,47 @@
 			fn_printProductList();
 		}
 		
+		
+		//매물 조회에 필요한 value값 저장하는 변수들
+// 		let colorArr = [];
+// 		$.each($("input[name=color]:checked"), function(i,v){
+// 			colorArr[i] = $(v).val(); 	
+// 		});
+		
+// 		let materialArr = [];
+// 		$.each($("input[name=material]:checked"), function(i,v){
+// 			materialArr[i] = $(v).val(); 	
+// 		});
+// 		let gradeArr = [];
+// 		$.each($("input[name=grade]:checked"), function(i,v){
+// 			gradeArr[i] = $(v).val(); 	
+// 		});
+// 		let item = $("input[name=item]").val();
+// 		let width = $("input[name='width']:checked").val(); 
+// 		let sort = $("input[name='sort']:checked").val();
+			
 		//조건에 따라 제품출력하는 ajax
 		const fn_printProductList=(cPage=1,numPerpage=10)=>{
-			$("#checkDiv").slideUp(200);
-			
+			//매물 조회에 필요한 value값 저장하는 변수들
 			let colorArr = [];
+			$.each($("input[name=color]:checked"), function(i,v){
+				colorArr[i] = $(v).val(); 	
+			});
+			
 			let materialArr = [];
+			$.each($("input[name=material]:checked"), function(i,v){
+				materialArr[i] = $(v).val(); 	
+			});
 			let gradeArr = [];
+			$.each($("input[name=grade]:checked"), function(i,v){
+				gradeArr[i] = $(v).val(); 	
+			});
 			let item = $("input[name=item]").val();
 			let width = $("input[name='width']:checked").val(); 
 			let sort = $("input[name='sort']:checked").val();
 			
-			$.each($("input[name=color]:checked"), function(i,v){
-				colorArr[i] = $(v).val(); 	
-			});
-			$.each($("input[name=material]:checked"), function(i,v){
-				materialArr[i] = $(v).val(); 	
-			});
-			$.each($("input[name=grade]:checked"), function(i,v){
-				gradeArr[i] = $(v).val(); 	
-			});
+			$("#checkDiv").slideUp(200);
+			
 			
 			$.ajax({
 				url : "${path}/product/productList.do",
@@ -311,20 +332,39 @@
 		
 		//페이징 ajax
 		function fn_paging(cPage=1, numPerpage=10){
+			//매물 조회에 필요한 value값 저장하는 변수들
+			let colorArr = [];
+			$.each($("input[name=color]:checked"), function(i,v){
+				colorArr[i] = $(v).val(); 	
+			});
+			
+			let materialArr = [];
+			$.each($("input[name=material]:checked"), function(i,v){
+				materialArr[i] = $(v).val(); 	
+			});
+			let gradeArr = [];
+			$.each($("input[name=grade]:checked"), function(i,v){
+				gradeArr[i] = $(v).val(); 	
+			});
+			let item = $("input[name=item]").val();
+			let width = $("input[name='width']:checked").val(); 
+			let sort = $("input[name='sort']:checked").val();
+			
 			$.ajax({
 				url : "${path}/product/page.do",
-				type : "get",
-				//contentType:"application/json",
-				data :{
+				type : "post",
+				tradtional:true,
+				contentType:"application/json",
+				data :JSON.stringify({
 					cPage:cPage,
 					numPerpage:numPerpage,
-					/* color: colorArr, 
+					color: colorArr, 
 					material: materialArr, 
 					grade: gradeArr, 
 					item: item, 
 					width: width, 
-					sort: sort */
-					},
+					sort: sort 
+					}),
 				success : data =>{
 					fn_printProductList(cPage,numPerpage);
 					//console.log(data);	
