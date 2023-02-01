@@ -293,7 +293,7 @@
                     </div>  
                 	
                 	<span class="more">
-                        <span class="blind">배송및 교환환불사항 더보기</span>
+                        <span class="blind">더보기</span>
                      </span>
                      <div class="board" >	                 
 	                        <div  style="border:0px solid black;height:780px;"> 

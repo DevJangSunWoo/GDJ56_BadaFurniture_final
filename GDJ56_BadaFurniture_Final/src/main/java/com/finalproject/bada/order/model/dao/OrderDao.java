@@ -15,7 +15,7 @@ public interface OrderDao {
 	int insertOrderSheet(SqlSessionTemplate session,HashMap map);
 	int insertOrderDetail(SqlSessionTemplate session,HashMap map);
 	List<OrderSheet> selectOrderComplete(SqlSessionTemplate session,int orderSheetNo);
-	
+	int updateSoldOutState(SqlSessionTemplate session,HashMap map); 
 	
 	
 }
