@@ -82,7 +82,7 @@ button.updateBtn,.searchBtn{
 	background-color: #393434;
 	color: white;
 }
-.tableTd,.tableTd2,.price{ 
+.tableTd,.tableTd2,.price,.productNoTd{ 
 	background-color: #dcd5c32b;
   /* border: 1px solid rgba(0, 0, 0, 0.178); */
 }

@@ -153,7 +153,7 @@ public class AdminServiceImpl implements AdminService {
 		if(orderSheets!=null) {
 			for(OrderSheet os : orderSheets) {
 				os.setDetails(dao.orderDetailList(session, os.getOrderSheetNo()));
-				log.debug("ㅎㅇ : {}",dao.orderDetailList(session, os.getOrderSheetNo()));
+				//log.debug("ㅎㅇ : {}",dao.orderDetailList(session, os.getOrderSheetNo()));
 			}
 		}
 		
@@ -171,6 +171,19 @@ public class AdminServiceImpl implements AdminService {
 	public List<Map<String, Integer>> orderSummary() {
 		// TODO Auto-generated method stub
 		return dao.orderSummary(session);
+	}
+
+	//주문관리- 결제상태 변경
+	@Override
+	public int updatePaymentState(Map param) {
+		// TODO Auto-generated method stub
+		return dao.updatePaymentState(session,param);
+	}
+
+	@Override
+	public int updateSoldOutStateAtOrder(Map param2) {
+		// TODO Auto-generated method stub
+		return dao.updateSoldOutStateAtOrder(session,param2);
 	}
 
 
