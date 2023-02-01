@@ -44,6 +44,16 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@Transactional
 	public void insertOrderSheet(HashMap map) {
+		
+		//1차시도			
+//		int orderDetailCount=dao.selectOrderDetailCount(session,map);			
+//		if(orderDetailCount<10) {
+//		int detailResult=dao.insertOrderDetail(session,map);
+//		}else {				
+//			throw new RuntimeException(" detail 저장 실패");
+//		}
+		
+	
 		int seqOrderSheet=(int)map.get("seqOrderSheet");
 		
 		//log.debug("{}","인서트 전"+seqOrderSheet);
@@ -69,15 +79,19 @@ public class OrderServiceImpl implements OrderService {
 			if(result != productCount) {
 				throw new RuntimeException("OrderDetail이 갯수 만큼 삽입이 안됬습니다.");
 			}
-//1차시도			
-//			int orderDetailCount=dao.selectOrderDetailCount(session,map);			
-//			if(orderDetailCount<10) {
-//			int detailResult=dao.insertOrderDetail(session,map);
-//			}else {				
-//				throw new RuntimeException(" detail 저장 실패");
-//			}
+
 			
+			//제품 SoldOutState 상태변화
+			int  resultSoldOutState =dao.updateSoldOutState(session,map);
 			
+				if(resultSoldOutState<=0) {
+					throw new RuntimeException(" 제품 SoldOutState 변화 실패");
+					
+				}
+			
+				
+				
+							
 			
 		}else {
 			
@@ -96,12 +110,12 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	
-	@Override
-	public int updateSoldOutState(HashMap map) {
-		// TODO Auto-generated method stub
-		return dao.updateSoldOutState(session,map);
-	}
-	
+//	@Override
+//	public int updateSoldOutState(HashMap map) {
+//		// TODO Auto-generated method stub
+//		return dao.updateSoldOutState(session,map);
+//	}
+//	
 	
 	
 	
