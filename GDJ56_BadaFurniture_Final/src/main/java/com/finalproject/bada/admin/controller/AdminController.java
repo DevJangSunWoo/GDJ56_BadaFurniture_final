@@ -23,6 +23,7 @@ import com.finalproject.bada.common.AdminPageFactory;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.refund.model.vo.Refund;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -511,7 +512,7 @@ public class AdminController {
 	}	
 	
 	
-	//'취소/반품관리' - 조회
+	//'취소반품관리' - 조회
 	@RequestMapping("/admin/refund.do")
 	public ModelAndView refundList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
@@ -555,7 +556,7 @@ public class AdminController {
 		return mv;
 	}
 	
-	//'취소반품 관리' - 취소상태 변경하기
+	//'취소반품관리' - 취소상태 변경하기
 	@RequestMapping(value="/admin/updateRefundState.do")
 	@ResponseBody
 	public Map updateRefundState(
@@ -581,9 +582,16 @@ public class AdminController {
 		
 	}	
 	
-//	@RequestMapping(value="/admin/viewRefundDetail.do")
-//	@ResponseBody
-//	public Refund
+	@RequestMapping(value="/admin/viewRefundDetail.do")
+	@ResponseBody
+	public Refund viewRefundDetail(
+			@RequestParam("orderDetailNo") int orderDetailNo ) {
+		
+		Refund refund=service.viewRefundDetail(orderDetailNo);
+		log.debug("안녕 환불 :{}",orderDetailNo+"|"+refund);
+		
+		return refund;
+	}
 	
 }
 

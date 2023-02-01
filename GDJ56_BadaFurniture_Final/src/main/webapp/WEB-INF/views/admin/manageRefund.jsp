@@ -169,22 +169,25 @@
 		</div>
 		<!-- </form> -->
 
-		<!-- 반품/취소 상세내역 모달 -->
+		<!-- 취소/반품 상세내역 모달 -->
 		<div class="modals hiddens">
 		<div class="bg"></div>
 			<div class="modalBox">
 				<div class="modalTitle">
-					<h1>반품/취소 상세내역</h1>
+					<h1>취소/반품 상세내역</h1>
 				</div>
 				<div class="modalContent">
 					<div class="modalContentInnerDiv">
-						<span>✔️ 주문 상세번호 : </span><span>1111</span>
+						<span>✔️ 취소/반품 여부 : </span><span id="refund_State"></span>
 					</div>
 					<div class="modalContentInnerDiv">
-						<span>✔️ 반품/취소 신청일 : </span><span>23-01-20</span>
+						<span>✔️ 주문 상세번호 : </span><span id="refund_OrderDetailNo"></span>
 					</div>
 					<div class="modalContentInnerDiv">
-						<span>✔️ 반품/취소 사유 : </span><span>단순변심</span>
+						<span>✔️ 취소/반품 신청일 : </span><span id="refund_EnrollDate"></span>
+					</div>
+					<div class="modalContentInnerDiv">
+						<span>✔️ 취소/반품 사유 : </span><span id="refund_RefundDetail"></span>
 					</div>
 				</div>
 				<div id="modalBtnArea">
@@ -318,18 +321,7 @@
 
 	})
 
-	//취소/반품 확인 모달
-	const open = () => {
-		document.querySelector(".modals").classList.remove("hiddens");
-	}
 
-	const close = () => {
-		document.querySelector(".modals").classList.add("hiddens");
-	}
-
-	document.querySelector("#detailModalBtn").addEventListener("click", open);
-	document.querySelector(".closeBtn").addEventListener("click", close);
-	document.querySelector(".bg").addEventListener("click", close);
 
 
 	//취소/반품 상세확인 
@@ -338,20 +330,42 @@
 		const orderDetailNo=$(e.target).parent().parent().children().find('input').first().val();
 		//alert(orderDetailNo);
 			
-			// $.ajax({
-			// 	url:"${path}/admin/updateRefundState.do",
-			// 	data:{
-			// 		orderDetailNo:orderDetailNo,
-			// 		refundState:refundState
-			// 	},
-			// 	success:function(result){	
-						
-			// 		alert(result.msg);
-			// 	},
-			// 	error:function(result){
-			// 		alert("AJAX ERROR - error : "+result);	
-			// 	}
-			// })
+		$.ajax({
+			url:"${path}/admin/viewRefundDetail.do",
+			data:{
+				orderDetailNo:orderDetailNo,
+			},
+			success:function(result){	
+				//alert(result.refundNo);
+				if($("#refund_State").text()=='취소'){
+					$("#refund_State").text(result.refundState).css("color","red");
+					
+				}else{
+					$("#refund_State").text(result.refundState).css("color","blue");
+
+				}
+				$("#refund_OrderDetailNo").text(result.orderDetailNo);
+				$("#refund_EnrollDate").text(result.refundEnrollDate);
+				$("#refund_RefundDetail").text(result.detail);
+
+				//취소/반품 확인 모달
+				const open = () => {
+					document.querySelector(".modals").classList.remove("hiddens");
+				}
+
+				const close = () => {
+					document.querySelector(".modals").classList.add("hiddens");
+				}
+
+				document.querySelector("#detailModalBtn").addEventListener("click", open);
+				document.querySelector(".closeBtn").addEventListener("click", close);
+				document.querySelector(".bg").addEventListener("click", close);
+				
+			},
+			error:function(result){
+				alert("AJAX ERROR - error : "+result);	
+			}
+		})
 
 
 	});

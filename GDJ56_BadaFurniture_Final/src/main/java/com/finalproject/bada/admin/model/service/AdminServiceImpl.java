@@ -13,6 +13,7 @@ import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.refund.model.vo.Refund;
 import com.finalproject.bada.resell.model.vo.Resell;
 
 import lombok.extern.slf4j.Slf4j;
@@ -199,7 +200,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	
-	//취소/반품관리 - 조회
+	//취소반품관리 - 조회
 	@Override
 	public List<OrderDetail> refundListPage(Map<String, Integer> param, Map search) {
 		// TODO Auto-generated method stub
@@ -212,7 +213,7 @@ public class AdminServiceImpl implements AdminService {
 		return dao.refundListCount(session,search);
 	}
 	
-	//취소/반품관리 - 요약
+	//취소반품관리 - 요약
 	@Override
 	public List<Map<String, Integer>> refundSummary() {
 		// TODO Auto-generated method stub
@@ -229,6 +230,13 @@ public class AdminServiceImpl implements AdminService {
 			throw new RuntimeException("취소/반품상태 변경에 실패했습니다.");
 		}
 		
+	}
+
+	//취소반품관리 - 취소반품 상세조회
+	@Override
+	public Refund viewRefundDetail(int orderDetailNo) {
+		// TODO Auto-generated method stub
+		return dao.viewRefundDetail(session,orderDetailNo);
 	}
 
 
