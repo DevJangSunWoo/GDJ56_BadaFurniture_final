@@ -88,7 +88,7 @@
 	</div>
 	
 	
-	<div id="checkDiv" hidden>
+	<div id="checkDiv" style="display: none">
 		<div class="container">
 				<h5>[색상]</h5>
 			<ul class="ks-cboxtags">
@@ -216,7 +216,8 @@
 		const fn_selectItem=(e)=>{
 			let item = $(e.target).parents(".icon").children("p").text();
 			$("input[name=item]").val(item);
-			fn_printProductList();
+//			fn_printProductList();
+			fn_paging(1);
 		}
 		
 		//정렬 selectbox 변경할때마다 ajax 구동
@@ -224,26 +225,28 @@
 			fn_printProductList();
 		}
 		
+			
 		//조건에 따라 제품출력하는 ajax
-		const fn_printProductList=()=>{
+//		const fn_printProductList=(cPage=1,numPerpage=10)=>{
+		const fn_printProductList=(cPage=1)=>{
 			$("#checkDiv").slideUp(200);
 			
 			let colorArr = [];
-			let materialArr = [];
-			let gradeArr = [];
-			let item = $("input[name=item]").val();
-			let width = $("input[name='width']:checked").val(); 
-			let sort = $("input[name='sort']:checked").val();
-			
 			$.each($("input[name=color]:checked"), function(i,v){
 				colorArr[i] = $(v).val(); 	
 			});
+			
+			let materialArr = [];
 			$.each($("input[name=material]:checked"), function(i,v){
 				materialArr[i] = $(v).val(); 	
 			});
+			let gradeArr = [];
 			$.each($("input[name=grade]:checked"), function(i,v){
 				gradeArr[i] = $(v).val(); 	
 			});
+			let item = $("input[name=item]").val();
+			let width = $("input[name='width']:checked").val(); 
+			let sort = $("input[name='sort']:checked").val();
 			
 			$.ajax({
 				url : "${path}/product/productList.do",
@@ -252,13 +255,14 @@
 				//contentType:"application/json"와 data에 JSON.stringify 추가
 				contentType:"application/json",
 				data :	JSON.stringify({
-					//cPage:++cPage,
-					color:colorArr, 
-					material:materialArr, 
-					grade:gradeArr, 
-					item:item, 
-					width:width, 
-					sort:sort}),
+					cPage:cPage,
+					//numPerpage:numPerpage,
+					color: colorArr, 
+					material: materialArr, 
+					grade: gradeArr, 
+					item: item, 
+					width: width, 
+					sort: sort}),
 				success : list =>{
 					console.log(list);
 					$("#productContainer").html("");
@@ -307,6 +311,50 @@
 				}
 			});
 		}
+		
+		//페이징 ajax
+		function fn_paging(cPage=1){
+			//매물 조회에 필요한 value값 저장하는 변수들
+			let colorArr = [];
+			$.each($("input[name=color]:checked"), function(i,v){
+				colorArr[i] = $(v).val(); 	
+			});
+			
+			let materialArr = [];
+			$.each($("input[name=material]:checked"), function(i,v){
+				materialArr[i] = $(v).val(); 	
+			});
+			let gradeArr = [];
+			$.each($("input[name=grade]:checked"), function(i,v){
+				gradeArr[i] = $(v).val(); 	
+			});
+			let item = $("input[name=item]").val();
+			let width = $("input[name='width']:checked").val(); 
+			let sort = $("input[name='sort']:checked").val();
+			
+			$.ajax({
+				url : "${path}/product/page.do",
+				type : "post",
+				tradtional:true,
+				contentType:"application/json",
+				data :JSON.stringify({
+					cPage:cPage,
+					//numPerpage:numPerpage,
+					color: colorArr, 
+					material: materialArr, 
+					grade: gradeArr, 
+					item: item, 
+					width: width, 
+					sort: sort 
+					}),
+				success : data =>{
+					fn_printProductList(cPage);
+					//console.log(data);
+					//console.log($("#pagebar"));
+					$("#pagebar").html(data);
+				}
+			});
+		}
 	</script>
 	
 	<div id="pro" style="display:flex; justify-content:center;">
@@ -352,13 +400,14 @@
             </c:forEach>
             
             <br><br>
-            <div id="pagebarDiv">
-	            <div id="pagebar" >
-					${pageBar}
-				</div>
-            </div>
 		</div>
 	</div>
+	
+	<div id="pagebarDiv">
+		<div id="pagebar" >
+			${pageBar}
+		</div>
+    </div>	
 	
 </section>
 	<script>

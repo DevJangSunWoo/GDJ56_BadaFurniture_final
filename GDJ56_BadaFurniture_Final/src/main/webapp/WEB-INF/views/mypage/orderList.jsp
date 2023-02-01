@@ -134,6 +134,9 @@
 	.modalTitle{
 		display: flex;
 		justify-content: center;
+		font-size:35px;
+		font-weight: bolder;
+		color:rgb(52, 132, 146);
 	}
 	
 	.closeBtn {
@@ -178,7 +181,7 @@
       display: block;
       width: 300px;
       height:30px;
-      font-size:20px;
+      font-size:16px;
       margin: 0 auto;
     }
 
@@ -317,18 +320,35 @@
 			</div>
 			<div class="modalBox">
 				<div class="modalTitle">
-					<h1>주문 상세보기</h1>
+					주문 상세보기
 				</div>
 				<div class="modalContent">
+					<div style="text-align:left;margin-top:30px;font-size:14px;color:grey;">
+						주문번호 : <span id="orderSheetNo"></span> &nbsp;&nbsp; 주문일자 : <span id="orderSheetEnrollDate"></span>
+					</div>
+					<table id="orderDetailTable">
+						<tr>
+							<th>
+								상품정보
+							</th>
+							<th>
+								결제금액
+							</th>
+							<th>
+								판매상태
+							</th>
+						</tr>
+					</table>
 					<div class="modalContentInnerDiv">
-						<span>✔️ 주문 상세번호 : </span><span>1111</span>
+						<span>✔️ 결제금액 : </span><span id="totalPrice"></span>
 					</div>
 					<div class="modalContentInnerDiv">
-						<span>✔️ 반품/취소 신청일 : </span><span>23-01-20</span>
+						<span>✔️ 결제수단 : </span><span id="paymentMethod"></span>
 					</div>
 					<div class="modalContentInnerDiv">
-						<span>✔️ 반품/취소 사유 : </span><span>단순변심</span>
+						<span>✔️ 결제상태 : </span><span id="paymentState"></span><span id="receiptContainer"></span>
 					</div>
+					
 				</div>
 				<div id="modalBtnArea">
 					<button class="closeBtn">닫기</button>
@@ -358,10 +378,14 @@
 			},
 			success:data=>{
 				console.log(data);
+				$("div.modalContent span#orderSheetNo").text(data.orderSheetNo);
+				$("div.modalContent span#orderSheetEnrollDate").text(data.orderSheetenrollDate);
+				$("div.modalContent span#totalPrice").text(fnSetComma(data.totalPrice)+'원');
+				$("div.modalContent span#paymentMethod").text(data.paymentMethod);
+				$("div.modalContent span#paymentState").text(data.paymentState);
 				open();
 			}
 		});
-		//open();
 	});
 	document.querySelector(".closeBtn").addEventListener("click", close);
 	document.querySelector(".bg").addEventListener("click", close);
@@ -404,5 +428,15 @@
 		let path = '${path}/product/view.do?productNo=' + $(e.target).prev().val();
 		location.assign(path);
 	});
+	
+	//숫자 콤마 찍어주는 함수
+	function fnSetComma(n) {
+	    var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
+	    n += '';                          // 숫자를 문자열로 변환         
+	    while (reg.test(n)) {
+	        n = n.replace(reg, '$1' + ',' + '$2');
+	    }
+	    return n;
+	}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

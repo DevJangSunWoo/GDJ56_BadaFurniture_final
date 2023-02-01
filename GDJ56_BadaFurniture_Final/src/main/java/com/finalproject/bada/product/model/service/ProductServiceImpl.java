@@ -35,8 +35,8 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public List<Product> selectProductList(Map map) {
-		return dao.selectProductList(session, map);
+	public List<Product> selectProductList(Map map, Map<String, Integer> page) {
+		return dao.selectProductList(session, map, page);
 	}
 	
 	@Override

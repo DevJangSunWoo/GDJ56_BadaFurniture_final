@@ -10,7 +10,7 @@ public interface ProductService {
 
 	Product selectProduct(int productNo);
 	
-	List<Product> selectProductList(Map map);
+	List<Product> selectProductList(Map map, Map<String, Integer> page);
 	
 	int selectProductListCount(Map map);
 	
