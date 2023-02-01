@@ -27,19 +27,23 @@
 			<table id="summaryTable">
 				<tr>
 					<th class="tableTh">전체</th>
-					<td class="tableTd"><c:out value="${summary[0].ALLP}"/></td>
+					<td class="tableTd"><c:out value="${summary[0].ALL_R}"/></td>
 				</tr>
 				<tr>
-					<th class="tableTh">판매중</th>
-					<td class="tableTd"><c:out value="${summary[0].SOSNP}"/></td>
+					<th class="tableTh">취소요청</th>
+					<td class="tableTd"><c:out value="${summary[0].STATE_1}"/></td>
 				</tr>
 				<tr>
-					<th class="tableTh">거래중</th>
-					<td class="tableTd"><c:out value="${summary[0].SOSIP}"/></td>
+					<th class="tableTh">반품요청</th>
+					<td class="tableTd"><c:out value="${summary[0].STATE_2}"/></td>
 				</tr>
 				<tr>
-					<th class="tableTh">숨긴 가구</th>
-					<td class="tableTd"><c:out value="${summary[0].SSNP}"/></td>
+					<th class="tableTh">반품대기</th>
+					<td class="tableTd"><c:out value="${summary[0].STATE_3}"/></td>
+				</tr>
+				<tr>
+					<th class="tableTh">처리완료</th>
+					<td class="tableTd"><c:out value="${summary[0].STATE_4}"/></td>
 				</tr>
 			</table>
 		</div>
@@ -51,16 +55,12 @@
 			<span style="font-size: 17px;">검색타입 : </span> 
         	<select id="searchType">
         		<option value="searchAll" ${searchType.equals("SEARCH_ALL")?"selected":""}>전체조회</option>
-				<option value="soldOutState" ${searchType.equals('SOLD_OUT_STATE')?"selected":""}>판매상태</option>
-        		<option value="showState" ${searchType.equals('SHOW_STATE')?"selected":""}>공개상태</option>
-        		<option value="item" ${searchType.equals('ITEM')?"selected":""}>가구분류</option>
-        		<option value="productNo" ${searchType.equals('PRODUCT_NO')?"selected":""}>가구번호</option>
-        		<option value="grade" ${searchType.equals('GRADE')?"selected":""}>상태</option>
-        		<option value="price" ${searchType.equals('PRICE')?"selected":""}>가격</option>
+				<option value="orderSheetNo" ${searchType.equals('ORDER_SHEET_NO')?"selected":""}>주문서번호</option>
+        		<option value="refundState" ${searchType.equals('REFUND_STATE')?"selected":""}>취소/반품 상태</option>
         	</select>
 			        	
 			<div id="search-searchAll">
-				<form action="${path}/admin/product.do" method="get">
+				<form action="${path}/admin/refund.do" method="get">
 
 					<label><input type="radio" name="searchKeyword" value="searchAll" ${searchKeyword.equals("searchAll")?"checked":""}>전체조회</label>
 					<input type="hidden" name="searchType" value="SEARCH_ALL">
@@ -68,154 +68,132 @@
 				</form>
 			</div>
 
-			<div id="search-soldOutState">
-				<form action="${path}/admin/product.do" method="get">
-
-					<label><input type="radio" name="searchKeyword" value="N" ${searchKeyword.equals('N')?"checked":""}>판매중</label> 
-					<label><input type="radio" name="searchKeyword" value="I" ${searchKeyword.equals('I')?"checked":""}>거래중</label>
-					<label><input type="radio" name="searchKeyword" value="Y" ${searchKeyword.equals('Y')?"checked":""}>판매완료</label>
-					<input type="hidden" name="searchType" value="SOLD_OUT_STATE">
-					<button class="searchBtn">검색</button>
-				</form>
-			</div>
-			
-        	<div id="search-showState">
-				<form action="${path}/admin/product.do" method="get">
-					
-					<label><input type="radio" name="searchKeyword" value="Y" ${searchKeyword.equals('Y')?"checked":""}>공개</label> 
-					<label><input type="radio" name="searchKeyword" value="N" ${searchKeyword.equals('N')?"checked":""}>숨김</label>
-					<input type="hidden" name="searchType" value="SHOW_STATE">
-					<button class="searchBtn">검색</button>
-				</form>
-
-        	</div>
-
-        	<div id="search-item">
-				<form action="${path}/admin/product.do" method="get">
-
+			<div id="search-refundState">
+				<form action="${path}/admin/refund.do" method="get">
 					<select name="searchKeyword" class="searchInput">
-						<option value="책상" ${searchKeyword.equals("책상")?"selected":""}>책상</option>
-						<option value="의자" ${searchKeyword.equals("의자")?"selected":""}>의자</option>
-						<option value="화장대" ${searchKeyword.equals("화장대")?"selected":""}>화장대</option>
-						<option value="침대" ${searchKeyword.equals("침대")?"selected":""}>침대</option>
-						<option value="서랍장" ${searchKeyword.equals("서랍장")?"selected":""}>서랍장</option>
-						<option value="책장" ${searchKeyword.equals("책장")?"selected":""}>책장</option>
-						<option value="소파" ${searchKeyword.equals("소파")?"selected":""}>소파</option>
-						<option value="옷장" ${searchKeyword.equals("옷장")?"selected":""}>옷장</option>
+						<option value="취소요청" ${searchKeyword.equals('취소요청')?"selected":""}>취소요청</option>
+						<option value="반품요청" ${searchKeyword.equals('반품요청')?"selected":""}>반품요청</option> 
+						<option value="반품대기" ${searchKeyword.equals('반품대기')?"selected":""}>반품대기</option>
+						<option value="취소완료" ${searchKeyword.equals('취소완료')?"selected":""}>취소완료</option>
+						<option value="반품완료" ${searchKeyword.equals('반품완료')?"selected":""}>반품완료</option>
 					</select>
-					
-					<input type="hidden" name="searchType" value="ITEM">
+
+
+
+					<input type="hidden" name="searchType" value="REFUND_STATE">
 					<button class="searchBtn">검색</button>
 				</form>
-        	</div>
+			</div>        	
         	
-        	<div id="search-productNo">
-				<form action="${path}/admin/product.do" method="get">
-
-					<input type="text" name="searchKeyword" size="30" 
-					placeholder="검색할 가구번호 입력" class="searchInput" value="${searchKeyword}">
-					<input type="hidden" name="searchType" value="PRODUCT_NO">
-					<button class="searchBtn">검색</button>
-				</form>
-        	</div>
-
-			<div id="search-grade">
-				<form action="${path}/admin/product.do" method="get">
-
-					<select name="searchKeyword" class="searchInput">
-						<option value="최상" ${searchKeyword.equals("최상")?"selected":""}>최상</option>
-						<option value="상" ${searchKeyword.equals("상")?"selected":""}>상</option>
-						<option value="중" ${searchKeyword.equals("중")?"selected":""}>중</option>
-					</select>
-					
-					<input type="hidden" name="searchType" value="GRADE">
-					<button class="searchBtn">검색</button>
-				</form>
-			</div>
-        	
-        	<div id="search-price">
-				<form action="${path}/admin/product.do" method="get">
-
+        	<div id="search-orderSheetNo">
+				<form action="${path}/admin/refund.do" method="get">
 					<input type="number" name="searchKeyword" size="30" 
-					placeholder="가격 입력" class="searchInput" value="${searchKeyword}"> 이하
-					<input type="hidden" name="searchType" value="PRICE">
+					placeholder="검색할 주문서번호 입력" class="searchInput" value="${searchKeyword}">
+					<input type="hidden" name="searchType" value="ORDER_SHEET_NO">
 					<button class="searchBtn">검색</button>
 				</form>
-        	</div>    	
+        	</div>
         	
         </div>
 
-		<!-- 가구 목록 -->
-
-		<form action="${path}/admin/deleteProduct.do" method="post" onsubmit="return deleteConfirm();">
-			<div id="deleteBtnDiv">
-				<button type="submit" id="delete" class="deleteBtn">삭제</button>
-			</div>
-			<div id="propertyContainer" class = "tableContainer">
-				<table id="propertyTable">
-					<thead>
+		<div id="propertyContainer" class = "tableContainer">
+			<table id="propertyTable">
+				<thead>
+					<tr>
+						<!-- <th><input type="checkbox" name="chk" onclick="selectAll(this)"></th> -->
+						<th>주문서번호</th>
+						<th>주문상세번호</th>
+						<th>가구번호</th>
+						<th>사진</th>
+						<th>분류</th>
+						<th>제품명</th>
+						<th>가격&nbsp;(원)</th>
+						<th>취소/반품 상태</th>
+						<th>취소/반품 상세</th>			
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${empty refund}">
 						<tr>
-							<th><input type="checkbox" name="chk" onclick="selectAll(this)"></th>
-							<th>가구번호</th>
-							<th>사진</th>
-							<th>제품명</th>
-							<th>분류</th>
-							<th>상태</th>
-							<th>색상</th>
-							<th>가격&nbsp;(원)</th>
-							<th>업로드일</th>
-							<th>판매상태</th>
-							<th>공개상태</th>
-							<th></th>					
+							<td colspan="12">조회된 결과가 없습니다.</td>
 						</tr>
-					</thead>
-					<tbody>
-						<c:if test="${empty product}">
-							<tr>
-								<td colspan="12">조회된 결과가 없습니다.</td>
-							</tr>
 
-						</c:if>
-						<c:if test="${not empty product}">
-							<c:forEach var="p" items="${product }">
-								<tr>
-									<td style="width: 10px;">
-										<input type="checkbox" name="deleteList" value="${p.productNo}">
-									</td>
-									<td style="width: 20px;">
-										<a class="viewProduct" href="${path}/product/view.do?productNo=${p.productNo}"><c:out value="${p.productNo }"/></a>
-									</td>
-									<td style="width: 70px;">
-										<img id="productImg" src="${path}/resources/upload/product/${p.getFiles().get(0).renamedFileName}">
-									</td>
-									<td>${p.title }</td>
-									<td style="width: 40px;"><c:out value="${p.item }"/></td>
-									<td style="width: 20px;"><c:out value="${p.grade }"/></td>
-									<td style="width: 30px;"><c:out value="${p.color }"/></td>
-									<td class="price" style="width: 70px;"><c:out value="${p.price }"/></td>
-									<td style="width: 60px;"><c:out value="${p.productEnrollDate }"/></td>
-									<td>
-										<select name="soldOutState">
-											<option value="N" ${p.soldOutState=='N'?"selected":"" }>판매중</option>
-											<option value="I" ${p.soldOutState=='I'?"selected":"" }>거래중</option>
-											<option value="Y" ${p.soldOutState=='Y'?"selected":"" }>판매완료</option>
-										</select>
-										
-									</td>
-									<td>
-										<select name="showState">
-											<option value="Y" ${p.showState=='Y'?"selected":"" }>공개</option>
-											<option value="N" ${p.showState=='N'?"selected":"" }>숨김</option>
-										</select>										
-									</td>
-									<td style="width: 80px;"><button type="button" class="updateBtn" onclick="window.open('${path}/admin/update.do?productNo=${p.productNo }')">수정</button></td>
-								</tr>
-							</c:forEach>
-						</c:if>							
-					</tbody>								
-				</table>
+					</c:if>
+					<c:if test="${not empty refund}">
+						<c:forEach var="r" items="${refund }">
+							<tr>
+								<!-- <td style="width: 10px;">
+									<input type="checkbox" name="deleteList" value="${p.productNo}">
+								</td> -->
+								<td style="width: 20px;">
+									<a class="viewOrderSheet" href="${path}/admin/order.do?searchKeyword=${r.orderSheetNo}&searchType=ORDER_SHEET_NO">
+										<c:out value="${r.orderSheetNo }"/>
+									</a>
+								</td>
+								<td style="width: 40px;">
+									<input type="hidden" value="${r.orderDetailNo }">
+									<a class="viewOrderDetail" href="">
+										<c:out value="${r.orderDetailNo }"/>
+									</a>
+								</td>
+								<td style="width: 20px;">
+									<a class="viewProduct" href="${path}/product/view.do?productNo=${r.product.productNo }">
+										<c:out value="${r.product.productNo }"/>
+									</a>
+								</td>
+								<td style="width: 70px;">
+									<img id="productImg" src="${path}/resources/upload/product/${r.product.getFiles().get(0).renamedFileName}">
+								</td>
+								<td style="width: 30px;"><c:out value="${r.product.item }"/></td>
+								<td style="width: 30px;"><c:out value="${r.product.title }"/></td>
+								<td class="price" style="width: 70px;"><c:out value="${r.product.price }"/></td>
+								<td>
+									<select name="refundState">
+										<option value="반품요청" ${r.refundState.equals("반품요청")?"selected":""}>반품요청</option>
+										<option value="반품대기" ${r.refundState.equals("반품대기")?"selected":""}>반품대기</option>
+										<option value="반품완료" ${r.refundState.equals("반품완료")?"selected":""}>반품완료</option>
+										<option value="취소요청" ${r.refundState.equals("취소요청")?"selected":""}>취소요청</option>
+										<option value="취소완료" ${r.refundState.equals("취소완료")?"selected":""}>취소완료</option>
+									</select>								
+									
+								</td>
+
+								<td class="tableTd" style="width: 80px;">
+									<button id="detailModalBtn" class="updateBtn" onclick="" name="refundDetail">상세확인</button>
+								</td>
+							</tr>
+						</c:forEach>
+					</c:if>							
+				</tbody>								
+			</table>
+		</div>
+		<!-- </form> -->
+
+		<!-- 반품/취소 상세내역 모달 -->
+		<div class="modals hiddens">
+		<div class="bg"></div>
+			<div class="modalBox">
+				<div class="modalTitle">
+					<h1>반품/취소 상세내역</h1>
+				</div>
+				<div class="modalContent">
+					<div class="modalContentInnerDiv">
+						<span>✔️ 주문 상세번호 : </span><span>1111</span>
+					</div>
+					<div class="modalContentInnerDiv">
+						<span>✔️ 반품/취소 신청일 : </span><span>23-01-20</span>
+					</div>
+					<div class="modalContentInnerDiv">
+						<span>✔️ 반품/취소 사유 : </span><span>단순변심</span>
+					</div>
+				</div>
+				<div id="modalBtnArea">
+					<button class="closeBtn">닫기</button>
+				</div>
 			</div>
-		</form>
+		</div>
+
+
 		<div id="pageBarContainer">
 			<div id=pageBar>
 				${pageBar}
@@ -236,13 +214,13 @@
 	});
 
 	//체크박스 전체선택
-	function selectAll(selectAll){
-		const allCheckbox=document.querySelectorAll('input[type="checkbox"]');
-		allCheckbox.forEach((checkbox)=>{
-			checkbox.checked = selectAll.checked
-		})
+	// function selectAll(selectAll){
+	// 	const allCheckbox=document.querySelectorAll('input[type="checkbox"]');
+	// 	allCheckbox.forEach((checkbox)=>{
+	// 		checkbox.checked = selectAll.checked
+	// 	})
 
-	}
+	// }
 
 	//천원 단위 콤마
 	$(()=>{
@@ -260,57 +238,44 @@
 	})
 
 	//체크 안하고 삭제 버튼 눌렀을 때
-	function deleteConfirm(){				
-		let deleteList=$("[name=deleteList]");
-		var chkArray=[];
-		$('input:checkbox[name=deleteList]:checked').each(function(){
-			chkArray.push(this.value);		
-		});
+	// function deleteConfirm(){				
+	// 	let deleteList=$("[name=deleteList]");
+	// 	var chkArray=[];
+	// 	$('input:checkbox[name=deleteList]:checked').each(function(){
+	// 		chkArray.push(this.value);		
+	// 	});
 		
-		if(chkArray.length==0){
-			alert("삭제할 가구를 선택해주세요.")
-			return false;
-		}else{
-			if(confirm("총 "+chkArray.length+"개의 가구를 삭제하시겠습니까?")){
-				return true;	
-			}else{
-				return false;
-			}
-		}
-	}
+	// 	if(chkArray.length==0){
+	// 		alert("삭제할 가구를 선택해주세요.")
+	// 		return false;
+	// 	}else{
+	// 		if(confirm("총 "+chkArray.length+"개의 가구를 삭제하시겠습니까?")){
+	// 			return true;	
+	// 		}else{
+	// 			return false;
+	// 		}
+	// 	}
+	// }
 
-	//판매상태 변경하기
-	$("select[name=soldOutState]").change(e=>{
-			const productNo=$(e.target).parent().parent().children().children().val();
-			const soldOutState=$(e.target).val();
-			// console.log(productNo);
-			// console.log(soldOutState);
+	//취소/반품상태 변경하기
+	$("select[name=refundState]").change(e=>{
+			const orderDetailNo=$(e.target).parent().parent().children().find('input').first().val();
+			const refundState=$(e.target).val();
+			//console.log(orderDetailNo);
+			//console.log(refundState);
 
 			$.ajax({
-				url:"${path}/admin/updateSoldOutState.do",
-				data:{productNo:productNo,soldOutState:soldOutState},
-				success:function(result){		
-					if(result.result>0){
-
-						const nowState="";
-						if(soldOutState=='N'){
-							msg="판매중";
-						}else if(soldOutState=='I'){
-							msg="거래중";
-						}else{
-							msg="판매완료";
-						}
-
-						alert(msg+"으로 변경 완료");
-
+				url:"${path}/admin/updateRefundState.do",
+				data:{
+					orderDetailNo:orderDetailNo,
+					refundState:refundState
+				},
+				success:function(result){	
 						
-					}else{
-						alert("판매상태 변경 실패");
-						
-					}
+					alert(result.msg);
 				},
 				error:function(result){
-					alert("error! result 값 : "+result.result );	
+					alert("AJAX ERROR - error : "+result);	
 				}
 			})
 
@@ -353,6 +318,43 @@
 
 	})
 
+	//취소/반품 확인 모달
+	const open = () => {
+		document.querySelector(".modals").classList.remove("hiddens");
+	}
+
+	const close = () => {
+		document.querySelector(".modals").classList.add("hiddens");
+	}
+
+	document.querySelector("#detailModalBtn").addEventListener("click", open);
+	document.querySelector(".closeBtn").addEventListener("click", close);
+	document.querySelector(".bg").addEventListener("click", close);
+
+
+	//취소/반품 상세확인 
+	$("button[name=refundDetail]").click(e=>{
+
+		const orderDetailNo=$(e.target).parent().parent().children().find('input').first().val();
+		//alert(orderDetailNo);
+			
+			// $.ajax({
+			// 	url:"${path}/admin/updateRefundState.do",
+			// 	data:{
+			// 		orderDetailNo:orderDetailNo,
+			// 		refundState:refundState
+			// 	},
+			// 	success:function(result){	
+						
+			// 		alert(result.msg);
+			// 	},
+			// 	error:function(result){
+			// 		alert("AJAX ERROR - error : "+result);	
+			// 	}
+			// })
+
+
+	});
 
 
 </script>

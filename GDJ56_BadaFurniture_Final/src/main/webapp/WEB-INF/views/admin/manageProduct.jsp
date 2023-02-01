@@ -21,7 +21,7 @@
 
 <section>
 	<div id="listContainer">
-		<h2>가구관리</h2>
+		<h2>가구 관리</h2>
 		<!-- 요약테이블 -->
 		<div id="summaryContainer">
 			<table id="summaryTable">
