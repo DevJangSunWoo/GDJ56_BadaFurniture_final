@@ -122,7 +122,7 @@
 		width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;
 	}
 	div#pageBar{
-		text-align:center;margin-top:10px;
+		text-align:center;margin-top:20px;
 	}
 </style>
 	<section class="mypage">
