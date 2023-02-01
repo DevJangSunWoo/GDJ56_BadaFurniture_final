@@ -65,6 +65,18 @@ public class AdminController {
 //		return "admin/manageOrder";
 //	}
 	
+	//배송 관리 연결
+	@RequestMapping("/admin/delivery.do")
+	public String manageDelivery() {
+		return "admin/manageDelivery";
+	}
+	
+	//취소/반품 관리 연결
+	@RequestMapping("/admin/refund.do")
+	public String manageRefund() {
+		return "admin/manageRefund";
+	}
+	
 //	//내가구팔기 관리 연결
 //	@RequestMapping("/admin/resell.do")
 //	public String manageResell() {
@@ -398,8 +410,8 @@ public class AdminController {
 		,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
 		,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
 		) {		
-		log.debug("cPage {}", cPage);
-		log.debug("numPerpage {}", numPerpage);
+		//log.debug("cPage {}", cPage);
+		//log.debug("numPerpage {}", numPerpage);
 		
 		
 
@@ -420,32 +432,32 @@ public class AdminController {
 			search.put("searchKeyword1", key1);			
 			search.put("searchKeyword2", key2);		
 			
-			log.debug("searchType {}", searchType);
-			log.debug("searchKeyword1 {}", key1);
-			log.debug("searchKeyword2 {}", key2);
+			//log.debug("searchType {}", searchType);
+			//log.debug("searchKeyword1 {}", key1);
+			//log.debug("searchKeyword2 {}", key2);
 			
 		}else {
 			search.put("searchKeyword", searchKeyword);	
 			
-			log.debug("searchType {}", searchType);
-			log.debug("searchKeyword {}", searchKeyword);
+			//log.debug("searchType {}", searchType);
+			//log.debug("searchKeyword {}", searchKeyword);
 			
 		}		
 		
 		List<OrderSheet> orderSheets = service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search);
-		if(orderSheets!=null) {
-			orderSheets.stream().forEach(v->log.debug("오더시트 : {}",v));
-		}
+//		if(orderSheets!=null) {
+//			orderSheets.stream().forEach(v->log.debug("오더시트 : {}",v));
+//		}
 		
 		
 		mv.addObject("order",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
-		log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
-		log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search).size());		
+		//log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		//log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search).size());		
 		
 		
 		int totalData=service.orderListCount(search);
 		
-		log.debug("totalData {}", totalData);		
+		//log.debug("totalData {}", totalData);		
 		
 		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "order.do",searchType,searchKeyword));
 		
@@ -463,7 +475,40 @@ public class AdminController {
 		
 		return mv;
 	}
-
+	
+	
+	//'주문관리' - 결제상태 변경하기
+	@RequestMapping(value="/admin/updatePaymentState.do")
+	@ResponseBody
+	public Map<String,String> updatePaymentState(
+			@RequestParam("orderSheetNo") int orderSheetNo,
+			@RequestParam("paymentState") String paymentState,
+			@RequestParam("productNoArr") int[] productNoArr) {
+		
+		log.debug("가구번호들 {}",productNoArr);
+		
+		
+		//주문서 결제상태 변경
+		Map param=new HashMap();
+		param.put("orderSheetNo", orderSheetNo);
+		param.put("paymentState", paymentState);	
+		param.put("productNoArr", productNoArr);
+		//log.debug("변경할 상태 : "+paymentState);
+		
+		
+		Map result=new HashMap();	
+		
+		try {
+			service.updatePaymentState(param);			
+			result.put("msg", ((String)param.get("paymentState"))+" 상태로 변경완료");
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			result.put("msg", "변경실패~");
+		}		
+		
+		return result;
+		
+	}	
 	
 }
 

@@ -151,10 +151,20 @@ public class AdminDaoImpl implements AdminDao {
 		return session.selectList("admin.orderSummary");
 	}
 
+	//주문관리- 결제상태 변경
+	@Override
+	public int updatePaymentState(SqlSessionTemplate session, Map param) {
+		// TODO Auto-generated method stub
+		return session.update("admin.updatePaymentState",param);
+	}
 
-	
-	
-	
+	@Override
+	public int updateSoldOutStateAtOrder(SqlSessionTemplate session, Map param2) {
+		// TODO Auto-generated method stub
+		return session.update("admin.updateSoldOutStateAtOrder",param2);
+	}
+
+
 	
 	
 	

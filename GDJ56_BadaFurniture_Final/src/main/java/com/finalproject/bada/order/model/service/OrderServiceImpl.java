@@ -46,10 +46,10 @@ public class OrderServiceImpl implements OrderService {
 	public void insertOrderSheet(HashMap map) {
 		int seqOrderSheet=(int)map.get("seqOrderSheet");
 		
-		log.debug("{}","인서트 전"+seqOrderSheet);
+		//log.debug("{}","인서트 전"+seqOrderSheet);
 		int result=dao.insertOrderSheet(session,map);
 		//map.get("seqOrderSheet")  으로 해야지  변화된 데이터가 나옴
-		log.debug("{}","인서트 후"+map.get("seqOrderSheet")); 
+		//log.debug("{}","인서트 후"+map.get("seqOrderSheet")); 
 		
 		
 		
@@ -67,9 +67,9 @@ public class OrderServiceImpl implements OrderService {
 			
 			int productCount = productNos.length;
 			if(result != productCount) {
-				throw new RuntimeException("OrderDetail이 10개가 아닙니다.");
+				throw new RuntimeException("OrderDetail이 갯수 만큼 삽입이 안됬습니다.");
 			}
-			
+//1차시도			
 //			int orderDetailCount=dao.selectOrderDetailCount(session,map);			
 //			if(orderDetailCount<10) {
 //			int detailResult=dao.insertOrderDetail(session,map);
@@ -92,6 +92,16 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return dao.selectOrderComplete(session,orderSheetNo);
 	}
+	
+	
+	
+	
+	@Override
+	public int updateSoldOutState(HashMap map) {
+		// TODO Auto-generated method stub
+		return dao.updateSoldOutState(session,map);
+	}
+	
 	
 	
 	

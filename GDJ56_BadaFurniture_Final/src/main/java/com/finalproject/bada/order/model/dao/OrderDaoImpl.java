@@ -43,6 +43,13 @@ public class OrderDaoImpl implements OrderDao {
 	
 	}
 
+	@Override
+	public int updateSoldOutState(SqlSessionTemplate session, HashMap map) {
+		// TODO Auto-generated method stub
+		return session.update("order.updateSoldOutState",map);
+	}
+
+	
 	
 	
 	
