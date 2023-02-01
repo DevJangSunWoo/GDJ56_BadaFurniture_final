@@ -10,17 +10,21 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finalproject.bada.admin.model.service.AdminService;
+import com.finalproject.bada.common.AdminPageFactory;
 import com.finalproject.bada.common.PageFactory;
 import com.finalproject.bada.member.model.vo.Member;
 import com.finalproject.bada.mypage.model.service.MypageService;
 import com.finalproject.bada.mypage.model.vo.Alert;
+import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,10 +33,12 @@ import lombok.extern.slf4j.Slf4j;
 public class MypageController {
 	
 	private MypageService service;
+	private AdminService adminService;
 	
 	@Autowired
-	public MypageController(MypageService service) {
+	public MypageController(MypageService service, AdminService adminService) {
 		this.service = service;
+		this.adminService = adminService;
 	}
 	
 	// 장바구니 리스트 출력
@@ -135,8 +141,64 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/mypage/order.do")
-	public String orderList() {
-		return "mypage/orderList";
+	public ModelAndView orderList(ModelAndView mv,
+			@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage,
+			@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType,
+			@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword,
+			HttpSession session) {
+		
+		Map search=new HashMap();
+		search.put("memberNo", ((Member)session.getAttribute("loginMember")).getMemberNo());
+		search.put("searchType", searchType);
+		if(searchType.equals("ORDER_SHEET_ENROLL_DATE")) {	
+			//주문일자 들어오는 값 :2023-01-31 ~ 2023-01-31
+			
+			String[] keys=searchKeyword.split("~");
+			
+			String key1=keys[0].trim();
+			String key2=keys[1].trim();
+			
+			//log.debug("keys :{}",key1);
+			//log.debug("keys :{}",key2);				
+			
+			search.put("searchKeyword1", key1);			
+			search.put("searchKeyword2", key2);		
+			
+			//log.debug("searchType {}", searchType);
+			//log.debug("searchKeyword1 {}", key1);
+			//log.debug("searchKeyword2 {}", key2);
+		}else {
+			search.put("searchKeyword", searchKeyword);	
+			//log.debug("searchType {}", searchType);
+			//log.debug("searchKeyword {}", searchKeyword);
+		}	
+		
+		List<OrderSheet> orderSheets = adminService.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search);
+		mv.addObject("orderSheets",adminService.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		//log.debug("order : {}",adminService.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		//log.debug("order : {}",adminService.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search).size());		
+		
+		
+		int totalData=adminService.orderListCount(search);
+		
+		log.debug("totalData {}", totalData);		
+		
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "order.do",searchType,searchKeyword));
+		
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchKeyword", searchKeyword);
+		
+		mv.setViewName("mypage/orderList");
+		
+		return mv;
+	}
+	
+	//orderList 주문상세보기 ajax
+	@ResponseBody
+	@RequestMapping("/mypage/order/read.do")
+	public OrderSheet readOrderSheet(@RequestParam(value="orderSheetNo") int orderSheetNo) {
+		return adminService.selectOrderSheet(orderSheetNo);
 	}
 	
 	@RequestMapping("/mypage/refund.do")

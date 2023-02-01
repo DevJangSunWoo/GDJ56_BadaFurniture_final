@@ -124,8 +124,32 @@ public class OrderController {
 		service.insertOrderSheet(map);		
 		
 		
+		
 		//장바구니 담겨있는 데이터들  delete 
+		//회원번호  ,제품 번호들
+		
+		
+		
+
 		//가구의  판매상태변경  update
+		//map 객체에 제품번호 확인
+		int[] productNosAfter = (int[])map.get("productNos");
+		
+		//for문을 도는 순간 여기서  배열을   일반 int형 데이터가 됨
+		for(int productNo : productNosAfter) {
+			
+		//log.debug("{}",productNo);
+			
+		}
+		
+		
+		int resultSoldOutState=service.updateSoldOutState(map);
+		
+		
+		
+		
+		
+		
 		
 		
 		//주문완료서에 데이터 표출하기

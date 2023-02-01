@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.finalproject.bada.admin.model.dao.AdminDao;
 import com.finalproject.bada.order.model.vo.OrderSheet;
@@ -153,7 +154,7 @@ public class AdminServiceImpl implements AdminService {
 		if(orderSheets!=null) {
 			for(OrderSheet os : orderSheets) {
 				os.setDetails(dao.orderDetailList(session, os.getOrderSheetNo()));
-				log.debug("ㅎㅇ : {}",dao.orderDetailList(session, os.getOrderSheetNo()));
+				//log.debug("ㅎㅇ : {}",dao.orderDetailList(session, os.getOrderSheetNo()));
 			}
 		}
 		
@@ -172,6 +173,36 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.orderSummary(session);
 	}
+
+	//주문관리- 결제상태 변경
+	@Override
+	@Transactional
+	public void updatePaymentState(Map param) {
+		// TODO Auto-generated method stub
+		
+		int result=dao.updatePaymentState(session,param);
+		if(result>0) {
+			result=0;
+			result=dao.updateSoldOutStateAtOrder(session,param);
+			
+			if(result<((int[])param.get("productNoArr")).length) {
+				throw new RuntimeException("가구 판매상태 변경 실패");				
+			}
+			
+		}else {
+			throw new RuntimeException("결제상태 변경 실패");
+		}
+		
+	}
+
+	//BD
+	//주문관리 - 주문서 번호로 주문서 1개 가져오기
+	@Override
+	public OrderSheet selectOrderSheet(int orderSheetNo) {
+		return dao.selectOrderSheet(session, orderSheetNo);
+	}
+
+
 
 
 

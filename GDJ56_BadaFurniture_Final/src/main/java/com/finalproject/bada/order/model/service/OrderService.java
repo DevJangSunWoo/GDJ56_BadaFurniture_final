@@ -16,7 +16,7 @@ public interface OrderService {
 	
 	List<OrderSheet> selectOrderComplete(int orderSheetNo);	
 	
-	
+	 int updateSoldOutState(HashMap map);
 	
 	
 }

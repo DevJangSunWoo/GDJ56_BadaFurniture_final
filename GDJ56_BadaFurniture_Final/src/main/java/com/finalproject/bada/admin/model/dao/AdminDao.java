@@ -59,6 +59,12 @@ public interface AdminDao {
 	//주문관리 - 요약
 	List<Map<String,Integer>> orderSummary(SqlSessionTemplate session);
 	
+	//주문관리- 결제상태 변경
+	int updatePaymentState(SqlSessionTemplate session,Map param);
+	int updateSoldOutStateAtOrder(SqlSessionTemplate session,Map param2);
 	
+	//BD
+	//주문관리 - 주문서 번호로 주문서 1개 가져오기
+	OrderSheet selectOrderSheet(SqlSessionTemplate session, int orderSheetNo);
 	
 }
