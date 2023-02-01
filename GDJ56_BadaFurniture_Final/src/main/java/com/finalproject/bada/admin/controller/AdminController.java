@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.admin.model.service.AdminService;
 import com.finalproject.bada.common.AdminPageFactory;
+import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
 import com.google.gson.Gson;
@@ -336,7 +337,7 @@ public class AdminController {
 		Map search=new HashMap();
 		search.put("searchType", searchType);		
 		search.put("searchKeyword", searchKeyword);		
-
+		
 		
 		mv.addObject("resell",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
 		//log.debug("resell : {}",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
@@ -393,15 +394,13 @@ public class AdminController {
 	@RequestMapping("/admin/order.do")
 	public ModelAndView orderList(ModelAndView mv,
 		@RequestParam(value="cPage", defaultValue="1") int cPage,
-		@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
+		@RequestParam(value="numPerpage", defaultValue="5") int numPerpage
 		,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
 		,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
 		) {		
-//		log.debug("cPage {}", cPage);
-//		log.debug("numPerpage {}", numPerpage);
-//		
-//		log.debug("searchType {}", searchType);
-//		log.debug("searchKeyword {}", searchKeyword);
+		log.debug("cPage {}", cPage);
+		log.debug("numPerpage {}", numPerpage);
+		
 		
 
 		Map search=new HashMap();
@@ -421,18 +420,32 @@ public class AdminController {
 			search.put("searchKeyword1", key1);			
 			search.put("searchKeyword2", key2);		
 			
+			log.debug("searchType {}", searchType);
+			log.debug("searchKeyword1 {}", key1);
+			log.debug("searchKeyword2 {}", key2);
+			
 		}else {
-			search.put("searchKeyword", searchKeyword);			
+			search.put("searchKeyword", searchKeyword);	
+			
+			log.debug("searchType {}", searchType);
+			log.debug("searchKeyword {}", searchKeyword);
+			
+		}		
+		
+		List<OrderSheet> orderSheets = service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search);
+		if(orderSheets!=null) {
+			orderSheets.stream().forEach(v->log.debug("오더시트 : {}",v));
 		}
-
+		
 		
 		mv.addObject("order",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
-		//log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search).size());		
 		
 		
 		int totalData=service.orderListCount(search);
 		
-		//log.debug("totalData {}", totalData);		
+		log.debug("totalData {}", totalData);		
 		
 		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "order.do",searchType,searchKeyword));
 		

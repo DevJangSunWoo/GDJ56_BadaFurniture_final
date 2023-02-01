@@ -15,9 +15,7 @@ public class AdminPageFactory {
       int pageBarSize=5;
       int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
       int pageEnd=pageNo+pageBarSize-1;
-
-      //if(searchType.equals("SEARCH_ALL")) searchKeyword="";
-      
+     
       
       pageBar="<span class='pagination justify-content-center pagination-sm'>";
       

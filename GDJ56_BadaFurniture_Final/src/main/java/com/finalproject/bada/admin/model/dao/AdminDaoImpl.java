@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.finalproject.bada.admin.model.service.AdminServiceImpl;
+import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
@@ -124,11 +125,17 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	
 	//주문관리 - 조회
+	//orderSheet
 	@Override
-	public List<OrderSheet> orderListPage(SqlSessionTemplate session, Map<String, Integer> param, Map search) {
+	public List<OrderSheet> orderListPage(SqlSessionTemplate session, Map<String, Integer> param, Map search) {		
+		return session.selectList("admin.orderList",search
+				,new RowBounds((param.get("cPage")-1)*param.get("numPerpage"),param.get("numPerpage")));		
+	}	
+	//orderDetail
+	@Override
+	public List<OrderDetail> orderDetailList(SqlSessionTemplate session, int orderSheetNo) {
 		// TODO Auto-generated method stub
-		return session.selectList("admin.orderList",search,
-				new RowBounds((param.get("cPage")-1)*param.get("numPerpage"),param.get("numPerpage")));
+		return session.selectList("admin.orderDetailList",orderSheetNo);
 	}
 
 	@Override
@@ -143,6 +150,7 @@ public class AdminDaoImpl implements AdminDao {
 		// TODO Auto-generated method stub
 		return session.selectList("admin.orderSummary");
 	}
+
 
 	
 	

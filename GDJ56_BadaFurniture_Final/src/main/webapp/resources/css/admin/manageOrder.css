@@ -4,7 +4,7 @@
   /* body table {        
         border: 1px solid blue;
   } */
-  
+
   .summaryTable{
     margin: 5px;
   }
@@ -32,7 +32,8 @@
   div.tableContainer>table td{
 
       padding:5px 10px 5px 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.514);
+      /* border-bottom: 1px solid rgba(0, 0, 0, 0.514); */
+      border-bottom: 1px solid rgba(0, 0, 0, 0.178);
   }
   
 
@@ -81,8 +82,12 @@ button.updateBtn,.searchBtn{
 	background-color: #393434;
 	color: white;
 }
-.tableTd{ 
+.tableTd,.tableTd2,.price{ 
 	background-color: #dcd5c32b;
+  /* border: 1px solid rgba(0, 0, 0, 0.178); */
+}
+.tableTd2,.price{
+  border: 1px solid rgba(0, 0, 0, 0.178);
 }
 
 select{
@@ -119,13 +124,18 @@ div#summaryContainer th,td{
 }
 
 /* 날짜선택 사이즈 조절 */
-.daterangepicker {width: 660px;}
+.daterangepicker {
+  width: 800px;
+}
 #orderDateRange{
 	width: 170px;
 }
 
 .searchInput{
 	width:170px;
+}
+.drp-calendar right{
+  width:500px;
 }
 
 
@@ -141,8 +151,8 @@ div#summaryContainer th,td{
          padding: 5px 10px;
          border-radius: 4px;
          cursor: pointer;
-	  border:none;
-	  color: white;
+          border:none;
+          color: white;
        }
 
        .modals {

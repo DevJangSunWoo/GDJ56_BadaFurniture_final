@@ -138,10 +138,24 @@ public class AdminServiceImpl implements AdminService {
 
 	
 	//주문관리 - 조회
+//	@Override
+//	public List<OrderSheet> orderListPage(Map<String, Integer> param, Map search) {
+//		// TODO Auto-generated method stub
+//		return dao.orderListPage(session, param, search);
+//	}
 	@Override
 	public List<OrderSheet> orderListPage(Map<String, Integer> param, Map search) {
 		// TODO Auto-generated method stub
-		return dao.orderListPage(session, param, search);
+		//return dao.orderListPage(session, param, search);
+		
+		List<OrderSheet> orderSheets = dao.orderListPage(session, param, search);
+		
+		if(orderSheets!=null) {
+			for(OrderSheet os : orderSheets) {
+				os.setDetails(dao.orderDetailList(session, os.getOrderSheetNo()));
+			}
+		}
+		return orderSheets;
 	}
 
 	@Override
