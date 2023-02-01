@@ -90,10 +90,19 @@ public class OrderServiceImpl implements OrderService {
 				}
 			
 			//제품결제시  결제한 제품들 카트에서 삭제하기	
-			
+			//장바구니에서  결제하려는 제품이 없을시에대한 분기처리해야함 예를들어 바로구매
+			//장바구니에 있든 없든 productNo 배열이 넘어간다.
+			//→selectCartCountNo 를 이용하여 내가 장바구니에서 선택한 개수를 만든다.
+			//그리고 내가 삭제구문시 반환되는 숫자 resultCartDelete
+			//resultCartDelete 와  selectCartCountNo 가 일치하지 않을시 runtime exception 발동 시키기
+				
+				
+			int	selectCartCountNo=dao.selectCartCount(session,map);
+				
+				
 			int resultCartDelete=dao.deleteMemberCart(session,map);	
 				
-			if(resultCartDelete<=0) {
+			if(resultCartDelete!=selectCartCountNo) {
 				throw new RuntimeException(" 장바구니 제품 삭제 실패");
 				
 			}

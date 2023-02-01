@@ -17,7 +17,7 @@ public interface OrderDao {
 	List<OrderSheet> selectOrderComplete(SqlSessionTemplate session,int orderSheetNo);
 	int updateSoldOutState(SqlSessionTemplate session,HashMap map); 
 	int deleteMemberCart(SqlSessionTemplate session,HashMap map);	
-	
+	int	selectCartCount(SqlSessionTemplate session,HashMap map);
 	
 	
 }
