@@ -12,7 +12,7 @@ public interface ProductDao {
 
 	Product selectProduct(SqlSessionTemplate session,int productNo);
 	
-	List<Product> selectProductList(SqlSessionTemplate session, Map map);
+	List<Product> selectProductList(SqlSessionTemplate session, Map map, Map<String, Integer> page);
 	
 	int selectProductListCount(SqlSessionTemplate session, Map map);
 	

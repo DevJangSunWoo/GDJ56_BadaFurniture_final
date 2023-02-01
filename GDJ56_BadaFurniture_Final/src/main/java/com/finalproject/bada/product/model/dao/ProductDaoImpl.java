@@ -19,8 +19,8 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<Product> selectProductList(SqlSessionTemplate session, Map map) {
-		return session.selectList("product.selectProductList", map);
+	public List<Product> selectProductList(SqlSessionTemplate session, Map map, Map<String, Integer> page) {
+		return session.selectList("product.selectProductList", map, new RowBounds((page.get("cPage")-1) * page.get("numPerpage"), page.get("numPerpage")));
 	}
 	
 	@Override

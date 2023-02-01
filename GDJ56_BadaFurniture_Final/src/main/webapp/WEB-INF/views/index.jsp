@@ -88,7 +88,7 @@
 	</div>
 	
 	
-	<div id="checkDiv" hidden>
+	<div id="checkDiv" style="display: none">
 		<div class="container">
 				<h5>[색상]</h5>
 			<ul class="ks-cboxtags">
@@ -225,7 +225,7 @@
 		}
 		
 		//조건에 따라 제품출력하는 ajax
-		const fn_printProductList=()=>{
+		const fn_printProductList=(cPage=1,numPerpage=10)=>{
 			$("#checkDiv").slideUp(200);
 			
 			let colorArr = [];
@@ -252,13 +252,14 @@
 				//contentType:"application/json"와 data에 JSON.stringify 추가
 				contentType:"application/json",
 				data :	JSON.stringify({
-					//cPage:++cPage,
-					color:colorArr, 
-					material:materialArr, 
-					grade:gradeArr, 
-					item:item, 
-					width:width, 
-					sort:sort}),
+					cPage:cPage,
+					//numPerpage:numPerpage,
+					color: colorArr, 
+					material: materialArr, 
+					grade: gradeArr, 
+					item: item, 
+					width: width, 
+					sort: sort}),
 				success : list =>{
 					console.log(list);
 					$("#productContainer").html("");
@@ -307,6 +308,29 @@
 				}
 			});
 		}
+		
+		//페이징 ajax
+		function fn_paging(cPage=1, numPerpage=10){
+			$.ajax({
+				url : "${path}/product/page.do",
+				type : "get",
+				//contentType:"application/json",
+				data :{
+					cPage:cPage,
+					numPerpage:numPerpage,
+					/* color: colorArr, 
+					material: materialArr, 
+					grade: gradeArr, 
+					item: item, 
+					width: width, 
+					sort: sort */
+					},
+				success : data =>{
+					fn_printProductList(cPage,numPerpage);
+					//console.log(data);	
+				}
+			});
+		}
 	</script>
 	
 	<div id="pro" style="display:flex; justify-content:center;">
@@ -352,13 +376,14 @@
             </c:forEach>
             
             <br><br>
-            <div id="pagebarDiv">
-	            <div id="pagebar" >
-					${pageBar}
-				</div>
-            </div>
 		</div>
 	</div>
+	
+	<div id="pagebarDiv">
+		<div id="pagebar" >
+			${pageBar}
+		</div>
+    </div>	
 	
 </section>
 	<script>

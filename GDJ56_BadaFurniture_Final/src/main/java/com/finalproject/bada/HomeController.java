@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.finalproject.bada.common.PageFactory2;
+import com.finalproject.bada.common.PageFactoryAjax;
 import com.finalproject.bada.product.model.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +25,12 @@ public class HomeController {
 		this.service = service;
 	}
 	
+	@RequestMapping("mypage.do")
+	public String mypageMain() {
+		return "mypage/mypageMain";
+	}
+	
+	
 	//메인페이지출력(+가구리스트)
 	@RequestMapping("/")
 	public ModelAndView index(ModelAndView mv, @RequestParam (value="cPage", defaultValue = "1") int cPage, 
@@ -34,18 +40,9 @@ public class HomeController {
 		
 		int totalData = service.selectProductCount();
 //		log.debug("totalData: {}",totalData);
-		mv.addObject("pageBar", PageFactory2.getPage(cPage, numPerpage, totalData, "/bada/"));
+		mv.addObject("pageBar", PageFactoryAjax.getPage(cPage, numPerpage, totalData, "/bada"));
 		
 		mv.setViewName("index");
 		return mv;
 	}
-	
-	@RequestMapping("mypage.do")
-	public String mypageMain() {
-		return "mypage/mypageMain";
-	}
-	
-
-	
-
 }

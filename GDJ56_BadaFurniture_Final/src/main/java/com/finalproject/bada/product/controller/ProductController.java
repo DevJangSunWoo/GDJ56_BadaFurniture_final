@@ -12,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finalproject.bada.common.PageFactoryAjax;
 import com.finalproject.bada.mypage.model.vo.Cart;
 import com.finalproject.bada.product.model.service.ProductService;
 import com.finalproject.bada.product.model.vo.Product;
@@ -69,21 +71,46 @@ public class ProductController {
 		
 	}
 	
-
+//--------------------------------------------------------------------------------------------------------------------------------------------------
+	
 	//메인페이지 제품리스트 출력(아이템, 조건, 정렬 적용)
 	@RequestMapping("product/productList.do")
 	@ResponseBody
-	public List<Product> productList(@RequestBody Map map) throws IOException{
+	//public List<Product> productList(@RequestBody Map map) throws IOException{
+	public List<Product> productList(@RequestBody Map map, @RequestParam (value="cPage", defaultValue = "1") int cPage, 
+									@RequestParam (value = "numPerpage", defaultValue = "10") int numPerpage) throws IOException{
 		log.debug("{}",map);
 		
-		List<Product> list = service.selectProductList(map);
+		Map<String,Integer> page = new HashMap(); 
 		
-		int totalData = service.selectProductListCount(map);
-		log.debug("{}",totalData);
+		cPage=(int)map.get("cPage");
+		page.put("cPage",cPage);
+		log.debug("{}",map.get("cPage"));
+		
+		//numPerpage=(int)map.get("numPerpage");
+		page.put("numPerpage", numPerpage);
+		log.debug("{}",map.get("numPerpage"));
+		
+		List<Product> list = service.selectProductList(map, page);
 		
 		return list;
 	}
 	
+	
+	//메인페이지 페이징 Ajax
+	@RequestMapping("product/page.do")
+	@ResponseBody
+	public String page(ModelAndView mv, @RequestParam (value="cPage", defaultValue = "1") int cPage, 
+			@RequestParam (value = "numPerpage", defaultValue = "10") int numPerpage) throws IOException{
+		
+//		log.debug("{}",map);
+//		int totalData = service.selectProductListCount(map);
+		int totalData = service.selectProductCount();
+		
+		return PageFactoryAjax.getPage(cPage, numPerpage, totalData, "/bada/");
+	}
+	
+//--------------------------------------------------------------------------------------------------------------------------------------------------	
 			
 	
 	@RequestMapping("/product/cartBtn.do")

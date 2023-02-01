@@ -1,6 +1,6 @@
 package com.finalproject.bada.common;
 
-public class PageFactory2 {
+public class PageFactoryAjax {
    
    public static String getPage(int cPage, int numPerpage, int totalData, String url) {
 
@@ -10,7 +10,6 @@ public class PageFactory2 {
       int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
       int pageEnd=pageNo+pageBarSize-1;
 
-      
       
       pageBar="<span class='pagination justify-content-center pagination-sm'>";
       
@@ -35,7 +34,6 @@ public class PageFactory2 {
             +pageNo+" </a>";
             pageBar+="</span>";
          }
-         
          pageNo++;
       }
       
@@ -51,13 +49,11 @@ public class PageFactory2 {
       
       pageBar+="</span>";
       
-      pageBar+="<script>";
-      pageBar+="function fn_paging(pageNo){";
-      pageBar+="location.assign('"+url+"?cPage='+pageNo);";
-      pageBar+="}";
-      pageBar+="</script>";
-      
-      
+//      pageBar+="<script>";
+//      pageBar+="function fn_paging(pageNo){";
+//      pageBar+="location.assign('"+url+"?cPage='+pageNo);";
+//      pageBar+="}";
+//      pageBar+="</script>";
       
       return pageBar;
    }
