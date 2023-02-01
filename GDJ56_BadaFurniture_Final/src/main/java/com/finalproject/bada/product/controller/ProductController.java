@@ -78,17 +78,20 @@ public class ProductController {
 	@RequestMapping("product/productList.do")
 	@ResponseBody
 	//public List<Product> productList(@RequestBody Map map) throws IOException{
-	public List<Product> productList(@RequestBody Map map, @RequestParam (value="cPage", defaultValue = "1") int cPage, 
-									@RequestParam (value = "numPerpage", defaultValue = "10") int numPerpage) throws IOException{
-		log.debug("{}",map);
+	public List<Product> productList(@RequestBody Map map, @RequestParam (value="cPage", defaultValue = "1") int cPage){ 
+//									,@RequestParam (value = "numPerpage", defaultValue = "10") int numPerpage) {
+		//log.debug("{}",map);
 		
 		Map<String,Integer> page = new HashMap(); 
 		
 		cPage=(int)map.get("cPage");
 		page.put("cPage",cPage);
 		//log.debug("{}",map.get("cPage"));
+		page.put("numPerpage", 10);
 		
-		page.put("numPerpage", numPerpage);
+//		int totalData = service.selectProductListCount(map);
+//		log.debug("totalData(productList): {}" ,totalData);
+//		PageFactoryAjax.getPage(cPage, numPerpage, totalData, "/bada/");
 		
 		List<Product> list = service.selectProductList(map, page);
 		
@@ -103,9 +106,11 @@ public class ProductController {
 		log.debug("{}",map);
 		
 		int totalData = service.selectProductListCount(map);
-		log.debug("totalData: {}" ,totalData);
+		System.out.println(totalData);
+		log.debug("totalData(page): {}" ,totalData);
 		
-		return PageFactoryAjax.getPage((int)map.get("cPage"), (int)map.get("numPerpage"), totalData, "/bada/");
+//		return PageFactoryAjax.getPage((int)map.get("cPage"), (int)map.get("numPerpage"), totalData, "/bada/");
+		return PageFactoryAjax.getPage((int)map.get("cPage"), 10, totalData, "/bada/");
 	}
 	
 //--------------------------------------------------------------------------------------------------------------------------------------------------	

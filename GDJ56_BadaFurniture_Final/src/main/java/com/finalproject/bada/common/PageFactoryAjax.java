@@ -4,9 +4,13 @@ public class PageFactoryAjax {
    
    public static String getPage(int cPage, int numPerpage, int totalData, String url) {
 
+//	   System.out.println("cPage: "+cPage);
+//	   System.out.println("numPerpage: "+numPerpage);
+//	   System.out.println("totalData(Factory): "+totalData);
+	   
       String pageBar="";
       int totalPage=(int)Math.ceil((double)totalData/numPerpage);
-      int pageBarSize=10;
+      int pageBarSize=5;
       int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
       int pageEnd=pageNo+pageBarSize-1;
 
@@ -14,7 +18,7 @@ public class PageFactoryAjax {
       pageBar="<span class='pagination justify-content-center pagination-sm'>";
       
       if(pageNo==1) {
-         pageBar+="<span class='page-item'>";
+         pageBar+="<span class='page-item disabled'>";
          pageBar+=" <a class='page-link' href='#'> 이전 </a>";
          pageBar+="</span>";
       }else {
@@ -25,20 +29,19 @@ public class PageFactoryAjax {
       
       while(!(pageNo>pageEnd||pageNo>totalPage)) {
          if(cPage==pageNo) {
-            pageBar+="<span class='page-item'>";
+            pageBar+="<span class='page-item disabled'>";
             pageBar+=" <a class='page-link' href='#'> "+pageNo+" </a>";
             pageBar+="</span>";
          }else {
             pageBar+="<span class='page-item'>";
-            pageBar+=" <a class='page-link' href='javascript:fn_paging("+(pageNo)+")'> "
-            +pageNo+" </a>";
+            pageBar+=" <a class='page-link' href='javascript:fn_paging("+(pageNo)+")'> "+pageNo+" </a>";
             pageBar+="</span>";
          }
          pageNo++;
       }
       
       if(pageNo>totalPage) {
-         pageBar+="<span class='page-item'>";
+         pageBar+="<span class='page-item disabled'>";
          pageBar+=" <a class='page-link' href='#'> 다음 </a>";
          pageBar+="</span>";
       }else {

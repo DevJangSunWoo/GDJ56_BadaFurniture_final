@@ -33,14 +33,15 @@ public class HomeController {
 	
 	//메인페이지출력(+가구리스트)
 	@RequestMapping("/")
-	public ModelAndView index(ModelAndView mv, @RequestParam (value="cPage", defaultValue = "1") int cPage, 
-							@RequestParam (value = "numPerpage", defaultValue = "10") int numPerpage) {
+	public ModelAndView index(ModelAndView mv, @RequestParam (value="cPage", defaultValue = "1") int cPage) { 
+//							,@RequestParam (value = "numPerpage", defaultValue = "10") int numPerpage) {
 		
-		mv.addObject("productList",service.productList(Map.of("cPage",cPage, "numPerpage",numPerpage)));
+//		mv.addObject("productList",service.productList(Map.of("cPage",cPage, "numPerpage",numPerpage)));
+		mv.addObject("productList",service.productList(Map.of("cPage",cPage, "numPerpage",10)));
 		
 		int totalData = service.selectProductCount();
-//		log.debug("totalData: {}",totalData);
-		mv.addObject("pageBar", PageFactoryAjax.getPage(cPage, numPerpage, totalData, "/bada"));
+//		mv.addObject("pageBar", PageFactoryAjax.getPage(cPage, numPerpage, totalData, "/bada"));
+		mv.addObject("pageBar", PageFactoryAjax.getPage(cPage, 10, totalData, "/bada"));
 		
 		mv.setViewName("index");
 		return mv;
