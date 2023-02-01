@@ -10,6 +10,9 @@
 <!-- css -->
 <link rel="stylesheet" href="${path }/resources/css/common/index.css"/>
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
 <section>
 	<div class="flexDiv">
 	    <img src="${path }/resources/images/mainpage/mainPicture.jpg" class="mainSize">
@@ -19,39 +22,39 @@
 		<div class="mainSize" id="iconContainer">
 			<div class="icon" onclick="fn_selectItem(event);">
 				<img src="${path }/resources/images/mainpage/전체.png">
-				<h3>전체</h3>
+				<p>전체</p>
 			</div>
 			<div class="icon" onclick="fn_selectItem(event);">
 				<img src="${path }/resources/images/mainpage/책장.png">
-				<h3>책장</h3>
+				<p>책장</p>
 			</div>
 			<div class="icon" onclick="fn_selectItem(event);">
 				<img src="${path }/resources/images/mainpage/의자.png">
-				<h3>의자</h3>
+				<p>의자</p>
 			</div>
 			<div class="icon" onclick="fn_selectItem(event);">
 				<img src="${path }/resources/images/mainpage/화장대.png">
-				<h3>화장대</h3>
+				<p>화장대</p>
 			</div>
 			<div class="icon" onclick="fn_selectItem(event);">
 				<img src="${path }/resources/images/mainpage/침대.png">
-				<h3>침대</h3>
+				<p>침대</p>
 			</div>
 			<div class="icon" onclick="fn_selectItem(event);">
 				<img src="${path }/resources/images/mainpage/서랍장.png">
-				<h3>서랍장</h3>
+				<p>서랍장</p>
 			</div>
 			<div class="icon" onclick="fn_selectItem(event);">
 				<img src="${path }/resources/images/mainpage/책상.png">
-				<h3>책상</h3>
+				<p>책상</p>
 			</div>
 			<div class="icon" onclick="fn_selectItem(event);">
 				<img src="${path }/resources/images/mainpage/쇼파.png">
-				<h3>소파</h3>
+				<p>소파</p>
 			</div>
 			<div class="icon" onclick="fn_selectItem(event);">
 				<img src="${path }/resources/images/mainpage/옷장.png">
-				<h3>옷장</h3>
+				<p>옷장</p>
 			</div>
 		</div>
 	</div>
@@ -211,7 +214,7 @@
 		
 		//카테고리 이미지 클릭시 클릭한 item 값 넘겨주면서 ajax에 데이터 넘겨주기
 		const fn_selectItem=(e)=>{
-			let item = $(e.target).parents(".icon").children("h3").text();
+			let item = $(e.target).parents(".icon").children("p").text();
 			$("input[name=item]").val(item);
 			fn_printProductList();
 		}
@@ -245,9 +248,17 @@
 			$.ajax({
 				url : "${path}/product/productList.do",
 				type : "post",
+				//controller에서 map으로 데이터를 받을때 배열은 못 받기때문에 
+				//contentType:"application/json"와 data에 JSON.stringify 추가
 				contentType:"application/json",
-// 				traditional:true,
-				data :	JSON.stringify({color:colorArr, material:materialArr, grade:gradeArr, item:item, width:width, sort:sort}),
+				data :	JSON.stringify({
+					//cPage:++cPage,
+					color:colorArr, 
+					material:materialArr, 
+					grade:gradeArr, 
+					item:item, 
+					width:width, 
+					sort:sort}),
 				success : list =>{
 					console.log(list);
 					$("#productContainer").html("");
@@ -303,7 +314,7 @@
 		
 			<c:forEach items="${productList}" var="product">
 				<div class="productWrap" >
-	                <input type="number" name="productNo" id="productNo" value="${product.productNo }">
+	                <input type="number" name="productNo" id="productNo" value="${product.productNo }" readonly>
 	                
 	                <div class="showProduct">
 		                <div class="imgDiv">
@@ -340,6 +351,12 @@
 	            </div>
             </c:forEach>
             
+            <br><br>
+            <div id="pagebarDiv">
+	            <div id="pagebar" >
+					${pageBar}
+				</div>
+            </div>
 		</div>
 	</div>
 	

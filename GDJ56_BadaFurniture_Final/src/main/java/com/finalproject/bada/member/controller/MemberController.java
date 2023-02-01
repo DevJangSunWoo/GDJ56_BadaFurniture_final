@@ -1,21 +1,19 @@
 package com.finalproject.bada.member.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.member.model.service.MemberService;
@@ -141,13 +139,13 @@ public class MemberController {
 	//정보수정페이지 이동
 	@RequestMapping("/updateMember.do")
 	public String updateMember() {
-		return "/member/updateMember";
+		return "mypage/member/updateMember";
 	}
 	
 	//비밀번호변경 페이지이동
 	@RequestMapping("/updatePassword.do")
 	public String updatePassword() {
-		return "member/updatePassword";
+		return "mypage/member/updatePassword";
 	}
 	
 	//비밀번호 변경 :
@@ -166,17 +164,17 @@ public class MemberController {
 			if(result>0) {
 				String script = "opener.location.replace('"+request.getContextPath()+"/member/logout.do');close();";
 				mv.addObject("msg","비밀번호 변경완료!");
-				mv.addObject("loc","/member/updateMember.do");
+				mv.addObject("loc","mypage/member/updateMember.do");
 				mv.addObject("script", script);
 				
 			}else {
 				mv.addObject("msg","비밀번호 변경 실패!");
-				mv.addObject("loc","/member/updatePassword.do");
+				mv.addObject("loc","mypage/member/updatePassword.do");
 			}
 			
 		}else {
 			mv.addObject("msg","현재 비밀번호가 일치하지 않습니다! 다시 시도하세요!");
-			mv.addObject("loc","/member/updatePassword.do");
+			mv.addObject("loc","mypage/member/updatePassword.do");
 		}
 		mv.setViewName("common/msg");
 		return mv;
@@ -200,7 +198,7 @@ public class MemberController {
 			mv.addObject("loc","/");
 		}else {
 			mv.addObject("msg","회원정보 수정실패");
-			mv.addObject("loc","/member/updateMember.do");
+			mv.addObject("loc","mypage/member/updateMember.do");
 		}
 		mv.setViewName("common/msg");
 		return mv;
@@ -208,9 +206,42 @@ public class MemberController {
 	
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	//회원탈퇴페이지 이동
+	//패스워드 확인
 	@RequestMapping("/deleteMember.do")
-	public String deleteMember() {
-		return "/mypage/deleteMember";
+	@ResponseBody
+	public String deleteMember(Member m) {
+		Member loginMember = service.selectMemberById(m);
+		log.debug("loginMember: {}",loginMember);
+		
+		if(loginMember!=null && passwordEncoder.matches(m.getPassword(), loginMember.getPassword())) {
+			return "true";
+		}
+		return "false";
+	}
+	
+	//탈퇴동의 페이지이동
+	@RequestMapping("/deleteMemberEnd.do")
+	public String deleteMemberEnd() {
+		return "mypage/member/deleteMemberEnd";
+	}
+	
+	//회원탈퇴
+	@RequestMapping("/deleteMemberResult.do")
+	public ModelAndView deleteMemberResult(ModelAndView mv, @RequestParam String memberNo, HttpSession session) {
+		System.out.println(memberNo);
+		
+		int result = service.deleteMember(Integer.parseInt(memberNo));
+		log.debug("deleteMember(result): {}",result);
+		
+		if(result>0) {
+			session.invalidate();
+			mv.addObject("msg","탈퇴가 완료되었습니다. 그동안 이용해주셔셔 감사합니다.<(＿　＿)>");
+			mv.addObject("loc","/");
+		}else {
+			mv.addObject("msg","회원삭제 실패");
+			mv.addObject("loc","mypage/member/deleteMemberEnd.do");
+		}
+		mv.setViewName("common/msg");
+		return mv;
 	}
 }

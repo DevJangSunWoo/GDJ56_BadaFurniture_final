@@ -17,4 +17,6 @@ public interface MemberService {
 	int updateMember(Member m);
 	
 	String searchId(Map param);
+	
+	int deleteMember(int memberNo);
 }

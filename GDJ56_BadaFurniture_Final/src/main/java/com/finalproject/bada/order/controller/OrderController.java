@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.order.model.service.OrderService;
+import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
 
 import lombok.extern.slf4j.Slf4j;
@@ -73,7 +74,7 @@ public class OrderController {
 			,@RequestParam(value="badaPostCode",required=false)String  postCode 
 			,@RequestParam(value="badaAddress",required=false)String address
 			,@RequestParam(value="badaAddressDetail",required=false)String addressDetail
-//			,@RequestParam(value="badaProductList",required=false)List<Product> productList
+//			,@RequestParam(value="badaProductList",required=false)List<Product> productList  //NG
 			,@RequestParam(value="badaProductNo",required=false) int[]productNos
 			)
 		throws IOException {
@@ -120,12 +121,29 @@ public class OrderController {
 		map.put("addressDetail",addressDetail);
 		map.put("productNos",productNos);
 		
-		service.insertOrderSheet(map);
+		service.insertOrderSheet(map);		
 		
 		
+		//장바구니 담겨있는 데이터들  delete 
+		//가구의  판매상태변경  update
 		
 		
-
+		//주문완료서에 데이터 표출하기
+		int orderSheetNo=Integer.parseInt(map.get("seqOrderSheet").toString());
+		//log.debug("주문서 번호+{}",orderSheetNo);		
+		
+		List<OrderSheet> oss=service.selectOrderComplete(orderSheetNo);		
+		
+		if(oss==null) {
+			//log.debug("{}","데이터x");
+			
+		}else {
+			//log.debug("{}","데이터넘어옴");
+			
+		}
+		
+		
+		mv.addObject("oss",oss);
 		mv.setViewName("product/orderComplete");
 		
 		return mv ;

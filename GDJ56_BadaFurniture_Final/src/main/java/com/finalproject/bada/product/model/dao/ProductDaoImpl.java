@@ -3,6 +3,7 @@ package com.finalproject.bada.product.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -23,10 +24,20 @@ public class ProductDaoImpl implements ProductDao {
 	}
 	
 	@Override
-	public List<Product> productList(SqlSessionTemplate session) {
-		return session.selectList("product.productList");
+	public int selectProductListCount(SqlSessionTemplate session, Map map) {
+		return session.selectOne("product.selectProductListCount", map);
+	}
+	
+	@Override
+	public List<Product> productList(SqlSessionTemplate session, Map<String, Integer> page) {
+		return session.selectList("product.productList", null, new RowBounds((page.get("cPage")-1) * page.get("numPerpage"), page.get("numPerpage")));
 	}
 
+	@Override
+	public int selectProductCount(SqlSessionTemplate session) {
+		return session.selectOne("product.selectProductCount");
+	}
+	
 	@Override
 	public Cart selectCartCheck(SqlSessionTemplate session, Map map) {
 		// TODO Auto-generated method stub
@@ -44,6 +55,10 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		return session.insert("product.insertCart", map);
 	}
+
+	
+
+	
 
 
 	
