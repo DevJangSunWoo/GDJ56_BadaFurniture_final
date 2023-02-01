@@ -194,17 +194,11 @@ public class MypageController {
 		return mv;
 	}
 	
+	//orderList 주문상세보기 ajax
 	@ResponseBody
 	@RequestMapping("/mypage/order/read.do")
-	public String orderDetail(ModelAndView mv, @RequestParam(value="orderSheetNo") int orderSheetNo) {
-		
-		
-		
-		Gson gson = new Gson();
-		JsonObject json = new JsonObject();
-		json.addProperty("orderSheet", "gg");
-		
-		return gson.toJson(json);
+	public OrderSheet readOrderSheet(@RequestParam(value="orderSheetNo") int orderSheetNo) {
+		return adminService.selectOrderSheet(orderSheetNo);
 	}
 	
 	@RequestMapping("/mypage/refund.do")

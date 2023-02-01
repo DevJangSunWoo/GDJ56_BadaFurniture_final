@@ -352,7 +352,14 @@
 	$(document).on("click", "#detailModalBtn", e=>{
 		let orderSheetNo = Number($(e.target).text());
 		$.ajax({
-			url:"${path}/mypage/order/read.do"
+			url:"${path}/mypage/order/read.do",
+			data:{
+				orderSheetNo:orderSheetNo
+			},
+			success:data=>{
+				console.log(data);
+				open();
+			}
 		});
 		//open();
 	});
