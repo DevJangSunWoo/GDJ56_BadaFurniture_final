@@ -195,6 +195,13 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
+	//BD
+	//주문관리 - 주문서 번호로 주문서 1개 가져오기
+	@Override
+	public OrderSheet selectOrderSheet(int orderSheetNo) {
+		return dao.selectOrderSheet(session, orderSheetNo);
+	}
+
 
 
 

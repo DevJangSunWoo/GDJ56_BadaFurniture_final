@@ -164,6 +164,13 @@ public class AdminDaoImpl implements AdminDao {
 		return session.update("admin.updateSoldOutStateAtOrder",param2);
 	}
 
+	//BD
+	//주문관리 - 주문서 번호로 주문서 1개 가져오기
+	@Override
+	public OrderSheet selectOrderSheet(SqlSessionTemplate session, int orderSheetNo) {
+		return session.selectOne("admin.selectOrderSheet", orderSheetNo);
+	}
+
 
 	
 	
