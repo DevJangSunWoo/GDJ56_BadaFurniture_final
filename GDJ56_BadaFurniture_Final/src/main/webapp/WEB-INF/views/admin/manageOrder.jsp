@@ -38,51 +38,51 @@
 			<table class="summaryTable">
 				<tr>
 					<th class="tableTh">전체주문</th>
-					<td class="tableTd"><c:out value="${summary[0].ALL_O}"/></td>
+					<td id="summary_allO" class="tableTd"><c:out value="${summary.ALL_O}"/></td>
 				</tr>
 			</table>
 			<table class="summaryTable">
 				<tr>
 					<th class="tableTh">입금대기</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_1}"/></td>
+					<td id="summary_state1" class="tableTd"><c:out value="${summary.STATE_1}"/></td>
 				</tr>	
 				<tr>
 					<th class="tableTh">입금완료</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_2}"/></td>
+					<td id="summary_state2" class="tableTd"><c:out value="${summary.STATE_2}"/></td>
 				</tr>	
 				<tr>
-					<th class="tableTh">결제완료</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_3}"/></td>
+					<th class="tableTh">카드결제완료</th>
+					<td id="summary_state3" class="tableTd"><c:out value="${summary.STATE_3}"/></td>
 				</tr>
 			</table>
 
 			<table class="summaryTable">
 				<tr>
 					<th class="tableTh">배송준비</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_4}"/></td>
+					<td id="summary_state4" class="tableTd"><c:out value="${summary.STATE_4}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">배송중</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_5}"/></td>
+					<td id="summary_state5" class="tableTd"><c:out value="${summary.STATE_5}"/></td>
 				</tr>	
 				<tr>
 					<th class="tableTh">배송완료</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_6}"/></td>
+					<td id="summary_state6" class="tableTd"><c:out value="${summary.STATE_6}"/></td>
 				</tr>
 			</table>
 
 			<table class="summaryTable">
 				<tr>
 					<th class="tableTh">반품요청</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_7}"/></td>
+					<td id="summary_state7" class="tableTd"><c:out value="${summary.STATE_7}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">반품대기</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_8}"/></td>
+					<td id="summary_state8" class="tableTd"><c:out value="${summary.STATE_8}"/></td>
 				</tr>	
 				<tr>
 					<th class="tableTh">취소요청</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_9}"/></td>
+					<td id="summary_state9" class="tableTd"><c:out value="${summary.STATE_9}"/></td>
 				</tr>
 			</table>
 
@@ -272,6 +272,12 @@
 	</div>
 </section>
 <script>
+
+	//요약테이블 출력
+	$(()=>{
+		updateSummary();
+	});
+	
 	//검색 타입 변경
 	$("select#searchType").change(e=>{
 		const type = $(e.target).val();
@@ -358,9 +364,34 @@
 				changePaymentState(orderSheetNo,paymentState,productNoArr);
 			}
 			
+			updateSummary();
 
 
 	});	
+
+	//
+	function updateSummary(){
+		$.ajax({
+			url:"${path}/admin/updateOrderSummary.do",
+			dataType : "json",
+			success:function(summary){
+				//console.log(summary);
+
+				$("#summary_allO").text(summary.ALL_O);
+				$("#summary_state1").text(summary.STATE_1);
+				$("#summary_state2").text(summary.STATE_2);
+				$("#summary_state3").text(summary.STATE_3);
+				$("#summary_state4").text(summary.STATE_4);
+				$("#summary_state5").text(summary.STATE_5);
+				$("#summary_state6").text(summary.STATE_6);
+				$("#summary_state7").text(summary.STATE_7);
+				$("#summary_state8").text(summary.STATE_8);
+				$("#summary_state9").text(summary.STATE_9);
+
+			}
+		})
+
+	}
 
 
 

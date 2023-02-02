@@ -70,7 +70,7 @@ public class AdminServiceImpl implements AdminService {
 
 	//요약테이블
 	@Override
-	public List<Map<String,Integer>> productSummary() {
+	public Map<String,Integer> productSummary() {
 		// TODO Auto-generated method stub
 		return dao.productSummary(session);
 	}
@@ -126,7 +126,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	//내가구팔기 관리 - 요약
 	@Override
-	public List<Map<String, Integer>> resellSummary() {
+	public Map<String, Integer> resellSummary() {
 		// TODO Auto-generated method stub
 		return dao.resellSummary(session);
 	}
@@ -166,7 +166,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	//주문관리 - 요약
 	@Override
-	public List<Map<String, Integer>> orderSummary() {
+	public Map<String, Integer> orderSummary() {
 		// TODO Auto-generated method stub
 		return dao.orderSummary(session);
 	}
@@ -215,7 +215,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	//취소반품관리 - 요약
 	@Override
-	public List<Map<String, Integer>> refundSummary() {
+	public Map<String, Integer> refundSummary() {
 		// TODO Auto-generated method stub
 		return dao.refundSummary(session);
 	}
@@ -254,7 +254,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	//배송관리 - 요약
 	@Override
-	public List<Map<String, Integer>> deliverySummary() {
+	public Map<String, Integer> deliverySummary() {
 		// TODO Auto-generated method stub
 		return dao.deliverySummary(session);
 	}

@@ -27,15 +27,15 @@
 			<table id="summaryTable">
 				<tr>
 					<th class="tableTh">배송대기</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_1}"/></td>
+					<td id="summary_state1" class="tableTd"><c:out value="${summary.STATE_1}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">배송중</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_2}"/></td>
+					<td id="summary_state2" class="tableTd"><c:out value="${summary.STATE_2}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">배송완료</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_3}"/></td>
+					<td id="summary_state3" class="tableTd"><c:out value="${summary.STATE_3}"/></td>
 				</tr>
 			</table>
 		</div>
@@ -166,6 +166,12 @@
 
 
 <script>
+
+	//요약테이블 출력
+	$(()=>{
+		updateSummary();
+	});
+
 	//검색타입 변경
 	$("select#searchType").change(e=>{
 		const type = $(e.target).val();
@@ -206,6 +212,7 @@
 				success:function(result){	
 
 					alert(result.msg);
+					updateSummary();
 				},
 				error:function(result){
 					alert("AJAX ERROR - result : "+result);	
@@ -224,8 +231,20 @@
 
 	})
 
+	//
+	function updateSummary(){
+		$.ajax({
+			url:"${path}/admin/updateDeliverySummary.do",
+			dataType : "json",
+			success:function(summary){
 
+				$("#summary_state1").text(summary.STATE_1);
+				$("#summary_state2").text(summary.STATE_2);
+				$("#summary_state3").text(summary.STATE_3);
 
+			}
+		})
+	}
 </script>
 
 </body>

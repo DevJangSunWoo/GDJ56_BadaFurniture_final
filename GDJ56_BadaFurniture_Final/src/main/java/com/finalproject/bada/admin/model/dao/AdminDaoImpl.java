@@ -57,9 +57,9 @@ public class AdminDaoImpl implements AdminDao {
 
 	//요약테이블
 	@Override
-	public List<Map<String,Integer>> productSummary(SqlSessionTemplate session) {
+	public Map<String,Integer> productSummary(SqlSessionTemplate session) {
 		// TODO Auto-generated method stub
-		return session.selectList("admin.productSummary");
+		return session.selectOne("admin.productSummary");
 	}
 
 	//가구관리 - 삭제
@@ -113,9 +113,9 @@ public class AdminDaoImpl implements AdminDao {
 	
 	//내가구팔기 관리 - 요약
 	@Override
-	public List<Map<String, Integer>> resellSummary(SqlSessionTemplate session) {
+	public Map<String, Integer> resellSummary(SqlSessionTemplate session) {
 		// TODO Auto-generated method stub
-		return session.selectList("admin.resellSummary");
+		return session.selectOne("admin.resellSummary");
 	}
 
 	//내가구팔기 관리 - 진행상태 변경
@@ -147,9 +147,9 @@ public class AdminDaoImpl implements AdminDao {
 	
 	//주문관리 - 요약
 	@Override
-	public List<Map<String, Integer>> orderSummary(SqlSessionTemplate session) {
+	public Map<String, Integer> orderSummary(SqlSessionTemplate session) {
 		// TODO Auto-generated method stub
-		return session.selectList("admin.orderSummary");
+		return session.selectOne("admin.orderSummary");
 	}
 
 	//주문관리- 결제상태 변경
@@ -189,9 +189,9 @@ public class AdminDaoImpl implements AdminDao {
 	
 	//취소반품관리 - 요약
 	@Override
-	public List<Map<String, Integer>> refundSummary(SqlSessionTemplate session) {
+	public Map<String, Integer> refundSummary(SqlSessionTemplate session) {
 		// TODO Auto-generated method stub
-		return session.selectList("admin.refundSummary");
+		return session.selectOne("admin.refundSummary");
 	}
 	
 	//취소반품관리 - 취소반품상태 변경
@@ -225,9 +225,9 @@ public class AdminDaoImpl implements AdminDao {
 	
 	//배송관리 - 요약
 	@Override
-	public List<Map<String, Integer>> deliverySummary(SqlSessionTemplate session) {
+	public Map<String, Integer> deliverySummary(SqlSessionTemplate session) {
 		// TODO Auto-generated method stub
-		return session.selectList("admin.deliverySummary");
+		return session.selectOne("admin.deliverySummary");
 	}
 	
 	//배송관리 - 배송상태 변경

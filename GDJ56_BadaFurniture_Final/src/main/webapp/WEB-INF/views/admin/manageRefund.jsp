@@ -27,27 +27,27 @@
 			<table id="summaryTable">
 				<tr>
 					<th class="tableTh">전체</th>
-					<td class="tableTd"><c:out value="${summary[0].ALL_R}"/></td>
+					<td id="summary_allR"class="tableTd"><c:out value="${summary.ALL_R}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">취소요청</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_1}"/></td>
+					<td id="summary_state1" class="tableTd"><c:out value="${summary.STATE_1}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">반품요청</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_2}"/></td>
+					<td id="summary_state2" class="tableTd"><c:out value="${summary.STATE_2}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">반품대기</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_3}"/></td>
+					<td id="summary_state3" class="tableTd"><c:out value="${summary.STATE_3}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">취소/반품완료</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_4}"/></td>
+					<td id="summary_state4" class="tableTd"><c:out value="${summary.STATE_4}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">거부완료</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_5}"/></td>
+					<td id="summary_state5" class="tableTd"><c:out value="${summary.STATE_5}"/></td>
 				</tr>
 			</table>
 		</div>
@@ -211,6 +211,12 @@
 
 
 <script>
+
+	//요약테이블 출력
+	$(()=>{
+		updateSummary();
+	});
+
 	//검색타입 변경
 	$("select#searchType").change(e=>{
 		const type = $(e.target).val();
@@ -251,6 +257,7 @@
 				success:function(result){	
 						
 					alert(result.msg);
+					updateSummary();
 				},
 				error:function(result){
 					alert("AJAX ERROR - result : "+result);	
@@ -311,7 +318,22 @@
 
 	});
 
+	function updateSummary(){
+		$.ajax({
+			url:"${path}/admin/updateRefundSummary.do",
+			dataType : "json",
+			success:function(summary){
 
+				$("#summary_allR").text(summary.ALL_R);
+				$("#summary_state1").text(summary.STATE_1);
+				$("#summary_state2").text(summary.STATE_2);
+				$("#summary_state3").text(summary.STATE_3);
+				$("#summary_state4").text(summary.STATE_4);
+				$("#summary_state5").text(summary.STATE_5);
+
+			}
+		})
+	}
 
 
 </script>
