@@ -92,14 +92,16 @@
                             	
                             	<!--장바구니에 보낼데이터   type="hidden -->
                             	<input id="cart_productNo" type="hidden" value="${productData.productNo}">
-                            	<input id="cart_memberNo" type="hidden" value="${loginMember.memberNo}" >
+                            <%-- 	<input id="cart_memberNo" type="hidden" value="${loginMember.memberNo}" > --%>
+                            		<input id="cart_memberNo" type="hidden" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberNo}" > 
                             </div>
                         </div>
                     </div>
              <!--</form> -->
             </div>
         </div>   	 
-    	 <input type="hidden" id="badaLoginFilter"  value="${loginMember.memberId}">
+    <%-- 	 <input type="hidden" id="badaLoginFilter"  value="${loginMember.memberId}"> --%>
+    	 <input type="hidden" id="badaLoginFilter"  value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberId}">
     	 <!--슬라이드 이미지 크기 조절 스타일  -->
     	 <style>
     	 	.imgUrl{
