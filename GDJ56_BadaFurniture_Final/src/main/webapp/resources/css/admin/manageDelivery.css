@@ -42,12 +42,9 @@
     div#search-container{text-align:center;}
 
     div#search-searchAll{display:inline-block;}
-    div#search-soldOutState{display:none;}
-    div#search-showState{display:none;}
-    div#search-item{display:none;}
-    div#search-grade{display:none;}
-    div#search-productNo{display:none;}
-    div#search-price{display:none;}
+    div#search-deliveryState{display:none;}
+    div#search-orderSheetNo{display:none;}
+    div#search-orderDetailNo{display:none;}
 
     div#search-container {margin:0 0 10px 0; padding:3px; }
     div#numPerpage-container{text-align:right; padding:0px 40px 20px 0px;}

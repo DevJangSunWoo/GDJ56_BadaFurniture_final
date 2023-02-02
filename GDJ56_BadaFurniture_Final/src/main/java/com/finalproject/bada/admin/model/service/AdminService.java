@@ -21,7 +21,7 @@ public interface AdminService {
 	int productListCount(Map search);
 	
 	//가구관리 - 요약테이블
-	List<Map<String,Integer>> productSummary();
+	Map<String,Integer> productSummary();
 	
 	//가구관리 - 삭제
 	int deleteProduct(Map param);
@@ -41,7 +41,7 @@ public interface AdminService {
 	int resellListCount(Map search);
 	
 	//내가구팔기 관리 - 요약
-	List<Map<String,Integer>> resellSummary();
+	Map<String,Integer> resellSummary();
 	
 	//내가구팔기 관리 - 진행상태 변경
 	int updateProgressState(Map param);	
@@ -51,7 +51,7 @@ public interface AdminService {
 	int orderListCount(Map search);
 	
 	//주문관리 - 요약
-	List<Map<String,Integer>> orderSummary();
+	Map<String,Integer> orderSummary();
 	
 	//주문관리 - 결제상태 변경
 	void updatePaymentState(Map param);
@@ -65,12 +65,22 @@ public interface AdminService {
 	int refundListCount(Map search);
 	
 	//취소반품관리 - 요약
-	List<Map<String,Integer>> refundSummary();
+	Map<String,Integer> refundSummary();
 	
 	//취소반품관리 - 취소반품상태 변경
 	void updateRefundState(Map param);
 	
 	//취소반품관리 - 취소반품 상세조회
 	Refund viewRefundDetail(int orderDetailNo);
+	
+	//배송관리 - 조회
+	List<OrderDetail> deliveryListPage(Map<String,Integer> param,Map search);
+	int deliveryListCount(Map search);
+	
+	//배송관리 - 요약
+	Map<String,Integer> deliverySummary();
+	
+	//배송관리 - 배송상태 변경
+	void updateDeliveryState(Map param);
 	
 }

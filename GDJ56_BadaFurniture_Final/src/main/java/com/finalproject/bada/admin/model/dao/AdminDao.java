@@ -24,7 +24,7 @@ public interface AdminDao {
 	int productListCount(SqlSessionTemplate session,Map search);
 	
 	//가구관리 - 요약테이블
-	List<Map<String,Integer>> productSummary(SqlSessionTemplate session);
+	Map<String,Integer> productSummary(SqlSessionTemplate session);
 	
 	//가구관리 - 삭제
 	int deleteProduct(SqlSessionTemplate session,Map param);
@@ -47,7 +47,7 @@ public interface AdminDao {
 	List<OrderDetail> orderDetailList(SqlSessionTemplate session,int orderSheetNo);	
 	
 	//내가구팔기 관리 - 요약
-	List<Map<String,Integer>> resellSummary(SqlSessionTemplate session);
+	Map<String,Integer> resellSummary(SqlSessionTemplate session);
 	
 	
 	//내가구팔기 관리 - 진행상태 변경
@@ -58,7 +58,7 @@ public interface AdminDao {
 	int orderListCount(SqlSessionTemplate session,Map search);
 	
 	//주문관리 - 요약
-	List<Map<String,Integer>> orderSummary(SqlSessionTemplate session);
+	Map<String,Integer> orderSummary(SqlSessionTemplate session);
 	
 	//주문관리- 결제상태 변경
 	int updatePaymentState(SqlSessionTemplate session,Map param);
@@ -73,13 +73,23 @@ public interface AdminDao {
 	int refundListCount(SqlSessionTemplate session,Map search);
 	
 	//취소반품관리 - 요약
-	List<Map<String,Integer>> refundSummary(SqlSessionTemplate session);	
+	Map<String,Integer> refundSummary(SqlSessionTemplate session);	
 	
 	//취소반품관리 - 취소반품상태 변경
 	int updateRefundState(SqlSessionTemplate session,Map param);
 	
 	//취소반품관리 - 취소반품 상세조회
 	Refund viewRefundDetail(SqlSessionTemplate session,int orderDetailNo);
+	
+	//배송관리 - 조회
+	List<OrderDetail> deliveryListPage(SqlSessionTemplate session,Map<String,Integer> param,Map search);
+	int deliveryListCount(SqlSessionTemplate session,Map search);
+	
+	//배송관리 - 요약
+	Map<String,Integer> deliverySummary(SqlSessionTemplate session);
+	
+	//배송관리 - 배송상태 변경
+	int updateDeliveryState(SqlSessionTemplate session,Map param);
 	
 	
 }

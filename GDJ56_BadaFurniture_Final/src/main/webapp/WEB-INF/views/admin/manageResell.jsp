@@ -31,23 +31,23 @@
 			<table id="summaryTable">
 				<tr>
 					<th>전체신청</th>
-					<td><c:out value="${summary[0].ALL_R}"/></td>
+					<td id="summary_allR"><c:out value="${summary.ALL_R}"/></td>
 				</tr>
 				<tr>
 					<th>승인검토</th>
-					<td><c:out value="${summary[0].STATE_1}"/></td>
+					<td id="summary_state1"><c:out value="${summary.STATE_1}"/></td>
 				</tr>
 				<tr>
 					<th>수정요청</th>
-					<td><c:out value="${summary[0].STATE_2}"/></td>
+					<td id="summary_state2"><c:out value="${summary.STATE_2}"/></td>
 				</tr>
 				<tr>
 					<th>미입금</th>
-					<td><c:out value="${summary[0].STATE_3}"/></td>
+					<td id="summary_state3"><c:out value="${summary.STATE_3}"/></td>
 				</tr>
 				<tr>
 					<th>수거대기</th>
-					<td><c:out value="${summary[0].STATE_4}"/></td>
+					<td id="summary_state4"><c:out value="${summary.STATE_4}"/></td>
 				</tr>
 	
 			</table>
@@ -182,6 +182,11 @@
 	</div>
 </section>
 <script>
+	//요약테이블 출력
+	$(()=>{
+		updateSummary();
+	});
+
 	//검색 타입 변경
 	$("select#searchType").change(e=>{
 		const type = $(e.target).val();
@@ -220,6 +225,7 @@
 	function changeProgressState(resellNo,progressState){
 		$.ajax({
 			url:"${path}/admin/updateProgressState.do",
+			async:false,
 			data:{resellNo:resellNo,progressState:progressState},
 			success:function(result){	
 				alert(progressState+"상태로 변경했습니다.")
@@ -242,15 +248,34 @@
 					location.reload();
 				}		
 
+				
+
 			}else{
 				changeProgressState(resellNo,progressState);
 			}
 
-
+			updateSummary();
 
 
 
 	});
+
+	function updateSummary(){
+		$.ajax({
+			url:"${path}/admin/updateResellSummary.do",
+			dataType : "json",
+			async:false,
+			success:function(summary){
+				console.log(summary);
+				$("#summary_allR").text(summary.ALL_R);
+				$("#summary_state1").text(summary.STATE_1);
+				$("#summary_state2").text(summary.STATE_2);
+				$("#summary_state3").text(summary.STATE_3);
+				$("#summary_state4").text(summary.STATE_4);
+
+			}
+		})
+	}
 </script>
 
 </body>

@@ -67,10 +67,10 @@ public class AdminController {
 //	}
 	
 	//배송 관리 연결
-	@RequestMapping("/admin/delivery.do")
-	public String manageDelivery() {
-		return "admin/manageDelivery";
-	}
+//	@RequestMapping("/admin/delivery.do")
+//	public String manageDelivery() {
+//		return "admin/manageDelivery";
+//	}
 	
 	//취소/반품 관리 연결
 //	@RequestMapping("/admin/refund.do")
@@ -180,7 +180,7 @@ public class AdminController {
 		
 		
 		//가구조회 요약
-		List<Map<String,Integer>> sum=service.productSummary();
+		Map<String,Integer> sum=service.productSummary();
 		//log.debug("{}",sum);		
 		mv.addObject("summary",sum);		
 		
@@ -367,7 +367,7 @@ public class AdminController {
 		
 		
 		//내가구팔기 요약
-		List<Map<String,Integer>> sum=service.resellSummary();
+		Map<String,Integer> sum=service.resellSummary();
 		//log.debug("{}",sum);		
 		mv.addObject("summary",sum);		
 		
@@ -386,11 +386,11 @@ public class AdminController {
 		param.put("resellNo", resellNo);
 		param.put("progressState", progressState);	
 		
-		//log.debug("변경할 상태 : "+progressState);
+		log.debug("변경할 상태 : "+progressState);
 	
 		
 		int result=service.updateProgressState(param);
-		
+		log.debug("ㅎㅇㅎㅇ{}",result);
 		Gson gson=new Gson();
 		JsonObject jsonOb=new JsonObject();
 		jsonOb.addProperty("result", result);
@@ -427,8 +427,8 @@ public class AdminController {
 			String key1=keys[0].trim();
 			String key2=keys[1].trim();
 			
-			//log.debug("keys :{}",key1);
-			//log.debug("keys :{}",key2);				
+			log.debug("keys :{}",key1);
+			log.debug("keys :{}",key2);				
 			
 			search.put("searchKeyword1", key1);			
 			search.put("searchKeyword2", key2);		
@@ -467,8 +467,8 @@ public class AdminController {
 		
 		
 		
-		//내가구팔기 요약
-		List<Map<String,Integer>> sum=service.orderSummary();
+		//주문관리 요약
+		Map<String,Integer> sum=service.orderSummary();
 		//log.debug("{}",sum);		
 		mv.addObject("summary",sum);		
 //		
@@ -547,7 +547,7 @@ public class AdminController {
 		
 		
 		//취소환불 요약
-		List<Map<String,Integer>> sum=service.refundSummary();
+		Map<String,Integer> sum=service.refundSummary();
 		//log.debug("{}",sum);		
 		mv.addObject("summary",sum);		
 		
@@ -593,6 +593,149 @@ public class AdminController {
 		return refund;
 	}
 	
+	
+	///////
+	//'배송관리' - 조회
+	@RequestMapping("/admin/delivery.do")
+	public ModelAndView deliveryList(ModelAndView mv,
+			@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
+			,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
+			,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
+			) {		
+
+		//log.debug("cPage {}", cPage);
+		//log.debug("numPerpage {}", numPerpage);
+		
+		//log.debug("searchType {}", searchType);
+		//log.debug("searchKeyword {}", searchKeyword);
+		
+		Map search=new HashMap();
+		search.put("searchType", searchType);		
+		search.put("searchKeyword", searchKeyword);		
+		
+		
+		mv.addObject("delivery",service.deliveryListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		//log.debug("resell : {}",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		
+		int totalData=service.deliveryListCount(search);
+		
+		//log.debug("totalData {}", totalData);		
+		
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "refund.do",searchType,searchKeyword));
+		
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchKeyword", searchKeyword);
+		
+		
+		
+		//배송 요약
+		Map<String,Integer> sum=service.deliverySummary();
+		//log.debug("{}",sum);		
+		mv.addObject("summary",sum);		
+		
+		mv.setViewName("admin/manageDelivery");	
+		
+		return mv;
+	}
+	
+	//'배송관리' - 배송상태 변경하기
+	@RequestMapping(value="/admin/updateDeliveryState.do")
+	@ResponseBody
+	public Map updateDeliveryState(
+			@RequestParam("orderDetailNo") int orderDetailNo,
+			@RequestParam("deliveryState") String deliveryState) {		
+		
+		Map param=new HashMap();
+		param.put("orderDetailNo", orderDetailNo);
+		param.put("deliveryState", deliveryState);	
+		//log.debug("변경할 상태 : "+deliveryState);
+		
+		Map result=new HashMap();	
+		
+		try {
+			service.updateDeliveryState(param);			
+			result.put("msg", ("'"+(String)param.get("deliveryState"))+"'"+" 상태로 변경했습니다.");
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			result.put("msg", "배송상태 변경에 실패했습니다.");
+		}		
+		
+		return result;
+		
+	}
+	
+	
+	@RequestMapping("/admin/updateProductSummary.do")	
+	public @ResponseBody Map<String,Integer> updateProductSummary() {		
+		Map<String,Integer> summary=service.productSummary();
+		//log.debug("콱그냥 :{}",summary);
+		
+		summary.put("ALLP",Integer.parseInt(String.valueOf(summary.get("ALLP"))));
+		summary.put("SOSNP",Integer.parseInt(String.valueOf(summary.get("SOSNP"))));
+		summary.put("SOSIP",Integer.parseInt(String.valueOf(summary.get("SOSIP"))));
+		summary.put("SSNP",Integer.parseInt(String.valueOf(summary.get("SSNP"))));
+		
+		return summary;
+		
+	}
+	
+	
+	@RequestMapping("/admin/updateOrderSummary.do")	
+	public @ResponseBody Map<String,Integer> updateOrderSummary() {		
+		Map<String,Integer> summary=service.orderSummary();
+		
+		summary.put("ALL_O)",Integer.parseInt(String.valueOf(summary.get("ALL_O"))));
+		summary.put("STATE_1",Integer.parseInt(String.valueOf(summary.get("STATE_1"))));
+		summary.put("STATE_2",Integer.parseInt(String.valueOf(summary.get("STATE_2"))));
+		summary.put("STATE_3",Integer.parseInt(String.valueOf(summary.get("STATE_3"))));
+		summary.put("STATE_4",Integer.parseInt(String.valueOf(summary.get("STATE_4"))));		
+		summary.put("STATE_5",Integer.parseInt(String.valueOf(summary.get("STATE_5"))));
+		summary.put("STATE_6",Integer.parseInt(String.valueOf(summary.get("STATE_6"))));
+		summary.put("STATE_7",Integer.parseInt(String.valueOf(summary.get("STATE_7"))));
+		summary.put("STATE_8",Integer.parseInt(String.valueOf(summary.get("STATE_8"))));
+		summary.put("STATE_9",Integer.parseInt(String.valueOf(summary.get("STATE_9"))));		
+		
+		return summary;
+	}
+	
+	@RequestMapping("/admin/updateDeliverySummary.do")	
+	public @ResponseBody Map<String,Integer> updateDeliverySummary() {		
+		Map<String,Integer> summary=service.deliverySummary();
+		
+		summary.put("STATE_1",Integer.parseInt(String.valueOf(summary.get("STATE_1"))));
+		summary.put("STATE_2",Integer.parseInt(String.valueOf(summary.get("STATE_2"))));
+		summary.put("STATE_3",Integer.parseInt(String.valueOf(summary.get("STATE_3"))));	
+		
+		return summary;
+	}
+	
+	@RequestMapping("/admin/updateRefundSummary.do")	
+	public @ResponseBody Map<String,Integer> updateRefundSummary() {		
+		Map<String,Integer> summary=service.refundSummary();
+		
+		summary.put("ALL_R",Integer.parseInt(String.valueOf(summary.get("ALL_R"))));
+		summary.put("STATE_1",Integer.parseInt(String.valueOf(summary.get("STATE_1"))));
+		summary.put("STATE_2",Integer.parseInt(String.valueOf(summary.get("STATE_2"))));
+		summary.put("STATE_3",Integer.parseInt(String.valueOf(summary.get("STATE_3"))));	
+		summary.put("STATE_4",Integer.parseInt(String.valueOf(summary.get("STATE_4"))));	
+		summary.put("STATE_5",Integer.parseInt(String.valueOf(summary.get("STATE_5"))));	
+		
+		return summary;
+	}
+	
+	@RequestMapping("/admin/updateResellSummary.do")	
+	public @ResponseBody Map<String,Integer> updateResellSummary() {		
+		Map<String,Integer> summary=service.resellSummary();
+		
+		summary.put("ALL_R",Integer.parseInt(String.valueOf(summary.get("ALL_R"))));
+		summary.put("STATE_1",Integer.parseInt(String.valueOf(summary.get("STATE_1"))));
+		summary.put("STATE_2",Integer.parseInt(String.valueOf(summary.get("STATE_2"))));
+		summary.put("STATE_3",Integer.parseInt(String.valueOf(summary.get("STATE_3"))));	
+		summary.put("STATE_4",Integer.parseInt(String.valueOf(summary.get("STATE_4"))));	
+		
+		return summary;
+	}
 }
 
 
