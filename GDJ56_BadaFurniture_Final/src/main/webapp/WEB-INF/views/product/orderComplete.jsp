@@ -178,7 +178,7 @@
 						            </li>
 						             <li class="order__item delivery__item__info"  id="adminAccountInfo" style="display: none;" >
 						                <span class="order__item__label">입금계좌</span>
-						                <div class="order__item__area" id="delivery-addr">예금주명:유병승/BS은행/계좌번호:1002-1002-1002 </div>
+						                <div class="order__item__area" id="delivery-addr">예금주명:유병승/은행:BS은행/계좌번호:1002-1002-1002 </div>
 						            </li>						         					
 						         </ul>
 						  </div>
