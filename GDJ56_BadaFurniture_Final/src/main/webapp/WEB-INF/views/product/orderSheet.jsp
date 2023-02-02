@@ -279,7 +279,7 @@
 														<span class="list_info" id="productCountCheck" >${product.title}</span>
 													</div>
 													<div class="order_option_box">
-														<p> 분류:${product.item}/색깔:${product.color} /상태:${product.grade}</p>
+														<p> 분류:${product.item}/색상:${product.color} /상태:${product.grade}</p>
 													</div>										
 												</div>
 											</td>

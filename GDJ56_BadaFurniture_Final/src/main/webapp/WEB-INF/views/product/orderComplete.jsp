@@ -232,7 +232,7 @@
 															</span>
 														</div>
 														<div class="order_option_box">
-															<p> 분류:${detail.product.item}/색깔:${detail.product.color} /상태:${detail.product.grade}</p>
+															<p> 분류:${detail.product.item}/색상:${detail.product.color} /상태:${detail.product.grade}</p>
 														</div>										
 													</div>
 												</td>
