@@ -30,24 +30,37 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain authenticationPath(HttpSecurity http) throws Exception {
 		
+//				loginPage ()  – 사용자 정의 로그인 페이지
+//				loginProcessingUrl () – 사용자 이름과 암호를 제출할 URL
+//				defaultSuccessUrl () – 성공적인 로그인 후 랜딩 페이지
+//				failureUrl () – 로그인 실패 후 방문 페이지
+//				logoutUrl () – 사용자 정의 로그 아웃
+		
 		return http.csrf().disable()
 				.formLogin()
+					.loginProcessingUrl(null)
 //					.successForwardUrl("/")
 					.and()
 				.authorizeRequests()
 					//간보기 패킷 cors에러여부를 확인하는 패킷
 					.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+					.antMatchers("/").permitAll()
 					.antMatchers("/resources/**").permitAll()
 					.antMatchers("/logout.do").permitAll()
 					//admin 권한 설정
 					.antMatchers("/admin/**").hasAnyRole("ADMIN")
+					//member 권한 설정
 					.antMatchers("/mypage/**").hasAnyAuthority("MEMBER")
 					.antMatchers("/mypage.do").hasAnyAuthority("MEMBER")
-					.antMatchers("/").permitAll()
-//					.antMatchers("/**").permitAll()
+					.antMatchers("/cart/**").hasAnyAuthority("MEMBER")
+					.antMatchers("/alert/**").hasAnyAuthority("MEMBER")
+					.antMatchers("/resell/**").hasAnyAuthority("MEMBER")
+					.antMatchers("/product/cartBtn.do").hasAnyAuthority("MEMBER")
+					.antMatchers("/order/**").hasAnyAuthority("MEMBER")
 					.and()
 				.logout()
-					.logoutUrl("/logout.do")
+					.logoutUrl("/member/logout.do")
+					.logoutSuccessUrl("/")
 					.and()
 				.authenticationProvider(provider)
 				.build();

@@ -105,7 +105,7 @@
 <!------------------------------------------------------------------------------------------------------------------>    
     <script>
     $(()=>{
-    	<c:if test="${loginMember != null}">
+    	<c:if test="${not empty loginMember}">
     	$.ajax({
    			url:"${path}/alert/countReadState.do",
    			success:data=>{
