@@ -1,5 +1,6 @@
 package com.finalproject.bada.member.model.vo;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -37,8 +38,16 @@ public class Member implements UserDetails{
 	//시큐리티 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		//Granted Authority를 implement 한 클래스
-		return List.of(new SimpleGrantedAuthority("ROLE_MEMBER"));
+		//SimpleGrantedAuthority : Granted Authority를 implement 한 클래스
+		List<SimpleGrantedAuthority> auth = new ArrayList();
+		
+		//admin 과 기본유저에 따른 권한 설정
+		if(memberId.equals("admin")) {
+			auth.add(new SimpleGrantedAuthority("ADMIN"));
+		}
+		auth.add(new SimpleGrantedAuthority("MEMBER"));
+		
+		return auth;
 	}
 	@Override
 	public String getUsername() {

@@ -7,11 +7,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import com.finalproject.bada.member.model.dao.MemberDao;
 import com.finalproject.bada.member.model.service.MemberService;
 import com.finalproject.bada.member.model.vo.Member;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Component
+@Slf4j
 public class BadaProvider implements AuthenticationProvider{
 
 	private MemberService service;
@@ -34,6 +39,7 @@ public class BadaProvider implements AuthenticationProvider{
 			//아이디가 존재하지 않거나, 비밀번호가 틀린 경우 발생하는 exception 
 			throw new BadCredentialsException("로그인 실패");
 		}
+		log.debug("loginMember: {}",loginMember);
 		
 //		- principal : 아이디
 //		- credential : 비밀번호
