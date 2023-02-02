@@ -86,7 +86,7 @@
                                 </p>
                                 
                              <%--    <c:if test="${not empty loginMember }">  --%>
-                                <button  class="site-btn" style="background-color: #348492;"  onclick="location.assign('${path}/order/orderSheet.do?productNo=${productData.productNo}');">바로 구매하기</button>
+                                <button  class="site-btn" style="background-color: #348492;"  onclick="fn_directPurchaseBtn();">바로 구매하기</button>
                                 <button  class="site-btn" style="background-color: #348492;" onclick="fn_cartBtn();">장바구니</button>
                          <%--    	</c:if> --%>
                             	
@@ -236,12 +236,16 @@
     	 
     	 <script>
     	 const fn_cartBtn=()=>{
-    		/* if( $("#badaLoginFilter").val() == null){
+    		 if( $("#badaLoginFilter").val() ==''){
     		
-    			confirm("로그인 화면으로 이동하시겠습니니까?");
+    			 alert("로그인 하셔야 장바구니에 담을 수 있습니다.");
    			 window.location.href="${path}/member/login.do"
     			
-    		} */
+    		} 
+    		
+    	
+    		
+    		
     		$.ajax({
 						url:"${path}/product/cartBtn.do",
 						data:{cartProductNo:$("#cart_productNo").val()
@@ -257,7 +261,19 @@
     			
     	 }	
     	 
-    	 
+    	
+    	 const fn_directPurchaseBtn=()=>{
+    		 
+    		 if( $("#badaLoginFilter").val() ==''){
+    	    		
+    			 alert("로그인 하셔야 구매하실수 있습니다.");
+   			 window.location.href="${path}/member/login.do"
+    			
+    		} 
+    		 
+    		 
+    		 location.assign('${path}/order/orderSheet.do?productNo=${productData.productNo}');
+    	 }
     	 
     	 
     	 
