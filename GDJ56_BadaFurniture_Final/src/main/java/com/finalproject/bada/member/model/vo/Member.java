@@ -44,11 +44,13 @@ public class Member implements UserDetails{
 		//admin 과 기본유저에 따른 권한 설정
 		if(memberId.equals("admin")) {
 			auth.add(new SimpleGrantedAuthority("ADMIN"));
+		}else {
+			auth.add(new SimpleGrantedAuthority("MEMBER"));
 		}
-		auth.add(new SimpleGrantedAuthority("MEMBER"));
 		
 		return auth;
 	}
+	
 	@Override
 	public String getUsername() {
 		return memberId;

@@ -1,17 +1,12 @@
 package com.finalproject.bada.config;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.AccessDecisionManager;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.access.ConfigAttribute;
-import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsUtils;
 
@@ -42,6 +37,7 @@ public class SecurityConfig {
 					.usernameParameter("userId")
 					.passwordParameter("password")
 					.loginProcessingUrl("/login.do")
+					.failureForwardUrl("/member/errorPage.do")
 //					.successForwardUrl("/")
 					.and()
 				.authorizeRequests()
@@ -51,7 +47,7 @@ public class SecurityConfig {
 					.antMatchers("/resources/**").permitAll()
 					.antMatchers("/logout.do").permitAll()
 					//admin 권한 설정
-					.antMatchers("/admin/**").hasAnyRole("ADMIN")
+					.antMatchers("/admin/**").hasAnyAuthority("ADMIN")
 					//member 권한 설정
 					.antMatchers("/mypage/**").hasAnyAuthority("MEMBER")
 					.antMatchers("/mypage.do").hasAnyAuthority("MEMBER")

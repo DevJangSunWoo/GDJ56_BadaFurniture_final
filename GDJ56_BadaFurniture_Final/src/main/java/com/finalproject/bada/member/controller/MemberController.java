@@ -40,8 +40,14 @@ public class MemberController {
 //--------------------------------------------------------------------------------------------------------------------------------------------------	
 
 	
-	
 	//security를 사용할 경우 security 맵핑주소와 동일한 mapping주소를 쓰면 안됨 
+	//security로그인 실패 나오는 페이지 연결
+	@RequestMapping("/errorPage.do")
+	public String errorPage () {
+		return "member/errorPage";
+	}
+	
+	
 	
 //	//로그인
 //	@RequestMapping("/login.do")
