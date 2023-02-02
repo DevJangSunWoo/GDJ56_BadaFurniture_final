@@ -76,6 +76,10 @@ public class OrderController {
 			,@RequestParam(value="badaAddressDetail",required=false)String addressDetail
 //			,@RequestParam(value="badaProductList",required=false)List<Product> productList  //NG
 			,@RequestParam(value="badaProductNo",required=false) int[]productNos
+			,@RequestParam(value="MERCHANT_UID",required=false) String merchantUidCard // 카드 주문식별번호
+			,@RequestParam(value="IMP_UID",required=false) String impUid
+			,@RequestParam(value="RECEIPT_URL",required=false) String receiptUrl			
+			,@RequestParam(value="payMethod",required=false) String payMethod	
 			)
 		throws IOException {
 //		log.debug("{}",loginMemberNo);  
@@ -120,8 +124,22 @@ public class OrderController {
 		map.put("address",address);
 		map.put("addressDetail",addressDetail);
 		map.put("productNos",productNos);
+		//카드 결제를 위해 map에 put할것들
+//		merchantUidCard
+//		impUid
+//		receiptUrl
+		map.put("merchantUidCard",merchantUidCard);
+		map.put("impUid",impUid);
+		map.put("receiptUrl",receiptUrl);
+		
+		//주문결제방식
+		map.put("payMethod",payMethod);
+		
+		
 		//주문서 작성 로직
 		service.insertOrderSheet(map);		
+		
+		
 		
 		
 		
