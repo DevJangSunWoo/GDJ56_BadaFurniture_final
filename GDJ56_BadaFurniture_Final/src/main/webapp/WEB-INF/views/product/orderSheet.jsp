@@ -5,14 +5,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<!-- 상단 콘텐츠 영역 -->
 
+
+
+ <!-- iamport.payment.js -->
+ <!--1.1.8.js  버전에 맞게 바꿔줘야함  -->
+ <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 
 
 
 
 <!-- SW커스텀마이징 css --> 
-
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/order/base.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/order/common.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/order/font-awesome.css" />
@@ -34,17 +37,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/order/swiper.min.css" />
 <!--// SW커스텀마이징 css -->
 
-
-
 <script src="//static.msscdn.net/swiper/swiper.min.js?20200316"></script>
-
-
-
 
 <!-- SW js커스텀마이징 -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.6.1.min.js"></script> 
-
-
 
 <%-- <script src="${pageContext.request.contextPath }/resources/js/jsOrder/ai.2.min.js"></script> --%>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/base.js"></script>
@@ -83,10 +79,8 @@
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/ui.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/uwt.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jsOrder/wcslog.js"></script> 
-
-
-
 <!-- //SW js커스텀마이징 -->
+
 <script src="//static.msscdn.net/static/common/1.2.0/chunk-vendors.js"></script>
 <script src="//static.msscdn.net/skin/js/app/app.js?874d2b2435d068069fdd"></script>
 
@@ -105,12 +99,6 @@
 	.n-order-promotion > div{margin:5px 0}
 	.n-order-promotion > a{display:inline-block;font-weight:bold;color:#000;margin-top:5px}
 </style>
-
-
-
-<!--  결제 관련  시작 -->
-<!--vs코드 참조  -->
-<!--  결제 관련  종료 -->
 
 
 <!-- wrap -->
@@ -972,8 +960,10 @@
 
 				<!--cart button-->
 				<div  id="card_btn"  class="btn_wrap order_form__payment-button-wrap" >
-					<a id="btn_pay" href="javascript:void(0)"   class="order_form__payment-button" ">
-						<span id="btn-pay_amt" style="font-size:20px;">0</span>카드 결제하기&nbsp;
+					<a href="#"   onclick="return badaOrderPayment('card')"    id="btn_pay"     class="order_form__payment-button">
+						<span id="btn-pay_amt" style="font-size:20px;">
+							<c:out value="${total}"/>원</span>	
+						</span>카드 결제하기&nbsp;
 						<span class="btn_billing" style="display:none;"><span name="total_expected_billing_dc_amt"></span>원 <span class="card_discount_type">청구</span> 예상</span>
 					</a>
 				</div>
@@ -982,7 +972,7 @@
 							<span id="btn-pay_amt" style="font-size:20px;"><c:out value="${total}"/>원</span>&nbsp계좌이체로 결제하기&nbsp;
 						</a>  
 						<button type="submit"   onclick="badaOrderPayment('account');" >계좌결제 임시 테스트 버튼</button>				 --%>
-						<a href="#"   onclick="return badaOrderPayment('account')"    id="btn_pay"     class="order_form__payment-button" ">
+						<a href="#"   onclick="return badaOrderPayment('account')"    id="btn_pay"     class="order_form__payment-button" >
 							<span id="btn-pay_amt" style="font-size:20px;"><c:out value="${total}"/>원</span>&nbsp계좌이체로 결제하기&nbsp;
 						</a>  	
 				</div>
@@ -1022,6 +1012,65 @@
 			document.getElementById('orderForm').setAttribute( 'action', '${path}/order/orderPayment.do' );
 			document.getElementById('orderForm').submit();
 			
+			}else if(method=='card'){
+				let memberNo=$('input[name=badaLoginMemberNo]').val();
+				let depositName=$('input[name=badaDepositName]').val();
+				let totalPrice=$('input[name=badaTotalPrice]').val();
+				let receiverName=$('input[name=badaReceiverName]').val();
+				
+				let postCode=$('input[name=badaPostCode]').val();
+				let address=$('input[name=badaAddress]').val();
+				let addressDetail=$('input[name=badaAddressDetail]').val();
+				let productList=$('input[name=badaProductList]').val();
+				
+				
+				console.log(memberNo);				
+				console.log(depositName);
+				console.log(totalPrice);				
+				console.log(receiverName);
+				console.log(postCode);				
+				console.log(address);
+				console.log(addressDetail);				
+				console.log(productList);
+				
+				
+				
+				
+				
+				/* IMP.init('imp51688482');  //가맹점 식별코드
+		         IMP.request_pay({
+		            pg : 'html5_inicis', //pg사명
+		             pay_method : 'card',
+		             merchant_uid: "100008", // 상점에서 관리하는 주문 번호를 전달  // db상 컬럼추가-> time+난수로 발생
+		             name : '주문명:결제테스트',
+		             amount : 100,
+		             buyer_email : 'iamport@siot.do',
+		             buyer_name : '구매자이름',
+		             buyer_tel : '010-1234-5678',
+		             buyer_addr : '서울특별시 강남구 삼성동',
+		             buyer_postcode : '123-456'
+		         
+		         }, function(rsp) {
+		            console.log(rsp);
+		             if ( rsp.success ) {
+		                var msg = '결제가 완료되었습니다.';
+		                 msg += '고유ID : ' + rsp.imp_uid;
+		                 msg += '상점 거래ID : ' + rsp.merchant_uid;
+		                 msg += '결제 금액 : ' + rsp.paid_amount;
+		                 msg += '카드 승인번호 : ' + rsp.apply_num;
+		                 msg += '결제 수단 :' + rsp.pay_method; 
+		                 msg += '영수증 url : ' + rsp.receipt_url;
+		                 console.log(rsp);
+		             } else {
+		                 var msg = '결제에 실패하였습니다.';
+		                  msg += '에러내용 : ' + rsp.error_msg;
+		             }
+		             
+		             alert(msg);//결제가 성공시  결제 완료 출력,   결제취소및 실패시   결제에 실패하였습니다. 출력하기
+		            
+		         }); */
+				
+				
 			}
 		} 	
 	</script>
