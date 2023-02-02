@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<c:set var="loginMember" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}"/>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/> 
 
@@ -36,7 +37,7 @@
           	<div class="flexDiv">
                   <img src="${path }/resources/images/member/아이디.png">
                   <div class="input-container">		
-                      <input type="text" name="id" class="form__input" value="${sessionScope.loginMember.memberId}" readonly/>
+                      <input type="text" name="id" class="form__input" value="${loginMember.memberId}" readonly/>
                       <label class="form__label" id="idTxt">아이디</label>
                   </div>
               </div>
@@ -45,7 +46,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/메일.png">
                         <div class="input-container" >
-                            <input type="email" name="email" id="email" class="form__input" value="${sessionScope.loginMember.email}" readonly/>
+                            <input type="email" name="email" id="email" class="form__input" value="${loginMember.email}" readonly/>
                             <label class="form__label" id="mailTxt">이메일</label>
                         </div>
                     </div>
@@ -60,14 +61,14 @@
                      const fn_updatePassword=()=>{
              			//새창으로 패스워드 수정페이지 연결
              			open("${path}/member/updatePassword.do?userId=${loginMember.memberId!=null ? loginMember.memberId : ""}",
-             					"_blank","width=400, height=210, left=500, top=200");
+             					"_blank","width=400, height=260, left=500, top=200");
              		}
                     </script>
                     
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/이름.png">
                         <div class="input-container">		
-                            <input type="text" name="memberName" class="form__input" value="${sessionScope.loginMember.memberName}" placeholder="이름" required/>
+                            <input type="text" name="memberName" class="form__input" value="${loginMember.memberName}" placeholder="이름" required/>
                             <label class="form__label">이름</label>
                         </div>
                     </div>
@@ -75,7 +76,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/전화.png">
                         <div class="input-container">
-                            <input type="text" name="phone" class="form__input" value="${sessionScope.loginMember.phone}" placeholder="전화번호(-포함)" required/>
+                            <input type="text" name="phone" class="form__input" value="${loginMember.phone}" placeholder="전화번호(-포함)" required/>
                             <label class="form__label">전화번호</label>		
                         </div>
                     </div>
@@ -101,7 +102,7 @@
 			                    <option value="HSBC은행">HSBC은행</option>
 			                    <option value="SC제일은행">SC제일은행</option>
 							</select>
-                            <input type="text" id="bank" name="bankName" class="form__input" value="${sessionScope.loginMember.bankName }" placeholder="거래은행" readonly/>
+                            <input type="text" id="bank" name="bankName" class="form__input" value="${loginMember.bankName }" placeholder="거래은행" readonly/>
                         </div>
                     </div>
                     <br>
@@ -115,7 +116,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/계좌번호.png">
                         <div class="input-container">
-                            <input type="text" name="accountCode" class="form__input" value="${sessionScope.loginMember.accountCode}" placeholder="계좌번호(-포함)"/>
+                            <input type="text" name="accountCode" class="form__input" value="${loginMember.accountCode}" placeholder="계좌번호(-포함)"/>
                             <label class="form__label">계좌번호</label>		
                         </div>
                     </div>
@@ -129,7 +130,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/그림.png">
                         <div class="input-container">
-                            <input type="text" id="postCode" name="postCode" class="form__input" value="${sessionScope.loginMember.postCode}" placeholder="우편번호" required/>
+                            <input type="text" id="postCode" name="postCode" class="form__input" value="${loginMember.postCode}" placeholder="우편번호" required/>
                             <label class="form__label">우편번호</label>		
                         </div>
                     </div>
@@ -137,7 +138,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/그림.png">
                         <div class="input-container">
-                            <input type="text" id="address" name="address" class="form__input" value="${sessionScope.loginMember.address}" placeholder="주소" required/>
+                            <input type="text" id="address" name="address" class="form__input" value="${loginMember.address}" placeholder="주소" required/>
                             <label class="form__label">주소</label>		
                         </div>
                     </div>
@@ -145,7 +146,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/그림.png">
                         <div class="input-container">
-                            <input type="text" name="detailAddress" class="form__input" value="${sessionScope.loginMember.detailAddress}" placeholder="상세주소"/>
+                            <input type="text" name="detailAddress" class="form__input" value="${loginMember.detailAddress}" placeholder="상세주소"/>
                             <label class="form__label">상세주소</label>		
                         </div>
                     </div>

@@ -4,6 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<c:set var="loginMember" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}"/>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,11 +31,11 @@
     <div id="headerDiv">
         <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo" style="cursor:pointer;">
         
-        <c:if test="${empty loginMember }">
+        <c:if test="${empty loginMember}">
         	<span class="headbtn" id="headbtn"><a href="#demo-modal"></a></span>
         </c:if>
         
-        <c:if test="${not empty loginMember }">
+        <c:if test="${not empty loginMember}">
         	<div style="display: flex; margin-top:10px">
 	        	<span id="alertImgContainer"><img id="alertImg" width="60px" height="60px" style="cursor:pointer;"/></span>
 	        	<div style="display: flex; margin-right: 5px;">
@@ -67,14 +70,16 @@
             </a>
             <img class="user" src="${path }/resources/images/mainpage/loginIcon.png" height="100px" width="100px">
             <h3>Sign in here</h3>
-            <form action="${path}/member/login.do" method="post">
+            
+            <form action="${path}/login.do" method="post">
                 <div class="inputBox"> 
-                    <input id="uname" type="text" name="memberId" placeholder="아이디"> 
+                    <input id="uname" type="text" name="userId" placeholder="아이디"> 
                     <input id="pass" type="password" name="password" placeholder="비밀번호"> 
                 </div>
                 <br>
                 <input type="submit" value="Login">
             </form>
+            
             <div style="display: flex; justify-content: center;">
                 <a href="${path}/member/searchId.do" class="find">아이디 찾기<br> </a> 
                 &nbsp; &nbsp; <a> | </a> &nbsp; &nbsp;
@@ -102,7 +107,7 @@
 <!------------------------------------------------------------------------------------------------------------------>    
     <script>
     $(()=>{
-    	<c:if test="${loginMember != null}">
+    	<c:if test="${not empty loginMember}">
     	$.ajax({
    			url:"${path}/alert/countReadState.do",
    			success:data=>{

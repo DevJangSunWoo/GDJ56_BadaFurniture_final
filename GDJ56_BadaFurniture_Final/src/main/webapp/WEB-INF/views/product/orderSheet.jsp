@@ -131,7 +131,8 @@
 			    <div class="order__delivery__inner">
 			        <h3 class="order__title">배송 정보</h3>
 			       <!--배송정보 히든 태그  -->
-			     <c:if test="${not empty loginMember }"> 
+			  <%--    <c:if test="${not empty loginMember }">  --%>
+				 <c:if test="${not empty sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }">  
 				        <ul class="order__list">
 				            <li class="order__item delivery__item__info" >
 				                <span class="order__item__label">
@@ -141,7 +142,7 @@
 				                    <ul class="order__delivery__radio-wrap" id="quickDeliveryList">
 				                        <li>
 				                            <input type="radio" onclick="test123789();" class="n-radio" id="delivery_choice_0"     checked >
-				                            <label for="delivery_choice_0">${loginMember.memberId}님 배송지</label>
+				                            <label for="delivery_choice_0">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberId}님 배송지</label>
 				                        </li>
 				                    </ul>
 				                    <button type="button" class="order__button" onclick="sample6_execDaumPostcode();">배송지 변경</button> 
@@ -151,8 +152,8 @@
 				                <span class="order__item__label">이름 / 연락처</span>
 				                <div class="order__item__area">
 				                    <ul class="order__delivery__user">
-				                        <li id="delivery-name">${loginMember.memberName}</li>
-				                        <li id="delivery-phone">${loginMember.phone}</li>
+				                        <li id="delivery-name">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberName}</li>
+				                        <li id="delivery-phone">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.phone}</li>
 				                    </ul>
 				                </div>
 				            </li>	
@@ -162,9 +163,9 @@
 						         	<span class="order__item__label">배송주소</span>    			
 					                <div class="order_option_box"> 								
 										<div id="addressContainer">
-											<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:100px;border:1px solid lightgray;"name="badaPostCode" readonly required  value="${loginMember.postCode}"   >
-											<input type="text" id="sample6_address" placeholder="주소" style="width:280px;border:1px solid lightgray;"name="badaAddress" readonly required value="${loginMember.address}"><br>
-											<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;"name="badaAddressDetail" value="${loginMember.detailAddress}">
+											<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:100px;border:1px solid lightgray;"name="badaPostCode" readonly required  value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.postCode}"   >
+											<input type="text" id="sample6_address" placeholder="주소" style="width:280px;border:1px solid lightgray;"name="badaAddress" readonly required value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.address}"><br>
+											<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;"name="badaAddressDetail" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.detailAddress}">
 											<input type="hidden" id="sample6_extraAddress" placeholder="참고항목" style="width:210px;"name="addressExtra" disabled>
 										</div>
 									 </div>	
@@ -231,9 +232,9 @@
 			<script>
 				/*기본 배송지로 변경하는 스크립트   */
 				function test123789(){
-					$("#sample6_postcode").val('${loginMember.postCode}');
-					$("#sample6_address").val('${loginMember.address}');
-					$("#sample6_detailAddress").val('${loginMember.detailAddress}');
+					$("#sample6_postcode").val('${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.postCode}');
+					$("#sample6_address").val('${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.address}');
+					$("#sample6_detailAddress").val('${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.detailAddress}');
 			}
 			</script>
 			
@@ -275,7 +276,7 @@
 												<div class="article_info connect_info">
 													<div class="box_product">
 														<strong>제품 명</strong>
-														<span class="list_info">${product.title}</span>
+														<span class="list_info" id="productCountCheck" >${product.title}</span>
 													</div>
 													<div class="order_option_box">
 														<p> 분류:${product.item}/색깔:${product.color} /상태:${product.grade}</p>
@@ -980,19 +981,28 @@
 			 </div>
 			<!--// 컨텐츠 영역 -->
 			<!--form으로 전송할 데이터  -->
-			<input  type="hidden"  name="badaLoginMemberNo" value="${loginMember.memberNo}" >
+			<input  type="hidden"  name="badaLoginMemberNo" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberNo}" >
 			<!--예금주명  태그 name은    badaDepositName -->
 			<input  type="hidden"  name="badaTotalPrice" value="${total}" >
-			<input  type="hidden"  name="badaReceiverName" value="${loginMember.memberId}" >
+			<input  type="hidden"  name="badaReceiverName" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberName}" >
 			<!--우편 번호/  badaPostCode      /주소 badaAddress      /상세주소   badaAddressDetail-->
-			<input type="hidden"  name="badaProductList"   value="${products}" >
 			<!--name="badaProductNo"   인트형배열의   제품번호들    -->
+			
+			<!--아임포트 카드 결제시 추가로 필요한  태그들  -->
+			<input  type="hidden"  name="buyer_email" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}" >
+			<input  type="hidden"  name="buyer_name" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberName}" >
+			<input  type="hidden"  name="buyer_tel" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.phone}" > 
+			 
+			<input  type="hidden"  name="MERCHANT_UID" value="" > 
+			<input  type="hidden"  name="IMP_UID" value="" > 
+			<input  type="hidden"  name="RECEIPT_URL" value="" > 
+			
+			<!--주문결제 방식 태그  -->
+			<input  type="hidden"  id="payMethodWay"   name="payMethod" value="" >
+			
+		<!--요건 필요 없을지도  -->	
+		<%-- 	<input type="hidden"  name="badaProductList"   value="${products}" > --%>
 		</form>
-		<%-- <a id="btn_pay"  href="javascript:badaOrderPayment('account')"    class="order_form__payment-button" ">
-			<span id="btn-pay_amt" style="font-size:20px;"><c:out value="${total}"/>원</span>&nbsp계좌이체로 결제하기2&nbsp;
-		</a>
-		<button type="submit"   onclick="badaOrderPayment('account');" >계좌결제 임시 테스트 버튼2</button> --%>
-			<!--right area  -->
 	 </div>
   </div>	
 		<!-- 중앙정렬용 /div  -->
@@ -1002,6 +1012,7 @@
 <!--결제 버튼 스크립트 -->
 	<script>
 		function badaOrderPayment(method){
+			document.getElementById('orderForm').setAttribute( 'action', '${path}/order/orderPayment.do' );
 			if(method=='account'){
 				/* console.log("계좌이체 결제 진행"); */
 			/* 	$('#orderForm').method = 'post'; */
@@ -1009,70 +1020,137 @@
 				/* $('#orderForm').target = '_blank'; */
 			/* 	$('#orderForm').submit(); */
 			alert('7일이내로 금액을 입금하셔야 배송이 시작됩니다.');				
-			document.getElementById('orderForm').setAttribute( 'action', '${path}/order/orderPayment.do' );
+			$('#payMethodWay').val('계좌이체');
+			//console.log($('#payMethodWay').val());
+			
 			document.getElementById('orderForm').submit();
 			
 			}else if(method=='card'){
-				let memberNo=$('input[name=badaLoginMemberNo]').val();
-				let depositName=$('input[name=badaDepositName]').val();
-				let totalPrice=$('input[name=badaTotalPrice]').val();
-				let receiverName=$('input[name=badaReceiverName]').val();
-				
-				let postCode=$('input[name=badaPostCode]').val();
-				let address=$('input[name=badaAddress]').val();
-				let addressDetail=$('input[name=badaAddressDetail]').val();
-				let productList=$('input[name=badaProductList]').val();
-				
-				
-				console.log(memberNo);				
-				console.log(depositName);
+				/* let memberNo=$('input[name=badaLoginMemberNo]').val();//로그인한 멤버의 회원번호
+				let totalPrice=$('input[name=badaTotalPrice]').val();//총가격
+				let receiverName=$('input[name=badaReceiverName]').val();// 수령인 명		
+				let postCode=$('input[name=badaPostCode]').val();  // 우편주소
+				let address=$('input[name=badaAddress]').val();	  //주소
+				let addressDetail=$('input[name=badaAddressDetail]').val();  //상세주소
+	
+				console.log(memberNo);								
 				console.log(totalPrice);				
 				console.log(receiverName);
 				console.log(postCode);				
 				console.log(address);
-				console.log(addressDetail);				
-				console.log(productList);
+				console.log(addressDetail);	 */
+			
 				
+				let productCount=$('span#productCountCheck').length;
+			//	let name=$('.td_product').eq(0).find('.list_info').text()+'외'+(productCount-1) +'건';
+			//	console.log('영수증 제목'+name);	
+			
+			
+			$('#payMethodWay').val('카드결제');
+				const data={
+					//자바단에서 말고 프론트상에서  함수를 이용하여 주문번호 난수로 생서
+					//orderNum :createOrderNum(),
+					payMethod :$('#payMethodWay').val(),
+					memberNo : $('input[name=badaLoginMemberNo]').val(),
+					totalPrice : $('input[name=badaTotalPrice]').val(),
+					receiverName : $('input[name=badaReceiverName]').val(),
+					postCode : $('input[name=badaPostCode]').val(),
+					address : $('input[name=badaAddress]').val(),
+					addressDetail :$('input[name=badaAddressDetail]').val(),				
+					name:$('.td_product').eq(0).find('.list_info').text()+'외'+(productCount-1) +'건',
+					buyer_email:$('input[name=buyer_email]').val() ,
+					buyer_name:$('input[name=buyer_name]').val(),
+					buyer_tel:$('input[name=buyer_tel]').val()
+					
+					}	
+			
 				
-				
-				
-				
-				/* IMP.init('imp51688482');  //가맹점 식별코드
-		         IMP.request_pay({
-		            pg : 'html5_inicis', //pg사명
-		             pay_method : 'card',
-		             merchant_uid: "100008", // 상점에서 관리하는 주문 번호를 전달  // db상 컬럼추가-> time+난수로 발생
-		             name : '주문명:결제테스트',
-		             amount : 100,
-		             buyer_email : 'iamport@siot.do',
-		             buyer_name : '구매자이름',
-		             buyer_tel : '010-1234-5678',
-		             buyer_addr : '서울특별시 강남구 삼성동',
-		             buyer_postcode : '123-456'
-		         
-		         }, function(rsp) {
-		            console.log(rsp);
-		             if ( rsp.success ) {
-		                var msg = '결제가 완료되었습니다.';
-		                 msg += '고유ID : ' + rsp.imp_uid;
-		                 msg += '상점 거래ID : ' + rsp.merchant_uid;
-		                 msg += '결제 금액 : ' + rsp.paid_amount;
-		                 msg += '카드 승인번호 : ' + rsp.apply_num;
-		                 msg += '결제 수단 :' + rsp.pay_method; 
-		                 msg += '영수증 url : ' + rsp.receipt_url;
-		                 console.log(rsp);
-		             } else {
-		                 var msg = '결제에 실패하였습니다.';
-		                  msg += '에러내용 : ' + rsp.error_msg;
-		             }
-		             
-		             alert(msg);//결제가 성공시  결제 완료 출력,   결제취소및 실패시   결제에 실패하였습니다. 출력하기
-		            
-		         }); */
-				
-				
+				badaPaymentCard(data);  //카드 결제 함수 호출
 			}
-		} 	
+		}
+		
+		
+		
+		//프론트상에서 난수로 주문번호 만들기 난수로 주문번호 만들기  //	yyyy/MM/dd_hh:mm:ss
+		function createOrderNum(){
+			const date = new Date();
+			const year = date.getFullYear();
+			const month = String(date.getMonth() + 1).padStart(2, "0");
+			const day = String(date.getDate()).padStart(2, "0");
+			const hours=String(date.getHours()).padStart(2, "0");
+			const minutes=String(date.getMinutes()).padStart(2, "0");         
+			const seconds=String(date.getSeconds()).padStart(2, "0");  
+			
+			
+			
+			let orderNum =year+'/'+ month+'/'+day+'_'+hours+':'+minutes+':'+seconds;
+			for(let i=0;i<10;i++) {
+				orderNum += Math.floor(Math.random() * 100000);	
+			}
+			return orderNum;
+		}
+		
+		
+		
+		
+		// 카드 결제
+		function badaPaymentCard(data) {
+		
+			 IMP.init('imp51688482');  //가맹점 식별코드
+			
+			 // 영수증 을 작성하기 위한 데이터 
+			 IMP.request_pay({
+	            pg : 'html5_inicis', //pg사명
+	             pay_method : data.payMethod ,
+	             merchant_uid: createOrderNum(), // 상점에서 관리하는 주문 번호를 전달  // db상 컬럼추가-> time+난수로 발생
+	             name : '주문명:'+data.name,
+	            // amount : data.totalPrice,  //총가격 추후에 바꾸기
+	             amount : 100,
+	             buyer_email : data.buyer_email ,  //로그인멤버
+	             buyer_name : data.buyer_name,			 //로그인멤버
+	             buyer_tel : data.buyer_tel,	 //로그인멤버
+	             buyer_addr : data.postCode+data.address
+	             
+	             
+	             
+	         }, function(rsp) {
+	            console.log(rsp);
+	             if ( rsp.success ) {
+	                var msg = '결제가 완료되었습니다.';
+	                 msg += '고유ID : ' + rsp.imp_uid;         //아임 포트 식별 번호  imp_uid
+	                 msg += '상점 거래ID : ' + rsp.merchant_uid;   // 주문식별 번호 merchant uid 난수
+	                 msg += '결제 금액 : ' + rsp.paid_amount;
+	                 msg += '카드 승인번호 : ' + rsp.apply_num;
+	                 msg += '결제 수단 :' + rsp.pay_method; 
+	                 msg += '영수증 url : ' + rsp.receipt_url;    //영수증 url   RECEIPT_URL
+	                 console.log(rsp);
+	                 //이부분에서  input hidden tag    MERCHANT_UID  ,IMP_UID,  RECEIPT_URL 에   val()을 이용하여 넣어줌 
+	             	 $('input[name=MERCHANT_UID]').val(rsp.merchant_uid);
+	             	$('input[name=IMP_UID]').val(rsp.imp_uid);	
+	             	$('input[name=RECEIPT_URL]').val(rsp.receipt_url);
+	             //submit() 함수 실행
+	            	document.getElementById('orderForm').submit();
+	             
+	             } else {
+	                 var msg = '결제에 실패하였습니다.';
+	                  msg += '에러내용 : ' + rsp.error_msg;
+	             }
+	             
+	             alert(msg);//결제가 성공시  결제 완료 출력,   결제취소및 실패시   결제에 실패하였습니다. 출력하기
+	            
+	         }); 
+			
+		
+		
+		
+		}
+
+		
+		
+		
+		
+		
+		
 	</script>
 <!--결제수단 여는 스크립트  -->
 	<script type="text/javascript">
