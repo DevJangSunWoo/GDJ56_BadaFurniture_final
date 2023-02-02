@@ -131,7 +131,8 @@
 			    <div class="order__delivery__inner">
 			        <h3 class="order__title">배송 정보</h3>
 			       <!--배송정보 히든 태그  -->
-			     <c:if test="${not empty loginMember }"> 
+			  <%--    <c:if test="${not empty loginMember }">  --%>
+				 <c:if test="${not empty sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal }">  
 				        <ul class="order__list">
 				            <li class="order__item delivery__item__info" >
 				                <span class="order__item__label">
@@ -141,7 +142,7 @@
 				                    <ul class="order__delivery__radio-wrap" id="quickDeliveryList">
 				                        <li>
 				                            <input type="radio" onclick="test123789();" class="n-radio" id="delivery_choice_0"     checked >
-				                            <label for="delivery_choice_0">${loginMember.memberId}님 배송지</label>
+				                            <label for="delivery_choice_0">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberId}님 배송지</label>
 				                        </li>
 				                    </ul>
 				                    <button type="button" class="order__button" onclick="sample6_execDaumPostcode();">배송지 변경</button> 
@@ -151,8 +152,8 @@
 				                <span class="order__item__label">이름 / 연락처</span>
 				                <div class="order__item__area">
 				                    <ul class="order__delivery__user">
-				                        <li id="delivery-name">${loginMember.memberName}</li>
-				                        <li id="delivery-phone">${loginMember.phone}</li>
+				                        <li id="delivery-name">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberName}</li>
+				                        <li id="delivery-phone">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.phone}</li>
 				                    </ul>
 				                </div>
 				            </li>	
@@ -162,9 +163,9 @@
 						         	<span class="order__item__label">배송주소</span>    			
 					                <div class="order_option_box"> 								
 										<div id="addressContainer">
-											<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:100px;border:1px solid lightgray;"name="badaPostCode" readonly required  value="${loginMember.postCode}"   >
-											<input type="text" id="sample6_address" placeholder="주소" style="width:280px;border:1px solid lightgray;"name="badaAddress" readonly required value="${loginMember.address}"><br>
-											<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;"name="badaAddressDetail" value="${loginMember.detailAddress}">
+											<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:100px;border:1px solid lightgray;"name="badaPostCode" readonly required  value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.postCode}"   >
+											<input type="text" id="sample6_address" placeholder="주소" style="width:280px;border:1px solid lightgray;"name="badaAddress" readonly required value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.address}"><br>
+											<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:210px;border:1px solid lightgray;"name="badaAddressDetail" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.detailAddress}">
 											<input type="hidden" id="sample6_extraAddress" placeholder="참고항목" style="width:210px;"name="addressExtra" disabled>
 										</div>
 									 </div>	
@@ -231,9 +232,9 @@
 			<script>
 				/*기본 배송지로 변경하는 스크립트   */
 				function test123789(){
-					$("#sample6_postcode").val('${loginMember.postCode}');
-					$("#sample6_address").val('${loginMember.address}');
-					$("#sample6_detailAddress").val('${loginMember.detailAddress}');
+					$("#sample6_postcode").val('${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.postCode}');
+					$("#sample6_address").val('${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.address}');
+					$("#sample6_detailAddress").val('${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.detailAddress}');
 			}
 			</script>
 			
@@ -980,17 +981,17 @@
 			 </div>
 			<!--// 컨텐츠 영역 -->
 			<!--form으로 전송할 데이터  -->
-			<input  type="hidden"  name="badaLoginMemberNo" value="${loginMember.memberNo}" >
+			<input  type="hidden"  name="badaLoginMemberNo" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberNo}" >
 			<!--예금주명  태그 name은    badaDepositName -->
 			<input  type="hidden"  name="badaTotalPrice" value="${total}" >
-			<input  type="hidden"  name="badaReceiverName" value="${loginMember.memberName}" >
+			<input  type="hidden"  name="badaReceiverName" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberName}" >
 			<!--우편 번호/  badaPostCode      /주소 badaAddress      /상세주소   badaAddressDetail-->
 			<!--name="badaProductNo"   인트형배열의   제품번호들    -->
 			
 			<!--아임포트 카드 결제시 추가로 필요한  태그들  -->
-			<input  type="hidden"  name="buyer_email" value="${loginMember.email}" >
-			<input  type="hidden"  name="buyer_name" value="${loginMember.memberName}" >
-			<input  type="hidden"  name="buyer_tel" value="${loginMember.phone}" > 
+			<input  type="hidden"  name="buyer_email" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}" >
+			<input  type="hidden"  name="buyer_name" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberName}" >
+			<input  type="hidden"  name="buyer_tel" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.phone}" > 
 			 
 			<input  type="hidden"  name="MERCHANT_UID" value="" > 
 			<input  type="hidden"  name="IMP_UID" value="" > 
