@@ -39,6 +39,7 @@ public class ResellController {
 		this.aes256 = aes256;
 	}
 	
+	//내 가구 팔기 리스트 출력
 	@RequestMapping("/mypage/resell.do")
 	public ModelAndView resellList(ModelAndView mv, HttpSession session,
 			@RequestParam(value="cPage", defaultValue="1") int cPage) {
@@ -58,6 +59,7 @@ public class ResellController {
 		return mv;
 	}
 	
+	//내 가구 팔기 상세페이지 연결
 	@RequestMapping("/resell/read.do")
 	public ModelAndView readResell(ModelAndView mv,
 			@RequestParam(value="resellNo") int resellNo) {
@@ -78,6 +80,7 @@ public class ResellController {
 		return mv;
 	}
 	
+	//내 가구 팔기 수정페이지 연결
 	@RequestMapping("/resell/update.do")
 	public ModelAndView updateResell(ModelAndView mv, 
 			@RequestParam(value="resellNo") int resellNo) {
@@ -90,6 +93,7 @@ public class ResellController {
 		return mv;
 	}
 	
+	//내 가구 팔기 수정하기 완료
 	@RequestMapping("/resell/updateEnd.do")
 	public ModelAndView updateEndResell(ModelAndView mv, Resell r) {
 		
@@ -114,11 +118,13 @@ public class ResellController {
 		return mv;
 	}
 	
+	//내 가구 팔기 입력페이지 연결
 	@RequestMapping("/resell/write.do")
 	public String writeResell() {
 		return "resell/writeResell";
 	}
 	
+	//내 가구 팔기 입력 완료
 	@RequestMapping("/resell/writeEnd.do")
 	public ModelAndView writeEndResell(ModelAndView mv, Resell r, 
 			HttpSession session, MultipartFile[] upFile,
@@ -187,6 +193,7 @@ public class ResellController {
 		return mv;
 	}
 	
+	//내 가구 팔기 삭제
 	@RequestMapping("/resell/delete.do")
 	public ModelAndView deleteResell(ModelAndView mv, 
 			@RequestParam(value="resellNo") int resellNo, HttpSession session) {
@@ -216,6 +223,7 @@ public class ResellController {
 		return mv;
 	}
 	
+	//내 가구 팔기 댓글 입력
 	@RequestMapping("/resell/writeComment.do")
 	public ModelAndView writeResellComment(ModelAndView mv, ResellComment resellComment, HttpSession session) {
 		

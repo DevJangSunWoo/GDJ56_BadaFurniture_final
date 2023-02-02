@@ -1,6 +1,7 @@
 package com.finalproject.bada.mypage.controller;
 
 
+import java.awt.TrayIcon.MessageType;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,10 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +28,6 @@ import com.finalproject.bada.mypage.model.service.MypageService;
 import com.finalproject.bada.mypage.model.vo.Alert;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,7 +47,24 @@ public class MypageController {
 	// 장바구니 리스트 출력
 	@RequestMapping("/mypage/cart.do")
 	public ModelAndView cartList(ModelAndView mv, HttpSession session) {	
-		Member loginMember = (Member)session.getAttribute("loginMember");	
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		
+		//시큐리티 테스트
+		
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+
+		// 비로그인 접근
+		if (authentication instanceof AnonymousAuthenticationToken) {
+		//throw new BaseException("", MessageType.ERROR_PAGE_403.toString(), HttpStatus.OK);
+		}
+
+		//Member loginMember2 = (Member)authentication.getPrincipal();
+		log.debug("시큐리티 : {}",authentication.getPrincipal());
+		//log.debug("시큐리티 : {}",loginMember2);
+		
+	
+		//시큐리티 테스트
+		
 		List<Product> products = service.selectCartProduct(loginMember.getMemberNo());	
 		mv.addObject("products",products);
 		mv.setViewName("mypage/cartList");
@@ -121,7 +141,7 @@ public class MypageController {
 		return mv;
 	}
 	
-	//N이었던 알림 READ_STATE Y로 변경
+	//로그인 멤버의 N이었던 알림 READ_STATE Y로 변경
 	@ResponseBody
 	@RequestMapping("/alert/updateReadState.do")
 	public int updateAlertReadState(HttpSession session) {
@@ -140,6 +160,7 @@ public class MypageController {
 		return count;
 	}
 	
+	//order리스트 출력
 	@RequestMapping("/mypage/order.do")
 	public ModelAndView orderList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
@@ -153,25 +174,14 @@ public class MypageController {
 		search.put("searchType", searchType);
 		if(searchType.equals("ORDER_SHEET_ENROLL_DATE")) {	
 			//주문일자 들어오는 값 :2023-01-31 ~ 2023-01-31
-			
-			String[] keys=searchKeyword.split("~");
-			
+			String[] keys=searchKeyword.split("~");		
 			String key1=keys[0].trim();
-			String key2=keys[1].trim();
-			
-			//log.debug("keys :{}",key1);
-			//log.debug("keys :{}",key2);				
-			
+			String key2=keys[1].trim();	
 			search.put("searchKeyword1", key1);			
 			search.put("searchKeyword2", key2);		
-			
-			//log.debug("searchType {}", searchType);
-			//log.debug("searchKeyword1 {}", key1);
-			//log.debug("searchKeyword2 {}", key2);
+
 		}else {
 			search.put("searchKeyword", searchKeyword);	
-			//log.debug("searchType {}", searchType);
-			//log.debug("searchKeyword {}", searchKeyword);
 		}	
 		
 		List<OrderSheet> orderSheets = adminService.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search);
@@ -201,11 +211,13 @@ public class MypageController {
 		return adminService.selectOrderSheet(orderSheetNo);
 	}
 	
+	//refund 리스트 출력
 	@RequestMapping("/mypage/refund.do")
 	public String refundList() {
 		return "mypage/refundList";
 	}
 	
+	//회원탈퇴 페이지 연결
 	@RequestMapping("/mypage/quit.do")
 	public String quitPage() {
 		return "mypage/quitPage";
