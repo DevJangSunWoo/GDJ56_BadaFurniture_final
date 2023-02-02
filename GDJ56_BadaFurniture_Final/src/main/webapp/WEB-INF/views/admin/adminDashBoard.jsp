@@ -44,9 +44,9 @@
                         <div class="valueDiv"><c:out value="${summary.STATE_2}"/></div>
                         <div class="unitDiv"><strong>건</strong></div>
                     </div>    
- 
+                    <hr>
                     <div class="stateOuterDiv">
-                        <div class="itemDiv"><strong>카드결제완료</strong></div>
+                        <div class="itemDiv"><strong>카드결제</strong></div>
                         <div class="valueDiv"><c:out value="${summary.STATE_3}"/></div>
                         <div class="unitDiv"><strong>건</strong></div>
                     </div>    
