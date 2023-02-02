@@ -79,7 +79,7 @@
             </div>
            
             <div id="orderDetail_container">
-                <h3 class="title">🛒 주문 취소 현황</h3>
+                <h3 class="title">🛒 취소/반품 현황</h3>
                 <div class="spandiv">                                    
 
                     <div class="stateOuterDiv">
