@@ -343,7 +343,7 @@ public class AdminController {
 				.color(p.getColor()).detail(p.getDetail()).build();
 		
 		//log.debug("p:{}",p);
-		//log.debug("upadatedP:{}",updatedP);
+		log.debug("upadatedP:{}",updatedP);
 		
 		try {
 			service.updateProduct(updatedP);
@@ -499,9 +499,11 @@ public class AdminController {
 		
 		
 		//주문관리 요약
-		Map<String,Integer> sum=service.orderSummary();
+		//Map<String,Integer> sum=service.orderSummary();
+		
+		
 		//log.debug("{}",sum);		
-		mv.addObject("summary",sum);		
+		mv.addObject("summary",updateOrderSummary());		
 //		
 		mv.setViewName("admin/manageOrder");	
 		

@@ -59,7 +59,7 @@
                 <div class="spandiv">
 
                     <div class="stateOuterDiv">
-                        <div class="itemDiv"><strong>배송준비</strong></div>
+                        <div class="itemDiv"><strong>배송대기</strong></div>
                         <div class="valueDiv"><c:out value="${summary.STATE_4}"/></div>
                         <div class="unitDiv"><strong>건</strong></div>
                     </div>   
