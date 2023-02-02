@@ -38,31 +38,36 @@ public class MemberController {
 	
 	
 //--------------------------------------------------------------------------------------------------------------------------------------------------	
-	//로그인
-	@RequestMapping("/login.do")
-	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
-//		log.debug("{}",m);
-		Member loginMember = service.selectMemberById(m);
-		log.debug("loginMember: {}",loginMember);
-		
-		if(loginMember!=null && passwordEncoder.matches(m.getPassword(), loginMember.getPassword())) {
-			session.setAttribute("loginMember", loginMember);
-			mv.addObject("msg","로그인 완료");
-			mv.addObject("loc","/");
-		}else {
-			mv.addObject("msg","아이디와 비밀번호를 다시 확인해주세요.");
-			mv.addObject("loc","/");
-		}
-		mv.setViewName("common/msg");
-		return mv;
-	}
+
 	
-	//로그아웃
-	@RequestMapping("/logout.do")
-	public String logoutMember(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
-	}
+	
+	//security를 사용할 경우 security 맵핑주소와 동일한 mapping주소를 쓰면 안됨 
+	
+//	//로그인
+//	@RequestMapping("/login.do")
+//	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
+////		log.debug("{}",m);
+//		Member loginMember = service.selectMemberById(m);
+//		log.debug("loginMember: {}",loginMember);
+//		
+//		if(loginMember!=null && passwordEncoder.matches(m.getPassword(), loginMember.getPassword())) {
+//			session.setAttribute("loginMember", loginMember);
+//			mv.addObject("msg","로그인 완료");
+//			mv.addObject("loc","/");
+//		}else {
+//			mv.addObject("msg","아이디와 비밀번호를 다시 확인해주세요.");
+//			mv.addObject("loc","/");
+//		}
+//		mv.setViewName("common/msg");
+//		return mv;
+//	}
+//	
+//	//로그아웃
+//	@RequestMapping("/logout.do")
+//	public String logoutMember(HttpSession session) {
+//		session.invalidate();
+//		return "redirect:/";
+//	}
 
 	//아이디찾기 페이지연결
 	@RequestMapping("/searchId.do")

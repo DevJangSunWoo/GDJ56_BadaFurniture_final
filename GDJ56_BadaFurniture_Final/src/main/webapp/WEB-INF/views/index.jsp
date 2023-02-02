@@ -14,6 +14,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
 <section>
+	<div>
+		${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberId}
+		${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberName}
+		${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}
+	</div>
 	<div class="flexDiv">
 	    <img src="${path }/resources/images/mainpage/mainPicture.jpg" class="mainSize">
 	</div>
