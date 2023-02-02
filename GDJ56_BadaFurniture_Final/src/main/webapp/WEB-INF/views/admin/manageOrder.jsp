@@ -220,29 +220,31 @@
 								<c:if test="${not empty o.details}">
 									<c:forEach var="d" items="${o.details}" varStatus="vs">
 										<tr>
-											<c:if test="${vs.index==0}">
+											<c:if test="${vs.index==0}">												
 												<td class="tableTd" rowspan="${o.details.size()}">
 													<input type="hidden" value="${o.orderSheetNo}">
-													<a href="${path}/order/orderPayment.do?orderSheetNo="><c:out value="${o.orderSheetNo}"/></a>
+													<a href=""><c:out value="${o.orderSheetNo}"/></a>
 												</td>
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.orderSheetenrollDate}"/></td>
 											</c:if>
 
-											<td class="tableTd"><c:out value="${d.product.productNo}"/></td>
+											<td class="${o.orderSheetNo}Td" style="background-color: #dcd5c32b;">
+												<input type="hidden" value="${d.product.productNo}">
+												<c:out value="${d.product.productNo}"/>
+											</td>
+
 											<td class="tableTd"><c:out value="${d.product.item}"/></td>
+
 											<td class="tableTd">
 												<img class="orderImg" src="${path}/resources/upload/product/${d.product.getFiles().get(0).renamedFileName}">
 											</td>
 											<td class="price"><c:out value="${d.product.price}"/></td>
 
-											<c:if test="${d.refundState==null}">
-												<td class="tableTd2">-</td>
-																				
-											</c:if>
+											
 
 											<c:if test='${o.paymentState=="카드결제완료" or o.paymentState=="입금완료"}'>
 												<td class="tableTd2" >
-													<input type="text" name="paymentState" value="${d.deliveryState}" readonly>
+													<input type="text" name="paymentState" value="${d.deliveryState}" style="width: 88px;border-style: none;background-color: #dcd5c36c;text-align: center;" readonly>
 													<!-- <select name="deliverState">
 														<option value="배송대기" ${d.deliveryState.equals("배송준비")?"selected":""}>배송대기</option>
 														<option value="배송중" ${d.deliveryState.equals("배송중")?"selected":""}>배송중</option>
@@ -254,18 +256,13 @@
 												<td class="tableTd2" >-</td>
 											</c:if>
 
-
+											<c:if test="${d.refundState==null}">
+												<td class="tableTd2">-</td>
+																				
+											</c:if>
 											<c:if test="${d.refundState!=null}">
 												<td class="tableTd2">
-													<input type="text" name="refundState" value="${d.refundState}" readonly>
-													<!-- <select name="refundState">
-														<option value="반품요청" ${d.refundState.equals("반품요청")?"selected":""}>반품요청</option>
-														<option value="반품대기" ${d.refundState.equals("반품대기")?"selected":""}>반품대기</option>
-														<option value="반품완료" ${d.refundState.equals("반품완료")?"selected":""}>반품완료</option>
-														<option value="취소요청" ${d.refundState.equals("취소요청")?"selected":""}>취소요청</option>
-														<option value="취소완료" ${d.refundState.equals("취소완료")?"selected":""}>취소완료</option>
-														<option value="주문확정" ${d.refundState.equals("주문확정")?"selected":""}>주문확정</option>
-													</select>										 -->
+													<input type="text" name="refundState" value="${d.refundState}" style="width: 88px;border-style: none;background-color: #dcd5c36c;text-align: center;" readonly>
 												</td>
 											</c:if>
 
@@ -277,20 +274,15 @@
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.member.memberName}"/></td>
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.paymentMethod}"/></td>
 												<td class="tableTd2" rowspan="${o.details.size()}">
-													<input type="text" name="paymentState" value="${o.paymentState}" style="width: 88px;border-style: none;background-color: #dcd5c36c;text-align: center;" readonly>
-													<!-- <select name="paymentState">
+													<!-- <input type="text" name="paymentState" value="${o.paymentState}" style="width: 88px;border-style: none;background-color: #dcd5c36c;text-align: center;" readonly> -->
+													<select name="paymentState">
 														<option value="입금대기" ${o.paymentState.equals("입금대기")?"selected":""}>입금대기</option>
 														<option value="입금완료"  ${o.paymentState.equals("입금완료")?"selected":""}>입금완료</option>
 														<option value="카드결제완료"  ${o.paymentState.equals("카드결제완료")?"selected":""}>카드결제완료</option>
-													</select> -->
+													</select>
 													
 												</td>
 											</c:if>
-
-
-
-
-
 												<!-- <td class="tableTd" style="width: 80px;">
 													<button id="detailModalBtn" class="updateBtn" onclick="">상세확인</button>
 												</td> -->
@@ -305,28 +297,28 @@
 			</table>
 			
 			<!-- 반품/취소 상세내역 모달 -->
-			<div class="modals hiddens">
+			<!-- <div class="modals hiddens">
 			<div class="bg"></div>
-			<div class="modalBox">
-				<div class="modalTitle">
-					<h1>반품/취소 상세내역</h1>
-				</div>
-				<div class="modalContent">
-					<div class="modalContentInnerDiv">
-						<span>✔️ 주문 상세번호 : </span><span>1111</span>
+				<div class="modalBox">
+					<div class="modalTitle">
+						<h1>반품/취소 상세내역</h1>
 					</div>
-					<div class="modalContentInnerDiv">
-						<span>✔️ 반품/취소 신청일 : </span><span>23-01-20</span>
+					<div class="modalContent">
+						<div class="modalContentInnerDiv">
+							<span>✔️ 주문 상세번호 : </span><span>1111</span>
+						</div>
+						<div class="modalContentInnerDiv">
+							<span>✔️ 반품/취소 신청일 : </span><span>23-01-20</span>
+						</div>
+						<div class="modalContentInnerDiv">
+							<span>✔️ 반품/취소 사유 : </span><span>단순변심</span>
+						</div>
 					</div>
-					<div class="modalContentInnerDiv">
-						<span>✔️ 반품/취소 사유 : </span><span>단순변심</span>
+					<div id="modalBtnArea">
+						<button class="closeBtn">닫기</button>
 					</div>
 				</div>
-				<div id="modalBtnArea">
-					<button class="closeBtn">닫기</button>
-				</div>
-			</div>
-			</div>
+			</div> -->
 		</div>
 		<div id="pageBarContainer">
 			<div id=pageBar>
@@ -367,6 +359,65 @@
 		})
 	})
 
+	function changePaymentState(orderSheetNo,paymentState,productNoArr){
+		$.ajax({
+				url:"${path}/admin/updatePaymentState.do",
+				traditional:true,
+				data:{
+					orderSheetNo:orderSheetNo,
+					paymentState:paymentState,
+					productNoArr:productNoArr
+				},
+				success:function(result){		
+						
+					// if(result.result>0){
+					// 	alert(paymentState+" 상태로 변경 완료");
+						
+					// }else{
+					// 	alert(paymentState+" 상태로 변경 실패");
+						
+					// }
+					alert(result.msg);
+
+
+				},
+				error:function(result){
+					alert("AJAX ERROR - error : "+result);	
+				}
+			})
+	}
+
+	//결제상태 변경하기
+	$("select[name=paymentState]").change(e=>{
+			const orderSheetNo=$(e.target).parent().parent().children().children().val();
+			const paymentState=$(e.target).val();
+			
+			let productNoArr = [];
+			$("td."+orderSheetNo+"Td").each((i,v)=>{
+				productNoArr.push($(v).children().first().val());
+			});	
+
+			// console.log("orderSheetNo"+orderSheetNo);
+			// console.log("paymentState"+paymentState);
+			// console.log(productNoArr);
+
+			if(paymentState=="입금완료"){
+				if(confirm("결제상태를 '입금완료'로 변경하시겠습니까?")){					
+					changePaymentState(orderSheetNo,paymentState,productNoArr);
+
+				}else{
+					alert("변경을 취소하셨습니다.");
+					location.reload();
+				}		
+
+			}else{
+				changePaymentState(orderSheetNo,paymentState,productNoArr);
+			}
+			
+
+
+	});	
+
 
 
 
@@ -390,25 +441,25 @@
     "drops": "auto"
 	}, 
 	function (start, end, label) {
-	    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+	    //console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
 		let when = $("#orderDateRange").val();
-		console.log(when);
+		//console.log(when);
 	}
 	);
 
 
 	//취소/반품 확인 모달
-	const open = () => {
-		document.querySelector(".modals").classList.remove("hiddens");
-	}
+	// const open = () => {
+	// 	document.querySelector(".modals").classList.remove("hiddens");
+	// }
 
-	const close = () => {
-		document.querySelector(".modals").classList.add("hiddens");
-	}
+	// const close = () => {
+	// 	document.querySelector(".modals").classList.add("hiddens");
+	// }
 
-	document.querySelector("#detailModalBtn").addEventListener("click", open);
-	document.querySelector(".closeBtn").addEventListener("click", close);
-	document.querySelector(".bg").addEventListener("click", close);
+	// document.querySelector("#detailModalBtn").addEventListener("click", open);
+	// document.querySelector(".closeBtn").addEventListener("click", close);
+	// document.querySelector(".bg").addEventListener("click", close);
 
 
 

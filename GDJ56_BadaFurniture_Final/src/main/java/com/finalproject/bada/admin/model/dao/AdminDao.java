@@ -9,6 +9,7 @@ import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.refund.model.vo.Refund;
 import com.finalproject.bada.resell.model.vo.Resell;
 
 public interface AdminDao {
@@ -59,6 +60,26 @@ public interface AdminDao {
 	//주문관리 - 요약
 	List<Map<String,Integer>> orderSummary(SqlSessionTemplate session);
 	
+	//주문관리- 결제상태 변경
+	int updatePaymentState(SqlSessionTemplate session,Map param);
+	int updateSoldOutStateAtOrder(SqlSessionTemplate session,Map param2);
+	
+	//BD
+	//주문관리 - 주문서 번호로 주문서 1개 가져오기
+	OrderSheet selectOrderSheet(SqlSessionTemplate session, int orderSheetNo);
+	
+	//취소반품관리 - 조회
+	List<OrderDetail> refundListPage(SqlSessionTemplate session,Map<String,Integer> param,Map search);
+	int refundListCount(SqlSessionTemplate session,Map search);
+	
+	//취소반품관리 - 요약
+	List<Map<String,Integer>> refundSummary(SqlSessionTemplate session);	
+	
+	//취소반품관리 - 취소반품상태 변경
+	int updateRefundState(SqlSessionTemplate session,Map param);
+	
+	//취소반품관리 - 취소반품 상세조회
+	Refund viewRefundDetail(SqlSessionTemplate session,int orderDetailNo);
 	
 	
 }

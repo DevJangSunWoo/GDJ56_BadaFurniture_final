@@ -5,6 +5,7 @@
         border: 1px solid blue;
   } */
 
+
   .summaryTable{
     margin: 5px;
   }
@@ -30,7 +31,6 @@
   
   /* 목록 아래 테두리 */
   div.tableContainer>table td{
-
       padding:5px 10px 5px 10px;
       /* border-bottom: 1px solid rgba(0, 0, 0, 0.514); */
       border-bottom: 1px solid rgba(0, 0, 0, 0.178);
@@ -82,7 +82,7 @@ button.updateBtn,.searchBtn{
 	background-color: #393434;
 	color: white;
 }
-.tableTd,.tableTd2,.price{ 
+.tableTd,.tableTd2,.price,.productNoTd{ 
 	background-color: #dcd5c32b;
   /* border: 1px solid rgba(0, 0, 0, 0.178); */
 }
@@ -124,7 +124,7 @@ div#summaryContainer th,td{
 }
 
 /* 날짜선택 사이즈 조절 */
-.daterangepicker {
+/* .daterangepicker {
   width: 800px;
 }
 #orderDateRange{
@@ -136,7 +136,7 @@ div#summaryContainer th,td{
 }
 .drp-calendar right{
   width:500px;
-}
+} */
 
 
 
@@ -218,15 +218,23 @@ div#summaryContainer th,td{
 		color: black;
 
 	} */
-	#pageBar a.active {
-		background-color: #4CAF50;
-  		color: white;
-	}
-	#pageBar a:hover:not(.active) {
-		background-color: #ddd;
+	#pageBarContainer *{
+
+		padding: 5px;
+		margin-top: 10px;
 	}
 
-	.orderImg{
-		width: 70px;
-		height: 70px;
+	#pageBarContainer a{
+
+		/* text-decoration: none; */
+		color: #348492;
+		font-weight: bold;
+		
+
+	}
+	#pageBarContainer a:visited{
+
+		/* text-decoration: none; */
+		color: black;
+
 	}

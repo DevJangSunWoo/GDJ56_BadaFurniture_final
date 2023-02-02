@@ -23,6 +23,7 @@ import com.finalproject.bada.common.AdminPageFactory;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.refund.model.vo.Refund;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -63,6 +64,18 @@ public class AdminController {
 //	@RequestMapping("/admin/order.do")
 //	public String manageOrder() {
 //		return "admin/manageOrder";
+//	}
+	
+	//배송 관리 연결
+	@RequestMapping("/admin/delivery.do")
+	public String manageDelivery() {
+		return "admin/manageDelivery";
+	}
+	
+	//취소/반품 관리 연결
+//	@RequestMapping("/admin/refund.do")
+//	public String manageRefund() {
+//		return "admin/manageRefund";
 //	}
 	
 //	//내가구팔기 관리 연결
@@ -398,8 +411,8 @@ public class AdminController {
 		,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
 		,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
 		) {		
-		log.debug("cPage {}", cPage);
-		log.debug("numPerpage {}", numPerpage);
+		//log.debug("cPage {}", cPage);
+		//log.debug("numPerpage {}", numPerpage);
 		
 		
 
@@ -420,32 +433,32 @@ public class AdminController {
 			search.put("searchKeyword1", key1);			
 			search.put("searchKeyword2", key2);		
 			
-			log.debug("searchType {}", searchType);
-			log.debug("searchKeyword1 {}", key1);
-			log.debug("searchKeyword2 {}", key2);
+			//log.debug("searchType {}", searchType);
+			//log.debug("searchKeyword1 {}", key1);
+			//log.debug("searchKeyword2 {}", key2);
 			
 		}else {
 			search.put("searchKeyword", searchKeyword);	
 			
-			log.debug("searchType {}", searchType);
-			log.debug("searchKeyword {}", searchKeyword);
+			//log.debug("searchType {}", searchType);
+			//log.debug("searchKeyword {}", searchKeyword);
 			
 		}		
 		
 		List<OrderSheet> orderSheets = service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search);
-		if(orderSheets!=null) {
-			orderSheets.stream().forEach(v->log.debug("오더시트 : {}",v));
-		}
+//		if(orderSheets!=null) {
+//			orderSheets.stream().forEach(v->log.debug("오더시트 : {}",v));
+//		}
 		
 		
 		mv.addObject("order",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
-		log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
-		log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search).size());		
+		//log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		//log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search).size());		
 		
 		
 		int totalData=service.orderListCount(search);
 		
-		log.debug("totalData {}", totalData);		
+		//log.debug("totalData {}", totalData);		
 		
 		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "order.do",searchType,searchKeyword));
 		
@@ -463,7 +476,122 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	
+	//'주문관리' - 결제상태 변경하기
+	@RequestMapping(value="/admin/updatePaymentState.do")
+	@ResponseBody
+	public Map<String,String> updatePaymentState(
+			@RequestParam("orderSheetNo") int orderSheetNo,
+			@RequestParam("paymentState") String paymentState,
+			@RequestParam("productNoArr") int[] productNoArr) {
+		
+		log.debug("가구번호들 {}",productNoArr);
+		
+		
+		//주문서 결제상태 변경
+		Map param=new HashMap();
+		param.put("orderSheetNo", orderSheetNo);
+		param.put("paymentState", paymentState);	
+		param.put("productNoArr", productNoArr);
+		//log.debug("변경할 상태 : "+paymentState);
+		
+		
+		Map result=new HashMap();	
+		
+		try {
+			service.updatePaymentState(param);			
+			result.put("msg", ("'"+(String)param.get("paymentState"))+"'"+" 상태로 변경했습니다.");
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			result.put("msg", "결제상태 변경에 실패했습니다.");
+		}		
+		
+		return result;
+		
+	}	
+	
+	
+	//'취소반품관리' - 조회
+	@RequestMapping("/admin/refund.do")
+	public ModelAndView refundList(ModelAndView mv,
+			@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
+			,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
+			,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
+			) {		
 
+		//log.debug("cPage {}", cPage);
+		//log.debug("numPerpage {}", numPerpage);
+		
+		//log.debug("searchType {}", searchType);
+		//log.debug("searchKeyword {}", searchKeyword);
+		
+		Map search=new HashMap();
+		search.put("searchType", searchType);		
+		search.put("searchKeyword", searchKeyword);		
+		
+		
+		mv.addObject("refund",service.refundListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		//log.debug("resell : {}",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		
+		int totalData=service.refundListCount(search);
+		
+		//log.debug("totalData {}", totalData);		
+		
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "refund.do",searchType,searchKeyword));
+		
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchKeyword", searchKeyword);
+		
+		
+		
+		//취소환불 요약
+		List<Map<String,Integer>> sum=service.refundSummary();
+		//log.debug("{}",sum);		
+		mv.addObject("summary",sum);		
+		
+		mv.setViewName("admin/manageRefund");	
+		
+		return mv;
+	}
+	
+	//'취소반품관리' - 취소상태 변경하기
+	@RequestMapping(value="/admin/updateRefundState.do")
+	@ResponseBody
+	public Map updateRefundState(
+			@RequestParam("orderDetailNo") int orderDetailNo,
+			@RequestParam("refundState") String refundState) {		
+		
+		Map param=new HashMap();
+		param.put("orderDetailNo", orderDetailNo);
+		param.put("refundState", refundState);	
+		//log.debug("변경할 상태 : "+paymentState);
+		
+		Map result=new HashMap();	
+		
+		try {
+			service.updateRefundState(param);			
+			result.put("msg", ("'"+(String)param.get("refundState"))+"'"+" 상태로 변경했습니다.");
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			result.put("msg", "취소/반품상태 변경에 실패했습니다.");
+		}		
+		
+		return result;
+		
+	}	
+	
+	@RequestMapping(value="/admin/viewRefundDetail.do")
+	@ResponseBody
+	public Refund viewRefundDetail(
+			@RequestParam("orderDetailNo") int orderDetailNo ) {
+		
+		Refund refund=service.viewRefundDetail(orderDetailNo);
+		log.debug("안녕 환불 :{}",orderDetailNo+"|"+refund);
+		
+		return refund;
+	}
 	
 }
 

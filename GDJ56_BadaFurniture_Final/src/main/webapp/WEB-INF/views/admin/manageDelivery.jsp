@@ -6,7 +6,7 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
-<link rel="stylesheet" href="${path }/resources/css/admin/manageProduct.css"/>
+<link rel="stylesheet" href="${path }/resources/css/admin/manageDelivery.css"/>
 
 
 <style>
@@ -21,7 +21,7 @@
 
 <section>
 	<div id="listContainer">
-		<h2>가구 관리</h2>
+		<h2>배송 관리</h2>
 		<!-- 요약테이블 -->
 		<div id="summaryContainer">
 			<table id="summaryTable">
