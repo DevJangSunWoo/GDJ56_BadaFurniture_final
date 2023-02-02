@@ -117,6 +117,15 @@ public class AdminServiceImpl implements AdminService {
 		return dao.selectProductByProductNo(session,productNo);
 	}
 	
+	//가구 관리 - 수정하기
+	@Override
+	public void updateProduct(Product p) {
+		// TODO Auto-generated method stub
+		int result= dao.updateProduct(session,p);
+		if(result<0) {
+			throw new RuntimeException("가구번호 "+p.getProductNo()+" 수정에 실패했습니다.");
+		}
+	}
 	
 	//내가구팔기 관리 - 조회
 	@Override
@@ -275,6 +284,8 @@ public class AdminServiceImpl implements AdminService {
 			throw new RuntimeException("배송상태 변경에 실패했습니다.");
 		}
 	}
+
+
 
 
 

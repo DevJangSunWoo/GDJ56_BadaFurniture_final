@@ -39,6 +39,9 @@ public interface AdminService {
 	//가구 관리 - 수정하기 연결 - productNo로 정보 가져오기
 	Product selectProductByProductNo(int productNo);
 	
+	//가구 관리 - 수정하기
+	void updateProduct(Product p);	
+	
 	//내가구팔기 관리 - 조회
 	List<Resell> resellListPage(Map<String,Integer> param,Map search);
 	int resellListCount(Map search);

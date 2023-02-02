@@ -102,6 +102,12 @@ public class AdminDaoImpl implements AdminDao {
 		return session.selectOne("admin.selectProductByProductNo",productNo);
 	}
 	
+	//가구 관리 - 수정하기
+	@Override
+	public int updateProduct(SqlSessionTemplate session, Product p) {
+		// TODO Auto-generated method stub
+		return session.update("admin.updateProduct",p);
+	}
 	
 	//내가구팔기 관리 - 조회
 	@Override
@@ -242,6 +248,7 @@ public class AdminDaoImpl implements AdminDao {
 		// TODO Auto-generated method stub
 		return session.update("admin.updateDeliveryState",param);
 	}
+
 
 
 

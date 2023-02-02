@@ -208,7 +208,7 @@
 											<option value="N" ${p.showState=='N'?"selected":"" }>숨김</option>
 										</select>										
 									</td>
-									<td style="width: 80px;"><button type="button" class="updateBtn" onclick="window.open('${path}/admin/update.do?productNo=${p.productNo }')">수정</button></td>
+									<td style="width: 80px;"><button type="button" class="updateBtn" onclick="window.open('${path}/admin/update.do?productNo=${p.productNo }','_blank')">수정</button></td>
 								</tr>
 							</c:forEach>
 						</c:if>							

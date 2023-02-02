@@ -332,11 +332,36 @@ public class AdminController {
 		return mv;
 	}
 	
-	//가구관리 - 수정하기 완료
-//	@RequestMapping("/admin/updateEnd.do")
-//	public String update() {
+	//가구관리 - 수정하기 완료 (사진수정 X)
+	@RequestMapping("/admin/updateEnd.do")
+	public ModelAndView updateProductEnd(ModelAndView mv, Product p) {
+		
+		Product updatedP=Product.builder().productNo(p.getProductNo()).title(p.getTitle())
+				.price(p.getPrice()).item(p.getItem()).grade(p.getGrade())
+				.material(p.getMaterial()).widths(p.getWidths())
+				.heights(p.getHeights()).depths(p.getDepths())
+				.color(p.getColor()).detail(p.getDetail()).build();
+		
+		//log.debug("p:{}",p);
+		//log.debug("upadatedP:{}",updatedP);
+		
+		try {
+			service.updateProduct(updatedP);
+			mv.addObject("msg","가구번호 '"+p.getProductNo()+"' 수정되었습니다.");
 
-//	}
+			
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			mv.addObject("msg","가구번호 "+p.getProductNo()+" 수정에 실패했습니다.");
+		}
+		
+		mv.addObject("loc","/admin/product.do?searchKeyword="+p.getProductNo()+"&searchType=PRODUCT_NO");
+		mv.addObject("script","opener.close()");
+		
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
 	
 	//'내가구팔기' - 조회
 	@RequestMapping("/admin/resell.do")

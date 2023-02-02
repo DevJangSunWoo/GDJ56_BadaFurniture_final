@@ -42,6 +42,8 @@ public interface AdminDao {
 	//가구 관리 - 수정하기 연결 - productNo로 정보 가져오기
 	Product selectProductByProductNo(SqlSessionTemplate session,int productNo);
 	
+	//가구 관리 - 수정하기
+	int updateProduct(SqlSessionTemplate session,Product p);	
 	
 	//내가구팔기 관리 - 조회
 	List<Resell> resellListPage(SqlSessionTemplate session,Map<String,Integer> param,Map search);
@@ -63,7 +65,7 @@ public interface AdminDao {
 	//주문관리 - 요약
 	Map<String,Integer> orderSummary(SqlSessionTemplate session);
 	
-	//주문관리- 결제상태 변경
+	//주문관리 - 결제상태 변경
 	int updatePaymentState(SqlSessionTemplate session,Map param);
 	int updateSoldOutStateAtOrder(SqlSessionTemplate session,Map param2);
 	
