@@ -239,6 +239,36 @@ public class AdminServiceImpl implements AdminService {
 		return dao.viewRefundDetail(session,orderDetailNo);
 	}
 
+	//배송관리 - 조회
+	@Override
+	public List<OrderDetail> deliveryListPage(Map<String, Integer> param, Map search) {
+		// TODO Auto-generated method stub
+		return dao.deliveryListPage(session, param, search);
+	}
+
+	@Override
+	public int deliveryListCount(Map search) {
+		// TODO Auto-generated method stub
+		return dao.deliveryListCount(session,search);
+	}
+	
+	//배송관리 - 요약
+	@Override
+	public List<Map<String, Integer>> deliverySummary() {
+		// TODO Auto-generated method stub
+		return dao.deliverySummary(session);
+	}
+
+	//배송관리 - 배송상태 변경
+	@Override
+	public void updateDeliveryState(Map param) {
+		// TODO Auto-generated method stub
+		int result=dao.updateDeliveryState(session,param);
+		if(result<0) {
+			throw new RuntimeException("배송상태 변경에 실패했습니다.");
+		}
+	}
+
 
 
 

@@ -73,4 +73,14 @@ public interface AdminService {
 	//취소반품관리 - 취소반품 상세조회
 	Refund viewRefundDetail(int orderDetailNo);
 	
+	//배송관리 - 조회
+	List<OrderDetail> deliveryListPage(Map<String,Integer> param,Map search);
+	int deliveryListCount(Map search);
+	
+	//배송관리 - 요약
+	List<Map<String,Integer>> deliverySummary();
+	
+	//배송관리 - 배송상태 변경
+	void updateDeliveryState(Map param);
+	
 }

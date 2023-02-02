@@ -208,6 +208,34 @@ public class AdminDaoImpl implements AdminDao {
 		// TODO Auto-generated method stub
 		return session.selectOne("admin.viewRefundDetail",orderDetailNo);
 	}
+	
+	//배송관리 - 조회
+	@Override
+	public List<OrderDetail> deliveryListPage(SqlSessionTemplate session, Map<String, Integer> param, Map search) {
+		// TODO Auto-generated method stub
+		return session.selectList("admin.deliveryList",search,
+				new RowBounds((param.get("cPage")-1)*param.get("numPerpage"),param.get("numPerpage")));
+	}
+
+	@Override
+	public int deliveryListCount(SqlSessionTemplate session,Map search) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.deliveryListCount",search);
+	}
+	
+	//배송관리 - 요약
+	@Override
+	public List<Map<String, Integer>> deliverySummary(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectList("admin.deliverySummary");
+	}
+	
+	//배송관리 - 배송상태 변경
+	@Override
+	public int updateDeliveryState(SqlSessionTemplate session, Map param) {
+		// TODO Auto-generated method stub
+		return session.update("admin.updateDeliveryState",param);
+	}
 
 
 	

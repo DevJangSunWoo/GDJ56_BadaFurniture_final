@@ -67,10 +67,10 @@ public class AdminController {
 //	}
 	
 	//배송 관리 연결
-	@RequestMapping("/admin/delivery.do")
-	public String manageDelivery() {
-		return "admin/manageDelivery";
-	}
+//	@RequestMapping("/admin/delivery.do")
+//	public String manageDelivery() {
+//		return "admin/manageDelivery";
+//	}
 	
 	//취소/반품 관리 연결
 //	@RequestMapping("/admin/refund.do")
@@ -591,6 +591,78 @@ public class AdminController {
 		log.debug("안녕 환불 :{}",orderDetailNo+"|"+refund);
 		
 		return refund;
+	}
+	
+	
+	///////
+	//'배송관리' - 조회
+	@RequestMapping("/admin/delivery.do")
+	public ModelAndView deliveryList(ModelAndView mv,
+			@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
+			,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
+			,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
+			) {		
+
+		//log.debug("cPage {}", cPage);
+		//log.debug("numPerpage {}", numPerpage);
+		
+		//log.debug("searchType {}", searchType);
+		//log.debug("searchKeyword {}", searchKeyword);
+		
+		Map search=new HashMap();
+		search.put("searchType", searchType);		
+		search.put("searchKeyword", searchKeyword);		
+		
+		
+		mv.addObject("delivery",service.deliveryListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		//log.debug("resell : {}",service.resellListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		
+		int totalData=service.deliveryListCount(search);
+		
+		//log.debug("totalData {}", totalData);		
+		
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "refund.do",searchType,searchKeyword));
+		
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchKeyword", searchKeyword);
+		
+		
+		
+		//배송 요약
+		List<Map<String,Integer>> sum=service.deliverySummary();
+		//log.debug("{}",sum);		
+		mv.addObject("summary",sum);		
+		
+		mv.setViewName("admin/manageDelivery");	
+		
+		return mv;
+	}
+	
+	//'배송관리' - 배송상태 변경하기
+	@RequestMapping(value="/admin/updateDeliveryState.do")
+	@ResponseBody
+	public Map updateDeliveryState(
+			@RequestParam("orderDetailNo") int orderDetailNo,
+			@RequestParam("deliveryState") String deliveryState) {		
+		
+		Map param=new HashMap();
+		param.put("orderDetailNo", orderDetailNo);
+		param.put("deliveryState", deliveryState);	
+		//log.debug("변경할 상태 : "+deliveryState);
+		
+		Map result=new HashMap();	
+		
+		try {
+			service.updateDeliveryState(param);			
+			result.put("msg", ("'"+(String)param.get("deliveryState"))+"'"+" 상태로 변경했습니다.");
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			result.put("msg", "배송상태 변경에 실패했습니다.");
+		}		
+		
+		return result;
+		
 	}
 	
 }
