@@ -536,7 +536,7 @@
 	//주문상세보기에서 영수증보기를 클릭했을 때
 	$(document).on("click","button.receiptButton", e=>{
 		let path = $(e.target).val();
-		window.open(path,'_blank','width=420px height=300px top=280px left=750px');	
+		window.open(path,'_blank','width=430px height=700px top=250px left=750px');	
 	});
 	
 	//기간 조회 버튼을 클릭했을 때

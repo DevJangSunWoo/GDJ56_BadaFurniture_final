@@ -47,24 +47,9 @@ public class MypageController {
 	// 장바구니 리스트 출력
 	@RequestMapping("/mypage/cart.do")
 	public ModelAndView cartList(ModelAndView mv, HttpSession session) {	
-		Member loginMember = (Member)session.getAttribute("loginMember");
-		
-		//시큐리티 테스트
-		
+
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-
-		// 비로그인 접근
-		if (authentication instanceof AnonymousAuthenticationToken) {
-		//throw new BaseException("", MessageType.ERROR_PAGE_403.toString(), HttpStatus.OK);
-		}
-
-		//Member loginMember2 = (Member)authentication.getPrincipal();
-		log.debug("시큐리티 : {}",authentication.getPrincipal());
-		//log.debug("시큐리티 : {}",loginMember2);
-		
-	
-		//시큐리티 테스트
-		
+		Member loginMember = (Member)authentication.getPrincipal();
 		List<Product> products = service.selectCartProduct(loginMember.getMemberNo());	
 		mv.addObject("products",products);
 		mv.setViewName("mypage/cartList");
@@ -76,7 +61,8 @@ public class MypageController {
 	@RequestMapping("/cart/delete.do")
 	public ModelAndView deleteCart(ModelAndView mv, HttpSession session, @RequestParam(value="productNo")List<Integer> productNos) {
 		
-		Member loginMember = (Member)session.getAttribute("loginMember");
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		Member loginMember = (Member)authentication.getPrincipal();
 		//log.debug("{}",productNos);
 		
 		Map<String, Object> param = new HashMap();
@@ -107,7 +93,8 @@ public class MypageController {
 			@RequestParam(value="cPage", defaultValue="1") int cPage) {
 		
 		int numPerpage = 5;
-		Member loginMember = (Member)session.getAttribute("loginMember");
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		Member loginMember = (Member)authentication.getPrincipal();
 		
 		List<Alert> alerts = service.selectAlertList(loginMember.getMemberNo(), cPage, numPerpage);
 		int totalData = service.selectAlertCount(loginMember.getMemberNo());
@@ -145,7 +132,8 @@ public class MypageController {
 	@ResponseBody
 	@RequestMapping("/alert/updateReadState.do")
 	public int updateAlertReadState(HttpSession session) {
-		Member loginMember = (Member)session.getAttribute("loginMember");
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		Member loginMember = (Member)authentication.getPrincipal();
 		int result = service.updateAlertReadState(loginMember.getMemberNo());
 		//log.debug("new 표시 업데이트 : ",result);
 		return result;
@@ -155,7 +143,8 @@ public class MypageController {
 	@ResponseBody
 	@RequestMapping("/alert/countReadState.do")
 	public int countReadState(HttpSession session) {
-		Member loginMember = (Member)session.getAttribute("loginMember");
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		Member loginMember = (Member)authentication.getPrincipal();
 		int count = service.selectAlertCountReadStateN(loginMember.getMemberNo());
 		return count;
 	}
@@ -170,7 +159,9 @@ public class MypageController {
 			HttpSession session) {
 		
 		Map search=new HashMap();
-		search.put("memberNo", ((Member)session.getAttribute("loginMember")).getMemberNo());
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		Member loginMember = (Member)authentication.getPrincipal();
+		search.put("memberNo", loginMember.getMemberNo());
 		search.put("searchType", searchType);
 		if(searchType.equals("ORDER_SHEET_ENROLL_DATE")) {	
 			//주문일자 들어오는 값 :2023-01-31 ~ 2023-01-31

@@ -9,6 +9,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,7 +47,8 @@ public class ResellController {
 			@RequestParam(value="cPage", defaultValue="1") int cPage) {
 		
 		int numPerpage = 5;
-		Member loginMember = (Member)session.getAttribute("loginMember");
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		Member loginMember = (Member)authentication.getPrincipal();
 		
 		List<Resell> resells = service.selectResellList(loginMember.getMemberNo(), cPage, numPerpage);
 		int totalData = service.selectResellCount(loginMember.getMemberNo());

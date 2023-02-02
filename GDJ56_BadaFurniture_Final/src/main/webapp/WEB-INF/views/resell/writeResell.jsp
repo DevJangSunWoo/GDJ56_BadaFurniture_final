@@ -87,6 +87,7 @@
 		font-weight:bolder;
 	}
 </style>
+<c:set var="loginMember" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}"/>
 <section id="sellpage">
 	<div id="title">
 		내 가구 판매 신청하기
