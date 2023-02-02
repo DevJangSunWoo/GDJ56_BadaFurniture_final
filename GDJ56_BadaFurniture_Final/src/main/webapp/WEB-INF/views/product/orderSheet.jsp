@@ -1105,7 +1105,7 @@
 	             merchant_uid: createOrderNum(), // 상점에서 관리하는 주문 번호를 전달  // db상 컬럼추가-> time+난수로 발생
 	             name : '주문명:'+data.name,
 	            // amount : data.totalPrice,  //총가격 추후에 바꾸기
-	             amount : 100,
+	             amount : data.totalPrice,
 	             buyer_email : data.buyer_email ,  //로그인멤버
 	             buyer_name : data.buyer_name,			 //로그인멤버
 	             buyer_tel : data.buyer_tel,	 //로그인멤버
