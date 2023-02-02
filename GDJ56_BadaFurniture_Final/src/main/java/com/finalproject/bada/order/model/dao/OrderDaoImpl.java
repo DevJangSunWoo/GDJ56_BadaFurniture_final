@@ -49,6 +49,19 @@ public class OrderDaoImpl implements OrderDao {
 		return session.update("order.updateSoldOutState",map);
 	}
 
+	@Override
+	public int deleteMemberCart(SqlSessionTemplate session, HashMap map) {
+		// TODO Auto-generated method stub
+		return session.delete("order.deleteMemberCart",map);
+	}
+
+	@Override
+	public int selectCartCount(SqlSessionTemplate session, HashMap map) {
+		// TODO Auto-generated method stub
+		return session.selectOne("order.selectCartCount", map);
+	}
+
+	
 	
 	
 	

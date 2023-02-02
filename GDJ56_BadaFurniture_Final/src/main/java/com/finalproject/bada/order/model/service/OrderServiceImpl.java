@@ -44,6 +44,16 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@Transactional
 	public void insertOrderSheet(HashMap map) {
+		
+		//1차시도			
+//		int orderDetailCount=dao.selectOrderDetailCount(session,map);			
+//		if(orderDetailCount<10) {
+//		int detailResult=dao.insertOrderDetail(session,map);
+//		}else {				
+//			throw new RuntimeException(" detail 저장 실패");
+//		}
+		
+	
 		int seqOrderSheet=(int)map.get("seqOrderSheet");
 		
 		//log.debug("{}","인서트 전"+seqOrderSheet);
@@ -69,15 +79,35 @@ public class OrderServiceImpl implements OrderService {
 			if(result != productCount) {
 				throw new RuntimeException("OrderDetail이 갯수 만큼 삽입이 안됬습니다.");
 			}
-//1차시도			
-//			int orderDetailCount=dao.selectOrderDetailCount(session,map);			
-//			if(orderDetailCount<10) {
-//			int detailResult=dao.insertOrderDetail(session,map);
-//			}else {				
-//				throw new RuntimeException(" detail 저장 실패");
-//			}
+
 			
+			//제품 SoldOutState 상태변화
+			int  resultSoldOutState =dao.updateSoldOutState(session,map);
 			
+				if(resultSoldOutState<=0) {
+					throw new RuntimeException(" 제품 SoldOutState 변화 실패");
+					
+				}
+			
+			//제품결제시  결제한 제품들 카트에서 삭제하기	
+			//장바구니에서  결제하려는 제품이 없을시에대한 분기처리해야함 예를들어 바로구매
+			//장바구니에 있든 없든 productNo 배열이 넘어간다.
+			//→selectCartCountNo 를 이용하여 내가 장바구니에서 선택한 개수를 만든다.
+			//그리고 내가 삭제구문시 반환되는 숫자 resultCartDelete
+			//resultCartDelete 와  selectCartCountNo 가 일치하지 않을시 runtime exception 발동 시키기
+				
+				
+			int	selectCartCountNo=dao.selectCartCount(session,map);
+				
+				
+			int resultCartDelete=dao.deleteMemberCart(session,map);	
+				
+			if(resultCartDelete!=selectCartCountNo) {
+				throw new RuntimeException(" 장바구니 제품 삭제 실패");
+				
+			}
+				
+							
 			
 		}else {
 			
@@ -96,12 +126,12 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	
-	@Override
-	public int updateSoldOutState(HashMap map) {
-		// TODO Auto-generated method stub
-		return dao.updateSoldOutState(session,map);
-	}
-	
+//	@Override
+//	public int updateSoldOutState(HashMap map) {
+//		// TODO Auto-generated method stub
+//		return dao.updateSoldOutState(session,map);
+//	}
+//	
 	
 	
 	

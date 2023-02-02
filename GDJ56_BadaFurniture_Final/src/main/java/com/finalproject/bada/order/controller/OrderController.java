@@ -120,7 +120,7 @@ public class OrderController {
 		map.put("address",address);
 		map.put("addressDetail",addressDetail);
 		map.put("productNos",productNos);
-		
+		//주문서 작성 로직
 		service.insertOrderSheet(map);		
 		
 		
@@ -130,26 +130,23 @@ public class OrderController {
 		
 		
 		
-
+		
+		
+	//1형태
 		//가구의  판매상태변경  update
 		//map 객체에 제품번호 확인
-		int[] productNosAfter = (int[])map.get("productNos");
-		
-		//for문을 도는 순간 여기서  배열을   일반 int형 데이터가 됨
-		for(int productNo : productNosAfter) {
+//		int[] productNosAfter = (int[])map.get("productNos");
+//		
+//		//for문을 도는 순간 여기서  배열을   일반 int형 데이터가 됨
+//		for(int productNo : productNosAfter) {
+//			
+//		//log.debug("{}",productNo);
+//			
+//		}
+//		
+//		int resultSoldOutState=service.updateSoldOutState(map);
+//		
 			
-		//log.debug("{}",productNo);
-			
-		}
-		
-		
-		int resultSoldOutState=service.updateSoldOutState(map);
-		
-		
-		
-		
-		
-		
 		
 		
 		//주문완료서에 데이터 표출하기
@@ -165,7 +162,7 @@ public class OrderController {
 			//log.debug("{}","데이터넘어옴");
 			
 		}
-		
+				
 		
 		mv.addObject("oss",oss);
 		mv.setViewName("product/orderComplete");

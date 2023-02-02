@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.finalproject.bada.admin.model.dao.AdminDao;
+import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.refund.model.vo.Refund;
 import com.finalproject.bada.resell.model.vo.Resell;
 
 import lombok.extern.slf4j.Slf4j;
@@ -139,11 +141,6 @@ public class AdminServiceImpl implements AdminService {
 
 	
 	//주문관리 - 조회
-//	@Override
-//	public List<OrderSheet> orderListPage(Map<String, Integer> param, Map search) {
-//		// TODO Auto-generated method stub
-//		return dao.orderListPage(session, param, search);
-//	}
 	@Override
 	public List<OrderSheet> orderListPage(Map<String, Integer> param, Map search) {
 		// TODO Auto-generated method stub
@@ -200,6 +197,46 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public OrderSheet selectOrderSheet(int orderSheetNo) {
 		return dao.selectOrderSheet(session, orderSheetNo);
+	}
+	
+	
+	//취소반품관리 - 조회
+	@Override
+	public List<OrderDetail> refundListPage(Map<String, Integer> param, Map search) {
+		// TODO Auto-generated method stub
+		return dao.refundListPage(session, param, search);
+	}
+
+	@Override
+	public int refundListCount(Map search) {
+		// TODO Auto-generated method stub
+		return dao.refundListCount(session,search);
+	}
+	
+	//취소반품관리 - 요약
+	@Override
+	public List<Map<String, Integer>> refundSummary() {
+		// TODO Auto-generated method stub
+		return dao.refundSummary(session);
+	}
+
+	//취소반품관리 - 취소반품상태 변경
+	@Override
+	@Transactional
+	public void updateRefundState(Map param) {
+		// TODO Auto-generated method stub
+		int result=dao.updateRefundState(session,param);
+		if(result<0) {
+			throw new RuntimeException("취소/반품상태 변경에 실패했습니다.");
+		}
+		
+	}
+
+	//취소반품관리 - 취소반품 상세조회
+	@Override
+	public Refund viewRefundDetail(int orderDetailNo) {
+		// TODO Auto-generated method stub
+		return dao.viewRefundDetail(session,orderDetailNo);
 	}
 
 

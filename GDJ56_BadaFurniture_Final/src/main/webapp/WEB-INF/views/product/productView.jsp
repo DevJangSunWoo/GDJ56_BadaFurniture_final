@@ -69,10 +69,10 @@
                                 <ul>
                                     <li>분류 <span>${productData.item}</span></li>
                                     <li>크기(가로/세로/높이) </li>
-                                    <li style="font-weight: 700;">${productData.widths}cm/${productData.depths}cm /${productData.heights}cm</li> 
+                                    <li style="font-weight: 700;">${productData.widths}mm/${productData.depths}mm /${productData.heights}mm</li> 
                                     <li>색상 <span>${productData.color}</span></li>
                                 </ul>
-                                <div class="checkout__order__subtotal">색사 <span>${productData.grade}</span></div>
+                                
                                 <div class="checkout__order__subtotal">등급 <span>${productData.grade}</span></div>
                                 <div class="checkout__order__total">총가격 <span>${productData.price}원</span></div>
                                 <div class="checkout__input__checkbox">

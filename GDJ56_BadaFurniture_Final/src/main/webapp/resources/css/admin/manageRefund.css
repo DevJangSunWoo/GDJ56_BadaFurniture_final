@@ -8,6 +8,10 @@
 	} */
 
 
+	div#propertyContainer{
+		margin-top: 30px;
+	}
+
     div#listContainer>h2{
         text-align:center;
         font-size:25px;
@@ -42,12 +46,8 @@
     div#search-container{text-align:center;}
 
     div#search-searchAll{display:inline-block;}
-    div#search-soldOutState{display:none;}
-    div#search-showState{display:none;}
-    div#search-item{display:none;}
-    div#search-grade{display:none;}
-    div#search-productNo{display:none;}
-    div#search-price{display:none;}
+    div#search-orderSheetNo{display:none;}
+    div#search-refundState{display:none;}
 
     div#search-container {margin:0 0 10px 0; padding:3px; }
     div#numPerpage-container{text-align:right; padding:0px 40px 20px 0px;}
@@ -101,9 +101,10 @@
 		text-decoration: none;
 	}
 	
-	.viewProduct{
+	.viewProduct,.viewOrderSheet,.viewOrderDetail{
 		text-decoration: none;
 		color: black;
+		font-weight: bold;
 	}
 
 	.viewProduct a:visited{
@@ -156,6 +157,100 @@
 	}
 
 	#productImg{
+		width: 70px;
+		height: 70px;
+	}
+
+	/* 모달 */
+	.modalTitle{
+		display: flex;
+		justify-content: center;
+	}
+
+	.closeBtn {
+		background-color: #348492;
+		padding: 5px 10px;
+		border-radius: 4px;
+		cursor: pointer;
+		border:none;
+		color: white;
+	}
+
+	.modals {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.modals .bg {
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	.modalBox {
+		position: absolute;
+		background-color: #fff;
+		width: 400px;
+		height: 300px;
+		padding: 15px;
+	}
+
+	.modalBox button {
+		display: block;
+		width: 80px;
+		margin: 0 auto;
+	}
+
+	.hiddens {
+		display: none;
+	}
+
+	.modalContentInnerDiv{
+		margin:8px;
+	}
+
+	#modalBtnArea{
+		display: flex;
+		justify-content: center;
+		padding: 15px;
+		
+	}
+
+
+	
+	#pageBarContainer *{
+
+		padding: 5px;
+		margin-top: 10px;
+	}
+
+	/* #pageBarContainer a{
+
+		text-decoration: none;
+		color: black;
+
+	}
+	#pageBarContainer a:visited{
+
+		text-decoration: none;
+		color: black;
+
+	} */
+	#pageBar a.active {
+		background-color: #4CAF50;
+  		color: white;
+	}
+	#pageBar a:hover:not(.active) {
+		background-color: #ddd;
+	}
+
+	.orderImg{
 		width: 70px;
 		height: 70px;
 	}

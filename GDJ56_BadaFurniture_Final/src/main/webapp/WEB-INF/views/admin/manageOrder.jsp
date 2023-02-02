@@ -223,7 +223,7 @@
 											<c:if test="${vs.index==0}">												
 												<td class="tableTd" rowspan="${o.details.size()}">
 													<input type="hidden" value="${o.orderSheetNo}">
-													<a href="${path}/order/orderPayment.do?orderSheetNo="><c:out value="${o.orderSheetNo}"/></a>
+													<a href=""><c:out value="${o.orderSheetNo}"/></a>
 												</td>
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.orderSheetenrollDate}"/></td>
 											</c:if>
@@ -263,14 +263,6 @@
 											<c:if test="${d.refundState!=null}">
 												<td class="tableTd2">
 													<input type="text" name="refundState" value="${d.refundState}" style="width: 88px;border-style: none;background-color: #dcd5c36c;text-align: center;" readonly>
-													<!-- <select name="refundState">
-														<option value="반품요청" ${d.refundState.equals("반품요청")?"selected":""}>반품요청</option>
-														<option value="반품대기" ${d.refundState.equals("반품대기")?"selected":""}>반품대기</option>
-														<option value="반품완료" ${d.refundState.equals("반품완료")?"selected":""}>반품완료</option>
-														<option value="취소요청" ${d.refundState.equals("취소요청")?"selected":""}>취소요청</option>
-														<option value="취소완료" ${d.refundState.equals("취소완료")?"selected":""}>취소완료</option>
-														<option value="주문확정" ${d.refundState.equals("주문확정")?"selected":""}>주문확정</option>
-													</select>										 -->
 												</td>
 											</c:if>
 
@@ -390,7 +382,7 @@
 
 				},
 				error:function(result){
-					alert("error! result 값 : "+result.result );	
+					alert("AJAX ERROR - error : "+result);	
 				}
 			})
 	}

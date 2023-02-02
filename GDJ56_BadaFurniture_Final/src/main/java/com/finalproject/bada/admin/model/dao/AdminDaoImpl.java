@@ -12,6 +12,7 @@ import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.refund.model.vo.Refund;
 import com.finalproject.bada.resell.model.vo.Resell;
 
 import lombok.extern.slf4j.Slf4j;
@@ -169,6 +170,43 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public OrderSheet selectOrderSheet(SqlSessionTemplate session, int orderSheetNo) {
 		return session.selectOne("admin.selectOrderSheet", orderSheetNo);
+	}
+	
+	//취소반품관리 - 조회
+	@Override
+	public List<OrderDetail> refundListPage(SqlSessionTemplate session, Map<String, Integer> param, Map search) {
+		// TODO Auto-generated method stub
+		return session.selectList("admin.refundList",search
+				,new RowBounds((param.get("cPage")-1)*param.get("numPerpage"),param.get("numPerpage")));		
+
+	}
+
+	@Override
+	public int refundListCount(SqlSessionTemplate session,Map search) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.refundListCount",search);
+	}
+	
+	//취소반품관리 - 요약
+	@Override
+	public List<Map<String, Integer>> refundSummary(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectList("admin.refundSummary");
+	}
+	
+	//취소반품관리 - 취소반품상태 변경
+	@Override
+	public int updateRefundState(SqlSessionTemplate session, Map param) {
+		// TODO Auto-generated method stub
+		return session.update("admin.updateRefundState",param);
+	}
+	
+	
+	//취소반품관리 - 취소반품 상세조회
+	@Override
+	public Refund viewRefundDetail(SqlSessionTemplate session, int orderDetailNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.viewRefundDetail",orderDetailNo);
 	}
 
 
