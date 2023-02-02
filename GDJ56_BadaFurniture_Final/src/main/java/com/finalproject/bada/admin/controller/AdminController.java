@@ -44,8 +44,14 @@ public class AdminController {
  
 	//관리자 페이지 메인 연결 - 대시보드
 	@RequestMapping("/admin")
-	public String adminDashBoard() {
-		return "admin/adminDashBoard";
+	public ModelAndView adminDashBoard(ModelAndView mv) {
+		
+		Map<String,Integer> summary=service.dashBoardSummary();
+		mv.addObject("summary",summary);	
+		
+		mv.setViewName("admin/adminDashBoard");
+		
+		return mv;
 	}
 	
 	//가구 올리기 연결
@@ -725,7 +731,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin/updateResellSummary.do")	
-	public @ResponseBody Map<String,Integer> updateResellSummary() {		
+	public @ResponseBody Map<String,Integer> updateResellSummary() {
+		
 		Map<String,Integer> summary=service.resellSummary();
 		
 		summary.put("ALL_R",Integer.parseInt(String.valueOf(summary.get("ALL_R"))));
@@ -735,7 +742,12 @@ public class AdminController {
 		summary.put("STATE_4",Integer.parseInt(String.valueOf(summary.get("STATE_4"))));	
 		
 		return summary;
+		
 	}
+	
+	
+	
+	
 }
 
 

@@ -13,6 +13,9 @@ import com.finalproject.bada.refund.model.vo.Refund;
 import com.finalproject.bada.resell.model.vo.Resell;
 
 public interface AdminDao {
+
+	//대시보드 - 요약
+	Map<String,Integer> dashBoardSummary(SqlSessionTemplate session);
 	
 	//가구 올리기
 	int insertProduct(SqlSessionTemplate session,Product product);

@@ -8,7 +8,11 @@
 <link rel="stylesheet" href="${path }/resources/css/admin/adminDashBoard.css"/>
 
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
-
+<style>
+    hr {
+        border: 0px;
+    }
+</style>
 <section>
     <div id="divTop">
         <div id="title_container">            
@@ -21,73 +25,202 @@
             <div id="order_container">
                 <h3 class="title">💰 주문 현황</h3>
                 <div class="spandiv">                
+
                     <div class="stateOuterDiv">
-                        <span id="totalOrder" style="margin-right: 60px;">전체</span><span class="orderCount">111111</span><span class="countUnit">건</span>
-                    </div>   
+                        <div class="itemDiv"><strong>전체</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.ALL_ORDER}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>                     
+                    <hr>
+                    <hr>
                     <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">입금대기</span><span class="orderCount">111111</span><span class="countUnit">건</span>
-                    </div>           
+                        <div class="itemDiv"><strong>입금대기</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_1}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div> 
+
                     <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">입금완료</span><span class="orderCount">111</span><span class="countUnit">건</span>
-                    </div>
-                    <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">결제완료</span><span class="orderCount">111</span><span class="countUnit">건</span>
+                        <div class="itemDiv"><strong>입금완료</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_2}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
                     </div>    
+ 
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>카드결제완료</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_3}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>    
+
                 </div>            
             </div>
-            <div id="orderDetail_container">
-                <h3 class="title">🛒 주문 취소 현황</h3>
-                <div class="spandiv">                                    
-                    <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">취소요청</span><span class="orderCount">111</span><span class="countUnit">건</span>
-                    </div>
-                    <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">반품요청</span><span class="orderCount">111</span><span class="countUnit">건</span>
-                    </div>
-                    <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">반품대기</span><span class="orderCount">111</span><span class="countUnit">건</span>
-                    </div>
-                </div>            
-            </div>
+            
             <div id="delivery_container">
                 <h3 class="title">🚚 배송 현황</h3>
                 <div class="spandiv">
+
                     <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">배송준비</span><span class="orderCount">111111</span><span class="countUnit">건</span>
-                    </div>
+                        <div class="itemDiv"><strong>배송준비</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_4}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>   
+
                     <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 45px;">배송중</span><span class="orderCount">111111</span><span class="countUnit">건</span>
+                        <div class="itemDiv"><strong>배송중</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_5}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>  
+
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>배송완료</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_6}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>  
+                </div>            
+            </div>
+           
+            <div id="orderDetail_container">
+                <h3 class="title">🛒 주문 취소 현황</h3>
+                <div class="spandiv">                                    
+
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>전체</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.ALL_REFUND}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div> 
+                    <hr>
+                    <hr>
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>취소요청</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_7}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div> 
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>취소완료</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_8}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div> 
+
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>취소거부</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_9}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div> 
+                    <hr>
+                    <hr>
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>반품요청</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_10}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div> 
+
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>반품대기</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_11}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
                     </div>
+
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>반품거부</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_12}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>
+
                 </div>            
             </div>
             <div id="product_container">
                 <h3 class="title">🎁 상품 현황</h3>
                 <div class="spandiv">
+
                     <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">판매중</span><span class="orderCount">111111</span><span class="countUnit">건</span>
+                        <div class="itemDiv"><strong>전체</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.ALL_PRODUCT}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
                     </div>
+                    <hr>
+                    <hr>
                     <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">거래중</span><span class="orderCount">111111</span><span class="countUnit">건</span>
+                        <div class="itemDiv"><strong>판매중</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_13}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
                     </div>
+
                     <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">비공개</span><span class="orderCount">111111</span><span class="countUnit">건</span>
+                        <div class="itemDiv"><strong>거래중</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_14}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>
+
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>판매완료</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_15}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>                    
+                    <hr>
+                    <hr>
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>공개</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_16}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>
+
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>비공개</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_17}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
                     </div>
                 </div>
             </div>
             <div id="resell_container">
                 <h3 class="title">🤝 '내 가구 팔기' 현황</h3>
                 <div class="spandiv">
+
                     <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">승인검토</span><span class="orderCount">111111</span><span class="countUnit">건</span>
+                        <div class="itemDiv"><strong>전체</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.ALL_RESELL}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
                     </div>
+                    <hr>
+                    <hr>
                     <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">수정요청</span><span class="orderCount">111111</span><span class="countUnit">건</span>
+                        <div class="itemDiv"><strong>승인검토</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_18}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
                     </div>
+
                     <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 45px;">미입금</span><span class="orderCount">111111</span><span class="countUnit">건</span>
+                        <div class="itemDiv"><strong>수정요청</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_19}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
                     </div>
+
                     <div class="stateOuterDiv">
-                        <span class="state" style="margin-right: 30px;">수거대기</span><span class="orderCount">111111</span><span class="countUnit">건</span>
+                        <div class="itemDiv"><strong>승인완료</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_20}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>
+
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>승인거부</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_21}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>
+
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>수거대기</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_22}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>
+
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>수거완료</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_23}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
+                    </div>
+
+                    <div class="stateOuterDiv">
+                        <div class="itemDiv"><strong>입금완료</strong></div>
+                        <div class="valueDiv"><c:out value="${summary.STATE_24}"/></div>
+                        <div class="unitDiv"><strong>건</strong></div>
                     </div>
                 </div>
             </div>

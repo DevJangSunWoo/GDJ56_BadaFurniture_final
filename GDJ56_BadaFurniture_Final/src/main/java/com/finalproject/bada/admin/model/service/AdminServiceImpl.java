@@ -32,6 +32,13 @@ public class AdminServiceImpl implements AdminService {
 		this.session = session;
 	}
 	
+	//대시보드 - 요약
+	@Override
+	public Map<String, Integer> dashBoardSummary() {
+		// TODO Auto-generated method stub
+		return dao.dashBoardSummary(session);
+	}
+	
 	//가구 올리기
 	@Override
 	public int insertProduct(Product product) {
@@ -268,6 +275,8 @@ public class AdminServiceImpl implements AdminService {
 			throw new RuntimeException("배송상태 변경에 실패했습니다.");
 		}
 	}
+
+
 
 
 
