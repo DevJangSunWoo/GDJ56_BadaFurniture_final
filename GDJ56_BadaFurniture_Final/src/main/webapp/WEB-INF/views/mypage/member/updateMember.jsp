@@ -37,7 +37,7 @@
           	<div class="flexDiv">
                   <img src="${path }/resources/images/member/아이디.png">
                   <div class="input-container">		
-                      <input type="text" name="id" class="form__input" value="${loginMember.memberId}" readonly/>
+                      <input type="text" name="id" class="form__input" value="${loginMember.memberId}" readonly style="background: #e9e9e9;"/>
                       <label class="form__label" id="idTxt">아이디</label>
                   </div>
               </div>
@@ -46,7 +46,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/메일.png">
                         <div class="input-container" >
-                            <input type="email" name="email" id="email" class="form__input" value="${loginMember.email}" readonly/>
+                            <input type="email" name="email" id="email" class="form__input" value="${loginMember.email}" readonly style="background: #e9e9e9;"/>
                             <label class="form__label" id="mailTxt">이메일</label>
                         </div>
                     </div>
