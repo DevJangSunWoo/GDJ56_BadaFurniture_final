@@ -21,6 +21,7 @@ public class SecurityConfig {
 					.and()
 				.authorizeRequests()
 					.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+					.antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
 				.antMatchers("/**").permitAll()
 				.and()
 				.build();
