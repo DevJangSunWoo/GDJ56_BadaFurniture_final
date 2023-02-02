@@ -147,7 +147,7 @@
 		
 		<div id="checkBtn"> 
 			<input type="button" onclick="fn_reset();" value="초기화">
-			<input type="button" onclick="fn_printProductList();" value="적용">
+			<input type="button" onclick="fn_paging(1);" value="적용">
 		</div>
 	</div>	
 	<br><br><br>
@@ -216,13 +216,12 @@
 		const fn_selectItem=(e)=>{
 			let item = $(e.target).parents(".icon").children("p").text();
 			$("input[name=item]").val(item);
-//			fn_printProductList();
 			fn_paging(1);
 		}
 		
 		//정렬 selectbox 변경할때마다 ajax 구동
 		const fn_changeSort=()=>{
-			fn_printProductList();
+			fn_paging(1);			
 		}
 		
 			
@@ -410,6 +409,7 @@
 	
 </section>
 	<script>
+		//매물정보 클릭시 상세페이지로 이동
 		$(".productWrap").on("click",function(e){
 			console.log($(e.target).parents(".productWrap").children(".showProduct").prev().val());
 			let productNo = $(e.target).parents(".productWrap").children(".showProduct").prev().val();
