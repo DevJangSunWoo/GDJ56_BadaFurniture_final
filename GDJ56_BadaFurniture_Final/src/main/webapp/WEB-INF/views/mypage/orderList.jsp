@@ -130,13 +130,18 @@
 		font-size:13px;
 	}
 	
+	div#pageBar{
+		text-align:center;margin-top:20px;
+	}
+	
+	/* 모달 Customizing */
 	/* 모달 */
 	.modalTitle{
 		display: flex;
 		justify-content: center;
-		font-size:35px;
+		font-size:30px;
 		font-weight: bolder;
-		color:rgb(52, 132, 146);
+		margin-bottom:20px;
 	}
 	
 	.closeBtn {
@@ -146,6 +151,10 @@
       cursor: pointer;
 	  border:none;
 	  color: white;
+	  width: 500px;
+      height:40px;
+      font-weight:bolder;
+      font-size:18px;
     }
 
     .modals {
@@ -172,16 +181,14 @@
     .modalBox {
       position: absolute;
       background-color: #fff;
-      width: 500px;
-      height: 700px;
-      padding: 15px;
+      width: 700px;
+      height: 800px;
+      padding: 20px;
+      overflow: scroll;
     }
 
     .modalBox button {
       display: block;
-      width: 300px;
-      height:30px;
-      font-size:16px;
       margin: 0 auto;
     }
 
@@ -197,11 +204,64 @@
 		display: flex;
 		justify-content: center;
 		padding: 15px;
+		margin-top:30px;
+	}
+	table#orderDetailTable{
+		width:100%;
+		border-top:5px solid black;
+		border-collapse: collapse;
+	}
+	table#orderDetailTable th{
+		text-align: center;
+		border-bottom:2px solid black;
+		height:30px;
+	}
+	table#orderDetailTable td{
+		border-bottom:1px solid black;
+	}
+	table#orderDetailTable th:first-child, table#orderDetailTable td:first-child {
+		width:530px;
+	}
+	table#orderDetailTable th:nth-child(2), table#orderDetailTable td:nth-child(2) {
+		width:100px;
+		text-align:center;
+	}
+	div.detailInfoContainer{
+		height:85px;width:100%;margin:10px;display:flex;
+	}
+	img.infoImg{
+		cursor:pointer;width:85px;height:85px;
+	}
+	div.detailProductTitle{
+		padding:20px 0px 8px 10px;
+	}
+	div.detailProductsummary{
+		padding:0px 0px 5px 10px;font-size:13px;color:grey;
 	}
 	
-	div#pageBar{
-		text-align:center;margin-top:20px;
+	table.infoTable td{
+		border-bottom: 1px solid grey;
+		height: 30px;
+		font-weight:bolder;
+		padding:10px;
 	}
+	table.infoTable td:first-child {
+		width:150px;	
+	}
+	table.infoTable button.receiptButton{
+		padding:0px;
+		border:2px solid rgb(52, 132, 146);
+		width:70px;
+		height:25px;
+		background-color:white;
+		color:rgb(52, 132, 146);
+		border-radius:5px;
+		padding-bottom:2px;
+		margin:1px;
+		cursor: pointer;
+		font-size:13px;
+	}
+	/* modal costomizing..  */
 </style>
 	<section class="mypage">
 		<div id="title">
@@ -214,15 +274,15 @@
 				<div id="dateContainer">
 					<div id=dateContent>
 						<span id="dateButtonContainer">
-							<input type="hidden" name="searchKeyword" value="1day">
-							<button class="searchDate">오늘</button>
-							<input type="hidden" name="searchKeyword" value="1week">
+							<input type="hidden" name="searchKeyword" id="day1">
+							<button class="searchDate">1일</button>
+							<input type="hidden" name="searchKeyword" id="week1">
 							<button class="searchDate">1주일</button>
-							<input type="hidden" name="searchKeyword" value="1month">
+							<input type="hidden" name="searchKeyword" id="month1">
 							<button class="searchDate">1개월</button>
-							<input type="hidden" name="searchKeyword" value="3month">
+							<input type="hidden" name="searchKeyword" id="month3">
 							<button class="searchDate">3개월</button>
-							<input type="hidden" name="searchKeyword" value="6month">
+							<input type="hidden" name="searchKeyword" id="month6">
 							<button class="searchDate">6개월</button>
 							&nbsp;&nbsp;
 							<!-- &nbsp;&nbsp;
@@ -230,7 +290,7 @@
 							&nbsp;~&nbsp;
 							<input type="date">
 							&nbsp;&nbsp; -->
-							<input type="text" id="orderDateRange" name="searchKeyword" class="searchInput" size="25" style="padding-bottom:3px;">
+							<input type="text" id="orderDateRange" name="searchKeyword" class="searchDate" size="25" style="padding-bottom:3px;">
 							<button class="searchDate">조회</button>
 						</span>
 					</div>
@@ -312,7 +372,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<!-- 반품/취소 상세내역 모달 -->
 		<div class="modals hiddens">
 			<div class="bg">
@@ -323,31 +382,56 @@
 					주문 상세보기
 				</div>
 				<div class="modalContent">
-					<div style="text-align:left;margin-top:30px;font-size:14px;color:grey;">
+					<div style="text-align:left;font-size:16px;margin:5px 0px 5px 0px;font-weight:bolder;">
 						주문번호 : <span id="orderSheetNo"></span> &nbsp;&nbsp; 주문일자 : <span id="orderSheetEnrollDate"></span>
 					</div>
 					<table id="orderDetailTable">
+					
+					</table>
+					
+					<div style="font-size:23px;font-weight:bolder;margin:25px 0px 3px 0px;"> 
+						결제정보
+					</div>
+					<table class="infoTable" style="width:100%;border-top:5px solid black;border-collapse: collapse;">
 						<tr>
-							<th>
-								상품정보
-							</th>
-							<th>
-								결제금액
-							</th>
-							<th>
-								판매상태
-							</th>
+							<td>결제금액</td>
+							<td id="totalPrice"></td>
+						</tr>
+						<tr>
+							<td>결제수단</td>
+							<td id="paymentMethod"></td>
+						</tr>
+						<tr>
+							<td>결제상태</td>
+							<td id="paymentState"></td>
+						</tr>
+						<tr>
+							<td id="paymentEtc"></td>
+							<td id="paymentEtcContent"></td>
 						</tr>
 					</table>
-					<div class="modalContentInnerDiv">
-						<span>✔️ 결제금액 : </span><span id="totalPrice"></span>
+					
+					<div style="font-size:23px;font-weight:bolder;margin:25px 0px 3px 0px;"> 
+						배송정보
 					</div>
-					<div class="modalContentInnerDiv">
-						<span>✔️ 결제수단 : </span><span id="paymentMethod"></span>
-					</div>
-					<div class="modalContentInnerDiv">
-						<span>✔️ 결제상태 : </span><span id="paymentState"></span><span id="receiptContainer"></span>
-					</div>
+					<table class="infoTable" style="width:100%;border-top:5px solid black;border-collapse: collapse;">
+						<tr>
+							<td>수령인</td>
+							<td id="receiverName"></td>
+						</tr>
+						<tr>
+							<td>우편번호</td>
+							<td id="postCode"></td>
+						</tr>
+						<tr>
+							<td>주소</td>
+							<td id="address"></td>
+						</tr>
+						<tr>
+							<td>상세주소</td>
+							<td id="detailAddress"></td>
+						</tr>
+					</table>
 					
 				</div>
 				<div id="modalBtnArea">
@@ -355,20 +439,32 @@
 				</div>
 			</div>
 		</div>
-		<button id="detailModalBtn">zz</button>
 	</section>
 	
 <script>
-	//취소/반품 확인 모달
+	$(()=>{
+		//1일전, 7일전, 1달전, 3달전, 6달전 input 설정
+		let dayArr = [1, 7, 30, 90, 180];
+		for(let i = 0; i<dayArr.length; i++){
+			let day = new Date(new Date().getTime() - dayArr[i]*24*60*60*1000).toISOString().split("T")[0];
+			$("input[name=searchKeyword]").eq(i).val(day+" ~ "+new Date().toISOString().split("T")[0]);
+		}
+	});
+	
+	//날짜검색
+	$("button.searchDate").click(e=>{
+		location.assign("${path}/mypage/order.do?searchType=ORDER_SHEET_ENROLL_DATE&searchKeyword="+$(e.target).prev().val());
+	});
+	//modal open
 	const open = () => {
 		document.querySelector(".modals").classList.remove("hiddens");
 	}
-	
+	//modal close
 	const close = () => {
 		document.querySelector(".modals").classList.add("hiddens");
 	}
 	
-	//document.querySelector("#detailModalBtn").addEventListener("click", open);
+	//주문번호를 클릭했을 때 => 주문상세보기 모달창 open
 	$(document).on("click", "#detailModalBtn", e=>{
 		let orderSheetNo = Number($(e.target).text());
 		$.ajax({
@@ -383,15 +479,66 @@
 				$("div.modalContent span#totalPrice").text(fnSetComma(data.totalPrice)+'원');
 				$("div.modalContent span#paymentMethod").text(data.paymentMethod);
 				$("div.modalContent span#paymentState").text(data.paymentState);
+				
+				$("table#orderDetailTable").html("");
+				let trHead = $("<tr>");
+				trHead.append($("<th>").text("상품정보"));
+				trHead.append($("<th>").text("배송정보"));
+				$("table#orderDetailTable").append(trHead);
+				
+				for(let i = 0; i < data.details.length; i++){
+					let tr = $("<tr>");
+					let td1 = $("<td>");
+					tr.append(td1);
+					let detailInfoContainer = $("<div>").attr("class","detailInfoContainer");
+					td1.append(detailInfoContainer);
+					detailInfoContainer.append($("<input>").attr("type","hidden").val(data.details[i].product.productNo));
+					detailInfoContainer.append($("<img>").attr("class","infoImg").attr("src","${path}/resources/upload/product/"+data.details[i].product.files[0].renamedFileName));
+					let infoInner = $("<div>").attr("class","infoInner");
+					infoInner.append($("<div>").attr("class","detailProductTitle").append($("<a>").attr("href","${path}/product/view.do?productNo="+data.details[i].product.productNo).text(data.details[i].product.title).css("font-weight","bolder")))
+					detailInfoContainer.append(infoInner);
+					let detailProductsummary = $("<div>").attr("class","detailProductsummary");
+					detailProductsummary.append($("<span>").text("분류 : ")).append($("<span>").text(data.details[i].product.item)).append($("<span>").text(" / 가격 : ")).append($("<span>").text(fnSetComma(data.details[i].product.price)+"원"));
+					infoInner.append(detailProductsummary);
+					let td2 = $("<td>").text(data.details[i].deliveryState);
+					tr.append(td2);
+					$("table#orderDetailTable").append(tr);
+				}
+				
+				$("table.infoTable td#totalPrice").text(fnSetComma(data.totalPrice)+"원");
+				$("table.infoTable td#paymentMethod").text(data.paymentMethod);
+				$("table.infoTable td#paymentState").text(data.paymentState);
+				$("table.infoTable td#paymentEtc").text(data.paymentMethod=="계좌이체"?"입금자명":"영수증");
+				let paymentEtcContent = $("table.infoTable td#paymentEtcContent");
+
+				if(data.paymentMethod=="계좌이체"){ //이게맞따
+				//if(data.paymentMethod!="계좌이체"){	//테스트용
+					paymentEtcContent.text(data.depositor);
+				} else {
+					let receiptButton = $("<button>").attr("class","receiptButton").text("영수증 보기").val(data.receiptUrl);
+					paymentEtcContent.html("");
+					paymentEtcContent.append(receiptButton);
+				}
+				
+				$("table.infoTable td#receiverName").text(data.receiverName);
+				$("table.infoTable td#postCode").text("("+$.trim(data.postCode)+")");
+				$("table.infoTable td#address").text(data.address);
+				$("table.infoTable td#detailAddress").text(data.detailAddress);
+					
+					
 				open();
 			}
 		});
 	});
 	document.querySelector(".closeBtn").addEventListener("click", close);
 	document.querySelector(".bg").addEventListener("click", close);
-
-
-
+	
+	//주문상세보기에서 영수증보기를 클릭했을 때
+	$(document).on("click","button.receiptButton", e=>{
+		let path = $(e.target).val();
+		window.open(path,'_blank','width=430px height=700px top=250px left=750px');	
+	});
+	
 	//기간 조회 버튼을 클릭했을 때
 	$("button.searchDate").click(e=>{
 		console.log($(e.target).prev().val());
@@ -423,8 +570,8 @@
 		}
 	);
 	
-	//이미지를 클릭했을 때
-	$("img.infoImg").click(e=>{
+	//이미지를 클릭했을 때 => 동적 태그 생성 추가
+	$(document).on("click", "img.infoImg", e=>{
 		let path = '${path}/product/view.do?productNo=' + $(e.target).prev().val();
 		location.assign(path);
 	});
