@@ -69,7 +69,7 @@
   		<br><br><br>
   		<div style="display: flex; justify-content: space-around;">
 	  		<input type="button" id="ok" value="확인" onclick="fn_passwordCheck();">
-	  		<div id="reset">
+	  		<div id="reset"  style="--c:#E95A49">
 	  			<a href="#" rel="modal:close" onclick="reset();">취소</a>
 	  		</div>
   		</div>

@@ -38,51 +38,51 @@
 			<table class="summaryTable">
 				<tr>
 					<th class="tableTh">전체주문</th>
-					<td class="tableTd"><c:out value="${summary[0].ALL_O}"/></td>
+					<td id="summary_allO" class="tableTd"><c:out value="${summary.ALL_O}"/></td>
 				</tr>
 			</table>
 			<table class="summaryTable">
 				<tr>
 					<th class="tableTh">입금대기</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_1}"/></td>
+					<td id="summary_state1" class="tableTd"><c:out value="${summary.STATE_1}"/></td>
 				</tr>	
 				<tr>
 					<th class="tableTh">입금완료</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_2}"/></td>
+					<td id="summary_state2" class="tableTd"><c:out value="${summary.STATE_2}"/></td>
 				</tr>	
 				<tr>
-					<th class="tableTh">결제완료</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_3}"/></td>
+					<th class="tableTh">카드결제완료</th>
+					<td id="summary_state3" class="tableTd"><c:out value="${summary.STATE_3}"/></td>
 				</tr>
 			</table>
 
 			<table class="summaryTable">
 				<tr>
-					<th class="tableTh">배송준비</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_4}"/></td>
+					<th class="tableTh">배송대기</th>
+					<td id="summary_state4" class="tableTd"><c:out value="${summary.STATE_4}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">배송중</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_5}"/></td>
+					<td id="summary_state5" class="tableTd"><c:out value="${summary.STATE_5}"/></td>
 				</tr>	
 				<tr>
 					<th class="tableTh">배송완료</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_6}"/></td>
+					<td id="summary_state6" class="tableTd"><c:out value="${summary.STATE_6}"/></td>
 				</tr>
 			</table>
 
 			<table class="summaryTable">
 				<tr>
 					<th class="tableTh">반품요청</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_7}"/></td>
+					<td id="summary_state7" class="tableTd"><c:out value="${summary.STATE_7}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">반품대기</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_8}"/></td>
+					<td id="summary_state8" class="tableTd"><c:out value="${summary.STATE_8}"/></td>
 				</tr>	
 				<tr>
 					<th class="tableTh">취소요청</th>
-					<td class="tableTd"><c:out value="${summary[0].STATE_9}"/></td>
+					<td id="summary_state9" class="tableTd"><c:out value="${summary.STATE_9}"/></td>
 				</tr>
 			</table>
 
@@ -92,8 +92,6 @@
         	<select id="searchType" class="searchInput">
 				<option value="searchAll" ${searchType.equals("SEARCH_ALL")?"selected":""}>전체조회</option>
         		<option value="paymentState" ${searchType.equals("PAYMENT_STATE")?"selected":""}>결제상태</option>
-        		<!-- <option value="deliveryState" ${searchType.equals("DELIVERY_STATE")?"selected":""}>배송상태</option>
-				<option value="refundState" ${searchType.equals("REFUND_STATE")?"selected":""}>취소/반품상태</option> -->
         		<option value="orderSheetNo" ${searchType.equals("ORDER_SHEET_NO")?"selected":""}>주문번호</option>
         		<option value="memberName" ${searchType.equals("MEMBER_NAME")?"selected":""}>주문자</option>
         		<option value="orderSheetEnrollDate" ${searchType.equals("ORDER_SHEET_ENROLL_DATE")?"selected":""}>주문일자</option>
@@ -122,35 +120,6 @@
 				</form>
 			</div>
 
-			<!-- <div id="search-deliveryState">
-				<form action="${path}/admin/order.do" method="get">
-
-					<select name="searchKeyword" class="searchInput">
-						<option value="배송대기" ${searchKeyword.equals("배송준비")?"selected":""}>배송대기</option>
-						<option value="배송중" ${searchKeyword.equals("배송중")?"selected":""}>배송중</option>
-						<option value="배송완료" ${searchKeyword.equals("배송완료")?"selected":""}>배송완료</option>
-					</select>
-					
-					<input type="hidden" name="searchType" value="DELIVERY_STATE">
-					<button class="searchBtn">검색</button>
-				</form>
-			</div>
-
-			<div id="search-refundState">
-				<form action="${path}/admin/order.do" method="get">
-
-					<select name="searchKeyword" class="searchInput">
-						<option value="반품요청" ${searchKeyword.equals("반품요청")?"selected":""}>반품요청</option>
-						<option value="반품대기" ${searchKeyword.equals("반품대기")?"selected":""}>반품대기</option>
-						<option value="반품완료" ${searchKeyword.equals("반품완료")?"selected":""}>반품완료</option>
-						<option value="취소요청" ${searchKeyword.equals("취소요청")?"selected":""}>취소요청</option>
-						<option value="취소완료" ${searchKeyword.equals("취소완료")?"selected":""}>취소완료</option>
-					</select>
-					
-					<input type="hidden" name="searchType" value="REFUND_STATE">
-					<button class="searchBtn">검색</button>
-				</form>
-			</div> -->
         	
         	<div id="search-orderSheetNo">
 				<form action="${path}/admin/order.do" method="get">
@@ -196,8 +165,8 @@
 						<th class="tableTh">사진</th>
 						<th class="tableTh">가격</th>
 
-						<th class="tableTh">배송상태</th> <a href=""></a>
-						<th class="tableTh">취소/반품 상태</th> <a href=""></a>
+						<th class="tableTh">배송상태</th>
+						<th class="tableTh">취소/반품 상태</th>
 
 						<th class="tableTh">총금액</th>
 						<th class="tableTh">주문자</th>
@@ -231,6 +200,7 @@
 											<td class="${o.orderSheetNo}Td" style="background-color: #dcd5c32b;">
 												<input type="hidden" value="${d.product.productNo}">
 												<c:out value="${d.product.productNo}"/>
+
 											</td>
 
 											<td class="tableTd"><c:out value="${d.product.item}"/></td>
@@ -244,12 +214,10 @@
 
 											<c:if test='${o.paymentState=="카드결제완료" or o.paymentState=="입금완료"}'>
 												<td class="tableTd2" >
-													<input type="text" name="paymentState" value="${d.deliveryState}" style="width: 88px;border-style: none;background-color: #dcd5c36c;text-align: center;" readonly>
-													<!-- <select name="deliverState">
-														<option value="배송대기" ${d.deliveryState.equals("배송준비")?"selected":""}>배송대기</option>
-														<option value="배송중" ${d.deliveryState.equals("배송중")?"selected":""}>배송중</option>
-														<option value="배송완료" ${d.deliveryState.equals("배송완료")?"selected":""}>배송완료</option>
-													</select>												 -->
+													<input type="text" name="deliveryState" value="${d.deliveryState}" 
+													style="width: 88px;border-style: none;background-color: #dcd5c36c;text-align: center;" 
+													onclick="location.assign('${path}/admin/delivery.do?searchKeyword=${d.product.productNo}&searchType=PRODUCT_NO')" 
+													readonly>
 												</td>
 											</c:if>
 											<c:if test='${o.paymentState=="입금대기"}'>
@@ -262,7 +230,10 @@
 											</c:if>
 											<c:if test="${d.refundState!=null}">
 												<td class="tableTd2">
-													<input type="text" name="refundState" value="${d.refundState}" style="width: 88px;border-style: none;background-color: #dcd5c36c;text-align: center;" readonly>
+													<input type="text" name="refundState" value="${d.refundState}" 
+													style="width: 88px;border-style: none;background-color: #dcd5c36c;text-align: center;"
+													onclick="location.assign('${path}/admin/refund.do?searchKeyword=${d.product.productNo}&searchType=PRODUCT_NO')"
+													readonly>
 												</td>
 											</c:if>
 
@@ -274,7 +245,6 @@
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.member.memberName}"/></td>
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.paymentMethod}"/></td>
 												<td class="tableTd2" rowspan="${o.details.size()}">
-													<!-- <input type="text" name="paymentState" value="${o.paymentState}" style="width: 88px;border-style: none;background-color: #dcd5c36c;text-align: center;" readonly> -->
 													<select name="paymentState">
 														<option value="입금대기" ${o.paymentState.equals("입금대기")?"selected":""}>입금대기</option>
 														<option value="입금완료"  ${o.paymentState.equals("입금완료")?"selected":""}>입금완료</option>
@@ -283,9 +253,6 @@
 													
 												</td>
 											</c:if>
-												<!-- <td class="tableTd" style="width: 80px;">
-													<button id="detailModalBtn" class="updateBtn" onclick="">상세확인</button>
-												</td> -->
 										</tr>
 									</c:forEach>
 								</c:if>	
@@ -295,30 +262,7 @@
 					</c:if>
 				</tbody>
 			</table>
-			
-			<!-- 반품/취소 상세내역 모달 -->
-			<!-- <div class="modals hiddens">
-			<div class="bg"></div>
-				<div class="modalBox">
-					<div class="modalTitle">
-						<h1>반품/취소 상세내역</h1>
-					</div>
-					<div class="modalContent">
-						<div class="modalContentInnerDiv">
-							<span>✔️ 주문 상세번호 : </span><span>1111</span>
-						</div>
-						<div class="modalContentInnerDiv">
-							<span>✔️ 반품/취소 신청일 : </span><span>23-01-20</span>
-						</div>
-						<div class="modalContentInnerDiv">
-							<span>✔️ 반품/취소 사유 : </span><span>단순변심</span>
-						</div>
-					</div>
-					<div id="modalBtnArea">
-						<button class="closeBtn">닫기</button>
-					</div>
-				</div>
-			</div> -->
+
 		</div>
 		<div id="pageBarContainer">
 			<div id=pageBar>
@@ -328,6 +272,12 @@
 	</div>
 </section>
 <script>
+
+	//요약테이블 출력
+	$(()=>{
+		updateSummary();
+	});
+	
 	//검색 타입 변경
 	$("select#searchType").change(e=>{
 		const type = $(e.target).val();
@@ -414,9 +364,34 @@
 				changePaymentState(orderSheetNo,paymentState,productNoArr);
 			}
 			
+			updateSummary();
 
 
 	});	
+
+	//
+	function updateSummary(){
+		$.ajax({
+			url:"${path}/admin/updateOrderSummary.do",
+			dataType : "json",
+			success:function(summary){
+				//console.log(summary);
+
+				$("#summary_allO").text(summary.ALL_O);
+				$("#summary_state1").text(summary.STATE_1);
+				$("#summary_state2").text(summary.STATE_2);
+				$("#summary_state3").text(summary.STATE_3);
+				$("#summary_state4").text(summary.STATE_4);
+				$("#summary_state5").text(summary.STATE_5);
+				$("#summary_state6").text(summary.STATE_6);
+				$("#summary_state7").text(summary.STATE_7);
+				$("#summary_state8").text(summary.STATE_8);
+				$("#summary_state9").text(summary.STATE_9);
+
+			}
+		})
+
+	}
 
 
 
@@ -448,23 +423,11 @@
 	);
 
 
-	//취소/반품 확인 모달
-	// const open = () => {
-	// 	document.querySelector(".modals").classList.remove("hiddens");
-	// }
-
-	// const close = () => {
-	// 	document.querySelector(".modals").classList.add("hiddens");
-	// }
-
-	// document.querySelector("#detailModalBtn").addEventListener("click", open);
-	// document.querySelector(".closeBtn").addEventListener("click", close);
-	// document.querySelector(".bg").addEventListener("click", close);
-
-
 
 
 </script>
+
+
 
 </body>
 </html>

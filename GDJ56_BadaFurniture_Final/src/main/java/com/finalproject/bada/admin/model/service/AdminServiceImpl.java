@@ -32,6 +32,13 @@ public class AdminServiceImpl implements AdminService {
 		this.session = session;
 	}
 	
+	//대시보드 - 요약
+	@Override
+	public Map<String, Integer> dashBoardSummary() {
+		// TODO Auto-generated method stub
+		return dao.dashBoardSummary(session);
+	}
+	
 	//가구 올리기
 	@Override
 	public int insertProduct(Product product) {
@@ -70,7 +77,7 @@ public class AdminServiceImpl implements AdminService {
 
 	//요약테이블
 	@Override
-	public List<Map<String,Integer>> productSummary() {
+	public Map<String,Integer> productSummary() {
 		// TODO Auto-generated method stub
 		return dao.productSummary(session);
 	}
@@ -110,6 +117,15 @@ public class AdminServiceImpl implements AdminService {
 		return dao.selectProductByProductNo(session,productNo);
 	}
 	
+	//가구 관리 - 수정하기
+	@Override
+	public void updateProduct(Product p) {
+		// TODO Auto-generated method stub
+		int result= dao.updateProduct(session,p);
+		if(result<0) {
+			throw new RuntimeException("가구번호 "+p.getProductNo()+" 수정에 실패했습니다.");
+		}
+	}
 	
 	//내가구팔기 관리 - 조회
 	@Override
@@ -126,7 +142,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	//내가구팔기 관리 - 요약
 	@Override
-	public List<Map<String, Integer>> resellSummary() {
+	public Map<String, Integer> resellSummary() {
 		// TODO Auto-generated method stub
 		return dao.resellSummary(session);
 	}
@@ -166,7 +182,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	//주문관리 - 요약
 	@Override
-	public List<Map<String, Integer>> orderSummary() {
+	public Map<String, Integer> orderSummary() {
 		// TODO Auto-generated method stub
 		return dao.orderSummary(session);
 	}
@@ -215,7 +231,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	//취소반품관리 - 요약
 	@Override
-	public List<Map<String, Integer>> refundSummary() {
+	public Map<String, Integer> refundSummary() {
 		// TODO Auto-generated method stub
 		return dao.refundSummary(session);
 	}
@@ -238,6 +254,40 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.viewRefundDetail(session,orderDetailNo);
 	}
+
+	//배송관리 - 조회
+	@Override
+	public List<OrderDetail> deliveryListPage(Map<String, Integer> param, Map search) {
+		// TODO Auto-generated method stub
+		return dao.deliveryListPage(session, param, search);
+	}
+
+	@Override
+	public int deliveryListCount(Map search) {
+		// TODO Auto-generated method stub
+		return dao.deliveryListCount(session,search);
+	}
+	
+	//배송관리 - 요약
+	@Override
+	public Map<String, Integer> deliverySummary() {
+		// TODO Auto-generated method stub
+		return dao.deliverySummary(session);
+	}
+
+	//배송관리 - 배송상태 변경
+	@Override
+	public void updateDeliveryState(Map param) {
+		// TODO Auto-generated method stub
+		int result=dao.updateDeliveryState(session,param);
+		if(result<0) {
+			throw new RuntimeException("배송상태 변경에 실패했습니다.");
+		}
+	}
+
+
+
+
 
 
 

@@ -27,19 +27,19 @@
 			<table id="summaryTable">
 				<tr>
 					<th class="tableTh">전체</th>
-					<td class="tableTd"><c:out value="${summary[0].ALLP}"/></td>
+					<td id="summary_all" class="tableTd"><c:out value="${summary.ALLP}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">판매중</th>
-					<td class="tableTd"><c:out value="${summary[0].SOSNP}"/></td>
+					<td id="summary_sosnp" class="tableTd"><c:out value="${summary.SOSNP}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">거래중</th>
-					<td class="tableTd"><c:out value="${summary[0].SOSIP}"/></td>
+					<td id="summary_sosip" class="tableTd"><c:out value="${summary.SOSIP}"/></td>
 				</tr>
 				<tr>
 					<th class="tableTh">숨긴 가구</th>
-					<td class="tableTd"><c:out value="${summary[0].SSNP}"/></td>
+					<td id="summary_ssnp" class="tableTd"><c:out value="${summary.SSNP}"/></td>
 				</tr>
 			</table>
 		</div>
@@ -208,7 +208,7 @@
 											<option value="N" ${p.showState=='N'?"selected":"" }>숨김</option>
 										</select>										
 									</td>
-									<td style="width: 80px;"><button type="button" class="updateBtn" onclick="window.open('${path}/admin/update.do?productNo=${p.productNo }')">수정</button></td>
+									<td style="width: 80px;"><button type="button" class="updateBtn" onclick="window.open('${path}/admin/update.do?productNo=${p.productNo }','_blank')">수정</button></td>
 								</tr>
 							</c:forEach>
 						</c:if>							
@@ -226,6 +226,12 @@
 
 
 <script>
+
+	//요약테이블 출력
+	$(()=>{
+		updateSummary();
+	});
+	
 	//검색타입 변경
 	$("select#searchType").change(e=>{
 		const type = $(e.target).val();
@@ -308,6 +314,8 @@
 						alert("판매상태 변경 실패");
 						
 					}
+
+					updateSummary();
 				},
 				error:function(result){
 					alert("error! result 값 : "+result.result );	
@@ -335,6 +343,8 @@
 						alert("공개상태 변경 실패");
 						
 					}
+
+					updateSummary();
 				},
 				error:function(result){
 					alert("error! result 값 : "+result.result );	
@@ -353,8 +363,23 @@
 
 	})
 
+	//
+	function updateSummary(){
+		$.ajax({
+			url:"${path}/admin/updateProductSummary.do",
+			dataType : "json",
+			success:function(summary){
+				//console.log(summary);
 
+				$("#summary_all").text(summary.ALLP);
+				$("#summary_sosnp").text(summary.SOSNP);
+				$("#summary_sosip").text(summary.SOSIP);
+				$("#summary_ssnp").text(summary.SSNP);
 
+			}
+		})
+
+	}
 </script>
 
 </body>
