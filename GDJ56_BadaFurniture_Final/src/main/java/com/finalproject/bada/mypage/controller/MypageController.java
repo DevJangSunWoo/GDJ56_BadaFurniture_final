@@ -1,7 +1,6 @@
 package com.finalproject.bada.mypage.controller;
 
 
-import java.awt.TrayIcon.MessageType;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -10,8 +9,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,6 +23,7 @@ import com.finalproject.bada.common.PageFactory;
 import com.finalproject.bada.member.model.vo.Member;
 import com.finalproject.bada.mypage.model.service.MypageService;
 import com.finalproject.bada.mypage.model.vo.Alert;
+import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
 
@@ -202,10 +200,57 @@ public class MypageController {
 		return adminService.selectOrderSheet(orderSheetNo);
 	}
 	
+	//취소신청 페이지 연결
+	@RequestMapping("/refund/cancel.do")
+	public ModelAndView writeRefundCancel(ModelAndView mv, int orderSheetNo, int orderDetailNo) {
+		OrderSheet orderSheet = adminService.selectOrderSheet(orderSheetNo);
+		
+		List<OrderDetail> orderDetails = orderSheet.getDetails();
+		
+		OrderDetail orderDetail = null;
+		for(OrderDetail o : orderDetails) {
+			if(o.getOrderDetailNo() == orderDetailNo) {
+				orderDetail = o;
+				break;
+			}
+		}
+		if(orderDetail != null) {
+			mv.addObject("orderDetail", orderDetail);
+		}
+		mv.addObject("orderSheet", orderSheet);
+		mv.setViewName("refund/writeRefundCancel");
+		return mv;
+	}
+	
+	//반품신청 페이지 연결
+	@RequestMapping("/refund/return.do")
+	public ModelAndView writeRefundReturn(ModelAndView mv, int orderSheetNo, int orderDetailNo) {
+		OrderSheet orderSheet = adminService.selectOrderSheet(orderSheetNo);
+		
+		List<OrderDetail> orderDetails = orderSheet.getDetails();
+		
+		OrderDetail orderDetail = null;
+		for(OrderDetail o : orderDetails) {
+			if(o.getOrderDetailNo() == orderDetailNo) {
+				orderDetail = o;
+				break;
+			}
+		}
+		if(orderDetail != null) {
+			mv.addObject("orderDetail", orderDetail);
+		}
+		
+		log.debug("orderDetail : {}" , orderDetail);
+		
+		mv.setViewName("refund/writeRefundReturn");
+		return mv;
+	}
+	
 	//refund 리스트 출력
 	@RequestMapping("/mypage/refund.do")
-	public String refundList() {
-		return "mypage/refundList";
+	public ModelAndView refundList(ModelAndView mv, int orderDetailNo) {
+		mv.setViewName("mypage/refundList");
+		return mv;
 	}
 	
 	//회원탈퇴 페이지 연결

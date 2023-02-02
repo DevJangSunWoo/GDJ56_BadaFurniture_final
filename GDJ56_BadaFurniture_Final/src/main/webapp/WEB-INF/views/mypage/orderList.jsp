@@ -275,7 +275,7 @@
 					<div id=dateContent>
 						<span id="dateButtonContainer">
 							<input type="hidden" name="searchKeyword" id="day1">
-							<button class="searchDate">1일</button>
+							<button class="searchDate">오늘</button>
 							<input type="hidden" name="searchKeyword" id="week1">
 							<button class="searchDate">1주일</button>
 							<input type="hidden" name="searchKeyword" id="month1">
@@ -354,7 +354,22 @@
 											<c:out value="${detail.deliveryState}"/>
 										</td>
 										<td class="td8">
-											<button class="cancelBtn">취소신청</button>
+											<input type="hidden" value="${orderSheet.orderSheetNo}"/>
+											<input type="hidden" value="${detail.orderDetailNo}"/>
+											<c:choose>
+												<c:when test="${detail.refundState eq null and detail.deliveryState ne null and detail.deliveryState eq '배송대기'}">
+													<button class="cancelBtn">취소신청</button>
+												</c:when>
+												<c:when test="${detail.refundState eq null and detail.deliveryState ne null and (detail.deliveryState eq '배송중' or detail.deliveryState eq '배송완료')}">
+													<button class="returnBtn">반품신청</button>
+												</c:when>
+												<c:when test="${detail.refundState ne null and fn:contains(detail.refundState, '취소')}">
+													취소신청완료
+												</c:when>
+												<c:when test="${detail.refundState ne null and fn:contains(detail.refundState, '반품')}">
+													반품신청완료
+												</c:when>
+											</c:choose>
 										</td>
 									</tr>
 								</c:forEach>
@@ -444,16 +459,27 @@
 <script>
 	$(()=>{
 		//1일전, 7일전, 1달전, 3달전, 6달전 input 설정
-		let dayArr = [1, 7, 30, 90, 180];
+		let dayArr = [0, 7, 30, 90, 180];
 		for(let i = 0; i<dayArr.length; i++){
 			let day = new Date(new Date().getTime() - dayArr[i]*24*60*60*1000).toISOString().split("T")[0];
 			$("input[name=searchKeyword]").eq(i).val(day+" ~ "+new Date().toISOString().split("T")[0]);
+		}
+		console.log("${searchKeyword}");
+		if("${searchKeyword}" != "searchAll"){
+			$("input.searchDate").val("${searchKeyword}");
+		}
+		else{
+			$("input.searchDate").val("날짜를 선택해주세요.");
 		}
 	});
 	
 	//날짜검색
 	$("button.searchDate").click(e=>{
-		location.assign("${path}/mypage/order.do?searchType=ORDER_SHEET_ENROLL_DATE&searchKeyword="+$(e.target).prev().val());
+		if($(e.target).prev().val().includes("~")){
+			location.assign("${path}/mypage/order.do?searchType=ORDER_SHEET_ENROLL_DATE&searchKeyword="+$(e.target).prev().val());
+		} else {
+			alert("날짜를 입력해주세요.");
+		}
 	});
 	//modal open
 	const open = () => {
@@ -514,6 +540,7 @@
 				if(data.paymentMethod=="계좌이체"){ //이게맞따
 				//if(data.paymentMethod!="계좌이체"){	//테스트용
 					paymentEtcContent.text(data.depositor);
+					paymentEtcContent.parent().after($("<tr>").append($("<td>").text("입금계좌")).append($("<td>").text("예금주명:유병승 / BS은행 / 계좌번호:1002-1002-1002")));
 				} else {
 					let receiptButton = $("<button>").attr("class","receiptButton").text("영수증 보기").val(data.receiptUrl);
 					paymentEtcContent.html("");
@@ -537,11 +564,6 @@
 	$(document).on("click","button.receiptButton", e=>{
 		let path = $(e.target).val();
 		window.open(path,'_blank','width=430px height=700px top=250px left=750px');	
-	});
-	
-	//기간 조회 버튼을 클릭했을 때
-	$("button.searchDate").click(e=>{
-		console.log($(e.target).prev().val());
 	});
 
 	//datepicker
@@ -570,12 +592,6 @@
 		}
 	);
 	
-	//이미지를 클릭했을 때 => 동적 태그 생성 추가
-	$(document).on("click", "img.infoImg", e=>{
-		let path = '${path}/product/view.do?productNo=' + $(e.target).prev().val();
-		location.assign(path);
-	});
-	
 	//숫자 콤마 찍어주는 함수
 	function fnSetComma(n) {
 	    var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
@@ -585,5 +601,23 @@
 	    }
 	    return n;
 	}
+	
+	//이미지를 클릭했을 때 => 동적 태그 생성 추가
+	$(document).on("click", "img.infoImg", e=>{
+		let path = '${path}/product/view.do?productNo=' + $(e.target).prev().val();
+		location.assign(path);
+	});
+	
+	//취소신청 클릭했을 때
+	$("button.cancelBtn").click(e=>{
+		let path = "${path}/refund/cancel.do?orderSheetNo="+$(e.target).prev().prev().val()+"&orderDetailNo=" + $(e.target).prev().val();
+		window.open(path,'_blank','width=420px height=300px top=250px left=750px');	
+	});
+	//반품신청 클릭했을 때
+	$("button.returnBtn").click(e=>{
+		let path = "${path}/refund/return.do?orderSheetNo="+$(e.target).prev().prev().val()+"&orderDetailNo=" + $(e.target).prev().val();
+		window.open(path,'_blank','width=420px height=300px top=250px left=750px');	
+	});
+	
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
