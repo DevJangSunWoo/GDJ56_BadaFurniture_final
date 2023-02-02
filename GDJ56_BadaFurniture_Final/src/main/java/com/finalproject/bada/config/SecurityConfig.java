@@ -38,7 +38,10 @@ public class SecurityConfig {
 		
 		return http.csrf().disable()
 				.formLogin()
-					.loginProcessingUrl(null)
+					.loginPage("/#demo-modal")
+					.usernameParameter("userId")
+					.passwordParameter("password")
+					.loginProcessingUrl("/login.do")
 //					.successForwardUrl("/")
 					.and()
 				.authorizeRequests()

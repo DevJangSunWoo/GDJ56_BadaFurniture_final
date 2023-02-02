@@ -70,14 +70,16 @@
             </a>
             <img class="user" src="${path }/resources/images/mainpage/loginIcon.png" height="100px" width="100px">
             <h3>Sign in here</h3>
-            <form action="${path}/member/login.do" method="post">
+            
+            <form action="${path}/login.do" method="post">
                 <div class="inputBox"> 
-                    <input id="uname" type="text" name="memberId" placeholder="아이디"> 
+                    <input id="uname" type="text" name="userId" placeholder="아이디"> 
                     <input id="pass" type="password" name="password" placeholder="비밀번호"> 
                 </div>
                 <br>
                 <input type="submit" value="Login">
             </form>
+            
             <div style="display: flex; justify-content: center;">
                 <a href="${path}/member/searchId.do" class="find">아이디 찾기<br> </a> 
                 &nbsp; &nbsp; <a> | </a> &nbsp; &nbsp;
