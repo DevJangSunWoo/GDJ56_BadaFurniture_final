@@ -49,7 +49,7 @@ public class SecurityConfig {
 					//admin 권한 설정
 					.antMatchers("/admin/**").hasAnyAuthority("ADMIN")
 					//member 권한 설정
-					.antMatchers("/mypage/**").hasAnyAuthority("MEMBER")
+					.antMatchers("/mypage/**").hasAnyAuthority("MEMBER","ADMIN")
 					.antMatchers("/mypage.do").hasAnyAuthority("MEMBER")
 					.antMatchers("/cart/**").hasAnyAuthority("MEMBER")
 					.antMatchers("/alert/**").hasAnyAuthority("MEMBER")
