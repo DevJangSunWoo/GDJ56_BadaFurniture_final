@@ -350,7 +350,6 @@
 				success : data =>{
 					fn_printProductList(cPage);
 					//console.log(data);
-					//console.log($("#pagebar"));
 					$("#pagebar").html(data);
 				}
 			});

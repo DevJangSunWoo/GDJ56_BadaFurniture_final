@@ -89,10 +89,6 @@ public class ProductController {
 		//log.debug("{}",map.get("cPage"));
 		page.put("numPerpage", 10);
 		
-//		int totalData = service.selectProductListCount(map);
-//		log.debug("totalData(productList): {}" ,totalData);
-//		PageFactoryAjax.getPage(cPage, numPerpage, totalData, "/bada/");
-		
 		List<Product> list = service.selectProductList(map, page);
 		
 		return list;
@@ -106,10 +102,8 @@ public class ProductController {
 		log.debug("{}",map);
 		
 		int totalData = service.selectProductListCount(map);
-		System.out.println(totalData);
 		log.debug("totalData(page): {}" ,totalData);
 		
-//		return PageFactoryAjax.getPage((int)map.get("cPage"), (int)map.get("numPerpage"), totalData, "/bada/");
 		return PageFactoryAjax.getPage((int)map.get("cPage"), 10, totalData, "/bada/");
 	}
 	
