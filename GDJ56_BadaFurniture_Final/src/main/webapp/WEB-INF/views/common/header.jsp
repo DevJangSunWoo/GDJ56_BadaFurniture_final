@@ -4,6 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<c:set var="loginMember" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}"/>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,11 +31,11 @@
     <div id="headerDiv">
         <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo" style="cursor:pointer;">
         
-        <c:if test="${empty loginMember }">
+        <c:if test="${empty loginMember}">
         	<span class="headbtn" id="headbtn"><a href="#demo-modal"></a></span>
         </c:if>
         
-        <c:if test="${not empty loginMember }">
+        <c:if test="${not empty loginMember}">
         	<div style="display: flex; margin-top:10px">
 	        	<span id="alertImgContainer"><img id="alertImg" width="60px" height="60px" style="cursor:pointer;"/></span>
 	        	<div style="display: flex; margin-right: 5px;">
