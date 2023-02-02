@@ -197,8 +197,7 @@ public class MemberController {
 		if(result>0) {
 			Member loginMember = service.selectMemberById(m);
 			log.debug("loginMember: {}",loginMember);
-			session.setAttribute("loginMember", loginMember);
-			log.debug("loginMember: {}",session.getAttribute("loginMember"));
+//			session.setAttribute("loginMember", loginMember);
 			mv.addObject("msg","회원정보 수정완료");
 			mv.addObject("loc","/");
 		}else {

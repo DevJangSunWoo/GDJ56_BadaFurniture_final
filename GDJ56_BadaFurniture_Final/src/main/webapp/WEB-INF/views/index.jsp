@@ -14,11 +14,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
 <section>
-	<div>
+	<%-- <div>
 		${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberId}
 		${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberName}
 		${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email}
-	</div>
+	</div> --%>
 	<div class="flexDiv">
 	    <img src="${path }/resources/images/mainpage/mainPicture.jpg" class="mainSize">
 	</div>
@@ -391,8 +391,9 @@
 		                    	<span>mm</span>
 		                    </div>
 		                    <div class="price">
-		                    	<span><fmt:formatNumber value="${product.price}" type="currency"/></span>
-		                    	<!-- <span>원</span> -->
+		                    	<span><c:out value="${product.price}"/></span>
+		                    	<%-- <span><fmt:formatNumber value="${product.price}" type="currency"/></span> --%>
+		                    	<span>원</span>
 		                    </div>
 		                    <div class="date">
 		                    	<span><fmt:formatDate value="${product.productEnrollDate}" type="date" pattern="yyyy-MM-dd(E)"/></span>
