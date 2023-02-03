@@ -283,6 +283,7 @@
 						
 						let imgDiv = $("<div>").addClass("imgDiv")
 									.append($("<img>").attr("src","${path }/resources/upload/product/"+list[i].files[0].renamedFileName));
+						//imgDiv.append($("<img>").attr("src","${path}/resources/images/product/soldOutEasy.png").addClass("showProduct"))
 						
 						let infoDiv = $("<div>").addClass("infoDiv");
 						let productTitle = $("<div>").addClass("productTitle")
@@ -363,15 +364,16 @@
 	<div id="pro" style="display:flex; justify-content:center;">
 		<div id="productContainer">
 		
+		<!-- $(v).next().next().find(".imgDiv").find("#img")-->
 			<c:forEach items="${productList}" var="product">
 				<div class="productWrap" >
-					<input type="text" name="soldoutstate" value="${product.soldOutState }">
+					<input type="text" class="productSoldOutState" value="${product.soldOutState }">
 	                <input type="number" name="productNo" id="productNo" value="${product.productNo }" readonly>
 	                
 	                <div class="showProduct">
 		                <div class="imgDiv">
-		                    <img id="img" src="${path }/resources/upload/product/${product.files[0].renamedFileName}" alt="">
-		                    <img id="soldOutImage" style="display: none; width:50%; height:50%;" class="centered"  src="${path}/resources/images/product/soldOutEasy.png"  >
+		                    <img id="img" src="${path}/resources/upload/product/${product.files[0].renamedFileName}" alt="">
+		                    <img class="soldOutImage" src="${path}/resources/images/product/soldOutEasy.png">
 		                </div>
 		                
 		                <div class="infoDiv">
@@ -403,10 +405,6 @@
 		                </div>
 	                </div> 
 	            </div>
-		            <script>
-		            	//이미지 soldout 처리하기
-		            </script>
-		            
             </c:forEach>
             
             <br><br>
@@ -421,6 +419,22 @@
 	
 </section>
 	<script>
+		//이미지 soldout 처리하기
+		$('.productSoldOutState').each (function (i,v){
+			//console.log($(v).val());			
+			if($(v).val()=='I' || $(v).val()=='Y'){
+				//console.log($(v).next().next().find(".imgDiv").find(".soldOutImage"));
+				
+				$(v).next().next().find(".imgDiv").find("#img").css('filter','blur(2px)');
+				$(v).next().next().find(".imgDiv").find("#img").css('-webkit-filter','blur(4px)');
+				$(v).next().next().find(".imgDiv").find(".soldOutImage").show();
+				
+			}
+			else{
+				$(v).next().next().find(".imgDiv").find(".soldOutImage").hide(); 	
+			} 
+		});
+		
 		//매물정보 클릭시 상세페이지로 이동
 		$(".productWrap").on("click",function(e){
 			console.log($(e.target).parents(".productWrap").children(".showProduct").prev().val());
