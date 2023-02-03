@@ -49,8 +49,12 @@
 			                        
 			                        <div class="product__details__pic__item">
 			                            <c:forEach var="files" items="${productData.files}" varStatus="vs" begin="0" end="0">	
-			                            <img class="product__details__pic__item--large"
+			                             <div class="container"> 
+			                            <img  id="soldOutStateImg"  class="product__details__pic__item--large"
 			                                src="${path}/resources/upload/product/${files.renamedFileName}" alt="">
+			                        	<img id="soldOutImage" style="display: none;width:50%;height:50%;"  class="centered"  src="${path}/resources/images/product/soldOutEasy.png"  >
+			                        
+			                        	 </div> 
 			                        	</c:forEach>
 			                        </div>
 			                        <div class="product__details__pic__slider owl-carousel">
@@ -100,8 +104,48 @@
              <!--</form> -->
             </div>
         </div>   	 
-    <%-- 	 <input type="hidden" id="badaLoginFilter"  value="${loginMember.memberId}"> --%>
+    <%-- 	 <input type="hidden" id="badaLoginFilter"  value="${loginMember.memberId}"> --%>  	 
+    	 <!--비로그인 회원인 장바구니 및 바로구매 사용못하게 하는 스크립트의  기준  -->
     	 <input type="hidden" id="badaLoginFilter"  value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.memberId}">
+    	 
+    	 
+    	 <!--제품 soldOutState에 영향을 주는 스타일  -->
+    	 <style>
+		    .container {
+		      position: relative;
+		       
+		     /*  text-align: center; */
+		    }
+		    
+		    .centered {
+			  position: absolute;
+			  top: 50%;
+			  left: 50%;
+			  transform: translate(-50%, -50%);
+			}
+		</style>  	 
+    	 
+    	 <input  type="hidden" id="productSoldOutState"  value="${productData.soldOutState}" >
+    	 <!--거래중 거래 완료 이미지  css 블러 처리하는 스크립트 -->
+    	 <!--제품 soldOutState에 맞춰서 이미지 블러위에 이미지 표출하는 스크립트 -->
+    	 <script>
+    	  
+    	 if($('#productSoldOutState').val()=='I'|| $('#productSoldOutState')=='Y'){
+    		 
+    		 $('#soldOutStateImg').css('filter','blur(4px)');
+    		 $('#soldOutStateImg').css('-webkit-filter','blur(4px)');
+    	 	$('#soldOutImage').show();
+    		 
+    		 
+    	 }
+    	 
+    	 </script>
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 </style>
     	 <!--슬라이드 이미지 크기 조절 스타일  -->
     	 <style>
     	 	.imgUrl{
@@ -138,6 +182,10 @@
     	 	}
     	 
     	 </style>
+    	 
+    	 
+    	
+    	 
     	 
     	 
     	 <!--슬라이드 스크립트  -->
