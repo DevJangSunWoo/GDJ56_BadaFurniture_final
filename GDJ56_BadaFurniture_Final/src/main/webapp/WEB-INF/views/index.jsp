@@ -365,11 +365,13 @@
 		
 			<c:forEach items="${productList}" var="product">
 				<div class="productWrap" >
+					<input type="text" name="soldoutstate" value="${product.soldOutState }">
 	                <input type="number" name="productNo" id="productNo" value="${product.productNo }" readonly>
 	                
 	                <div class="showProduct">
 		                <div class="imgDiv">
-		                    <img src="${path }/resources/upload/product/${product.files[0].renamedFileName}" alt="">
+		                    <img id="img" src="${path }/resources/upload/product/${product.files[0].renamedFileName}" alt="">
+		                    <img id="soldOutImage" style="display: none; width:50%; height:50%;" class="centered"  src="${path}/resources/images/product/soldOutEasy.png"  >
 		                </div>
 		                
 		                <div class="infoDiv">
@@ -401,6 +403,10 @@
 		                </div>
 	                </div> 
 	            </div>
+		            <script>
+		            	//이미지 soldout 처리하기
+		            </script>
+		            
             </c:forEach>
             
             <br><br>
