@@ -175,6 +175,10 @@
 						                <div class="order__item__area" id="delivery-addr">
 						                	<fmt:formatNumber value="${os.totalPrice}" type="currency" />원
 						                </div>
+						            </li>
+						             <li class="order__item delivery__item__info"  id="adminAccountInfo" style="display: none;" >
+						                <span class="order__item__label">입금계좌</span>
+						                <div class="order__item__area" id="delivery-addr">예금주명:유병승/은행:BS은행/계좌번호:1002-1002-1002 </div>
 						            </li>						         					
 						         </ul>
 						  </div>
@@ -182,9 +186,17 @@
 				</c:forEach>
 			</c:if>
 			
-			<c:if test="${not empty oss}">		 
-				 	
+			<!--계좌이체로 결제시  입금계좌 보이게하는 스크립트  -->
+			<input  id="payMethodForScript" type="hidden" value="${payMethod}"> 
+			<script >
+				if($('#payMethodForScript').val()=='계좌이체'){
+				//console.log('계좌이체');	
+				$('#adminAccountInfo').show();
 				
+				
+				}
+			</script>
+			<c:if test="${not empty oss}">		 	
 					<div class="section order_product_info">
 						<h3 class="order__title">상품 정보</h3>
 						<input type="hidden" id="discount_applied_yn" value="" />
@@ -232,7 +244,7 @@
 															</span>
 														</div>
 														<div class="order_option_box">
-															<p> 분류:${detail.product.item}/색깔:${detail.product.color} /상태:${detail.product.grade}</p>
+															<p> 분류:${detail.product.item}/색상:${detail.product.color} /상태:${detail.product.grade}</p>
 														</div>										
 													</div>
 												</td>
@@ -961,4 +973,4 @@
 	
 	
 
-<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/> 
