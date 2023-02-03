@@ -36,7 +36,7 @@ public class ProductController {
 		super();
 		this.service = service;
 	}
-	
+	 
 //	@RequestMapping("/product/view.do")
 //	public String productView() {
 //		return "product/productView";

@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+div{
+	/* border: 1px solid black; */
+}
+
+.flexDiv, #searchDiv{
+    display: flex;
+    justify-content: center;
+}
+
+#searchDiv{
+	border: 2px solid black;
+	width: 60%;
+	height: 700px;
+}
+
+#img{
+	width: 98%;
+	height: 100%;
+		
+}
+
+#searchTip{
+	background-color: lightgrey;
+	width: 90%;
+	text-align: center;
+	font-size: 28px;
+	
+}
+
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 아이콘 */
+
+#inputDiv {
+    width: 90%;
+    margin: 10px;
+}
+
+#inputDiv img{
+    width: 50px;
+    height: 46px;
+    margin-right: 10px;
+}
+
+
+/* -------------------------------------------------------------------------------------------------- */
+/* input태그 */
+
+.input-container{
+    width: 100%;
+}
+
+.form__label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    display: block;
+    transition: all 0.3s;
+    transform: translateY(0rem);
+}
+
+.form__input {
+    font-family: 'Roboto', sans-serif;
+    color: #393434;
+    height: 30px;
+    width: 95%;
+    border-radius: 0.2rem;
+    border-top: none;
+    border-left:none;
+    border-right: none;
+    display: block;
+    transition: all 0.3s;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.form__input:focus {
+    border-top: none;
+    border-left:none;
+    border-right: none;
+}
+
+.form__input:placeholder-shown + .form__label {
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transform: translateY(2rem);
+    transform: translateY(2rem);
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 기본버튼 */
+.oribtn {
+    background-color: #348492;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 80px;
+    height: 35px;
+    margin-right: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 버튼 */
+.btn {
+    /* font-family: 'Poppins', sans-serif; */
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 19px;
+    letter-spacing: 4px;
+    position: relative;
+    background-color: #348492;
+    border: none;
+    color: #fff;
+    padding: 20px;
+    width: 70%;
+    height: 61px;
+    text-align: center;
+    transition-duration: 0.4s;
+    overflow: hidden;
+    box-shadow: 0 5px 10px #193047;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    background: #fff;
+    box-shadow: 0px 2px 10px 5px #1abc9c;
+    color: #000;
+}
+
+.btn:after {
+    content: "";
+    background: #1abc9c;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.btn:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.btn:focus { outline:0; }

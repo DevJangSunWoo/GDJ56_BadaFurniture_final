@@ -90,7 +90,7 @@
 		<div id="mypageMenu">
 			<div class="mypageRow">
 				<div class="mypageCol">
-					<input type="hidden" value="/mypage/edit.do"/>
+					<input type="hidden" value="/member/updateMember.do"/>
 					<div class="innerTitle1">
 						Edit
 					</div>
@@ -233,5 +233,4 @@
 			location.assign(url);
 		});
 	</script>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

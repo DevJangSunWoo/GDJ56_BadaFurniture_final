@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.finalproject.bada.mypage.model.vo.Alert;
+import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.product.model.vo.Product;
 import com.finalproject.bada.refund.model.vo.Refund;
 import com.finalproject.bada.resell.model.vo.Resell;
@@ -86,6 +87,16 @@ public class MypageDaoImpl implements MypageDao {
 	@Override
 	public int updateOrderDetailRefundState(SqlSessionTemplate session, Map param) {
 		return session.update("mypage.updateOrderDetailRefundState", param);
+	}
+
+	@Override
+	public List<OrderDetail> selectOrderDetailRefundList(SqlSessionTemplate session, int cPage, int numPerpage, Map search) {
+		return session.selectList("mypage.selectOrderDetailRefundList", search, new RowBounds((cPage-1)*numPerpage, numPerpage));
+	}
+
+	@Override
+	public int selectOrderDetailRefundListCount(SqlSessionTemplate session, Map search) {
+		return session.selectOne("mypage.selectOrderDetailRefundListCount", search);
 	}
 
 }

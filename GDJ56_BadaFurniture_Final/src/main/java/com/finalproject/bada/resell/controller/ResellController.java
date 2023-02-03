@@ -74,7 +74,7 @@ public class ResellController {
 		//log.debug("resellComments : {}",resell.getComments());
 		try {
 			resell.setAccountCode(aes256.decrypt(resell.getAccountCode()));
-		} catch(Exception e) {
+		} catch(Exception e) { 
 			e.printStackTrace();
 		}
 		mv.addObject("resell", resell);

@@ -1,0 +1,156 @@
+@charset "UTF-8";
+
+section.mypage>div#title{
+	width:100%;
+	height:200px;
+}
+
+section.mypage>div#title>div#innerTitle{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	width:100%;
+	height:200px;
+	font-family:"Courier New";
+	font-weight:bolder;
+	font-size:50px;
+}
+
+div#mypageMenu{
+	width:100%;
+	height:500px;
+	/* border:1px solid red; */
+}
+
+div#mypageMenu *{
+	font-family: 'Nanum Gothic' !important;
+}
+
+div#mypageMenu>div.mypageRow{
+	width:100%;
+	height:212px;
+	/* border:1px solid blue; */
+	display:flex;
+	justify-content:center;
+}
+
+div#mypageMenu>div.mypageRow>div.mypageCol{
+	width:200px;
+	height:200px;
+	border:2px solid black;
+	margin: 5px 3px 3px 5px;
+	cursor:pointer; 
+}
+
+div#mypageMenu>div.mypageRow>div.mypageCol>div.innerTitle1{
+	text-align: center;
+	font-family: "Verdana";
+	font-size:25px;
+	height:40px;
+	padding-top:15px;
+}
+
+div#mypageMenu>div.mypageRow>div.mypageCol>div.innerTitle2{
+	text-align:center;
+	font-size:13px;
+}
+
+div#mypageMenu>div.mypageRow>div.mypageCol>div.innerImg{
+	text-align:center;
+	margin-top:8px;
+	margin-bottom:8px;
+}
+
+div#mypageMenu>div.mypageRow>div.mypageCol>div.innerImg>img{
+	width:60px;
+	height:60px;
+}
+
+div#mypageMenu>div.mypageRow>div.mypageCol>div.innerContent{
+	text-align:center;
+	font-size:13px;
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+/* 패스워드 modal */
+
+#ex1{
+	height: 300px;
+	width: 500px 
+	
+}
+
+#ex1 p{
+	font-size: 30px;
+	font-weight: bolder;
+}
+
+#passwordck{
+	width: 100%;
+	font-size: 30px;
+}
+
+#ok, #reset {
+  --c:  #229091; /* the color*/
+  
+  box-shadow: 0 0 0 .1em inset var(--c); 
+  --_g: linear-gradient(var(--c) 0 0) no-repeat;
+  background: 
+    var(--_g) calc(var(--_p,0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p,0%)) 0%,
+    var(--_g) calc(var(--_p,0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p,0%)) 100%;
+  background-size: 50.5% calc(var(--_p,0%)/2 + .5%);
+  outline-offset: .1em;
+  transition: background-size .4s, background-position 0s .4s;
+}
+#ok:hover, #reset:hover {
+  --_p: 100%;
+  transition: background-position .4s, background-size 0s;
+  color: #fff;
+}
+#ok:active, #reset:active {
+  box-shadow: 0 0 9e9q inset #0009; 
+  background-color: var(--c);
+  color: #fff;
+}
+
+#ok{
+	width: 110px;
+    height: 45px;
+	font-size: 30px;
+	/* background-color: #348492;
+    color: white; */
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+}
+
+#reset{
+	text-align: center;
+	width: 110px;
+	font-size: 30px;
+	/* background-color: #ff4f4f;
+    color: white; */
+    color: black;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+}
+
+#reset>a{
+	text-decoration: none;
+	color: black;
+}
+
+#reset>a:hover{
+	color:white;
+}
+
+
+
+
+
+
+
+

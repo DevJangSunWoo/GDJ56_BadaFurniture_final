@@ -17,6 +17,6 @@ public class Refund {
 	private int refundNo;
 	private int orderDetailNo;
 	private String refundState;
-	private String detail;
+	private String detail; 
 	private Date refundEnrollDate;
 }

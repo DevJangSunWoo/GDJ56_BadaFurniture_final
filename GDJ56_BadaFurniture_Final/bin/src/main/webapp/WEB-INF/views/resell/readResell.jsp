@@ -22,13 +22,13 @@
 	}
 	div#sellWrap{
 		width:100%;
-		height:900px; /* 수정요망 */
+		/* height:900px; */ /* 수정요망 */
 		display:flex;
 		justify-content: center;
 	}
 	div#sellWrap>div#sellContent{
 		width:618px; 
-		height:900px; /* 수정요망 */
+		/* height:900px; */ /* 수정요망 */
 		/* border: 2px solid red; */
 	}
 	div#sellWrap>div#sellContent>div.sellRow{
@@ -63,10 +63,10 @@
 
 	}
 	div.sellColRight>div.sellImageUpload{
-		width:200px;
-		height:200px;
+		width:220px;
+		height:220px;
 		border: 2px solid rgb(52, 132, 146);
-		margin-right:20px;
+		margin-right:0px;
 	}
 	div#addressContainer>*{
 		margin:3px;
@@ -83,6 +83,19 @@
 		border:none;
 		font-size:20px;
 		border-radius:20px;
+	}
+	
+	button.updateBtn{
+		padding:0px;
+		border:2px solid rgb(52, 132, 146);
+		width:70px;
+		height:25px;
+		background-color:white;
+		color:rgb(52, 132, 146);
+		border-radius:5px;
+		padding-bottom:2px;
+		margin:1px;
+		cursor: pointer;
 	}
 	
 	/*댓글테이블*/
@@ -114,12 +127,13 @@
     table#tbl-comment textarea{margin: 4px 0 0 0;}
     table#tbl-comment button.btn-insert2{width:60px; height:23px; color:white; background:#3300ff; position:relative; top:-5px; left:10px;}
 </style>
+<c:set var="loginMember" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}"/>
 <section id="sellpage">
 	<div id="title">
 		내 가구 판매 신청서 조회
 	</div>
 	<div id="title" style="font-size:20px !important;height:50px !important;">
-		신청번호 : 100001
+		신청번호 : <c:out value="${resell.resellNo}"/>
 	</div>
 	<div id="sellWrap">
 		<div id="sellContent">
@@ -128,7 +142,7 @@
 					카테고리
 				</div>
 				<div class="sellColRight" style="border-radius:0px 20px 0px 0px;">
-					책상
+					<c:out value="${resell.item}"/>
 				</div>	
 			</div>
 			<div class="sellRow">
@@ -136,9 +150,9 @@
 					크기
 				</div>
 				<div class="sellColRight">
-					<span style="margin-right:30px;">가로 800cm</span>
-					<span style="margin-right:30px;">세로 600cm</span>
-					<span>높이 150cm</span>
+					<span style="margin-right:30px;">가로 <c:out value="${resell.widths}"/>mm</span>
+					<span style="margin-right:30px;">세로 <c:out value="${resell.depths}"/>mm</span>
+					<span>높이 <c:out value="${resell.heights}"/>mm</span>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -146,19 +160,7 @@
 					색상
 				</div>
 				<div class="sellColRight">
-					<select id="color">
-						<option>세부 항목을 선택해주세요.</option>
-						<option>블랙</option>
-						<option>화이트</option>
-						<option>브라운</option>
-						<option>그레이</option>
-						<option>네이비</option>
-						<option>레드</option>
-						<option>옐로우</option>
-						<option>그린</option>
-						<option>블루</option>
-						<option>퍼플</option>
-					</select>
+					<c:out value="${resell.color}"/>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -166,7 +168,7 @@
 					상태
 				</div>
 				<div class="sellColRight">
-					최상
+					<c:out value="${resell.grade}"/>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -175,10 +177,10 @@
 				</div>
 				<div class="sellColRight" style="height:250px !important;display:flex;">
 					<div class="sellImageUpload">
-						<img src="${path}/resources/upload/resell/deskTestImg01.png" width="100%" height="100%"/>
+						<img src="${path}/resources/upload/resell/${resell.files[0].renamedFileName}" width="100%" height="100%"/>
 					</div>
-					<div class="sellImageUpload">
-						<img src="${path}/resources/upload/resell/deskTestImg02.png" width="100%" height="100%"/>
+					<div class="sellImageUpload" style="border-left:0px;">
+						<img src="${path}/resources/upload/resell/${resell.files[1].renamedFileName}" width="100%" height="100%"/>
 					</div>
 				</div>		
 			</div>
@@ -187,7 +189,9 @@
 					참고사항
 				</div>
 				<div class="sellColRight" style="height:110px !important;">
-					1년전에 구매한 이케아 책상입니다. 상태 좋아용 ㅎ
+					<div>
+						<c:out value="${resell.detail}"/>
+					</div>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -196,13 +200,9 @@
 				</div>
 				<div class="sellColRight" style="height:110px !important;">
 					<div id="addressContainer">
-						<input type="text" id="sample4_postcode" placeholder="우편번호" style="width:100px;" value="08500">
-						<br>
-						<input type="text" id="sample4_roadAddress" placeholder="도로명주소" style="width:210px;" value="서울 금천구 가마산로 76">
-						<input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width:210px;" value="서울 금천구 가산동 535-132">
-						<span id="guide" style="color:#999;display:none"></span><br>
-						<input type="text" id="sample4_detailAddress" placeholder="상세주소" style="width:210px;" value="구디빌라 811호">
-						<input type="text" id="sample4_extraAddress" placeholder="참고항목" style="width:210px;" value="(가산동)"> 
+						<input type="text" style="width:100px;"name="postCode" value="${resell.postCode}" disabled><br>
+						<input type="text" style="width:435px;"name="address" value="${resell.address}" disabled><br>
+						<input type="text" style="width:435px;"name="addressDetail" value="${resell.addressDetail}" disabled>
 					</div>
 				</div>		
 			</div>
@@ -211,7 +211,7 @@
 					희망수거일
 				</div>
 				<div class="sellColRight">
-					2023-01-24(화)
+					<fmt:formatDate value="${resell.pickUpDate}" type="date" pattern="yyyy-MM-dd(E)"/>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -219,7 +219,7 @@
 					판매희망금액
 				</div>
 				<div class="sellColRight">
-					100,000원
+					<fmt:formatNumber value="${resell.hopePrice}" type="currency"/> &nbsp;<button class="updateBtn" value="${resell.resellNo}">수정하기</button>
 				</div>		
 			</div>
 			<div class="sellRow">
@@ -230,53 +230,50 @@
 				</div>
 				<div class="sellColRight" style="height:80px !important;border-bottom: 1px solid black;border-radius:0px 0px 20px 0px;">
 					<div id="accountContainer">
-						은행명 : 국민은행
-						예금주 : 박선우
+						은행명 : <c:out value="${resell.bankName}"/> / 
+						예금주 : <c:out value="${resell.depositorName}"/>
 						<br>
-						계좌번호 : 1234-1234-1234
+						계좌번호 : <c:out value="${resell.accountCode}"/>
 					</div>
 				</div>		
 			</div>
 			<div id="comment-container">
 				<div class="comment-editor">
-					<form action="${path}/board/writeBoardComment.do" method="post">
+					<form action="${path}/resell/writeComment.do" method="post">
 						<textarea name="content" cols="55" rows="3"></textarea>
-						<input type="hidden" name="boardref" value="${board.boardNo}">
-						<input type="hidden" name="level" value="1">
-						<input type="hidden" name="commentref" value="0">
-						<input type="hidden" name="commentWriter" value="${loginMember!=null?loginMember.userId:''}">
+						<input type="hidden" name="resellNo" value="${resell.resellNo}">
+						<input type="hidden" name="memberNo" value="${loginMember.memberNo}">
 						<button type="submit" id="btn-insert">등록</button>
 					</form>
 				</div>
 				<table id="tbl-comment">
-					<tr class="level1">
-		   				<td style="width:200px;font-size:15px;">
-						    <sub class="comment-writer">운영자</sub>
-						    <sub class="comment-date">2023-01-10</sub>
-						    <button style="width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;">new</button>
-						    <br> 
-						    고객님이 신청하신 이케아 책상의 가격대는 80,000으로 책정되어 있습니다. 판매를 희망하신다면 가격을 조정해주시면 감사하겠습니다.             
-		   				</td>
-						<td>
-							<button>가격수정</button>
-						</td>	
-					</tr>
-					<tr class="level1">
-		   				<td style="width:200px">
-						    <sub class="comment-writer">DevSunwoo</sub>
-						    <sub class="comment-date">2023-01-11</sub>
-						    <br> 
-						    넹   
-		   				</td>
-						<td>
-
-						</td>	
-					</tr>		
+					<c:if test="${not empty resell.comments}">
+						<c:forEach var="comment" items="${resell.comments}">
+							<tr class="level1">
+								<td>
+									<sub class="comment-writer">
+										<c:out value="${comment.memberNo==100000?'운영자':loginMember.memberId}"/>
+									</sub>
+								    <sub class="comment-date"><fmt:formatDate value="${comment.resellCommentEnrollDate}" type="date" pattern="yyyy-MM-dd(E) a hh:mm"/></sub>
+								    <br> 
+								    <c:out value="${comment.content}"/>
+								</td>
+								<td>
+								
+								</td>
+							</tr>
+						</c:forEach>
+					</c:if>	
 				</table>
 			</div>
 		</div>
 	</div>
 </section>
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
-</body>
-</html>
+<script>
+	$("button.updateBtn").click(e=>{
+		let path = '${path}/resell/update.do?resellNo=' + $(e.target).val();
+		open(path,'_blank','width=420px height=300px top=280px left=750px');
+	});
+</script>
+<br><br><br><br>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

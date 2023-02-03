@@ -7,6 +7,11 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/> 
 
+<!-- 주소검색 api -->
+<!-- <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
+<!-- <script src="https://ssl.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js?autoload=false"></script> -->
+<script src = "https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+
 <!-- css -->
 <link rel="stylesheet" href="${path }/resources/css/member/enroll.css"/>
 
@@ -18,40 +23,187 @@
 
     <div class="flexDiv" style="justify-content: center;">
         <div id="enrollDiv">
-            <form action="">
+            <form action="${path}/member/enrollMemberEnd.do">
                 <br>
                 <div class="flexDiv" style="justify-content: center;">
                     <div style="border: 1px solid grey; width: 80%;">
-                        <h5>  ❗ 계좌번호 제외 모두 필수 입력항목입니다.</h5>
+                        <h5> ❗ 계좌번호 제외 모두 필수 입력항목입니다.</h5>
+                        <h5> ❗ 아이디는 4글자 이상 영문자/숫자로만 구성할 수 있습니다.</h5>
+                        <h5> ❗ 비밀번호는 8글자 이상, 영문자/숫자로만 구성할 수 있습니다.</h5>
                     </div>
                 </div>
                 <br>
                 
                 <div class="flexDiv" style="justify-content: center;">
                     <div id="inputDiv">
+		            	<div class="flexDiv">
+		                    <img src="${path }/resources/images/member/아이디.png">
+		                    <div class="input-container">		
+		                        <input type="text" name="memberId" id="id" class="form__input" placeholder="아이디" required/>
+		                        
+		                        <label class="form__label" id="idTxt">아이디</label>
+		                    </div>
+		                    <input type="button" class="oribtn" id="idcheck" value="중복확인">
+		                </div>
+		                <br>
+		                
+		                <script>
+			              	//아이디 정규표현식
+			    			$("input[name=memberId]").blur(e=>{
+		    					const id=$("#id").val().trim();
+		    					const idChk=/^[A-Za-z0-9]+$/
+		    					
+		    					if(!idChk.test(id) || id.length<4){
+		    						setTimeout(function(){ //alert 무한루프 문제 해결
+			    						alert("⛔ 아이디는 4자 이상, 영문자/숫자로만 구성할 수 있습니다. ⛔");
+			    						$("input[name=memberId]").val("");
+		    						}, 10)
+		    					}					
+			    			});
+		                
+		                	//아이디 중복확인
+		                	$("#idcheck").click(function(){
+		                	/* $("input[name=memberId]").keyup(function(){ */
+		                		$.ajax({
+		                			url: "${path}/member/idDuplicate.do",
+		                			data: {memberId: $("#id").val()},
+		                	         success:data=>{
+		                				if(data=='true'){  //중복된 아이디가 있음
+		                					$("#idTxt").html("<span id='idTxtcheck'>중복된 아이디입니다</span>")
+	                        				$("#idTxtcheck").css({
+	                        					"color" : "#FA3E3E",
+	                        					"font-weight" : "bold",
+	                        					"font-size" : "14px"
+	                        				});
+		                					
+		                					alert("중복된 아이디입니다");
+		                					$("input[name=id]").val("");
+		                			
+		                				}else{ //중복된 아이디 없음
+		                					$("#idTxt").html("<span id='idTxtcheck'>사용가능한 아이디입니다</span>")
+	                        				$("#idTxtcheck").css({
+	                        					"color" : "#0D6EFD",
+	                        					"font-weight" : "bold",
+	                        					"font-size" : "14px"
+	                        				});
+		                				}
+		                			}
+		                		});
+		                	});
+		                </script>
+		                
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/메일.png">
                             <div class="input-container" >
-                                <input type="email"  name="email" class="form__input" placeholder="이메일"/>
-                                <label class="form__label">이메일</label>
+                                <input type="email" name="email" id="email" class="form__input" placeholder="이메일" required/>
+                                <label class="form__label" id="mailTxt">이메일</label>
                             </div>
-                            <input type="button" class="oribtn" value="중복확인">
-                            <input type="button" class="oribtn" value="이메일인증">
+                           <input type="button" class="oribtn" id="emailcheck" value="중복확인">
+                           <input type="button" class="oribtn" id="emailAuthentication" value="이메일인증" hidden>
                         </div>
                         <br>
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/이메일체크.png" width="">
                             <div class="input-container">
-                                <input type="number" name="emailck" class="form__input" placeholder="인증번호"/>
-                                <label class="form__label">인증번호</label>
+                                <input type="text" name="emailck" class="form__input" id="memailconfirm" placeholder="인증번호" required/>
+                                <label class="form__label" id="memailconfirmTxt">인증번호</label>
                             </div>
-                            <input type="button" class="oribtn" value="인증확인">		
+                            <!-- <input type="button" class="oribtn" value="인증확인"> -->		
                         </div>
                         <br>
+                        
+                        <script>
+	                      	//이메일 정규표현식
+	            			$("input[name=email]").blur(e=>{
+            					const userEmail=$("input[name=email]").val().trim();
+            					const emailChk=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])+@[a-z]+\.[a-z]{2,3}/
+            					
+            					if(!emailChk.test(userEmail)){
+            						setTimeout(function(){ 
+            							alert("⛔ 이메일을 정확히 입력해주세요 ⛔");
+            							$("input[name=email]").val("");
+            						}, 10);
+            					}					
+	            			});
+                        	
+                        	//이메일 중복확인
+		                	$("#emailcheck").click(function(){
+		                		const email = $("input[name=email]").val();
+		                		$.ajax({
+		                			url: "${path}/member/emailDuplicate.do",
+		                			data: {email: email},
+		                	         success:data=>{
+		                				if(data=='true'){  //중복된 이메일 있음
+		                					$("#mailTxt").html("<span id='mailTxtcheck'>중복된 이메일입니다</span>")
+	                        				$("#mailTxtcheck").css({
+	                        					"color" : "#FA3E3E",
+	                        					"font-weight" : "bold",
+	                        					"font-size" : "14px"
+	                        				});
+		                			
+		                				}else{ //중복된 이메일 없음
+		                					$("#mailTxt").html("<span id='mailTxtcheck'>사용가능한 이메일입니다</span>")
+	                        				$("#mailTxtcheck").css({
+	                        					"color" : "#0D6EFD",
+	                        					"font-weight" : "bold",
+	                        					"font-size" : "14px"
+	                        				});
+		                					$("#emailAuthentication").attr("hidden",false);
+		                				}
+		                			}
+		                		});
+		                	});
+                        
+                        	
+	                     	// 이메일 인증번호
+	                        $("#emailAuthentication").click(function() {
+	                           $.ajax({
+	                              type : "POST",
+	                              url : "login/mailConfirm",
+	                              data : {
+	                                 "email" : $("#email").val()
+	                              },
+	                              success : function(data){
+	                                 alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
+	                                 console.log("data : "+data);
+	                                 chkEmailConfirm(data, $("#memailconfirm"), $("#memailconfirmTxt"));
+	                              }
+	                           })
+	                        })
+
+                        	// 이메일 인증번호 체크 함수
+                        	function chkEmailConfirm(data){
+                        		$("#memailconfirm").on("blur", function(){
+                        			if (data != $("#memailconfirm").val()) { 
+                        				emconfirmchk = false;
+                        				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+                        				$("#emconfirmchk").css({
+                        					"color" : "#FA3E3E",
+                        					"font-weight" : "bold",
+                        					"font-size" : "14px"
+                        				});
+                        				
+                        				alert("인증번호가 잘못되었습니다.");
+        	            				$("input[name=emailck]").val("");
+                        				
+                        			} else { // 아니면 중복아님
+                        				emconfirmchk = true;
+                        				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
+
+                        				$("#emconfirmchk").css({
+                        					"color" : "#0D6EFD",
+                        					"font-weight" : "bold",
+                        					"font-size" : "14px"
+                        				})
+                        			}
+                        		})
+                        	}
+                        </script>
+                        
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/비밀번호.png">
                             <div class="input-container">		
-                                <input type="password" name="password" class="form__input" placeholder="비밀번호"/>
+                                <input type="password" name="password" id="pw" class="form__input" placeholder="비밀번호" required/>
                                 <label class="form__label">비밀번호</label>
                             </div>
                         </div>
@@ -59,15 +211,48 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/비밀번호체크.png">
                             <div class="input-container">		
-                                <input type="password" name="passwordck" class="form__input" placeholder="비밀번호 확인"/>
-                                <label class="form__label">비밀번호 확인</label>
+                                <input type="password" name="passwordck" class="form__input" placeholder="비밀번호 확인" required/>
+                                <label class="form__label" id="passwordckTxt">비밀번호 확인</label>
                             </div>
                         </div>
                         <br>
+                        
+                        <script>
+                        	//비밀번호 확인
+							$("input[name=passwordck]").blur(e=>{
+								const pw = $("#pw").val();
+								const pwck = $("input[name=passwordck]").val();
+								
+								console.log($("#pw").val());
+								console.log(pwck);
+								
+								if(pw!=pwck){
+									$("#passwordckTxt").html("<span id='passwordck'>비밀번호 불일치</span>")
+                    				$("#passwordck").css({
+                    					"color" : "#FA3E3E",
+                    					"font-weight" : "bold",
+                    					"font-size" : "14px"
+                    				});
+									
+									$("input[name=passwordck]").val('');
+									//$("input[name=passwordck]").focus();
+									
+								}else{
+									$("#passwordckTxt").html("<span id='passwordck'>비밀번호 일치</span>")
+                    				$("#passwordck").css({
+                    					"color" : "#0D6EFD",
+                    					"font-weight" : "bold",
+                    					"font-size" : "14px"
+                    				});
+								}
+							});
+                        	
+                        </script>
+                        
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/이름.png">
                             <div class="input-container">		
-                                <input type="text" name="name" class="form__input" placeholder="이름"/>
+                                <input type="text" name="memberName" class="form__input" placeholder="이름" required/>
                                 <label class="form__label">이름</label>
                             </div>
                         </div>
@@ -75,16 +260,50 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/전화.png">
                             <div class="input-container">
-                                <input type="text" name="phone" class="form__input" placeholder="전화번호(-포함)"/>
+                                <input type="text" name="phone" class="form__input" placeholder="전화번호(-포함)" required/>
                                 <label class="form__label">전화번호</label>		
                             </div>
                         </div>
                         <br>
+                        
+                        <script>
+	                        //전화번호 정규표현식
+	            			$("input[name=phone]").blur(e=>{
+		                        const userPhone=$("input[name=phone]").val().trim();
+		                        const phoneChk=/^\d{3}-\d{3,4}-\d{4}$/
+		                        
+		                        if(!phoneChk.test(userPhone)){
+		                            setTimeout(function(){ 
+			                            alert("⛔ '-' 포함 전화번호를 정확히 입력해주세요 ⛔");
+			                            $("input[name=phone]").val("");
+		                            }, 10);
+		                        }					
+	                		});  	
+                        </script>
+                        
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/은행.png">
                             <div class="input-container">
-                                <input type="text" name="bankName" class="form__input" placeholder="거래은행"/>
-                                <label class="form__label">거래은행</label>		
+								<select name="bankName">
+									<option value="">은행명 선택</option>
+			                        <option value="국민은행">국민은행</option>
+			                        <option value="기업은행">기업은행</option>
+			                        <option value="농협중앙회">농협중앙회</option>
+			                        <option value="새마을금고">새마을금고</option>
+			                        <option value="수협중앙회">수협중앙회</option>
+			                        <option value="신한은행">신한은행</option>
+			                        <option value="외환은행">외환은행</option>
+			                        <option value="우리은행">우리은행</option>
+			                        <option value="우체국">우체국</option>
+			                        <option value="카카오뱅크">카카오뱅크</option>
+			                        <option value="케이뱅크">케이뱅크</option>
+			                        <option value="하나은행">하나은행</option>
+			                        <option value="한국씨티은행">한국씨티은행</option>
+			                        <option value="HSBC은행">HSBC은행</option>
+			                        <option value="SC제일은행">SC제일은행</option>
+								</select>
+                                <!-- <input type="text" name="bankName" class="form__input" placeholder="거래은행"/>
+                                <label class="form__label">거래은행</label> -->		
                             </div>
                         </div>
                         <br>
@@ -96,15 +315,16 @@
                             </div>
                         </div>
                         <br>
+                        
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/주소.png">
-                            <input type="button" value="주소찾기" class="oribtn">
+                            <input type="button" value="주소찾기" class="oribtn" onclick="sample5_execDaumPostcode()">
                         </div>
                         <br>
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" name="postCode" class="form__input" placeholder="우편번호"/>
+                                <input type="text" id="postCode" name="postCode" class="form__input" placeholder="우편번호" required/>
                                 <label class="form__label">우편번호</label>		
                             </div>
                         </div>
@@ -112,7 +332,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" name="address" class="form__input" placeholder="주소"/>
+                                <input type="text" id="address" name="address" class="form__input" placeholder="주소" required/>
                                 <label class="form__label">주소</label>		
                             </div>
                         </div>
@@ -120,13 +340,37 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" name="addressDetail" class="form__input" placeholder="상세주소"/>
+                                <input type="text" name="detailAddress" class="form__input" placeholder="상세주소"/>
                                 <label class="form__label">상세주소</label>		
                             </div>
                         </div>
                     </div>
                 </div>
-
+					
+				<script>
+	                function sample5_execDaumPostcode() {
+	                    new daum.Postcode({
+	                        oncomplete: function(data) {
+	                            addr = data.address; // 최종 주소 변수
+	
+	                            // 주소 정보를 해당 필드에 넣는다.
+	                            document.getElementById("address").value = addr;
+	                            document.getElementById("postCode").value = data.zonecode;
+	                            
+	                			console.log(data);
+	                			console.log(addr);
+	                          	console.log(data.zonecode);
+	                			//console.log(data.jibunAddress);
+	                			//console.log(document.getElementById("sample5_address").value);
+	                			
+				                //geocoder.addressSearch(addr, callback); 
+	                        }
+	                    }).open();
+	                }
+	            </script>
+				
+				</script>	
+				
                 <div class="flexDiv" style="justify-content: center;">
                     <div id="inputDiv">
                         <h3 style="color: #348492;"><b style="background-color: lightgray;">🔊 바다 이용약관</b></h3>
@@ -300,8 +544,8 @@
                             회사와 회원간 발생한 분쟁에 관한 소송의 관할법원은 제소 당시의 회사의 주소를 관할하는 지방법원의 전속관할로 합니다. 
                             
                             부칙 
-                            본 약관은 2022년 11월 01일부터 적용됩니다. 
-                            2022년 4월 19일부터 시행되던 종전의 약관은 본 약관으로 대체합니다.</div>
+                            본 약관은 2023년 01월 01일부터 적용됩니다. 
+                            2023년 4월 19일부터 시행되던 종전의 약관은 본 약관으로 대체합니다.</div>
                         <br>
                     </div>
                 </div>
@@ -354,9 +598,9 @@
                         </div>
                         <br>
                         <div id="ruleContainer">
-                            <input type="checkbox" name="agree1" value="Y" required> 이용약관에 동의합니다. 
+                            <label><input type="checkbox" name="agree1" value="Y" required> 이용약관에 동의합니다.</label> 
                             <br>
-                            <input type="checkbox" name="agree2" value="Y" required> 개인정보 수집 및 이용에 동의합니다.
+                            <label><input type="checkbox" name="agree2" value="Y" required> 개인정보 수집 및 이용에 동의합니다.</label>
                         </div>
                     </div>
                 </div>

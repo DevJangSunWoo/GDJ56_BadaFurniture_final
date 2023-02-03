@@ -27,6 +27,137 @@
 		width: 70px;
 		height: 70px;
 	}
+	
+		/* 모달 Customizing */
+	/* 모달 */
+	.modalTitle{
+		display: flex;
+		justify-content: center;
+		font-size:30px;
+		font-weight: bolder;
+		margin-bottom:20px;
+	}
+	
+	.closeBtn {
+      background-color: #348492;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+	  border:none;
+	  color: white;
+	  width: 500px;
+      height:40px;
+      font-weight:bolder;
+      font-size:18px;
+    }
+
+    .modals {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modals *{
+   		font-family: 'Nanum Gothic' !important;
+    }
+
+    .modals .bg {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modalBox {
+      position: absolute;
+      background-color: #fff;
+      width: 700px;
+      height: 800px;
+      padding: 20px;
+      overflow: scroll;
+    }
+
+    .modalBox button {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .hiddens {
+      display: none;
+    }
+
+	.modalContentInnerDiv{
+		margin:8px;
+	}
+
+	#modalBtnArea{
+		display: flex;
+		justify-content: center;
+		padding: 15px;
+		margin-top:30px;
+	}
+	table#orderDetailTable{
+		width:100%;
+		border-top:5px solid black;
+		border-collapse: collapse;
+	}
+	table#orderDetailTable th{
+		text-align: center;
+		border-bottom:2px solid black;
+		height:30px;
+	}
+	table#orderDetailTable td{
+		border-bottom:1px solid black;
+	}
+	table#orderDetailTable th:first-child, table#orderDetailTable td:first-child {
+		width:530px;
+	}
+	table#orderDetailTable th:nth-child(2), table#orderDetailTable td:nth-child(2) {
+		width:100px;
+		text-align:center;
+	}
+	div.detailInfoContainer{
+		height:85px;width:100%;margin:10px;display:flex;
+	}
+	img.infoImg{
+		cursor:pointer;width:85px;height:85px;
+	}
+	div.detailProductTitle{
+		padding:20px 0px 8px 10px;
+	}
+	div.detailProductsummary{
+		padding:0px 0px 5px 10px;font-size:13px;color:grey;
+	}
+	
+	table.infoTable td{
+		border-bottom: 1px solid grey;
+		height: 30px;
+		font-weight:bolder;
+		padding:10px;
+	}
+	table.infoTable td:first-child {
+		width:150px;	
+	}
+	table.infoTable button.receiptButton{
+		padding:0px;
+		border:2px solid rgb(52, 132, 146);
+		width:70px;
+		height:25px;
+		background-color:white;
+		color:rgb(52, 132, 146);
+		border-radius:5px;
+		padding-bottom:2px;
+		margin:1px;
+		cursor: pointer;
+		font-size:13px;
+	}
+	/* modal costomizing..  */
+	
+
 </style>
 
 
@@ -192,7 +323,7 @@
 											<c:if test="${vs.index==0}">												
 												<td class="tableTd" rowspan="${o.details.size()}">
 													<input type="hidden" value="${o.orderSheetNo}">
-													<input type="number" value="${o.orderSheetNo}" 
+													<input type="number" value="${o.orderSheetNo}" id="orderSheetBtn" 
 													style="width: 85px;border-style: none;background-color: #dcd5c36c;text-align: center;"
 													readonly>
 												</td>
@@ -355,8 +486,10 @@
 	}
 	
 	//주문번호를 클릭했을 때 => 주문상세보기 모달창 open
-	$(document).on("click", "#detailModalBtn", e=>{
-		let orderSheetNo = Number($(e.target).text());
+	$(document).on("click", "#orderSheetBtn", e=>{
+		let orderSheetNo = $(e.target).val();
+		//alert(orderSheetNo);
+		
 		$.ajax({
 			url:"${path}/mypage/order/read.do",
 			data:{
@@ -422,6 +555,24 @@
 	document.querySelector(".closeBtn").addEventListener("click", close);
 	document.querySelector(".bg").addEventListener("click", close);
 	
+	//숫자 콤마 찍어주는 함수
+	function fnSetComma(n) {
+	    var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
+	    n += '';                          // 숫자를 문자열로 변환         
+	    while (reg.test(n)) {
+	        n = n.replace(reg, '$1' + ',' + '$2');
+	    }
+	    return n;
+	}
+	
+	//이미지를 클릭했을 때 => 동적 태그 생성 추가
+	$(document).on("click", "img.infoImg", e=>{
+		let path = '${path}/product/view.do?productNo=' + $(e.target).prev().val();
+		location.assign(path);
+	});
+
+
+
 
 	//요약테이블 출력
 	$(()=>{
