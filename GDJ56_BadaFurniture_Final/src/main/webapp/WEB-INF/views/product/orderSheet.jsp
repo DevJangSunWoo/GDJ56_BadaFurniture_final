@@ -175,9 +175,20 @@
 			          </c:if> 
 			    </div>
 			</div>
-		
-			<!--주소api  -->
+			<!--배송비  지역에 따라 변경해주는 스크립트  -->
+			<script>
+			/* let delCost = $('input[name=badaAddress]').text(); 
+			 console.log(delCost);
 			
+			if(delCost.indexOf()>0){
+				 
+				 console.log('배송비');
+				 
+				 
+			 } */
+			
+			</script>		
+			<!--주소api  -->			
 			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 			<script>
 			function sample6_execDaumPostcode() {
@@ -1020,10 +1031,6 @@
 						return false;
 						
 				    	 } 
-				
-				
-				
-					
 					
 			/* console.log("계좌이체 결제 진행"); */
 			/* 	$('#orderForm').method = 'post'; */
