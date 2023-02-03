@@ -139,6 +139,7 @@
 									</a>
 								</td>
 								<td style="width: 20px;">
+									<input type="hidden" value="${r.product.productNo }">
 									<a class="viewProduct" href="${path}/product/view.do?productNo=${r.product.productNo }">
 										<c:out value="${r.product.productNo }"/>
 									</a>
@@ -245,14 +246,17 @@
 	$("select[name=refundState]").change(e=>{
 			const orderDetailNo=$(e.target).parent().parent().children().find('input').first().val();
 			const refundState=$(e.target).val();
-			//console.log(orderDetailNo);
-			//console.log(refundState);
+			const productNo=$(e.target).parent().prev().prev().prev().prev().prev().children().val();
+			console.log(orderDetailNo);
+			console.log(refundState);
+			console.log(productNo);
 
 			$.ajax({
 				url:"${path}/admin/updateRefundState.do",
 				data:{
 					orderDetailNo:orderDetailNo,
-					refundState:refundState
+					refundState:refundState,
+					productNo:productNo
 				},
 				success:function(result){	
 						

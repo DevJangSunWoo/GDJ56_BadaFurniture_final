@@ -247,10 +247,70 @@
             </div>
         </div>
     </div> 
-
-
 </section>
 </body>
 </html>
+<script>
+    //주문수 및 매출액
+
+    //내가구팔기 가구비율
+
+    //상품별 주문수요
+    $(()=>{
+        $.ajax({
+			url: "${path}/admin/chartDemand.do",
+			dataType:"json",
+			contentType:"application/json;charset=utf-8",
+			success:function(data){
+ 				var male=[];
+				var female=[];					
+				
+				$.each(data,function(){
+					male.push(this["maleCount"])
+					female.push(this["femCount"]) 
+					
+				})
+
+                new Chart(document.getElementById("gender-doughnut"), {
+                    plugins: [ChartDataLabels],
+                    type: 'doughnut',
+                    data: {
+                        labels: ['남','여'],
+                        datasets: 
+                            [{ 
+                                data: [male,female], 
+                                backgroundColor: [
+                                    '#9DCEFF',
+                                    '#FFACB7'
+                                    ],
+                                borderWidth: 0,
+                                scaleBeginAtZero: true,
+                                fill: true
+                            }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            responsive:false,	//차트 크기 조정용
+                            text: 'member 성비',
+                            datalabels: { // datalables 플러그인 세팅
+                                formatter: function (value, context) {
+                                var idx = context.dataIndex; // 각 데이터 인덱스
+                
+                                // 출력 텍스트
+                                return context.chart.data.labels[idx] + value;
+                                },
+                                align: 'top', // 도넛 차트에서 툴팁이 잘리는 경우 사용
+                            },                           
+                        }
+                    }
+                })                
+            }
+        })
+    })
+		
+
+</script>
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

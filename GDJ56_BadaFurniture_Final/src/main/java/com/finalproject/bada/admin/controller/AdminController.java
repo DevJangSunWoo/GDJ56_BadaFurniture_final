@@ -594,19 +594,26 @@ public class AdminController {
 	@ResponseBody
 	public Map updateRefundState(
 			@RequestParam("orderDetailNo") int orderDetailNo,
-			@RequestParam("refundState") String refundState) {		
+			@RequestParam("refundState") String refundState,
+			@RequestParam("productNo") String productNo
+			) {		
 		
 		Map param=new HashMap();
 		param.put("orderDetailNo", orderDetailNo);
 		param.put("refundState", refundState);	
+		param.put("productNo", productNo);	
 		//log.debug("변경할 상태 : "+paymentState);
+		
+		
 		
 		Map result=new HashMap();	
 		
-		try {
-			service.updateRefundState(param);			
+		try {			
+			service.updateRefundState(param);	
 			result.put("msg", ("'"+(String)param.get("refundState"))+"'"+" 상태로 변경했습니다.");
+			
 		}catch(RuntimeException e) {
+			
 			e.printStackTrace();
 			result.put("msg", "취소/반품상태 변경에 실패했습니다.");
 		}		
@@ -772,6 +779,16 @@ public class AdminController {
 		
 	}
 	
+	//대시보드 - chartJs - 상품별 주문수요
+	@RequestMapping("/admin/chartDemand.do")
+	@ResponseBody
+	public String chartDemand() {
+		
+		Map result=service.chartDemand();
+		
+		
+		return null;
+	}
 	
 	
 	

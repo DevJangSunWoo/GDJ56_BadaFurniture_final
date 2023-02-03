@@ -242,9 +242,22 @@ public class AdminServiceImpl implements AdminService {
 	public void updateRefundState(Map param) {
 		// TODO Auto-generated method stub
 		int result=dao.updateRefundState(session,param);
-		if(result<0) {
-			throw new RuntimeException("취소/반품상태 변경에 실패했습니다.");
-		}
+		
+		if(param.get("refundState").equals("반품완료")
+				||param.get("refundState").equals("취소완료")) {		
+			
+			result+=dao.updateSoldOutStateAfterRefund(session,param);
+			
+			if(result<2) {
+				throw new RuntimeException("취소/반품상태 변경에 실패했습니다.");					
+			}
+			
+		}else {
+			if(result<1) {
+				throw new RuntimeException("취소/반품상태 변경에 실패했습니다.");				
+			}
+		}		
+
 		
 	}
 
@@ -283,6 +296,13 @@ public class AdminServiceImpl implements AdminService {
 		if(result<0) {
 			throw new RuntimeException("배송상태 변경에 실패했습니다.");
 		}
+	}
+
+	//대시보드 - 차트 - 상품별 주문수요
+	@Override
+	public Map chartDemand() {
+		// TODO Auto-generated method stub
+		return dao.chartDemand(session);
 	}
 
 
