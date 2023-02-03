@@ -298,11 +298,31 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 
+	
 	//대시보드 - 차트 - 상품별 주문수요
 	@Override
 	public Map chartDemand() {
 		// TODO Auto-generated method stub
 		return dao.chartDemand(session);
+	}
+	
+	//대시보드 - chartJs - 내가구팔기 가구비율
+	@Override
+	public Map chartResell() {
+		// TODO Auto-generated method stub
+		return dao.chartResell(session);
+	}
+
+	//대시보드 - chartJs - 일일 주문,매출액
+	@Override
+	public Map chartOrders() {
+		// TODO Auto-generated method stub
+		return dao.chartOrders(session);
+	}
+	@Override
+	public Map chartSales() {
+		// TODO Auto-generated method stub
+		return dao.chartSales(session);
 	}
 
 

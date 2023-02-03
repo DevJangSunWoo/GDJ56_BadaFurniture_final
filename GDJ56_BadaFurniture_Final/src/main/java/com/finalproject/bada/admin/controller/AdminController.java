@@ -782,14 +782,39 @@ public class AdminController {
 	//대시보드 - chartJs - 상품별 주문수요
 	@RequestMapping("/admin/chartDemand.do")
 	@ResponseBody
-	public String chartDemand() {
+	public Map chartDemand() {
 		
 		Map result=service.chartDemand();
+		
+				
+		String[] keys={"의자","침대","화장대","책상","옷장","소파","책장","서랍장"};
+
+		
+		return result;
+	}
+	
+	//대시보드 - chartJs - 내가구팔기 가구비율
+	@RequestMapping("/admin/chartResell.do")
+	@ResponseBody
+	public Map chartResell() {
+		
+		Map result=service.chartResell();
+		String[] keys={"의자","침대","화장대","책상","옷장","소파","책장","서랍장"};
+		
+		return result;
+	}
+	
+	//대시보드 - chartJs - 일일 주문,매출액
+	@RequestMapping("/admin/chartOrdersSales.do")
+	@ResponseBody
+	public String chartOrdersSales() {
+		
+		Map resultOrders=service.chartOrders();
+		Map resultSales=service.chartSales();
 		
 		
 		return null;
 	}
-	
 	
 	
 }

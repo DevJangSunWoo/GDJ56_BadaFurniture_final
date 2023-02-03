@@ -7,6 +7,11 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="${path }/resources/css/admin/adminDashBoard.css"/>
 
+<!-- chart.js 라이브러리 CDN 로드 -->    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
 <style>
     hr {
@@ -251,37 +256,54 @@
 </body>
 </html>
 <script>
+
     //주문수 및 매출액
 
     //내가구팔기 가구비율
-
-    //상품별 주문수요
     $(()=>{
         $.ajax({
-			url: "${path}/admin/chartDemand.do",
-			dataType:"json",
+			url: "${path}/admin/chartResell.do",
 			contentType:"application/json;charset=utf-8",
-			success:function(data){
- 				var male=[];
-				var female=[];					
-				
-				$.each(data,function(){
-					male.push(this["maleCount"])
-					female.push(this["femCount"]) 
-					
-				})
+			success:function(result){
 
-                new Chart(document.getElementById("gender-doughnut"), {
+                // console.log(result);
+                // console.log(result['의자']);
+                
+                var resultData=[];
+                resultData.push(result['의자']);
+                resultData.push(result['침대']);
+                resultData.push(result['화장대']);
+                resultData.push(result['책상']);
+                resultData.push(result['옷장']);
+                resultData.push(result['소파']);
+                resultData.push(result['책장']);
+                resultData.push(result['서랍장']);
+
+                //console.log(resultData);
+                
+
+				var resultlabel=["의자","침대","화장대","책상","옷장","소파","책장","서랍장"];					
+
+
+                //차트
+                new Chart(document.getElementById("resellMine"), {
                     plugins: [ChartDataLabels],
                     type: 'doughnut',
                     data: {
-                        labels: ['남','여'],
+                        labels: resultlabel,
                         datasets: 
                             [{ 
-                                data: [male,female], 
+                                data: resultData, 
                                 backgroundColor: [
-                                    '#9DCEFF',
-                                    '#FFACB7'
+                                    '#4FC0E8',
+                                    '#FFACB7',
+                                    '#FB6E52',
+                                    '#ED5466',
+                                    '#9DB6FF',
+                                    '#8CC051',
+                                    '#AC92ED',
+                                    '#36BC9B'
+
                                     ],
                                 borderWidth: 0,
                                 scaleBeginAtZero: true,
@@ -292,7 +314,7 @@
                         title: {
                             display: true,
                             responsive:false,	//차트 크기 조정용
-                            text: 'member 성비',
+                            text: '상품별 주문수요',
                             datalabels: { // datalables 플러그인 세팅
                                 formatter: function (value, context) {
                                 var idx = context.dataIndex; // 각 데이터 인덱스
@@ -303,8 +325,94 @@
                                 align: 'top', // 도넛 차트에서 툴팁이 잘리는 경우 사용
                             },                           
                         }
+
+
+                        
                     }
-                })                
+                })   
+                //차트               
+                                
+
+
+            }
+        })
+    })
+
+    //상품별 주문수요
+    $(()=>{
+        $.ajax({
+			url: "${path}/admin/chartDemand.do",
+			contentType:"application/json;charset=utf-8",
+			success:function(result){
+
+                // console.log(result);
+                // console.log(result['의자']);
+                
+                var resultData=[];
+                resultData.push(result['의자']);
+                resultData.push(result['침대']);
+                resultData.push(result['화장대']);
+                resultData.push(result['책상']);
+                resultData.push(result['옷장']);
+                resultData.push(result['소파']);
+                resultData.push(result['책장']);
+                resultData.push(result['서랍장']);
+
+                //console.log(resultData);
+                
+
+				var resultlabel=["의자","침대","화장대","책상","옷장","소파","책장","서랍장"];					
+
+
+                //차트
+                new Chart(document.getElementById("itemDemand"), {
+                    plugins: [ChartDataLabels],
+                    type: 'doughnut',
+                    data: {
+                        labels: resultlabel,
+                        datasets: 
+                            [{ 
+                                data: resultData, 
+                                backgroundColor: [
+                                    '#4FC0E8',
+                                    '#FFACB7',
+                                    '#FB6E52',
+                                    '#ED5466',
+                                    '#9DB6FF',
+                                    '#8CC051',
+                                    '#AC92ED',
+                                    '#36BC9B'
+
+                                    ],
+                                borderWidth: 0,
+                                scaleBeginAtZero: true,
+                                fill: true
+                            }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            responsive:false,	//차트 크기 조정용
+                            text: '상품별 주문수요',
+                            datalabels: { // datalables 플러그인 세팅
+                                formatter: function (value, context) {
+                                var idx = context.dataIndex; // 각 데이터 인덱스
+                
+                                // 출력 텍스트
+                                return context.chart.data.labels[idx] + value;
+                                },
+                                align: 'top', // 도넛 차트에서 툴팁이 잘리는 경우 사용
+                            },                           
+                        }
+
+
+                        
+                    }
+                })   
+                //차트               
+                                
+
+
             }
         })
     })

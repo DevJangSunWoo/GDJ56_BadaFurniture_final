@@ -263,6 +263,25 @@ public class AdminDaoImpl implements AdminDao {
 		return session.selectOne("admin.chartDemand");
 	}
 
+	//대시보드 - chartJs - 내가구팔기 가구비율
+	@Override
+	public Map chartResell(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.chartResell");
+	}
+	
+	//대시보드 - chartJs - 일일 주문,매출액
+	@Override
+	public Map chartOrders(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.chartOrders");
+	}
+	@Override
+	public Map chartSales(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.chartSales");
+	}
+
 
 	
 	
