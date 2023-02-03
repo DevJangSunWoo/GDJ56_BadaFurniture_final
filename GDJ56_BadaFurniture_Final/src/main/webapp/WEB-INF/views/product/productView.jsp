@@ -129,22 +129,12 @@
     	 <!--거래중 거래 완료 이미지  css 블러 처리하는 스크립트 -->
     	 <!--제품 soldOutState에 맞춰서 이미지 블러위에 이미지 표출하는 스크립트 -->
     	 <script>
-    	  
-    	 if($('#productSoldOutState').val()=='I'|| $('#productSoldOutState')=='Y'){
-    		 
+    	 if($('#productSoldOutState').val()=='I'|| $('#productSoldOutState')=='Y'){ 
     		 $('#soldOutStateImg').css('filter','blur(4px)');
     		 $('#soldOutStateImg').css('-webkit-filter','blur(4px)');
-    	 	$('#soldOutImage').show();
-    		 
-    		 
-    	 }
-    	 
+    	 	$('#soldOutImage').show(); 		 
+    	 } 
     	 </script>
-    	 
-    	 
-    	 
-    	 
-    	 
     	 </style>
     	 <!--슬라이드 이미지 크기 조절 스타일  -->
     	 <style>
@@ -284,6 +274,13 @@
     	 
     	 <script>
     	 const fn_cartBtn=()=>{
+    		 /*  */
+    		 if($('#productSoldOutState').val()=='I'|| $('#productSoldOutState')=='Y'){ 
+    			 alert("거래완료된 제품입니다. 장바구니에 담으실수 없습니다.");	
+    			 	return false;
+    		 } 
+    		 
+    		 
     		 if( $("#badaLoginFilter").val() ==''){
     		
     			 alert("로그인 하셔야 장바구니에 담을 수 있습니다.");
@@ -311,6 +308,11 @@
     	 
     	
     	 const fn_directPurchaseBtn=()=>{
+    		 if($('#productSoldOutState').val()=='I'|| $('#productSoldOutState')=='Y'){ 
+    			 alert("거래완료된 제품입니다. 구매하실수 없습니다.");	
+    			 	return false;
+    		 } 
+    		 	 
     		 
     		 if( $("#badaLoginFilter").val() ==''){
     	    		
