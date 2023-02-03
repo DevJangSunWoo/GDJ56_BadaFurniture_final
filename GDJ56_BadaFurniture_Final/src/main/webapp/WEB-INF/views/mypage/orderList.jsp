@@ -268,6 +268,11 @@
 		color:grey;
 		font-weight:bolder;
 	}
+	a.refundDone{
+		font-size:14px;
+		color:grey;
+		font-weight:bolder;
+	}
 </style>
 	<section class="mypage">
 		<div id="title">
@@ -290,20 +295,14 @@
 							<button class="searchDate">3개월</button>
 							<input type="hidden" name="searchKeyword" id="month6">
 							<button class="searchDate">6개월</button>
+							<button class="searchAll">전체</button>
 							&nbsp;&nbsp;
-							<!-- &nbsp;&nbsp;
-							<input type="date">
-							&nbsp;~&nbsp;
-							<input type="date">
-							&nbsp;&nbsp; -->
 							<input type="text" id="orderDateRange" name="searchKeyword" class="searchDate" size="25" style="padding-bottom:3px;">
 							<button class="searchDate">조회</button>
 						</span>
 					</div>
 				</div>
 				<div style="font-size:14px;color:grey;margin-bottom:70px;">
-					 <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					 - 기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문조회 내역을 조회하실 수 있습니다. -->
 				</div>
 				<table id="orderTable"> 
 					<tr style="border-bottom:1px solid black;"> 
@@ -370,10 +369,10 @@
 													<button class="returnBtn">반품신청</button>
 												</c:when>
 												<c:when test="${detail.refundState ne null and fn:contains(detail.refundState, '취소')}">
-													<span class="refundDone">취소신청완료</span>
+													<a class="refundDone" href="${path}/mypage/refund.do">취소신청완료</a>
 												</c:when>
 												<c:when test="${detail.refundState ne null and fn:contains(detail.refundState, '반품')}">
-													<span class="refundDone">반품신청완료</span>
+													<a class="refundDone" href="${path}/mypage/refund.do">반품신청완료</a>
 												</c:when>
 											</c:choose>
 										</td>
@@ -486,6 +485,11 @@
 		} else {
 			alert("날짜를 입력해주세요.");
 		}
+	});
+	
+	//전체 버튼을 눌렀을 때
+	$("button.searchAll").click(e=>{
+		location.assign("${path}/mypage/order.do");
 	});
 	//modal open
 	const open = () => {

@@ -45,7 +45,7 @@ public class MypageController {
 	
 	// 장바구니 리스트 출력
 	@RequestMapping("/mypage/cart.do")
-	public ModelAndView cartList(ModelAndView mv, HttpSession session) {	
+	public ModelAndView cartList(ModelAndView mv) {	
 
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
 		Member loginMember = (Member)authentication.getPrincipal();
@@ -58,7 +58,7 @@ public class MypageController {
 	
 	//장바구니 삭제 기능
 	@RequestMapping("/cart/delete.do")
-	public ModelAndView deleteCart(ModelAndView mv, HttpSession session, @RequestParam(value="productNo")List<Integer> productNos) {
+	public ModelAndView deleteCart(ModelAndView mv, @RequestParam(value="productNo")List<Integer> productNos) {
 		
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
 		Member loginMember = (Member)authentication.getPrincipal();
@@ -88,7 +88,7 @@ public class MypageController {
 	
 	//알림리스트 출력
 	@RequestMapping("/mypage/alert.do")
-	public ModelAndView alertList(ModelAndView mv, HttpSession session,
+	public ModelAndView alertList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage) {
 		
 		int numPerpage = 5;
@@ -130,7 +130,7 @@ public class MypageController {
 	//로그인 멤버의 N이었던 알림 READ_STATE Y로 변경
 	@ResponseBody
 	@RequestMapping("/alert/updateReadState.do")
-	public int updateAlertReadState(HttpSession session) {
+	public int updateAlertReadState() {
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
 		Member loginMember = (Member)authentication.getPrincipal();
 		int result = service.updateAlertReadState(loginMember.getMemberNo());
@@ -154,8 +154,7 @@ public class MypageController {
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
 			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage,
 			@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType,
-			@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword,
-			HttpSession session) {
+			@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword) {
 		
 		Map search=new HashMap();
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
@@ -251,7 +250,37 @@ public class MypageController {
 	
 	//refund 리스트 출력
 	@RequestMapping("/mypage/refund.do")
-	public ModelAndView refundList(ModelAndView mv, int orderDetailNo) {
+	public ModelAndView refundList(ModelAndView mv,
+			@RequestParam(value="cPage", defaultValue="1") int cPage,
+			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage,
+			@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType,
+			@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword) {
+		
+		
+		Map search=new HashMap();
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		Member loginMember = (Member)authentication.getPrincipal();
+		search.put("memberNo", loginMember.getMemberNo());
+		search.put("searchType", searchType);
+		if(searchType.equals("ORDER_SHEET_ENROLL_DATE")) {	
+			String[] keys=searchKeyword.split("~");		
+			String key1=keys[0].trim();
+			String key2=keys[1].trim();	
+			search.put("searchKeyword1", key1);			
+			search.put("searchKeyword2", key2);		
+
+		}else {
+			search.put("searchKeyword", searchKeyword);	
+		}	
+		
+		mv.addObject("refund",adminService.refundListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		
+		int totalData = adminService.refundListCount(search);
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "refund.do",searchType,searchKeyword));
+		mv.addObject("searchType", searchType);
+		mv.addObject("searchKeyword", searchKeyword);
+		
+		
 		mv.setViewName("mypage/refundList");
 		return mv;
 	}
