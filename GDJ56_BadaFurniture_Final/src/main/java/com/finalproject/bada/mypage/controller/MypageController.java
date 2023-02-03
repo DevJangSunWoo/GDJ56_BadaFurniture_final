@@ -221,7 +221,7 @@ public class MypageController {
 		mv.addObject("state", state);
 		mv.setViewName("refund/writeRefund");
 		
-		return mv;
+		return mv; 
 	}
 	
 	//반품취소신청 완료

@@ -1,5 +1,8 @@
 package com.finalproject.bada.order.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.finalproject.bada.product.model.vo.Product;
 import com.finalproject.bada.refund.model.vo.Refund;
 
@@ -12,9 +15,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class OrderDetail {
 	private int orderDetailNo;
 	private OrderSheet orderSheet;
+	//private int orderSheetNo;
 	private Product product;
 	private String deliveryState;
 	private String confirmState;
