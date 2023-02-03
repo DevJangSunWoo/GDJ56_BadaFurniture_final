@@ -124,11 +124,11 @@
 			}
 		</style>  	 
     	 
-    	 <input  type="hidden" id="productSoldOutState"  value="${productData.soldOutState}" >
+    	 <input  type="text" id="productSoldOutState"  value="${productData.soldOutState}" >
     	 <!--거래중 거래 완료 이미지  css 블러 처리하는 스크립트 -->
     	 <!--제품 soldOutState에 맞춰서 이미지 블러위에 이미지 표출하는 스크립트 -->
     	 <script>
-    	 if($('#productSoldOutState').val()=='I'|| $('#productSoldOutState')=='Y'){ 
+    	 if($('#productSoldOutState').val()=='I'|| $('#productSoldOutState').val()=='Y'){ 
     		 $('#soldOutStateImg').css('filter','blur(4px)');
     		 $('#soldOutStateImg').css('-webkit-filter','blur(4px)');
     	 	$('#soldOutImage').show(); 		 
