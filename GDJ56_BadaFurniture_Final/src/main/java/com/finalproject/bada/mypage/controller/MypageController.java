@@ -1,7 +1,6 @@
 package com.finalproject.bada.mypage.controller;
 
 
-import java.awt.TrayIcon.MessageType;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -10,8 +9,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,8 +23,10 @@ import com.finalproject.bada.common.PageFactory;
 import com.finalproject.bada.member.model.vo.Member;
 import com.finalproject.bada.mypage.model.service.MypageService;
 import com.finalproject.bada.mypage.model.vo.Alert;
+import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.refund.model.vo.Refund;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -183,7 +182,7 @@ public class MypageController {
 		
 		int totalData=adminService.orderListCount(search);
 		
-		log.debug("totalData {}", totalData);		
+		//log.debug("totalData {}", totalData);		
 		
 		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "order.do",searchType,searchKeyword));
 		
@@ -202,10 +201,59 @@ public class MypageController {
 		return adminService.selectOrderSheet(orderSheetNo);
 	}
 	
+	//반품/취소 신청 페이지 연결
+	@RequestMapping("/refund/write.do")
+	public ModelAndView writeRefund(ModelAndView mv, String state, int orderSheetNo, int orderDetailNo) {
+		OrderSheet orderSheet = adminService.selectOrderSheet(orderSheetNo);
+		
+		List<OrderDetail> orderDetails = orderSheet.getDetails();
+		
+		OrderDetail orderDetail = null;
+		for(OrderDetail o : orderDetails) {
+			if(o.getOrderDetailNo() == orderDetailNo) {
+				orderDetail = o;
+				break;
+			}
+		}
+		if(orderDetail != null) {
+			mv.addObject("orderDetail", orderDetail);
+		}
+		mv.addObject("orderSheet", orderSheet);
+		mv.addObject("state", state);
+		mv.setViewName("refund/writeRefund");
+		
+		return mv;
+	}
+	
+	//반품취소신청 완료
+	@RequestMapping("/refund/writeEnd.do")
+	public ModelAndView writeRefundEnd(ModelAndView mv, Refund refund) {
+		
+		log.debug("refund {}", refund);
+		
+		String msg="";
+		String script="opener.parent.location.reload();window.close();";
+		try {
+			service.insertRefund(refund);
+			msg = refund.getRefundState()+"신청이 완료되었습니다.";
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			msg = refund.getRefundState()+"신청 실패!";
+		}
+		
+		mv.addObject("msg",msg);
+		mv.addObject("script",script);
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
+	
+	
 	//refund 리스트 출력
 	@RequestMapping("/mypage/refund.do")
-	public String refundList() {
-		return "mypage/refundList";
+	public ModelAndView refundList(ModelAndView mv, int orderDetailNo) {
+		mv.setViewName("mypage/refundList");
+		return mv;
 	}
 	
 	//회원탈퇴 페이지 연결

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.finalproject.bada.mypage.model.vo.Alert;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.refund.model.vo.Refund;
 import com.finalproject.bada.resell.model.vo.Resell;
 
 import lombok.extern.slf4j.Slf4j;
@@ -75,6 +76,16 @@ public class MypageDaoImpl implements MypageDao {
 	@Override
 	public int selectAlertCountReadStateN(SqlSessionTemplate session, int memberNo) {
 		return session.selectOne("mypage.selectAlertCountReadStateN", memberNo);
+	}
+
+	@Override
+	public int insertRefund(SqlSessionTemplate session, Refund refund) {
+		return session.insert("mypage.insertRefund",refund);
+	}
+
+	@Override
+	public int updateOrderDetailRefundState(SqlSessionTemplate session, Map param) {
+		return session.update("mypage.updateOrderDetailRefundState", param);
 	}
 
 }

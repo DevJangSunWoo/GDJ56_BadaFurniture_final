@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.finalproject.bada.mypage.model.vo.Alert;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.refund.model.vo.Refund;
 
 public interface MypageDao {
 	//Cart
@@ -28,4 +29,8 @@ public interface MypageDao {
 	int updateAlertReadState(SqlSessionTemplate session, int memberNo);
 	
 	int selectAlertCountReadStateN(SqlSessionTemplate session, int memberNo);
+	
+	int insertRefund(SqlSessionTemplate session, Refund refund);
+	
+	int updateOrderDetailRefundState(SqlSessionTemplate session, Map param);
 }

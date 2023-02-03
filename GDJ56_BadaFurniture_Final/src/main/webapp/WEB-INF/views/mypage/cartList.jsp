@@ -195,7 +195,7 @@
 					</ul>
 				</div>
 				<div style="display:flex;justify-content:center">
-					<button id="orderBtn">구매하기</button>
+					<button id="orderBtn" style="cursor:pointer">구매하기</button>
 				</div>
 				</form>
 			</div>
