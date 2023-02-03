@@ -128,8 +128,8 @@
 						<c:forEach var="r" items="${refund }">
 							<tr>
 								<td style="width: 20px;">
-									<a class="viewOrderSheet" href="${path}/admin/order.do?searchKeyword=${r.orderSheetNo}&searchType=ORDER_SHEET_NO">
-										<c:out value="${r.orderSheetNo }"/>
+									<a class="viewOrderSheet" href="${path}/admin/order.do?searchKeyword=${r.orderSheet.orderSheetNo}&searchType=ORDER_SHEET_NO">
+										<c:out value="${r.orderSheet.orderSheetNo }"/>
 									</a>
 								</td>
 								<td style="width: 40px;">
@@ -151,7 +151,7 @@
 								<td style="width: 30px;"><c:out value="${r.product.title }"/></td>
 								<td class="price" style="width: 70px;"><c:out value="${r.product.price }"/></td>
 								<td>
-									<select name="refundState">
+									<select name="refundState" id="refundStateSelectBox" ${r.refundState.equals("반품완료")?"disabled":""} ${r.refundState.equals("취소완료")?"disabled":""}>
 										<option value="반품요청" ${r.refundState.equals("반품요청")?"selected":""}>반품요청</option>
 										<option value="반품대기" ${r.refundState.equals("반품대기")?"selected":""}>반품대기</option>
 										<option value="반품완료" ${r.refundState.equals("반품완료")?"selected":""}>반품완료</option>
@@ -242,16 +242,9 @@
 		})
 	})
 
-	//취소/반품상태 변경하기
-	$("select[name=refundState]").change(e=>{
-			const orderDetailNo=$(e.target).parent().parent().children().find('input').first().val();
-			const refundState=$(e.target).val();
-			const productNo=$(e.target).parent().prev().prev().prev().prev().prev().children().val();
-			console.log(orderDetailNo);
-			console.log(refundState);
-			console.log(productNo);
-
-			$.ajax({
+	//취소반품 상태 변경 ajax
+	function updateRefundState(orderDetailNo,refundState,productNo){
+		$.ajax({
 				url:"${path}/admin/updateRefundState.do",
 				data:{
 					orderDetailNo:orderDetailNo,
@@ -267,7 +260,28 @@
 					alert("AJAX ERROR - result : "+result);	
 				}
 			})
+	}
 
+	//취소/반품상태 변경하기
+	$("select[name=refundState]").change(e=>{
+			const orderDetailNo=$(e.target).parent().parent().children().find('input').first().val();
+			const refundState=$(e.target).val();
+			const productNo=$(e.target).parent().prev().prev().prev().prev().prev().children().val();
+			// console.log(orderDetailNo);
+			// console.log(refundState);
+			// console.log(productNo);
+
+			if(refundState=="취소완료" || refundState=="반품완료"){
+				if(confirm("⛔ 취소/반품 완료 후에는 상태 변경이 불가합니다. 변경하시겠습니까?")){
+					updateRefundState(orderDetailNo,refundState,productNo);
+					$(e.target).attr("disabled",true);
+
+				}else{
+					location.reload();
+				}
+			}else{
+				updateRefundState(orderDetailNo,refundState,productNo);
+			}
 
 	});
 
