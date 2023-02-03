@@ -264,7 +264,6 @@
 				Refund
 			</div>
 		</div>
-		${orderDetailRefunds }
 		<div id="refundWrap">
 			<div id="refundContent">
 				<div id="dateContainer">
@@ -295,42 +294,53 @@
 						<th>주문일자</th>
 						<th>주문번호</th>
 						<th>상품가격</th>
-						<th>배송상태</th>
-						<th>주문상태</th>
+						<th>배송정보</th>
+						<th>반품/취소정보</th>
 					</tr>
-					<tr>
-						<td  class="td1">
-							<div style="height:85px;width:530px;margin:10px;display:flex;">
-								<input type="hidden" id="productNo" value="${detail.product.productNo}"/>
-								<img class="infoImg" src="${path}/resources/upload/product/${detail.product.getFiles().get(0).renamedFileName}" width="85px" height="85px" style="cursor:pointer;"/>
-								<div>
-									<div style="padding:20px 0px 8px 10px;">
-										<a href="${path}/product/view.do?productNo=${detail.product.productNo}" style="font-weight:bolder;"><c:out value="${detail.product.title}"/></a>
+					<c:if test="${not empty orderDetailRefunds}">
+						<c:forEach var="detail" items="${orderDetailRefunds}">
+							<tr>
+								<td  class="td1">
+									<div style="height:85px;width:530px;margin:10px;display:flex;">
+										<input type="hidden" id="productNo" value="${detail.product.productNo}"/>
+										<img class="infoImg" src="${path}/resources/upload/product/${detail.product.getFiles().get(0).renamedFileName}" width="85px" height="85px" style="cursor:pointer;"/>
+										<div>
+											<div style="padding:20px 0px 8px 10px;">
+												<a href="${path}/product/view.do?productNo=${detail.product.productNo}" style="font-weight:bolder;"><c:out value="${detail.product.title}"/></a>
+											</div>
+											<div style="padding:0px 0px 5px 10px;font-size:13px;color:grey;">
+												분류: <span><c:out value="${detail.product.item}"/></span> / 가격 : <span><fmt:formatNumber value="${detail.product.price}" pattern="#,###" />원</span>
+											</div>
+										</div>
 									</div>
-									<div style="padding:0px 0px 5px 10px;font-size:13px;color:grey;">
-										분류: <span><c:out value="${detail.product.item}"/></span> / 가격 : <span><fmt:formatNumber value="${detail.product.price}" pattern="#,###" />원</span>
-									</div>
-								</div>
-							</div>
-						</td>
-						<td class="td2">
-							<fmt:formatDate value="${orderSheet.orderSheetenrollDate}" type="date" pattern="yyyy-MM-dd(E)"/>
-						</td>
-						<td class="td3">
-							<a href="javascript:void(0)" id="detailModalBtn" class="orderSheetTag" style="font-weight:bolder;">
-								<c:out value="${orderSheet.orderSheetNo}"/>
-							</a>
-						</td>
-						<td class="td4">
-							<fmt:formatNumber value="${orderSheet.totalPrice}" pattern="#,###" />원
-						</td>
-						<td class="td5">
-							취소요청
-						</td>
-						<td class="td6">
-							취소요청
-						</td>
-					</tr>
+								</td>
+								<td class="td2">
+									<fmt:formatDate value="${detail.orderSheet.orderSheetenrollDate}" type="date" pattern="yyyy-MM-dd(E)"/>
+								</td>
+								<td class="td3">
+									<a href="javascript:void(0)" id="detailModalBtn" class="orderSheetTag" style="font-weight:bolder;">
+										<c:out value="${detail.orderSheet.orderSheetNo}"/>
+									</a>
+								</td>
+								<td class="td4">
+									<fmt:formatNumber value="${detail.orderSheet.totalPrice}" pattern="#,###" />원
+								</td>
+								<td class="td5">
+									<c:out value="${detail.deliveryState}"/>
+								</td>
+								<td class="td6">
+									<c:out value="${detail.refundState}"/>
+								</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty orderDetailRefunds}">
+						<tr>
+							<td colspan="6" style="text-align:center;color:grey;">
+								검색된 항목이 존재하지 않습니다.
+							</td>
+						</tr>
+					</c:if>
 				</table>
 				<div id="pageBar">
 					${pageBar}
@@ -424,7 +434,7 @@
 	//날짜검색
 	$("button.searchDate").click(e=>{
 		if($(e.target).prev().val().includes("~")){
-			location.assign("${path}/mypage/order.do?searchType=ORDER_SHEET_ENROLL_DATE&searchKeyword="+$(e.target).prev().val());
+			location.assign("${path}/mypage/refund.do?searchType=ORDER_SHEET_ENROLL_DATE&searchKeyword="+$(e.target).prev().val());
 		} else {
 			alert("날짜를 입력해주세요.");
 		}

@@ -252,7 +252,7 @@ public class MypageController {
 	@RequestMapping("/mypage/refund.do")
 	public ModelAndView refundList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
-			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage,
+			@RequestParam(value="numPerpage", defaultValue="7") int numPerpage,
 			@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType,
 			@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword) {
 		
@@ -274,6 +274,11 @@ public class MypageController {
 		}	
 		
 		mv.addObject("orderDetailRefunds",service.selectOrderDetailRefundList(cPage, numPerpage, search));
+		
+//		List<OrderDetail> tempList = service.selectOrderDetailRefundList(cPage, numPerpage, search);
+//		for(OrderDetail od : tempList) {
+//			log.debug("오다디테일 : {}", tempList);
+//		}
 		
 		int totalData = service.selectOrderDetailRefundListCount(search);
 		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "refund.do",searchType,searchKeyword));
