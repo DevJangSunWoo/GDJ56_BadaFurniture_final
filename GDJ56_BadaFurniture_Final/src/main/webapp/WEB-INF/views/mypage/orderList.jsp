@@ -540,17 +540,15 @@
 				$("table.infoTable td#totalPrice").text(fnSetComma(data.totalPrice)+"원");
 				$("table.infoTable td#paymentMethod").text(data.paymentMethod);
 				$("table.infoTable td#paymentState").text(data.paymentState);
-				$("table.infoTable td#paymentEtc").text(data.paymentMethod=="계좌이체"?"입금자명":"영수증");
+				$("table.infoTable td#paymentEtc").html(data.paymentMethod=="계좌이체"?"입금자명<br>[입금계좌]":"영수증");
 				let paymentEtcContent = $("table.infoTable td#paymentEtcContent");
-
 				if(data.paymentMethod=="계좌이체"){ //이게맞따
-				//if(data.paymentMethod!="계좌이체"){	//테스트용
-					paymentEtcContent.text(data.depositor);
-					paymentEtcContent.parent().after($("<tr>").append($("<td>").text("입금계좌")).append($("<td>").text("예금주명:유병승 / BS은행 / 계좌번호:1002-1002-1002")));
+					//paymentEtcContent.text(data.depositor);
+					$("table.infoTable td#paymentEtcContent").html(data.depositor +"<br>[예금주명:유병승 / BS은행 / 계좌번호:1002-1002-1002]");
 				} else {
 					let receiptButton = $("<button>").attr("class","receiptButton").text("영수증 보기").val(data.receiptUrl);
-					paymentEtcContent.html("");
-					paymentEtcContent.append(receiptButton);
+					$("table.infoTable td#paymentEtcContent").html("");
+					$("table.infoTable td#paymentEtcContent").append(receiptButton);
 				}
 				
 				$("table.infoTable td#receiverName").text(data.receiverName);
