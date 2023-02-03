@@ -264,6 +264,7 @@
 				Refund
 			</div>
 		</div>
+		${orderDetailRefunds }
 		<div id="refundWrap">
 			<div id="refundContent">
 				<div id="dateContainer">

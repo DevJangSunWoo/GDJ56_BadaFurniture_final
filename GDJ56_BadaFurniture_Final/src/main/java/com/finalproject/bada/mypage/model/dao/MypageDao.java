@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.finalproject.bada.mypage.model.vo.Alert;
+import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.product.model.vo.Product;
 import com.finalproject.bada.refund.model.vo.Refund;
 
@@ -33,4 +34,8 @@ public interface MypageDao {
 	int insertRefund(SqlSessionTemplate session, Refund refund);
 	
 	int updateOrderDetailRefundState(SqlSessionTemplate session, Map param);
+	
+	List<OrderDetail> selectOrderDetailRefundList(SqlSessionTemplate session, int cPage, int numPerpage, Map search);
+	
+	int selectOrderDetailRefundListCount(SqlSessionTemplate session, Map search);
 }

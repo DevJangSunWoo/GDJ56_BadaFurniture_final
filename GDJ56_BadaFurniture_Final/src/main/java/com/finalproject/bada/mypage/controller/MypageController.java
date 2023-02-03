@@ -273,13 +273,12 @@ public class MypageController {
 			search.put("searchKeyword", searchKeyword);	
 		}	
 		
-		mv.addObject("refund",adminService.refundListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
+		mv.addObject("orderDetailRefunds",service.selectOrderDetailRefundList(cPage, numPerpage, search));
 		
-		int totalData = adminService.refundListCount(search);
+		int totalData = service.selectOrderDetailRefundListCount(search);
 		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "refund.do",searchType,searchKeyword));
 		mv.addObject("searchType", searchType);
 		mv.addObject("searchKeyword", searchKeyword);
-		
 		
 		mv.setViewName("mypage/refundList");
 		return mv;

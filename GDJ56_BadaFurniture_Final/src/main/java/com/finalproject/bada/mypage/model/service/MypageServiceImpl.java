@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.finalproject.bada.mypage.model.dao.MypageDao;
 import com.finalproject.bada.mypage.model.vo.Alert;
+import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.product.model.vo.Product;
 import com.finalproject.bada.refund.model.vo.Refund;
 
@@ -88,6 +89,17 @@ public class MypageServiceImpl implements MypageService {
 			throw new RuntimeException("Refund 입력 실패");
 		}
 		
+	}
+
+	@Override
+	public List<OrderDetail> selectOrderDetailRefundList(int cPage, int numPerpage, Map search) {
+		return dao.selectOrderDetailRefundList(session, cPage, numPerpage, search);
+	}
+
+
+	@Override
+	public int selectOrderDetailRefundListCount(Map search) {
+		return dao.selectOrderDetailRefundListCount(session, search);
 	}
 	
 	
