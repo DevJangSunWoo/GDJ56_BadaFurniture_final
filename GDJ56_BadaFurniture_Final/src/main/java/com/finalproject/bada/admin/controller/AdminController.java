@@ -784,12 +784,8 @@ public class AdminController {
 	@ResponseBody
 	public Map chartDemand() {
 		
-		Map result=service.chartDemand();
-		
-				
-		String[] keys={"의자","침대","화장대","책상","옷장","소파","책장","서랍장"};
-
-		
+		Map result=service.chartDemand();				
+	
 		return result;
 	}
 	
@@ -799,8 +795,7 @@ public class AdminController {
 	public Map chartResell() {
 		
 		Map result=service.chartResell();
-		String[] keys={"의자","침대","화장대","책상","옷장","소파","책장","서랍장"};
-		
+	
 		return result;
 	}
 	
