@@ -1,15 +1,18 @@
 package com.finalproject.bada.mypage.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.finalproject.bada.mypage.model.dao.MypageDao;
 import com.finalproject.bada.mypage.model.vo.Alert;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.refund.model.vo.Refund;
 
 @Service
 public class MypageServiceImpl implements MypageService {
@@ -63,5 +66,57 @@ public class MypageServiceImpl implements MypageService {
 	public int selectAlertCountReadStateN(int memberNo) {
 		return dao.selectAlertCountReadStateN(session, memberNo);
 	}
+
+	@Override
+	@Transactional
+	public void insertRefund(Refund refund) {
+		
+		//refund insert
+		int result = dao.insertRefund(session, refund);
+		
+		//orderSheet의 refundState를 변경해줘야 한다.
+		if(result > 0) {
+			Map param = new HashMap();
+			param.put("orderDetailNo", refund.getOrderDetailNo());
+			param.put("refundState", refund.getRefundState().equals("취소")?"취소요청":"반품요청");
+			result = 0;
+			result = dao.updateOrderDetailRefundState(session, param);
+			if(result < 1) {
+				throw new RuntimeException("OrderDetail refundState 변경 실패");
+			}
+		} else {
+			throw new RuntimeException("Refund 입력 실패");
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

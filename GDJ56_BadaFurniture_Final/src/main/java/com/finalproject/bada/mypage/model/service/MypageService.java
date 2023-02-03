@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.finalproject.bada.mypage.model.vo.Alert;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.refund.model.vo.Refund;
 
 public interface MypageService {
 	
@@ -23,4 +24,7 @@ public interface MypageService {
 	int updateAlertReadState(int memberNo);
 	
 	int selectAlertCountReadStateN(int memberNo);
+	
+	//refund
+	void insertRefund(Refund refund);
 }

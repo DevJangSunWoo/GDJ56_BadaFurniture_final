@@ -8,7 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <style>
 	section.mypage>div#title{
 		width:100%;
@@ -44,6 +45,9 @@
 		/* border:1px solid black; */
 		border-top:8px solid black;
 		border-collapse: collapse;
+	}
+	table#resellTable th{
+		text-align:center;
 	}
 	table#resellTable tr>th:first-child{
 		width:400px;
@@ -83,6 +87,7 @@
 		padding-bottom:2px;
 		margin:1px;
 		cursor: pointer;
+		font-size:14px;
 	}
 	button.updateBtn{
 		padding:0px;
@@ -95,6 +100,7 @@
 		padding-bottom:2px;
 		margin:1px;
 		cursor: pointer;
+		font-size:14px;
 	}
 	div#ulContainer li{
 		color:grey;
