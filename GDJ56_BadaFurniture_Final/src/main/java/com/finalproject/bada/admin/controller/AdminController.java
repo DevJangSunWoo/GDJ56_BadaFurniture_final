@@ -44,8 +44,14 @@ public class AdminController {
  
 	//관리자 페이지 메인 연결 - 대시보드
 	@RequestMapping("/admin")
-	public String adminDashBoard() {
-		return "admin/adminDashBoard";
+	public ModelAndView adminDashBoard(ModelAndView mv) {
+		
+		Map<String,Integer> summary=service.dashBoardSummary();
+		mv.addObject("summary",summary);	
+		
+		mv.setViewName("admin/adminDashBoard");
+		
+		return mv;
 	}
 	
 	//가구 올리기 연결
@@ -326,11 +332,36 @@ public class AdminController {
 		return mv;
 	}
 	
-	//가구관리 - 수정하기 완료
-//	@RequestMapping("/admin/updateEnd.do")
-//	public String update() {
+	//가구관리 - 수정하기 완료 (사진수정 X)
+	@RequestMapping("/admin/updateEnd.do")
+	public ModelAndView updateProductEnd(ModelAndView mv, Product p) {
+		
+		Product updatedP=Product.builder().productNo(p.getProductNo()).title(p.getTitle())
+				.price(p.getPrice()).item(p.getItem()).grade(p.getGrade())
+				.material(p.getMaterial()).widths(p.getWidths())
+				.heights(p.getHeights()).depths(p.getDepths())
+				.color(p.getColor()).detail(p.getDetail()).build();
+		
+		//log.debug("p:{}",p);
+		log.debug("upadatedP:{}",updatedP);
+		
+		try {
+			service.updateProduct(updatedP);
+			mv.addObject("msg","가구번호 '"+p.getProductNo()+"' 수정되었습니다.");
 
-//	}
+			
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			mv.addObject("msg","가구번호 "+p.getProductNo()+" 수정에 실패했습니다.");
+		}
+		
+		mv.addObject("loc","/admin/product.do?searchKeyword="+p.getProductNo()+"&searchType=PRODUCT_NO");
+		mv.addObject("script","opener.close()");
+		
+		mv.setViewName("common/msg");
+		
+		return mv;
+	}
 	
 	//'내가구팔기' - 조회
 	@RequestMapping("/admin/resell.do")
@@ -468,9 +499,11 @@ public class AdminController {
 		
 		
 		//주문관리 요약
-		Map<String,Integer> sum=service.orderSummary();
+		//Map<String,Integer> sum=service.orderSummary();
+		
+		
 		//log.debug("{}",sum);		
-		mv.addObject("summary",sum);		
+		mv.addObject("summary",updateOrderSummary());		
 //		
 		mv.setViewName("admin/manageOrder");	
 		
@@ -725,7 +758,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin/updateResellSummary.do")	
-	public @ResponseBody Map<String,Integer> updateResellSummary() {		
+	public @ResponseBody Map<String,Integer> updateResellSummary() {
+		
 		Map<String,Integer> summary=service.resellSummary();
 		
 		summary.put("ALL_R",Integer.parseInt(String.valueOf(summary.get("ALL_R"))));
@@ -735,7 +769,12 @@ public class AdminController {
 		summary.put("STATE_4",Integer.parseInt(String.valueOf(summary.get("STATE_4"))));	
 		
 		return summary;
+		
 	}
+	
+	
+	
+	
 }
 
 

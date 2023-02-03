@@ -21,6 +21,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AdminDaoImpl implements AdminDao {
 	
+	@Override
+	public Map<String, Integer> dashBoardSummary(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.dashBoardSummary");
+	}
+	
 	//가구 올리기
 	@Override
 	public int insertProduct(SqlSessionTemplate session, Product product) {
@@ -96,6 +102,12 @@ public class AdminDaoImpl implements AdminDao {
 		return session.selectOne("admin.selectProductByProductNo",productNo);
 	}
 	
+	//가구 관리 - 수정하기
+	@Override
+	public int updateProduct(SqlSessionTemplate session, Product p) {
+		// TODO Auto-generated method stub
+		return session.update("admin.updateProduct",p);
+	}
 	
 	//내가구팔기 관리 - 조회
 	@Override
@@ -236,6 +248,9 @@ public class AdminDaoImpl implements AdminDao {
 		// TODO Auto-generated method stub
 		return session.update("admin.updateDeliveryState",param);
 	}
+
+
+
 
 
 	

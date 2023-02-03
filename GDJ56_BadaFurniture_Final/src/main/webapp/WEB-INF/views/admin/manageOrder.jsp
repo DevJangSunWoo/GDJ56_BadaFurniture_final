@@ -58,7 +58,7 @@
 
 			<table class="summaryTable">
 				<tr>
-					<th class="tableTh">배송준비</th>
+					<th class="tableTh">배송대기</th>
 					<td id="summary_state4" class="tableTd"><c:out value="${summary.STATE_4}"/></td>
 				</tr>
 				<tr>

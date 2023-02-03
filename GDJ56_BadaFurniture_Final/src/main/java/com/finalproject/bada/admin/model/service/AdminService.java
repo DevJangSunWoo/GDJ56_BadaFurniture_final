@@ -12,6 +12,9 @@ import com.finalproject.bada.resell.model.vo.Resell;
 
 public interface AdminService {
 	
+	//대시보드 - 요약
+	Map<String,Integer> dashBoardSummary();
+	
 	//가구 올리기
 	int insertProduct(Product product);
 	
@@ -20,7 +23,7 @@ public interface AdminService {
 	List<Product> productListPage(Map<String,Integer> param,Map search);
 	int productListCount(Map search);
 	
-	//가구관리 - 요약테이블
+	//가구관리 - 요약
 	Map<String,Integer> productSummary();
 	
 	//가구관리 - 삭제
@@ -35,6 +38,9 @@ public interface AdminService {
 	
 	//가구 관리 - 수정하기 연결 - productNo로 정보 가져오기
 	Product selectProductByProductNo(int productNo);
+	
+	//가구 관리 - 수정하기
+	void updateProduct(Product p);	
 	
 	//내가구팔기 관리 - 조회
 	List<Resell> resellListPage(Map<String,Integer> param,Map search);

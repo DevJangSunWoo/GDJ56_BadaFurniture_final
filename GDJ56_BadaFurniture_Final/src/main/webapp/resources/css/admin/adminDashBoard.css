@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
-/*     div{        
+    /* div{        
         border: 1px solid blue;
     } */
+    
    
     canvas{
         border: 1px solid #3934348a;
@@ -58,9 +59,11 @@
         margin-bottom: 30px;
         
     }
-    /* .orderCount,#totalOrder{
+    .orderCount{
+        width: 50px;
+        margin-left: 0px;
 
-    } */
+    }
     #totalOrder{
        margin-right: 32px;
     }
@@ -110,8 +113,28 @@
     canvas{
         width: 100%;
     }
-    .stateOuterDiv{
-        margin-bottom: 10px;
-        margin-left: 15px;
-    }
 
+
+
+
+    .stateOuterDiv{     
+        margin-left: 15px;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    div.itemDiv{
+        display: inline-block;
+        width:40%;
+    }
+    div.valueDiv{
+        display: inline-block;
+        width:40%;
+        text-align: right;
+        
+    }
+    div.unitDiv{
+        display: inline-block;
+        width:10%;
+        text-align: center;
+
+    }

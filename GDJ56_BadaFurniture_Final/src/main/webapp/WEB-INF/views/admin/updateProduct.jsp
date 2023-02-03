@@ -17,7 +17,7 @@
     <div id="divOuter1">
         <div id="divOuter2">   
             <div id="divMid">
-                <form action="${path}k/admin/updateEnd.do" method="post">
+                <form action="${path}/admin/updateEnd.do" method="post">
                     <div id="divContent">            
                         <span>가구번호</span>
                         <input type="text" name="productNo" style="border-style: none;" value="${product.productNo}" readonly><br>
@@ -88,54 +88,21 @@
 
                         <br>
                         <img src="${path }/resources/upload/product/${product.files.get(0).renamedFileName}" 
-                            name="photo1" onclick="" width="180px" height="180px" class="fileImg" id="thumbTst">
-                        <input type="file" name="upFile1" style="display: none;" required>
-                        <br>
-
-                        <c:if test="${product.files.size()>1}">
-                            <img src="${path }/resources/upload/product/${product.files.get(1).renamedFileName}" 
-                            name="photo2" onclick="" width="110px" height="110px" class="fileImg">
-                            <input type="file" name="upFile2" style="display: none;">
-                        </c:if>
-                        <c:if test="${1>=product.files.size()}">
-                            <img src="${path}/resources/images/admin/addImage.png" 
-                            name="photo2" onclick="" width="110px" height="110px" class="fileImg">
-                            <input type="file" name="upFile2" style="display: none;">
-                        </c:if> 
-
-                        <c:if test="${product.files.size()>2}">
-                            <img src="${path }/resources/upload/product/${product.files.get(2).renamedFileName}" 
-                            name="photo2" onclick="" width="110px" height="110px" class="fileImg">
-                            <input type="file" name="upFile2" style="display: none;">
-                        </c:if>
-                        <c:if test="${2>=product.files.size()}">
-                            <img src="${path}/resources/images/admin/addImage.png" 
-                            name="photo2" onclick="" width="110px" height="110px" class="fileImg">
-                            <input type="file" name="upFile2" style="display: none;">
-                        </c:if> 
-
-                        <c:if test="${product.files.size()>3}">
-                            <img src="${path }/resources/upload/product/${product.files.get(3).renamedFileName}" 
-                            name="photo2" onclick="" width="110px" height="110px" class="fileImg">
-                            <input type="file" name="upFile2" style="display: none;">
-                        </c:if>
-                        <c:if test="${3>=product.files.size()}">
-                            <img src="${path}/resources/images/admin/addImage.png" 
-                            name="photo2" onclick="" width="110px" height="110px" class="fileImg">
-                            <input type="file" name="upFile2" style="display: none;">
-                        </c:if> 
-
-                        <c:if test="${product.files.size()>4}">
-                            <img src="${path }/resources/upload/product/${product.files.get(4).renamedFileName}" 
-                            name="photo2" onclick="" width="110px" height="110px" class="fileImg">
-                            <input type="file" name="upFile2" style="display: none;">
-                        </c:if>
-                        <c:if test="${4>=product.files.size()}">
-                            <img src="${path}/resources/images/admin/addImage.png" 
-                            name="photo2" onclick="" width="110px" height="110px" class="fileImg">
-                            <input type="file" name="upFile2" style="display: none;">
-                        </c:if>                   
-                        
+                            name="photo1" width="180px" height="180px" class="fileImg" id="thumbTst">
+                        <!-- <input type="file" name="upFile1" style="display: none;" required> -->
+                        <br>                        
+                        <c:forEach var="i" begin="1" end="4">
+                            <c:if test="${product.files.size()>i}">
+                                <img src="${path }/resources/upload/product/${product.files.get(i).renamedFileName}" 
+                                name="photo2" width="110px" height="110px" class="fileImg">
+                                <!-- <input type="file" name="upFile2" style="display: none;"> -->
+                            </c:if>
+                            <!-- <c:if test="${i>=product.files.size()}">
+                                <img src="${path}/resources/images/admin/none.png" 
+                                name="photo2" onclick="" width="110px" height="110px" class="fileImg">
+                                <input type="file" name="upFile2" style="display: none;">
+                            </c:if>  -->
+                        </c:forEach>
 
                         
                         <br>
