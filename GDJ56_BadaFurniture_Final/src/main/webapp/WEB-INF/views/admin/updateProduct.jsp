@@ -22,6 +22,9 @@
                         <span>가구번호</span>
                         <input type="text" name="productNo" style="border-style: none;" value="${product.productNo}" readonly><br>
 
+                        <span>최근 수정일</span>
+                        <input type="text" name="productNo" style="border-style: none;" value="${product.productEditDate}" readonly><br>
+                        
                         <span>상품명</span>
                         <input type="text" name="title" placeholder="상품명" value="${product.title}" required><br>
 
@@ -109,12 +112,15 @@
                         <span>상세 내용</span><br>
                         <textarea name="detail" cols="73" rows="10" style="resize:none;margin-left: 15px;" required>${product.detail}</textarea>
                         <br>
+                        
+                        
                     </div>
                     <div id="divBtn">
                         <button id="updateBtn">가구 수정하기</button>
                     </div>        
                 </form>
-         </div>
+            </div>
+            
      </div>    
     </div>        
 

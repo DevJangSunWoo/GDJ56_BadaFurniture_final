@@ -192,7 +192,9 @@
 											<c:if test="${vs.index==0}">												
 												<td class="tableTd" rowspan="${o.details.size()}">
 													<input type="hidden" value="${o.orderSheetNo}">
-													<a href=""><c:out value="${o.orderSheetNo}"/></a>
+													<input type="number" value="${o.orderSheetNo}" 
+													style="width: 85px;border-style: none;background-color: #dcd5c36c;text-align: center;"
+													readonly>
 												</td>
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.orderSheetenrollDate}"/></td>
 											</c:if>
@@ -271,7 +273,155 @@
 		</div>
 	</div>
 </section>
+
+<!-- 주문 상세내역 모달 -->
+<div class="modals hiddens">
+	<div class="bg">
+	
+	</div>
+	<div class="modalBox">
+		<div class="modalTitle">
+			주문 상세보기
+		</div>
+		<div class="modalContent">
+			<div style="text-align:left;font-size:16px;margin:5px 0px 5px 0px;font-weight:bolder;">
+				주문번호 : <span id="orderSheetNo"></span> &nbsp;&nbsp; 주문일자 : <span id="orderSheetEnrollDate"></span>
+			</div>
+			<table id="orderDetailTable">
+			
+			</table>
+			
+			<div style="font-size:23px;font-weight:bolder;margin:25px 0px 3px 0px;"> 
+				결제정보
+			</div>
+			<table class="infoTable" style="width:100%;border-top:5px solid black;border-collapse: collapse;">
+				<tr>
+					<td>결제금액</td>
+					<td id="totalPrice"></td>
+				</tr>
+				<tr>
+					<td>결제수단</td>
+					<td id="paymentMethod"></td>
+				</tr>
+				<tr>
+					<td>결제상태</td>
+					<td id="paymentState"></td>
+				</tr>
+				<tr>
+					<td id="paymentEtc"></td>
+					<td id="paymentEtcContent"></td>
+				</tr>
+			</table>
+			
+			<div style="font-size:23px;font-weight:bolder;margin:25px 0px 3px 0px;"> 
+				배송정보
+			</div>
+			<table class="infoTable" style="width:100%;border-top:5px solid black;border-collapse: collapse;">
+				<tr>
+					<td>수령인</td>
+					<td id="receiverName"></td>
+				</tr>
+				<tr>
+					<td>우편번호</td>
+					<td id="postCode"></td>
+				</tr>
+				<tr>
+					<td>주소</td>
+					<td id="address"></td>
+				</tr>
+				<tr>
+					<td>상세주소</td>
+					<td id="detailAddress"></td>
+				</tr>
+			</table>
+			
+		</div>
+		<div id="modalBtnArea">
+			<button class="closeBtn">닫기</button>
+		</div>
+	</div>
+</div>
+
+
 <script>
+
+	//modal open
+	const open = () => {
+		document.querySelector(".modals").classList.remove("hiddens");
+	}
+	//modal close
+	const close = () => {
+		document.querySelector(".modals").classList.add("hiddens");
+	}
+	
+	//주문번호를 클릭했을 때 => 주문상세보기 모달창 open
+	$(document).on("click", "#detailModalBtn", e=>{
+		let orderSheetNo = Number($(e.target).text());
+		$.ajax({
+			url:"${path}/mypage/order/read.do",
+			data:{
+				orderSheetNo:orderSheetNo
+			},
+			success:data=>{
+				console.log(data);
+				$("div.modalContent span#orderSheetNo").text(data.orderSheetNo);
+				$("div.modalContent span#orderSheetEnrollDate").text(data.orderSheetenrollDate);
+				$("div.modalContent span#totalPrice").text(fnSetComma(data.totalPrice)+'원');
+				$("div.modalContent span#paymentMethod").text(data.paymentMethod);
+				$("div.modalContent span#paymentState").text(data.paymentState);
+				
+				$("table#orderDetailTable").html("");
+				let trHead = $("<tr>");
+				trHead.append($("<th>").text("상품정보"));
+				trHead.append($("<th>").text("배송정보"));
+				$("table#orderDetailTable").append(trHead);
+				
+				for(let i = 0; i < data.details.length; i++){
+					let tr = $("<tr>");
+					let td1 = $("<td>");
+					tr.append(td1);
+					let detailInfoContainer = $("<div>").attr("class","detailInfoContainer");
+					td1.append(detailInfoContainer);
+					detailInfoContainer.append($("<input>").attr("type","hidden").val(data.details[i].product.productNo));
+					detailInfoContainer.append($("<img>").attr("class","infoImg").attr("src","${path}/resources/upload/product/"+data.details[i].product.files[0].renamedFileName));
+					let infoInner = $("<div>").attr("class","infoInner");
+					infoInner.append($("<div>").attr("class","detailProductTitle").append($("<a>").attr("href","${path}/product/view.do?productNo="+data.details[i].product.productNo).text(data.details[i].product.title).css("font-weight","bolder")))
+					detailInfoContainer.append(infoInner);
+					let detailProductsummary = $("<div>").attr("class","detailProductsummary");
+					detailProductsummary.append($("<span>").text("분류 : ")).append($("<span>").text(data.details[i].product.item)).append($("<span>").text(" / 가격 : ")).append($("<span>").text(fnSetComma(data.details[i].product.price)+"원"));
+					infoInner.append(detailProductsummary);
+					let td2 = $("<td>").text(data.details[i].deliveryState);
+					tr.append(td2);
+					$("table#orderDetailTable").append(tr);
+				}
+				
+				$("table.infoTable td#totalPrice").text(fnSetComma(data.totalPrice)+"원");
+				$("table.infoTable td#paymentMethod").text(data.paymentMethod);
+				$("table.infoTable td#paymentState").text(data.paymentState);
+				$("table.infoTable td#paymentEtc").html(data.paymentMethod=="계좌이체"?"입금자명<br>[입금계좌]":"영수증");
+				let paymentEtcContent = $("table.infoTable td#paymentEtcContent");
+				if(data.paymentMethod=="계좌이체"){ //이게맞따
+					//paymentEtcContent.text(data.depositor);
+					$("table.infoTable td#paymentEtcContent").html(data.depositor +"<br>[예금주명:유병승 / BS은행 / 계좌번호:1002-1002-1002]");
+				} else {
+					let receiptButton = $("<button>").attr("class","receiptButton").text("영수증 보기").val(data.receiptUrl);
+					$("table.infoTable td#paymentEtcContent").html("");
+					$("table.infoTable td#paymentEtcContent").append(receiptButton);
+				}
+				
+				$("table.infoTable td#receiverName").text(data.receiverName);
+				$("table.infoTable td#postCode").text("("+$.trim(data.postCode)+")");
+				$("table.infoTable td#address").text(data.address);
+				$("table.infoTable td#detailAddress").text(data.detailAddress);
+					
+					
+				open();
+			}
+		});
+	});
+	document.querySelector(".closeBtn").addEventListener("click", close);
+	document.querySelector(".bg").addEventListener("click", close);
+	
 
 	//요약테이블 출력
 	$(()=>{

@@ -48,14 +48,10 @@ public class SecurityConfig {
 					.antMatchers("/logout.do").permitAll()
 					//admin 권한 설정
 					.antMatchers("/admin/**").hasAnyAuthority("ADMIN")
-					//member 권한 설정
-					.antMatchers("/mypage/**").hasAnyAuthority("MEMBER","ADMIN")
-					.antMatchers("/mypage.do").hasAnyAuthority("MEMBER")
-					.antMatchers("/cart/**").hasAnyAuthority("MEMBER")
-					.antMatchers("/alert/**").hasAnyAuthority("MEMBER")
-					.antMatchers("/resell/**").hasAnyAuthority("MEMBER")
-					.antMatchers("/product/cartBtn.do").hasAnyAuthority("MEMBER")
-					.antMatchers("/order/**").hasAnyAuthority("MEMBER")
+					//member & admin 권한 설정
+					.antMatchers("/mypage/**", "/mypage.do", "/cart/**", "/alert/**", "/resell/**", "/product/cartBtn.do", "/order/**").hasAnyAuthority("MEMBER","ADMIN")
+					.antMatchers("/member/updateMember.do", "/member/updatePassword.do", "/member/updatePasswordEnd.do", "/member/updateMemberEnd.do").hasAnyAuthority("MEMBER","ADMIN")
+					.antMatchers("/member/deleteMember.do", "/member/deleteMemberEnd.do", "/member/deleteMemberResult.do").hasAnyAuthority("MEMBER","ADMIN")
 					.and()
 				.logout()
 					.logoutUrl("/member/logout.do")
