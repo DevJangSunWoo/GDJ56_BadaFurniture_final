@@ -119,8 +119,8 @@
 						<c:forEach var="d" items="${delivery }">
 							<tr>
 								<td style="width: 20px;">
-									<a class="viewOrderSheet" href="${path}/admin/order.do?searchKeyword=${d.orderSheetNo}&searchType=ORDER_SHEET_NO">
-										<c:out value="${d.orderSheetNo }"/>
+									<a class="viewOrderSheet" href="${path}/admin/order.do?searchKeyword=${d.orderSheet.orderSheetNo}&searchType=ORDER_SHEET_NO">
+										<c:out value="${d.orderSheet.orderSheetNo }"/>
 									</a>
 								</td>
 								<td style="width: 40px;">

@@ -128,8 +128,8 @@
 						<c:forEach var="r" items="${refund }">
 							<tr>
 								<td style="width: 20px;">
-									<a class="viewOrderSheet" href="${path}/admin/order.do?searchKeyword=${r.orderSheetNo}&searchType=ORDER_SHEET_NO">
-										<c:out value="${r.orderSheetNo }"/>
+									<a class="viewOrderSheet" href="${path}/admin/order.do?searchKeyword=${r.orderSheet.orderSheetNo}&searchType=ORDER_SHEET_NO">
+										<c:out value="${r.orderSheet.orderSheetNo }"/>
 									</a>
 								</td>
 								<td style="width: 40px;">
