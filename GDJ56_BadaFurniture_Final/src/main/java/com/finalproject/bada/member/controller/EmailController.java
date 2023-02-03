@@ -31,7 +31,7 @@ public class EmailController {
 		this.service = service;
 		this.passwordEncoder = passwordEncoder;
 	}
-	
+	 
 	//인증번호
     @PostMapping("member/login/mailConfirm")
     @ResponseBody

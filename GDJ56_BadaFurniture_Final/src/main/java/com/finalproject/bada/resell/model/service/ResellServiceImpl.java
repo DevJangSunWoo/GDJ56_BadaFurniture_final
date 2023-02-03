@@ -1,5 +1,5 @@
 package com.finalproject.bada.resell.model.service;
-
+ 
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -32,7 +32,7 @@ public class ResellServiceImpl implements ResellService {
 		this.dao = dao;
 		this.session = session;
 		this.mypageDao = mypageDao;
-	}
+	} 
 	
 	@Override
 	public List<Resell> selectResellList(int memberNo, int cPage, int numPerpage) {
@@ -87,7 +87,7 @@ public class ResellServiceImpl implements ResellService {
 			if(result <= 0) {
 				throw new RuntimeException("알림 등록 실패");
 			}
-		} else if(result <= 0) {
+		} else if(result <= 0) { 
 			throw new RuntimeException("댓글 등록 실패");
 		}
 	}

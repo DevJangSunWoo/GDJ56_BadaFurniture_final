@@ -6,112 +6,21 @@
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
+<link rel="stylesheet" href="${path }/resources/css/admin/manageResell.css"/>
 
 <style>
-/*     div#search-container>div {        
-        border: 1px solid blue;
-    } */
-
-
-
-    div#listContainer>h2{
-        text-align:center;
-        font-size:25px;
-        font-weight:bolder;
-        padding:15px;
-		margin-top: 35px;
-    }
-    div.tableContainer>table{
-        width:100%;
-        text-align: center;
-        border-collapse : collapse;
-		margin-top: 40px;
-    }
-    div.tableContainer>table th,td{
-        border : 1px solid black;
-        padding:5px 10px 5px 10px;
-    }
-    div#pageBarContainer{
-        display:flex;
-        justify-content: center;
-    }
-
-    div#search-container{text-align:center;}
-
-    div#search-soldOutState{display:inline-block;}
-    div#search-memberName{display:none;}
-    div#search-resellNo{display:none;}
-
-    div#search-container {margin:0 0 10px 0; padding:3px; }
-    div#numPerpage-container{text-align:right; padding:0px 40px 20px 0px;}
-    button#hidingBtnToY{
-        background-color: white;
-        color:black;
-        border:none;
-    }
-    button#hidingBtnToN{
-        background-color: rgb(7, 90, 42);
-        color:white;
-        border:none;
-    }
-
-	button.updateBtn,.searchBtn{
-		background-color:#348492;
-		border: none;
-		color: white;
-		width: 80px;
-		border-radius: 5px;
-		padding: 5px;
-
+	#pageBar a.active {
+		background-color: #4CAF50;
+  		color: white;
 	}
-	.searchBtn{
-		margin-left: 5px;
+	#pageBar a:hover:not(.active) {
+		background-color: #ddd;
 	}
 
-	th{
-		background-color: #393434;
-		color: white;
+	.resellImg{
+		width: 70px;
+		height: 70px;
 	}
-	td{
-		background-color: #dcd5c32b;
-	}
-	button{
-		cursor: pointer;
-	}
-	button:hover{
-        box-shadow: 200px 0 0 0 rgba(0,0,0,0.25) inset, 
-                   -200px 0 0 0 rgba(0,0,0,0.25) inset;
-    }
-	a{
-		text-decoration: none;
-	}
-
-	/* a:visited{
-		color: black;
-	} */
-
-	select{
-		font-size: 16px;
-	}
-
-	div#summaryContainer{
-		display: flex;
-		justify-content: center;
-		margin-top: 30px;
-		margin-bottom: 30px;
-	}
-	div#summaryContainer th,td{
-		width: 100px;
-		height: 30px;
-		text-align: center;
-		border: none;
-	}
-
-	.searchInput{
-		width: 200px;
-	}
-
-
 </style>
 
 <section>
@@ -122,61 +31,79 @@
 			<table id="summaryTable">
 				<tr>
 					<th>전체신청</th>
-					<td>10</td>
+					<td id="summary_allR"><c:out value="${summary.ALL_R}"/></td>
 				</tr>
 				<tr>
 					<th>승인검토</th>
-					<td>5</td>
+					<td id="summary_state1"><c:out value="${summary.STATE_1}"/></td>
 				</tr>
 				<tr>
 					<th>수정요청</th>
-					<td>5</td>
+					<td id="summary_state2"><c:out value="${summary.STATE_2}"/></td>
 				</tr>
 				<tr>
 					<th>미입금</th>
-					<td>3</td>
+					<td id="summary_state3"><c:out value="${summary.STATE_3}"/></td>
 				</tr>
 				<tr>
 					<th>수거대기</th>
-					<td>2</td>
+					<td id="summary_state4"><c:out value="${summary.STATE_4}"/></td>
 				</tr>
 	
 			</table>
 		</div>
 		<div id="search-container">
-			검색타입 : 
+			<span style="font-size: 17px;">검색타입 : </span>
         	<select id="searchType">
-				<option value="soldOutState">판매상태</option>
-        		<option value="memberName">신청자</option>
-        		<option value="resellNo">신청번호</option>
+				<option value="searchAll" ${searchType.equals("SEARCH_ALL")?"selected":""}>전체조회</option>
+				<option value="progressState" ${searchType.equals("PROGRESS_STATE")?"selected":""}>진행상태</option>
+        		<option value="memberName" ${searchType.equals("MEMBER_NAME")?"selected":""}>신청자</option>
+        		<option value="resellNo" ${searchType.equals("RESELL_NO")?"selected":""}>신청번호</option>
         	</select>
 
-        	<div id="search-soldOutState">
-                <select name="searchKeyword" class="searchInput">
-					<option value="승인검토">승인검토</option>
-					<option value="수정요청">수정요청</option>
-                    <option value="승인거부">승인거부</option>
-                    <option value="수거대기">수거대기</option>
-                    <option value="수거완료">수거완료</option>
-                    <option value="입금완료">입금완료</option>
-                </select>
+			<div id="search-searchAll">
+				<form action="${path}/admin/resell.do" method="get">
 
-       			<input type="hidden" name="searchType" value="BROKER_NO">
-       			<button class="searchBtn">검색</button>
+					<label><input type="radio" name="searchKeyword" value="searchAll" checked>전체조회</label>
+					<input type="hidden" name="searchType" value="SEARCH_ALL">
+					<button class="searchBtn">검색</button>
+				</form>
+			</div>
+        	<div id="search-progressState">
+				<form action="${path}/admin/resell.do" method="get">
+
+					<select name="searchKeyword" class="searchInput">
+						<option value="승인검토" ${searchKeyword.equals("승인검토")?"selected":""}>승인검토</option>
+						<option value="수정요청" ${searchKeyword.equals("수정요청")?"selected":""}>수정요청</option>
+						<option value="승인거부" ${searchKeyword.equals("승인거부")?"selected":""}>승인거부</option>
+						<option value="수거대기" ${searchKeyword.equals("수거대기")?"selected":""}>수거대기</option>
+						<option value="수거완료" ${searchKeyword.equals("수거완료")?"selected":""}>수거완료</option>
+						<option value="입금완료" ${searchKeyword.equals("입금완료")?"selected":""}>입금완료</option>
+					</select>
+					
+					<input type="hidden" name="searchType" value="PROGRESS_STATE">
+					<button class="searchBtn">검색</button>
+				</form>
         	</div>
         	
         	<div id="search-memberName">
-       			<input type="text" name="searchKeyword" size="30" 
-       			placeholder="검색할 신청자 이름을 입력하세요" class="searchInput">
-       			<input type="hidden" name="searchType" value="BROKER_NO">
-       			<button class="searchBtn">검색</button>
+				<form action="${path}/admin/resell.do" method="get">
+
+					<input type="text" name="searchKeyword" size="30" 
+					placeholder="검색할 신청자 이름을 입력하세요" class="searchInput" value="${searchKeyword}">
+					<input type="hidden" name="searchType" value="MEMBER_NAME">
+					<button class="searchBtn">검색</button>
+				</form>
         	</div>
         	
         	<div id="search-resellNo">
-       			<input type="text" name="searchKeyword" size="30" 
-       			placeholder="검색할 신청번호를 입력하세요" class="searchInput">
-       			<input type="hidden" name="searchType" value="BROKER_NO">
-       			<button class="searchBtn">검색</button>
+				<form action="${path}/admin/resell.do" method="get">
+
+					<input type="text" name="searchKeyword" size="30" 
+					placeholder="검색할 신청번호를 입력하세요" class="searchInput" value="${searchKeyword}">
+					<input type="hidden" name="searchType" value="RESELL_NO">
+					<button class="searchBtn">검색</button>
+				</form>
         	</div>
 
         </div>
@@ -184,53 +111,83 @@
 			<table id="propertyTable">
 				<thead>
 					<tr>
+						<!-- <th>
+							<input type="checkbox" name="chk" onclick="selectAll(this)">
+						</th> -->
 						<th>신청번호</th>
 						<th>신청일자</th>
 						<th>최종수정일</th>
-						<th>분류</th>
 						<th>사진</th>
+						<th>분류</th>
 						<th>상태</th>
-						<th>거래희망가</th>
+						<th>판매희망금액</th>
 						<th>신청자</th>
 						<th>수거희망일</th>
 						<th>상태</th>		
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><a href="">신청번호</a></td>
-						<td>신청일자</td>
-						<td>최종수정일</td>
-						<td>분류</td>
-						<td>사진</td>
-						<td>상태</td>
-						<td>거래희망가</td>
-						<td>신청자</td>
-						<td>수거희망일</td>
-						<td>
-							<select>
-								<option value="승인검토">승인검토</option>
-								<option value="수정요청">수정요청</option>
-								<option value="승인완료">승인완료</option>
-								<option value="승인거부">승인거부</option>
-								<option value="수거대기">수거대기</option>
-								<option value="수거완료">수거완료</option>
-								<option value="입금완료">입금완료</option>
+					<c:if test="${empty resell}">
+						<tr>
+							<td colspan="10">조회된 결과가 없습니다.</td>
+						</tr>
 
-							</select>
+					</c:if>
+					<c:if test="${not empty resell}">
+						<c:forEach var="r" items="${resell }">
+							<tr>
+								<!-- <td>
+									<input type="checkbox" name="deleteList" value="${r.resellNo}">
+								</td> -->
+								<td>
+									<input type="hidden" value="${r.resellNo}">
+									<a href="${path}/resell/read.do?resellNo=${r.resellNo}">
+										<c:out value="${r.resellNo}"/>
+									</a>
+								</td>
+								<td><c:out value="${r.resellEnrollDate}"/></td>
+								<td>${r.resellEditDate==null?"-":r.resellEditDate}</td>
+								<td>
+									<img class="resellImg" src="${path}/resources/upload/resell/${r.getFiles().get(0).renamedFileName}">									
+								</td>
+								<td><c:out value="${r.item}"/></td>
+								<td><c:out value="${r.grade}"/></td>
+								<td class="price"><c:out value="${r.hopePrice}"/></td>
+								<td><c:out value="${r.member.memberName}"/></td>
+								<td><c:out value="${r.resellEditDate}"/></td>
+								<td>
+									<select name="progressState">
+										<option value="승인검토" ${r.progressState.equals("승인검토")?"selected":""}>승인검토</option>
+										<option value="수정요청" ${r.progressState.equals("수정요청")?"selected":""}>수정요청</option>
+										<option value="승인완료" ${r.progressState.equals("승인완료")?"selected":""}>승인완료</option>
+										<option value="승인거부" ${r.progressState.equals("승인거부")?"selected":""}>승인거부</option>
+										<option value="수거대기" ${r.progressState.equals("수거대기")?"selected":""}>수거대기</option>
+										<option value="수거완료" ${r.progressState.equals("수거완료")?"selected":""}>수거완료</option>
+										<option value="입금완료" ${r.progressState.equals("입금완료")?"selected":""}>입금완료</option>
 
-						</td>
-					</tr>
+									</select>
+								</td>
+							</tr>
+						</c:forEach>
+					</c:if>		
 				</tbody>		
 
 			</table>
 		</div>
 		<div id="pageBarContainer">
-			<div id=pageBar></div>
+			<div id=pageBar>
+				${pageBar}
+			</div>
 		</div>
 	</div>
 </section>
 <script>
+	//요약테이블 출력
+	$(()=>{
+		updateSummary();
+	});
+
+	//검색 타입 변경
 	$("select#searchType").change(e=>{
 		const type = $(e.target).val();
 		$("div#search-container>div").hide();
@@ -239,6 +196,86 @@
 		$("div#search-hiding>label>input[name=searchKeyword]").first().prop("checked",true);
 	});
 
+	//검색조건 고정시켜놓기
+	$(()=>{
+		const type = $("#searchType").val();
+		$("div#search-container>div").hide();
+		$("div#search-"+type).css("display","inline-block");
+	})
+
+	//천원 단위 콤마
+	$(()=>{
+		$(".price").each((i,v)=>{
+			let oriPrice=$(v).text();
+			let numberPrice=Number(oriPrice);
+			let parsedPrice=numberPrice.toLocaleString();
+			
+			// console.log("이전: "+oriPrice);
+			// console.log("이후: "+parsedPrice);
+			// console.log("=============")
+
+			$(v).text(parsedPrice);
+		})
+	})
+
+
+
+
+	//진행상태 변경하기
+	function changeProgressState(resellNo,progressState){
+		$.ajax({
+			url:"${path}/admin/updateProgressState.do",
+			async:false,
+			data:{resellNo:resellNo,progressState:progressState},
+			success:function(result){	
+				alert(progressState+"상태로 변경했습니다.")
+			}
+		})
+	}
+
+	$("select[name=progressState]").change(e=>{
+			const resellNo=$(e.target).parent().parent().children().children().val();
+			const progressState=$(e.target).val();
+
+			//console.log("resellNo : "+resellNo);
+			//console.log("progressState : "+progressState);
+			
+			if(progressState=="수정요청"||progressState=="승인거부"||progressState=="승인완료"){
+				if(confirm("진행상태를 "+progressState+"으로 변경하시겠습니까?")){					
+					changeProgressState(resellNo,progressState);
+
+				}else{
+					location.reload();
+				}		
+
+				
+
+			}else{
+				changeProgressState(resellNo,progressState);
+			}
+
+			updateSummary();
+
+
+
+	});
+
+	function updateSummary(){
+		$.ajax({
+			url:"${path}/admin/updateResellSummary.do",
+			dataType : "json",
+			async:false,
+			success:function(summary){
+				console.log(summary);
+				$("#summary_allR").text(summary.ALL_R);
+				$("#summary_state1").text(summary.STATE_1);
+				$("#summary_state2").text(summary.STATE_2);
+				$("#summary_state3").text(summary.STATE_3);
+				$("#summary_state4").text(summary.STATE_4);
+
+			}
+		})
+	}
 </script>
 
 </body>
@@ -246,3 +283,5 @@
 
 </body>
 </html>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

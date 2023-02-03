@@ -8,7 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <style>
 	section.mypage>div#title{
 		width:100%;
@@ -26,7 +27,7 @@
 	} 
 	div#resellWrap{
 		width:100%; 
-		height:1000px; /* 수정요망 */
+		/* height:1000px; */ /* 수정요망 */
 		display:flex;
 		justify-content: center;
 	}
@@ -35,7 +36,7 @@
 	}
 	div#resellWrap>div#resellContent{
 		width:1150px; /* px로 수정 */ 
-		height:1000px; /* 수정요망 */
+		/* height:1000px; */ /* 수정요망 */
 		/* border: 2px solid red; */ /* 삭제요망 */ 
 	}
 	
@@ -44,6 +45,9 @@
 		/* border:1px solid black; */
 		border-top:8px solid black;
 		border-collapse: collapse;
+	}
+	table#resellTable th{
+		text-align:center;
 	}
 	table#resellTable tr>th:first-child{
 		width:400px;
@@ -82,6 +86,8 @@
 		border-radius:5px;
 		padding-bottom:2px;
 		margin:1px;
+		cursor: pointer;
+		font-size:14px;
 	}
 	button.updateBtn{
 		padding:0px;
@@ -93,6 +99,8 @@
 		border-radius:5px;
 		padding-bottom:2px;
 		margin:1px;
+		cursor: pointer;
+		font-size:14px;
 	}
 	div#ulContainer li{
 		color:grey;
@@ -110,6 +118,18 @@
 		font-size:20px;
 		border-radius:20px;
 	}
+	div.infoContainer{
+		height:85px;width:350px;margin:10px;display:flex;
+	}
+	div.infoDetail{
+		padding:30px 0px 8px 20px;
+	}
+	button.newButton{
+		width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;
+	}
+	div#pageBar{
+		text-align:center;margin-top:20px;
+	}
 </style>
 	<section class="mypage">
 		<div id="title">
@@ -122,79 +142,79 @@
 				<table id="resellTable"> 
 					<tr style="border-bottom:1px solid black;"> 
 						<th>신청정보</th>
-						<th>신청일<br>(최종수정일)</th>
+						<th>신청일<br>[ 최종수정일 ]</th>
 						<th>거래희망가</th>
 						<th>수거희망일</th>
 						<th>판매상태</th>
 						<th>비고</th>
 					</tr>
-					<tr>
-						<td>
-							<div style="height:85px;width:350px;margin:10px;display:flex;">
-								<img src="${path}/resources/images/admin/addImage.png" width="85px" height="85px"/>
-								<div>
-									<div style="padding:30px 0px 8px 20px;">
-										<a href="#">화장대 판매신청</a>
-										<button style="width:24px;height:12px;border:none;background-color:red;font-size:8px;color:white;text-align:center;padding:0px;">new</button>
+					<c:if test="${not empty resells}">
+						<c:forEach var="r" items="${resells}">
+							<tr>
+								<td>
+									<div class="infoContainer">
+										<input type="hidden" id="resellNo" value="${r.resellNo}"/>
+										<img class="infoImg" src="${path}/resources/upload/resell/${r.files[0].renamedFileName}" width="85px" height="85px" style="cursor:pointer;"/>
+										<div>
+											<div class="infoDetail">
+												<a href="${path}/resell/read.do?resellNo=${r.resellNo}"><c:out value="${r.item}"/> 판매신청</a>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-						</td>
-						<td>
-							2023-01-18
-						</td>
-						<td>
-							100,000원
-						</td>
-						<td>
-							2023-01-25
-						</td>
-						<td>
-							수정요청
-						</td>
-						<td>
-							<button class="updateBtn">수정하기</button>
-							<br>
-							<button class="deleteBtn">삭제</button>
-						</td>
-					</tr>	
-					
-					<tr>
-						<td>
-							<div style="height:85px;width:350px;margin:10px;display:flex;">
-								<img src="${path}/resources/images/admin/addImage.png" width="85px" height="85px"/>
-								<div>
-									<div style="padding:30px 0px 8px 20px;">
-										<a href="#">책상 판매신청</a>
-									</div>
-								</div>
-							</div>
-						</td>
-						<td>
-							2023-01-01
-							<br>
-							(2023-01-03)
-						</td>
-						<td>
-							30,000원
-						</td>
-						<td>
-							2023-01-10
-						</td>
-						<td>
-							입금완료
-						</td>
-						<td>
-							내가구팔기 완료
-						</td>
-					</tr>	
+								</td>
+								<td>
+									<fmt:formatDate value="${r.resellEnrollDate}" type="date" pattern="yyyy-MM-dd(E)"/>
+									<c:if test="${r.resellEditDate ne null}">
+										<br>
+										<span style="font-size:14px;color:grey;">
+											[ <fmt:formatDate value="${r.resellEditDate}" type="date" pattern="yyyy-MM-dd(E)"/> ]
+										</span>
+									</c:if>
+								</td>
+								<td>
+									<fmt:formatNumber value="${r.hopePrice}" type="currency" /> 
+								</td>
+								<td>
+									<fmt:formatDate value="${r.pickUpDate}" type="date" pattern="yyyy-MM-dd(E)"/>
+								</td>
+								<td>
+									<c:out value="${r.progressState}"/>
+								</td>
+								<td>
+									<c:if test="${r.progressState ne '입금완료'}">
+										<button class="updateBtn" value="${r.resellNo}">수정하기</button>
+										<br>
+										<button class="deleteBtn" value="${r.resellNo}">삭제</button>
+									</c:if>
+									<c:if test="${r.progressState eq '입금완료' }">
+										내 가구 팔기 완료
+									</c:if>
+								</td>
+							</tr>
+						</c:forEach>
+					</c:if>
 				</table>
 				
-				<div id="pageBar" style="text-align:center;margin-top:10px;">
-					[이전] 1 2 3 4 5 [다음]
+				<div id="pageBar">
+					${pageBar }
 				</div>
 			</div>
 		</div>
 	</section>
-</body>
-</html>
+	<script>
+		$("button.updateBtn").click(e=>{
+			let path = '${path}/resell/update.do?resellNo=' + $(e.target).val();
+			open(path,'_blank','width=420px height=300px top=280px left=750px');
+		});
+		$("button.deleteBtn").click(e=>{
+			if(confirm("삭제 하시겠습니까?")){
+				let path = '${path}/resell/delete.do?resellNo=' + $(e.target).val();
+				location.assign(path);
+			} 
+		});
+		$("img.infoImg").click(e=>{
+			let path = '${path}/resell/read.do?resellNo=' + $(e.target).prev().val();
+			location.assign(path);
+		});
+	</script>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

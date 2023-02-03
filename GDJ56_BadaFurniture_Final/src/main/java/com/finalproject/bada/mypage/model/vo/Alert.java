@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Alert {
+public class Alert { 
 	private int alertNo;
 	private int memberNo;
 	private String detail;

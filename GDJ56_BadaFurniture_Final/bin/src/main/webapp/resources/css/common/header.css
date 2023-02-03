@@ -46,13 +46,12 @@ summary {
   text-align: center;
   padding: 12px 10px;
   height: 17px;
-  color: var(--secoColor); 
+  color: #348492; 
   cursor: pointer;
   user-select: none;
   outline: none;
   transition: transform 200ms ease-in-out 0s;
 }
-
 summary::before,
 summary::after {
   position: static;
@@ -88,7 +87,7 @@ details[open] summary::after {
 	border-radius: var(--cornerRad);
 	background-color: #393434;
 	box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
-	margin-top: 16px;
+    margin-top: 35px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -96,23 +95,25 @@ details[open] summary::after {
 }
 
 .memberMenu a {
-  padding: 12px 24px;
-  margin: 0 16px;
- /*  color: var(--secoColor); */
-  color: white;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-  text-decoration: none;
-  text-align: center;
-  transition: filter 200ms linear 0s;
+	padding: 12px 15px;
+	margin: 0 12px;
+	/* color: var(--secoColor); */
+	color: white;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+	text-decoration: none;
+	text-align: center;
+	transition: filter 200ms linear 0s;
 }
 .memberMenu a:nth-of-type(1) {
-  padding-top: 24px;
+	padding-top: 24px;
 }
 .memberMenu a:nth-last-of-type(1) {
-  border-bottom: none;
+	border-bottom: none;
 }
 .memberMenu a:hover {
-  filter: brightness(200%);
+	filter: brightness(200%);
+	color:  #348492 ;
+	text-decoration-line : none;
 }
 
 /* -------------------------------------------------------------------------------------------------- */
@@ -125,7 +126,7 @@ details[open] summary::after {
     margin-right: 10px;
 }
 
-.button{
+.headbtn{
   position: relative;
   display: inline-flex;
   width: 180px;
@@ -133,7 +134,7 @@ details[open] summary::after {
   margin: 0 15px;
   perspective: 1000px;
 }
-.button a{
+.headbtn a{
   font-size: 19px;
   letter-spacing: 1px;
   transform-style: preserve-3d;
@@ -142,8 +143,8 @@ details[open] summary::after {
   font-family: 'Montserrat', sans-serif;
   
 }
-.button a:before,
-.button a:after{
+.headbtn a:before,
+.headbtn a:after{
   position: absolute;
   content: "LOGIN";
   height: 55px;
@@ -155,16 +156,16 @@ details[open] summary::after {
   box-sizing: border-box;
   border-radius: 5px;
 }
-.button a:before{
+.headbtn a:before{
   color: #fff;
   background: #348492;
   transform: rotateY(0deg) translateZ(25px);
 }
-.button a:after{
+.headbtn a:after{
   color:#348492;
   transform: rotateX(90deg) translateZ(25px);
 }
-.button a:hover{
+.headbtn a:hover{
   transform: translateZ(-25px) rotateX(-90deg);
 }
 
@@ -178,6 +179,10 @@ details[open] summary::after {
     height: 80px;
     width: 100%;
     align-items: center;
+}
+
+#navDiv *{
+	font-family: 'Cabin', sans-serif !important;
 }
 
 .navMenu a {
@@ -196,43 +201,44 @@ details[open] summary::after {
 }
 
 .navMenu a:hover {
-  color: #348492;
+    color: #348492;
+    text-decoration: none;
 }
 
 .navMenu .dot {
-  width: 10px;
-  height: 10px;
-  background: #fddb3a;
-  border-radius: 50%;
-  opacity: 0;
-  -webkit-transform: translateX(30px);
-  transform: translateX(30px);
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+	width: 10px;
+	height: 10px;
+	background: #fddb3a;
+	border-radius: 50%;
+	opacity: 0;
+	-webkit-transform: translateX(30px);
+	transform: translateX(30px);
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
 }
 
 .navMenu a:nth-child(1):hover ~ .dot {
-  -webkit-transform: translateX(195px);
-  transform: translateX(195px);
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  opacity: 1;
+	-webkit-transform: translateX(195px);
+	transform: translateX(195px);
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	opacity: 1;
 }
 
 .navMenu a:nth-child(2):hover ~ .dot {
-  -webkit-transform: translateX(600px);
-  transform: translateX(600px);
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  opacity: 1;
+	-webkit-transform: translateX(600px);
+	transform: translateX(600px);
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	opacity: 1;
 }
 
 .navMenu a:nth-child(3):hover ~ .dot {
-  -webkit-transform: translateX(1005px);
-  transform: translateX(1005px);
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  opacity: 1;
+	-webkit-transform: translateX(1005px);
+	transform: translateX(1005px);
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	opacity: 1;
 }
 
 /* .navMenu a:nth-child(4):hover ~ .dot {
@@ -265,7 +271,7 @@ details[open] summary::after {
   transform: translate(-50%,-50%);
   /* width: 350px; */
   width: 400px;
-  height: 580px;
+  height: 530px;
   min-height: 200px;
   background: #393434 ;
   /* background: white; */
@@ -336,13 +342,13 @@ details[open] summary::after {
   text-align: center;
   display: block
 }
-a:hover{
+.loginBox a:hover{
   color: #00ffff
 }
 
 /* -------------------------------------------------------------------------------------------------- */
 /* 모달창 */
-.modal {
+.loginModal {
   visibility: hidden;
   opacity: 0;
   position: absolute;
@@ -358,12 +364,12 @@ a:hover{
   transition: all .4s;
 }
 
-.modal:target {
+.loginModal:target {
   visibility: visible;
   opacity: 1;
 }
 
-#modal__close {
+#loginModal__close {
   position: absolute;
   top: 10px;
   right: 10px;

@@ -4,6 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<c:set var="loginMember" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}"/>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,52 +29,61 @@
 <body>
 <!-- 상단 -->
     <div id="headerDiv">
-        <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo">
-        <c:if test="${not empty loginMember }">
-        	<span class="button" id="headbtn"><a href="#demo-modal"></a></span>
+        <img src="${path }/resources/images/mainpage/BADAlogo.png" id="logo" style="cursor:pointer;">
+        
+        <c:if test="${empty loginMember}">
+        	<span class="headbtn" id="headbtn"><a href="#demo-modal"></a></span>
         </c:if>
-        <c:if test="${empty loginMember }">
+        
+        <c:if test="${not empty loginMember}">
         	<div style="display: flex; margin-top:10px">
-	        	<span><img src="${path }/resources/images/mainpage/종.png" width="60px" height="60px"></span>
+	        	<span id="alertImgContainer"><img id="alertImg" width="60px" height="60px" style="cursor:pointer;"/></span>
 	        	<div style="display: flex; margin-right: 5px;">
 	        	  <details>
-			        <summary id="memberName"><u>유저공일님</u></summary>
+			        <summary id="memberName"><u>${loginMember.memberName}님</u></summary>
 			        <nav class="memberMenu">
-			          <a href="#link">알림</a>
-			          <a href="#link">장바구니</a>
-			          <a href="#link">주문목록</a>
-			          <a href="#link">내 정보수정</a>
-			          <a href="#link">로그아웃</a>
-			          
+		        		<c:if test="${loginMember.memberId.equals('admin')}">
+							<a href="${path}/admin">관리자페이지</a>
+						</c:if>
+						<c:if test="${!loginMember.memberId.equals('admin')}">
+							<a href="${path}/mypage/alert.do">알림</a>
+							<a href="${path}/mypage/cart.do">장바구니</a>
+							<a href="${path}/mypage/order.do">주문목록</a>
+						</c:if>
+						<a href="${path}/member/updateMember.do">정보수정</a>
+						<a href="${path}/member/logout.do ">로그아웃</a>
 			        </nav>
 			      </details>
 		        </div>
         	</div>
-        </c:if>
+        </c:if> 
     </div>
     
 
 <!------------------------------------------------------------------------------------------------------------------>
     <!-- 로그인 모달창 -->
-    <div id="demo-modal" class="modal">
+    <div id="demo-modal" class="loginModal" style="z-index:3">
         <div class="loginBox"> 
-            <a href="#" id="modal__close">
+            <a href="#" id="loginModal__close">
                 <!-- <img src="./아이콘/external-close-web-flaticons-flat-flat-icons.png" alt="" width="50px" height="50px"> -->
                 <img src="${path }/resources/images/mainpage/closebutton.png" alt="" width="50px" height="50px">
             </a>
             <img class="user" src="${path }/resources/images/mainpage/loginIcon.png" height="100px" width="100px">
             <h3>Sign in here</h3>
-            <form action="login.php" method="post">
+            
+            <form action="${path}/login.do" method="post">
                 <div class="inputBox"> 
-                    <input id="uname" type="text" name="Username" placeholder="아이디"> 
-                    <input id="pass" type="password" name="Password" placeholder="비밀번호"> 
-                </div> 
-                <input type="submit" name="" value="Login">
+                    <input id="uname" type="text" name="userId" placeholder="아이디"> 
+                    <input id="pass" type="password" name="password" placeholder="비밀번호"> 
+                </div>
+                <br>
+                <input type="submit" value="Login">
             </form>
+            
             <div style="display: flex; justify-content: center;">
-                <a href="#" class="find">아이디 찾기<br> </a> 
+                <a href="${path}/member/searchId.do" class="find">아이디 찾기<br> </a> 
                 &nbsp; &nbsp; <a> | </a> &nbsp; &nbsp;
-                <a href="#" class="find">비밀번호 찾기<br> </a>
+                <a href="${path}/member/searchPw.do" class="find">비밀번호 찾기<br> </a>
             </div>
             <br><br>
             <div class="text-center" style="float:left">
@@ -91,4 +103,32 @@
             <div class="dot"></div>
         </nav>
     </div>
+    
+<!------------------------------------------------------------------------------------------------------------------>    
+    <script>
+    $(()=>{
+    	<c:if test="${not empty loginMember}">
+    	$.ajax({
+   			url:"${path}/alert/countReadState.do",
+   			success:data=>{
+   				let alertImg = $("img#alertImg");
+   				if(data > 0){
+   					alertImg.attr("src","${path }/resources/images/mainpage/new종.png");
+   				} else{
+   					alertImg.attr("src","${path }/resources/images/mainpage/종.png");
+   				}
+   				$("span#alertImgContainer").append(alertImg);
+   			}
+    	});
+    	</c:if>
+    });
+    
+    $(document).on("click","span#alertImgContainer>img", e=>{
+    	location.assign("${path}/mypage/alert.do");
+    });
+    
+    $("#logo").click(e=>{
+    	location.assign("${path}")
+    });
+    </script>
 

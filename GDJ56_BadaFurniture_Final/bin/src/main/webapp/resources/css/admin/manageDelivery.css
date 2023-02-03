@@ -1,0 +1,160 @@
+@charset "UTF-8";
+
+/*     div#search-container>div {        
+        border: 1px solid blue;
+    } */
+	/* body *{
+		border: 1px solid blue;
+	} */
+
+
+    div#listContainer>h2{
+        text-align:center;
+        font-size:25px;
+        font-weight:bolder;
+        padding:15px;
+		margin-top: 35px;
+    }
+    div.tableContainer>table{
+        width:100%;
+        text-align: center;
+        border-collapse : collapse;
+		margin-top: 0px;
+    }
+    div.tableContainer>table th,td{
+        border : 1px solid white;
+        padding:5px 10px 5px 10px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.514);
+    }
+	/* 목록 아래 테두리 */
+    div.tableContainer>table td{
+
+        padding:5px 10px 5px 10px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.514);
+    }
+
+
+    div#pageBarContainer{
+        display:flex;
+        justify-content: center;
+    }
+
+    div#search-container{text-align:center;}
+
+    div#search-searchAll{display:inline-block;}
+    div#search-deliveryState{display:none;}
+    div#search-orderSheetNo{display:none;}
+    div#search-orderDetailNo{display:none;}
+
+    div#search-container {margin:0 0 10px 0; padding:3px; }
+    div#numPerpage-container{text-align:right; padding:0px 40px 20px 0px;}
+    button#hidingBtnToY{
+        background-color: white;
+        color:black;
+        border:none;
+    }
+    button#hidingBtnToN{
+        background-color: rgb(7, 90, 42);
+        color:white;
+        border:none;
+    }
+
+	button.updateBtn,.searchBtn,.deleteBtn{
+		background-color:#348492;
+		border: none;
+		color: white;
+		width: 80px;
+		border-radius: 5px;
+		padding: 5px;
+
+	}
+	.deleteBtn{
+		width: 42px;
+	}
+
+	#deleteBtnDiv{
+		display: flex;
+		justify-content: left;
+		margin-bottom: 5px;
+	}
+
+	.searchBtn{
+		margin-left: 5px;
+	}
+
+	th{
+		background-color: #393434;
+		color: white;
+	}
+	td{
+		background-color: #dcd5c32b;
+	}
+	
+	select{
+		font-size: 16px;
+	}
+
+	a{
+		text-decoration: none;
+	}
+	
+	.viewProduct{
+		text-decoration: none;
+		color: black;
+	}
+
+	.viewProduct a:visited{
+		color: black;
+	}
+
+	button{
+		cursor: pointer;
+	}
+
+	button:hover{
+        box-shadow: 200px 0 0 0 rgba(0,0,0,0.25) inset, 
+                   -200px 0 0 0 rgba(0,0,0,0.25) inset;
+    }
+	div#summaryContainer{
+		display: flex;
+		justify-content: center;
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+	div#summaryContainer th,td{
+		width: 100px;
+		height: 30px;
+		text-align: center;
+		border: none;
+	}
+	.searchInput{
+		width:160px
+	}
+	
+	#pageBarContainer *{
+
+		padding: 5px;
+		margin-top: 10px;
+	}
+
+	#pageBarContainer a{
+
+		/* text-decoration: none; */
+		color: #348492;
+		font-weight: bold;
+		
+
+	}
+	#pageBarContainer a:visited{
+
+		/* text-decoration: none; */
+		color: black;
+
+	}
+
+	#productImg{
+		width: 70px;
+		height: 70px;
+	}
+	
+
