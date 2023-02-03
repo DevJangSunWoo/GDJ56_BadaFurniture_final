@@ -20,7 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 @Slf4j
 public class AdminDaoImpl implements AdminDao {
-	
+		
+	//대시보드 - 요약
 	@Override
 	public Map<String, Integer> dashBoardSummary(SqlSessionTemplate session) {
 		// TODO Auto-generated method stub
@@ -213,6 +214,12 @@ public class AdminDaoImpl implements AdminDao {
 		return session.update("admin.updateRefundState",param);
 	}
 	
+	@Override
+	public int updateSoldOutStateAfterRefund(SqlSessionTemplate session, Map param) {
+		// TODO Auto-generated method stub
+		return session.update("admin.updateSoldOutStateAfterRefund",param);
+	}
+	
 	
 	//취소반품관리 - 취소반품 상세조회
 	@Override
@@ -249,12 +256,14 @@ public class AdminDaoImpl implements AdminDao {
 		return session.update("admin.updateDeliveryState",param);
 	}
 
+	//대시보드 - 차트 - 상품별 주문수요
+	@Override
+	public Map chartDemand(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.chartDemand");
+	}
 
 
-
-
-	
-	
 	
 	
 

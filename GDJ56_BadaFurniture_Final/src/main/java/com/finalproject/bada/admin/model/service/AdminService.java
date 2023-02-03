@@ -89,4 +89,6 @@ public interface AdminService {
 	//배송관리 - 배송상태 변경
 	void updateDeliveryState(Map param);
 	
+	//대시보드 - 차트 - 상품별 주문수요
+	Map chartDemand();
 }

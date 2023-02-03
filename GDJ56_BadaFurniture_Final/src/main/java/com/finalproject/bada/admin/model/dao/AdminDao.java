@@ -82,6 +82,7 @@ public interface AdminDao {
 	
 	//취소반품관리 - 취소반품상태 변경
 	int updateRefundState(SqlSessionTemplate session,Map param);
+	int updateSoldOutStateAfterRefund(SqlSessionTemplate session,Map param);
 	
 	//취소반품관리 - 취소반품 상세조회
 	Refund viewRefundDetail(SqlSessionTemplate session,int orderDetailNo);
@@ -95,6 +96,9 @@ public interface AdminDao {
 	
 	//배송관리 - 배송상태 변경
 	int updateDeliveryState(SqlSessionTemplate session,Map param);
+	
+	//대시보드 - 차트 - 상품별 주문수요
+	Map chartDemand(SqlSessionTemplate session);
 	
 	
 }
