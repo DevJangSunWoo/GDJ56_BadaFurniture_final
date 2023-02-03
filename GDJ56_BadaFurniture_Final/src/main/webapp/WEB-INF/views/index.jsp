@@ -277,13 +277,16 @@
 					//list.forEach(e=>{})
 					for(let i=0; i<list.length; i++){
 						let productWrap = $("<div>").addClass("productWrap");
+						let soldOutState= $("<input>").attr("type","hidden").addClass("productSoldOutState")
+										.attr("value",list[i].soldOutState);
 						let productNo = $("<input>").attr("type","number").attr("name","productNo")
 										.attr("value",list[i].productNo).attr("readonly",true);
+						
 						let showProduct = $("<div>").addClass("showProduct");
 						
 						let imgDiv = $("<div>").addClass("imgDiv")
-									.append($("<img>").attr("src","${path }/resources/upload/product/"+list[i].files[0].renamedFileName));
-						//imgDiv.append($("<img>").attr("src","${path}/resources/images/product/soldOutEasy.png").addClass("showProduct"))
+									.append($("<img>").attr("id","img").attr("src","${path }/resources/upload/product/"+list[i].files[0].renamedFileName));
+						imgDiv.append($("<img>").attr("src","${path}/resources/images/product/soldOutEasy.png").addClass("soldOutImage"))
 						
 						let infoDiv = $("<div>").addClass("infoDiv");
 						let productTitle = $("<div>").addClass("productTitle")
@@ -300,18 +303,35 @@
 									.append($("<span>")).text(list[i].productEnrollDate);
 						
 						
-						productWrap.append(productNo).append(showProduct);
+						productWrap.append(soldOutState).append(productNo).append(showProduct);
 						showProduct.append(imgDiv).append(infoDiv);
 						infoDiv.append(productTitle).append(grade).append(size).append(price).append(date);
 						
+						$("#productContainer").append(productWrap);
+						
 						//생성된 태그에 이벤트 걸어서 제품 div 클릭시 상세페이지로 연결
 						productWrap.on("click",function(e){
-							console.log($(e.target).parents(".productWrap").children(".showProduct").prev().val());
+							//console.log($(e.target).parents(".productWrap").children(".showProduct").prev().val());
 							let productNo = $(e.target).parents(".productWrap").children(".showProduct").prev().val();
 							location.assign("${path}/product/view.do?productNo="+productNo);
 						});
 						
-						$("#productContainer").append(productWrap);
+						//이미지 soldout 처리하기
+						$('.productSoldOutState').each (function (i,v){
+							//console.log($(v).val());			
+							if($(v).val()=='I' || $(v).val()=='Y'){
+								//console.log($(v).next().next().find(".imgDiv"));
+								
+								$(v).next().next().find(".imgDiv").find("#img").css('filter','blur(2px)');
+								$(v).next().next().find(".imgDiv").find("#img").css('-webkit-filter','blur(4px)');
+								$(v).next().next().find(".imgDiv").find(".soldOutImage").show();
+								
+							}
+							else{
+								$(v).next().next().find(".imgDiv").find(".soldOutImage").hide(); 	
+							} 
+						});
+						
 					}
 				}
 			});
@@ -344,7 +364,6 @@
 				contentType:"application/json",
 				data :JSON.stringify({
 					cPage:cPage,
-					//numPerpage:numPerpage,
 					color: colorArr, 
 					material: materialArr, 
 					grade: gradeArr, 
@@ -366,8 +385,8 @@
 		
 		<!-- $(v).next().next().find(".imgDiv").find("#img")-->
 			<c:forEach items="${productList}" var="product">
-				<div class="productWrap" >
-					<input type="text" class="productSoldOutState" value="${product.soldOutState }">
+				<div class="productWrap">
+					<input type="hidden" class="productSoldOutState" value="${product.soldOutState }">
 	                <input type="number" name="productNo" id="productNo" value="${product.productNo }" readonly>
 	                
 	                <div class="showProduct">
@@ -429,10 +448,10 @@
 				$(v).next().next().find(".imgDiv").find("#img").css('-webkit-filter','blur(4px)');
 				$(v).next().next().find(".imgDiv").find(".soldOutImage").show();
 				
-			}
-			else{
+			}else{
 				$(v).next().next().find(".imgDiv").find(".soldOutImage").hide(); 	
-			} 
+			}
+			 
 		});
 		
 		//매물정보 클릭시 상세페이지로 이동
