@@ -26,6 +26,7 @@ import com.finalproject.bada.mypage.model.vo.Alert;
 import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
+import com.finalproject.bada.refund.model.vo.Refund;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -181,7 +182,7 @@ public class MypageController {
 		
 		int totalData=adminService.orderListCount(search);
 		
-		log.debug("totalData {}", totalData);		
+		//log.debug("totalData {}", totalData);		
 		
 		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "order.do",searchType,searchKeyword));
 		
@@ -200,9 +201,9 @@ public class MypageController {
 		return adminService.selectOrderSheet(orderSheetNo);
 	}
 	
-	//취소신청 페이지 연결
-	@RequestMapping("/refund/cancel.do")
-	public ModelAndView writeRefundCancel(ModelAndView mv, int orderSheetNo, int orderDetailNo) {
+	//반품/취소 신청 페이지 연결
+	@RequestMapping("/refund/write.do")
+	public ModelAndView writeRefund(ModelAndView mv, String state, int orderSheetNo, int orderDetailNo) {
 		OrderSheet orderSheet = adminService.selectOrderSheet(orderSheetNo);
 		
 		List<OrderDetail> orderDetails = orderSheet.getDetails();
@@ -218,33 +219,35 @@ public class MypageController {
 			mv.addObject("orderDetail", orderDetail);
 		}
 		mv.addObject("orderSheet", orderSheet);
-		mv.setViewName("refund/writeRefundCancel");
+		mv.addObject("state", state);
+		mv.setViewName("refund/writeRefund");
+		
 		return mv;
 	}
 	
-	//반품신청 페이지 연결
-	@RequestMapping("/refund/return.do")
-	public ModelAndView writeRefundReturn(ModelAndView mv, int orderSheetNo, int orderDetailNo) {
-		OrderSheet orderSheet = adminService.selectOrderSheet(orderSheetNo);
+	//반품취소신청 완료
+	@RequestMapping("/refund/writeEnd.do")
+	public ModelAndView writeRefundEnd(ModelAndView mv, Refund refund) {
 		
-		List<OrderDetail> orderDetails = orderSheet.getDetails();
+		log.debug("refund {}", refund);
 		
-		OrderDetail orderDetail = null;
-		for(OrderDetail o : orderDetails) {
-			if(o.getOrderDetailNo() == orderDetailNo) {
-				orderDetail = o;
-				break;
-			}
-		}
-		if(orderDetail != null) {
-			mv.addObject("orderDetail", orderDetail);
+		String msg="";
+		String script="opener.parent.location.reload();window.close();";
+		try {
+			service.insertRefund(refund);
+			msg = refund.getRefundState()+"신청이 완료되었습니다.";
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			msg = refund.getRefundState()+"신청 실패!";
 		}
 		
-		log.debug("orderDetail : {}" , orderDetail);
+		mv.addObject("msg",msg);
+		mv.addObject("script",script);
+		mv.setViewName("common/msg");
 		
-		mv.setViewName("refund/writeRefundReturn");
 		return mv;
 	}
+	
 	
 	//refund 리스트 출력
 	@RequestMapping("/mypage/refund.do")

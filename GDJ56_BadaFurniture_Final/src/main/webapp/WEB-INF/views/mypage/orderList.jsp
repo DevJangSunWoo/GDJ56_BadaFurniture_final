@@ -262,6 +262,12 @@
 		font-size:13px;
 	}
 	/* modal costomizing..  */
+	
+	span.refundDone{
+		font-size:14px;
+		color:grey;
+		font-weight:bolder;
+	}
 </style>
 	<section class="mypage">
 		<div id="title">
@@ -364,10 +370,10 @@
 													<button class="returnBtn">반품신청</button>
 												</c:when>
 												<c:when test="${detail.refundState ne null and fn:contains(detail.refundState, '취소')}">
-													취소신청완료
+													<span class="refundDone">취소신청완료</span>
 												</c:when>
 												<c:when test="${detail.refundState ne null and fn:contains(detail.refundState, '반품')}">
-													반품신청완료
+													<span class="refundDone">반품신청완료</span>
 												</c:when>
 											</c:choose>
 										</td>
@@ -610,13 +616,13 @@
 	
 	//취소신청 클릭했을 때
 	$("button.cancelBtn").click(e=>{
-		let path = "${path}/refund/cancel.do?orderSheetNo="+$(e.target).prev().prev().val()+"&orderDetailNo=" + $(e.target).prev().val();
-		window.open(path,'_blank','width=420px height=300px top=250px left=750px');	
+		let path = "${path}/refund/write.do?state=취소&orderSheetNo="+$(e.target).prev().prev().val()+"&orderDetailNo=" + $(e.target).prev().val();
+		window.open(path,'_blank','width=470px height=420px top=230px left=700px');	
 	});
 	//반품신청 클릭했을 때
 	$("button.returnBtn").click(e=>{
-		let path = "${path}/refund/return.do?orderSheetNo="+$(e.target).prev().prev().val()+"&orderDetailNo=" + $(e.target).prev().val();
-		window.open(path,'_blank','width=420px height=300px top=250px left=750px');	
+		let path = "${path}/refund/write.do?state=반품&orderSheetNo="+$(e.target).prev().prev().val()+"&orderDetailNo=" + $(e.target).prev().val();
+		window.open(path,'_blank','width=470px height=420px top=230px left=700px');	
 	});
 	
 </script>
