@@ -182,7 +182,11 @@ public class OrderController {
 		}
 				
 		
-		mv.addObject("oss",oss);
+		mv.addObject("oss",oss);		
+		//payMethod 값    orderComplete 화면에 부여해주기
+		mv.addObject("payMethod", payMethod);
+		
+		
 		mv.setViewName("product/orderComplete");
 		
 		return mv ;
