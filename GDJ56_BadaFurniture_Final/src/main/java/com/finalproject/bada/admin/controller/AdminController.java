@@ -805,8 +805,7 @@ public class AdminController {
 	@ResponseBody
 	public Map chartOrdersSales() {
 		
-		Map resultOrders=service.chartOrders();
-		
+		Map resultOrders=service.chartOrders();		
 		Map resultSales=service.chartSales();
 		
 		Map result=new HashMap();

@@ -236,7 +236,7 @@
     <div id="divBot">
         <div class="titleNcanvas">
             <h3 class="title">주문수/매출액</h3>
-            <canvas id="orderNprofit" width="600" height="400"></canvas>    
+            <canvas id="orderNsales" width="600" height="400"></canvas>    
 
         </div>
         <div class="titleNcanvas">
@@ -292,30 +292,35 @@
 
 				var resultlabel=['7일전','6일전','5일전','4일전','3일전','2일전','1일전','오늘'];			                
                
-                new Chart(document.getElementById("orderNprofit"), {
+                new Chart(document.getElementById("orderNsales"), {
                     plugins: [ChartDataLabels],
                     type: 'bar',
                     data: {
                         labels: resultlabel,
                         datasets: 
-                            [{ 
+                            [
+                            {
+                                label:'주문건수 그래프',
+                                yAxisID:'B',
+                                data:orderData,                                
+                                type:'line',
+                                lineTension:0.1,
+                                borderColor: '#FFACB7',
+                                scaleBeginAtZero: true
+                            }
+                                ,{ 
                                 label:'매출액 그래프',
+                                yAxisID:'A',
                                 data: salesData, 
                                 backgroundColor: [
                                     '#9DCEFF'
 
                                     ],
                                 scaleBeginAtZero: true
-                            },{
-                                label:'주문건수 그래프',
-                                data:orderData,                                
-                                type:'line',
-                                lineTension:0.1,
-                                borderColor: '#FFACB7'
                             }]
                     },
                     options: {
-                        responsive:false,	//차트 크기 조정용
+                        responsive:false,
                         title: {
                             display: true,
                             text: '상품별 주문수요'
@@ -474,7 +479,7 @@
                             }]
                     },
                     options: {
-                        responsive:false,	//차트 크기 조정용
+                        responsive:false,
                         maintainAspectRatio:false,
                         title: {
                             display: true,
