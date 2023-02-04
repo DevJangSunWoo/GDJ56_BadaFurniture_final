@@ -175,9 +175,20 @@
 			          </c:if> 
 			    </div>
 			</div>
-		
-			<!--주소api  -->
+			<!--배송비  지역에 따라 변경해주는 스크립트  -->
+			<script>
+			var delCost = $('#sample6_address').val(); 
+			 console.log(delCost);
 			
+			if(delCost.indexOf('서') != -1){
+				 
+				 console.log('배송비');
+				 
+				 
+			 } 
+			
+			</script>		
+			<!--주소api  -->			
 			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 			<script>
 			function sample6_execDaumPostcode() {
@@ -331,7 +342,7 @@
 	                                            <input type="hidden" id="pay-fee-rate-PHONE" value="5" />                                       
 	                                     </div>
 										<div id="pay_info2_account"  style="display:none;" >
-											<input  id="depositName"  name="badaDepositName" type="text"  placeholder="예금주명을 입력해주세요" style="width:200px;border:1px solid lightgray;display: block!important;"/>	
+											<input  required   id="depositName"  name="badaDepositName" type="text"  placeholder="예금주명을 입력해주세요" style="width:200px;border:1px solid lightgray;display: block!important;"/>	
 										</div>
 									</li>
 								</ul>
@@ -1020,10 +1031,6 @@
 						return false;
 						
 				    	 } 
-				
-				
-				
-					
 					
 			/* console.log("계좌이체 결제 진행"); */
 			/* 	$('#orderForm').method = 'post'; */

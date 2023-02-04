@@ -50,8 +50,7 @@
 			                        <div class="product__details__pic__item">
 			                            <c:forEach var="files" items="${productData.files}" varStatus="vs" begin="0" end="0">	
 			                             <div class="container"> 
-			                            <img  id="soldOutStateImg"  class="product__details__pic__item--large"
-			                                src="${path}/resources/upload/product/${files.renamedFileName}" alt="">
+			                            <img  id="soldOutStateImg"  class="product__details__pic__item--large"			                                src="${path}/resources/upload/product/${files.renamedFileName}" alt="">
 			                        	<img id="soldOutImage" style="display: none;width:50%;height:50%;"  class="centered"  src="${path}/resources/images/product/soldOutEasy.png"  >
 			                        
 			                        	 </div> 

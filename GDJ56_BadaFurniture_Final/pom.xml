@@ -104,8 +104,11 @@
 		    <version>2.10.1</version>
 		</dependency>		
 					
-		
-		
+		<!-- 스케줄러 의존성 주입 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-quartz</artifactId>
+		</dependency>
 		
 		
 		
