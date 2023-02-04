@@ -272,10 +272,9 @@
                 orderData.push(result.resultOrders['5일전']);
                 orderData.push(result.resultOrders['4일전']);
                 orderData.push(result.resultOrders['3일전']);
-                orderData.push(result.resultOrders['3일전']);
                 orderData.push(result.resultOrders['2일전']);
                 orderData.push(result.resultOrders['1일전']);
-                orderData.push(result.resultOrders['오늘']);
+                orderData.push(result.resultOrders['0일전']);
      
                 var salesData=[];
                 salesData.push(result.resultSales['7일전']);
@@ -285,7 +284,7 @@
                 salesData.push(result.resultSales['3일전']);
                 salesData.push(result.resultSales['2일전']);
                 salesData.push(result.resultSales['1일전']);
-                salesData.push(result.resultSales['오늘']);
+                salesData.push(result.resultSales['0일전']);
 
                 console.log("주문건 데이터 :"+orderData);
                 console.log("매출 데이터 :"+salesData);
