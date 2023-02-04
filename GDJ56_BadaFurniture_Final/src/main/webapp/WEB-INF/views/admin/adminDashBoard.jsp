@@ -231,15 +231,15 @@
             </div>
         </div>   
     </div>
-    <br>
     <hr>
     <div id="divBot">
-        <div class="titleNcanvas">
+        <div class="titleNcanvas" style="margin-right: 7%;margin-left: 3%;">
             <h3 class="title">주문수/매출액</h3>
             <canvas id="orderNsales" width="600" height="400"></canvas>    
 
         </div>
-        <div class="titleNcanvas">
+
+        <div class="titleNcanvas" >
             <h3 class="title">상품별 주문수요</h3>
             <canvas id="itemDemand" width="400" height="400"></canvas>
         </div>
@@ -248,7 +248,7 @@
             <h3 class="title">내가구팔기 가구비율</h3>
             <canvas id="resellMine" width="400" height="400"></canvas>
         </div>       
-        
+
     </div> 
 
 </section>
@@ -299,7 +299,7 @@
                         datasets: 
                             [
                             {
-                                label:'주문건수 그래프',
+                                label:'주문건수',
                                 yAxisID:'B',
                                 data:orderData,                                
                                 type:'line',
@@ -308,7 +308,7 @@
                                 scaleBeginAtZero: true
                             }
                                 ,{ 
-                                label:'매출액 그래프',
+                                label:'매출액',
                                 yAxisID:'A',
                                 data: salesData, 
                                 backgroundColor: [

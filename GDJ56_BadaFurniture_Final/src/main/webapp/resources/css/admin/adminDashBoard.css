@@ -2,13 +2,13 @@
 
     /* div{        
         border: 1px solid blue;
-    } */
+    }
     
    
     canvas{
         border: 1px solid #3934348a;
-
-    } 
+        border-radius: 7px;
+    }  */
 
     #divTop{
         display: flex;
@@ -141,7 +141,7 @@
 
     }
 
-    .titleNcanvas{
+    .titleNcanvas {
         display: block;
     }
 

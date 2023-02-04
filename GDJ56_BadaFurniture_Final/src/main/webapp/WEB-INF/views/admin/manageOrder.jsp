@@ -323,8 +323,7 @@
 											<c:if test="${vs.index==0}">												
 												<td class="tableTd" rowspan="${o.details.size()}">
 													<input type="hidden" value="${o.orderSheetNo}">
-													<input type="number" value="${o.orderSheetNo}" id="orderSheetBtn" 
-													style="width: 85px;border-style: none;background-color: #dcd5c36c;text-align: center;"
+													<input type="number" class="onclickInput" value="${o.orderSheetNo}" id="orderSheetBtn" 
 													readonly>
 												</td>
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.orderSheetenrollDate}"/></td>
@@ -347,8 +346,7 @@
 
 											<c:if test='${o.paymentState=="카드결제완료" or o.paymentState=="입금완료"}'>
 												<td class="tableTd2" >
-													<input type="text" name="deliveryState" value="${d.deliveryState}" 
-													style="width: 88px;border-style: none;background-color: #dcd5c36c;text-align: center;" 
+													<input type="text" class="onclickInput" name="deliveryState" value="${d.deliveryState}"													" 
 													onclick="location.assign('${path}/admin/delivery.do?searchKeyword=${d.product.productNo}&searchType=PRODUCT_NO')" 
 													readonly>
 												</td>
@@ -363,8 +361,7 @@
 											</c:if>
 											<c:if test="${d.refundState!=null}">
 												<td class="tableTd2">
-													<input type="text" name="refundState" value="${d.refundState}" 
-													style="width: 88px;border-style: none;background-color: #dcd5c36c;text-align: center;"
+													<input type="text" class="onclickInput" name="refundState" value="${d.refundState}" 
 													onclick="location.assign('${path}/admin/refund.do?searchKeyword=${d.product.productNo}&searchType=PRODUCT_NO')"
 													readonly>
 												</td>
@@ -377,13 +374,13 @@
 											<c:if test="${vs.index==0}">
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.member.memberName}"/></td>
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.paymentMethod}"/></td>
+												
 												<td class="tableTd2" rowspan="${o.details.size()}">
-													<select name="paymentState">
-														<option value="입금대기" ${o.paymentState.equals("입금대기")?"selected":""}>입금대기</option>
-														<option value="입금완료"  ${o.paymentState.equals("입금완료")?"selected":""}>입금완료</option>
-														<option value="카드결제완료"  ${o.paymentState.equals("카드결제완료")?"selected":""}>카드결제완료</option>
-													</select>
-													
+														<select name="paymentState">
+															<option value="입금대기" ${o.paymentState.equals("입금대기")?"selected":""}>입금대기</option>
+															<option value="입금완료"  ${o.paymentState.equals("입금완료")?"selected":""}>입금완료</option>
+															<option value="카드결제완료"  ${o.paymentState.equals("카드결제완료")?"selected":""}>카드결제완료</option>
+														</select>
 												</td>
 											</c:if>
 										</tr>
