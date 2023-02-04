@@ -438,7 +438,7 @@ public class AdminController {
 	@RequestMapping("/admin/order.do")
 	public ModelAndView orderList(ModelAndView mv,
 		@RequestParam(value="cPage", defaultValue="1") int cPage,
-		@RequestParam(value="numPerpage", defaultValue="5") int numPerpage
+		@RequestParam(value="numPerpage", defaultValue="10") int numPerpage
 		,@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType
 		,@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword
 		) {		
@@ -788,6 +788,7 @@ public class AdminController {
 	
 		return result;
 	}
+
 	
 	//대시보드 - chartJs - 내가구팔기 가구비율
 	@RequestMapping("/admin/chartResell.do")
@@ -802,13 +803,17 @@ public class AdminController {
 	//대시보드 - chartJs - 일일 주문,매출액
 	@RequestMapping("/admin/chartOrdersSales.do")
 	@ResponseBody
-	public String chartOrdersSales() {
+	public Map chartOrdersSales() {
 		
 		Map resultOrders=service.chartOrders();
+		
 		Map resultSales=service.chartSales();
 		
+		Map result=new HashMap();
+		result.put("resultOrders", resultOrders);
+		result.put("resultSales", resultSales);
 		
-		return null;
+		return result;
 	}
 	
 	

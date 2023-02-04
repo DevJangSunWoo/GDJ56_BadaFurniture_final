@@ -119,6 +119,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	//가구 관리 - 수정하기
 	@Override
+	@Transactional
 	public void updateProduct(Product p) {
 		// TODO Auto-generated method stub
 		int result= dao.updateProduct(session,p);
@@ -290,6 +291,7 @@ public class AdminServiceImpl implements AdminService {
 
 	//배송관리 - 배송상태 변경
 	@Override
+	@Transactional
 	public void updateDeliveryState(Map param) {
 		// TODO Auto-generated method stub
 		int result=dao.updateDeliveryState(session,param);
@@ -305,6 +307,7 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.chartDemand(session);
 	}
+
 	
 	//대시보드 - chartJs - 내가구팔기 가구비율
 	@Override
