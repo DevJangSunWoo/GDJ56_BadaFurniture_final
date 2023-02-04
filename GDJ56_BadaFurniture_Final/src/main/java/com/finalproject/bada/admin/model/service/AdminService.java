@@ -91,4 +91,11 @@ public interface AdminService {
 	
 	//대시보드 - 차트 - 상품별 주문수요
 	Map chartDemand();
+	
+	//대시보드 - chartJs - 내가구팔기 가구비율
+	Map chartResell();
+	
+	//대시보드 - chartJs - 일일 주문,매출액
+	Map chartOrders();
+	Map chartSales();
 }
