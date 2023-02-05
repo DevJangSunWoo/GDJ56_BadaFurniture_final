@@ -263,6 +263,7 @@ public class AdminDaoImpl implements AdminDao {
 		return session.selectOne("admin.chartDemand");
 	}
 
+
 	//대시보드 - chartJs - 내가구팔기 가구비율
 	@Override
 	public Map chartResell(SqlSessionTemplate session) {
