@@ -105,6 +105,7 @@
 						<th>분류</th>
 						<th>제품명</th>
 						<th>가격&nbsp;(원)</th>
+						<th>취소/반품 상태</th>	
 						<th>배송 상태</th>	
 					</tr>
 				</thead>
@@ -140,12 +141,22 @@
 								<td style="width: 30px;"><c:out value="${d.product.item }"/></td>
 								<td style="width: 30px;"><c:out value="${d.product.title }"/></td>
 								<td class="price" style="width: 70px;"><c:out value="${d.product.price }"/></td>
+								<td style="width: 50px;"><c:out value="${d.refundState}"/></td>
 								<td>
-									<select name="deliveryState">
-										<option value="배송대기" ${d.deliveryState=='배송대기'?"selected":"" }>배송대기</option>
-										<option value="배송중" ${d.deliveryState=='배송중'?"selected":"" }>배송중</option>
-										<option value="배송완료" ${d.deliveryState=='배송완료'?"selected":"" }>배송완료</option>
-									</select>
+									<c:if test='${d.refundState==null}'>
+										<select name="deliveryState">
+											<option value="배송대기" ${d.deliveryState=='배송대기'?"selected":"" }>배송대기</option>
+											<option value="배송중" ${d.deliveryState=='배송중'?"selected":"" }>배송중</option>
+											<option value="배송완료" ${d.deliveryState=='배송완료'?"selected":"" }>배송완료</option>
+										</select>
+									</c:if>
+									<c:if test='${d.refundState!=null}'>
+										<select name="deliveryState" disabled>
+											<option value="배송대기" ${d.deliveryState=='배송대기'?"selected":"" }>배송대기</option>
+											<option value="배송중" ${d.deliveryState=='배송중'?"selected":"" }>배송중</option>
+											<option value="배송완료" ${d.deliveryState=='배송완료'?"selected":"" }>배송완료</option>
+										</select>
+									</c:if>
 									
 								</td>
 

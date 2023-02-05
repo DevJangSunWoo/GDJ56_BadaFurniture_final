@@ -635,7 +635,7 @@ public class AdminController {
 	
 	
 	///////
-	//'배송관리' - 조회
+	//'배송관리' - 조회 (결제상태-취소완료,반품완료인거 안뜨게 변경)
 	@RequestMapping("/admin/delivery.do")
 	public ModelAndView deliveryList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
