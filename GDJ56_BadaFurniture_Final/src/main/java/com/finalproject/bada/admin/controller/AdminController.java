@@ -662,7 +662,7 @@ public class AdminController {
 		
 		//log.debug("totalData {}", totalData);		
 		
-		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "refund.do",searchType,searchKeyword));
+		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "delivery.do",searchType,searchKeyword));
 		
 		mv.addObject("searchType", searchType);
 		mv.addObject("searchKeyword", searchKeyword);

@@ -146,4 +146,31 @@
     }
 
 
-    
+    .valueDiv>a{
+        color: black;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .valueDiv>a:hover{
+        color: #348492;
+        font-weight: bold;
+    }
+
+    /* .valueDiv>a{
+        position: relative;
+        font-weight: bold;
+        color: black;
+    }
+    .valueDiv>a::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 10px;
+        position: absolute;
+        left: 0;
+        bottom: 0px;
+        background: #34849223;
+        width: 100%;
+        transition: width .3s;
+    } */
