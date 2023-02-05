@@ -260,49 +260,52 @@ public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 		
 	
 		//애초에 db에서 가져올떄	 애초에 가져올떄도 계좌이체로 계산했고 결제상태가 입금대기상태인 것들은 가져오면된다.?	
-		//list가 null 일떄 처리해야함
+		//list가 null 일떄 처리해야함   -> 예외처리?  OR COUNT ? 어떻게 해야하지-> 애초에 If문 씌이면 되는구나
 		List<OrderSheet> list=service.selectOrderList();
 		
-		Calendar orderafter3Day=Calendar.getInstance();
-		DateFormat df =new SimpleDateFormat("yyyy-MM-dd");		
+//		if(list==null) {
+//			log.debug("{}","null로나오네");
+//		}else {
+//			log.debug("{}","null로안나오므로 size 사용해야함");
+//		}
 		
-		Calendar today=Calendar.getInstance();
-		today.setTime(new Date());
 		
-		//#애초에 지금가져온  ordersheet는 결제수단은  계좌이체이고  결제 상태가 입금대기 인
-		for(OrderSheet  o: list) {
+		if(list!=null&& list.size()>0) {
+			Calendar orderafter3Day=Calendar.getInstance();
+			DateFormat df =new SimpleDateFormat("yyyy-MM-dd");		
 			
-			//log.debug("{}",o.getOrderSheetenrollDate());		
-			orderafter3Day.setTime(o.getOrderSheetenrollDate());
-			//log.debug("{}","전"+ df.format(orderafter3Day.getTime()));
-			orderafter3Day.add(Calendar.DATE,3); 
-//			log.debug("{}","후orderafter3Day"+df.format(orderafter3Day.getTime())+"기준점이다.");
-//			log.debug("{}","오늘날짜"+df.format(today.getTime())+".");
-//			
-//			log.debug("{}","today가 orderafter3Day 보다 전날이니? "+today.before(orderafter3Day));
-//			log.debug("{}","today가 orderafter3Day 와 같은날이니? "+today.equals(orderafter3Day));
-//			log.debug("{}","today가 orderafter3Day  보다 후일이니? "+today.after(orderafter3Day));
+			Calendar today=Calendar.getInstance();
+			today.setTime(new Date());
 			
 			//#애초에 지금가져온  ordersheet는 결제수단은  계좌이체이고  결제 상태가 입금대기 인
-			//그러니까 오늘날짜가  (주문일로부터 3일뒤날짜)  보다 후일이면 
-			if(today.after(orderafter3Day)==true) {
+			for(OrderSheet  o: list) {
 				
-				int updateOrderNo=o.getOrderSheetNo();
+				//log.debug("{}",o.getOrderSheetenrollDate());		
+				orderafter3Day.setTime(o.getOrderSheetenrollDate());
+				//log.debug("{}","전"+ df.format(orderafter3Day.getTime()));
+				orderafter3Day.add(Calendar.DATE,3); 
+	//			log.debug("{}","후orderafter3Day"+df.format(orderafter3Day.getTime())+"기준점이다.");
+	//			log.debug("{}","오늘날짜"+df.format(today.getTime())+".");
+	//			
+	//			log.debug("{}","today가 orderafter3Day 보다 전날이니? "+today.before(orderafter3Day));
+	//			log.debug("{}","today가 orderafter3Day 와 같은날이니? "+today.equals(orderafter3Day));
+	//			log.debug("{}","today가 orderafter3Day  보다 후일이니? "+today.after(orderafter3Day));
 				
-				//orderSheet에 결제상태를 미입금으로 바꿈				
-				service.updateUndeposited(updateOrderNo);
-			
-			 
+				//#애초에 지금가져온  ordersheet는 결제수단은  계좌이체이고  결제 상태가 입금대기 인
+				//그러니까 오늘날짜가  (주문일로부터 3일뒤날짜)  보다 후일이면 
+				if(today.after(orderafter3Day)==true) {
+					
+					int updateOrderNo=o.getOrderSheetNo();
+					
+					//orderSheet에 결제상태를 미입금으로 바꿈				
+					service.updateUndeposited(updateOrderNo);				
+				}
 				
 				
 				
 			}
-			
-			
-			
+		
 		}
-		
-		
 		
 		
 		
