@@ -19,4 +19,8 @@ public interface OrderService {
 	// int updateSoldOutState(HashMap map);
 	
 	
+	List<OrderSheet> selectOrderList();
+	
+	void updateUndeposited(int updateOrderNo);
+	
 }

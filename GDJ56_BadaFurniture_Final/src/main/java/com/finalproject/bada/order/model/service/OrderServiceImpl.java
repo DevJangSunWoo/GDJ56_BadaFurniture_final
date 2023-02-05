@@ -124,6 +124,36 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	
+	@Override
+	public List<OrderSheet> selectOrderList() {
+		// TODO Auto-generated method stub
+		return dao.selectOrderList(session);
+	}
+	
+	@Override
+	public void updateUndeposited(int updateOrderNo) {
+		
+		
+		int result=dao.updateUndeposited(session,updateOrderNo);
+		
+		if(result>0) {
+			
+			
+			
+			
+			
+		}else {
+			
+			throw new RuntimeException("미입금 상태로 변경 실패 ");
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 //	@Override
