@@ -238,3 +238,11 @@ div#summaryContainer th,td{
 		color: black;
 
 	}
+
+  .onclickInput{
+    width: 88px;
+    border-style: none;
+    background-color: #dcd5c36c;
+    text-align: center;
+    cursor: pointer;
+  }

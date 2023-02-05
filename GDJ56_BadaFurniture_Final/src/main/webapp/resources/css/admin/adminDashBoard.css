@@ -2,13 +2,13 @@
 
     /* div{        
         border: 1px solid blue;
-    } */
+    }
     
    
     canvas{
         border: 1px solid #3934348a;
-        
-    } 
+        border-radius: 7px;
+    }  */
 
     #divTop{
         display: flex;
@@ -74,7 +74,7 @@
 
     }
     .title{
-        font-size: 23px;
+        font-size: 20px;
     }
 
     .spanDiv{
@@ -95,21 +95,23 @@
     #divBot>#mixedGraph_container{
         display: block;
         width:65%;
-
+    }
+    #divBot>#mixedGraph_container>div>div{
+        
     }
     #divBot>#mixedGraph_container>canvas{
         height: 100%;
     }
-    #divBot>#basicGraph_container{
+    /* #divBot>#basicGraph_container{
         display: block;
         width:33%;
     }
     #divBot>#basicGraph_container>div{
-        width:100%;
+        width: 620px;
     }
     #divBot>#basicGraph_container canvas{
         height: 35%;
-    }
+    } */
     canvas{
         width: 100%;
     }
@@ -138,3 +140,37 @@
         text-align: center;
 
     }
+
+    .titleNcanvas {
+        display: block;
+    }
+
+
+    .valueDiv>a{
+        color: black;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .valueDiv>a:hover{
+        color: #348492;
+        font-weight: bold;
+    }
+
+    /* .valueDiv>a{
+        position: relative;
+        font-weight: bold;
+        color: black;
+    }
+    .valueDiv>a::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 10px;
+        position: absolute;
+        left: 0;
+        bottom: 0px;
+        background: #34849223;
+        width: 100%;
+        transition: width .3s;
+    } */
