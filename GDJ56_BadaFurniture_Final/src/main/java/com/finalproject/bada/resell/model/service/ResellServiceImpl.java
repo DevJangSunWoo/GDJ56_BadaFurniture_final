@@ -6,9 +6,12 @@ import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.finalproject.bada.common.AlertFactory;
 import com.finalproject.bada.member.model.vo.Member;
 import com.finalproject.bada.mypage.model.dao.MypageDao;
 import com.finalproject.bada.mypage.model.vo.Alert;
@@ -78,10 +81,11 @@ public class ResellServiceImpl implements ResellService {
 	@Transactional
 	public void insertResellComment(ResellComment resellComment, HttpSession httpSession) {
 		int result = dao.insertResellComment(session, resellComment);
-		Member loginMember = (Member)httpSession.getAttribute("loginMember");
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		Member loginMember = (Member)authentication.getPrincipal();
 		if(result>0 && loginMember != null && loginMember.getMemberId().equals("admin")) {
 			Resell resell = dao.selectResell(session, resellComment.getResellNo());
-			String alertMsg = mypageDao.getAlertMsg(httpSession.getServletContext().getContextPath(), "resellComment", resell);
+			String alertMsg = AlertFactory.getAlertMsg(httpSession.getServletContext().getContextPath(), "resellComment", resell);
 			result = 0;
 			result = mypageDao.insertAlert(session, Alert.builder().memberNo(resell.getMember().getMemberNo()).detail(alertMsg).build());
 			if(result <= 0) {

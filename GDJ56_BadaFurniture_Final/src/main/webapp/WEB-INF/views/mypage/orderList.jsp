@@ -469,7 +469,7 @@
 			let day = new Date(new Date().getTime() - dayArr[i]*24*60*60*1000).toISOString().split("T")[0];
 			$("input[name=searchKeyword]").eq(i).val(day+" ~ "+new Date().toISOString().split("T")[0]);
 		}
-		console.log("${searchKeyword}");
+		//console.log("${searchKeyword}");
 		if("${searchKeyword}" != "searchAll"){
 			$("input.searchDate").val("${searchKeyword}");
 		}
@@ -477,6 +477,14 @@
 			$("input.searchDate").val("날짜를 선택해주세요.");
 		}
 	});
+	
+	//계좌이체 입금일 구하는 함수(3일후)
+	const getAfterThreeDay = (date) =>{
+		let dateArr = date.split("-");
+		// 시:분:초 가 00:00:00 으로 설정되기 때문에 4일로 설정해야 3일 후가 뜬다.
+		let returnDate = new Date(new Date(dateArr[0], dateArr[1]-1, dateArr[2]).getTime() + 4*24*60*60*1000).toISOString().split("T")[0];
+		return returnDate;
+	}
 	
 	//날짜검색
 	$("button.searchDate").click(e=>{
@@ -544,11 +552,11 @@
 				$("table.infoTable td#totalPrice").text(fnSetComma(data.totalPrice)+"원");
 				$("table.infoTable td#paymentMethod").text(data.paymentMethod);
 				$("table.infoTable td#paymentState").text(data.paymentState);
-				$("table.infoTable td#paymentEtc").html(data.paymentMethod=="계좌이체"?"입금자명<br>[입금계좌]":"영수증");
+				$("table.infoTable td#paymentEtc").html(data.paymentMethod=="계좌이체"?"입금자명<br>[입금계좌]<br>[입금일]":"영수증");
 				let paymentEtcContent = $("table.infoTable td#paymentEtcContent");
 				if(data.paymentMethod=="계좌이체"){ //이게맞따
 					//paymentEtcContent.text(data.depositor);
-					$("table.infoTable td#paymentEtcContent").html(data.depositor +"<br>[예금주명:유병승 / BS은행 / 계좌번호:1002-1002-1002]");
+					$("table.infoTable td#paymentEtcContent").html(data.depositor +"<br>[예금주명:유병승 / BS은행 / 계좌번호:1002-1002-1002]<br>["+getAfterThreeDay(data.orderSheetenrollDate)+" 까지]");
 				} else {
 					let receiptButton = $("<button>").attr("class","receiptButton").text("영수증 보기").val(data.receiptUrl);
 					$("table.infoTable td#paymentEtcContent").html("");
@@ -594,9 +602,9 @@
 		drops: "auto"
 		}, 
 		function (start, end, label) {
-		    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+		    //console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
 			let when = $("#orderDateRange").val();
-			console.log(when);
+			//console.log(when);
 		}
 	);
 	
