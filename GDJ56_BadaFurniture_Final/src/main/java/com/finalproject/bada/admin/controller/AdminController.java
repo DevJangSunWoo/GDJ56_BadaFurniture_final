@@ -27,10 +27,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.finalproject.bada.admin.model.service.AdminService;
 import com.finalproject.bada.common.AdminPageFactory;
+import com.finalproject.bada.mypage.model.service.MypageService;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
 import com.finalproject.bada.refund.model.vo.Refund;
+import com.finalproject.bada.resell.model.service.ResellService;
+import com.finalproject.bada.resell.model.vo.Resell;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -41,11 +44,15 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 		
 	private AdminService service;
+	private ResellService resellService;
+	private MypageService mypageService;
 	
 	@Autowired
-	public AdminController(AdminService service) {
+	public AdminController(AdminService service, ResellService resellService, MypageService mypageService) {
 		super();
 		this.service = service;
+		this.resellService = resellService;
+		this.mypageService = mypageService;
 	}
 	
  
@@ -415,19 +422,30 @@ public class AdminController {
 	}
 	
 	//'내 가구 팔기 ' 관리 - 진행상태 변경
+	// 트랜잭션 추가
+	// [BD] 수정 - Alert 추가
 	@RequestMapping(value="/admin/updateProgressState.do")
 	@ResponseBody
 	public String updateProgressState(
 			@RequestParam("resellNo") int resellNo,
-			@RequestParam("progressState") String progressState) {
+			@RequestParam("progressState") String progressState, HttpSession httpSession) {
 		Map param=new HashMap();
+		
+		Resell resell = resellService.selectResell(resellNo);
+		
+		param.put("resell", resell);
 		param.put("resellNo", resellNo);
 		param.put("progressState", progressState);	
 		
 		log.debug("변경할 상태 : "+progressState);
 	
+		int result = 0;
+		try {
+			result=service.updateProgressState(param, httpSession);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
 		
-		int result=service.updateProgressState(param);
 		log.debug("ㅎㅇㅎㅇ{}",result);
 		Gson gson=new Gson();
 		JsonObject jsonOb=new JsonObject();
@@ -602,7 +620,7 @@ public class AdminController {
 	public Map updateRefundState(
 			@RequestParam("orderDetailNo") int orderDetailNo,
 			@RequestParam("refundState") String refundState,
-			@RequestParam("productNo") String productNo
+			@RequestParam("productNo") String productNo, HttpSession httpSession
 			) {		
 		
 		Map param=new HashMap();
@@ -616,7 +634,7 @@ public class AdminController {
 		Map result=new HashMap();	
 		
 		try {			
-			service.updateRefundState(param);	
+			service.updateRefundState(param, httpSession);	
 			result.put("msg", ("'"+(String)param.get("refundState"))+"'"+" 상태로 변경했습니다.");
 			
 		}catch(RuntimeException e) {

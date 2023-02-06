@@ -3,12 +3,17 @@ package com.finalproject.bada.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.finalproject.bada.admin.model.dao.AdminDao;
+import com.finalproject.bada.common.AlertFactory;
+import com.finalproject.bada.mypage.model.dao.MypageDao;
+import com.finalproject.bada.mypage.model.vo.Alert;
 import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
@@ -24,12 +29,14 @@ public class AdminServiceImpl implements AdminService {
 
 	private AdminDao dao;
 	private SqlSessionTemplate session;
+	private MypageDao mypageDao;
 	
 	@Autowired
-	public AdminServiceImpl(AdminDao dao, SqlSessionTemplate session) {
+	public AdminServiceImpl(AdminDao dao, SqlSessionTemplate session, MypageDao mypageDao) {
 		super();
 		this.dao = dao;
 		this.session = session;
+		this.mypageDao = mypageDao;
 	}
 	
 	//대시보드 - 요약
@@ -150,10 +157,30 @@ public class AdminServiceImpl implements AdminService {
 	
 	
 	//내가구팔기 관리 - 진행상태 변경
+	//[BD] 알림기능 추가
 	@Override
-	public int updateProgressState(Map param) {
-		// TODO Auto-generated method stub
-		return dao.updateProgressState(session,param);
+	@Transactional
+	public int updateProgressState(Map param, HttpSession httpSession) {
+		int result =  dao.updateProgressState(session,param);
+		if(result > 0) {
+			String progressState = (String)param.get("progressState");
+			if(progressState.equals("수정요청") || progressState.equals("승인완료")||progressState.equals("승인거부")) {
+				Resell resell = (Resell)param.get("resell");
+				log.debug("리쏄! : {}", resell);
+				resell.setProgressState(progressState);
+				String alertMsg = AlertFactory.getAlertMsg(httpSession.getServletContext().getContextPath(), "progressState", resell);
+				log.debug("alertMsg : {}" , alertMsg);
+				result = 0;
+				result = mypageDao.insertAlert(session, Alert.builder().memberNo(resell.getMember().getMemberNo()).detail(alertMsg).build());
+				if(result <= 0) {
+					throw new RuntimeException("알림 등록 실패");
+				}
+			}
+		}
+		else {
+			throw new RuntimeException("내 가구 팔기 진행상태 수정 실패");
+		}
+		return result;
 	}
 
 	
@@ -238,27 +265,35 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	//취소반품관리 - 취소반품상태 변경
+	//[BD] 알림기능 추가
 	@Override
 	@Transactional
-	public void updateRefundState(Map param) {
+	public void updateRefundState(Map param, HttpSession httpSession) {
 		// TODO Auto-generated method stub
 		int result=dao.updateRefundState(session,param);
 		
-		if(param.get("refundState").equals("반품완료")
-				||param.get("refundState").equals("취소완료")) {		
-			
-			result+=dao.updateSoldOutStateAfterRefund(session,param);
-			
+		if(result > 0 && (param.get("refundState").equals("반품완료") ||param.get("refundState").equals("취소완료"))) {			
+			result+=dao.updateSoldOutStateAfterRefund(session,param);		
 			if(result<2) {
 				throw new RuntimeException("취소/반품상태 변경에 실패했습니다.");					
-			}
-			
-		}else {
+			}		
+		} else {
 			if(result<1) {
-				throw new RuntimeException("취소/반품상태 변경에 실패했습니다.");				
+				throw new RuntimeException("취소/반품상태 변경에 실패했습니다.2");				
 			}
 		}		
-
+		//알림 설정
+		String refundState = (String)param.get("refundState");
+		if(refundState.equals("반품대기") || refundState.equals("반품완료") || refundState.equals("반품거부")
+				|| refundState.equals("취소완료") || refundState.equals("취소거부")) {
+			OrderDetail orderDetail = mypageDao.selectOrderDetailRefundOne(session, param);
+			String alertMsg = AlertFactory.getAlertMsg(httpSession.getServletContext().getContextPath(), "refundState", orderDetail);
+			result = 0;
+			result = mypageDao.insertAlert(session, Alert.builder().memberNo(orderDetail.getOrderSheet().getMember().getMemberNo()).detail(alertMsg).build());
+			if(result <= 0) {
+				throw new RuntimeException("알림 등록 실패");
+			}
+		}
 		
 	}
 

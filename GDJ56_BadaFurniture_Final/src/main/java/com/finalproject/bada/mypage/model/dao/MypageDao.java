@@ -38,4 +38,6 @@ public interface MypageDao {
 	List<OrderDetail> selectOrderDetailRefundList(SqlSessionTemplate session, int cPage, int numPerpage, Map search);
 	
 	int selectOrderDetailRefundListCount(SqlSessionTemplate session, Map search);
+	
+	OrderDetail selectOrderDetailRefundOne(SqlSessionTemplate session, Map search);
 }

@@ -277,10 +277,12 @@
 					//list.forEach(e=>{})
 					for(let i=0; i<list.length; i++){
 						let productWrap = $("<div>").addClass("productWrap");
-						let soldOutState= $("<input>").attr("type","hidden").addClass("productSoldOutState")
+						let soldOutState = $("<input>").attr("type","hidden").addClass("productSoldOutState")
 										.attr("value",list[i].soldOutState);
-						let productNo = $("<input>").attr("type","number").attr("name","productNo")
-										.attr("value",list[i].productNo).attr("readonly",true);
+						
+						let dateDiv = $("<div>").addClass("date")
+									.append($("<input>").attr("type","number").attr("name","productNo").attr("value",list[i].productNo).attr("readonly",true))
+									.append($("<span>").text(list[i].productEnrollDate));
 						
 						let showProduct = $("<div>").addClass("showProduct");
 						
@@ -299,40 +301,58 @@
 											+"</span><span>mm</span>");
 						let price = $("<div>").addClass("price")
 									.html("<span>"+list[i].price+"</span><span>원</span>");
-						let date = $("<div>").addClass("date")
-									.append($("<span>")).text(list[i].productEnrollDate);
 						
 						
-						productWrap.append(soldOutState).append(productNo).append(showProduct);
+						productWrap.append(soldOutState).append(dateDiv).append(showProduct);
 						showProduct.append(imgDiv).append(infoDiv);
-						infoDiv.append(productTitle).append(grade).append(size).append(price).append(date);
+						infoDiv.append(productTitle).append(grade).append(size).append(price);
 						
 						$("#productContainer").append(productWrap);
 						
-						//생성된 태그에 이벤트 걸어서 제품 div 클릭시 상세페이지로 연결
-						productWrap.on("click",function(e){
-							//console.log($(e.target).parents(".productWrap").children(".showProduct").prev().val());
-							let productNo = $(e.target).parents(".productWrap").children(".showProduct").prev().val();
-							location.assign("${path}/product/view.do?productNo="+productNo);
-						});
-						
-						//이미지 soldout 처리하기
-						$('.productSoldOutState').each (function (i,v){
-							//console.log($(v).val());			
-							if($(v).val()=='I' || $(v).val()=='Y'){
-								//console.log($(v).next().next().find(".imgDiv"));
-								
-								$(v).next().next().find(".imgDiv").find("#img").css('filter','blur(2px)');
-								$(v).next().next().find(".imgDiv").find("#img").css('-webkit-filter','blur(4px)');
-								$(v).next().next().find(".imgDiv").find(".soldOutImage").show();
-								
-							}
-							else{
-								$(v).next().next().find(".imgDiv").find(".soldOutImage").hide(); 	
-							} 
-						});
-						
 					}
+					
+					//매물정보 클릭시 상세페이지로 이동
+					$(".productWrap").on("click",function(e){
+						console.log($(e.target).parents(".productWrap").find(".date").children().first().val());
+						let productNo = $(e.target).parents(".productWrap").find(".date").children().first().val();
+						if(productNo!=undefined){
+							location.assign("${path}/product/view.do?productNo="+productNo);
+						}
+					});
+					
+					//이미지 soldout 처리하기
+					$('.productSoldOutState').each (function (i,v){
+						//console.log($(v).val());			
+						if($(v).val()=='I' || $(v).val()=='Y'){
+							//console.log($(v).next().next().find(".imgDiv"));
+							
+							$(v).next().next().find(".imgDiv").find("#img").css('filter','blur(2px)');
+							$(v).next().next().find(".imgDiv").find("#img").css('-webkit-filter','blur(4px)');
+							$(v).next().next().find(".imgDiv").find(".soldOutImage").show();
+							
+						}
+						else{
+							$(v).next().next().find(".imgDiv").find(".soldOutImage").hide(); 	
+						} 
+					});
+				
+					//천원단위 분리
+					$(()=>{
+						//console.log('t',$(".price"));
+					
+						$(".price").each(function (i,v){
+							//console.log($(v).children().first());	
+							let oriPrice=$(v).children().first().text();
+								
+							//console.log("이전: "+oriPrice);
+							//console.log("이후: "+parsedPrice);
+
+							let numberPrice=Number(oriPrice);
+							let parsedPrice=numberPrice.toLocaleString();
+				
+							$(v).children().first().text(parsedPrice);
+						});
+					});
 				}
 			});
 		}
@@ -387,7 +407,10 @@
 			<c:forEach items="${productList}" var="product">
 				<div class="productWrap">
 					<input type="hidden" class="productSoldOutState" value="${product.soldOutState }">
-	                <input type="number" name="productNo" id="productNo" value="${product.productNo }" readonly>
+					<div class="date">
+	                	<input type="number" name="productNo" id="productNo" value="${product.productNo }" readonly>
+	                	<span><fmt:formatDate value="${product.productEnrollDate}" type="date" pattern="yyyy-MM-dd(E)"/></span>
+	                </div>
 	                
 	                <div class="showProduct">
 		                <div class="imgDiv">
@@ -418,9 +441,9 @@
 		                    	<%-- <span><fmt:formatNumber value="${product.price}" type="currency"/></span> --%>
 		                    	<span>원</span>
 		                    </div>
-		                    <div class="date">
+		                    <%-- <div class="date">
 		                    	<span><fmt:formatDate value="${product.productEnrollDate}" type="date" pattern="yyyy-MM-dd(E)"/></span>
-		                    </div>
+		                    </div> --%>
 		                </div>
 	                </div> 
 	            </div>
@@ -454,11 +477,32 @@
 			 
 		});
 		
-		//매물정보 클릭시 상세페이지로 이동
+		//제품정보 클릭시 상세페이지로 이동
 		$(".productWrap").on("click",function(e){
-			console.log($(e.target).parents(".productWrap").children(".showProduct").prev().val());
-			let productNo = $(e.target).parents(".productWrap").children(".showProduct").prev().val();
-			location.assign("${path}/product/view.do?productNo="+productNo);
+			console.log($(e.target).parents(".productWrap").children(".showProduct").prev().find("#productNo").val());
+			let productNo = $(e.target).parents(".productWrap").children(".showProduct").prev().find("#productNo").val();
+			if(productNo!=undefined){
+				location.assign("${path}/product/view.do?productNo="+productNo);
+			}
+		});
+		
+		//제품숨긴상태 N이면 제품숨김
+		
+		
+		//천원단위 분리
+		$(()=>{
+			$(".price").each(function (i,v){
+			
+				let oriPrice = $(v).children().first().text();
+				let numberPrice = Number(oriPrice);
+				let parsedPrice = numberPrice.toLocaleString();
+	
+/* 				console.log("이전: "+oriPrice);
+				console.log("이후: "+parsedPrice);
+				console.log("=============") */
+				
+				$(v).children().first().text(parsedPrice);
+			});
 		});
 	</script>
 

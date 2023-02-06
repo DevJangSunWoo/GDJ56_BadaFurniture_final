@@ -61,6 +61,18 @@ public class OrderDaoImpl implements OrderDao {
 		return session.selectOne("order.selectCartCount", map);
 	}
 
+	@Override
+	public List<OrderSheet> selectOrderList(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectList("order.selectOrderList");
+	}
+
+	@Override
+	public int updateUndeposited(SqlSessionTemplate session, int updateOrderNo) {
+		// TODO Auto-generated method stub
+		return session.update("order.updateUndeposited",updateOrderNo);
+	}
+
 	
 	
 	

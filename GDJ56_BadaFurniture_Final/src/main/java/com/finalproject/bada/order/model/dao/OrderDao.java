@@ -18,6 +18,8 @@ public interface OrderDao {
 	int updateSoldOutState(SqlSessionTemplate session,HashMap map); 
 	int deleteMemberCart(SqlSessionTemplate session,HashMap map);	
 	int	selectCartCount(SqlSessionTemplate session,HashMap map);
-	
-	
+	 List<OrderSheet> selectOrderList(SqlSessionTemplate session);
+	 
+	 int updateUndeposited(SqlSessionTemplate session, int updateOrderNo);
+	 
 }
