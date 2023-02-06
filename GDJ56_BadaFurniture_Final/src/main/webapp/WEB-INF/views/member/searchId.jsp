@@ -92,7 +92,7 @@
 	            		$("#memailconfirm").on("blur", function(){
 	            			if (data != $("#memailconfirm").val()) { 
 	            				emconfirmchk = false;
-	            				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+	            				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호가 불일치</span>")
 	            				$("#emconfirmchk").css({
 	            					"color" : "#FA3E3E",
 	            					"font-weight" : "bold",

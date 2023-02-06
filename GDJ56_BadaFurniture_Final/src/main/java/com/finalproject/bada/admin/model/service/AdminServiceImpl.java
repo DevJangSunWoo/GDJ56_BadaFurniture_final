@@ -293,6 +293,7 @@ public class AdminServiceImpl implements AdminService {
 		}		
 		//알림 설정
 		String refundState = (String)param.get("refundState");
+		//log.debug(refundState);
 		if(refundState.equals("반품대기") || refundState.equals("반품완료") || refundState.equals("반품거부")
 				|| refundState.equals("취소완료") || refundState.equals("취소거부")) {
 			OrderDetail orderDetail = mypageDao.selectOrderDetailRefundOne(session, param);
