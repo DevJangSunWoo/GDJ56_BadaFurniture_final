@@ -331,8 +331,25 @@
 								$(v).next().next().find(".imgDiv").find(".soldOutImage").hide(); 	
 							} 
 						});
-						
 					}
+					
+					//천원단위 분리
+					$(()=>{
+						//console.log('t',$(".price"));
+					
+						$(".price").each(function (i,v){
+							//console.log($(v).children().first());	
+							let oriPrice=$(v).children().first().text();
+								
+							//console.log("이전: "+oriPrice);
+							//console.log("이후: "+parsedPrice);
+
+							let numberPrice=Number(oriPrice);
+							let parsedPrice=numberPrice.toLocaleString();
+				
+							$(v).children().first().text(parsedPrice);
+						});
+					});
 				}
 			});
 		}
@@ -462,14 +479,20 @@
 		});
 		
 		//천원단위 분리
-		/* $(()=>{
-		$(".price").each((i,v)=>{
-			let oriPrice=$(v).text();
-			let numberPrice=Number(oriPrice);
-			let parsedPrice=numberPrice.toLocaleString();
-
-			$(v).text(parsedPrice);
-		}); */
+		$(()=>{
+			$(".price").each(function (i,v){
+			
+				let oriPrice = $(v).children().first().text();
+				let numberPrice = Number(oriPrice);
+				let parsedPrice = numberPrice.toLocaleString();
+	
+/* 				console.log("이전: "+oriPrice);
+				console.log("이후: "+parsedPrice);
+				console.log("=============") */
+				
+				$(v).children().first().text(parsedPrice);
+			});
+		});
 	</script>
 
 

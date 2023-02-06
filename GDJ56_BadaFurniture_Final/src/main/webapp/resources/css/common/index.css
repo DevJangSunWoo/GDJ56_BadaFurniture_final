@@ -392,8 +392,12 @@ ul.ks-cboxtags li input[type="checkbox"] {
 
 .productWrap>input[name="productNo"]{
 	border: none;
-	width: 75px;
+	width: 98%;
 	margin-left: 5px;
+}
+
+.productWrap>input[name="productNo"]:focus{
+	border: none;
 }
 
 
