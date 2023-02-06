@@ -8,6 +8,14 @@
 <jsp:include page="/WEB-INF/views/common/adminHeader.jsp"/>
 <link rel="stylesheet" href="${path }/resources/css/admin/manageRefund.css"/>
 
+<!-- 제이쿼리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" 
+integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" 
+crossorigin="anonymous" type="text/javascript"></script>
+
+<!-- 아임포트 -->
+<script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+
 
 <style>
 	#pageBar a.active {
@@ -282,37 +290,21 @@
 				if(confirm("⛔ 취소/반품 완료 후에는 상태 변경이 불가합니다. 변경하시겠습니까?")){
 					
 					$.ajax({
-						url:"${path}/admin/selectOrderSheet.do",
+						 //url:"${path}/admin/selectOrderSheet.do",
+						url:"${path}/admin/cardCancel.do",
 						data:{
 							orderSheetNo:orderSheetNo
 						},
 						success:function(result){
+							alert("됐냐?");
+							// if(confirm(
+							// "주문자명 : "+result.member.memberName+
+							// " 주문번호 : "+result.orderSheetNo+
+							// " 환불금액 : ")){
 
-							console.log(result);
-							console.log(result.impUid);
+							// }else{
 
-							$.ajax({
-								url: "https://api.iamport.kr/users/getToken",
-								method: "post", // POST method
-								contentType : "application/json;",
-								data: {
-									imp_key: "8361161254308658", // REST API키
-									imp_secret: "Defk61fQjnfQ8MxXOO10ucVQ9vhSfVJqRNdEmBDqeMY9gSidzvwVg1jnUF10RKluNEZBLv3oPbEJ97rh" // REST API Secret
-								},
-								success:{
-									
-								}
-
-
-
-
-
-
-
-								
-							})
-
-
+							// }
 
 						}
 					})

@@ -1,8 +1,15 @@
 package com.finalproject.bada.admin.model.service;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,6 +27,8 @@ import com.finalproject.bada.product.model.vo.FileProduct;
 import com.finalproject.bada.product.model.vo.Product;
 import com.finalproject.bada.refund.model.vo.Refund;
 import com.finalproject.bada.resell.model.vo.Resell;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -365,13 +374,47 @@ public class AdminServiceImpl implements AdminService {
 	
 
 
-
-
-
-
-
-
 	
+	/////////////////////////////////////
+	//취소반품관리 - 아임포트 토큰 받아오기
+	public String getToken() throws IOException {
+		 
+		HttpsURLConnection conn = null;
+
+		URL url = new URL("https://api.iamport.kr/users/getToken");
+
+		conn = (HttpsURLConnection) url.openConnection();
+
+		conn.setRequestMethod("POST");
+		conn.setRequestProperty("Content-type", "application/json");
+		conn.setRequestProperty("Accept", "application/json");
+		conn.setDoOutput(true);
+		JsonObject json = new JsonObject();
+
+		json.addProperty("imp_key", "8361161254308658");
+		json.addProperty("imp_secret", "Defk61fQjnfQ8MxXOO10ucVQ9vhSfVJqRNdEmBDqeMY9gSidzvwVg1jnUF10RKluNEZBLv3oPbEJ97rh");
+		
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+		
+		bw.write(json.toString());
+		bw.flush();
+		bw.close();
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+
+		Gson gson = new Gson();
+
+		String response = gson.fromJson(br.readLine(), Map.class).get("response").toString();
+		
+		System.out.println(response);
+
+		String token = gson.fromJson(response, Map.class).get("access_token").toString();
+
+		br.close();
+		conn.disconnect();
+
+		return token;
+	}
 	
 	
 	

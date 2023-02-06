@@ -1,22 +1,27 @@
 package com.finalproject.bada.admin.controller;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.json.JSONParser;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -653,7 +658,7 @@ public class AdminController {
 			@RequestParam("orderDetailNo") int orderDetailNo ) {
 		
 		Refund refund=service.viewRefundDetail(orderDetailNo);
-		log.debug("안녕 환불 :{}",orderDetailNo+"|"+refund);
+		//log.debug("안녕 환불 :{}",orderDetailNo+"|"+refund);
 		
 		return refund;
 	}
@@ -841,82 +846,6 @@ public class AdminController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping("/admin/selectOrderSheet.do")
 	@ResponseBody
 	public OrderSheet selectOrderSheetByNo(
@@ -929,6 +858,199 @@ public class AdminController {
 	}
 	
 	
+	@RequestMapping("/admin/cardCancel.do")
+	@ResponseBody
+	public String cardCancel(
+			@RequestParam(value="orderSheetNo")int orderSheetNo) {
+		String token="";
+		try {
+			
+			token=service.getToken();
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		HttpsURLConnection conn = null;
+		//String response="";
+		try {
+			
+			URL url = new URL("https://api.iamport.kr/payments/cancel");
+			
+			conn = (HttpsURLConnection) url.openConnection();
+			
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-type", "application/json");
+			conn.setRequestProperty("Authorization", token);
+			conn.setDoOutput(true);
+			JsonObject json = new JsonObject();
+			
+			json.addProperty("reason", "테스트");
+			json.addProperty("imp_uid", "imp_529708345730");
+			json.addProperty("amount", "200");
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			
+			bw.write(json.toString());
+			bw.flush();
+			bw.close();
+			
+//			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+//			
+//			Gson gson = new Gson();
+//			
+//			response = gson.fromJson(br.readLine(), Map.class).get("response").toString();
+//			
+//			System.out.println("response:"+response);
+//			
+//			String token = gson.fromJson(response, Map.class).get("access_token").toString();
+//			
+//			br.close();
+			conn.disconnect();
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+//		return response;
+		
+		
+		
+		
+//		OrderSheet os=service.selectOrderSheet(orderSheetNo);
+//		OrderDetail od=service.selectOrderDetail(orderSheetNo);
+		
+		//log.debug("하이"+token);
+		
+	}
+//	@RequestMapping("/admin/cardCancel.do")
+//	public String getToken2() {
+////		HttpURLConnection conn=null;
+////		String access_token=null;
+////		try {
+////			URL url=new URL("https://api.iamport.kr/users/getToken");
+////			conn=(HttpURLConnection)url.openConnection();
+////			
+////			//요청방식
+////			conn.setRequestMethod("POST");
+////			
+////			//Header 설정
+////			conn.setRequestProperty("Content-Type", "application/json"); //보낼 데이터 타입 설정
+////			conn.setRequestProperty("Accept", "application/json"); //받을 데이터 타입 설정
+////			
+////			//Data 설정
+////			conn.setDoOutput(true); // OutputStream으로 POST데이터를 넘겨주겠다
+////
+////			//서버로 보낼 데이터 JSON으로 변환			
+//////			JsonObject obj=new JsonObject();	않ㄴ이 ;;; 이거 JSONObject랑 다르다고 ?? 진자 어이업내		
+//////			obj.addProperty("imp_Skey","8361161254308658");
+//////			obj.addProperty("imp_secret","Defk61fQjnfQ8MxXOO10ucVQ9vhSfVJqRNdEmBDqeMY9gSidzvwVg1jnUF10RKluNEZBLv3oPbEJ97rh");
+////			
+////			JSONObject obj=new JSONObject();			
+////			obj.put("imp_key","8361161254308658");
+////			obj.put("imp_secret","Defk61fQjnfQ8MxXOO10ucVQ9vhSfVJqRNdEmBDqeMY9gSidzvwVg1jnUF10RKluNEZBLv3oPbEJ97rh");
+////			
+////			BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+////			bw.write(obj.toString()); //쓰기....
+////			
+////			bw.flush(); //버퍼비우기
+////			bw.close(); //입력스트림 닫기
+////			
+////			
+////			
+////		}catch(Exception e) {
+////			e.printStackTrace();
+////		}
+//		
+//		
+//	}
+	
+	
+	///
+//	public String getToken(HttpServletRequest request
+//
+//			,HttpServletResponse response
+//
+//			,JsonObject json
+//
+//			,String requestURL) throws Exception{
+//
+//			// requestURL 아임포트 고유키, 시크릿 키 정보를 포함하는 url 정보 
+//
+//			String _token = "";
+//
+//			try{
+//
+//			String requestString = "";
+//
+//			URL url = new URL(requestURL);
+//
+//			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//
+//			connection.setDoOutput(true);
+//
+//			connection.setInstanceFollowRedirects(false);  
+//
+//			connection.setRequestMethod("POST");
+//
+//			connection.setRequestProperty("Content-Type", "application/json");
+//
+//			OutputStream os= connection.getOutputStream();
+//
+//			os.write(json.toString().getBytes());
+//
+//			connection.connect();
+//
+//			StringBuilder sb = new StringBuilder(); 
+//
+//			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+//
+//			BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
+//
+//			String line = null;  
+//
+//			while ((line = br.readLine()) != null) {  
+//
+//			sb.append(line + "\n");  
+//
+//			}
+//
+//			br.close();
+//
+//			requestString = sb.toString();
+//
+//			}
+//
+//			os.flush();
+//
+//			connection.disconnect();
+//
+//			JSONParser jsonParser = new JSONParser();
+//
+//			JsonObject jsonObj = (JsonObject) jsonParser.parse(requestString);
+//
+//			if((Long)jsonObj.get("code")  == 0){
+//
+//				JsonObject getToken = (JsonObject) jsonObj.get("response");
+//
+//			System.out.println("getToken==>>"+getToken.get("access_token") );
+//
+//			_token = (String)getToken.get("access_token");
+//
+//			}
+//
+//			}catch(Exception e){
+//
+//			e.printStackTrace();
+//
+//			_token = "";
+//
+//			}
+//
+//			return _token;
+//
+//			}
 	
 	
 }

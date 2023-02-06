@@ -1,5 +1,6 @@
 package com.finalproject.bada.admin.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -101,4 +102,10 @@ public interface AdminService {
 	Map chartOrders();
 	Map chartSales();
 
+	
+	//////////////////////////////
+	
+	String getToken() throws IOException;
+	
+	
 }
