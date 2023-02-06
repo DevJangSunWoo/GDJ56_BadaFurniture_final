@@ -125,7 +125,7 @@
 			}
 		</style>  	 
     	 
-    	 <input  type="text" id="productSoldOutState"  value="${productData.soldOutState}" >
+    	 <input  type="hidden" id="productSoldOutState"  value="${productData.soldOutState}" >
     	 <!--거래중 거래 완료 이미지  css 블러 처리하는 스크립트 -->
     	 <!--제품 soldOutState에 맞춰서 이미지 블러위에 이미지 표출하는 스크립트 -->
     	 <script>

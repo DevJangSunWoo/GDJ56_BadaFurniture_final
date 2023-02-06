@@ -16,11 +16,15 @@ public interface OrderService {
 	
 	List<OrderSheet> selectOrderComplete(int orderSheetNo);	
 	
-	// int updateSoldOutState(HashMap map);
+	// int updateSoldOutState(HashMap map);		
+	
+	List<OrderSheet> selectOrderSheetUndepositedList();
+	
+		
+	void updateUndeposited();
+	
+	/* List<OrderDetail> selectOrderDetail */
 	
 	
-	List<OrderSheet> selectOrderList();
-	
-	void updateUndeposited(int updateOrderNo);
 	
 }

@@ -2,6 +2,7 @@ package com.finalproject.bada.order.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -18,8 +19,12 @@ public interface OrderDao {
 	int updateSoldOutState(SqlSessionTemplate session,HashMap map); 
 	int deleteMemberCart(SqlSessionTemplate session,HashMap map);	
 	int	selectCartCount(SqlSessionTemplate session,HashMap map);
-	 List<OrderSheet> selectOrderList(SqlSessionTemplate session);
 	 
-	 int updateUndeposited(SqlSessionTemplate session, int updateOrderNo);
+	List<OrderSheet> selectOrderSheetUndepositedList(SqlSessionTemplate session);
+	 
+	int updateOrderSheetUndeposited(SqlSessionTemplate session,HashMap param);
+	 
+	int updateOrderDetailRefundState(SqlSessionTemplate session,HashMap param);
+	 
 	 
 }

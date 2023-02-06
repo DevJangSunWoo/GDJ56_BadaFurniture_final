@@ -4,6 +4,7 @@ package com.finalproject.bada.order.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,30 +125,70 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	
-	@Override
-	public List<OrderSheet> selectOrderList() {
-		// TODO Auto-generated method stub
-		return dao.selectOrderList(session);
-	}
 	
 	@Override
-	public void updateUndeposited(int updateOrderNo) {
-		
-		
-		int result=dao.updateUndeposited(session,updateOrderNo);
-		
-		if(result>0) {
-			
-			
-			
-			
-			
-		}else {
-			
-			throw new RuntimeException("미입금 상태로 변경 실패 ");
-		}
-		
+	public List<OrderSheet> selectOrderSheetUndepositedList() {
+		// TODO Auto-generated method stub
+		return dao.selectOrderSheetUndepositedList(session);
 	}
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public void updateUndeposited() {
+		
+		
+		
+		//애초에 db에서 가져올떄	 애초에 가져올떄도 계좌이체로 계산했고 결제상태가 입금대기상태인 것들은 가져오면된다.-> 즉 오늘날짜로부터 -3일인데도 아직까지 입금대기상태이고 계좌이체로 결제한  녀석들을가져온면된다.
+		//list가 null 일떄 처리해야함   -> 예외처리?  OR COUNT ? 어떻게 해야하지-> 애초에 If문 씌이면 되는구나
+		List<OrderSheet> list=selectOrderSheetUndepositedList();
+		//log.debug("테테스트{}", list);
+		
+		HashMap param=new HashMap();
+		
+		param.put("orderSheets", list);
+		
+		
+		
+		if(list!=null&& list.size()>0) {
+
+				
+			
+			int resultOrderSheetUndeposited= dao.updateOrderSheetUndeposited(session,param);	
+			 
+			 if(resultOrderSheetUndeposited>0) {
+				 //log.debug("{}"," 주문서 미입금상태 변경 성공");	
+				
+			
+				 int resultupdateOrderDetailRefundState=dao.updateOrderDetailRefundState(session,param);
+				 
+				 if(resultupdateOrderDetailRefundState>0) {
+					 log.debug("{}","주문상세 Refund_state 변경 성공");	
+					 
+					 
+										 
+				 }else {
+					 throw new RuntimeException("주문상세 Refund_state 변경 실패 ");
+				 }
+				 
+				 
+				 
+			 }else {
+				 
+				 throw new RuntimeException("주문서 미입금 상태로 변경 실패 ");				 
+			 }
+			
+		
+			}		
+	}
+	
+	
+	
+	
 	
 	
 	
