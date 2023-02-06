@@ -37,9 +37,13 @@ public class AlertFactory {
 			}
 			break;
 		case "undeposited" :
-			OrderSheet undepositedOrderSheet = (OrderSheet)obj;
-			
-			
+			//undepositedOrderSheet
+			OrderSheet uos = (OrderSheet)obj;
+			String sizeMinusOne = Integer.toString(uos.getDetails().size() - 1);
+			msg = "<a href=\""+path+"/mypage/order.do?orderSheetNo="+uos.getOrderSheetNo()+"\">"+uos.getDetails().get(0).getProduct().getTitle()
+					+ (uos.getDetails().size()>1?("외 "+ ""+sizeMinusOne +"건"):"") +" 구매신청("+formatter.format(uos.getTotalPrice()) +")"+"</a>이"
+					+ "미입금으로 인해 <b>구매취소</b> 되었습니다.";
+			break;
 		default: 
 			break;
 		}
