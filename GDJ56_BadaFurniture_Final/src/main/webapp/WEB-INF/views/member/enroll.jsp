@@ -173,18 +173,18 @@
 
                         	// 이메일 인증번호 체크 함수
                         	function chkEmailConfirm(data){
-                        		$("#memailconfirm").on("blur", function(){
+                        		$("#memailconfirm").on("keyup", function(){
                         			if (data != $("#memailconfirm").val()) { 
                         				emconfirmchk = false;
-                        				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+                        				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호가 불일치</span>")
                         				$("#emconfirmchk").css({
                         					"color" : "#FA3E3E",
                         					"font-weight" : "bold",
                         					"font-size" : "14px"
                         				});
                         				
-                        				alert("인증번호가 잘못되었습니다.");
-        	            				$("input[name=emailck]").val("");
+                        				//alert("인증번호가 틀렸습니다.");
+        	            				//$("input[name=emailck]").val("");
                         				
                         			} else { // 아니면 중복아님
                         				emconfirmchk = true;
@@ -194,9 +194,16 @@
                         					"color" : "#0D6EFD",
                         					"font-weight" : "bold",
                         					"font-size" : "14px"
-                        				})
+                        				});
                         			}
-                        		})
+                        			
+                        			$("#memailconfirm").on("blur", function(){
+    	            					if (data != $("#memailconfirm").val()){
+    	            						alert("인증번호가 틀렸습니다.");
+    	            						$("input[name=emailck]").val("");
+    	            					}
+    								});
+                        		});
                         	}
                         </script>
                         
@@ -211,20 +218,18 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/비밀번호체크.png">
                             <div class="input-container">		
-                                <input type="password" name="passwordck" class="form__input" placeholder="비밀번호 확인" required/>
+                                <input type="password" name="passwordck" id="pwck" class="form__input" placeholder="비밀번호 확인" required/>
                                 <label class="form__label" id="passwordckTxt">비밀번호 확인</label>
                             </div>
                         </div>
                         <br>
                         
                         <script>
-                        	//비밀번호 확인
-							$("input[name=passwordck]").blur(e=>{
+
+	            			//비밀번호 확인
+							$("input[name=passwordck]").keyup(e=>{
 								const pw = $("#pw").val();
 								const pwck = $("input[name=passwordck]").val();
-								
-								console.log($("#pw").val());
-								console.log(pwck);
 								
 								if(pw!=pwck){
 									$("#passwordckTxt").html("<span id='passwordck'>비밀번호 불일치</span>")
@@ -233,10 +238,6 @@
                     					"font-weight" : "bold",
                     					"font-size" : "14px"
                     				});
-									
-									$("input[name=passwordck]").val('');
-									//$("input[name=passwordck]").focus();
-									
 								}else{
 									$("#passwordckTxt").html("<span id='passwordck'>비밀번호 일치</span>")
                     				$("#passwordck").css({
@@ -245,7 +246,32 @@
                     					"font-size" : "14px"
                     				});
 								}
+								
+								$("#pwck").blur(e=>{
+									const pw=$("#pw").val();
+	            					const pwck=$("#pwck").val();
+	            					if(pw!=pwck){
+	            						$("#pwck").val('');
+	            					}
+								});
+								
 							});
+	            			
+							//비번 정규표현식, 일치-불일치 체크
+	            			$(()=>{
+	            				$("#pw").blur(e=>{
+	            					const pw=$("#pw").val();
+	            					const pwck=$("#pwck").val(); //비밀번호 확인
+	            					const pwChk=/^[a-zA-Z0-9]+$/ //정규표현식
+	            					
+	            					//비밀번호 정규표현식
+	            					if(!pwChk.test(pw) || pw.trim().length<8){
+	            						alert("⛔ 비밀번호는 8자 이상, 영문자/숫자로만 구성할 수 있습니다.⛔");
+	            						$("#pw").val('');
+	            						// $("#userPw").focus();
+	            					}
+	            				});
+	            			});
                         	
                         </script>
                         
