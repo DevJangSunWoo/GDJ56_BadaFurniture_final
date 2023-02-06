@@ -4,14 +4,19 @@ package com.finalproject.bada.order.model.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.finalproject.bada.common.AlertFactory;
+import com.finalproject.bada.mypage.model.dao.MypageDao;
+import com.finalproject.bada.mypage.model.vo.Alert;
 import com.finalproject.bada.order.model.dao.OrderDao;
+import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
 
@@ -24,10 +29,12 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderDao dao;
 	private SqlSessionTemplate session;
-	public OrderServiceImpl(OrderDao dao, SqlSessionTemplate session) {
+	private MypageDao mypageDao;
+	public OrderServiceImpl(OrderDao dao, SqlSessionTemplate session, MypageDao mypageDao) {
 		super();
 		this.dao = dao;
 		this.session = session;
+		this.mypageDao = mypageDao;
 	}
 	@Override
 	public Product selectOrderSheet(int productNo) {
@@ -139,22 +146,29 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	@Override
-	public void updateUndeposited() {
+	public List<OrderDetail> selectOrderDetailCancelCompleted() {
+		// TODO Auto-generated method stub
+		return dao.selectOrderDetailCancelCompleted(session);
+	}
+	
+	
+	@Override
+	public void updateUndeposited(HttpSession httpSession) {
 		
 		
 		
 		//애초에 db에서 가져올떄	 애초에 가져올떄도 계좌이체로 계산했고 결제상태가 입금대기상태인 것들은 가져오면된다.-> 즉 오늘날짜로부터 -3일인데도 아직까지 입금대기상태이고 계좌이체로 결제한  녀석들을가져온면된다.
 		//list가 null 일떄 처리해야함   -> 예외처리?  OR COUNT ? 어떻게 해야하지-> 애초에 If문 씌이면 되는구나
-		List<OrderSheet> list=selectOrderSheetUndepositedList();
+		List<OrderSheet> orderSheetList=selectOrderSheetUndepositedList();
 		//log.debug("테테스트{}", list);
 		
 		HashMap param=new HashMap();
 		
-		param.put("orderSheets", list);
+		param.put("orderSheets", orderSheetList);
 		
 		
 		
-		if(list!=null&& list.size()>0) {
+		if(orderSheetList!=null&& orderSheetList.size()>0) {
 
 				
 			
@@ -164,11 +178,62 @@ public class OrderServiceImpl implements OrderService {
 				 //log.debug("{}"," 주문서 미입금상태 변경 성공");	
 				
 			
-				 int resultupdateOrderDetailRefundState=dao.updateOrderDetailRefundState(session,param);
+				 int resultUpdateOrderDetailRefundState=dao.updateOrderDetailRefundState(session,param);
 				 
-				 if(resultupdateOrderDetailRefundState>0) {
-					 log.debug("{}","주문상세 Refund_state 변경 성공");	
-					 
+				 
+				 
+				 if(resultUpdateOrderDetailRefundState>0) {
+					 //log.debug("{}","주문상세 Refund_state 변경 성공");	
+					    List<OrderDetail> orderDetailList=selectOrderDetailCancelCompleted();
+					    
+					    param.put("orderDetails", orderDetailList);
+					    
+					    if(orderDetailList!=null&& orderDetailList.size()>0) {					    	
+					    	int  resultRefund=0;
+					    	 
+					    	for(OrderDetail od : orderDetailList ) {					    		
+					    		int orderDetailNo=od.getOrderDetailNo();
+					    		resultRefund += dao.insertRefund(session,orderDetailNo);
+					    	}
+					    	
+					    		
+					    	if( resultRefund !=orderDetailList.size()) {
+					    		throw new RuntimeException("REFUND가 갯수 만큼 삽입이 안됬습니다.");
+					    		
+					    	}else {
+					    		
+					    		//log.debug("{}" ,"REFUND 테이블에  갯수 만큼 삽입 성공" );
+					    		
+					    		int productUpdateResult=dao.updateRefundProductSoldOutState(session,param);
+					    	
+					    	
+					    		if(productUpdateResult>0) {
+					    			int resultUndeposited = 0; 
+					    			//log.debug("{}" ,"제품 판매상태 변경 선공" );
+					    			for(OrderSheet os : orderSheetList) {
+					    				String alertMsg = AlertFactory.getAlertMsg(httpSession.getServletContext().getContextPath(), "undeposited", os);
+					    				resultUndeposited += mypageDao.insertAlert(session, Alert.builder().memberNo(os.getMember().getMemberNo()).detail(alertMsg).build());
+					    			}
+					    			if(resultUndeposited < orderSheetList.size()) {
+					    				new RuntimeException("미입금자 알림 입력 실패");
+					    			}
+					    			
+					    		}else {
+					    			
+					    			throw new RuntimeException("제품 판매상태  변경 실패 ");
+					    		}
+					    				
+					    			
+					    	
+					    	
+					    	
+					    	
+					    	}
+					    		
+					    	
+					    	
+					    	
+					    }
 					 
 										 
 				 }else {

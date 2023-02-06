@@ -3,10 +3,11 @@ package com.finalproject.bada.order.controller;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -232,12 +233,12 @@ public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 	
 	//테스트 주소 
 	@RequestMapping("/test.do")	
-	public ModelAndView test(ModelAndView mv) {
+	public ModelAndView test(ModelAndView mv, HttpSession httpSession) {
 		
 			
 
 
-		 service.updateUndeposited();
+		 service.updateUndeposited(httpSession);
 		
 		
 		mv.setViewName("product/test");

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
 
@@ -25,6 +26,14 @@ public interface OrderDao {
 	int updateOrderSheetUndeposited(SqlSessionTemplate session,HashMap param);
 	 
 	int updateOrderDetailRefundState(SqlSessionTemplate session,HashMap param);
+	 
+	
+	 List<OrderDetail> selectOrderDetailCancelCompleted(SqlSessionTemplate session);
+	
+	 int insertRefund(SqlSessionTemplate session,int orderDetailNo);
+	 
+	int  updateRefundProductSoldOutState(SqlSessionTemplate session,HashMap param);
+	 
 	 
 	 
 }

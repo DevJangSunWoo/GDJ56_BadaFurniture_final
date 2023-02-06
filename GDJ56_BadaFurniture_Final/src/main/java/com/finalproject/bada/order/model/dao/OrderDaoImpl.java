@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
 
@@ -80,6 +81,27 @@ public class OrderDaoImpl implements OrderDao {
 		return session.update("order.updateOrderDetailRefundState", param);
 	}
 
+	
+	@Override
+	public List<OrderDetail> selectOrderDetailCancelCompleted(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectList("order.selectOrderDetailCancelCompleted");
+	}
+
+	@Override
+	public int insertRefund(SqlSessionTemplate session, int orderDetailNo) {
+		// TODO Auto-generated method stub
+		return session.insert("order.insertRefund", orderDetailNo);
+	}
+
+	@Override
+	public int updateRefundProductSoldOutState(SqlSessionTemplate session, HashMap param) {
+		// TODO Auto-generated method stub
+		return session.update("order.updateRefundProductSoldOutState", param);
+	}
+
+	
+	
 	
 	
 	
