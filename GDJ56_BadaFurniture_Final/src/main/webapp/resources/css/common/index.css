@@ -386,20 +386,15 @@ ul.ks-cboxtags li input[type="checkbox"] {
     border: 1px solid lightgrey;
     border-radius: 10px;
     width: 330px;
-    height: 500px;
+    /* height: 500px; */
 	margin: 10px;
 }
 
-.productWrap>input[name="productNo"]{
+input[name="productNo"]{
 	border: none;
-	width: 98%;
-	margin-left: 5px;
-}
-
-.productWrap>input[name="productNo"]:focus{
 	border: none;
+    width: 25%;
 }
-
 
 .imgDiv{
     display: flex;
@@ -445,8 +440,11 @@ ul.ks-cboxtags li input[type="checkbox"] {
 }
 
 .date {
-	float: right;
-	margin-right: 7px;
+	display: flex;
+	justify-content: space-between;
+	margin : 5px;
+	/* margin-left : 5px;
+	margin-right : 5px; */
 }
 
 /* -------------------------------------------------------------------------------------------------- */
