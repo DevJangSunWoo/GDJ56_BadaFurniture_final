@@ -126,9 +126,9 @@
 								</td>
 								<td style="width: 40px;">
 									<input type="hidden" value="${d.orderDetailNo }">
-									<a class="viewOrderDetail" href="">
+									
 										<c:out value="${d.orderDetailNo }"/>
-									</a>
+									
 								</td>
 								<td style="width: 20px;">
 									<a class="viewProduct" href="${path}/product/view.do?productNo=${d.product.productNo }">

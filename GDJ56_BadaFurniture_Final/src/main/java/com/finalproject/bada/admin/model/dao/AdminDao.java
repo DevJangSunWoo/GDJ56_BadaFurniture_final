@@ -107,5 +107,6 @@ public interface AdminDao {
 	Map chartOrders(SqlSessionTemplate session);
 	Map chartSales(SqlSessionTemplate session);
 	
+
 	
 }

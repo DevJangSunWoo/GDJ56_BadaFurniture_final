@@ -98,4 +98,5 @@ public interface AdminService {
 	//대시보드 - chartJs - 일일 주문,매출액
 	Map chartOrders();
 	Map chartSales();
+
 }

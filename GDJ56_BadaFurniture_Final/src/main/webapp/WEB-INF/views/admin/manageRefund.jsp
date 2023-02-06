@@ -125,18 +125,19 @@
 
 					</c:if>
 					<c:if test="${not empty refund}">
-						<c:forEach var="r" items="${refund }">
+						<c:forEach var="r" items="${refund }">							
 							<tr>
 								<td style="width: 20px;">
+									
 									<a class="viewOrderSheet" href="${path}/admin/order.do?searchKeyword=${r.orderSheet.orderSheetNo}&searchType=ORDER_SHEET_NO">
 										<c:out value="${r.orderSheet.orderSheetNo }"/>
 									</a>
 								</td>
 								<td style="width: 40px;">
 									<input type="hidden" value="${r.orderDetailNo }">
-									<a class="viewOrderDetail" href="">
+									
 										<c:out value="${r.orderDetailNo }"/>
-									</a>
+									
 								</td>
 								<td style="width: 20px;">
 									<input type="hidden" value="${r.product.productNo }">
@@ -151,7 +152,8 @@
 								<td style="width: 30px;"><c:out value="${r.product.title }"/></td>
 								<td class="price" style="width: 70px;"><c:out value="${r.product.price }"/></td>
 								<td>
-									<select name="refundState" id="refundStateSelectBox" ${r.refundState.equals("반품완료")?"disabled":""} ${r.refundState.equals("취소완료")?"disabled":""}>
+									<!-- <select name="refundState" id="refundStateSelectBox" ${r.refundState.equals("반품완료")?"disabled":""} ${r.refundState.equals("취소완료")?"disabled":""}> -->
+									<select name="refundState" id="refundStateSelectBox">
 										<option value="반품요청" ${r.refundState.equals("반품요청")?"selected":""}>반품요청</option>
 										<option value="반품대기" ${r.refundState.equals("반품대기")?"selected":""}>반품대기</option>
 										<option value="반품완료" ${r.refundState.equals("반품완료")?"selected":""}>반품완료</option>
@@ -162,7 +164,7 @@
 									</select>								
 									
 								</td>
-
+								<input type="hidden" value="${r.orderSheet.orderSheetNo }">
 								<td class="tableTd" style="width: 80px;">
 									<button id="detailModalBtn" class="updateBtn" onclick="" name="refundDetail">상세확인</button>
 								</td>
@@ -267,15 +269,62 @@
 			const orderDetailNo=$(e.target).parent().parent().children().find('input').first().val();
 			const refundState=$(e.target).val();
 			const productNo=$(e.target).parent().prev().prev().prev().prev().prev().children().val();
+			
+			const orderSheetNo=$(e.target).parent().next().val();
+			
 			// console.log(orderDetailNo);
 			// console.log(refundState);
 			// console.log(productNo);
+			// console.log(orderSheetNo);
+
 
 			if(refundState=="취소완료" || refundState=="반품완료"){
 				if(confirm("⛔ 취소/반품 완료 후에는 상태 변경이 불가합니다. 변경하시겠습니까?")){
-					updateRefundState(orderDetailNo,refundState,productNo);
-					$(e.target).attr("disabled",true);
+					
+					$.ajax({
+						url:"${path}/admin/selectOrderSheet.do",
+						data:{
+							orderSheetNo:orderSheetNo
+						},
+						success:function(result){
 
+							console.log(result);
+							console.log(result.impUid);
+
+							$.ajax({
+								url: "https://api.iamport.kr/users/getToken",
+								method: "post", // POST method
+								contentType : "application/json;",
+								data: {
+									imp_key: "8361161254308658", // REST API키
+									imp_secret: "Defk61fQjnfQ8MxXOO10ucVQ9vhSfVJqRNdEmBDqeMY9gSidzvwVg1jnUF10RKluNEZBLv3oPbEJ97rh" // REST API Secret
+								},
+								success:{
+									
+								}
+
+
+
+
+
+
+
+								
+							})
+
+
+
+						}
+					})
+
+
+
+
+
+					// 지우면 안됨 ------------
+					// updateRefundState(orderDetailNo,refundState,productNo);
+					// $(e.target).attr("disabled",true);
+					// 지우면 안됨 여기까지 ---
 				}else{
 					location.reload();
 				}
@@ -352,6 +401,7 @@
 			}
 		})
 	}
+
 
 
 </script>
