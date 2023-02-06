@@ -283,8 +283,6 @@
 						let dateDiv = $("<div>").addClass("date")
 									.append($("<input>").attr("type","number").attr("name","productNo").attr("value",list[i].productNo).attr("readonly",true))
 									.append($("<span>").text(list[i].productEnrollDate));
-						//let date = ;
-						
 						
 						let showProduct = $("<div>").addClass("showProduct");
 						
@@ -479,7 +477,7 @@
 			 
 		});
 		
-		//매물정보 클릭시 상세페이지로 이동
+		//제품정보 클릭시 상세페이지로 이동
 		$(".productWrap").on("click",function(e){
 			console.log($(e.target).parents(".productWrap").children(".showProduct").prev().find("#productNo").val());
 			let productNo = $(e.target).parents(".productWrap").children(".showProduct").prev().find("#productNo").val();
@@ -487,6 +485,9 @@
 				location.assign("${path}/product/view.do?productNo="+productNo);
 			}
 		});
+		
+		//제품숨긴상태 N이면 제품숨김
+		
 		
 		//천원단위 분리
 		$(()=>{
