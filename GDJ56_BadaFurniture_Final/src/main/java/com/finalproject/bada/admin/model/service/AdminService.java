@@ -3,6 +3,8 @@ package com.finalproject.bada.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.FileProduct;
@@ -50,7 +52,7 @@ public interface AdminService {
 	Map<String,Integer> resellSummary();
 	
 	//내가구팔기 관리 - 진행상태 변경
-	int updateProgressState(Map param);	
+	int updateProgressState(Map param, HttpSession httpSession);	
 	
 	//주문관리 - 조회
 	List<OrderSheet> orderListPage(Map<String,Integer> param,Map search);
@@ -74,7 +76,7 @@ public interface AdminService {
 	Map<String,Integer> refundSummary();
 	
 	//취소반품관리 - 취소반품상태 변경
-	void updateRefundState(Map param);
+	void updateRefundState(Map param, HttpSession httpSession);
 	
 	//취소반품관리 - 취소반품 상세조회
 	Refund viewRefundDetail(int orderDetailNo);

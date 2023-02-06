@@ -254,7 +254,8 @@ public class MypageController {
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
 			@RequestParam(value="numPerpage", defaultValue="7") int numPerpage,
 			@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType,
-			@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword) {
+			@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword,
+			@RequestParam(value="orderDetailNo", required = false) Integer orderDetailNo) {
 		
 		
 		Map search=new HashMap();
@@ -262,6 +263,8 @@ public class MypageController {
 		Member loginMember = (Member)authentication.getPrincipal();
 		search.put("memberNo", loginMember.getMemberNo());
 		search.put("searchType", searchType);
+		//추가
+		search.put("orderDetailNo", orderDetailNo);
 		if(searchType.equals("ORDER_SHEET_ENROLL_DATE")) {	
 			String[] keys=searchKeyword.split("~");		
 			String key1=keys[0].trim();
