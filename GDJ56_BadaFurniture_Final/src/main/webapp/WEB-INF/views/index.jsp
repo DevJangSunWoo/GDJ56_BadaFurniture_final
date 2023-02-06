@@ -460,6 +460,16 @@
 			let productNo = $(e.target).parents(".productWrap").children(".showProduct").prev().val();
 			location.assign("${path}/product/view.do?productNo="+productNo);
 		});
+		
+		//천원단위 분리
+		/* $(()=>{
+		$(".price").each((i,v)=>{
+			let oriPrice=$(v).text();
+			let numberPrice=Number(oriPrice);
+			let parsedPrice=numberPrice.toLocaleString();
+
+			$(v).text(parsedPrice);
+		}); */
 	</script>
 
 
