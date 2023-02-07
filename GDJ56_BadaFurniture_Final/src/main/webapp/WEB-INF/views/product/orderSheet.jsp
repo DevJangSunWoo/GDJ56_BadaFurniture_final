@@ -1038,7 +1038,7 @@
 			/* 	$('#orderForm').action = '${path}/order/orderPayment.do'; */  
 				/* $('#orderForm').target = '_blank'; */
 			/* 	$('#orderForm').submit(); */
-			alert('7일이내로 금액을 입금하셔야 배송이 시작됩니다. 예금주명:유병승/은행:BS은행/계좌번호:1002-1002-1002 으로 보내주시면 됩니다.');				
+			alert('3일이내로 금액을 입금하셔야 배송이 시작됩니다.예금주명:유병승/은행:BS은행/계좌번호:1002-1002-1002 으로 보내주시면 됩니다.');				
 			$('#payMethodWay').val('계좌이체');
 			//console.log($('#payMethodWay').val());
 			
