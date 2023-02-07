@@ -3,10 +3,11 @@ package com.finalproject.bada.order.controller;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -32,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 	
 	private static final Logger log = LoggerFactory.getLogger(OrderController.class);
-	//해달클래명.class
+	//해당클래명.class
 	
 	private OrderService service;
 
@@ -201,8 +202,6 @@ public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 		
 		mv.setViewName("product/orderComplete");
 		
-		//주문이 완료되는 시점에서   executeInternal(context);
-		//executeInternal(context);
 		
 		
 		
@@ -218,99 +217,29 @@ public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 	//계좌이체로 결제후 3일 후에도 미입금시  해당 결제 주문 취소기키는 로직 
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		// TODO Auto-generated method stub
-		//log.info("Ordercontroller 실행");
 	
-	//1.첫번쨰 기준 날짜    ->  오늘 날짜가  >=   주문일+3일 
-	//and 이고
-	//2.주문서의 결제상태가 미입금상태이면
-	//주문을 취소 시킨다.	
 		
 		
-	
+		// service.updateUndeposited();
 					
 	
-	//일단 오늘의 날짜가 >= 오늘의 날짜+3일 상태여야한다.	
-		
-	//1.첫번쨰 기준 날짜    ->  오늘 날짜(주문일로부터 3일)가  >=   ordersheet의  주문등록일 	
-	//필요한것  주문서들의 날짜
-	Calendar cal=Calendar.getInstance();
-	cal.setTime(new Date());
-	DateFormat df =new SimpleDateFormat("yyyy-MM-dd");
-	//log.debug("{}","변경전 현재 일시 :" +df.format(cal.getTime()));
-	cal.add(Calendar.DATE,3); //3일 더하기
-
-	//log.debug("{}","변경후  일시 :" +df.format(cal.getTime()));	
+	
 		
 		
 		
 	}
 	
-	@RequestMapping("/test.do")	
-	public ModelAndView test(ModelAndView mv) {
-		
-			
-		//3일뒤 날짜
-//		Calendar afterDay=Calendar.getInstance();
-//		afterDay.setTime(new Date());
-//		DateFormat df =new SimpleDateFormat("yyyy-MM-dd");
-//		log.debug("{}","변경전 현재 일시 :" +df.format(afterDay.getTime()));
-//		afterDay.add(Calendar.DATE,3); //3일 더하기
-//		log.debug("{}","변경후  일시 :" +df.format(afterDay.getTime()));	
-		
 	
-		//애초에 db에서 가져올떄	 애초에 가져올떄도 계좌이체로 계산했고 결제상태가 입금대기상태인 것들은 가져오면된다.?	
-		//list가 null 일떄 처리해야함   -> 예외처리?  OR COUNT ? 어떻게 해야하지-> 애초에 If문 씌이면 되는구나
-		List<OrderSheet> list=service.selectOrderList();
+	
+	//테스트 주소 
+	@RequestMapping("/test.do")	
+	public ModelAndView test(ModelAndView mv, HttpSession httpSession) {
 		
-//		if(list==null) {
-//			log.debug("{}","null로나오네");
-//		}else {
-//			log.debug("{}","null로안나오므로 size 사용해야함");
-//		}
-		
-		
-		if(list!=null&& list.size()>0) {
-			Calendar orderafter3Day=Calendar.getInstance();
-			DateFormat df =new SimpleDateFormat("yyyy-MM-dd");		
 			
-			Calendar today=Calendar.getInstance();
-			today.setTime(new Date());
-			
-			//#애초에 지금가져온  ordersheet는 결제수단은  계좌이체이고  결제 상태가 입금대기 인
-			for(OrderSheet  o: list) {
-				
-				//log.debug("{}",o.getOrderSheetenrollDate());		
-				orderafter3Day.setTime(o.getOrderSheetenrollDate());
-				//log.debug("{}","전"+ df.format(orderafter3Day.getTime()));
-				orderafter3Day.add(Calendar.DATE,3); 
-	//			log.debug("{}","후orderafter3Day"+df.format(orderafter3Day.getTime())+"기준점이다.");
-	//			log.debug("{}","오늘날짜"+df.format(today.getTime())+".");
-	//			
-	//			log.debug("{}","today가 orderafter3Day 보다 전날이니? "+today.before(orderafter3Day));
-	//			log.debug("{}","today가 orderafter3Day 와 같은날이니? "+today.equals(orderafter3Day));
-	//			log.debug("{}","today가 orderafter3Day  보다 후일이니? "+today.after(orderafter3Day));
-				
-				//#애초에 지금가져온  ordersheet는 결제수단은  계좌이체이고  결제 상태가 입금대기 인
-				//그러니까 오늘날짜가  (주문일로부터 3일뒤날짜)  보다 후일이면 
-				if(today.after(orderafter3Day)==true) {
-					
-					int updateOrderNo=o.getOrderSheetNo();
-					
-					//orderSheet에 결제상태를 미입금으로 바꿈				
-					service.updateUndeposited(updateOrderNo);				
-				}
-				
-				
-				
-			}
+
+
+		 service.updateUndeposited(httpSession);
 		
-		}
-		
-		
-		
-		//1.첫번쨰 기준 날짜    ->  오늘 날짜(주문일로부터 3일)가  >=   ordersheet의  주문등록일 	
-				//필요한것  주문서들의 날짜
 		
 		mv.setViewName("product/test");
 		return mv;

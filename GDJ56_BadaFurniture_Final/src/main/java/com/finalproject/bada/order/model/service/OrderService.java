@@ -3,6 +3,9 @@ package com.finalproject.bada.order.model.service;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import com.finalproject.bada.order.model.vo.OrderDetail;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
 
@@ -16,11 +19,15 @@ public interface OrderService {
 	
 	List<OrderSheet> selectOrderComplete(int orderSheetNo);	
 	
-	// int updateSoldOutState(HashMap map);
+	// int updateSoldOutState(HashMap map);		
+	
+	List<OrderSheet> selectOrderSheetUndepositedList();
+	
+		
+	void updateUndeposited(HttpSession httpSession);
+	
+	List<OrderDetail> selectOrderDetailCancelCompleted(); 
 	
 	
-	List<OrderSheet> selectOrderList();
-	
-	void updateUndeposited(int updateOrderNo);
 	
 }
