@@ -61,7 +61,7 @@
                      const fn_updatePassword=()=>{
              			//새창으로 패스워드 수정페이지 연결
              			open("${path}/member/updatePassword.do?userId=${loginMember.memberId!=null ? loginMember.memberId : ""}",
-             					"_blank","width=400, height=260, left=500, top=200");
+             					"_blank","width=500, height=330, left=500, top=200");
              		}
                     </script>
                     
