@@ -40,7 +40,7 @@
            <!--헤더 예비 위치  -->
             <div class="checkout__form">
                 <h4>PRODUCT Details</h4>
-             	<a href="${path}/test.do"> 스케줄러 테스트 링크</a>
+             	<%-- <a href="${path}/test.do"> 스케줄러 테스트 링크</a> --%>
              <c:if test="${not empty productData}">
               <!--<form action="#"> -->
                     <div class="row">

@@ -238,6 +238,7 @@
 		            }
 		        }).open();
 		    	$("#delivery_choice_0").prop("checked",false);
+				$("#sample6_detailAddress").val("");
 			}	
 			</script>
 			<script>
