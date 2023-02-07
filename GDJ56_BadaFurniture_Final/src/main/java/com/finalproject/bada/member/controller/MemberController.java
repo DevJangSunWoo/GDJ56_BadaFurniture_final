@@ -173,19 +173,20 @@ public class MemberController {
 			int result = service.updatePassword(param);
 			
 			if(result>0) {
-				String script = "opener.location.replace('"+request.getContextPath()+"/member/logout.do');close();";
+				String script = "close();";
+//				String script = "opener.location.replace('"+request.getContextPath()+"/member/logout.do');close();";
 				mv.addObject("msg","비밀번호 변경완료!");
-				mv.addObject("loc","mypage/member/updateMember.do");
+				//mv.addObject("loc","mypage/member/updateMember.do");
 				mv.addObject("script", script);
 				
 			}else {
 				mv.addObject("msg","비밀번호 변경 실패!");
-				mv.addObject("loc","mypage/member/updatePassword.do");
+				mv.addObject("loc","/member/updatePassword.do?userId="+(String)param.get("memberId"));
 			}
 			
 		}else {
-			mv.addObject("msg","현재 비밀번호가 일치하지 않습니다! 다시 시도하세요!");
-			mv.addObject("loc","mypage/member/updatePassword.do");
+			mv.addObject("msg","기존 비밀번호가 일치하지 않습니다! 다시 시도하세요!");
+			mv.addObject("loc","/member/updatePassword.do?userId="+(String)param.get("memberId"));
 		}
 		mv.setViewName("common/msg");
 		return mv;
