@@ -377,11 +377,12 @@ crossorigin="anonymous" type="text/javascript"></script>
 			},
 			success:function(result){
 				
-				if($("#refund_State").text()=='취소'){
-					$("#refund_State").text(result.refundState).css("color","red");
+				$("#refund_State").text(result.refundState);
+				if($("#refund_State").text()=="취소"){
+					$("#refund_State").css("color","red");
 					
 				}else{
-					$("#refund_State").text(result.refundState).css("color","blue");
+					$("#refund_State").css("color","blue");
 
 				}
 				$("#refund_OrderDetailNo").text(result.orderDetailNo);
