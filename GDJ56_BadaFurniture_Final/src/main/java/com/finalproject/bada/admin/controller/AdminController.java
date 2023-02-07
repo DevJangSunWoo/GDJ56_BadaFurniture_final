@@ -489,32 +489,32 @@ public class AdminController {
 			search.put("searchKeyword1", key1);			
 			search.put("searchKeyword2", key2);		
 			
-			//log.debug("searchType {}", searchType);
-			//log.debug("searchKeyword1 {}", key1);
-			//log.debug("searchKeyword2 {}", key2);
+			log.debug("searchType {}", searchType);
+			log.debug("searchKeyword1 {}", key1);
+			log.debug("searchKeyword2 {}", key2);
 			
 		}else {
 			search.put("searchKeyword", searchKeyword);	
 			
-			//log.debug("searchType {}", searchType);
-			//log.debug("searchKeyword {}", searchKeyword);
+			log.debug("searchType {}", searchType);
+			log.debug("searchKeyword {}", searchKeyword);
 			
 		}		
 		
 		List<OrderSheet> orderSheets = service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search);
-//		if(orderSheets!=null) {
-//			orderSheets.stream().forEach(v->log.debug("오더시트 : {}",v));
-//		}
+		if(orderSheets!=null) {
+			orderSheets.stream().forEach(v->log.debug("오더시트 : {}",v));
+		}
 		
 		
 		mv.addObject("order",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));
-		//log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
-		//log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search).size());		
+		log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search));		
+		log.debug("order : {}",service.orderListPage(Map.of("cPage",cPage,"numPerpage",numPerpage),search).size());		
 		
 		
 		int totalData=service.orderListCount(search);
 		
-		//log.debug("totalData {}", totalData);		
+		log.debug("order_totalData {}", totalData);		
 		
 		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "order.do",searchType,searchKeyword));
 		
@@ -653,7 +653,7 @@ public class AdminController {
 			@RequestParam("orderDetailNo") int orderDetailNo ) {
 		
 		Refund refund=service.viewRefundDetail(orderDetailNo);
-		//log.debug("안녕 환불 :{}",orderDetailNo+"|"+refund);
+		log.debug("안녕 환불 :{}",orderDetailNo+"|"+refund);
 		
 		return refund;
 	}
@@ -747,9 +747,10 @@ public class AdminController {
 	
 	
 	@RequestMapping("/admin/updateOrderSummary.do")	
-	public @ResponseBody Map<String,Integer> updateOrderSummary() {		
-		Map<String,Integer> summary=service.orderSummary();
+	public @ResponseBody Map updateOrderSummary() {		
 		
+		Map<String,Integer> summary=service.orderSummary();
+		log.debug("sumamry:{}",summary);
 		summary.put("ALL_O)",Integer.parseInt(String.valueOf(summary.get("ALL_O"))));
 		summary.put("STATE_1",Integer.parseInt(String.valueOf(summary.get("STATE_1"))));
 		summary.put("STATE_2",Integer.parseInt(String.valueOf(summary.get("STATE_2"))));
