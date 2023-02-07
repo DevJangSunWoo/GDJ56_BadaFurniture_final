@@ -83,9 +83,9 @@
 		<div>
 			<div class="select" tabindex="1" onchange="fn_changeSort();">
 		        <input class="selectopt" name="sort" value="최근등록일순" type="radio" id="opt0" checked>
-		        <label for="opt0" class="option">🏳‍🌈 최근등록일순</label>
+		        <label for="opt0" class="option">🏁 최근등록일순</label>
 		        <input class="selectopt" name="sort" value="금액낮은순" type="radio" id="opt1">
-		        <label for="opt1" class="option">🏁 금액 낮은순</label>
+		        <label for="opt1" class="option">🏳 금액 낮은순</label>
 		        <input class="selectopt" name="sort" value="금액높은순" type="radio" id="opt2">
 		        <label for="opt2" class="option">🏴 금액 높은순</label>
 		    </div>
