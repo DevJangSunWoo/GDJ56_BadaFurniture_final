@@ -173,6 +173,9 @@ crossorigin="anonymous" type="text/javascript"></script>
 									
 								</td>
 								<input type="hidden" value="${r.orderSheet.orderSheetNo }">
+								<input type="hidden" value="${r.orderSheet.paymentMethod }">
+								<input type="hidden" value="${r.orderSheet.impUid }">
+								<input type="hidden" value="${r.product.price }">
 								<td class="tableTd" style="width: 80px;">
 									<button id="detailModalBtn" class="updateBtn" onclick="" name="refundDetail">상세확인</button>
 								</td>
@@ -272,57 +275,107 @@ crossorigin="anonymous" type="text/javascript"></script>
 			})
 	}
 
-	//취소/반품상태 변경하기
+	//취소/반품상태 변경하기 & 카드 취소
 	$("select[name=refundState]").change(e=>{
 			const orderDetailNo=$(e.target).parent().parent().children().find('input').first().val();
 			const refundState=$(e.target).val();
 			const productNo=$(e.target).parent().prev().prev().prev().prev().prev().children().val();
 			
 			const orderSheetNo=$(e.target).parent().next().val();
+
+			const paymentMethod=$(e.target).parent().next().next().val();
+			const impUid=$(e.target).parent().next().next().next().val();
+			const price=$(e.target).parent().next().next().next().next().val();
 			
 			// console.log(orderDetailNo);
 			// console.log(refundState);
 			// console.log(productNo);
 			// console.log(orderSheetNo);
-
-
+			// console.log("paymentMethod:"+paymentMethod);
+			// console.log("impUid:"+impUid);
+			// console.log("price:"+price);		
+			
 			if(refundState=="취소완료" || refundState=="반품완료"){
-				if(confirm("⛔ 취소/반품 완료 후에는 상태 변경이 불가합니다. 변경하시겠습니까?")){
-					
-					$.ajax({
-						 //url:"${path}/admin/selectOrderSheet.do",
-						url:"${path}/admin/cardCancel.do",
-						data:{
-							orderSheetNo:orderSheetNo
-						},
-						success:function(result){
-							alert("됐냐?");
-							// if(confirm(
-							// "주문자명 : "+result.member.memberName+
-							// " 주문번호 : "+result.orderSheetNo+
-							// " 환불금액 : ")){
-
-							// }else{
-
-							// }
-
+				if(confirm("⛔ 취소/반품 완료 후에는 상태 변경이 불가능합니다. 변경하시겠습니까?")){
+					if(paymentMethod=="카드결제"){	
+						if(confirm("주문번호 : "+orderSheetNo+", 취소금액 : "+price + " 진행하시겠습니까?")){
+							$.ajax({
+								url:"${path}/admin/cardCancel.do",
+								data:{
+									paymentMethod:paymentMethod,
+									impUid:impUid,
+									price:price
+								},
+								success:function(returnV){	
+									if(returnV=="Failed"){
+										alert("부분취소가 불가능한 가맹점입니다.")
+										location.reload();
+										return;
+									}else{
+										updateRefundState(orderDetailNo,refundState,productNo);
+										$(e.target).attr("disabled",true);	
+									} 
+								}
+							});
 						}
-					})
-
-
-
-
-
-					// 지우면 안됨 ------------
-					// updateRefundState(orderDetailNo,refundState,productNo);
-					// $(e.target).attr("disabled",true);
-					// 지우면 안됨 여기까지 ---
-				}else{
+						else{
+							alert("취소하셨습니다.");
+							location.reload();
+							return;
+						}
+					}
+				}
+				else{
+					alert("취소하셨습니다.");
 					location.reload();
+					return;
 				}
 			}else{
 				updateRefundState(orderDetailNo,refundState,productNo);
+				$(e.target).attr("disabled",true);
+				
 			}
+				
+
+
+			// if(refundState=="취소완료" || refundState=="반품완료"){
+			// 	if(paymentMethod=="카드결제"){				
+			// 		if(confirm("⛔ 취소/반품 완료 후에는 상태 변경이 불가능합니다. 변경하시겠습니까?")){
+			// 			if(confirm("주문번호 : "+orderSheetNo+", 취소금액 : "+price + " 진행하시겠습니까?")){
+			// 				$.ajax({
+			// 					url:"${path}/admin/cardCancel.do",
+			// 					data:{
+			// 						paymentMethod:paymentMethod,
+			// 						impUid:impUid,
+			// 						price:price
+			// 					},
+			// 					success:function(param){	
+			// 						updateRefundState(orderDetailNo,refundState,productNo);
+			// 						//$(e.target).attr("disabled",true);	
+			// 					}
+		
+			// 				})
+			// 			}else{
+			// 				alert("취소하셨습니다.");
+			// 				location.reload();
+			// 			}
+
+			// 			// 지우면 안됨 ------------
+			// 			updateRefundState(orderDetailNo,refundState,productNo);						
+			// 			$(e.target).attr("disabled",true);
+			// 			// 지우면 안됨 여기까지 ---
+			// 		}else{
+
+			// 			location.reload();
+						
+			// 		}
+			// 	}else{
+			// 		updateRefundState(orderDetailNo,refundState,productNo);
+			// 	}
+
+			// }else{
+			// 	updateRefundState(orderDetailNo,refundState,productNo);
+			// }
 
 	});
 

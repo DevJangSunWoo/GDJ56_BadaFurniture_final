@@ -5,9 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,12 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sound.sampled.AudioFormat.Encoding;
 
-import org.apache.tomcat.util.json.JSONParser;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -852,7 +847,7 @@ public class AdminController {
 			@RequestParam(value="orderSheetNo")int orderSheetNo) {
 		
 		OrderSheet os=service.selectOrderSheet(orderSheetNo);
-		log.debug("os :{}",os);
+		//log.debug("os :{}",os);
 		
 		return os;
 	}
@@ -861,197 +856,91 @@ public class AdminController {
 	@RequestMapping("/admin/cardCancel.do")
 	@ResponseBody
 	public String cardCancel(
-			@RequestParam(value="orderSheetNo")int orderSheetNo) {
+			@RequestParam(value="paymentMethod")String paymentMethod,
+			@RequestParam(value="impUid")String impUid,
+			@RequestParam(value="price")String price) {
 		String token="";
+		
 		try {
-			
 			token=service.getToken();
 			
 		}catch(IOException e) {
+			
 			e.printStackTrace();
 		}
-		
-		
+				
+		log.debug("token:{}",token);
+				
 		HttpsURLConnection conn = null;
-		//String response="";
+		String returnV="cancel";
 		try {
 			
 			URL url = new URL("https://api.iamport.kr/payments/cancel");
-			
-			conn = (HttpsURLConnection) url.openConnection();
-			
+			conn = (HttpsURLConnection) url.openConnection();			
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-type", "application/json");
+			conn.setRequestProperty("Accept", "application/json");
 			conn.setRequestProperty("Authorization", token);
+			
 			conn.setDoOutput(true);
-			JsonObject json = new JsonObject();
+			Map<String,String> requestData=new HashMap();
+			requestData.put("reason", "테스트");
+			requestData.put("imp_uid", impUid);
+			requestData.put("amount", price);
 			
-			json.addProperty("reason", "테스트");
-			json.addProperty("imp_uid", "imp_529708345730");
-			json.addProperty("amount", "200");
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			bw.write(new Gson().toJson(requestData));
 			
-			bw.write(json.toString());
 			bw.flush();
 			bw.close();
 			
-//			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
-//			
-//			Gson gson = new Gson();
-//			
-//			response = gson.fromJson(br.readLine(), Map.class).get("response").toString();
-//			
-//			System.out.println("response:"+response);
-//			
-//			String token = gson.fromJson(response, Map.class).get("access_token").toString();
-//			
-//			br.close();
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+			StringBuffer sb=new StringBuffer();
+			String data=br.readLine();
+//			for(int i=0;i<data.length();i++) {
+//				int code=data.charAt(i);
+//				if('\\'==code && 'u' ==data.charAt(i+1)) {
+//					Character r=(char)Integer.parseInt(data.substring(i+2,i+6),16);
+//					sb.append(r);
+//					i+=5;
+//				}else {
+//					sb.append(data.charAt(i));
+//				}
+//			}
+			log.debug("sb:{}",sb);//접속		
+			log.debug("data:{}",data);//접속
+			data.substring(0,10 );
+			log.debug("되냐구"+data.substring(24,35));
+					
+			br.close();
 			conn.disconnect();
 		
+//			String errorMsg="\\uacb0\\uc81c\\ucde8\\uc18c\\uc5d0 \\uc2e4\\ud328\\ud558\\uc600\\uc2b5\\ub2c8\\ub2e4";
+//			String errorMsg2=Encoding.
+			
+			
+			String kakaoErr="acb0\\uc81c\\";
+			if(data.substring(24,35).equals(kakaoErr)){
+				returnV="Failed";
+				log.debug("returnV:"+returnV);
+			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		return null;
-//		return response;
-		
 		
 		
 		
 //		OrderSheet os=service.selectOrderSheet(orderSheetNo);
 //		OrderDetail od=service.selectOrderDetail(orderSheetNo);
 		
-		//log.debug("하이"+token);
+
 		
+		return returnV;			
 	}
-//	@RequestMapping("/admin/cardCancel.do")
-//	public String getToken2() {
-////		HttpURLConnection conn=null;
-////		String access_token=null;
-////		try {
-////			URL url=new URL("https://api.iamport.kr/users/getToken");
-////			conn=(HttpURLConnection)url.openConnection();
-////			
-////			//요청방식
-////			conn.setRequestMethod("POST");
-////			
-////			//Header 설정
-////			conn.setRequestProperty("Content-Type", "application/json"); //보낼 데이터 타입 설정
-////			conn.setRequestProperty("Accept", "application/json"); //받을 데이터 타입 설정
-////			
-////			//Data 설정
-////			conn.setDoOutput(true); // OutputStream으로 POST데이터를 넘겨주겠다
-////
-////			//서버로 보낼 데이터 JSON으로 변환			
-//////			JsonObject obj=new JsonObject();	않ㄴ이 ;;; 이거 JSONObject랑 다르다고 ?? 진자 어이업내		
-//////			obj.addProperty("imp_Skey","8361161254308658");
-//////			obj.addProperty("imp_secret","Defk61fQjnfQ8MxXOO10ucVQ9vhSfVJqRNdEmBDqeMY9gSidzvwVg1jnUF10RKluNEZBLv3oPbEJ97rh");
-////			
-////			JSONObject obj=new JSONObject();			
-////			obj.put("imp_key","8361161254308658");
-////			obj.put("imp_secret","Defk61fQjnfQ8MxXOO10ucVQ9vhSfVJqRNdEmBDqeMY9gSidzvwVg1jnUF10RKluNEZBLv3oPbEJ97rh");
-////			
-////			BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-////			bw.write(obj.toString()); //쓰기....
-////			
-////			bw.flush(); //버퍼비우기
-////			bw.close(); //입력스트림 닫기
-////			
-////			
-////			
-////		}catch(Exception e) {
-////			e.printStackTrace();
-////		}
-//		
-//		
-//	}
 	
-	
-	///
-//	public String getToken(HttpServletRequest request
-//
-//			,HttpServletResponse response
-//
-//			,JsonObject json
-//
-//			,String requestURL) throws Exception{
-//
-//			// requestURL 아임포트 고유키, 시크릿 키 정보를 포함하는 url 정보 
-//
-//			String _token = "";
-//
-//			try{
-//
-//			String requestString = "";
-//
-//			URL url = new URL(requestURL);
-//
-//			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//
-//			connection.setDoOutput(true);
-//
-//			connection.setInstanceFollowRedirects(false);  
-//
-//			connection.setRequestMethod("POST");
-//
-//			connection.setRequestProperty("Content-Type", "application/json");
-//
-//			OutputStream os= connection.getOutputStream();
-//
-//			os.write(json.toString().getBytes());
-//
-//			connection.connect();
-//
-//			StringBuilder sb = new StringBuilder(); 
-//
-//			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-//
-//			BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
-//
-//			String line = null;  
-//
-//			while ((line = br.readLine()) != null) {  
-//
-//			sb.append(line + "\n");  
-//
-//			}
-//
-//			br.close();
-//
-//			requestString = sb.toString();
-//
-//			}
-//
-//			os.flush();
-//
-//			connection.disconnect();
-//
-//			JSONParser jsonParser = new JSONParser();
-//
-//			JsonObject jsonObj = (JsonObject) jsonParser.parse(requestString);
-//
-//			if((Long)jsonObj.get("code")  == 0){
-//
-//				JsonObject getToken = (JsonObject) jsonObj.get("response");
-//
-//			System.out.println("getToken==>>"+getToken.get("access_token") );
-//
-//			_token = (String)getToken.get("access_token");
-//
-//			}
-//
-//			}catch(Exception e){
-//
-//			e.printStackTrace();
-//
-//			_token = "";
-//
-//			}
-//
-//			return _token;
-//
-//			}
-	
+
 	
 }
 
