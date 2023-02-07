@@ -17,6 +17,13 @@
 	#pageBar a:hover:not(.active) {
 		background-color: #ddd;
 	}
+	.onclickInput{
+    width: 88px;
+    border-style: none;
+    background-color: #dcd5c36c;
+    text-align: center;
+    cursor: pointer;
+  }
 </style>
 
 <section>
@@ -120,8 +127,10 @@
 						<c:forEach var="d" items="${delivery }">
 							<tr>
 								<td style="width: 20px;">
-									<a class="viewOrderSheet" href="${path}/admin/order.do?searchKeyword=${d.orderSheet.orderSheetNo}&searchType=ORDER_SHEET_NO">
-										<c:out value="${d.orderSheet.orderSheetNo }"/>
+									<a class="viewOrderSheet" href="${path}/admin/order.do?searchKeyword=${d.orderSheet.orderSheetNo}&searchType=ORDER_SHEET_NO">										
+										<input type="text" class="onclickInput" name="orderSheetNo" value="${d.orderSheet.orderSheetNo}"													" 
+										onclick="location.assign('${path}/admin/delivery.do?searchKeyword=${d.product.productNo}&searchType=PRODUCT_NO')" 
+										readonly>
 									</a>
 								</td>
 								<td style="width: 40px;">
@@ -131,9 +140,10 @@
 									
 								</td>
 								<td style="width: 20px;">
-									<a class="viewProduct" href="${path}/product/view.do?productNo=${d.product.productNo }">
-										<c:out value="${d.product.productNo }"/>
-									</a>
+									<input type="hidden" value="${d.product.productNo}">
+									<input type="text" class="onclickInput" name="productNo" value="${d.product.productNo}"													" 
+									onclick="location.assign('${path}/product/view.do?productNo=${d.product.productNo }')" 
+									readonly>
 								</td>
 								<td style="width: 70px;">
 									<img id="productImg" src="${path}/resources/upload/product/${d.product.getFiles().get(0).renamedFileName}">

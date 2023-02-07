@@ -330,8 +330,9 @@
 
 											<td class="${o.orderSheetNo}Td" style="background-color: #dcd5c32b;">
 												<input type="hidden" value="${d.product.productNo}">
-												<c:out value="${d.product.productNo}"/>
-
+														<input type="text" class="onclickInput" name="productNo" value="${d.product.productNo}"													" 
+														onclick="location.assign('${path}/product/view.do?productNo=${d.product.productNo }')" 
+														readonly>
 											</td>
 
 											<td class="tableTd"><c:out value="${d.product.item}"/></td>
@@ -562,7 +563,7 @@
 	});
 	document.querySelector(".closeBtn").addEventListener("click", close);
 	document.querySelector(".bg").addEventListener("click", close);
-	
+
 	//숫자 콤마 찍어주는 함수
 	function fnSetComma(n) {
 	    var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
@@ -578,9 +579,6 @@
 		let path = '${path}/product/view.do?productNo=' + $(e.target).prev().val();
 		location.assign(path);
 	});
-
-
-
 
 	//요약테이블 출력
 	$(()=>{
@@ -704,37 +702,7 @@
 
 	}
 
-
-
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// // datepicker
-	// $('#orderDateRange').daterangepicker({
-    // "locale": {
-    //     "format": "YYYY-MM-DD",
-    //     "separator": " ~ ",
-    //     "applyLabel": "확인",
-    //     "cancelLabel": "취소",
-    //     "fromLabel": "From",
-    //     "toLabel": "To",
-    //     "customRangeLabel": "Custom",
-    //     "weekLabel": "W",
-    //     "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-    //     "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-    // },
-    // "startDate": new Date(),
-    // "endDate": new Date(),
-    // "drops": "auto"
-	// }, 
-	// function (start, end, label) {
-	//     //console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-	// 	let when = $("#orderDateRange").val();
-	// 	//console.log(when);
-	// }
-	// );
-
-////
-		//datepicker
+	//datepicker
 		$('#orderDateRange').daterangepicker({
 			locale: {
 				format: "YYYY-MM-DD",
