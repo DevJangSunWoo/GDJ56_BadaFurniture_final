@@ -154,13 +154,17 @@ public class MypageController {
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
 			@RequestParam(value="numPerpage", defaultValue="5") int numPerpage,
 			@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType,
-			@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword) {
+			@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword,
+			@RequestParam(value="orderSheetNo", required = false) Integer orderSheetNo) {
 		
 		Map search=new HashMap();
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
 		Member loginMember = (Member)authentication.getPrincipal();
 		search.put("memberNo", loginMember.getMemberNo());
 		search.put("searchType", searchType);
+		//추가
+		search.put("orderSheetNo", orderSheetNo);
+		
 		if(searchType.equals("ORDER_SHEET_ENROLL_DATE")) {	
 			//주문일자 들어오는 값 :2023-01-31 ~ 2023-01-31
 			String[] keys=searchKeyword.split("~");		
@@ -254,7 +258,8 @@ public class MypageController {
 			@RequestParam(value="cPage", defaultValue="1") int cPage,
 			@RequestParam(value="numPerpage", defaultValue="7") int numPerpage,
 			@RequestParam(value="searchType", defaultValue="SEARCH_ALL") String searchType,
-			@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword) {
+			@RequestParam(value="searchKeyword", defaultValue="searchAll") String searchKeyword,
+			@RequestParam(value="orderDetailNo", required = false) Integer orderDetailNo) {
 		
 		
 		Map search=new HashMap();
@@ -262,6 +267,8 @@ public class MypageController {
 		Member loginMember = (Member)authentication.getPrincipal();
 		search.put("memberNo", loginMember.getMemberNo());
 		search.put("searchType", searchType);
+		//추가
+		search.put("orderDetailNo", orderDetailNo);
 		if(searchType.equals("ORDER_SHEET_ENROLL_DATE")) {	
 			String[] keys=searchKeyword.split("~");		
 			String key1=keys[0].trim();
@@ -275,10 +282,6 @@ public class MypageController {
 		
 		mv.addObject("orderDetailRefunds",service.selectOrderDetailRefundList(cPage, numPerpage, search));
 		
-//		List<OrderDetail> tempList = service.selectOrderDetailRefundList(cPage, numPerpage, search);
-//		for(OrderDetail od : tempList) {
-//			log.debug("오다디테일 : {}", tempList);
-//		}
 		
 		int totalData = service.selectOrderDetailRefundListCount(search);
 		mv.addObject("pageBar",AdminPageFactory.getPage(cPage, numPerpage, totalData, "refund.do",searchType,searchKeyword));

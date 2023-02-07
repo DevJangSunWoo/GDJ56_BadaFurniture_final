@@ -99,4 +99,9 @@ public class MypageDaoImpl implements MypageDao {
 		return session.selectOne("mypage.selectOrderDetailRefundListCount", search);
 	}
 
+	@Override
+	public OrderDetail selectOrderDetailRefundOne(SqlSessionTemplate session, Map search) {
+		return session.selectOne("mypage.selectOrderDetailRefundOne", search);
+	}
+
 }
