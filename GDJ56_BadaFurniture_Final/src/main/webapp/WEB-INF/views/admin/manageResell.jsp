@@ -42,7 +42,7 @@
 					<td id="summary_state2"><c:out value="${summary.STATE_2}"/></td>
 				</tr>
 				<tr>
-					<th>미입금</th>
+					<th>수거완료</th>
 					<td id="summary_state3"><c:out value="${summary.STATE_3}"/></td>
 				</tr>
 				<tr>

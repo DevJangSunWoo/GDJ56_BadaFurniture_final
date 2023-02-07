@@ -28,7 +28,7 @@
 		height: 70px;
 	}
 	
-		/* 모달 Customizing */
+		
 	/* 모달 */
 	.modalTitle{
 		display: flex;
@@ -316,7 +316,6 @@
 					</c:if>
 					<c:if test="${not empty order}">
 						<c:forEach var="o" items="${order}" varStatus="vs">						
-								<!-- <td class="tableTd" style="width: 10px;background-color:#dcd5c32b;"><input type="checkbox" name="chk"></td> -->
 								<c:if test="${not empty o.details}">
 									<c:forEach var="d" items="${o.details}" varStatus="vs">
 										<tr>
@@ -623,6 +622,7 @@
 		$.ajax({
 				url:"${path}/admin/updatePaymentState.do",
 				traditional:true,
+				async:false,
 				data:{
 					orderSheetNo:orderSheetNo,
 					paymentState:paymentState,
@@ -683,9 +683,10 @@
 	function updateSummary(){
 		$.ajax({
 			url:"${path}/admin/updateOrderSummary.do",
-			dataType : "json",
+			// dataType : "json",
+			async:false,
 			success:function(summary){
-				//console.log(summary);
+				console.log(summary);
 
 				$("#summary_allO").text(summary.ALL_O);
 				$("#summary_state1").text(summary.STATE_1);
@@ -707,32 +708,57 @@
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// datepicker
-	$('#orderDateRange').daterangepicker({
-    "locale": {
-        "format": "YYYY-MM-DD",
-        "separator": " ~ ",
-        "applyLabel": "확인",
-        "cancelLabel": "취소",
-        "fromLabel": "From",
-        "toLabel": "To",
-        "customRangeLabel": "Custom",
-        "weekLabel": "W",
-        "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-        "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-    },
-    "startDate": new Date(),
-    "endDate": new Date(),
-    "drops": "auto"
-	}, 
-	function (start, end, label) {
-	    //console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-		let when = $("#orderDateRange").val();
-		//console.log(when);
-	}
-	);
+	// // datepicker
+	// $('#orderDateRange').daterangepicker({
+    // "locale": {
+    //     "format": "YYYY-MM-DD",
+    //     "separator": " ~ ",
+    //     "applyLabel": "확인",
+    //     "cancelLabel": "취소",
+    //     "fromLabel": "From",
+    //     "toLabel": "To",
+    //     "customRangeLabel": "Custom",
+    //     "weekLabel": "W",
+    //     "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+    //     "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+    // },
+    // "startDate": new Date(),
+    // "endDate": new Date(),
+    // "drops": "auto"
+	// }, 
+	// function (start, end, label) {
+	//     //console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+	// 	let when = $("#orderDateRange").val();
+	// 	//console.log(when);
+	// }
+	// );
 
-
+////
+		//datepicker
+		$('#orderDateRange').daterangepicker({
+			locale: {
+				format: "YYYY-MM-DD",
+				separator: " ~ ",
+				applyLabel: "확인",
+				cancelLabel: "취소",
+				fromLabel: "From",
+				toLabel: "To",
+				customRangeLabel: "Custom",
+				weekLabel: "W",
+				daysOfWeek: ["일", "월", "화", "수", "목", "금", "토"],
+				monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+			},
+			maxDate:new Date(),
+			startDate: new Date(),
+			endDate: new Date(),
+			drops: "auto"
+			}, 
+			function (start, end, label) {
+				//console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+				let when = $("#orderDateRange").val();
+				//console.log(when);
+			}
+		);
 
 
 </script>

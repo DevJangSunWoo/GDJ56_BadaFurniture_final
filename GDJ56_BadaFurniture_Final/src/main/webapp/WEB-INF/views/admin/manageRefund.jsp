@@ -160,8 +160,8 @@ crossorigin="anonymous" type="text/javascript"></script>
 								<td style="width: 30px;"><c:out value="${r.product.title }"/></td>
 								<td class="price" style="width: 70px;"><c:out value="${r.product.price }"/></td>
 								<td>
-									<!-- <select name="refundState" id="refundStateSelectBox" ${r.refundState.equals("반품완료")?"disabled":""} ${r.refundState.equals("취소완료")?"disabled":""}> -->
-									<select name="refundState" id="refundStateSelectBox">
+									<select name="refundState" id="refundStateSelectBox" ${r.refundState.equals("반품완료")?"disabled":""} ${r.refundState.equals("취소완료")?"disabled":""}>
+
 										<option value="반품요청" ${r.refundState.equals("반품요청")?"selected":""}>반품요청</option>
 										<option value="반품대기" ${r.refundState.equals("반품대기")?"selected":""}>반품대기</option>
 										<option value="반품완료" ${r.refundState.equals("반품완료")?"selected":""}>반품완료</option>
@@ -336,47 +336,6 @@ crossorigin="anonymous" type="text/javascript"></script>
 				
 			}
 				
-
-
-			// if(refundState=="취소완료" || refundState=="반품완료"){
-			// 	if(paymentMethod=="카드결제"){				
-			// 		if(confirm("⛔ 취소/반품 완료 후에는 상태 변경이 불가능합니다. 변경하시겠습니까?")){
-			// 			if(confirm("주문번호 : "+orderSheetNo+", 취소금액 : "+price + " 진행하시겠습니까?")){
-			// 				$.ajax({
-			// 					url:"${path}/admin/cardCancel.do",
-			// 					data:{
-			// 						paymentMethod:paymentMethod,
-			// 						impUid:impUid,
-			// 						price:price
-			// 					},
-			// 					success:function(param){	
-			// 						updateRefundState(orderDetailNo,refundState,productNo);
-			// 						//$(e.target).attr("disabled",true);	
-			// 					}
-		
-			// 				})
-			// 			}else{
-			// 				alert("취소하셨습니다.");
-			// 				location.reload();
-			// 			}
-
-			// 			// 지우면 안됨 ------------
-			// 			updateRefundState(orderDetailNo,refundState,productNo);						
-			// 			$(e.target).attr("disabled",true);
-			// 			// 지우면 안됨 여기까지 ---
-			// 		}else{
-
-			// 			location.reload();
-						
-			// 		}
-			// 	}else{
-			// 		updateRefundState(orderDetailNo,refundState,productNo);
-			// 	}
-
-			// }else{
-			// 	updateRefundState(orderDetailNo,refundState,productNo);
-			// }
-
 	});
 
 	//검색조건 고정시켜놓기
@@ -401,9 +360,10 @@ crossorigin="anonymous" type="text/javascript"></script>
 
 	//취소/반품 상세확인 
 	$("button[name=refundDetail]").click(e=>{
-
+		$(e.target).parent().parent().children().find('input').first().val();
 		const orderDetailNo=$(e.target).parent().parent().children().find('input').first().val();
-			
+		console.log("orderDetailNo"+orderDetailNo);
+
 		$.ajax({
 			url:"${path}/admin/viewRefundDetail.do",
 			data:{

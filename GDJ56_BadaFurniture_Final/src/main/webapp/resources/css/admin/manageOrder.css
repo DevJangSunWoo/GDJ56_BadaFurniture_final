@@ -24,7 +24,7 @@
     margin-top: 40px;
 
   }
-  div.tableContainer>table th,td{
+  div.tableContainer>table#propertyTable th,table#propertyTable td{
       border : 1px solid white;
       padding:5px 10px 5px 10px;
   }
@@ -122,23 +122,6 @@ div#summaryContainer th,td{
 	text-align: center;
 	border: none;
 }
-
-/* 날짜선택 사이즈 조절 */
-/* .daterangepicker {
-  width: 800px;
-}
-#orderDateRange{
-	width: 170px;
-}
-
-.searchInput{
-	width:170px;
-}
-.drp-calendar right{
-  width:500px;
-} */
-
-
 
 /* 모달 */
 .modalTitle{
