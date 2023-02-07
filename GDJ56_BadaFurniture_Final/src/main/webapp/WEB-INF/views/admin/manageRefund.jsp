@@ -160,16 +160,22 @@ crossorigin="anonymous" type="text/javascript"></script>
 								<td style="width: 30px;"><c:out value="${r.product.title }"/></td>
 								<td class="price" style="width: 70px;"><c:out value="${r.product.price }"/></td>
 								<td>
-									<select name="refundState" id="refundStateSelectBox" ${r.refundState.equals("반품완료")?"disabled":""} ${r.refundState.equals("취소완료")?"disabled":""}>
+									<c:if test='${fn:contains(r.refundState,"취소")}'>
+										<select name="refundState" id="refundStateSelectBox" ${r.refundState.equals("취소완료")?"disabled":""}>
+											<option value="취소요청" ${r.refundState.equals("취소요청")?"selected":""}>취소요청</option>
+											<option value="취소완료" ${r.refundState.equals("취소완료")?"selected":""}>취소완료</option>
+											<option value="취소거부" ${r.refundState.equals("취소거부")?"selected":""}>취소거부</option>
+										</select>	
+									</c:if>
+									<c:if test='${fn:contains(r.refundState,"반품")}'>
+										<select name="refundState" id="refundStateSelectBox" ${r.refundState.equals("반품완료")?"disabled":""}>
+											<option value="반품요청" ${r.refundState.equals("반품요청")?"selected":""}>반품요청</option>
+											<option value="반품대기" ${r.refundState.equals("반품대기")?"selected":""}>반품대기</option>
+											<option value="반품완료" ${r.refundState.equals("반품완료")?"selected":""}>반품완료</option>
+											<option value="반품거부" ${r.refundState.equals("반품거부")?"selected":""}>반품거부</option>
 
-										<option value="반품요청" ${r.refundState.equals("반품요청")?"selected":""}>반품요청</option>
-										<option value="반품대기" ${r.refundState.equals("반품대기")?"selected":""}>반품대기</option>
-										<option value="반품완료" ${r.refundState.equals("반품완료")?"selected":""}>반품완료</option>
-										<option value="반품거부" ${r.refundState.equals("반품거부")?"selected":""}>반품거부</option>
-										<option value="취소요청" ${r.refundState.equals("취소요청")?"selected":""}>취소요청</option>
-										<option value="취소완료" ${r.refundState.equals("취소완료")?"selected":""}>취소완료</option>
-										<option value="취소거부" ${r.refundState.equals("취소거부")?"selected":""}>취소거부</option>
-									</select>								
+										</select>
+									</c:if>
 									
 								</td>
 								<input type="hidden" value="${r.orderSheet.orderSheetNo }">
