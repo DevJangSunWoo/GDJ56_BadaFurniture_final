@@ -153,7 +153,7 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	@Override
-	public void updateUndeposited(HttpSession httpSession) {
+	public void updateUndeposited(String contextPath) {
 		
 		
 		
@@ -175,7 +175,7 @@ public class OrderServiceImpl implements OrderService {
 			int resultOrderSheetUndeposited= dao.updateOrderSheetUndeposited(session,param);	
 			 
 			 if(resultOrderSheetUndeposited>0) {
-				 //log.debug("{}"," 주문서 미입금상태 변경 성공");	
+				 log.debug("{}"," 주문서 미입금상태 변경 성공");	
 				
 			
 				 int resultUpdateOrderDetailRefundState=dao.updateOrderDetailRefundState(session,param);
@@ -183,7 +183,7 @@ public class OrderServiceImpl implements OrderService {
 				 
 				 
 				 if(resultUpdateOrderDetailRefundState>0) {
-					 //log.debug("{}","주문상세 Refund_state 변경 성공");	
+					 log.debug("{}","주문상세 Refund_state 변경 성공");	
 					    List<OrderDetail> orderDetailList=selectOrderDetailCancelCompleted();
 					    
 					    param.put("orderDetails", orderDetailList);
@@ -202,46 +202,42 @@ public class OrderServiceImpl implements OrderService {
 					    		
 					    	}else {
 					    		
-					    		//log.debug("{}" ,"REFUND 테이블에  갯수 만큼 삽입 성공" );
+					    		log.debug("{}" ,"REFUND 테이블에  갯수 만큼 삽입 성공" );
 					    		
 					    		int productUpdateResult=dao.updateRefundProductSoldOutState(session,param);
 					    	
 					    	
 					    		if(productUpdateResult>0) {
 					    			int resultUndeposited = 0; 
-					    			//log.debug("{}" ,"제품 판매상태 변경 선공" );
-					    			for(OrderSheet os : orderSheetList) {
-					    				String alertMsg = AlertFactory.getAlertMsg(httpSession.getServletContext().getContextPath(), "undeposited", os);
-					    				resultUndeposited += mypageDao.insertAlert(session, Alert.builder().memberNo(os.getMember().getMemberNo()).detail(alertMsg).build());
+					    			log.debug("{}" ,"제품 판매상태 변경 선공" );
+					    			if(orderSheetList.size() > 0) {
+						    			for(OrderSheet os : orderSheetList) {
+						    				log.debug("orderList 길이 : {}", orderSheetList.size());
+						    				String alertMsg = AlertFactory.getAlertMsg(contextPath, "undeposited", os);
+						    				log.debug("알림메시지 : {}", alertMsg);
+						    				resultUndeposited += mypageDao.insertAlert(session, Alert.builder().memberNo(os.getMember().getMemberNo()).detail(alertMsg).build());
+						    				log.debug("resultUndeposited : {}", resultUndeposited);
+						    				if(resultUndeposited>0) {
+						    					log.debug("{}","알림 삽입 성공");
+						    				}else {
+						    					new RuntimeException("알림 실패");
+						    				}
+						    				
+						    			}
+						    			if(resultUndeposited < orderSheetList.size()) {
+						    				new RuntimeException("미입금자 알림 입력 실패");
+						    			}
 					    			}
-					    			if(resultUndeposited < orderSheetList.size()) {
-					    				new RuntimeException("미입금자 알림 입력 실패");
-					    			}
-					    			
 					    		}else {
 					    			
 					    			throw new RuntimeException("제품 판매상태  변경 실패 ");
 					    		}
-					    				
-					    			
-					    	
-					    	
-					    	
-					    	
 					    	}
-					    		
-					    	
-					    	
-					    	
-					    }
-					 
+					    }					 
 										 
 				 }else {
 					 throw new RuntimeException("주문상세 Refund_state 변경 실패 ");
 				 }
-				 
-				 
-				 
 			 }else {
 				 
 				 throw new RuntimeException("주문서 미입금 상태로 변경 실패 ");				 
@@ -249,32 +245,23 @@ public class OrderServiceImpl implements OrderService {
 			
 		
 			}		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	@Override
-//	public int updateSoldOutState(HashMap map) {
-//		// TODO Auto-generated method stub
-//		return dao.updateSoldOutState(session,map);
-//	}
-//	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
+		
+		
+		
+		 List <Product> listProductShowState  = dao.selectProductListShowState(session);
+		
+		 
+//		 for(Product  p :  listProductShowState) {
+//		 log.debug("{}","listProductShowState의 값:"+p);
+//		 }
+		 
+		 
+		 param.put("listShowState", listProductShowState);
+		 int updateShowStateResult=dao.updateProductShowState(session,param);
+		
+		
+		 
+		
+	}	
 }

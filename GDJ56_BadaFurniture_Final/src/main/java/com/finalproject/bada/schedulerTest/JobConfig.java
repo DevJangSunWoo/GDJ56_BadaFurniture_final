@@ -40,7 +40,8 @@ public class JobConfig {
             	// 크론형식 지정 후 스케줄 시작 
 			// "0/10 * * * * ?"  10초마다 실행
 			//세부 시간 설정 추가 필요함!!!
-			scheduler.scheduleJob(detail, runJobTrigger("0 0 0 3 * ?")); // 이곳은 반복주기 설정하는 곳//3일을 실정하면 3일뒤에 무조건 실행한다.
+			//0 0/5 * * * ?  5분마다
+			scheduler.scheduleJob(detail, runJobTrigger("0 0 0 3 * ?")); // 이곳은 반복주기 설정하는 곳//3일을 실정하면 3일뒤에 무조건 실행한다. "0 0 0 3 * ?"
 		} catch (SchedulerException e) {
 			e.printStackTrace();
 		}
