@@ -243,7 +243,7 @@ public class MemberController {
 		if(result>0) {
 			session.invalidate();
 			mv.addObject("msg","탈퇴가 완료되었습니다. 그동안 이용해주셔셔 감사합니다.<(＿　＿)>");
-			mv.addObject("loc","/member/logout.do");
+			mv.addObject("loc","/member/logout.do");  //시큐리티에 설정된 로그아웃 URL로 연결해서 세션 없어지면서 로그아웃 됨 
 		}else {
 			mv.addObject("msg","회원삭제 실패");
 			mv.addObject("loc","mypage/member/deleteMemberEnd.do");
