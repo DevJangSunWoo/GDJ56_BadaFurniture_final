@@ -258,8 +258,14 @@ public class OrderServiceImpl implements OrderService {
 		 
 		 
 		 param.put("listShowState", listProductShowState);
-		 int updateShowStateResult=dao.updateProductShowState(session,param);
-		
+		 if(listProductShowState.size()>0) {
+		 int updateShowStateResult=dao.updateProductShowState(session,param);		 
+			 if(updateShowStateResult == listProductShowState.size()) {//10개면  10개가  다되야 변경한거니까
+				 log.debug("{}","제품 공개상태 변경 성공");				 
+			 }else {
+				 throw new RuntimeException("제품 공개상태 변경 실패 ");			
+			 }
+		 }
 		
 		 
 		

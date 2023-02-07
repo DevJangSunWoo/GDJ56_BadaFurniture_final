@@ -68,7 +68,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
-                                <h4>응접실 소파</h4>
+                                <h4>${productData.title}</h4>
                                 <div class="checkout__order__products">가격 <span>${productData.price}원</span></div>
                                 <ul>
                                     <li>분류 <span>${productData.item}</span></li>
