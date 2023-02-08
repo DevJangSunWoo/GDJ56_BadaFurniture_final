@@ -381,9 +381,9 @@
 							</c:if>
 						</c:forEach>
 					</c:if>
-					<c:if test="${orderSheets == null or empty orderSheets}">
+					<c:if test="${empty orderSheets}">
 						<tr>
-							<td colspan="7">조회된 결과가 없습니다.</td>
+							<td colspan="8" style="text-align:center;color:grey;height:60px;">조회된 결과가 없습니다.</td>
 						</tr>
 					</c:if>
 				</table>

@@ -336,7 +336,7 @@
 					</c:if>
 					<c:if test="${empty orderDetailRefunds}">
 						<tr>
-							<td colspan="6" style="text-align:center;color:grey;">
+							<td colspan="6" style="text-align:center;color:grey;height:60px;">
 								검색된 항목이 존재하지 않습니다.
 							</td>
 						</tr>
