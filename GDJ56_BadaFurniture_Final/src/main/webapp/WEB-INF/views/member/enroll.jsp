@@ -297,7 +297,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" id="postCode" name="postCode" class="form__input" placeholder="우편번호" required/>
+                                <input type="text" id="postCode" name="postCode" class="form__input" placeholder="우편번호" required readonly/>
                                 <label class="form__label">우편번호</label>		
                             </div>
                         </div>
@@ -305,7 +305,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" id="address" name="address" class="form__input" placeholder="주소" required/>
+                                <input type="text" id="address" name="address" class="form__input" placeholder="주소" required readonly/>
                                 <label class="form__label">주소</label>		
                             </div>
                         </div>

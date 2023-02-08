@@ -15,7 +15,7 @@
     </div>
     <br>
 
-	<form class="flexDiv" action="${path}/member/searchIdEnd.do" method="post" onsubmit="return fn_invalidate(result);">
+	<form class="flexDiv" action="" method="post" onsubmit="">
 	    <div id="searchDiv">
 	    	<div style="width:100%; justify-content: center;">
 	    		<img id="img" src="${path}/resources/images/member/찾기.jpg">
@@ -102,7 +102,7 @@
 			        	 alert("비밀번호 찾기 성공!");
 				   		 alert("해당 이메일로 임시비밀번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
 			        	 console.log("data : "+data);
-				         //location.assign("${path}/member/searchPw.do");
+				         location.assign("${path}/");
 			         }
 			      }
 			   });
