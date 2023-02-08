@@ -333,85 +333,110 @@
     	 
     	 </script>
     	 <!--상품 상세사항  -->
-            <div style="display:flex;justify-content:center;">
-                <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바-->
-              
-                <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바여기까지-->
-                <!--상세사항 div  -->
-                <div style="border:0px solid red;width:1000px;height:100%;margin-top:50px;">
-                    <div class="card-content" style="height:100%;">
-                        <img src="${path}/resources/images/product/furnitureInfo.png"  class="furnitureInfo"/>
-                        <div class="detailFont" style="border:0px solid red;height:60px;text-align: center;">
-                            <span>소재:</span>
-                            <span>${productData.material}</span>
+            <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                    aria-selected="true">제품상세정보</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                                    aria-selected="false">배송 및 환불 사항</a>
+                            </li>                           
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <div style="display:flex;justify-content:center;">
+						                <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바-->              
+						                <!--콘텐츠 중앙정렬을 위한 가상왼쪽사이드바여기까지-->
+						                <!--상세사항 div  -->
+						                <div style="border:0px solid red;width:1000px;height:100%;margin-top:50px;">
+						                    <div class="card-content" style="height:100%;">
+						                        <img src="${path}/resources/images/product/furnitureInfo.png"  class="furnitureInfo"/>
+						                        <div class="detailFont" style="border:0px solid red;height:60px;text-align: center;">
+						                            <span>소재:</span>
+						                            <span>${productData.material}</span>
+						                        </div>
+						                        <div class="detailFont" style="border:0px solid red;height:60px;text-align: center;">
+						                          <!--   <span>조립식 유/무:</span>
+						                            <span>무</span> -->
+						                        </div>
+						                    	
+						                    	<c:if test="${not empty productData.files}">      
+						                        	<c:forEach var="files" items="${productData.files}" varStatus="vs"> 	
+						                        		<div style="display:flex;justify-content:center;">
+						                        		<div style="width:500px;height:500px;display:flex;justify-content:center;">
+						                        			<img src="${path}/resources/upload/product/${files.renamedFileName}" class="card-content-img"/>
+						                    			</div>	
+						                    			</div>
+						                    		</c:forEach>	 
+						                    	</c:if>
+						                    	<c:if test="${empty productData.files}"> 
+						                    		제품사진 미등록됨
+						                    	</c:if>	
+						                    </div>                  	
+						                 </div>
+						                                   
+                                   
+                                </div>
+                                     
+                                    
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                           		 <div  class="board"  style="display:flex;justify-content: center ! important;">	                 
+                                            <div  style="border:0px solid black;height:780px;"> 
+                                                <div  style="border:0px solid rgb(17, 0, 255);height:260px;">
+                                                    <div style="border:0px solid rgb(179, 255, 0);height:86px;">
+                                                    배송기간<br>
+                                                    -평균5~7일
+                                                    </div>
+                                                    <div style="border:0px solid rgb(255, 81, 0);height:86px;">
+                                                    배송비<br>
+                                                    배송비는 주문금액에 포함되어있습니다.
+                                                    </div>
+                                                    <div style="border:0px solid rgb(76, 0, 255);height:86px;">
+                                                    반품/교환<br>
+                                                    -배송비는 누가 부담하나요?단순변심: 고객부담 <br>
+                                                    -상품의 불량 또는 오배송: 본사 부담
+                                                    </div>   
+                                                </div>
+                                                <div  style="border:0px solid rgb(179, 255, 0);height:260px;"> 
+                                                    <div style="border:0px solid rgb(255, 115, 0);height:43px;"><p style="text-decoration: underline; text-underline-position:under;">교환 및 반품 기능</p></div>
+                                                    <div style="border:0px solid rgb(30, 255, 0);height:217px;">
+                                                        -상품 수령 후 박스를 개봉하기 않은 신품에  한해서는 일주일 이내  반품이 가능합니다.  <br>
+                                                        -제품의 하자나 배송오류가 발생한 경우 <br>
+                                                        -제품의 수령한 후 반품하게 되면 일정금액의 왕복배송비 및 설치비를 전액 부담하셔야 합니다.  <br>
+                                                        -주문하신 제품이  출입문이나 창문으로 들어가지 않을 경우 다른제품으로 교환하는 것을 원칙으로 합니다.  <br>
+                                                    </div>
+                                                </div>
+                                                <div  style="border:0px solid rgb(17, 0, 255);height:260px;">
+                                                    <div style="border:0px solid rgb(255, 115, 0);height:43px;"><p style="text-decoration: underline; text-underline-position:under;">교환 및 반품 불가능</p></div>
+                                                    <div style="border:0px solid rgb(30, 255, 0);height:217px;">
+                                                        -제품을 설치한 후 고객님의 단순변심이나 현장상황이 변경되어 제품이 필요없게 된 경우 <br>
+                                                        -주문 후 제품의 설치가 진행된경우 <br>
+                                                        -고객님의 실수 또는 오작동으로 인하여 파손되거나 고장난 경우 <br>
+                                                    </div>
+                                                </div>
+                                            </div>	                      
+                                       </div>    
+                           		        
+                            </div>
+                            
+                           
+                            
                         </div>
-                        <div class="detailFont" style="border:0px solid red;height:60px;text-align: center;">
-                          <!--   <span>조립식 유/무:</span>
-                            <span>무</span> -->
-                        </div>
-                    	
-                    	<c:if test="${not empty productData.files}">      
-                        	<c:forEach var="files" items="${productData.files}" varStatus="vs"> 	
-                        		<div style="display:flex;justify-content:center;">
-                        		<div style="width:500px;height:500px;display:flex;justify-content:center;">
-                        			<img src="${path}/resources/upload/product/${files.renamedFileName}" class="card-content-img"/>
-                    			</div>	
-                    			</div>
-                    		</c:forEach>	 
-                    	</c:if>
-                    	<c:if test="${empty productData.files}"> 
-                    		제품사진 미등록됨
-                    	</c:if>	
-                    </div>  
-                	
-                	<span class="more">
-                        <span class="blind">더보기</span>
-                     </span>
-                     <div class="board" >	                 
-	                        <div  style="border:0px solid black;height:780px;"> 
-	                            <div  style="border:0px solid rgb(17, 0, 255);height:260px;">
-	                                <div style="border:0px solid rgb(179, 255, 0);height:86px;">
-	                                배송기간<br>
-	                                -평균5~7일
-	                                </div>
-	                                <div style="border:0px solid rgb(255, 81, 0);height:86px;">
-	                                배송비<br>
-	                                배송비는 주문금액에 포함되어있습니다.
-	                                </div>
-	                                <div style="border:0px solid rgb(76, 0, 255);height:86px;">
-	                                반품/교환<br>
-	                                -배송비는 누가 부담하나요?단순변심: 고객부담 <br>
-	                                -상품의 불량 또는 오배송: 본사 부담
-	                                </div>   
-	                            </div>
-	                            <div  style="border:0px solid rgb(179, 255, 0);height:260px;"> 
-	                                <div style="border:0px solid rgb(255, 115, 0);height:43px;"><p style="text-decoration: underline; text-underline-position:under;">교환 및 반품 기능</p></div>
-	                                <div style="border:0px solid rgb(30, 255, 0);height:217px;">
-	                                    -상품 수령 후 박스를 개봉하기 않은 신품에  한해서는 일주일 이내  반품이 가능합니다.  <br>
-	                                    -제품의 하자나 배송오류가 발생한 경우 <br>
-	                                    -제품의 수령한 후 반품하게 되면 일정금액의 왕복배송비 및 설치비를 전액 부담하셔야 합니다.  <br>
-	                                    -주문하신 제품이  출입문이나 창문으로 들어가지 않을 경우 다른제품으로 교환하는 것을 원칙으로 합니다.  <br>
-	                                </div>
-	                            </div>
-	                            <div  style="border:0px solid rgb(17, 0, 255);height:260px;">
-	                                <div style="border:0px solid rgb(255, 115, 0);height:43px;"><p style="text-decoration: underline; text-underline-position:under;">교환 및 반품 불가능</p></div>
-	                                <div style="border:0px solid rgb(30, 255, 0);height:217px;">
-	                                    -제품을 설치한 후 고객님의 단순변심이나 현장상황이 변경되어 제품이 필요없게 된 경우 <br>
-	                                    -주문 후 제품의 설치가 진행된경우 <br>
-	                                    -고객님의 실수 또는 오작동으로 인하여 파손되거나 고장난 경우 <br>
-	                                </div>
-	                            </div>
-	                        </div>	                      
-	                    </div>    
-                
+                    </div>
                 </div>
-              	
-              	
-              	
-              	
-              	
-              
-              
+            
+            
+            
+            
+             
               </c:if>
               <c:if test="${empty productData}">
               	해당 제품이 조회되지 않습니다.	              
@@ -419,8 +444,6 @@
   				
   
   
-              
-         
                 <!-- 상품 상세사항 div여기까지  -->
     </section>
     <!--상품 더보기 접기 js  -->
@@ -462,7 +485,7 @@
 	
 		section {
 		  margin-top:60px;
-		  margin-bottom:800px !important;
+		  margin-bottom:1px !important;
 		}	
 	 
 	 

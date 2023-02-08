@@ -1,6 +1,11 @@
 @charset "UTF-8";
 
 
+
+
+
+
+
  <!--박스그림자-->
      
         .box-shadowTest123{
@@ -54,8 +59,8 @@
           top:30px;
           width:750px;
           height:auto;
-          visibility:hidden;    /* position:absolute; 처음 숨겨주는것 */  
-          margin-left:130px !important;   /* 위치변경 */
+         margin:auto;
+         /*  margin-left:500px !important;   위치변경 */
          overflow: auto;
 	   
         
