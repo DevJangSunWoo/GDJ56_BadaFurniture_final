@@ -71,6 +71,7 @@ div{
 /* -------------------------------------------------------------------------------------------------- */
 /* 조건검색 */
 #checkDiv{
+	margin-left: 15px;
 	z-index: 1000;  /* 겹쳐있는 Div중 가장 최상위 설정 */ 
 	background-color: white;
 	position: absolute;
@@ -80,6 +81,7 @@ div{
 }
 
 #slidebtn{
+	margin-left: 15px;
 	cursor: pointer;
 	background-color: #efefef;
 	border-radius: 3px;
@@ -281,11 +283,12 @@ ul.ks-cboxtags li input[type="checkbox"] {
 /* -------------------------------------------------------------------------------------------------- */
 /* select박스 */
 .select {
-	display:flex;
+	margin-right: 15px;
+	display: flex;
 	flex-direction: column;
-	position:relative;
-	width:230px;
-	height:40px;
+	position: relative;
+	width: 230px;
+	height: 40px;
 	font-size: 18px; 
 }
 
@@ -382,6 +385,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
     flex-wrap: wrap;
 }
 .productWrap{
+	cursor: pointer;
 	font-family: 'Ubuntu', sans-serif;
     border: 1px solid lightgrey;
     border-radius: 10px;
