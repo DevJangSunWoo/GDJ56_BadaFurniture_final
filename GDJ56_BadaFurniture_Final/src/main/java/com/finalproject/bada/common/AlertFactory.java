@@ -25,7 +25,7 @@ public class AlertFactory {
 		case "progressState":
 			Resell updateResell = (Resell)obj;
 			msg = "<a href=\""+path+"/resell/read.do?resellNo="+updateResell.getResellNo()+"\">"+updateResell.getItem()+" 판매신청("+formatter.format(updateResell.getHopePrice()) +")"+"</a>"
-					+"의 판매상태가 <b>" + updateResell.getProgressState() + (updateResell.getProgressState().equals("수정요청")?"으":"") +"</b>로 변경되었습니다.";
+					+"의 판매상태가 <b>" + updateResell.getProgressState() + "</b>" + (updateResell.getProgressState().equals("수정요청")?"으":"") +"로 변경되었습니다.";
 			break;
 		case "refundState" :
 			OrderDetail orderDetail = (OrderDetail)obj;

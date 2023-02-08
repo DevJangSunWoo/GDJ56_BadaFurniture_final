@@ -219,7 +219,10 @@
 					판매희망금액
 				</div>
 				<div class="sellColRight">
-					<fmt:formatNumber value="${resell.hopePrice}" type="currency"/> &nbsp;<button class="updateBtn" value="${resell.resellNo}">수정하기</button>
+					<fmt:formatNumber value="${resell.hopePrice}" type="currency"/> 
+					<c:if test="${resell.member.memberNo eq loginMember.memberNo and (resell.progressState eq '승인검토' or resell.progressState eq '수정요청')}">
+						&nbsp;<button class="updateBtn" value="${resell.resellNo}">수정하기</button>
+					</c:if>
 				</div>		
 			</div>
 			<div class="sellRow">

@@ -181,13 +181,13 @@
 									<c:out value="${r.progressState}"/>
 								</td>
 								<td>
-									<c:if test="${r.progressState ne '입금완료'}">
+									<c:if test="${r.progressState eq '승인검토' or r.progressState eq '수정요청'}">
 										<button class="updateBtn" value="${r.resellNo}">수정하기</button>
 										<br>
 										<button class="deleteBtn" value="${r.resellNo}">삭제</button>
 									</c:if>
-									<c:if test="${r.progressState eq '입금완료' }">
-										내 가구 팔기 완료
+									<c:if test="${!(r.progressState eq '승인검토' or r.progressState eq '수정요청')}">
+										-
 									</c:if>
 								</td>
 							</tr>

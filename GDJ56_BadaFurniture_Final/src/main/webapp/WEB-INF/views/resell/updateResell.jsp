@@ -41,7 +41,7 @@
 		<form action="${path}/resell/updateEnd.do" method="post" onsubmit="return checkSubmit();">
 			<input type="hidden" name="resellNo" value="${resell.resellNo}"/>
 			<div class="updateRow">
-				판매 희망 금액 : <input type="number" style="width:100px;" name="hopePrice" value="${resell.hopePrice}"> 원 
+				판매 희망 금액 : <input type="number" style="width:100px;" name="hopePrice" min="1" value="${resell.hopePrice}"> 원 
 			</div>
 			<div class="updateRow">
 				희망 수거일 : <input type="date" name="pickUpDate" style="width:100px">
