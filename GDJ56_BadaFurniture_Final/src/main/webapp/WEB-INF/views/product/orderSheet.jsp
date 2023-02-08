@@ -1136,13 +1136,13 @@
 	            console.log(rsp);
 	             if ( rsp.success ) {
 	                var msg = '결제가 완료되었습니다.';
-	                 msg += '고유ID : ' + rsp.imp_uid;         //아임 포트 식별 번호  imp_uid
-	                 msg += '상점 거래ID : ' + rsp.merchant_uid;   // 주문식별 번호 merchant uid 난수
-	                 msg += '결제 금액 : ' + rsp.paid_amount;
-	                 msg += '카드 승인번호 : ' + rsp.apply_num;
-	                 msg += '결제 수단 :' + rsp.pay_method; 
-	                 msg += '영수증 url : ' + rsp.receipt_url;    //영수증 url   RECEIPT_URL
-	                 console.log(rsp);
+	                 //msg += '고유ID : ' + rsp.imp_uid;         //아임 포트 식별 번호  imp_uid
+	                 //msg += '상점 거래ID : ' + rsp.merchant_uid;   // 주문식별 번호 merchant uid 난수
+	                 //msg += '결제 금액 : ' + rsp.paid_amount;
+	                 //msg += '카드 승인번호 : ' + rsp.apply_num;
+	                 //msg += '결제 수단 :' + rsp.pay_method; 
+	                 //msg += '영수증 url : ' + rsp.receipt_url;    //영수증 url   RECEIPT_URL
+	                // console.log(rsp);
 	                 //이부분에서  input hidden tag    MERCHANT_UID  ,IMP_UID,  RECEIPT_URL 에   val()을 이용하여 넣어줌 
 	             	 $('input[name=MERCHANT_UID]').val(rsp.merchant_uid);
 	             	$('input[name=IMP_UID]').val(rsp.imp_uid);	
@@ -1152,7 +1152,7 @@
 	             
 	             } else {
 	                 var msg = '결제에 실패하였습니다.';
-	                  msg += '에러내용 : ' + rsp.error_msg;
+	                  //msg += '에러내용 : ' + rsp.error_msg;
 	             }
 	             
 	             alert(msg);//결제가 성공시  결제 완료 출력,   결제취소및 실패시   결제에 실패하였습니다. 출력하기

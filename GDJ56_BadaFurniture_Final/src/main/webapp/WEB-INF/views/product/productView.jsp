@@ -287,8 +287,9 @@
     		 if( $("#badaLoginFilter").val() ==''){
     		
     			 alert("로그인 하셔야 장바구니에 담을 수 있습니다.");
-   			 window.location.href="${path}/member/login.do"
-    			
+   					console.log(window.location.href);
+    			 window.location.href=window.location.href+"#demo-modal";
+    			 return false;
     		} 
     		
     	
@@ -300,8 +301,8 @@
 							,cartMemberNo:$("#cart_memberNo").val()
 						},
 						success:data=>{
-							console.log(data);
-							if(confirm(data+"장바구니로 이동하시겠습니까?")) {
+							//console.log(data);
+							if(confirm("장바구니로 이동하시겠습니까?")) {
 							    window.location.href = "${path}/mypage/cart.do"
 							}
 						}
@@ -320,8 +321,8 @@
     		 if( $("#badaLoginFilter").val() ==''){
     	    		
     			 alert("로그인 하셔야 구매하실수 있습니다.");
-   			 window.location.href="${path}/member/login.do"
-    			
+    			 window.location.href=window.location.href+"#demo-modal";
+    			 return false;
     		} 
     		 
     		 
@@ -393,7 +394,7 @@
 	                                </div>
 	                            </div>
 	                            <div  style="border:0px solid rgb(17, 0, 255);height:260px;">
-	                                <div style="border:0px solid rgb(255, 115, 0);height:43px;"><p style="text-decoration: underline; text-underline-position:under;">교환밑반품불가능</p></div>
+	                                <div style="border:0px solid rgb(255, 115, 0);height:43px;"><p style="text-decoration: underline; text-underline-position:under;">교환 및 반품 불가능</p></div>
 	                                <div style="border:0px solid rgb(30, 255, 0);height:217px;">
 	                                    -제품을 설치한 후 고객님의 단순변심이나 현장상황이 변경되어 제품이 필요없게 된 경우 <br>
 	                                    -주문 후 제품의 설치가 진행된경우 <br>
