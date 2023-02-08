@@ -23,7 +23,7 @@
 
     <div class="flexDiv" style="justify-content: center;">
         <div id="enrollDiv">
-            <form action="${path}/member/enrollMemberEnd.do">
+            <form action="${path}/member/enrollMemberEnd.do" method="post" onsubmit="return fn_invalidate();">
                 <br>
                 <div class="flexDiv" style="justify-content: center;">
                     <div style="border: 1px solid grey; width: 80%;">
@@ -48,19 +48,6 @@
 		                <br>
 		                
 		                <script>
-			              	//아이디 정규표현식
-			    			$("input[name=memberId]").blur(e=>{
-		    					const id=$("#id").val().trim();
-		    					const idChk=/^[A-Za-z0-9]+$/
-		    					
-		    					if(!idChk.test(id) || id.length<4){
-		    						setTimeout(function(){ //alert 무한루프 문제 해결
-			    						alert("⛔ 아이디는 4자 이상, 영문자/숫자로만 구성할 수 있습니다. ⛔");
-			    						$("input[name=memberId]").val("");
-		    						}, 10)
-		    					}					
-			    			});
-		                
 		                	//아이디 중복확인
 		                	$("#idcheck").click(function(){
 		                	/* $("input[name=memberId]").keyup(function(){ */
@@ -98,7 +85,7 @@
                                 <input type="email" name="email" id="email" class="form__input" placeholder="이메일" required/>
                                 <label class="form__label" id="mailTxt">이메일</label>
                             </div>
-                           <input type="button" class="oribtn" id="emailcheck" value="중복확인">
+                           <input type="button" class="oribtn" id="emailcheck" value="중복확인" required>
                            <input type="button" class="oribtn" id="emailAuthentication" value="이메일인증" hidden>
                         </div>
                         <br>
@@ -168,12 +155,12 @@
 	                                 console.log("data : "+data);
 	                                 chkEmailConfirm(data, $("#memailconfirm"), $("#memailconfirmTxt"));
 	                              }
-	                           })
-	                        })
+	                           });
+	                        });
 
                         	// 이메일 인증번호 체크 함수
                         	function chkEmailConfirm(data){
-                        		$("#memailconfirm").on("keyup", function(){
+                        		$("#memailconfirm").on("blur", function(){
                         			if (data != $("#memailconfirm").val()) { 
                         				emconfirmchk = false;
                         				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호가 불일치</span>")
@@ -183,8 +170,8 @@
                         					"font-size" : "14px"
                         				});
                         				
-                        				//alert("인증번호가 틀렸습니다.");
-        	            				//$("input[name=emailck]").val("");
+                        				alert("인증번호가 틀렸습니다.");
+        	            				$("input[name=emailck]").val("");
                         				
                         			} else { // 아니면 중복아님
                         				emconfirmchk = true;
@@ -196,13 +183,6 @@
                         					"font-size" : "14px"
                         				});
                         			}
-                        			
-                        			$("#memailconfirm").on("blur", function(){
-    	            					if (data != $("#memailconfirm").val()){
-    	            						alert("인증번호가 틀렸습니다.");
-    	            						$("input[name=emailck]").val("");
-    	            					}
-    								});
                         		});
                         	}
                         </script>
@@ -225,7 +205,6 @@
                         <br>
                         
                         <script>
-
 	            			//비밀번호 확인
 							$("input[name=passwordck]").keyup(e=>{
 								const pw = $("#pw").val();
@@ -256,23 +235,6 @@
 								});
 								
 							});
-	            			
-							//비번 정규표현식, 일치-불일치 체크
-	            			$(()=>{
-	            				$("#pw").blur(e=>{
-	            					const pw=$("#pw").val();
-	            					const pwck=$("#pwck").val(); //비밀번호 확인
-	            					const pwChk=/^[a-zA-Z0-9]+$/ //정규표현식
-	            					
-	            					//비밀번호 정규표현식
-	            					if(!pwChk.test(pw) || pw.trim().length<8){
-	            						alert("⛔ 비밀번호는 8자 이상, 영문자/숫자로만 구성할 수 있습니다.⛔");
-	            						$("#pw").val('');
-	            						// $("#userPw").focus();
-	            					}
-	            				});
-	            			});
-                        	
                         </script>
                         
                         <div class="flexDiv">
@@ -291,21 +253,6 @@
                             </div>
                         </div>
                         <br>
-                        
-                        <script>
-	                        //전화번호 정규표현식
-	            			$("input[name=phone]").blur(e=>{
-		                        const userPhone=$("input[name=phone]").val().trim();
-		                        const phoneChk=/^\d{3}-\d{3,4}-\d{4}$/
-		                        
-		                        if(!phoneChk.test(userPhone)){
-		                            setTimeout(function(){ 
-			                            alert("⛔ '-' 포함 전화번호를 정확히 입력해주세요 ⛔");
-			                            $("input[name=phone]").val("");
-		                            }, 10);
-		                        }					
-	                		});  	
-                        </script>
                         
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/은행.png">
@@ -395,6 +342,47 @@
 	                }
 	            </script>
 				
+				<script>
+					const fn_invalidate=()=>{
+						
+						//아이디 정규표현식
+    					const id=$("#id").val().trim();
+    					const idChk=/^[A-Za-z0-9]+$/
+    					
+    					if(!idChk.test(id) || id.length<4){
+    						setTimeout(function(){ //alert 무한루프 문제 해결
+	    						alert("⛔ 아이디는 4자 이상, 영문자/숫자로만 구성할 수 있습니다. ⛔");
+	    						$("input[name=memberId]").val("");
+    						}, 10)
+    						$("#id").focus();
+    						return false;
+    					}					
+						
+						//비번 정규표현식, 일치-불일치 체크
+       					const pw=$("#pw").val();
+       					const pwck=$("#pwck").val(); 
+       					const pwChk=/^[a-zA-Z0-9]+$/ 
+       					
+       					if(!pwChk.test(pw) || pw.trim().length<8){
+       						alert("⛔ 비밀번호는 8자 이상, 영문자/숫자로만 구성할 수 있습니다.⛔");
+       						$("#pw").val('');
+       						$("#userPw").focus();
+       						return false;
+       					}
+       					
+       					//전화번호 정규표현식
+                        const userPhone=$("input[name=phone]").val().trim();
+                        const phoneChk=/^\d{3}-\d{3,4}-\d{4}$/
+                        
+                        if(!phoneChk.test(userPhone)){
+                            setTimeout(function(){ 
+	                            alert("⛔ '-' 포함 전화번호를 정확히 입력해주세요 ⛔");
+	                            $("input[name=phone]").val("");
+                            }, 10);
+                            $("input[name=phone]").focus();
+                            return false;
+                        }					
+					}
 				</script>	
 				
                 <div class="flexDiv" style="justify-content: center;">
