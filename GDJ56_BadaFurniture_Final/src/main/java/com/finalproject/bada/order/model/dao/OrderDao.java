@@ -39,4 +39,7 @@ public interface OrderDao {
 	
 	int updateProductShowState(SqlSessionTemplate session,HashMap param);
 	
+	List<OrderDetail> selectOrderDetailConfirmStateN(SqlSessionTemplate session);
+	
+	int updateOrderDetailConfirmStateNtoY(SqlSessionTemplate session, HashMap param);
 }

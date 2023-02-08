@@ -112,6 +112,16 @@ public class OrderDaoImpl implements OrderDao {
 		return session.update("order.updateProductShowState", param);
 	}
 
+	@Override
+	public List<OrderDetail> selectOrderDetailConfirmStateN(SqlSessionTemplate session) {
+		return session.selectList("order.selectOrderDetailConfirmStateN");
+	}
+
+	@Override
+	public int updateOrderDetailConfirmStateNtoY(SqlSessionTemplate session, HashMap param) {
+		return session.update("order.updateOrderDetailConfirmStateNtoY", param);
+	}
+
 	
 	
 	
