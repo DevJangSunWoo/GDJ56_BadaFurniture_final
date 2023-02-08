@@ -21,9 +21,9 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public List<Product> selectOrderSheetProductList(SqlSessionTemplate session,HashMap map) {
+	public List<Product> selectOrderSheetProductList(SqlSessionTemplate session, HashMap map) {
 		// TODO Auto-generated method stub
-		return session.selectList("order.selectOrderSheetProductList",map);
+		return session.selectList("order.selectOrderSheetProductList", map);
 	}
 
 	@Override
@@ -35,26 +35,26 @@ public class OrderDaoImpl implements OrderDao {
 	@Override
 	public int insertOrderDetail(SqlSessionTemplate session, HashMap map) {
 		// TODO Auto-generated method stub
-		return session.insert("order.insertOrderDetail",map);
+		return session.insert("order.insertOrderDetail", map);
 	}
 
 	@Override
 	public List<OrderSheet> selectOrderComplete(SqlSessionTemplate session, int orderSheetNo) {
 		// TODO Auto-generated method stub
-		return session.selectList("order.selectOrderComplete",orderSheetNo);
-	
+		return session.selectList("order.selectOrderComplete", orderSheetNo);
+
 	}
 
 	@Override
 	public int updateSoldOutState(SqlSessionTemplate session, HashMap map) {
 		// TODO Auto-generated method stub
-		return session.update("order.updateSoldOutState",map);
+		return session.update("order.updateSoldOutState", map);
 	}
 
 	@Override
 	public int deleteMemberCart(SqlSessionTemplate session, HashMap map) {
 		// TODO Auto-generated method stub
-		return session.delete("order.deleteMemberCart",map);
+		return session.delete("order.deleteMemberCart", map);
 	}
 
 	@Override
@@ -70,9 +70,9 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public int updateOrderSheetUndeposited(SqlSessionTemplate session,HashMap param) {
+	public int updateOrderSheetUndeposited(SqlSessionTemplate session, HashMap param) {
 		// TODO Auto-generated method stub
-		return session.update("order.updateOrderSheetUndeposited",param);
+		return session.update("order.updateOrderSheetUndeposited", param);
 	}
 
 	@Override
@@ -81,7 +81,6 @@ public class OrderDaoImpl implements OrderDao {
 		return session.update("order.updateOrderDetailRefundState", param);
 	}
 
-	
 	@Override
 	public List<OrderDetail> selectOrderDetailCancelCompleted(SqlSessionTemplate session) {
 		// TODO Auto-generated method stub
@@ -122,23 +121,4 @@ public class OrderDaoImpl implements OrderDao {
 		return session.update("order.updateOrderDetailConfirmStateNtoY", param);
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

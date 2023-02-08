@@ -372,12 +372,12 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th style="background-color: #393434 !important;color: white;" scope="col">상품
-									정보</th>
-								<th style="background-color: #393434 !important;color: white;" scope="col"
-									colspan="3"><strong>배송비</strong></th>
-								<th style="background-color: #393434!important;color: white;" scope="col"
-									colspan="3"><strong>주문금액</strong></th>
+								<th style="background-color: #393434 !important; color: white;"
+									scope="col">상품 정보</th>
+								<th style="background-color: #393434 !important; color: white;"
+									scope="col" colspan="3"><strong>배송비</strong></th>
+								<th style="background-color: #393434 !important; color: white;"
+									scope="col" colspan="3"><strong>주문금액</strong></th>
 							</tr>
 						</thead>
 						<!--리스트 데이터 표출 -->
@@ -483,8 +483,8 @@
 														<li>2. 수집 항목 <br>구매자 정보: 성명, 전화번호, ID, 휴대전화 번호,
 															메일주소, 상품 구매정보 <br>수령자 정보: 성명, 전화번호, 휴대전화 번호, 배송지 주소
 														</li>
-														<li>3. 보유기간 <br>
-														<span style="font-weight: bold; font-size: 14px;">개인정보
+														<li>3. 보유기간 <br> <span
+															style="font-weight: bold; font-size: 14px;">개인정보
 																수집 및 이용목적 달성 시 및 관련 법령에 따른 기간까지 보관</span>
 														</li>
 														<li>4. 동의 거부시 불이익 <br>본 개인정보 수집 및 이용 등에 동의하지 않을
@@ -764,10 +764,9 @@
 															따릅니다.</li>
 														<li>② 회사와 이용자간에 발생한 분쟁에 관한 관할은 민사소송법에서 정한 바에 따릅니다.</li>
 													</ol>
-													<br>
-													<br>
-													<br> <strong>[엔에이치엔한국사이버결제]</strong><br> <strong>전자금융거래
-														기본약관</strong><br> <strong>제1조 (목적)</strong>
+													<br> <br> <br> <strong>[엔에이치엔한국사이버결제]</strong><br>
+													<strong>전자금융거래 기본약관</strong><br> <strong>제1조
+														(목적)</strong>
 													<ol>
 														<li>이 약관은 엔에이치엔한국사이버결제 주식회사(이하 '회사'라 합니다)가 제공하는
 															전자지급결제대행서비스 및 결제대금예치서비스를 이용자가 이용함에 있어 회사와 이용자 사이의 전자금융거래에
@@ -1196,8 +1195,8 @@
 					value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.phone}">
 
 				<input type="hidden" name="MERCHANT_UID" value=""> <input
-					type="hidden" name="IMP_UID" value=""> <input
-					type="hidden" name="RECEIPT_URL" value="">
+					type="hidden" name="IMP_UID" value=""> <input type="hidden"
+					name="RECEIPT_URL" value="">
 
 				<!--주문결제 방식 태그  -->
 				<input type="hidden" id="payMethodWay" name="payMethod" value="">

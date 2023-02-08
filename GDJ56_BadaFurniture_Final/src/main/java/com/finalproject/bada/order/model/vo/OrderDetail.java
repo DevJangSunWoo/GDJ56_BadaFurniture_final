@@ -19,20 +19,19 @@ import lombok.NoArgsConstructor;
 public class OrderDetail {
 	private int orderDetailNo;
 	private OrderSheet orderSheet;
-	//private int orderSheetNo;
+	// private int orderSheetNo;
 	private Product product;
 	private String deliveryState;
 	private String confirmState;
 	private String refundState;
 	private Refund refund;
-	
-	
+
 	public String toString() {
-		 String temp="";
-	
-		 return orderDetailNo+" "+orderSheet.getOrderSheetNo()+" "+product+" "+deliveryState
-				 +" "+confirmState+" "+refundState+temp;
-		 
+		String temp = "";
+
+		return orderDetailNo + " " + orderSheet.getOrderSheetNo() + " " + product + " " + deliveryState + " "
+				+ confirmState + " " + refundState + temp;
+
 	}
-	
+
 }
