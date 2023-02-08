@@ -24,7 +24,7 @@ public interface OrderService {
 	List<OrderSheet> selectOrderSheetUndepositedList();
 	
 		
-	void updateUndeposited(HttpSession httpSession);
+	void updateUndeposited(String contextPath);
 	
 	List<OrderDetail> selectOrderDetailCancelCompleted(); 
 	

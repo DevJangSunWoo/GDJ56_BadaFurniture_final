@@ -23,7 +23,7 @@
 
 <div class="flexDiv" style="justify-content: center;">
     <div id="enrollDiv">
-        <form action="${path}/member/updateMemberEnd.do" method="post">
+        <form action="${path}/member/updateMemberEnd.do" method="post" onsubmit="return fn_invalidate();">
             <br>
             <div class="flexDiv" style="justify-content: center;">
                 <div style="border: 1px solid grey; width: 80%;">
@@ -61,7 +61,7 @@
                      const fn_updatePassword=()=>{
              			//새창으로 패스워드 수정페이지 연결
              			open("${path}/member/updatePassword.do?userId=${loginMember.memberId!=null ? loginMember.memberId : ""}",
-             					"_blank","width=400, height=260, left=500, top=200");
+             					"_blank","width=500, height=330, left=500, top=200");
              		}
                     </script>
                     
@@ -153,7 +153,7 @@
                 </div>
             </div>
 	
-<script>
+		<script>
              function sample5_execDaumPostcode() {
                  new daum.Postcode({
                      oncomplete: function(data) {
@@ -174,6 +174,7 @@
                  }).open();
              }
          </script>
+         
 			
 			<input type="hidden" name="memberId" value="${loginMember.memberId }">
 			
@@ -185,6 +186,22 @@
         </form>
     </div>
 </div>
+<script>
+	const fn_invalidate=()=>{
+		//전화번호 정규표현식
+		const userPhone=$("input[name=phone]").val().trim();
+		const phoneChk=/^\d{3}-\d{3,4}-\d{4}$/
+		
+		if(!phoneChk.test(userPhone)){
+		    setTimeout(function(){ 
+		     alert("⛔ '-' 포함 전화번호를 정확히 입력해주세요 ⛔");
+		     $("input[name=phone]").val("");
+		    }, 10);
+		    $("input[name=phone]").focus();
+		    return false;
+		}					
+	}
+</script>
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

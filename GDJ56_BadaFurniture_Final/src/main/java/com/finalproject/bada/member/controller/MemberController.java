@@ -173,19 +173,20 @@ public class MemberController {
 			int result = service.updatePassword(param);
 			
 			if(result>0) {
-				String script = "opener.location.replace('"+request.getContextPath()+"/member/logout.do');close();";
+				String script = "close();";
+//				String script = "opener.location.replace('"+request.getContextPath()+"/member/logout.do');close();";
 				mv.addObject("msg","비밀번호 변경완료!");
-				mv.addObject("loc","mypage/member/updateMember.do");
+				//mv.addObject("loc","mypage/member/updateMember.do");
 				mv.addObject("script", script);
 				
 			}else {
 				mv.addObject("msg","비밀번호 변경 실패!");
-				mv.addObject("loc","mypage/member/updatePassword.do");
+				mv.addObject("loc","/member/updatePassword.do?userId="+(String)param.get("memberId"));
 			}
 			
 		}else {
-			mv.addObject("msg","현재 비밀번호가 일치하지 않습니다! 다시 시도하세요!");
-			mv.addObject("loc","mypage/member/updatePassword.do");
+			mv.addObject("msg","기존 비밀번호가 일치하지 않습니다! 다시 시도하세요!");
+			mv.addObject("loc","/member/updatePassword.do?userId="+(String)param.get("memberId"));
 		}
 		mv.setViewName("common/msg");
 		return mv;
@@ -243,7 +244,7 @@ public class MemberController {
 		if(result>0) {
 			session.invalidate();
 			mv.addObject("msg","탈퇴가 완료되었습니다. 그동안 이용해주셔셔 감사합니다.<(＿　＿)>");
-			mv.addObject("loc","/");
+			mv.addObject("loc","/member/logout.do");  //시큐리티에 설정된 로그아웃 URL로 연결해서 세션 없어지면서 로그아웃 됨 
 		}else {
 			mv.addObject("msg","회원삭제 실패");
 			mv.addObject("loc","mypage/member/deleteMemberEnd.do");

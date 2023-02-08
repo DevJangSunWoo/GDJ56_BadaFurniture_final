@@ -14,6 +14,7 @@ import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finalproject.bada.config.AES256Config;
 import com.finalproject.bada.order.model.service.OrderService;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
@@ -36,11 +38,19 @@ public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 	//해당클래명.class
 	
 	private OrderService service;
+	
+	@Value("${context.path}")
+	private String contextPath;  // yml 에 설정해주고     @Value를 사용하면 가져와서 쓸수 있음.
+	
 
+	
+	
+	
 	@Autowired
 	public OrderController(OrderService service) {
 		super();
 		this.service = service;
+		
 	}
 	
 	
@@ -92,25 +102,17 @@ public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 			,@RequestParam(value="IMP_UID",required=false) String impUid
 			,@RequestParam(value="RECEIPT_URL",required=false) String receiptUrl			
 			,@RequestParam(value="payMethod",required=false) String payMethod	
-			,JobExecutionContext context
+		//	,JobExecutionContext context
 			)
-		throws IOException,JobExecutionException {
-//		log.debug("{}",loginMemberNo);  
-//		log.debug("{}",depositName);  
-//		log.debug("{}",totalPrice);	
-//		log.debug("{}",receiverName);
-//		log.debug("{}",postCode);
-//		log.debug("{}",address);
-//		log.debug("{}",addressDetail);
-//		log.debug("{}",productList);   //ng
-//		log.debug("{}",productNos);
+		throws IOException {
+
 		
 		
-		//import java.util.Date 
+	
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd_hh:mm:ss");
 		String dateToStr = dateFormat.format(date);
-		//log.debug("{}",dateToStr);
+		
 		
 		//난수
 		//중복되지 않는 난수 생성?
@@ -123,7 +125,11 @@ public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 		
 		//주문식별번호=날짜+난수
 		String merchantUid=dateToStr +rnd;
-		log.debug("{}",merchantUid);
+		//log.debug("{}",merchantUid);
+		
+		
+		//계좌번호 양방향 암화화 
+		
 		
 		
 		HashMap map = new HashMap();
@@ -216,18 +222,34 @@ public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 	//이로직이 바로 실행되고!! 그다음 바로 3일마다 반복되서 실행됨
 	//계좌이체로 결제후 3일 후에도 미입금시  해당 결제 주문 취소기키는 로직 
 	@Override
-	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-	
+	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {	
 		
 		
-		// service.updateUndeposited();
-					
+		//HttpSession httpSession=(HttpSession)(RequestContextHolder.currentRequestAttributes().resolveReference(RequestAttributes.REFERENCE_SESSION));
+		// 톰갯 쓰레드와  job 쓰레드가 다름  즉 작업공간이 달라서   가져와설 쓸수 없음. 		 
+		//방안 -> yml에 등록하고 고정값으로 쓸수 밖에없음
 	
+		
+//		log.debug("{}","테스트");
+//		log.debug(contextPath);
+		
+		
+		
+		 service.updateUndeposited(contextPath);
+		 log.debug("{}","20초마다  테스트 성공");			
 	
 		
 		
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -238,8 +260,8 @@ public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 			
 
 
-		 service.updateUndeposited(httpSession);
-		
+		// service.updateUndeposited(httpSession);
+		 service.updateUndeposited(contextPath);
 		
 		mv.setViewName("product/test");
 		return mv;

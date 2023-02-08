@@ -238,6 +238,7 @@
 		            }
 		        }).open();
 		    	$("#delivery_choice_0").prop("checked",false);
+				$("#sample6_detailAddress").val("");
 			}	
 			</script>
 			<script>
@@ -1022,10 +1023,10 @@
 
 <!--결제 버튼 스크립트 -->
 	<script>
+   
 		function badaOrderPayment(method){
 			document.getElementById('orderForm').setAttribute( 'action', '${path}/order/orderPayment.do' );			
 			if(method=='account'){
-				
 				 if(document.getElementById("depositName").value==''){
 						alert("예금주명을 입력하셔야 결제할수 있습니다.");
 						return false;
@@ -1037,7 +1038,7 @@
 			/* 	$('#orderForm').action = '${path}/order/orderPayment.do'; */  
 				/* $('#orderForm').target = '_blank'; */
 			/* 	$('#orderForm').submit(); */
-			alert('7일이내로 금액을 입금하셔야 배송이 시작됩니다. 예금주명:유병승/은행:BS은행/계좌번호:1002-1002-1002 으로 보내주시면 됩니다.');				
+			alert('3일이내로 금액을 입금하셔야 배송이 시작됩니다.\n예금주명:유병승\n은행:BS은행\n계좌번호:1002-1002-1002으로 보내주시면 됩니다.');						
 			$('#payMethodWay').val('계좌이체');
 			//console.log($('#payMethodWay').val());
 			

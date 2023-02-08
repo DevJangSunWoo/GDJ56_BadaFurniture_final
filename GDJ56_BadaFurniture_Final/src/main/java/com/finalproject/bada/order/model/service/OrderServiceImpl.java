@@ -153,7 +153,8 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	@Override
-	public void updateUndeposited(HttpSession httpSession) {
+	@Transactional
+	public void updateUndeposited(String contextPath) {
 		
 		
 		
@@ -168,113 +169,86 @@ public class OrderServiceImpl implements OrderService {
 		
 		
 		
-		if(orderSheetList!=null&& orderSheetList.size()>0) {
+		if(orderSheetList!=null && orderSheetList.size()>0) {
 
-				
-			
-			int resultOrderSheetUndeposited= dao.updateOrderSheetUndeposited(session,param);	
+			 int resultOrderSheetUndeposited= dao.updateOrderSheetUndeposited(session,param);	
 			 
-			 if(resultOrderSheetUndeposited>0) {
-				 //log.debug("{}"," 주문서 미입금상태 변경 성공");	
+			 if(resultOrderSheetUndeposited==orderSheetList.size()) {//
+				 log.debug("{}"," 주문서 미입금상태 변경 성공");	
 				
-			
+				 List<OrderDetail> orderDetailList=selectOrderDetailCancelCompleted();
+				    
+				 param.put("orderDetails", orderDetailList);
 				 int resultUpdateOrderDetailRefundState=dao.updateOrderDetailRefundState(session,param);
+				  log.debug("{}","주문상세 Refund_state 변경 성공");
 				 
 				 
-				 
-				 if(resultUpdateOrderDetailRefundState>0) {
-					 //log.debug("{}","주문상세 Refund_state 변경 성공");	
-					    List<OrderDetail> orderDetailList=selectOrderDetailCancelCompleted();
-					    
-					    param.put("orderDetails", orderDetailList);
+				 if(resultUpdateOrderDetailRefundState==orderDetailList.size()) {
+						
 					    
 					    if(orderDetailList!=null&& orderDetailList.size()>0) {					    	
 					    	int  resultRefund=0;
-					    	 
 					    	for(OrderDetail od : orderDetailList ) {					    		
 					    		int orderDetailNo=od.getOrderDetailNo();
 					    		resultRefund += dao.insertRefund(session,orderDetailNo);
 					    	}
 					    	
-					    		
-					    	if( resultRefund !=orderDetailList.size()) {
-					    		throw new RuntimeException("REFUND가 갯수 만큼 삽입이 안됬습니다.");
-					    		
-					    	}else {
-					    		
-					    		//log.debug("{}" ,"REFUND 테이블에  갯수 만큼 삽입 성공" );
-					    		
+					    	if( resultRefund < orderDetailList.size()) {
+					    		throw new RuntimeException("REFUND가 갯수 만큼 삽입이 안됬습니다.");	
+					    	} else {
+					    		log.debug("{}" ,"REFUND 테이블에  갯수 만큼 삽입 성공" );
 					    		int productUpdateResult=dao.updateRefundProductSoldOutState(session,param);
-					    	
-					    	
 					    		if(productUpdateResult>0) {
+					    		//if(productUpdateResult<orderDetailList.size()) {
 					    			int resultUndeposited = 0; 
-					    			//log.debug("{}" ,"제품 판매상태 변경 선공" );
-					    			for(OrderSheet os : orderSheetList) {
-					    				String alertMsg = AlertFactory.getAlertMsg(httpSession.getServletContext().getContextPath(), "undeposited", os);
-					    				resultUndeposited += mypageDao.insertAlert(session, Alert.builder().memberNo(os.getMember().getMemberNo()).detail(alertMsg).build());
+					    			log.debug("{}" ,"제품 판매상태 변경 선공" );
+					    			if(orderSheetList.size() > 0) {
+						    			for(OrderSheet os : orderSheetList) {
+						    				log.debug("orderList 길이 : {}", orderSheetList.size());
+						    				String alertMsg = AlertFactory.getAlertMsg(contextPath, "undeposited", os);
+						    				log.debug("알림메시지 : {}", alertMsg);
+						    				resultUndeposited += mypageDao.insertAlert(session, Alert.builder().memberNo(os.getMember().getMemberNo()).detail(alertMsg).build());
+						    				log.debug("resultUndeposited : {}", resultUndeposited);
+						    			}
+						    			if(resultUndeposited < orderSheetList.size()) {
+						    				new RuntimeException("미입금자 알림 입력 실패");
+						    			}
 					    			}
-					    			if(resultUndeposited < orderSheetList.size()) {
-					    				new RuntimeException("미입금자 알림 입력 실패");
-					    			}
-					    			
 					    		}else {
-					    			
 					    			throw new RuntimeException("제품 판매상태  변경 실패 ");
 					    		}
-					    				
-					    			
-					    	
-					    	
-					    	
-					    	
 					    	}
-					    		
-					    	
-					    	
-					    	
-					    }
-					 
-										 
-				 }else {
+					    }					 				 
+				 } else {
 					 throw new RuntimeException("주문상세 Refund_state 변경 실패 ");
 				 }
-				 
-				 
-				 
 			 }else {
 				 
 				 throw new RuntimeException("주문서 미입금 상태로 변경 실패 ");				 
 			 }
-			
+
+		}		
+	
 		
-			}		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	@Override
-//	public int updateSoldOutState(HashMap map) {
-//		// TODO Auto-generated method stub
-//		return dao.updateSoldOutState(session,map);
-//	}
-//	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		 List <Product> listProductShowState  = dao.selectProductListShowState(session);
+		
+		 
+//		 for(Product  p :  listProductShowState) {
+//		 log.debug("{}","listProductShowState의 값:"+p);
+//		 }
+		 
+		 
+		 param.put("listShowState", listProductShowState);
+		 if(listProductShowState.size()>0) {
+		 int updateShowStateResult=dao.updateProductShowState(session,param);		 
+			 if(updateShowStateResult == listProductShowState.size()) {//10개면  10개가  다되야 변경한거니까
+				 log.debug("{}","제품 공개상태 변경 성공");				 
+			 }else {
+				 throw new RuntimeException("제품 공개상태 변경 실패 ");			
+			 }
+		 }
+		
+		 
+		
+	}	
 }

@@ -100,6 +100,21 @@ public class OrderDaoImpl implements OrderDao {
 		return session.update("order.updateRefundProductSoldOutState", param);
 	}
 
+	@Override
+	public List<Product> selectProductListShowState(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectList("order.selectProductListShowState");
+	}
+
+	@Override
+	public int updateProductShowState(SqlSessionTemplate session, HashMap param) {
+		// TODO Auto-generated method stub
+		return session.update("order.updateProductShowState", param);
+	}
+
+	
+	
+	
 	
 	
 	

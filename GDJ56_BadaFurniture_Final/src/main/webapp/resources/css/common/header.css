@@ -92,6 +92,7 @@ details[open] summary::after {
 	flex-direction: column;
 	justify-content: space-between;
 	animation: closeMenu 300ms ease-in-out forwards;
+	z-index: 1000;
 }
 
 .memberMenu a {

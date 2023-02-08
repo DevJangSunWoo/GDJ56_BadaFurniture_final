@@ -35,5 +35,8 @@ public interface OrderDao {
 	int  updateRefundProductSoldOutState(SqlSessionTemplate session,HashMap param);
 	 
 	 
-	 
+	List <Product> selectProductListShowState(SqlSessionTemplate session);
+	
+	int updateProductShowState(SqlSessionTemplate session,HashMap param);
+	
 }
