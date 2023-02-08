@@ -280,17 +280,23 @@ public class AdminServiceImpl implements AdminService {
 	public void updateRefundState(Map param, HttpSession httpSession) {
 		// TODO Auto-generated method stub
 		int result=dao.updateRefundState(session,param);
+		//log.debug("취소상태변경 - {}",result);
 		
 		if(result > 0 && (param.get("refundState").equals("반품완료") ||param.get("refundState").equals("취소완료"))) {			
-			result+=dao.updateSoldOutStateAfterRefund(session,param);		
+			result+=dao.updateSoldOutStateAfterRefund(session,param);
+//			int result2=dao.updateSoldOutStateAfterRefund(session,param);
+//			log.debug("취소상태변경2 - {}",result2);
 			if(result<2) {
+
 				throw new RuntimeException("취소/반품상태 변경에 실패했습니다.");					
 			}		
 		} else {
 			if(result<1) {
 				throw new RuntimeException("취소/반품상태 변경에 실패했습니다.2");				
+				
 			}
 		}		
+		
 		//알림 설정
 		String refundState = (String)param.get("refundState");
 		//log.debug(refundState);
@@ -300,7 +306,7 @@ public class AdminServiceImpl implements AdminService {
 			String alertMsg = AlertFactory.getAlertMsg(httpSession.getServletContext().getContextPath(), "refundState", orderDetail);
 			result = 0;
 			result = mypageDao.insertAlert(session, Alert.builder().memberNo(orderDetail.getOrderSheet().getMember().getMemberNo()).detail(alertMsg).build());
-			if(result <= 0) {
+			if(result < 1) {
 				throw new RuntimeException("알림 등록 실패");
 			}
 		}
