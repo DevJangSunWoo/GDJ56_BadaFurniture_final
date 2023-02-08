@@ -185,6 +185,10 @@
 					<th class="tableTh">카드결제완료</th>
 					<td id="summary_state3" class="tableTd"><c:out value="${summary.STATE_3}"/></td>
 				</tr>
+				<tr>
+					<th class="tableTh">미입금</th>
+					<td id="summary_state10" class="tableTd"><c:out value="${summary.STATE_10}"/></td>
+				</tr>
 			</table>
 
 			<table class="summaryTable">
@@ -330,8 +334,9 @@
 
 											<td class="${o.orderSheetNo}Td" style="background-color: #dcd5c32b;">
 												<input type="hidden" value="${d.product.productNo}">
-												<c:out value="${d.product.productNo}"/>
-
+														<input type="text" class="onclickInput" name="productNo" value="${d.product.productNo}"													" 
+														onclick="location.assign('${path}/product/view.do?productNo=${d.product.productNo }')" 
+														readonly>
 											</td>
 
 											<td class="tableTd"><c:out value="${d.product.item}"/></td>
@@ -382,16 +387,23 @@
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.paymentMethod}"/></td>
 												
 												<td class="tableTd2" rowspan="${o.details.size()}">
-													<c:if test='${o.paymentState!="미입금"}'>
+													<c:if test='${o.paymentState!="카드결제완료"}'>
 														<select name="paymentState">
 															<option value="입금대기" ${o.paymentState.equals("입금대기")?"selected":""}>입금대기</option>
 															<option value="입금완료"  ${o.paymentState.equals("입금완료")?"selected":""}>입금완료</option>
-															<option value="카드결제완료"  ${o.paymentState.equals("카드결제완료")?"selected":""}>카드결제완료</option>
 														</select>													
 													</c:if>
+													
+													<c:if test='${o.paymentState!="미입금"}'>
+														<c:if test='${o.paymentState=="카드결제완료"}'>
+															${o.paymentState}											
+														</c:if>
+													</c:if>
+
 													<c:if test='${o.paymentState=="미입금"}'>
 														${o.paymentState}													
 													</c:if>
+
 												</td>
 											</c:if>
 										</tr>
@@ -562,7 +574,7 @@
 	});
 	document.querySelector(".closeBtn").addEventListener("click", close);
 	document.querySelector(".bg").addEventListener("click", close);
-	
+
 	//숫자 콤마 찍어주는 함수
 	function fnSetComma(n) {
 	    var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
@@ -578,9 +590,6 @@
 		let path = '${path}/product/view.do?productNo=' + $(e.target).prev().val();
 		location.assign(path);
 	});
-
-
-
 
 	//요약테이블 출력
 	$(()=>{
@@ -698,43 +707,14 @@
 				$("#summary_state7").text(summary.STATE_7);
 				$("#summary_state8").text(summary.STATE_8);
 				$("#summary_state9").text(summary.STATE_9);
+				$("#summary_state10").text(summary.STATE_10);
 
 			}
 		})
 
 	}
 
-
-
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// // datepicker
-	// $('#orderDateRange').daterangepicker({
-    // "locale": {
-    //     "format": "YYYY-MM-DD",
-    //     "separator": " ~ ",
-    //     "applyLabel": "확인",
-    //     "cancelLabel": "취소",
-    //     "fromLabel": "From",
-    //     "toLabel": "To",
-    //     "customRangeLabel": "Custom",
-    //     "weekLabel": "W",
-    //     "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-    //     "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-    // },
-    // "startDate": new Date(),
-    // "endDate": new Date(),
-    // "drops": "auto"
-	// }, 
-	// function (start, end, label) {
-	//     //console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-	// 	let when = $("#orderDateRange").val();
-	// 	//console.log(when);
-	// }
-	// );
-
-////
-		//datepicker
+	//datepicker
 		$('#orderDateRange').daterangepicker({
 			locale: {
 				format: "YYYY-MM-DD",

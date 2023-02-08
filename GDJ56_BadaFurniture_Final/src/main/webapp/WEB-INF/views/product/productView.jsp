@@ -126,6 +126,9 @@
 		</style>  	 
     	 
     	 <input  type="hidden" id="productSoldOutState"  value="${productData.soldOutState}" >
+    	 
+    	 
+    	 
     	 <!--거래중 거래 완료 이미지  css 블러 처리하는 스크립트 -->
     	 <!--제품 soldOutState에 맞춰서 이미지 블러위에 이미지 표출하는 스크립트 -->
     	 <script>
@@ -262,20 +265,20 @@
                  src: imgurl
              });
          }
-     });
-    	 
-    	 
-    	 
+     });    	     	     	 
     	 </script>
-    	 
-    	 
-    	 
-    	 
-    	 
+    	 <input  type="hidden" id="productShowState"  value="${productData.showState}" >
     	 <script>
+    	 //공개상태가 N일떄 장바구니에 담지 못하게하기
     	 const fn_cartBtn=()=>{
+    		 if($('#productShowState').val()=='N'){
+    			 alert("거래완료된 제품입니다. 장바구니에 담으실수 없습니다.");	
+ 			 	return false;
+    			 
+    		 }
+    		 
     		 /*  */
-    		 if($('#productSoldOutState').val()=='I'|| $('#productSoldOutState')=='Y'){ 
+    		 if($('#productSoldOutState').val()=='I'|| $('#productSoldOutState').val()=='Y'){ 
     			 alert("거래완료된 제품입니다. 장바구니에 담으실수 없습니다.");	
     			 	return false;
     		 } 
@@ -284,8 +287,9 @@
     		 if( $("#badaLoginFilter").val() ==''){
     		
     			 alert("로그인 하셔야 장바구니에 담을 수 있습니다.");
-   			 window.location.href="${path}/member/login.do"
-    			
+   					console.log(window.location.href);
+    			 window.location.href=window.location.href+"#demo-modal";
+    			 return false;
     		} 
     		
     	
@@ -297,8 +301,8 @@
 							,cartMemberNo:$("#cart_memberNo").val()
 						},
 						success:data=>{
-							console.log(data);
-							if(confirm(data+"장바구니로 이동하시겠습니까?")) {
+							//console.log(data);
+							if(confirm("장바구니로 이동하시겠습니까?")) {
 							    window.location.href = "${path}/mypage/cart.do"
 							}
 						}
@@ -308,7 +312,7 @@
     	 
     	
     	 const fn_directPurchaseBtn=()=>{
-    		 if($('#productSoldOutState').val()=='I'|| $('#productSoldOutState')=='Y'){ 
+    		 if($('#productSoldOutState').val()=='I'|| $('#productSoldOutState').val()=='Y'){ 
     			 alert("거래완료된 제품입니다. 구매하실수 없습니다.");	
     			 	return false;
     		 } 
@@ -317,8 +321,8 @@
     		 if( $("#badaLoginFilter").val() ==''){
     	    		
     			 alert("로그인 하셔야 구매하실수 있습니다.");
-   			 window.location.href="${path}/member/login.do"
-    			
+    			 window.location.href=window.location.href+"#demo-modal";
+    			 return false;
     		} 
     		 
     		 
@@ -390,7 +394,7 @@
 	                                </div>
 	                            </div>
 	                            <div  style="border:0px solid rgb(17, 0, 255);height:260px;">
-	                                <div style="border:0px solid rgb(255, 115, 0);height:43px;"><p style="text-decoration: underline; text-underline-position:under;">교환밑반품불가능</p></div>
+	                                <div style="border:0px solid rgb(255, 115, 0);height:43px;"><p style="text-decoration: underline; text-underline-position:under;">교환 및 반품 불가능</p></div>
 	                                <div style="border:0px solid rgb(30, 255, 0);height:217px;">
 	                                    -제품을 설치한 후 고객님의 단순변심이나 현장상황이 변경되어 제품이 필요없게 된 경우 <br>
 	                                    -주문 후 제품의 설치가 진행된경우 <br>

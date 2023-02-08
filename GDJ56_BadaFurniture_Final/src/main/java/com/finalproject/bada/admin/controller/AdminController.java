@@ -627,7 +627,7 @@ public class AdminController {
 		param.put("orderDetailNo", orderDetailNo);
 		param.put("refundState", refundState);	
 		param.put("productNo", productNo);	
-		//log.debug("변경할 상태 : "+paymentState);
+		//log.debug("변경할 상태 : "+param);
 		
 		
 		

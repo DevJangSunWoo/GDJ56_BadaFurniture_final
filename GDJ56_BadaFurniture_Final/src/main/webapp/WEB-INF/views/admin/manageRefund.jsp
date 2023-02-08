@@ -25,6 +25,13 @@ crossorigin="anonymous" type="text/javascript"></script>
 	#pageBar a:hover:not(.active) {
 		background-color: #ddd;
 	}
+	.onclickInput{
+    width: 88px;
+    border-style: none;
+    background-color: #dcd5c36c;
+    text-align: center;
+    cursor: pointer;
+  }
 </style>
 
 <section>
@@ -138,44 +145,51 @@ crossorigin="anonymous" type="text/javascript"></script>
 								<td style="width: 20px;">
 									
 									<a class="viewOrderSheet" href="${path}/admin/order.do?searchKeyword=${r.orderSheet.orderSheetNo}&searchType=ORDER_SHEET_NO">
-										<c:out value="${r.orderSheet.orderSheetNo }"/>
+										<input type="text" class="onclickInput" name="orderSheetNo" value="${r.orderSheet.orderSheetNo}"													" 
+										onclick="location.assign('${path}/admin/delivery.do?searchKeyword=${r.product.productNo}&searchType=PRODUCT_NO')" 
+										readonly>
 									</a>
-								</td>
-								<td style="width: 40px;">
-									<input type="hidden" value="${r.orderDetailNo }">
-									
-										<c:out value="${r.orderDetailNo }"/>
-									
 								</td>
 								<td style="width: 20px;">
+									<input type="hidden" value="${r.orderDetailNo }">									
+									<c:out value="${r.orderDetailNo }"/>									
+								</td>
+								<td style="width: 10px;">
 									<input type="hidden" value="${r.product.productNo }">
-									<a class="viewProduct" href="${path}/product/view.do?productNo=${r.product.productNo }">
-										<c:out value="${r.product.productNo }"/>
-									</a>
+									<input type="text" class="onclickInput" name="productNo" value="${r.product.productNo }"													" 
+									onclick="location.assign('${path}/product/view.do?productNo=${r.product.productNo }')" 
+									readonly>
 								</td>
 								<td style="width: 70px;">
 									<img id="productImg" src="${path}/resources/upload/product/${r.product.getFiles().get(0).renamedFileName}">
 								</td>
 								<td style="width: 30px;"><c:out value="${r.product.item }"/></td>
-								<td style="width: 30px;"><c:out value="${r.product.title }"/></td>
+								<td style="width: 50px;"><c:out value="${r.product.title }"/></td>
 								<td class="price" style="width: 70px;"><c:out value="${r.product.price }"/></td>
 								<td>
-									<select name="refundState" id="refundStateSelectBox" ${r.refundState.equals("반품완료")?"disabled":""} ${r.refundState.equals("취소완료")?"disabled":""}>
+									<c:if test='${fn:contains(r.refundState,"취소")}'>
+										<select name="refundState" id="refundStateSelectBox" ${r.refundState=="취소완료"?"disabled":""}>
+											<option value="취소요청" ${r.refundState.equals("취소요청")?"selected":""}>취소요청</option>
+											<option value="취소완료" ${r.refundState.equals("취소완료")?"selected":""}>취소완료</option>
+											<option value="취소거부" ${r.refundState.equals("취소거부")?"selected":""}>취소거부</option>
+										</select>	
+									</c:if>
+									<c:if test='${fn:contains(r.refundState,"반품")}'>
+										<select name="refundState" id="refundStateSelectBox" ${r.refundState=="반품완료"?"disabled":""}>
+											<option value="반품요청" ${r.refundState.equals("반품요청")?"selected":""}>반품요청</option>
+											<option value="반품대기" ${r.refundState.equals("반품대기")?"selected":""}>반품대기</option>
+											<option value="반품완료" ${r.refundState.equals("반품완료")?"selected":""}>반품완료</option>
+											<option value="반품거부" ${r.refundState.equals("반품거부")?"selected":""}>반품거부</option>
 
-										<option value="반품요청" ${r.refundState.equals("반품요청")?"selected":""}>반품요청</option>
-										<option value="반품대기" ${r.refundState.equals("반품대기")?"selected":""}>반품대기</option>
-										<option value="반품완료" ${r.refundState.equals("반품완료")?"selected":""}>반품완료</option>
-										<option value="반품거부" ${r.refundState.equals("반품거부")?"selected":""}>반품거부</option>
-										<option value="취소요청" ${r.refundState.equals("취소요청")?"selected":""}>취소요청</option>
-										<option value="취소완료" ${r.refundState.equals("취소완료")?"selected":""}>취소완료</option>
-										<option value="취소거부" ${r.refundState.equals("취소거부")?"selected":""}>취소거부</option>
-									</select>								
+										</select>
+									</c:if>
 									
 								</td>
 								<input type="hidden" value="${r.orderSheet.orderSheetNo }">
 								<input type="hidden" value="${r.orderSheet.paymentMethod }">
 								<input type="hidden" value="${r.orderSheet.impUid }">
 								<input type="hidden" value="${r.product.price }">
+								<input type="hidden" value="${r.orderDetailNo }">	
 								<td class="tableTd" style="width: 80px;">
 									<button id="detailModalBtn" class="updateBtn" onclick="" name="refundDetail">상세확인</button>
 								</td>
@@ -277,7 +291,7 @@ crossorigin="anonymous" type="text/javascript"></script>
 
 	//취소/반품상태 변경하기 & 카드 취소
 	$("select[name=refundState]").change(e=>{
-			const orderDetailNo=$(e.target).parent().parent().children().find('input').first().val();
+			const orderDetailNo=$(e.target).parent().next().next().next().next().next().val();
 			const refundState=$(e.target).val();
 			const productNo=$(e.target).parent().prev().prev().prev().prev().prev().children().val();
 			
@@ -332,7 +346,7 @@ crossorigin="anonymous" type="text/javascript"></script>
 				}
 			}else{
 				updateRefundState(orderDetailNo,refundState,productNo);
-				$(e.target).attr("disabled",true);
+				
 				
 			}
 				
@@ -371,11 +385,12 @@ crossorigin="anonymous" type="text/javascript"></script>
 			},
 			success:function(result){
 				
-				if($("#refund_State").text()=='취소'){
-					$("#refund_State").text(result.refundState).css("color","red");
+				$("#refund_State").text(result.refundState);
+				if($("#refund_State").text()=="취소"){
+					$("#refund_State").css("color","red");
 					
 				}else{
-					$("#refund_State").text(result.refundState).css("color","blue");
+					$("#refund_State").css("color","blue");
 
 				}
 				$("#refund_OrderDetailNo").text(result.orderDetailNo);
