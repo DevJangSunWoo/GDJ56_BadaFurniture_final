@@ -1,4 +1,4 @@
-package com.finalproject.bada.schedulerTest;
+package com.finalproject.bada.config;
 
 import static org.quartz.JobBuilder.newJob;
 
