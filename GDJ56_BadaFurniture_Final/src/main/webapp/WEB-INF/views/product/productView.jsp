@@ -268,7 +268,14 @@
      });    	     	     	 
     	 </script>
     	 <input  type="hidden" id="productShowState"  value="${productData.showState}" >
+    	 <!-- loginURL 선언을해서  누적인 안되게하면 고정값을 선언 모달창 열림 -->
     	 <script>
+    	 var loginURL;
+    	 $(()=>{
+    		 loginURL = window.location.href + "#demo-modal"; 
+    		 console.log(loginURL);
+    	 });
+    	 
     	 //공개상태가 N일떄 장바구니에 담지 못하게하기
     	 const fn_cartBtn=()=>{
     		 if($('#productShowState').val()=='N'){
@@ -287,8 +294,7 @@
     		 if( $("#badaLoginFilter").val() ==''){
     		
     			 alert("로그인 하셔야 장바구니에 담을 수 있습니다.");
-   					console.log(window.location.href);
-    			 window.location.href=window.location.href+"#demo-modal";
+    			 window.location.href=loginURL;
     			 return false;
     		} 
     		
@@ -321,7 +327,7 @@
     		 if( $("#badaLoginFilter").val() ==''){
     	    		
     			 alert("로그인 하셔야 구매하실수 있습니다.");
-    			 window.location.href=window.location.href+"#demo-modal";
+    			 window.location.href=loginURL;
     			 return false;
     		} 
     		 
