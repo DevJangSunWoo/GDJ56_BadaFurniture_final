@@ -275,10 +275,10 @@
 		} else if($("input[name=widths]").val()==''){
 			alert("가로 길이를 입력해주세요.");
 			return false;
-		} else if($("input[name=heights]").val()==''){
+		} else if($("input[name=depths]").val()==''){
 			alert("세로 길이를 입력해주세요.");
 			return false;
-		} else if($("input[name=depths]").val()==''){
+		} else if($("input[name=heights]").val()==''){
 			alert("높이를 입력해주세요.");
 			return false;
 		} else if($("select[name=color]").val()=='none'){
