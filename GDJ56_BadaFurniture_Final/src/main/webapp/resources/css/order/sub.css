@@ -13296,7 +13296,7 @@ li.box-tab-btn.tab-btn.btn.tab-box-bidlist.active {
 .order_option_box {
   min-height: 20px;
   padding: 3px 9px 7px;
-  background-color: #f3f3f3;
+ /*  background-color: #f3f3f3; */
   border: 1px solid #ddd;
 }
 .order_option_box > p {
