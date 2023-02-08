@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finalproject.bada.config.AES256Config;
 import com.finalproject.bada.member.model.service.MemberService;
 import com.finalproject.bada.member.model.vo.Member;
 
@@ -23,19 +24,19 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/member")
-//@SessionAttributes({"loginMember"})
 @Slf4j
 public class MemberController {
 
 	private MemberService service;
-	private BCryptPasswordEncoder passwordEncoder;
+	private BCryptPasswordEncoder passwordEncoder; //단반향암호화
+	private AES256Config aes; // 양방향암호와
 
 	@Autowired
-	public MemberController(MemberService service, BCryptPasswordEncoder passwordEncoder) {
+	public MemberController(MemberService service, BCryptPasswordEncoder passwordEncoder, AES256Config aes) {
 		this.service = service;
 		this.passwordEncoder = passwordEncoder;
+		this.aes = aes;
 	}
-	
 	
 //--------------------------------------------------------------------------------------------------------------------------------------------------	
 
@@ -46,7 +47,6 @@ public class MemberController {
 	public String errorPage () {
 		return "member/errorPage";
 	}
-	
 	
 	
 //	//로그인
@@ -137,6 +137,15 @@ public class MemberController {
 		String encodePassword = passwordEncoder.encode(m.getPassword());
 		m.setPassword(encodePassword);
 		
+		if(m.getAccountCode()!=null) {
+			try {
+				m.setAccountCode(aes.encrypt(m.getAccountCode()));
+				log.debug("계좌번호 암호화 후 : {}", m.getAccountCode());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		int result = service.insertMember(m);
 		if(result>0) {
 			mv.addObject("msg","회원가입 완료 o(*￣▽￣*)ブ");
@@ -155,8 +164,20 @@ public class MemberController {
  
 	//정보수정페이지 이동
 	@RequestMapping("/updateMember.do")
-	public String updateMember() {
-		return "mypage/member/updateMember";
+	public ModelAndView updateMember(ModelAndView mv, String id) {
+		Member member = service.selectMemberById(Member.builder().memberId(id).build());
+		
+		if(member.getAccountCode()!=null) {
+			try {
+				//계좌번호 암호화해제
+				member.setAccountCode(aes.decrypt(member.getAccountCode()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			mv.addObject("accountCode",member.getAccountCode());
+		}
+		mv.setViewName("mypage/member/updateMember");
+		return mv;
 	}
 	
 	//비밀번호변경 페이지이동
