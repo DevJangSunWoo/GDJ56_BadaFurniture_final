@@ -88,8 +88,14 @@ public class MemberController {
 		String memberId = service.searchId(param);
 		log.debug("searchId(result): {}",memberId);
 		
-		mv.addObject("memberId",memberId);
-		mv.setViewName("member/searchIdResult");
+		if(memberId!=null) {
+			mv.addObject("memberId",memberId);
+			mv.setViewName("member/searchIdResult");
+		}else {
+			mv.addObject("msg","입력된 정보와 일치하는 회원이 없습니다. 다시 입력해주세요.");
+			mv.addObject("loc","/member/searchId.do");
+			mv.setViewName("common/msg");
+		}
 		return mv;
 	}
 	

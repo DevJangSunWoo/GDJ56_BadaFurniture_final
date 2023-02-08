@@ -15,7 +15,7 @@
     </div>
     <br>
 
-	<form class="flexDiv" action="${path}/member/searchIdEnd.do" method="post" onsubmit="return fn_invalidate(result);">
+	<form class="flexDiv" action="${path}/member/searchIdEnd.do" method="post" onsubmit="return fn_invalidate();">
 	    <div id="searchDiv">
 	    	<div style="width:100%; justify-content: center;">
 	    		<img id="img" src="${path}/resources/images/member/찾기.jpg">
@@ -99,9 +99,11 @@
 	            					"font-size" : "14px"
 	            				});
 	            				
-	            				fn_invalidate("false");
-	            				//alert("인증번호가 잘못되었습니다.");
-	            				//$("input[name=emailck]").val("");
+	            				//onsubmit 함수
+	            				fn_invalidate=()=>{
+	            					alert("인증번호를 다시 확인해주세요.");
+	            					return false;
+	            				};
 	            				
 	            			} else { // 아니면 중복아님
 	            				$("button[type=submit]").css("background","#348492");
@@ -114,6 +116,11 @@
 	            					"font-weight" : "bold",
 	            					"font-size" : "14px"
 	            				});
+	            				
+	            				//onsubmit 함수
+	            				fn_invalidate=()=>{
+	            					return true;
+	            				};
 	            				
 	            			}
 	            		});
@@ -137,20 +144,5 @@
 	</form>	
 	
 </section>
-
-	<script>
-		//onsubmit
-		const fn_invalidate=(result)=>{
-			if(result=='false'){
-				console.log(result);
-				$("input[name=emailck]").focus();
-				//$("input[type=submit]").css("background","gray");
-				return false;
-			}else{
-				//$("button[type=submit]").css("background","#348492");
-				return true;
-			}
-		}
-	</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/> 

@@ -42,6 +42,7 @@ public class EmailController {
     }
     
     
+    
     //임시비밀번호 
     @PostMapping("member/searchPw")
     @ResponseBody
