@@ -229,9 +229,9 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th style="background-color:#DCD5C3!important;" scope="col">상품 정보</th>					
-									<th style="background-color:#DCD5C3!important;"  scope="col"  colspan="3"><strong>배송비</strong></th>
-									<th  style="background-color:#DCD5C3 !important;" scope="col"  colspan="3"><strong>주문금액</strong></th>
+									<th style="background-color:#393434!important;color: white;" scope="col">상품 정보</th>					
+									<th style="background-color:#393434!important;color: white;"  scope="col"  colspan="3"><strong>배송비</strong></th>
+									<th  style="background-color:#393434 !important;color: white;" scope="col"  colspan="3"><strong>주문금액</strong></th>
 								</tr>
 							</thead>
 							<!--리스트 데이터 표출 -->
