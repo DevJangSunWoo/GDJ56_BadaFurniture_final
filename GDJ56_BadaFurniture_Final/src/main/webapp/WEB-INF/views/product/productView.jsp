@@ -33,6 +33,11 @@
 	<!--기존 CSS  -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/product/productView.css"/>
       
+    <style>
+        span.deliveryNrefundDetail{
+            font-size: smaller;
+        }
+    </style>
 
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
@@ -78,16 +83,16 @@
                                 </ul>
                                 
                                 <div class="checkout__order__subtotal">등급 <span>${productData.grade}</span></div>
-                                <div class="checkout__order__total">총가격 <span>${productData.price}원</span></div>
+                                <div class="checkout__order__total" style="margin-bottom: 100px;">총가격 <span>${productData.price}원</span></div>
                                 <div class="checkout__input__checkbox">
-                                    <label for="acc-or">
+                                 <!--    <label for="acc-or">
                                         배송비는 어떻게 되나요?
                                       
                                     </label>
                                 </div>
                                 <p>배송비는 총가격에 포함되고 있습니다.
                                 	지역에 따라 배송비 추가금액이 붙을수 있습니다.
-                                </p>
+                                </p> -->
                                 
                              <%--    <c:if test="${not empty loginMember }">  --%>
                                 <button  class="site-btn" style="background-color: #348492;"  onclick="fn_directPurchaseBtn();">바로 구매하기</button>
@@ -392,20 +397,43 @@
                                             <div  style="border:0px solid black;height:780px;"> 
                                                 <div  style="border:0px solid rgb(17, 0, 255);height:260px;">
                                                     <div style="border:0px solid rgb(179, 255, 0);height:86px;">
-                                                    배송기간<br>
-                                                    -평균5~7일
+                                                        📌 배송기간<br>
+                                                        <span class="deliveryNrefundDetail">- 결제확인 후 영업일 기준 평균 5~7일 소요됩니다.</span>
                                                     </div>
                                                     <div style="border:0px solid rgb(255, 81, 0);height:86px;">
-                                                    배송비<br>
-                                                    배송비는 주문금액에 포함되어있습니다.
+                                                        📌 배송비<br>
+                                                        <span class="deliveryNrefundDetail">- 전국 무료배송 서비스를 진행하고 있습니다.</span>
+                                                        <br>
+                                                        <span class="deliveryNrefundDetail">- 제주 및 도서/산간 지역의 경우 추가 비용이 발생할 수 있습니다.</span>
                                                     </div>
+                                                    <br>
                                                     <div style="border:0px solid rgb(76, 0, 255);height:86px;">
-                                                    반품/교환<br>
-                                                    -배송비는 누가 부담하나요?단순변심: 고객부담 <br>
-                                                    -상품의 불량 또는 오배송: 본사 부담
+                                                        📌 반품/교환<br>
+                                                        <span class="deliveryNrefundDetail">- 구매자 단순변심 :  품목에 따라 별도의 반품비가 부과됩니다.</span>
+                                                        <br>
+                                                        <span class="deliveryNrefundDetail">- 상품의 불량 또는 오배송: 본사 부담</span>                                                            
+                                                    </div>   
+                                                    <br>
+                                                    <div style="border:0px solid rgb(76, 0, 255);height:86px;">
+                                                        📌 추가 비용 발생 안내<br>
+                                                        <span class="deliveryNrefundDetail">
+                                                            - 배송 당일 현장의 특수성으로 인해 추가적으로 발생하는 비용은 고객님 부담입니다.
+                                                        </span>
+                                                        <br>
+                                                        <span class="deliveryNrefundDetail">
+                                                            - 엘리베이터가 없는 3층 이상 주소지 또는 3층 미만이지만 배송하는 상품이 계단으로 반입이 불가능한 경우
+                                                        </span>
+                                                        <br>
+                                                        <span class="deliveryNrefundDetail">
+                                                            - 8인 이상 탑승 가능한 엘리베이터가 없거나, 계단이 좁아 가구 반입이 불가능하여 사다리차나 지게차를 사용할 경우
+                                                        </span>
+                                                        <br>
+                                                        <span class="deliveryNrefundDetail">
+                                                            - 엘리베이터 사용료 발생 등으로 인하여 부득이하게 계단을 통해 가구를 이동할 경우
+                                                        </span>                                                         
                                                     </div>   
                                                 </div>
-                                                <div  style="border:0px solid rgb(179, 255, 0);height:260px;"> 
+                                                <!-- <div  style="border:0px solid rgb(179, 255, 0);height:260px;"> 
                                                     <div style="border:0px solid rgb(255, 115, 0);height:43px;"><p style="text-decoration: underline; text-underline-position:under;">교환 및 반품 기능</p></div>
                                                     <div style="border:0px solid rgb(30, 255, 0);height:217px;">
                                                         -상품 수령 후 박스를 개봉하기 않은 신품에  한해서는 일주일 이내  반품이 가능합니다.  <br>
@@ -421,7 +449,7 @@
                                                         -주문 후 제품의 설치가 진행된경우 <br>
                                                         -고객님의 실수 또는 오작동으로 인하여 파손되거나 고장난 경우 <br>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>	                      
                                        </div>    
                            		        

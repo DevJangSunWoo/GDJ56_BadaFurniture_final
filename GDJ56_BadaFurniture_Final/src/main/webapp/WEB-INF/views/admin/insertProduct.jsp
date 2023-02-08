@@ -92,24 +92,24 @@
                         <br>
                         <img src="${path }/resources/images/admin/addThumbnail.png" 
                             name="photo1" onclick="fn_upFile1();" width="180px" height="180px" class="fileImg">
-                        <input type="file" id="photoFile1" name="upFile" style="display: none;" required>
+                        <input type="file" id="photoFile1" name="upFile" accept="image/jpeg, image/png" style="display: none;" required>
                         <br>                
                         
                         <img src="${path }/resources/images/admin/addImage.png" 
                             name="photo2" onclick="fn_upFile2();" width="110px" height="110px" class="fileImg">
-                        <input type="file" id="photoFile2" name="upFile" style="display: none;">
+                        <input type="file" id="photoFile2" name="upFile" accept="image/jpeg, image/png" style="display: none;">
 
                         <img src="${path }/resources/images/admin/addImage.png" 
                             name="photo3" onclick="fn_upFile3();" width="110px" height="110px" class="fileImg">
-                        <input type="file" id="photoFile3" name="upFile" style="display: none;">
+                        <input type="file" id="photoFile3" name="upFile" accept="image/jpeg, image/png" style="display: none;">
 
                         <img src="${path }/resources/images/admin/addImage.png" 
                             name="photo4" onclick="fn_upFile4();" width="110px" height="110px" class="fileImg">
-                        <input type="file" id="photoFile4" name="upFile" style="display: none;">
+                        <input type="file" id="photoFile4" name="upFile" accept="image/jpeg, image/png" style="display: none;">
 
                         <img src="${path }/resources/images/admin/addImage.png" 
                             name="photo5" onclick="fn_upFile5();" width="110px" height="110px" class="fileImg">
-                        <input type="file" id="photoFile5" name="upFile" style="display: none;">           
+                        <input type="file" id="photoFile5" name="upFile" accept="image/jpeg, image/png" style="display: none;">           
 
                         <br>
                         <span>상세 내용</span><br>
