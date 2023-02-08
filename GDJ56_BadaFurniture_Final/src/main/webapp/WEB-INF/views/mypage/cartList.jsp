@@ -163,7 +163,9 @@
 					</c:if>
 					<c:if test="${empty products}">
 						<tr>
-							<td colspan="6">장바구니에 상품이 없습니다.</td>
+							<td colspan="6" style="text-align:center;color:grey;height:60px;">
+								검색된 항목이 존재하지 않습니다.
+							</td>
 						</tr>
 					</c:if>
 				</table>
@@ -188,9 +190,6 @@
 						</li>
 						<li>
 							장바구니에는 최대 10개의 상품을 보관할 수 있으며, 주문당 한번에 주문 가능한 상품 수는 10개로 제한됩니다.
-						</li>
-						<li>
-							무통장 입금 결제는 주문 취소시 24시간 내 재주문이 불가능합니다.
 						</li>
 					</ul>
 				</div>

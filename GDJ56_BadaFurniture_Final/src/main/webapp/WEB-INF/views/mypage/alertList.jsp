@@ -120,6 +120,13 @@
 							</tr>
 						</c:forEach>
 					</c:if>
+					<c:if test="${empty alerts}">
+						<tr>
+							<td colspan="3" style="text-align:center;color:grey;height:60px;">
+								검색된 항목이 존재하지 않습니다.
+							</td>
+						</tr>
+					</c:if>
 				</table>
 				<div style="display:flex;justify-content: left;">
 					<div>

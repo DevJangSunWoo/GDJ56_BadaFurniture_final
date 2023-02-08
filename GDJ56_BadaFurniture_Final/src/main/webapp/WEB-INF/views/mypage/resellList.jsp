@@ -193,10 +193,14 @@
 							</tr>
 						</c:forEach>
 					</c:if>
+					<c:if test="${empty resells}">
+						<tr>
+							<td colspan="8" style="text-align:center !important;color:grey;height:60px;">조회된 결과가 없습니다.</td>
+						</tr>
+					</c:if>
 				</table>
-				
 				<div id="pageBar">
-					${pageBar }
+					${pageBar}
 				</div>
 			</div>
 		</div>
