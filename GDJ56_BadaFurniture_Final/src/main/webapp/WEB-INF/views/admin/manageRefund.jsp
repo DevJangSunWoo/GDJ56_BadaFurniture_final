@@ -305,7 +305,7 @@ crossorigin="anonymous" type="text/javascript"></script>
 			// console.log(refundState);
 			// console.log(productNo);
 			// console.log(orderSheetNo);
-			// console.log("paymentMethod:"+paymentMethod);
+			 //console.log("paymentMethod:"+paymentMethod);
 			// console.log("impUid:"+impUid);
 			// console.log("price:"+price);		
 			
@@ -337,6 +337,9 @@ crossorigin="anonymous" type="text/javascript"></script>
 							location.reload();
 							return;
 						}
+					}else{
+						updateRefundState(orderDetailNo,refundState,productNo);
+						$(e.target).attr("disabled",true);	
 					}
 				}
 				else{
