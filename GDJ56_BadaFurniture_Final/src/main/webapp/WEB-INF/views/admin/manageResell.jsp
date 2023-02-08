@@ -154,7 +154,7 @@
 								<td><c:out value="${r.grade}"/></td>
 								<td class="price"><c:out value="${r.hopePrice}"/></td>
 								<td><c:out value="${r.member.memberName}"/></td>
-								<td><c:out value="${r.resellEditDate}"/></td>
+								<td><c:out value="${r.pickUpDate}"/></td>
 								<td>
 									<select name="progressState">
 										<option value="승인검토" ${r.progressState.equals("승인검토")?"selected":""}>승인검토</option>
@@ -266,7 +266,7 @@
 			dataType : "json",
 			async:false,
 			success:function(summary){
-				console.log(summary);
+				//console.log(summary);
 				$("#summary_allR").text(summary.ALL_R);
 				$("#summary_state1").text(summary.STATE_1);
 				$("#summary_state2").text(summary.STATE_2);

@@ -112,6 +112,7 @@
 						<th>분류</th>
 						<th>제품명</th>
 						<th>가격&nbsp;(원)</th>
+						<th>결제 상태</th>	
 						<th>취소/반품 상태</th>	
 						<th>배송 상태</th>	
 					</tr>
@@ -119,7 +120,7 @@
 				<tbody>
 					<c:if test="${empty delivery}">
 						<tr>
-							<td colspan="8">조회된 결과가 없습니다.</td>
+							<td colspan="10">조회된 결과가 없습니다.</td>
 						</tr>
 
 					</c:if>
@@ -151,7 +152,8 @@
 								<td style="width: 30px;"><c:out value="${d.product.item }"/></td>
 								<td style="width: 30px;"><c:out value="${d.product.title }"/></td>
 								<td class="price" style="width: 70px;"><c:out value="${d.product.price }"/></td>
-								<td style="width: 50px;"><c:out value="${d.refundState}"/></td>
+								<td style="width: 50px;"><c:out value="${d.orderSheet.paymentState}"/></td>
+								<td style="width: 60px;"><c:out value="${d.refundState}"/></td>
 								<td>
 									<c:if test='${d.refundState==null}'>
 										<select name="deliveryState">

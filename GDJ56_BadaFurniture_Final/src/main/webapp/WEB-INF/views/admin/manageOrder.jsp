@@ -185,6 +185,10 @@
 					<th class="tableTh">카드결제완료</th>
 					<td id="summary_state3" class="tableTd"><c:out value="${summary.STATE_3}"/></td>
 				</tr>
+				<tr>
+					<th class="tableTh">미입금</th>
+					<td id="summary_state10" class="tableTd"><c:out value="${summary.STATE_10}"/></td>
+				</tr>
 			</table>
 
 			<table class="summaryTable">
@@ -383,16 +387,23 @@
 												<td class="tableTd2" rowspan="${o.details.size()}"><c:out value="${o.paymentMethod}"/></td>
 												
 												<td class="tableTd2" rowspan="${o.details.size()}">
-													<c:if test='${o.paymentState!="미입금"}'>
+													<c:if test='${o.paymentState!="카드결제완료"}'>
 														<select name="paymentState">
 															<option value="입금대기" ${o.paymentState.equals("입금대기")?"selected":""}>입금대기</option>
 															<option value="입금완료"  ${o.paymentState.equals("입금완료")?"selected":""}>입금완료</option>
-															<option value="카드결제완료"  ${o.paymentState.equals("카드결제완료")?"selected":""}>카드결제완료</option>
 														</select>													
 													</c:if>
+													
+													<c:if test='${o.paymentState!="미입금"}'>
+														<c:if test='${o.paymentState=="카드결제완료"}'>
+															${o.paymentState}											
+														</c:if>
+													</c:if>
+
 													<c:if test='${o.paymentState=="미입금"}'>
 														${o.paymentState}													
 													</c:if>
+
 												</td>
 											</c:if>
 										</tr>
@@ -696,6 +707,7 @@
 				$("#summary_state7").text(summary.STATE_7);
 				$("#summary_state8").text(summary.STATE_8);
 				$("#summary_state9").text(summary.STATE_9);
+				$("#summary_state10").text(summary.STATE_10);
 
 			}
 		})
