@@ -170,8 +170,15 @@
                         					"font-size" : "14px"
                         				});
                         				
-                        				alert("인증번호가 틀렸습니다.");
-        	            				$("input[name=emailck]").val("");
+                        				//onsubmit 함수
+        	            				fn_invalidate=()=>{
+        	            					alert("인증번호를 다시 확인해주세요.");
+        	            					$("#memailconfirm").focus();
+        	            					return false;
+        	            				};
+                        				
+                        				/* alert("인증번호가 틀렸습니다.");
+        	            				$("input[name=emailck]").val(""); */
                         				
                         			} else { // 아니면 중복아님
                         				emconfirmchk = true;
@@ -182,6 +189,11 @@
                         					"font-weight" : "bold",
                         					"font-size" : "14px"
                         				});
+                        				
+                        				//onsubmit 함수
+        	            				fn_invalidate=()=>{
+        	            					return true;
+        	            				};
                         			}
                         		});
                         	}
