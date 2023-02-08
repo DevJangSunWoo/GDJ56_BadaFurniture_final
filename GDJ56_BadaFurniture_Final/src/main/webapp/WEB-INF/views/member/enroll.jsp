@@ -163,7 +163,7 @@
                         		$("#memailconfirm").on("blur", function(){
                         			if (data != $("#memailconfirm").val()) { 
                         				emconfirmchk = false;
-                        				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호가 불일치</span>")
+                        				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호 불일치</span>")
                         				$("#emconfirmchk").css({
                         					"color" : "#FA3E3E",
                         					"font-weight" : "bold",
@@ -171,9 +171,9 @@
                         				});
                         				
                         				//onsubmit 함수
-        	            				fn_invalidate=()=>{
+        	            				const fn_invalidate=()=>{
         	            					alert("인증번호를 다시 확인해주세요.");
-        	            					$("#memailconfirm").focus();
+        	            					$("input[name=emailck]").focus();
         	            					return false;
         	            				};
                         				
@@ -191,7 +191,7 @@
                         				});
                         				
                         				//onsubmit 함수
-        	            				fn_invalidate=()=>{
+        	            				const fn_invalidate=()=>{
         	            					return true;
         	            				};
                         			}
