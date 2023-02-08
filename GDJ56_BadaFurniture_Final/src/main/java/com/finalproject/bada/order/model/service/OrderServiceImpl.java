@@ -55,8 +55,6 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	public void insertOrderSheet(HashMap map) {
 
-		
-		
 		// 1차시도
 //		int orderDetailCount=dao.selectOrderDetailCount(session,map);			
 //		if(orderDetailCount<10) {
