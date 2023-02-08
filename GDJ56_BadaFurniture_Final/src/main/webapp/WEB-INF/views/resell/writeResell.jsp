@@ -212,7 +212,7 @@
 					판매희망금액
 				</div>
 				<div class="sellColRight">
-					<input type="number" min="1" name="hopePrice"> &nbsp;원
+					<input type="number" min="100" name="hopePrice" step="100"> &nbsp;원
 				</div>		
 			</div>
 			<div class="sellRow">
