@@ -176,23 +176,37 @@
 						                	<fmt:formatNumber value="${os.totalPrice}" type="currency" />원
 						                </div>
 						            </li>
-						             <li class="order__item delivery__item__info"  id="adminAccountInfo" style="display: none;" >
+						             <li class="order__item delivery__item__info adminAccountInfo"  style="display: none;" >
 						                <span class="order__item__label">입금계좌</span>
 						                <div class="order__item__area" id="delivery-addr">예금주명:유병승/은행:BS은행/계좌번호:1002-1002-1002 </div>
+						            </li>
+						            <li class="order__item delivery__item__info adminAccountInfo"  style="display: none;" >
+						                <span class="order__item__label">입금기한일</span>
+						                <div class="order__item__area" id="dueDate"></div>
 						            </li>						         					
+						         
 						         </ul>
 						  </div>
 					</div>
 				</c:forEach>
 			</c:if>
-			
-			<!--계좌이체로 결제시  입금계좌 보이게하는 스크립트  -->
 			<input  id="payMethodForScript" type="hidden" value="${payMethod}"> 
 			<script >
-				if($('#payMethodForScript').val()=='계좌이체'){
+			//계좌이체 입금일 구하는 식(3일후)	        
+	         const getAfterThreeDay = () =>{
+	        	 var date = new Date().toISOString().split("T")[0]; // 현재 날짜 및 시간
+	        	 let dateArr = date.split("-");
+	             // 시:분:초 가 00:00:00 으로 설정되기 때문에 4일로 설정해야 3일 후가 뜬다.
+	             let returnDate = new Date(new Date(dateArr[0], dateArr[1]-1, dateArr[2]).getTime() + 4*24*60*60*1000).toISOString().split("T")[0];
+	             return returnDate;
+	          }		 
+			//계좌이체로 결제시  입금계좌 보이게하는 스크립트 	
+			if($('#payMethodForScript').val()=='계좌이체'){
 				//console.log('계좌이체');	
-				$('#adminAccountInfo').show();
-				
+				$('.adminAccountInfo').show();
+				let returnDate=getAfterThreeDay();
+				//console.log(returnDate);
+				$('#dueDate').text(returnDate);
 				
 				}
 			</script>

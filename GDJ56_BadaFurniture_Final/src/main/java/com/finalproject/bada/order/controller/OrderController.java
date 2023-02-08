@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.quartz.JobExecutionContext;
@@ -21,11 +20,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finalproject.bada.config.AES256Config;
 import com.finalproject.bada.order.model.service.OrderService;
 import com.finalproject.bada.order.model.vo.OrderSheet;
 import com.finalproject.bada.product.model.vo.Product;
@@ -45,10 +42,15 @@ public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 	@Value("${context.path}")
 	private String contextPath;  // yml 에 설정해주고     @Value를 사용하면 가져와서 쓸수 있음.
 	
+
+	
+	
+	
 	@Autowired
 	public OrderController(OrderService service) {
 		super();
 		this.service = service;
+		
 	}
 	
 	
@@ -100,25 +102,17 @@ public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 			,@RequestParam(value="IMP_UID",required=false) String impUid
 			,@RequestParam(value="RECEIPT_URL",required=false) String receiptUrl			
 			,@RequestParam(value="payMethod",required=false) String payMethod	
-			,JobExecutionContext context
+		//	,JobExecutionContext context
 			)
 		throws IOException {
-//		log.debug("{}",loginMemberNo);  
-//		log.debug("{}",depositName);  
-//		log.debug("{}",totalPrice);	
-//		log.debug("{}",receiverName);
-//		log.debug("{}",postCode);
-//		log.debug("{}",address);
-//		log.debug("{}",addressDetail);
-//		log.debug("{}",productList);   //ng
-//		log.debug("{}",productNos);
+
 		
 		
-		//import java.util.Date 
+	
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd_hh:mm:ss");
 		String dateToStr = dateFormat.format(date);
-		//log.debug("{}",dateToStr);
+		
 		
 		//난수
 		//중복되지 않는 난수 생성?
@@ -131,7 +125,11 @@ public class OrderController extends QuartzJobBean{ // extends QuartzJobBean
 		
 		//주문식별번호=날짜+난수
 		String merchantUid=dateToStr +rnd;
-		log.debug("{}",merchantUid);
+		//log.debug("{}",merchantUid);
+		
+		
+		//계좌번호 양방향 암화화 
+		
 		
 		
 		HashMap map = new HashMap();
