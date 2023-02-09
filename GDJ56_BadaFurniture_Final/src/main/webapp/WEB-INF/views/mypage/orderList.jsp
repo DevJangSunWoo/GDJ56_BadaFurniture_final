@@ -362,6 +362,9 @@
 											<input type="hidden" value="${orderSheet.orderSheetNo}"/>
 											<input type="hidden" value="${detail.orderDetailNo}"/>
 											<c:choose>
+												<c:when test="${detail.confirmState eq 'Y'}">
+													주문확정
+												</c:when>
 												<c:when test="${detail.refundState eq null and detail.deliveryState ne null and detail.deliveryState eq '배송대기'}">
 													<button class="cancelBtn">취소신청</button>
 												</c:when>
@@ -369,10 +372,10 @@
 													<button class="returnBtn">반품신청</button>
 												</c:when>
 												<c:when test="${detail.refundState ne null and fn:contains(detail.refundState, '취소')}">
-													<a class="refundDone" href="${path}/mypage/refund.do">취소신청완료</a>
+													<a class="refundDone" href="${path}/mypage/refund.do?orderDetailNo=${detail.orderDetailNo}">취소신청완료</a>
 												</c:when>
 												<c:when test="${detail.refundState ne null and fn:contains(detail.refundState, '반품')}">
-													<a class="refundDone" href="${path}/mypage/refund.do">반품신청완료</a>
+													<a class="refundDone" href="${path}/mypage/refund.do?orderDetailNo=${detail.orderDetailNo}">반품신청완료</a>
 												</c:when>
 											</c:choose>
 										</td>
