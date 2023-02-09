@@ -323,7 +323,7 @@ span.deliveryNrefundDetail {
     	 var loginURL;
     	 $(()=>{
     		 loginURL = window.location.href + "#demo-modal"; 
-    		 console.log(loginURL);
+    		 //console.log(loginURL);
     	 });
     	 
     	 //공개상태가 N일떄 장바구니에 담지 못하게하기

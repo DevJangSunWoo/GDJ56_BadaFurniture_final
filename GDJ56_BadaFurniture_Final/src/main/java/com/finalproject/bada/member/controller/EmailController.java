@@ -52,12 +52,12 @@ public class EmailController {
     	param.put("memberName", memberName);
     	
     	String memberId = service.searchId(param);
-    	log.debug("searchPw(resultId): {}", memberId);
+    	//log.debug("searchPw(resultId): {}", memberId);
     	
     	
     	if(memberId!=null && memberId.equals(inputId)) {
     		String code = registerMail.sendSimpleMessage2(email);
-    		log.info("인증코드 : " + code);
+    		log.info("임시비밀번호 : " + code);
     		
     		String encodePassword = passwordEncoder.encode(code);
 			param.put("password_new",encodePassword);
