@@ -415,7 +415,7 @@ span.deliveryNrefundDetail {
 											<span>소재:</span> <span>${productData.material}</span>
 										</div>
 										<div class="detailFont"
-											style="border: 0px solid red; height: 60px; text-align: center;">
+											style="border: 0px solid red; text-align: center; margin-bottom:50px;">
 											<span>상세설명:</span> <span> ${productData.detail} </span>
 										</div>
 
