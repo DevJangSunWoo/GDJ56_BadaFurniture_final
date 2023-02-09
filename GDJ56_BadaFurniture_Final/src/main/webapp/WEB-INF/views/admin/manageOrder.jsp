@@ -517,7 +517,7 @@
 				orderSheetNo:orderSheetNo
 			},
 			success:data=>{
-				console.log(data);
+				//console.log(data);
 				$("div.modalContent span#orderSheetNo").text(data.orderSheetNo);
 				$("div.modalContent span#orderSheetEnrollDate").text(data.orderSheetenrollDate);
 				$("div.modalContent span#totalPrice").text(fnSetComma(data.totalPrice)+'원');
@@ -696,7 +696,7 @@
 			// dataType : "json",
 			async:false,
 			success:function(summary){
-				console.log(summary);
+				//console.log(summary);
 
 				$("#summary_allO").text(summary.ALL_O);
 				$("#summary_state1").text(summary.STATE_1);

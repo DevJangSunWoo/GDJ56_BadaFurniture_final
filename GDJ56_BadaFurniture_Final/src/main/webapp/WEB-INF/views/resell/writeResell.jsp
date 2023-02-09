@@ -268,7 +268,7 @@
 
 	// onsubmit 함수
 	const checkSubmit = () => {
-		console.log($("input[name=upFile]").length);
+		//console.log($("input[name=upFile]").length);
 		if($("select[name=item]").val()=='none'){
 			alert("카테고리를 선택해주세요.");
 			return false;

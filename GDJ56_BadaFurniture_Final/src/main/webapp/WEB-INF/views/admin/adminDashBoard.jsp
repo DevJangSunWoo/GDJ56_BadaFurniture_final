@@ -233,24 +233,24 @@
     </div>
     <hr>
     <div id="divBot">
-        <div class="titleNcanvas" style="margin-left: 3%;">
+        <div class="titleNcanvas" style="margin-left: 2%;">
             <h3 class="title">주문수/매출액 (일)</h3>
-            <canvas id="orderNsales" width="600" height="400"></canvas>    
+            <canvas id="orderNsales" width="500" height="300"></canvas>    
 
         </div>
-        <div class="titleNcanvas" style="margin-right: 7%;margin-left: 3%;">
+        <div class="titleNcanvas">
             <h3 class="title">주문수/매출액 (월)</h3>
-            <canvas id="orderNsalesMonthly" width="600" height="400"></canvas>    
+            <canvas id="orderNsalesMonthly" width="500" height="300"></canvas>    
 
         </div>
         <div class="titleNcanvas" >
             <h3 class="title">상품별 주문수요</h3>
-            <canvas id="itemDemand" width="400" height="400"></canvas>
+            <canvas id="itemDemand" width="350" height="350"></canvas>
         </div>
         
         <div class="titleNcanvas">
             <h3 class="title">내가구팔기 가구비율</h3>
-            <canvas id="resellMine" width="400" height="400"></canvas>
+            <canvas id="resellMine" width="350" height="350"></canvas>
         </div>       
 
     </div> 
@@ -267,8 +267,8 @@
 			contentType:"application/json;charset=utf-8",
 			success:function(result){
 
-                console.log(result.resultOrders);
-                console.log(result.resultSales);
+                //console.log(result.resultOrders);
+                //console.log(result.resultSales);
                 
                 var orderData=[];
                 orderData.push(result.resultOrders['7일전']);
@@ -290,8 +290,8 @@
                 salesData.push(result.resultSales['1일전']);
                 salesData.push(result.resultSales['0일전']);
 
-                console.log("주문건 데이터 :"+orderData);
-                console.log("매출 데이터 :"+salesData);
+                //console.log("주문건 데이터 :"+orderData);
+                //console.log("매출 데이터 :"+salesData);
 
 				var resultlabel=['7일전','6일전','5일전','4일전','3일전','2일전','1일전','오늘'];			                
                
@@ -353,8 +353,8 @@
 			contentType:"application/json;charset=utf-8",
 			success:function(result){
 
-                console.log(result.resultOrdersMonthly);
-                console.log(result.resultSalesMonthly);
+                //console.log(result.resultOrdersMonthly);
+                //console.log(result.resultSalesMonthly);
                 
                 var orderData=[];
                 orderData.push(result.resultOrdersMonthly['7달전']);
@@ -376,8 +376,8 @@
                 salesData.push(result.resultSalesMonthly['1달전']);
                 salesData.push(result.resultSalesMonthly['0달전']);
 
-                console.log("주문건 데이터 :"+orderData);
-                console.log("매출 데이터 :"+salesData);
+                //console.log("주문건 데이터 :"+orderData);
+                //console.log("매출 데이터 :"+salesData);
 
 				var resultlabel=['7달전','6달전','5달전','4달전','3달전','2달전','1달전','이번 달'];			                
                

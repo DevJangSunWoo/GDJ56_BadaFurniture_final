@@ -422,7 +422,7 @@
 			let day = new Date(new Date().getTime() - dayArr[i]*24*60*60*1000).toISOString().split("T")[0];
 			$("input[name=searchKeyword]").eq(i).val(day+" ~ "+new Date().toISOString().split("T")[0]);
 		}
-		console.log("${searchKeyword}");
+		//console.log("${searchKeyword}");
 		if("${searchKeyword}" != "searchAll"){
 			$("input.searchDate").val("${searchKeyword}");
 		}
@@ -464,7 +464,7 @@
 				orderSheetNo:orderSheetNo
 			},
 			success:data=>{
-				console.log(data);
+				//console.log(data);
 				$("div.modalContent span#orderSheetNo").text(data.orderSheetNo);
 				$("div.modalContent span#orderSheetEnrollDate").text(data.orderSheetenrollDate);
 				$("div.modalContent span#totalPrice").text(fnSetComma(data.totalPrice)+'원');
@@ -549,9 +549,9 @@
 		drops: "auto"
 		}, 
 		function (start, end, label) {
-		    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+		    //console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
 			let when = $("#orderDateRange").val();
-			console.log(when);
+			//console.log(when);
 		}
 	);
 	

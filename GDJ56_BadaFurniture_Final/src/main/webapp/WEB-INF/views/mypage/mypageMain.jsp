@@ -17,7 +17,7 @@
 		justify-content:center;
 		width:100%;
 		height:200px;
-		font-family:"Courier New";
+		/* font-family:"Courier New"; */
 		font-weight:bolder;
 		font-size:50px;
 	}
