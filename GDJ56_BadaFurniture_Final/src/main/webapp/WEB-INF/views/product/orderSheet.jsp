@@ -264,11 +264,11 @@
 				<!--배송비  지역에 따라 변경해주는 스크립트  -->
 				<script>
 					var delCost = $('#sample6_address').val();
-					console.log(delCost);
+					//console.log(delCost);
 
 					if (delCost.indexOf('서') != -1) {
 
-						console.log('배송비');
+						//console.log('배송비');
 
 					}
 				</script>
@@ -1312,7 +1312,7 @@
 			buyer_addr : data.postCode + data.address
 
 		}, function(rsp) {
-			console.log(rsp);
+			//console.log(rsp);
 			if (rsp.success) {
 				var msg = '결제가 완료되었습니다.';
 				//msg += '고유ID : ' + rsp.imp_uid;         //아임 포트 식별 번호  imp_uid
