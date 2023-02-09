@@ -337,9 +337,9 @@
 	                            document.getElementById("address").value = addr;
 	                            document.getElementById("postCode").value = data.zonecode;
 	                            
-	                			console.log(data);
-	                			console.log(addr);
-	                          	console.log(data.zonecode);
+	                			//console.log(data);
+	                			//console.log(addr);
+	                          	//console.log(data.zonecode);
 	                			//console.log(data.jibunAddress);
 	                			//console.log(document.getElementById("sample5_address").value);
 	                			
