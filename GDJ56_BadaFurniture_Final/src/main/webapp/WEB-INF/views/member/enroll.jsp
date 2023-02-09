@@ -128,19 +128,24 @@
 	                        					"font-size" : "14px"
 	                        				});
 		                			
-		                				}else{ //중복된 이메일 없음
+		                				}else if(email!=''){ //중복된 이메일 없으면서 빈칸이 아닐때
 		                					$("#mailTxt").html("<span id='mailTxtcheck'>사용가능한 이메일입니다</span>")
 	                        				$("#mailTxtcheck").css({
 	                        					"color" : "#0D6EFD",
 	                        					"font-weight" : "bold",
 	                        					"font-size" : "14px"
 	                        				});
+		                				
 		                					$("#emailAuthentication").attr("hidden",false);
+		                					
+		                				} else{
+		                					alert("이메일을 입력해주세요");
 		                				}
 		                			}
 		                		});
 		                	});
                         
+                        	let emailCode = "noData";
                         	
 	                     	// 이메일 인증번호
 	                        $("#emailAuthentication").click(function() {
@@ -154,6 +159,7 @@
 	                                 alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
 	                                 console.log("data : "+data);
 	                                 chkEmailConfirm(data, $("#memailconfirm"), $("#memailconfirmTxt"));
+	                                 emailCode = data;
 	                              }
 	                           });
 	                        });
@@ -169,14 +175,7 @@
                         					"font-weight" : "bold",
                         					"font-size" : "14px"
                         				});
-                        				
-                        				//onsubmit 함수
-        	            				const fn_invalidate=()=>{
-        	            					alert("인증번호를 다시 확인해주세요.");
-        	            					$("input[name=emailck]").focus();
-        	            					return false;
-        	            				};
-                        				
+                        			                        				
                         				/* alert("인증번호가 틀렸습니다.");
         	            				$("input[name=emailck]").val(""); */
                         				
@@ -190,10 +189,6 @@
                         					"font-size" : "14px"
                         				});
                         				
-                        				//onsubmit 함수
-        	            				const fn_invalidate=()=>{
-        	            					return true;
-        	            				};
                         			}
                         		});
                         	}
@@ -393,7 +388,17 @@
                             }, 10);
                             $("input[name=phone]").focus();
                             return false;
-                        }					
+                        }	
+                        
+                        //이메일 인증번호 확인
+                        if(emailCode == 'noData' || emailCode != $("#memailconfirm").val()){
+                        	//console.log(emailCode);
+                        	//console.log($("#memailconfirm").val());
+                        	
+                        	alert("이메일 인증번호가 일치하지 않습니다.");
+                        	return false;
+                        }
+                        return true;
 					}
 				</script>	
 				
