@@ -84,14 +84,14 @@ public class OrderServiceImpl implements OrderService {
 
 			int productCount = productNos.length;
 			if (result != productCount) {
-				throw new RuntimeException("OrderDetail이 갯수 만큼 삽입이 안됬습니다.");
+				throw new RuntimeException("OrderDetail이 개수 만큼 삽입이 안됐습니다.");
 			}
 
 			// 제품 SoldOutState 상태변화
 			int resultSoldOutState = dao.updateSoldOutState(session, map);
 
 			if (resultSoldOutState <= 0) {
-				throw new RuntimeException(" 제품 SoldOutState 변화 실패");
+				throw new RuntimeException("제품 SoldOutState 변화 실패");
 
 			}
 
