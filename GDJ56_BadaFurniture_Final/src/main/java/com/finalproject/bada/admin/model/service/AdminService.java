@@ -102,9 +102,11 @@ public interface AdminService {
 	Map chartOrders();
 	Map chartSales();
 
-	
-	//////////////////////////////
-	
+	//대시보드 - chartJs - 월 주문,매출액
+	Map chartOrdersMonthly();
+	Map chartSalesMonthly();
+
+	//iamport 토큰	
 	String getToken() throws IOException;
 	
 	

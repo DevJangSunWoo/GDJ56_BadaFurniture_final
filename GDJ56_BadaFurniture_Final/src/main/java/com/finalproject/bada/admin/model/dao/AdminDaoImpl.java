@@ -278,6 +278,18 @@ public class AdminDaoImpl implements AdminDao {
 		return session.selectOne("admin.chartOrders");
 	}
 	@Override
+	public Map chartSalesMonthly(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.chartSalesMonthly");
+	}
+	
+	//대시보드 - chartJs - 일일 주문,매출액
+	@Override
+	public Map chartOrdersMonthly(SqlSessionTemplate session) {
+		// TODO Auto-generated method stub
+		return session.selectOne("admin.chartOrdersMonthly");
+	}
+	@Override
 	public Map chartSales(SqlSessionTemplate session) {
 		// TODO Auto-generated method stub
 		return session.selectOne("admin.chartSales");
