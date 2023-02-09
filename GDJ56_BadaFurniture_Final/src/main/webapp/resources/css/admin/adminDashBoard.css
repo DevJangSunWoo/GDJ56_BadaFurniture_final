@@ -1,108 +1,101 @@
 @charset "UTF-8";
 
-    /* div{        
-        border: 1px solid blue;
-    }
-    
-   
-    canvas{
-        border: 1px solid #3934348a;
-        border-radius: 7px;
-    }  */
+/* div {
+  border: 1px solid blue;
+}
 
-    #divTop{
-        display: flex;
-        justify-content: center;
-        justify-items: center;
-        padding: 30px;
+canvas {
+  border: 1px solid #3934348a;
+  border-radius: 7px;
+} */
 
+#divTop {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  padding: 30px;
+}
+#divMidOuter {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  width: auto;
+}
 
-    }
-    #divMidOuter{
-        display: flex;
-        justify-content: center;
-        justify-items: center;   
-        width: auto;
-    }
+#divMid {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
+  padding: 10px;
 
-    #divMid{
-        display: flex;
-        justify-content: center;
-        justify-items: center;
-        width: 100%;
-        padding: 10px;
-        
-        /* border: 1px solid #393434; */
-        border-radius: 8px;
+  /* border: 1px solid #393434; */
+  border-radius: 8px;
+}
+#divMid > div {
+  border: 1px solid #3934348a;
+  border-radius: 8px;
+}
+#divMid > div {
+  width: 100%;
+  margin: 5px;
+  padding: 10px;
+}
 
-    }
-    #divMid>div{
-        border: 1px solid #3934348a;
-        border-radius: 8px;
-    }
-    #divMid>div{
-        width: 100%;
-        margin: 5px;
-        padding: 10px;
-    }
+.state,
+.orderCount,
+#totalOrder {
+  font-size: 17px;
+}
 
-    .state,.orderCount,#totalOrder{
+.state,
+#totalOrder {
+  padding-right: 7%;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.orderCount {
+  width: 50px;
+  margin-left: 0px;
+}
+#totalOrder {
+  margin-right: 32px;
+}
+.countUnit {
+  font-weight: bold;
+  font-size: 17px;
+  margin-left: 10px;
+}
+.title {
+  font-size: 20px;
+}
 
-        font-size: 17px;        
+.spanDiv {
+  padding: 10px;
+}
 
-    }
-
-    .state,#totalOrder{
-        padding-right: 7%;
-        font-weight: bold;
-        margin-top: 30px;
-        margin-bottom: 30px;
-        
-    }
-    .orderCount{
-        width: 50px;
-        margin-left: 0px;
-
-    }
-    #totalOrder{
-       margin-right: 32px;
-    }
-    .countUnit{
-        font-weight: bold;
-        font-size: 17px;
-        margin-left: 10px;
-
-    }
-    .title{
-        font-size: 20px;
-    }
-
-    .spanDiv{
-        padding: 10px;
-    }
-
-    #divBot{
-        display: flex;
-        justify-content: space-evenly;
-        justify-items: center;
-        width: auto;
-        padding: 5px;       
-    }
-    #divBot div{
-        width: 100%;
-        margin: 5px;
-    }
-    #divBot>#mixedGraph_container{
-        display: block;
-        width:65%;
-    }
-    #divBot>#mixedGraph_container>div>div{
-        
-    }
-    #divBot>#mixedGraph_container>canvas{
-        height: 100%;
-    }
-    /* #divBot>#basicGraph_container{
+#divBot {
+  display: flex;
+  justify-content: space-evenly;
+  justify-items: center;
+  width: auto;
+  padding: 5px;
+}
+#divBot div {
+  width: 100%;
+  margin: 5px;
+}
+#divBot > #mixedGraph_container {
+  display: block;
+  width: 65%;
+}
+#divBot > #mixedGraph_container > div > div {
+}
+#divBot > #mixedGraph_container > canvas {
+  height: 100%;
+}
+/* #divBot>#basicGraph_container{
         display: block;
         width:33%;
     }
@@ -112,52 +105,46 @@
     #divBot>#basicGraph_container canvas{
         height: 35%;
     } */
-    canvas{
-        width: 100%;
-    }
+canvas {
+  width: 100%;
+}
 
+.stateOuterDiv {
+  margin-left: 15px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+div.itemDiv {
+  display: inline-block;
+  width: 40%;
+}
+div.valueDiv {
+  display: inline-block;
+  width: 40%;
+  text-align: right;
+}
+div.unitDiv {
+  display: inline-block;
+  width: 10%;
+  text-align: center;
+}
 
+.titleNcanvas {
+  display: block;
+}
 
+.valueDiv > a {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
 
-    .stateOuterDiv{     
-        margin-left: 15px;
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-    div.itemDiv{
-        display: inline-block;
-        width:40%;
-    }
-    div.valueDiv{
-        display: inline-block;
-        width:40%;
-        text-align: right;
-        
-    }
-    div.unitDiv{
-        display: inline-block;
-        width:10%;
-        text-align: center;
+.valueDiv > a:hover {
+  color: #348492;
+  font-weight: bold;
+}
 
-    }
-
-    .titleNcanvas {
-        display: block;
-    }
-
-
-    .valueDiv>a{
-        color: black;
-        cursor: pointer;
-        text-decoration: none;
-    }
-
-    .valueDiv>a:hover{
-        color: #348492;
-        font-weight: bold;
-    }
-
-    /* .valueDiv>a{
+/* .valueDiv>a{
         position: relative;
         font-weight: bold;
         color: black;

@@ -330,8 +330,8 @@
 		$("select[name=showState]").change(e=>{
 			const productNo=$(e.target).parent().parent().children().children().val();
 			const showState=$(e.target).val();
-			console.log(productNo);
-			console.log(showState);
+			//console.log(productNo);
+			//console.log(showState);
 
 			$.ajax({
 				url:"${path}/admin/updateShowState.do",
