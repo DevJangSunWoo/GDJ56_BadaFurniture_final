@@ -50,7 +50,7 @@
 							<a href="${path}/mypage/cart.do"> 장바구니</a>
 							<a href="${path}/mypage/order.do"> 주문목록</a>
 						</c:if>
-						<a href="${path}/member/updateMember.do"> 정보수정</a>
+						<a href="${path}/member/updateMember.do?id=${loginMember.memberId}"> 정보수정</a>
 						<a href="${path}/member/logout.do "> 로그아웃</a>
 			        </nav>
 			      </details>

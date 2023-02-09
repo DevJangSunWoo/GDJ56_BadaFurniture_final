@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finalproject.bada.config.AES256Config;
 import com.finalproject.bada.member.model.service.MemberService;
 import com.finalproject.bada.member.model.vo.Member;
 
@@ -23,30 +24,38 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/member")
-//@SessionAttributes({"loginMember"})
 @Slf4j
 public class MemberController {
 
 	private MemberService service;
-	private BCryptPasswordEncoder passwordEncoder;
+	private BCryptPasswordEncoder passwordEncoder; //단반향암호화
+	private AES256Config aes; // 양방향암호와
 
 	@Autowired
-	public MemberController(MemberService service, BCryptPasswordEncoder passwordEncoder) {
+	public MemberController(MemberService service, BCryptPasswordEncoder passwordEncoder, AES256Config aes) {
 		this.service = service;
 		this.passwordEncoder = passwordEncoder;
+		this.aes = aes;
 	}
-	
 	
 //--------------------------------------------------------------------------------------------------------------------------------------------------	
 
 	
 	//security를 사용할 경우 security 맵핑주소와 동일한 mapping주소를 쓰면 안됨 
 	//security로그인 실패 나오는 페이지 연결
-	@RequestMapping("/errorPage.do")
-	public String errorPage () {
-		return "member/errorPage";
-	}
+//	@RequestMapping("/errorPage.do")
+//	public String errorPage () {
+//		return "member/errorPage";
+//	}
 	
+	@RequestMapping("/errorPage.do")
+	public ModelAndView errorPage (ModelAndView mv) {
+		
+		mv.addObject("msg","로그인 실패 X﹏X");
+		mv.addObject("loc","/#demo-modal");
+		mv.setViewName("common/msg");
+		return mv;
+	}
 	
 	
 //	//로그인
@@ -84,12 +93,18 @@ public class MemberController {
 	//아이디찾기 완료
 	@RequestMapping("/searchIdEnd.do")
 	public ModelAndView searchIdEnd(@RequestParam Map param, ModelAndView mv) {
-		log.debug("searchId: {}",param);
+		//log.debug("searchId: {}",param);
 		String memberId = service.searchId(param);
-		log.debug("searchId(result): {}",memberId);
+		//log.debug("searchId(result): {}",memberId);
 		
-		mv.addObject("memberId",memberId);
-		mv.setViewName("member/searchIdResult");
+		if(memberId!=null) {
+			mv.addObject("memberId",memberId);
+			mv.setViewName("member/searchIdResult");
+		}else {
+			mv.addObject("msg","입력된 정보와 일치하는 회원이 없습니다. 다시 입력해주세요.");
+			mv.addObject("loc","/member/searchId.do");
+			mv.setViewName("common/msg");
+		}
 		return mv;
 	}
 	
@@ -128,8 +143,20 @@ public class MemberController {
 	//회원가입완료
 	@RequestMapping("/enrollMemberEnd.do")
 	public ModelAndView enrollMemberEne(Member m, ModelAndView mv) {
+		
+		//비밀번호 단방향암호화
 		String encodePassword = passwordEncoder.encode(m.getPassword());
 		m.setPassword(encodePassword);
+		
+		//계좌번호 양방향 암호화
+		if(m.getAccountCode()!=null) {
+			try {
+				m.setAccountCode(aes.encrypt(m.getAccountCode()));
+				//log.debug("계좌번호 암호화 후 : {}", m.getAccountCode());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		int result = service.insertMember(m);
 		if(result>0) {
@@ -149,8 +176,20 @@ public class MemberController {
  
 	//정보수정페이지 이동
 	@RequestMapping("/updateMember.do")
-	public String updateMember() {
-		return "mypage/member/updateMember";
+	public ModelAndView updateMember(ModelAndView mv, String id) {
+		Member member = service.selectMemberById(Member.builder().memberId(id).build());
+		
+		if(member.getAccountCode()!=null) {
+			try {
+				//계좌번호 암호화해제
+				member.setAccountCode(aes.decrypt(member.getAccountCode()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			mv.addObject("accountCode",member.getAccountCode());
+		}
+		mv.setViewName("mypage/member/updateMember");
+		return mv;
 	}
 	
 	//비밀번호변경 페이지이동
@@ -162,7 +201,7 @@ public class MemberController {
 	//비밀번호 변경 :
 	@RequestMapping("/updatePasswordEnd.do")
 	public ModelAndView updatePasswordEnd(@RequestParam Map param, ModelAndView mv, HttpServletRequest request) {
-		log.debug("{}",param);
+		//log.debug("{}",param);
 		Member member = service.selectMemberById(Member.builder().memberId((String)param.get("memberId")).build());
 		
 		if(member!=null && passwordEncoder.matches((String)(param.get("password")), member.getPassword())) {
@@ -198,6 +237,16 @@ public class MemberController {
 		
 		log.debug("updateMemberEnd: {}",m);
 		
+		//계좌번호 양방향 암호화
+		if(m.getAccountCode()!=null) {
+			try {
+				m.setAccountCode(aes.encrypt(m.getAccountCode()));
+				//log.debug("계좌번호 암호화 후 : {}", m.getAccountCode());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		int result = service.updateMember(m);
 		log.debug("updateMemberEnd(result): {}",result);
 		
@@ -219,7 +268,7 @@ public class MemberController {
 	@ResponseBody
 	public String deleteMember(Member m) {
 		Member loginMember = service.selectMemberById(m);
-		log.debug("loginMember: {}",loginMember);
+		//log.debug("loginMember: {}",loginMember);
 		
 		if(loginMember!=null && passwordEncoder.matches(m.getPassword(), loginMember.getPassword())) {
 			return "true";
@@ -239,7 +288,7 @@ public class MemberController {
 		System.out.println(memberNo);
 		
 		int result = service.deleteMember(Integer.parseInt(memberNo));
-		log.debug("deleteMember(result): {}",result);
+		//log.debug("deleteMember(result): {}",result);
 		
 		if(result>0) {
 			session.invalidate();

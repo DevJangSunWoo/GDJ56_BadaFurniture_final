@@ -163,15 +163,22 @@
                         		$("#memailconfirm").on("blur", function(){
                         			if (data != $("#memailconfirm").val()) { 
                         				emconfirmchk = false;
-                        				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호가 불일치</span>")
+                        				$("#memailconfirmTxt").html("<span id='emconfirmchk'>인증번호 불일치</span>")
                         				$("#emconfirmchk").css({
                         					"color" : "#FA3E3E",
                         					"font-weight" : "bold",
                         					"font-size" : "14px"
                         				});
                         				
-                        				alert("인증번호가 틀렸습니다.");
-        	            				$("input[name=emailck]").val("");
+                        				//onsubmit 함수
+        	            				const fn_invalidate=()=>{
+        	            					alert("인증번호를 다시 확인해주세요.");
+        	            					$("input[name=emailck]").focus();
+        	            					return false;
+        	            				};
+                        				
+                        				/* alert("인증번호가 틀렸습니다.");
+        	            				$("input[name=emailck]").val(""); */
                         				
                         			} else { // 아니면 중복아님
                         				emconfirmchk = true;
@@ -182,6 +189,11 @@
                         					"font-weight" : "bold",
                         					"font-size" : "14px"
                         				});
+                        				
+                        				//onsubmit 함수
+        	            				const fn_invalidate=()=>{
+        	            					return true;
+        	            				};
                         			}
                         		});
                         	}
@@ -297,7 +309,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" id="postCode" name="postCode" class="form__input" placeholder="우편번호" required/>
+                                <input type="text" id="postCode" name="postCode" class="form__input" placeholder="우편번호" required readonly/>
                                 <label class="form__label">우편번호</label>		
                             </div>
                         </div>
@@ -305,7 +317,7 @@
                         <div class="flexDiv">
                             <img src="${path }/resources/images/member/그림.png">
                             <div class="input-container">
-                                <input type="text" id="address" name="address" class="form__input" placeholder="주소" required/>
+                                <input type="text" id="address" name="address" class="form__input" placeholder="주소" required readonly/>
                                 <label class="form__label">주소</label>		
                             </div>
                         </div>
