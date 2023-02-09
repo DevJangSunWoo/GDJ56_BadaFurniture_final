@@ -71,7 +71,7 @@ div{
 /* -------------------------------------------------------------------------------------------------- */
 /* 조건검색 */
 #checkDiv{
-	margin-left: 15px;
+	margin-left: 70px;
 	z-index: 1000;  /* 겹쳐있는 Div중 가장 최상위 설정 */ 
 	background-color: white;
 	position: absolute;
@@ -81,7 +81,7 @@ div{
 }
 
 #slidebtn{
-	margin-left: 15px;
+	margin-left: 70px;
 	cursor: pointer;
 	background-color: #efefef;
 	border-radius: 3px;
@@ -283,7 +283,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
 /* -------------------------------------------------------------------------------------------------- */
 /* select박스 */
 .select {
-	margin-right: 15px;
+	margin-right: 110px;
 	display: flex;
 	flex-direction: column;
 	position: relative;

@@ -190,7 +190,7 @@ public class OrderController extends QuartzJobBean { // extends QuartzJobBean
 //		log.debug(contextPath);
 
 		service.updateUndeposited(contextPath);
-		log.debug("{}", "20초마다  테스트 성공");
+		log.debug("{}", " 2월 9일 테스트 성공");
 
 	}
 
