@@ -116,7 +116,7 @@
                     <div class="flexDiv">
                         <img src="${path }/resources/images/member/계좌번호.png">
                         <div class="input-container">
-                            <input type="text" name="accountCode" class="form__input" value="${loginMember.accountCode}" placeholder="계좌번호(-포함)"/>
+                            <input type="text" name="accountCode" class="form__input" value="${accountCode}" placeholder="계좌번호(-포함)"/>
                             <label class="form__label">계좌번호</label>		
                         </div>
                     </div>

@@ -206,9 +206,9 @@ body{
 <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 </head>
 <body>
-  <div class="message">You are not authorized.
+  <div class="message">
   </div>
-  <div class="message2">You tried to access a page you did not have prior authorization for.</div>
+  <div class="message2"></div>
   <div class="container">
     <div class="neon">403</div>
     <div class="door-frame">
@@ -228,8 +228,6 @@ body{
       </div>  
     </div>
   </div>
-</body>	
-		
 		
 		
 		
@@ -240,10 +238,10 @@ body{
 
 <script>
 	window.onload=()=>{
-		setTimeout(function(){ 
-			console.log('dd');
-		    location.replace("${pageContext.request.contextPath }/#demo-modal");
-		}, 3000);
+		//setTimeout(function(){ 
+			alert("로그인 실패 X﹏X"); 
+			location.replace("${pageContext.request.contextPath }/#demo-modal");
+		//}, 1000);
 	}
 </script>
 </html>

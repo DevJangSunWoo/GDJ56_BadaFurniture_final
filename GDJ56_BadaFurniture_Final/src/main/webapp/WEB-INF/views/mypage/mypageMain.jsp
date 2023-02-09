@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="loginMember" value="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <style>
 	section.mypage>div#title{
@@ -90,7 +91,7 @@
 		<div id="mypageMenu">
 			<div class="mypageRow">
 				<div class="mypageCol">
-					<input type="hidden" value="/member/updateMember.do"/>
+					<input type="hidden" value="/member/updateMember.do?id=${loginMember.memberId}"/>
 					<div class="innerTitle1">
 						Edit
 					</div>
