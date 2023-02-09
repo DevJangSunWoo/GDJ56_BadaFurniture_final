@@ -103,9 +103,13 @@ public interface AdminDao {
 	//대시보드 - chartJs - 내가구팔기 가구비율
 	Map chartResell(SqlSessionTemplate session);
 	
-	//대시보드 - chartJs - 일일 주문,매출액
+	//대시보드 - chartJs - 일 주문,매출액
 	Map chartOrders(SqlSessionTemplate session);
 	Map chartSales(SqlSessionTemplate session);
+	
+	//대시보드 - chartJs - 월 주문,매출액
+	Map chartOrdersMonthly(SqlSessionTemplate session);
+	Map chartSalesMonthly(SqlSessionTemplate session);
 	
 
 	

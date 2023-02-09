@@ -233,12 +233,16 @@
     </div>
     <hr>
     <div id="divBot">
-        <div class="titleNcanvas" style="margin-right: 7%;margin-left: 3%;">
-            <h3 class="title">주문수/매출액</h3>
+        <div class="titleNcanvas" style="margin-left: 3%;">
+            <h3 class="title">주문수/매출액 (일)</h3>
             <canvas id="orderNsales" width="600" height="400"></canvas>    
 
         </div>
+        <div class="titleNcanvas" style="margin-right: 7%;margin-left: 3%;">
+            <h3 class="title">주문수/매출액 (월)</h3>
+            <canvas id="orderNsalesMonthly" width="600" height="400"></canvas>    
 
+        </div>
         <div class="titleNcanvas" >
             <h3 class="title">상품별 주문수요</h3>
             <canvas id="itemDemand" width="400" height="400"></canvas>
@@ -292,6 +296,92 @@
 				var resultlabel=['7일전','6일전','5일전','4일전','3일전','2일전','1일전','오늘'];			                
                
                 new Chart(document.getElementById("orderNsales"), {
+                    plugins: [ChartDataLabels],
+                    type: 'bar',
+                    data: {
+                        labels: resultlabel,
+                        datasets: 
+                            [
+                            {
+                                label:'주문건수',
+                                yAxisID:'B',
+                                data:orderData,                                
+                                type:'line',
+                                lineTension:0.1,
+                                borderColor: '#FFACB7',
+                                scaleBeginAtZero: true
+                            }
+                                ,{ 
+                                label:'매출액',
+                                yAxisID:'A',
+                                data: salesData, 
+                                backgroundColor: [
+                                    '#9DCEFF'
+
+                                    ],
+                                scaleBeginAtZero: true
+                            }]
+                    },
+                    options: {
+                        responsive:false,
+                        title: {
+                            display: true,
+                            text: '상품별 주문수요'
+                        },                           
+                        datalabels: { // datalables 플러그인 세팅
+                            formatter: function (value, context) {
+                            var idx = context.dataIndex; // 각 데이터 인덱스
+            
+                            // 출력 텍스트
+                            return context.chart.data.labels[idx] + value;
+                            },
+                            align: 'top', // 도넛 차트에서 툴팁이 잘리는 경우 사용
+                        }
+                        
+                    }
+                })        
+                                
+
+
+            }
+        })
+    })
+    //주문수 및 매출액 (월)
+    $(()=>{
+        $.ajax({
+			url: "${path}/admin/chartOrdersSalesMonthly.do",
+			contentType:"application/json;charset=utf-8",
+			success:function(result){
+
+                console.log(result.resultOrdersMonthly);
+                console.log(result.resultSalesMonthly);
+                
+                var orderData=[];
+                orderData.push(result.resultOrdersMonthly['7달전']);
+                orderData.push(result.resultOrdersMonthly['6달전']);
+                orderData.push(result.resultOrdersMonthly['5달전']);
+                orderData.push(result.resultOrdersMonthly['4달전']);
+                orderData.push(result.resultOrdersMonthly['3달전']);
+                orderData.push(result.resultOrdersMonthly['2달전']);
+                orderData.push(result.resultOrdersMonthly['1달전']);
+                orderData.push(result.resultOrdersMonthly['0달전']);
+     
+                var salesData=[];
+                salesData.push(result.resultSalesMonthly['7달전']);
+                salesData.push(result.resultSalesMonthly['6달전']);
+                salesData.push(result.resultSalesMonthly['5달전']);
+                salesData.push(result.resultSalesMonthly['4달전']);
+                salesData.push(result.resultSalesMonthly['3달전']);
+                salesData.push(result.resultSalesMonthly['2달전']);
+                salesData.push(result.resultSalesMonthly['1달전']);
+                salesData.push(result.resultSalesMonthly['0달전']);
+
+                console.log("주문건 데이터 :"+orderData);
+                console.log("매출 데이터 :"+salesData);
+
+				var resultlabel=['7달전','6달전','5달전','4달전','3달전','2달전','1달전','이번 달'];			                
+               
+                new Chart(document.getElementById("orderNsalesMonthly"), {
                     plugins: [ChartDataLabels],
                     type: 'bar',
                     data: {

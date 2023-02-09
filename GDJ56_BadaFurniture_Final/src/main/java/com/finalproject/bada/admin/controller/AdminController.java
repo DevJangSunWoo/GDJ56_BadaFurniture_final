@@ -852,6 +852,21 @@ public class AdminController {
 		return os;
 	}
 	
+	//대시보드 - chartJs - 월 주문,매출액
+	@RequestMapping("/admin/chartOrdersSalesMonthly.do")
+	@ResponseBody
+	public Map chartOrdersSalesMonthly() {
+		
+		Map resultOrders=service.chartOrdersMonthly();		
+		Map resultSales=service.chartSalesMonthly();
+		
+		Map result=new HashMap();
+		result.put("resultOrdersMonthly", resultOrders);
+		result.put("resultSalesMonthly", resultSales);
+		
+		return result;
+	}
+	
 	
 	@RequestMapping("/admin/cardCancel.do")
 	@ResponseBody

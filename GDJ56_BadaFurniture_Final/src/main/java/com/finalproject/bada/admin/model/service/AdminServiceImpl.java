@@ -379,6 +379,18 @@ public class AdminServiceImpl implements AdminService {
 		return dao.chartSales(session);
 	}
 	
+	//대시보드 - chartJs - 월 주문,매출액
+	@Override
+	public Map chartOrdersMonthly() {
+		// TODO Auto-generated method stub
+		return dao.chartOrdersMonthly(session);
+	}
+	@Override
+	public Map chartSalesMonthly() {
+		// TODO Auto-generated method stub
+		return dao.chartSalesMonthly(session);
+	}
+	
 
 
 	
