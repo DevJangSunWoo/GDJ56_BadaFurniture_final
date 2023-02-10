@@ -268,7 +268,7 @@
 					width: width, 
 					sort: sort}),
 				success : list =>{
-					console.log(list);
+					//console.log(list);
 					$("#productContainer").html("");
 					if(list==""){
 						$("#productContainer").html("<h1 style='color: grey; text-align: center;'>조건에 맞는 가구가 없습니다.</h1>");

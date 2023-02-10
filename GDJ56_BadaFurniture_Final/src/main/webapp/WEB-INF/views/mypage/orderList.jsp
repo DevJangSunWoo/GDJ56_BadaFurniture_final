@@ -366,7 +366,7 @@
 													주문확정
 												</c:when>
 												<c:when test="${detail.refundState eq null and detail.deliveryState ne null and detail.deliveryState eq '배송대기'}">
-													<button class="cancelBtn">취소신청</button>
+													<button class="cancelBtn2">취소신청</button>
 												</c:when>
 												<c:when test="${detail.refundState eq null and detail.deliveryState ne null and (detail.deliveryState eq '배송중' or detail.deliveryState eq '배송완료')}">
 													<button class="returnBtn">반품신청</button>
@@ -628,7 +628,7 @@
 	});
 	
 	//취소신청 클릭했을 때
-	$("button.cancelBtn").click(e=>{
+	$("button.cancelBtn2").click(e=>{
 		let path = "${path}/refund/write.do?state=취소&orderSheetNo="+$(e.target).prev().prev().val()+"&orderDetailNo=" + $(e.target).prev().val();
 		window.open(path,'_blank','width=470px height=420px top=230px left=700px');	
 	});

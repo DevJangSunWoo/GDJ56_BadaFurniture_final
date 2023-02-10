@@ -235,7 +235,7 @@ public class MemberController {
 	@RequestMapping("/updateMemberEnd.do" )
 	public ModelAndView updateMember(Member m, ModelAndView mv, HttpSession session) {
 		
-		log.debug("updateMemberEnd: {}",m);
+		//log.debug("updateMemberEnd: {}",m);
 		
 		//계좌번호 양방향 암호화
 		if(m.getAccountCode()!=null) {
@@ -248,7 +248,7 @@ public class MemberController {
 		}
 		
 		int result = service.updateMember(m);
-		log.debug("updateMemberEnd(result): {}",result);
+		//log.debug("updateMemberEnd(result): {}",result);
 		
 		if(result>0) {
 			mv.addObject("msg","회원정보 수정완료");

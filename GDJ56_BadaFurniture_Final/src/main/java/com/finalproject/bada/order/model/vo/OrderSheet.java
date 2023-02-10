@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class OrderSheet {
 	private int orderSheetNo;
-	private Member member; // *
+	private Member member; 
 	private String paymentMethod;
 	private String paymentState;
 	private String merchantUid;
@@ -28,7 +28,7 @@ public class OrderSheet {
 	private String depositor;
 	private int totalPrice;
 	private String receiverName;
-	private String postCode; // *
+	private String postCode;
 	private String address;
 	private String detailAddress;
 	private Date orderSheetenrollDate;

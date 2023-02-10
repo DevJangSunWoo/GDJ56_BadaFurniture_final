@@ -97,10 +97,10 @@ public class ProductController {
 	@RequestMapping("product/page.do")
 	@ResponseBody
 	public String page(@RequestBody Map map) {
-		log.debug("{}", map);
+//		log.debug("{}", map);
 
 		int totalData = service.selectProductListCount(map);
-		log.debug("totalData(page): {}", totalData);
+//		log.debug("totalData(page): {}", totalData);
 
 		return PageFactoryAjax.getPage((int) map.get("cPage"), 10, totalData, "/bada/");
 	}
