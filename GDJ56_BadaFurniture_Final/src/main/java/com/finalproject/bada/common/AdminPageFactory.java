@@ -56,31 +56,18 @@ public class AdminPageFactory {
          pageBar+=" <a class='page-link' href='javascript:fn_paging("+pageNo;
          pageBar+=",\""+searchType+"\",\""+searchKeyword+"\");'>" 
          +"다음"+" </a>	";
-         //pageBar+=" <a class='page-link' href='javascript:fn_paging("+pageNo+",'"+searchType+"','"+searchKeyword+"')'> 다음 </a>";
          pageBar+="</span>";
       }
       
-      pageBar+="</span>";
-       
+      pageBar+="</span>";     
       
       
       
       
       pageBar+="<script>";
       pageBar+="function fn_paging(pageNo,searchType,searchKeyword){";
-      //ori
-     // pageBar+="location.assign('" + url + "?cPage='+pageNo ) ;";
-      //re
-//      pageBar+= "let totalUrl = '" + url + "';";
-//      pageBar+= "totalUrl += 'cPage='";
-//      pageBar+= "totalUrl += pageNo";
-//      pageBar += "location.assign(totalUrl)";
-      
-      //pageBar+="location.assign('"	 +	url	+	"?cPage="	+	"pageNo"	+	"&searchType="	+	searchType	+	"&searchKeyword="	+	searchKeyword +"');";
-      pageBar+="location.assign('"	 +	url	+	"?cPage="	+ "'"+	"+pageNo+" +"'"	+	"&searchType="	+	searchType	+	"&searchKeyword="	+	searchKeyword +"');";
-
-      //병도추가
-      //pageBar += "alert("+cPage+")";
+      pageBar+="location.assign('"	 +	url	+	"?cPage="	+ "'"+	"+pageNo+" +"'"	
+    		  +	"&searchType="	+	searchType	+	"&searchKeyword="	+	searchKeyword +"');";
       
       
       pageBar+="}";

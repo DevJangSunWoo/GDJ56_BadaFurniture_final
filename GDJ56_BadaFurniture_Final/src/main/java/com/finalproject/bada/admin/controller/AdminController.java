@@ -652,6 +652,7 @@ public class AdminController {
 			@RequestParam("orderDetailNo") int orderDetailNo ) {
 		
 		Refund refund=service.viewRefundDetail(orderDetailNo);
+		
 		log.debug("안녕 환불 :{}",orderDetailNo+"|"+refund);
 		
 		return refund;
@@ -884,7 +885,7 @@ public class AdminController {
 			e.printStackTrace();
 		}
 				
-		log.debug("token:{}",token);
+		//log.debug("token:{}",token);
 				
 		HttpsURLConnection conn = null;
 		String returnV="cancel";
@@ -913,6 +914,7 @@ public class AdminController {
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
 			StringBuffer sb=new StringBuffer();
 			String data=br.readLine();
+			
 //			for(int i=0;i<data.length();i++) {
 //				int code=data.charAt(i);
 //				if('\\'==code && 'u' ==data.charAt(i+1)) {
@@ -923,11 +925,14 @@ public class AdminController {
 //					sb.append(data.charAt(i));
 //				}
 //			}
+			
 			log.debug("sb:{}",sb);//접속		
 			log.debug("data:{}",data);//접속
+			
 			data.substring(0,10 );
+			
 			log.debug("되냐구"+data.substring(24,35));
-					
+						
 			br.close();
 			conn.disconnect();
 		
@@ -944,13 +949,6 @@ public class AdminController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-//		OrderSheet os=service.selectOrderSheet(orderSheetNo);
-//		OrderDetail od=service.selectOrderDetail(orderSheetNo);
-		
-
 		
 		return returnV;			
 	}

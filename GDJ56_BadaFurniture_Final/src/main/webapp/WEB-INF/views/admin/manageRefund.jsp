@@ -377,9 +377,8 @@ crossorigin="anonymous" type="text/javascript"></script>
 
 	//취소/반품 상세확인 
 	$("button[name=refundDetail]").click(e=>{
-		$(e.target).parent().parent().children().find('input').first().val();
-		const orderDetailNo=$(e.target).parent().parent().children().find('input').first().val();
-		//console.log("orderDetailNo"+orderDetailNo);
+		const orderDetailNo=$(e.target).parent().prev().val();
+		console.log(orderDetailNo);
 
 		$.ajax({
 			url:"${path}/admin/viewRefundDetail.do",
