@@ -357,8 +357,8 @@ span.deliveryNrefundDetail {
 							,cartMemberNo:$("#cart_memberNo").val()
 						},
 						success:data=>{
-							//console.log(data);
-							if(confirm("장바구니로 이동하시겠습니까?")) {
+							console.log(data);							
+							if(confirm(data+"장바구니로 이동하시겠습니까?")) {
 							    window.location.href = "${path}/mypage/cart.do"
 							}
 						}
