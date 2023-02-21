@@ -90,7 +90,6 @@ span.deliveryNrefundDetail {
 												style="display: none; width: 50%; height: 50%;"
 												class="centered"
 												src="${path}/resources/images/product/soldOutEasy.png">
-
 										</div>
 									</c:forEach>
 								</div>
